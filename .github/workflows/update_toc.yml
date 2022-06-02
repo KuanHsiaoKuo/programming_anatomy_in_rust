@@ -1,0 +1,19 @@
+# 实时更新目录
+
+on:
+  push: # 当推送指定目录的内容改变时触发
+    branches: [main]
+    paths:
+      - 'src/resources/*.md'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          chmod a+x gh-md-toc
+          ls src/resources/*.md | xargs -I {} ./gh-md-toc --insert --no-backup {}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto update markdown TOC
