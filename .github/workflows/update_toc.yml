@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           chmod a+x gh-md-toc
-          ls *.md | xargs -I {} ./gh-md-toc --insert --no-backup {}
+          find . -type f -name '*.md' | xargs -I {} ./gh-md-toc --insert --no-backup {}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Auto update markdown TOC
