@@ -3,8 +3,8 @@
 on:
   push: # 当推送指定目录的内容改变时触发
     branches: [main]
-    paths:
-      - 'src/resources/*.md'
+    #paths:
+      #- 'src/resources/*.md'
 jobs:
   build:
     runs-on: ubuntu-latest
