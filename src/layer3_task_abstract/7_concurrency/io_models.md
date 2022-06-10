@@ -21,7 +21,8 @@
          * [参与者：](#参与者)
    * [参考资源](#参考资源)
 
-<!-- Added by: kuanhsiaokuo, at: Fri Jun 10 23:36:37 CST 2022 -->
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Fri Jun 10 15:38:36 UTC 2022 -->
 
 <!--te-->
 ## 1. 同步/异步、阻塞/非阻塞概念区别
