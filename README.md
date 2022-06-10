@@ -22,3 +22,6 @@ mdbook serve
 git lfs install 
 git lfs track '*.img'
 ```
+
+## 项目基础结构
+1. 每个文件夹下的同名md文件介绍当前文件夹的内容
