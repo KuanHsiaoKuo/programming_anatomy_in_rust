@@ -49,3 +49,9 @@ abstract / become / box / do / final / macro / override / priv / typeof / unsize
 14. 属性（Attribute)
 
 ## 路径: ::, ::<>
+
+
+
+## 参考资源
+
+1. [词法结构](https://time.geekbang.org/course/detail/100060601-286522)
