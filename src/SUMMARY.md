@@ -10,6 +10,7 @@
       - [自定义类型](./layer1_underlying_abstract/2_type_system/user_defined_types.md)
       - [泛型、特征及特征对象](./layer1_underlying_abstract/2_type_system/generics_traits_objects.md)
     - [语言语法](./layer1_underlying_abstract/3_language_grammar/language_grammar.md)
+      - [词法结构扫盲](./layer1_underlying_abstract/3_language_grammar/keywords_glossary.md)
 - [Layer2: 设计抽象](./layer2_design_abstract/layer2_design_abstract.md)
     - [编程范式](./layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.md)
     - [设计模式](./layer2_design_abstract/5_design_pattern/5_design_pattern.md)
