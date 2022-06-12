@@ -17,7 +17,8 @@ theme = "mytheme"
 default-theme = "rust"
 git-repository-url = "https://github.com/KuanHsiaoKuo/programming_anatomy_in_rust.git"
 git-repository-icon = "fa-rust"
-additional-js = ["mermaid.min.js", "mermaid-init.js", "smart-anchor.js"]
+additional-js = ["mermaid.min.js", "mermaid-init.js", "smart-anchor.js", "sidebar.js"]
+additional-css = ["style.css"]
 mathjax-support = true
 
 
