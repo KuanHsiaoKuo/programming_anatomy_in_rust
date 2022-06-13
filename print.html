@@ -174,13 +174,13 @@
                 </div>
                 <!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:29 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:58 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:55 UTC 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -206,7 +206,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:57 UTC 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -257,7 +257,19 @@
 <li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%9E%9A%E4%B8%BE%E4%BD%93">泛型枚举体</a></li>
 <li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">泛型特征</a></li>
 <li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95">泛型方法</a></li>
-<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0%E5%9D%97">泛型实现块</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#impl-%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0%E5%9D%97">impl: 泛型实现块</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0">泛型实现</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%B8%93%E9%97%A8%E5%8C%96%E6%B3%9B%E5%9E%8B">专门化泛型</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%8C%87%E5%AE%9A%E7%B1%BB%E5%9E%8B%E8%BF%9B%E8%A1%8C%E5%AE%9E%E4%BE%8B%E5%8C%96">指定类型进行实例化</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%9F%BA%E4%BA%8E%E7%B1%BB%E5%9E%8B%E5%AE%9E%E4%BE%8B%E5%8C%96%E6%8E%A8%E6%96%AD">基于类型实例化推断</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%9F%90%E4%BA%9B%E6%96%B9%E6%B3%95">泛型函数调用某些方法</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#turbofish-">turbofish: ::&lt;&gt;</a></li>
 </ul>
 </li>
 </ul>
@@ -269,7 +281,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:56 UTC 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -310,10 +322,120 @@ fn main() {
 }
 </code></pre></pre>
 <h4 id="泛型结构体"><a class="header" href="#泛型结构体">泛型结构体</a></h4>
+<pre><pre class="playground"><code class="language-rust  editable">// generic_struct.rs
+
+struct Container&lt;T&gt; {
+    item: T
+}
+
+impl&lt;T&gt; Container&lt;T&gt; {
+    fn new(item: T) -&gt; Self {
+        Container { item }
+    }
+}
+
+impl Container&lt;u32&gt; {
+    fn sum(item: u32) -&gt; Self {
+        Container { item }
+    }
+}
+
+fn main() {
+    // todo
+}
+</code></pre></pre>
 <h4 id="泛型枚举体"><a class="header" href="#泛型枚举体">泛型枚举体</a></h4>
+<pre><pre class="playground"><code class="language-rust  editable">// generic_enum.rs
+
+enum Transmission&lt;T&gt; {
+    Signal(T),
+    NoSignal
+}
+
+fn main() {
+    // stuff
+}
+</code></pre></pre>
 <h4 id="泛型特征"><a class="header" href="#泛型特征">泛型特征</a></h4>
 <h4 id="泛型方法"><a class="header" href="#泛型方法">泛型方法</a></h4>
-<h4 id="泛型实现块"><a class="header" href="#泛型实现块">泛型实现块</a></h4>
+<h3 id="impl-泛型实现块"><a class="header" href="#impl-泛型实现块">impl: 泛型实现块</a></h3>
+<h4 id="泛型实现"><a class="header" href="#泛型实现">泛型实现</a></h4>
+<blockquote>
+<p>当为任何泛型编写 impl 代码块时,都需要在使用它之前声明泛型参数。T 就像一个变量—— 一个类型变量,我们需要先声明它 impl代码块实际上意味着我们正在为所有类型 T 实现这些方法,它们会出现在 Container<T>中。这个 impl 代码块是一个泛型实现。 因此,生成的每个具体 Container 都将有这些方法。</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust  editable">// generic_struct_impl.rs
+
+struct Container&lt;T&gt; {
+    item: T
+}
+
+impl&lt;T&gt; Container&lt;T&gt; {
+    fn new(item: T) -&gt; Self {
+        Container { item }
+    }
+}
+
+fn main() {
+    // stuff
+}
+</code></pre></pre>
+<h4 id="专门化泛型"><a class="header" href="#专门化泛型">专门化泛型</a></h4>
+<blockquote>
+<p>在这里, 由于 u32 是作为具体类型存在的, 因此我们不需要 impl 之后的<T>, 这是 impl 代码块的另外一个特性,它允许你通过独立实现方法来专门化泛型。 现在,我们也可以通过将 T 替换为任何具体类型来为 Container<T>编写更具体的 impl 代码块。以下就是它的实例:</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust  editable">impl Container&lt;u32&gt; { 
+    fn sum(item: u32) -&gt; Self {
+        Container { item }
+    } 
+}
+</code></pre></pre>
+<h3 id="指定类型进行实例化"><a class="header" href="#指定类型进行实例化">指定类型进行实例化</a></h3>
+<blockquote>
+<p>每当我们进行实例化时, 编译器需要在其类型签名中知道 T 的具体类型以便替换,这为其提供了将泛型代码单态化的类型信息。
+而具体类型的确定主要有三种方式：</p>
+</blockquote>
+<ol>
+<li>大多数情况下,具体类型是基于类型的实例化推断.</li>
+<li>对泛型函数调用某些方法来接收具体类型。 </li>
+<li>在极个别情况下, 我们需要通过使用 <code>turbofish (::&lt;&gt;)</code>运算符输入具体类型来替代泛型以便辅助编译器识别。</li>
+</ol>
+<h4 id="基于类型实例化推断"><a class="header" href="#基于类型实例化推断">基于类型实例化推断</a></h4>
+<p>这是最常见的方式，主要基于类型特征(trait)。</p>
+<h4 id="泛型函数调用某些方法"><a class="header" href="#泛型函数调用某些方法">泛型函数调用某些方法</a></h4>
+<pre><pre class="playground"><code class="language-rust  editable">// using_generic_func.rs
+
+use std::str;
+
+fn main() {
+    let num_from_str = str::parse::&lt;u8&gt;(&quot;34&quot;).unwrap();
+    println!(&quot;Parsed number {}&quot;, num_from_str);
+}
+</code></pre></pre>
+<h4 id="turbofish-"><a class="header" href="#turbofish-">turbofish: ::&lt;&gt;</a></h4>
+<ol>
+<li>如果没有任何类型特征，代码将无法编译：👇</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust  editable">fn main() {
+    let a = Vec::new();
+}
+</code></pre></pre>
+<ol start="2">
+<li>这时可以用下列三种方式指定</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust  editable">// using_generic_vec.rs
+
+fn main() {
+    // providing a type
+    let v1: Vec&lt;u8&gt; = Vec::new();
+
+    // or calling method
+    let mut v2 = Vec::new();
+    v2.push(2);    // v2 is now Vec&lt;i32&gt;
+
+    // or using turbofish
+    let v3 = Vec::&lt;u8&gt;::new();    // not so readable
+}
+</code></pre></pre>
 <h2 id="特征"><a class="header" href="#特征">特征</a></h2>
 <h2 id="特征区间泛型特征"><a class="header" href="#特征区间泛型特征">特征区间：泛型+特征</a></h2>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
@@ -340,7 +462,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:29 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:57 UTC 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -408,27 +530,27 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="逻辑判断与循环"><a class="header" href="#逻辑判断与循环">逻辑判断与循环</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:00 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:29 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:58 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="函数式编程"><a class="header" href="#函数式编程">函数式编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="面向对象编程"><a class="header" href="#面向对象编程">面向对象编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型编程"><a class="header" href="#泛型编程">泛型编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:59 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:11:59 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="模块相关"><a class="header" href="#模块相关">模块相关</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo及类似包管理器介绍"><a class="header" href="#cargo及类似包管理器介绍">Cargo及类似包管理器介绍</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:01 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:00 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
 <ul>
@@ -469,7 +591,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:01 UTC 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -671,16 +793,16 @@ req          +---------&gt; |            |   |          | req handler    |
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:01 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:02 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:02 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:01 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Added by: kuanhsiaokuo, at: Thu Jun  2 23:19:28 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h1>
@@ -689,7 +811,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:40:32 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 10:12:03 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
