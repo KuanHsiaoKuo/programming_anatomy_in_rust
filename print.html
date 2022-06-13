@@ -174,13 +174,13 @@
                 </div>
                 <!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:02 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:29 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:37:59 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -206,7 +206,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:00 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -237,6 +237,40 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="自定义类型"><a class="header" href="#自定义类型">自定义类型</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型特征及特征对象"><a class="header" href="#泛型特征及特征对象">泛型、特征及特征对象</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/rust-traits-deep-dive.png" alt="rust-traits-deep-dive" /></p>
+<!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81%E5%8F%8A%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1">泛型、特征及特征对象</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B">泛型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E5%87%BA%E5%8F%91">从代码复用出发</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E4%B8%8D%E8%B6%B3">函数作用不足</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E8%BF%98%E9%9C%80%E8%A6%81%E6%B3%9B%E5%9E%8B%E6%9D%A5%E5%A4%8D%E7%94%A8%E4%BB%A3%E7%A0%81">静态类型语言还需要泛型来复用代码</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E4%B8%80%E7%A7%8D%E5%8D%95%E6%80%81%E5%8C%96">泛型本质上是一种单态化</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">泛型使用方式</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0">泛型函数</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%BB%93%E6%9E%84%E4%BD%93">泛型结构体</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%9E%9A%E4%B8%BE%E4%BD%93">泛型枚举体</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">泛型特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95">泛型方法</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0%E5%9D%97">泛型实现块</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81">特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">特征区间：泛型+特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
+<!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
 <h4 id="函数作用不足"><a class="header" href="#函数作用不足">函数作用不足</a></h4>
@@ -249,10 +283,11 @@
 </blockquote>
 <h4 id="静态类型语言还需要泛型来复用代码"><a class="header" href="#静态类型语言还需要泛型来复用代码">静态类型语言还需要泛型来复用代码</a></h4>
 <blockquote>
-<p>泛型编程是一种仅适用于静态类型编程语言的技术。它首次出现在 ML 语言中,是一种静态类型的函数式语言。 </p>
+<p>泛型编程是一种仅适用于静态类型编程语言的技术。它首次出现在 ML 语言中,是一种静态类型的函数式语言。</p>
 </blockquote>
 <p>像 Python 这样的动态语言采用的是简单类型 (duck typing) , 其中的 API 是根据它们可以做什么,而不是它们是什么来处理参数的,因此不依赖于泛型。</p>
-<p>泛型是语言设计特性的一部分, 可以实现代码复用, 并遵循不重复自己的原则 (Don't Repeat Yourself,DRY) 。采用这种技术,你可以使用类型占位符来编写算法、函数、方法及类型, 并在这些类型上指定一个类型变量(使用单个字母,通常是 T、K 或 V) ,告知编译器在任何代码中实例化它们时要填充的实际类型。这些类型被称为泛型或元素。单个字母(例如类型 T)被称为泛型参数。当你使用或实例化任何泛型元素时,它们会被替换成诸如 u32 这样的具体类型。</p>
+<p>泛型是语言设计特性的一部分, 可以实现代码复用, 并遵循不重复自己的原则 (Don't Repeat Yourself,DRY) 。采用这种技术,你可以使用类型占位符来编写算法、函数、方法及类型, 并在这些类型上指定一个类型变量(
+使用单个字母,通常是 T、K 或 V) ,告知编译器在任何代码中实例化它们时要填充的实际类型。这些类型被称为泛型或元素。单个字母(例如类型 T)被称为泛型参数。当你使用或实例化任何泛型元素时,它们会被替换成诸如 u32 这样的具体类型。</p>
 <h3 id="泛型本质上是一种单态化"><a class="header" href="#泛型本质上是一种单态化">泛型本质上是一种单态化</a></h3>
 <p>每次将泛型元素与具体类型一起使用时,都会在编译时用类型变量 T 生成该代码的特定副本,并将其替换为具体类型。<strong>这种在编译时生成包含具体类型的专用函数的过程被称为单态化,这是执行与多态函数相反的过程。</strong></p>
 <h3 id="泛型使用方式"><a class="header" href="#泛型使用方式">泛型使用方式</a></h3>
@@ -305,7 +340,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:01 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:29 UTC 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -373,27 +408,27 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="逻辑判断与循环"><a class="header" href="#逻辑判断与循环">逻辑判断与循环</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:04 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:02 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:29 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="函数式编程"><a class="header" href="#函数式编程">函数式编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="面向对象编程"><a class="header" href="#面向对象编程">面向对象编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型编程"><a class="header" href="#泛型编程">泛型编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:03 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:03 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="模块相关"><a class="header" href="#模块相关">模块相关</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo及类似包管理器介绍"><a class="header" href="#cargo及类似包管理器介绍">Cargo及类似包管理器介绍</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:06 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:05 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:30 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
 <ul>
@@ -434,7 +469,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:05 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -636,16 +671,16 @@ req          +---------&gt; |            |   |          | req handler    |
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:06 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:07 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:06 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:06 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:31 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Added by: kuanhsiaokuo, at: Thu Jun  2 23:19:28 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h1>
@@ -654,7 +689,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 07:38:08 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 07:40:32 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
