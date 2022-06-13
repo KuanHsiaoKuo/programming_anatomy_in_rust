@@ -2,22 +2,23 @@
 
 ![rust-traits-deep-dive](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/rust-traits-deep-dive.png)
 <!--ts-->
+
 * [泛型、特征及特征对象](#泛型特征及特征对象)
-   * [泛型](#泛型)
-      * [从代码复用出发](#从代码复用出发)
-         * [函数作用不足](#函数作用不足)
-         * [静态类型语言还需要泛型来复用代码](#静态类型语言还需要泛型来复用代码)
-      * [泛型本质上是一种单态化](#泛型本质上是一种单态化)
-      * [泛型使用方式](#泛型使用方式)
-         * [泛型函数](#泛型函数)
-         * [泛型结构体](#泛型结构体)
-         * [泛型枚举体](#泛型枚举体)
-         * [泛型特征](#泛型特征)
-         * [泛型方法](#泛型方法)
-         * [泛型实现块](#泛型实现块)
-   * [特征](#特征)
-   * [特征区间：泛型+特征](#特征区间泛型特征)
-   * [参考资源](#参考资源)
+    * [泛型](#泛型)
+        * [从代码复用出发](#从代码复用出发)
+            * [函数作用不足](#函数作用不足)
+            * [静态类型语言还需要泛型来复用代码](#静态类型语言还需要泛型来复用代码)
+        * [泛型本质上是一种单态化](#泛型本质上是一种单态化)
+        * [泛型使用方式](#泛型使用方式)
+            * [泛型函数](#泛型函数)
+            * [泛型结构体](#泛型结构体)
+            * [泛型枚举体](#泛型枚举体)
+            * [泛型特征](#泛型特征)
+            * [泛型方法](#泛型方法)
+            * [泛型实现块](#泛型实现块)
+    * [特征](#特征)
+    * [特征区间：泛型+特征](#特征区间泛型特征)
+    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Mon Jun 13 07:40:28 UTC 2022 -->
@@ -67,13 +68,66 @@
 
 #### 泛型结构体
 
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/generic_struct.rs:1:21}}
+```
+
 #### 泛型枚举体
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/generic_enum.rs:1:10}}
+```
 
 #### 泛型特征
 
 #### 泛型方法
 
-#### 泛型实现块
+### impl: 泛型实现块
+
+#### 泛型实现
+
+> 当为任何泛型编写 impl 代码块时,都需要在使用它之前声明泛型参数。T 就像一个变量—— 一个类型变量,我们需要先声明它 impl代码块实际上意味着我们正在为所有类型 T 实现这些方法,它们会出现在 Container<T>中。这个 impl 代码块是一个泛型实现。 因此,生成的每个具体 Container 都将有这些方法。
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/generic_struct_impl.rs:1:15}}
+```
+
+#### 专门化泛型
+
+> 在这里, 由于 u32 是作为具体类型存在的, 因此我们不需要 impl 之后的<T>, 这是 impl 代码块的另外一个特性,它允许你通过独立实现方法来专门化泛型。 现在,我们也可以通过将 T 替换为任何具体类型来为 Container<T>编写更具体的 impl 代码块。以下就是它的实例:
+
+```rust, editable
+impl Container<u32> { 
+    fn sum(item: u32) -> Self {
+        Container { item }
+    } 
+}
+```
+
+### 指定类型进行实例化
+> 每当我们进行实例化时, 编译器需要在其类型签名中知道 T 的具体类型以便替换,这为其提供了将泛型代码单态化的类型信息。
+而具体类型的确定主要有三种方式：
+1. 大多数情况下,具体类型是基于类型的实例化推断.
+2. 对泛型函数调用某些方法来接收具体类型。 
+3. 在极个别情况下, 我们需要通过使用 `turbofish (::<>)`运算符输入具体类型来替代泛型以便辅助编译器识别。
+#### 基于类型实例化推断
+这是最常见的方式，主要基于类型特征(trait)。
+
+#### 泛型函数调用某些方法
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/using_generic_func.rs:1:}}
+```
+
+#### turbofish: ::<>
+1. 如果没有任何类型特征，代码将无法编译：👇
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/creating_generic_vec.rs:1:}}
+```
+2. 这时可以用下列三种方式指定
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/using_generic_vec.rs:1:}}
+```
+
 
 ## 特征
 
