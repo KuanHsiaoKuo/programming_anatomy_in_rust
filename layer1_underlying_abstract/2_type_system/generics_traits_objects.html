@@ -231,13 +231,32 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">特征区间：泛型+特征</a></li>
+<li><a href="#%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">特征区间：泛型+特征</a>
+<ul>
+<li><a href="#%E5%BC%95%E5%87%BA%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4">引出特征区间</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E5%8D%95%E4%BD%93%E5%8C%96">代码单体化</a></li>
+<li><a href="#%E6%8C%87%E5%AE%9A%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%96%B9%E6%B3%95">指定特征区间的四个方法</a>
+<ul>
+<li><a href="#%E5%8C%BA%E9%97%B4%E5%86%85%E6%B3%9B%E5%9E%8B-fn-fn_namet-target_traitval-t">区间内泛型: fn fn_name&lt;T: target_trait&gt;(val: T)</a></li>
+<li><a href="#where%E8%AF%AD%E5%8F%A5-%E5%BD%93%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%E7%AD%BE%E5%90%8D%E8%BF%87%E9%95%BF%E6%97%B6%E4%BD%BF%E7%94%A8">where语句: 当第一种方法签名过长时使用</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%BB%84%E5%90%88%E5%A4%9A%E4%B8%AA%E7%89%B9%E5%BE%81">使用&quot;+&quot;组合多个特征</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8impl%E7%89%B9%E5%BE%81%E8%AF%AD%E6%B3%95-%E9%97%AD%E5%8C%85%E5%B8%B8%E7%94%A8">使用impl特征语法: 闭包常用</a></li>
+</ul>
+</li>
+<li><a href="#%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">特征区间的使用场景</a>
+<ul>
+<li><a href="#%E5%9C%A8%E7%B1%BB%E5%9E%8B%E4%B8%8A%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%BB%BA%E8%AE%AE">在类型上使用：不建议</a></li>
+<li><a href="#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0impl%E4%BB%A3%E7%A0%81%E5%9D%97">泛型函数+impl代码块</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
 </ul>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jun 13 10:22:04 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jun 13 16:17:48 UTC 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -281,7 +300,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust  editable">// generic_struct.rs
 
 struct Container&lt;T&gt; {
-    item: T
+    item: T,
 }
 
 impl&lt;T&gt; Container&lt;T&gt; {
@@ -305,7 +324,7 @@ fn main() {
 
 enum Transmission&lt;T&gt; {
     Signal(T),
-    NoSignal
+    NoSignal,
 }
 
 fn main() {
@@ -322,7 +341,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust  editable">// generic_struct_impl.rs
 
 struct Container&lt;T&gt; {
-    item: T
+    item: T,
 }
 
 impl&lt;T&gt; Container&lt;T&gt; {
@@ -385,10 +404,10 @@ fn main() {
 
     // or calling method
     let mut v2 = Vec::new();
-    v2.push(2);    // v2 is now Vec&lt;i32&gt;
+    v2.push(2); // v2 is now Vec&lt;i32&gt;
 
     // or using turbofish
-    let v3 = Vec::&lt;u8&gt;::new();    // not so readable
+    let v3 = Vec::&lt;u8&gt;::new(); // not so readable
 }
 </code></pre></pre>
 <h2 id="特征"><a class="header" href="#特征">特征</a></h2>
@@ -419,6 +438,331 @@ fn main() {
 <h4 id="关联类型特征"><a class="header" href="#关联类型特征">关联类型(特征)</a></h4>
 <h4 id="继承特征"><a class="header" href="#继承特征">继承(特征)</a></h4>
 <h2 id="特征区间泛型特征"><a class="header" href="#特征区间泛型特征">特征区间：泛型+特征</a></h2>
+<h3 id="引出特征区间"><a class="header" href="#引出特征区间">引出特征区间</a></h3>
+<p>首先看一下如下代码：</p>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_bounds_intro.rs
+
+struct Game;
+
+struct Enemy;
+
+struct Hero;
+/*
+在 Game 类型上我们有一个泛型函数 load,它可以接收任何游戏实体,
+并通过任意 T 调用 init()将其加载到我们的游戏世界中。
+但是,这个示例无法通过编译
+*/
+impl Game {
+    fn load&lt;T&gt;(&amp;self, entity: T) {
+        entity.init(); // method not found in `T`
+    }
+}
+
+fn main() {
+    let game = Game;
+    game.load(Enemy);
+    game.load(Hero);
+}
+</code></pre></pre>
+<ol>
+<li>因此, 任何类型为 T 的泛型函数都不能知道或默认假定 init()方法存在于 T 之上。</li>
+<li>如果确实如此,那么它根本不是泛型,并且它们只能接收具有 init()方法的类型。</li>
+<li><strong>因此,有一种方法可以让编译器知道这一点,并约束 load 通过特征能够接收的类型集,这就需要用到特征区间</strong>。</li>
+</ol>
+<blockquote>
+<p>我们可以定义一个名为 Loadable 的特征,并在我们的 Enemy 和 Hero 类型上实现它。</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_bounds_intro.rs
+
+struct Game;
+
+struct Enemy;
+
+struct Hero;
+
+trait Loadable {
+    fn init(&amp;self);
+}
+/*
+我们分别为 Enemy 和 Hero 实现了 Loadable,还修改了 load 方法
+*/
+impl Loadable for Enemy {
+    fn init(&amp;self) {
+        println!(&quot;Enemy loaded&quot;);
+    }
+}
+
+impl Loadable for Hero {
+    fn init(&amp;self) {
+        println!(&quot;Hero loaded&quot;);
+    }
+}
+
+impl Game {
+    /*
+        我们必须在泛型声明旁边放置几个符号来指定特征,我们称之为特征区间
+    */
+    fn load&lt;T: Loadable&gt;(&amp;self, entity: T) {
+        entity.init();
+    }
+}
+
+fn main() {
+    let game = Game;
+    game.load(Enemy);
+    game.load(Hero);
+}
+</code></pre></pre>
+<ol>
+<li>注意, “:Loadable”部分表明了我们指定特征范围的方式。特征区间允许我们限制泛型 API 可以接收的参数范围。</li>
+</ol>
+<h3 id="代码单体化"><a class="header" href="#代码单体化">代码单体化</a></h3>
+<ol>
+<li>指定泛型元素上的绑定的特征类似于我们为变量指定类型的方式</li>
+<li>但是此处的变量是泛型 T,类型是某些特征。例如 <strong>T:SomeTrait</strong>。</li>
+<li>定义泛型函数时几乎总是会用到特征区间。</li>
+<li>如果定义的泛型函数中的 T 不包含任何特征区间,我们就不能通过任何方法调用,因 Rust 不知道给定方法实现的方式。</li>
+<li>它需要知道 T 是否具有某个 foo 方法,以便<strong>将代码单体化</strong></li>
+</ol>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_bounds_basics.rs
+
+// 我们有一个方法 add_thing,它可以添加任何类型 T。
+fn add_thing&lt;T&gt;(fst: T, snd: T) {
+    // 编译器向用户建议在 T 上添加特征区间 Add
+    // help: consider restricting type parameter `T`
+    let _ = fst + snd;
+}
+
+fn main() {
+    add_thing(2, 2);
+}
+</code></pre></pre>
+<blockquote>
+<p>修正后</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_bound_basics_fixed.rs
+
+use std::ops::Add;
+
+// 代码修改之后,我们将“:Add”添加到了 T 的后面,之后代码通过了编译
+fn add_thing&lt;T: Add&gt;(fst: T, snd: T) {
+    let _ = fst + snd;
+}
+
+fn main() {
+    add_thing(2, 2);
+}
+</code></pre></pre>
+<h3 id="指定特征区间的四个方法"><a class="header" href="#指定特征区间的四个方法">指定特征区间的四个方法</a></h3>
+<h4 id="区间内泛型-fn-fn_namet-target_traitval-t"><a class="header" href="#区间内泛型-fn-fn_namet-target_traitval-t">区间内泛型: fn fn_name&lt;T: target_trait&gt;(val: T)</a></h4>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 指定特征区间的一种方法, 它会接收任何实现了 Display 特征的类型
+fn show_me&lt;T: Display&gt;(val: T) {
+    //可以使用{}格式化字符串，因为有Display特征区间
+    printin!(&quot;{}&quot;, val);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ol>
+<li>这是在泛型函数的类型签名的长度较短时声明特征区间的常见语法。</li>
+<li>在指定类型的特征区间时,此语法也有效</li>
+</ol>
+<h4 id="where语句-当第一种方法签名过长时使用"><a class="header" href="#where语句-当第一种方法签名过长时使用">where语句: 当第一种方法签名过长时使用</a></h4>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn parse&lt;F&gt;(&amp;self) -&gt; Result&lt;F, &lt;F as FromStr&gt;::Err&gt;
+    where F: FromStr { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>注意“where F: FromStr”部分告诉我们 F 类型必须实现 FromStr 特征。where 语句将特征区间和函数签名解耦,并使其可读</p>
+</blockquote>
+<h4 id="使用组合多个特征"><a class="header" href="#使用组合多个特征">使用&quot;+&quot;组合多个特征</a></h4>
+<ul>
+<li>先看一下标准库中 HashMap 类型的 impl 代码块:</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// HashMap 键类型的 K 必须实现 Hash 特征和 Eq 特征
+impl&lt;K: Hash + Eq, V&gt; HashMap&lt;K, V, RandomState&gt;
+{}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>一个更加具体的例子</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust  editable">// traits_composition.rs
+
+trait Eat {
+    fn eat(&amp;self) {
+        println!(&quot;eat&quot;);
+    }
+}
+
+trait Code {
+    fn code(&amp;self) {
+        println!(&quot;code&quot;);
+    }
+}
+
+trait Sleep {
+    fn sleep(&amp;self) {
+        println!(&quot;sleep&quot;);
+    }
+}
+
+// 创建了一个新的特征 Programmer,它由 3 个特征组合而成:Eat、Code、 Sleep。
+// 通过这种方式, 我们对类型设置了约束:
+// 因此如果类型 T 实现了 Programmer, 那么它必须实现上述所有特征
+trait Programmer: Eat + Code + Sleep {
+    fn animate(&amp;self) {
+        self.eat();
+        self.code();
+        self.sleep();
+        println!(&quot;repeat!&quot;);
+    }
+}
+
+struct Bob;
+
+impl Programmer for Bob {}
+
+impl Eat for Bob {}
+
+impl Code for Bob {}
+
+impl Sleep for Bob {}
+
+fn main() {
+    Bob.animate();
+}
+</code></pre></pre>
+<h4 id="使用impl特征语法-闭包常用"><a class="header" href="#使用impl特征语法-闭包常用">使用impl特征语法: 闭包常用</a></h4>
+<pre><pre class="playground"><code class="language-rust  editable">// impl_trait_syntax.rs
+
+use std::fmt::Display;
+
+/*
+直接使用了 impl Display,而不是指定 T:Display。这是 impl 特征语法。
+这为我们返回复杂或不方便表示的类型(例如函数的闭包)提供了便利
+*/
+fn show_me(val: impl Display) {
+    println!(&quot;{}&quot;, val);
+}
+
+fn main() {
+    show_me(&quot;Trait bounds are awesome&quot;);
+}
+</code></pre></pre>
+<blockquote>
+<p>如果没有这种语法,则必须使用 Box 智能指针类型将其放在指针后面返回,这涉及堆分配。
+闭包的底层结构由实现了一系列特征的结构体组成。<strong>Fn(T) -&gt; U</strong> 特征就是其中之一</p>
+</blockquote>
+<p>闭包使用示例：</p>
+<pre><pre class="playground"><code class="language-rust  editable">// impl_trait_closure.rs
+// 它接收两个数字,并返回将这两个数字相加的闭包
+fn lazy_adder(a: u32, b: u32) -&gt; impl Fn() -&gt; u32 {
+    move || a + b
+}
+
+fn main() {
+    // 调用 lazy_adder,传入两个数字。
+    // 这会在 lazy_adder 中创建一个闭包,但不会对其进行求值
+    let add_later = lazy_adder(1024, 2048);
+    println!(&quot;{:?}&quot;, add_later());
+}
+</code></pre></pre>
+<p>还可以在入参和返回使用：</p>
+<pre><pre class="playground"><code class="language-rust  editable">// impl_trait_both.rs
+
+use std::fmt::Display;
+
+/*
+1. 会接收任何 Display 特征的参数
+2. 返回的类型是 impl Display
+*/
+fn surround_with_braces(val: impl Display) -&gt; impl Display {
+    format!(&quot;{{{}}}&quot;, val)
+}
+
+fn main() {
+    println!(&quot;{}&quot;, surround_with_braces(&quot;Hello&quot;));
+}
+</code></pre></pre>
+<ol>
+<li>通常建议将特征区间的 impl 特征语法用做函数的返回类型。</li>
+<li>在参数位置使用它意味着我们不能使用 turbofish 运算符。</li>
+<li>如果某些相关代码使用 turbofish 运算符来调用软件包中的某个方法,那么可能导致 API 不兼容。</li>
+<li>只有当我们没有可用的具体类型时才应该使用它, 就像闭包那样。</li>
+</ol>
+<h3 id="特征区间的使用场景"><a class="header" href="#特征区间的使用场景">特征区间的使用场景</a></h3>
+<h4 id="在类型上使用不建议"><a class="header" href="#在类型上使用不建议">在类型上使用：不建议</a></h4>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_bounds_types.rs
+
+use std::fmt::Display;
+
+// 写法一：区间内泛型
+struct Foo&lt;T: Display&gt; {
+    bar: T,
+}
+
+// 写法二：where语句解耦
+struct Bar&lt;F&gt;
+    where
+        F: Display,
+{
+    inner: F,
+}
+
+fn main() {}
+</code></pre></pre>
+<blockquote>
+<p>不过,我们并不鼓励在类型上使用特征区间,因为它对类型自身施加了限制。
+通常, 我们希望类型尽可能是泛型,从而允许我们使用任何类型创建实例,并使用函数或方法中的特征区间对其行为进行限制。</p>
+</blockquote>
+<h4 id="泛型函数impl代码块"><a class="header" href="#泛型函数impl代码块">泛型函数+impl代码块</a></h4>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_bounds_functions.rs
+
+use std::fmt::Debug;
+
+trait Eatable {
+    fn eat(&amp;self);
+}
+
+// 指定类型必须是 Debug,以便其可以在方法内部输出到控制台
+#[derive(Debug)]
+struct Food&lt;T&gt;(T);
+
+#[derive(Debug)]
+struct Apple;
+
+// 为了让 apple 是“可食用”的,我们实现了 Food 的 Eatable 特征
+impl&lt;T&gt; Eatable for Food&lt;T&gt;
+    where
+        T: Debug,
+{
+    fn eat(&amp;self) {
+        println!(&quot;Eating {:?}&quot;, self);
+    }
+}
+
+// 注意 eat 的特点,类型 T 必须实现 Eatable 特征。
+fn eat&lt;T&gt;(val: T)
+    where
+        T: Eatable,
+{
+    val.eat();
+}
+
+fn main() {
+    let apple = Food(Apple);
+    eat(apple);
+}
+</code></pre></pre>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <ol>
 <li>&lt;精通rust(第二版)&gt;-第四章：类型、泛型和特征</li>
