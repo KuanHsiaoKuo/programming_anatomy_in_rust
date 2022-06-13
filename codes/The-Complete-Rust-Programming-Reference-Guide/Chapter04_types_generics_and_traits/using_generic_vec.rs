@@ -6,8 +6,8 @@ fn main() {
 
     // or calling method
     let mut v2 = Vec::new();
-    v2.push(2);    // v2 is now Vec<i32>
+    v2.push(2); // v2 is now Vec<i32>
 
     // or using turbofish
-    let v3 = Vec::<u8>::new();    // not so readable
+    let v3 = Vec::<u8>::new(); // not so readable
 }

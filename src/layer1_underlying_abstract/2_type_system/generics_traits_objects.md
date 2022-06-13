@@ -2,39 +2,40 @@
 
 ![rust-traits-deep-dive](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/rust-traits-deep-dive.png)
 <!--ts-->
+
 * [泛型、特征及特征对象](#泛型特征及特征对象)
-   * [泛型](#泛型)
-      * [从代码复用出发](#从代码复用出发)
-         * [函数作用不足](#函数作用不足)
-         * [静态类型语言还需要泛型来复用代码](#静态类型语言还需要泛型来复用代码)
-      * [泛型本质上是一种单态化](#泛型本质上是一种单态化)
-      * [泛型使用方式](#泛型使用方式)
-         * [泛型函数](#泛型函数)
-         * [泛型结构体](#泛型结构体)
-         * [泛型枚举体](#泛型枚举体)
-         * [泛型特征](#泛型特征)
-         * [泛型方法](#泛型方法)
-      * [impl: 泛型实现块](#impl-泛型实现块)
-         * [泛型实现](#泛型实现)
-         * [专门化泛型](#专门化泛型)
-      * [指定类型进行实例化](#指定类型进行实例化)
-         * [基于类型实例化推断](#基于类型实例化推断)
-         * [泛型函数调用某些方法](#泛型函数调用某些方法)
-         * [turbofish: ::&lt;&gt;](#turbofish-)
-   * [特征](#特征)
-      * [从多态和代码复用的角度来看: 接口、鸭子类型还是特征？](#从多态和代码复用的角度来看-接口鸭子类型还是特征)
-         * [接口](#接口)
-         * [鸭子类型](#鸭子类型)
-         * [特征](#特征-1)
-      * [特征到底是什么？](#特征到底是什么)
-      * [特征的多种表现形式](#特征的多种表现形式)
-         * [标记(特征)](#标记特征)
-         * [简单(特征)](#简单特征)
-         * [泛型(特征)](#泛型特征-1)
-         * [关联类型(特征)](#关联类型特征)
-         * [继承(特征)](#继承特征)
-   * [特征区间：泛型+特征](#特征区间泛型特征)
-   * [参考资源](#参考资源)
+    * [泛型](#泛型)
+        * [从代码复用出发](#从代码复用出发)
+            * [函数作用不足](#函数作用不足)
+            * [静态类型语言还需要泛型来复用代码](#静态类型语言还需要泛型来复用代码)
+        * [泛型本质上是一种单态化](#泛型本质上是一种单态化)
+        * [泛型使用方式](#泛型使用方式)
+            * [泛型函数](#泛型函数)
+            * [泛型结构体](#泛型结构体)
+            * [泛型枚举体](#泛型枚举体)
+            * [泛型特征](#泛型特征)
+            * [泛型方法](#泛型方法)
+        * [impl: 泛型实现块](#impl-泛型实现块)
+            * [泛型实现](#泛型实现)
+            * [专门化泛型](#专门化泛型)
+        * [指定类型进行实例化](#指定类型进行实例化)
+            * [基于类型实例化推断](#基于类型实例化推断)
+            * [泛型函数调用某些方法](#泛型函数调用某些方法)
+            * [turbofish: ::&lt;&gt;](#turbofish-)
+    * [特征](#特征)
+        * [从多态和代码复用的角度来看: 接口、鸭子类型还是特征？](#从多态和代码复用的角度来看-接口鸭子类型还是特征)
+            * [接口](#接口)
+            * [鸭子类型](#鸭子类型)
+            * [特征](#特征-1)
+        * [特征到底是什么？](#特征到底是什么)
+        * [特征的多种表现形式](#特征的多种表现形式)
+            * [标记(特征)](#标记特征)
+            * [简单(特征)](#简单特征)
+            * [泛型(特征)](#泛型特征-1)
+            * [关联类型(特征)](#关联类型特征)
+            * [继承(特征)](#继承特征)
+    * [特征区间：泛型+特征](#特征区间泛型特征)
+    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Mon Jun 13 10:22:04 UTC 2022 -->
@@ -183,12 +184,139 @@ Rust也有一个类似且功能强大的结构,被称为特征。Rust中的特�
 ### 特征到底是什么？
 
 ### 特征的多种表现形式
+
 #### 标记(特征)
+
 #### 简单(特征)
+
 #### 泛型(特征)
+
 #### 关联类型(特征)
+
 #### 继承(特征)
+
 ## 特征区间：泛型+特征
+
+### 引出特征区间
+
+首先看一下如下代码：
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_bound_intro.rs:1:}}
+```
+
+1. 因此, 任何类型为 T 的泛型函数都不能知道或默认假定 init()方法存在于 T 之上。
+2. 如果确实如此,那么它根本不是泛型,并且它们只能接收具有 init()方法的类型。
+3. **因此,有一种方法可以让编译器知道这一点,并约束 load 通过特征能够接收的类型集,这就需要用到特征区间**。
+
+> 我们可以定义一个名为 Loadable 的特征,并在我们的 Enemy 和 Hero 类型上实现它。
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_bound_intro_fixed.rs:1:}}
+```
+
+1. 注意, “:Loadable”部分表明了我们指定特征范围的方式。特征区间允许我们限制泛型 API 可以接收的参数范围。
+
+### 代码单体化
+
+1. 指定泛型元素上的绑定的特征类似于我们为变量指定类型的方式
+2. 但是此处的变量是泛型 T,类型是某些特征。例如 **T:SomeTrait**。
+3. 定义泛型函数时几乎总是会用到特征区间。
+4. 如果定义的泛型函数中的 T 不包含任何特征区间,我们就不能通过任何方法调用,因 Rust 不知道给定方法实现的方式。
+5. 它需要知道 T 是否具有某个 foo 方法,以便**将代码单体化**
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_bound_basics.rs:1:}}
+```
+
+> 修正后
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_bound_basics_fixed.rs:1:}}
+```
+
+### 指定特征区间的四个方法
+
+#### 区间内泛型: fn fn_name<T: target_trait>(val: T)
+
+```rust
+// 指定特征区间的一种方法, 它会接收任何实现了 Display 特征的类型
+fn show_me<T: Display>(val: T) {
+    //可以使用{}格式化字符串，因为有Display特征区间
+    printin!("{}", val);
+}
+```
+
+1. 这是在泛型函数的类型签名的长度较短时声明特征区间的常见语法。
+2. 在指定类型的特征区间时,此语法也有效
+
+#### where语句: 当第一种方法签名过长时使用
+
+```rust
+pub fn parse<F>(&self) -> Result<F, <F as FromStr>::Err>
+    where F: FromStr { ... }
+```
+
+> 注意“where F: FromStr”部分告诉我们 F 类型必须实现 FromStr 特征。where 语句将特征区间和函数签名解耦,并使其可读
+
+#### 使用"+"组合多个特征
+
+- 先看一下标准库中 HashMap 类型的 impl 代码块:
+
+```rust
+// HashMap 键类型的 K 必须实现 Hash 特征和 Eq 特征
+impl<K: Hash + Eq, V> HashMap<K, V, RandomState>
+{}
+```
+
+- 一个更加具体的例子
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_composition.rs:1:}}
+```
+
+#### 使用impl特征语法: 闭包常用
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/impl_trait_syntax.rs:1:}}
+```
+
+> 如果没有这种语法,则必须使用 Box 智能指针类型将其放在指针后面返回,这涉及堆分配。
+> 闭包的底层结构由实现了一系列特征的结构体组成。**Fn(T) -> U** 特征就是其中之一
+
+闭包使用示例：
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/impl_trait_closure.rs:1:}}
+```
+
+还可以在入参和返回使用：
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/impl_trait_both.rs:1:}}
+```
+
+1. 通常建议将特征区间的 impl 特征语法用做函数的返回类型。
+2. 在参数位置使用它意味着我们不能使用 turbofish 运算符。
+3. 如果某些相关代码使用 turbofish 运算符来调用软件包中的某个方法,那么可能导致 API 不兼容。
+4. 只有当我们没有可用的具体类型时才应该使用它, 就像闭包那样。
+
+### 特征区间的使用场景
+
+#### 在类型上使用：不建议
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_bounds_types.rs:1:}}
+```
+
+> 不过,我们并不鼓励在类型上使用特征区间,因为它对类型自身施加了限制。
+> 通常, 我们希望类型尽可能是泛型,从而允许我们使用任何类型创建实例,并使用函数或方法中的特征区间对其行为进行限制。
+
+#### 泛型函数+impl代码块
+
+```rust, editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter04_types_generics_and_traits/trait_bound_functions.rs:1:}}
+```
 
 ## 参考资源
 

@@ -8,7 +8,7 @@ struct Square(f32);
 struct Rectangle(f32, f32);
 
 trait Area: Debug {
-    fn get_area(&self) -> f32; 
+    fn get_area(&self) -> f32;
 }
 
 impl Area for Square {

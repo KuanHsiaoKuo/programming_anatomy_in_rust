@@ -2,7 +2,7 @@
 
 enum Transmission<T> {
     Signal(T),
-    NoSignal
+    NoSignal,
 }
 
 fn main() {

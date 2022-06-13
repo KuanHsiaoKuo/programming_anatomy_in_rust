@@ -1,7 +1,7 @@
 // generic_struct.rs
 
 struct Container<T> {
-    item: T
+    item: T,
 }
 
 impl<T> Container<T> {

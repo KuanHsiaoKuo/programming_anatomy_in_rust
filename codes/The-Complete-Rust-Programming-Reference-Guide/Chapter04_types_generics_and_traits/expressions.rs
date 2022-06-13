@@ -17,7 +17,7 @@ fn main() {
     let result_msg = match precompute {
         42 => "done",
         a if a % 2 == 0 => "continue",
-        _ => panic!("Oh no !")
+        _ => panic!("Oh no !"),
     };
 
     // if expressions

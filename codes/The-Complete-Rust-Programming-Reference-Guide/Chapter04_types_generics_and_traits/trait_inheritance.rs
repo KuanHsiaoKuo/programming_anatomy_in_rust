@@ -10,12 +10,15 @@ trait Car: Vehicle {
 
 struct TeslaRoadster {
     model: String,
-    release_date: u16
+    release_date: u16,
 }
 
 impl TeslaRoadster {
     fn new(model: &str, release_date: u16) -> Self {
-        Self { model: model.to_string(), release_date }
+        Self {
+            model: model.to_string(),
+            release_date,
+        }
     }
 }
 
@@ -27,5 +30,9 @@ impl Car for TeslaRoadster {
 
 fn main() {
     let my_roadster = TeslaRoadster::new("Tesla Roadster II", 2020);
-    println!("{} is priced at ${}", my_roadster.model, my_roadster.get_price());
+    println!(
+        "{} is priced at ${}",
+        my_roadster.model,
+        my_roadster.get_price()
+    );
 }
