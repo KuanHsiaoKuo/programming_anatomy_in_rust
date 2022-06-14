@@ -1,4 +1,4 @@
-# 所有权、作用域与生命周期
+# 所有权、作用域、借用与生命周期
 
 ![Ownership](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Ownership.jpeg)
 
@@ -10,6 +10,13 @@
 <!-- Added by: runner, at: Tue Jun 14 03:29:01 UTC 2022 -->
 
 <!--te-->
+## 所有权
+
+## 作用域
+
+## 借用
+
+## 生命周期
 
 ## 参考资源
 
