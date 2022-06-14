@@ -3,7 +3,7 @@
 - [Layer1: 底层抽象](./layer1_underlying_abstract/layer1_underlying_abstract.md)
     - [虚拟内存管理](./layer1_underlying_abstract/1_virtual_memory/virtual_memory.md)
       - [内存管理与内存安全](./layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.md)
-      - [**所有权四件套**](./layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.md)
+      - [**所有权三件套**](./layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.md)
     - [类型系统](./layer1_underlying_abstract/2_type_system/type_system.md)
       - [基础内置类型](./layer1_underlying_abstract/2_type_system/primitive_types.md)
       - [集合类型](./layer1_underlying_abstract/2_type_system/collections.md)

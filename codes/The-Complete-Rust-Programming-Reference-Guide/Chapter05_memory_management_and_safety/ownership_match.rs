@@ -4,20 +4,20 @@
 enum Food {
     Cake,
     Pizza,
-    Salad
+    Salad,
 }
 
 #[derive(Debug)]
 struct Bag {
-    food: Food
+    food: Food,
 }
 
 fn main() {
     let bag = Bag { food: Food::Cake };
     match bag.food {
         Food::Cake => println!("I got cake"),
-        a => println!("I got {:?}", a)
+        a => println!("I got {:?}", a) // value partially moved here
     }
-    
-    println!("{:?}", bag);
+
+    println!("{:?}", bag); // value borrowed here after partial move
 }
