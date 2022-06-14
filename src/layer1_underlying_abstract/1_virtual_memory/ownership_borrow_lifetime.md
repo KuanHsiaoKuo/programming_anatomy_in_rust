@@ -44,11 +44,12 @@
          * [函数中的借用](#函数中的借用)
          * [匹配中的借用](#匹配中的借用)
          * [从函数返回引用：](#从函数返回引用)
+      * [基于借用规则的方法类型](#基于借用规则的方法类型)
    * [生命周期：针对引用附加的信息](#生命周期针对引用附加的信息)
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:29 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:50 UTC 2022 -->
 
 <!--te-->
 
