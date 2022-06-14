@@ -4,6 +4,7 @@
 
 <!--ts-->
 * [所有权四件套：所有权、作用域、借用与生命周期](#所有权四件套所有权作用域借用与生命周期)
+   * [综述](#综述)
    * [所有权](#所有权)
    * [作用域](#作用域)
    * [借用](#借用)
@@ -11,7 +12,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 04:14:39 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 05:37:06 UTC 2022 -->
 
 <!--te-->
 
