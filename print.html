@@ -174,13 +174,13 @@
                 </div>
                 <!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:03 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:43 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:00 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:40 UTC 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -206,7 +206,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:02 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:41 UTC 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -326,12 +326,31 @@
 </li>
 </ul>
 </li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1-%E5%A4%9A%E6%80%81%E7%89%B9%E5%BE%81%E7%B1%BB%E5%9E%8B">特征对象: 多态特征类型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%88%86%E5%8F%91dispatch">分发(dispatch)</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%88%86%E5%8F%91%E6%96%B9%E5%BC%8F%E9%9D%99%E6%80%81-or-%E5%8A%A8%E6%80%81">分发方式：静态 or 动态</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%8C%BA%E5%88%AB%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E4%B8%8E%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1">区别特征区间与特征对象</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1%E5%85%B7%E4%BD%93%E8%AF%B4%E8%AF%B4">特征对象具体说说</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%8C%87%E5%AE%9A%E4%B8%BA%E5%AE%9E%E7%8E%B0%E6%9F%90%E4%B8%AA%E7%89%B9%E5%BE%81">指定为实现某个特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%94%A8%E8%83%96%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0">用胖指针实现</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%98%AFrust%E6%89%A7%E8%A1%8C%E5%8A%A8%E6%80%81%E5%88%86%E5%8F%91%E7%9A%84%E6%96%B9%E5%BC%8F">是Rust执行动态分发的方式</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%B8%8D%E5%AE%9A%E9%95%BF%E7%B1%BB%E5%9E%8B%E5%8F%AA%E8%83%BD%E4%BD%9C%E4%B8%BA%E5%BC%95%E7%94%A8%E5%88%9B%E5%BB%BA">不定长类型只能作为引用创建</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%80%BB%E7%BB%93%E7%89%B9%E5%BE%81%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E5%92%8C%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1">总结特征、特征区间和特征对象</a></li>
 <li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
 </ul>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:01 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:41 UTC 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -964,6 +983,104 @@ fn main() {
     eat(apple);
 }
 </code></pre></pre>
+<h2 id="特征对象-多态特征类型"><a class="header" href="#特征对象-多态特征类型">特征对象: 多态特征类型</a></h2>
+<h3 id="分发dispatch"><a class="header" href="#分发dispatch">分发(dispatch)</a></h3>
+<blockquote>
+<p>分发是一个从面向对象编程范式中借鉴的概念,主要用于描述被称为多态的上下文中的一种特性。 在面向对象程序设计(Object-Oriented Programming,OOP)中,当 API 是泛型或者接收实现为接口的参数时,必须弄清楚参数在传递给 API 的类型实例上调用什么方法实现。多态的上下文中的方法解析过程被称为分发,调用该方法被称为分发化(dispatching) 。</p>
+</blockquote>
+<h4 id="分发方式静态-or-动态"><a class="header" href="#分发方式静态-or-动态">分发方式：静态 or 动态</a></h4>
+<blockquote>
+<p>在支持多态的主流语言中,分发可以通过以下任意一种方式进行。</p>
+</blockquote>
+<ol>
+<li>静态分发：编译期决定</li>
+</ol>
+<p>当在编译期决定要调用的方法时,它被称为静态分发或早期绑定。方法的签名用于决定调用的方法,所有这些都在编译期决定。在 Rust 中,泛型展示了这种形式的分发, 因为即使泛型函数可以接收许多参数, 也会在编译期使用具体类型生成函数的专用副本。</p>
+<p>2.动态分发: 运行期决定，资源开销更大</p>
+<p>在面向对象的语言中,有时直到运行时才能确定调用的方法。这是因为具体类型被隐藏,并且只有接口方法可用于调用该类型。 在 Java 中,当函数只有参数时就是这种情况,即接口。 这种情况只能通过动态分发来处理。在动态分发过程中,可通过对
+vtable 接口的实现列表进行查找,并调用该方法来动态确定相关方法。vtable 是一个函数指针列表,指向每个类型的实现方法。由于方法调用过程中存在额外的间接指针引用,所以这需要更多的资源开销</p>
+<h3 id="区别特征区间与特征对象"><a class="header" href="#区别特征区间与特征对象">区别特征区间与特征对象</a></h3>
+<table><thead><tr><th align="center">特征使用方式</th><th align="center">分发方式</th><th align="center">实现方式</th><th align="center">绑定时期</th><th></th></tr></thead><tbody>
+<tr><td align="center">特征区间</td><td align="center">静态分发</td><td align="center">限定泛型</td><td align="center">编译期(早期绑定)</td><td></td></tr>
+<tr><td align="center">特征对象</td><td align="center">动态分发</td><td align="center">胖指针</td><td align="center">运行期多态(后期绑定)</td><td></td></tr>
+</tbody></table>
+<h3 id="特征对象具体说说"><a class="header" href="#特征对象具体说说">特征对象具体说说</a></h3>
+<h4 id="指定为实现某个特征"><a class="header" href="#指定为实现某个特征">指定为实现某个特征</a></h4>
+<p>特征对象是一种创建多态 API 的方法,可以将参数指定为实现某个特征的东西,而不是泛型或具体类型。这种方法被声明为实现某个特征 API,即特征对象。</p>
+<h4 id="用胖指针实现"><a class="header" href="#用胖指针实现">用胖指针实现</a></h4>
+<p>特征对象类似 C++中的虚方法。特征对象实现为胖指针,并且是不定长类型,这意味着它们只能在引用符号(&amp;)后面使用。特征对象胖指针具有指向与对象关联的实际数据的第一指针,而第二指针指向虚拟表(vtable) ,它是在固定偏移处为每个对象的方法保留一个函数指针的结构体。</p>
+<h4 id="是rust执行动态分发的方式"><a class="header" href="#是rust执行动态分发的方式">是Rust执行动态分发的方式</a></h4>
+<p>特征对象是 Rust 执行动态分发的方式,我们没有实际的具体类型信息。通过跳转到vtable 并调用适当的方法完成方法解析。</p>
+<p>特征对象的另一个用例是,它们允许用户对可以具有多种类型的集合进行操作,但是在运行时需要额外的间接指针引用开销</p>
+<pre><pre class="playground"><code class="language-rust  editable">// trait_objects.rs
+
+use std::fmt::Debug;
+
+#[derive(Debug)]
+struct Square(f32);
+
+#[derive(Debug)]
+struct Rectangle(f32, f32);
+
+trait Area: Debug {
+    fn get_area(&amp;self) -&gt; f32;
+}
+
+impl Area for Square {
+    fn get_area(&amp;self) -&gt; f32 {
+        self.0 * self.0
+    }
+}
+
+impl Area for Rectangle {
+    fn get_area(&amp;self) -&gt; f32 {
+        self.0 * self.1
+    }
+}
+
+fn main() {
+    /*
+        shapes 的元素类型是&amp;dyn Area,这是一种表示为特征的类型。
+        特征对象是由 dyn Area 表示的, 意味着它是指向 Area 特征某些实现的指针。
+        特征对象形式的类型允许用户在集合类型(例如 Vec)中存储不同类型
+
+        Square 和 Rectangle 会隐式转换成特征对象,因为我们给它们推送了一个引用。
+        我们还可以通过手动转换某个特征对象来构造一个类型,但这是一种比较少见的情况.
+        只有在编译器自身无法将类型作为特征对象转换时使用。
+    */
+    let shapes: Vec&lt;&amp;dyn Area&gt; = vec![&amp;Square(3f32), &amp;Rectangle(4f32, 2f32)];
+    for s in shapes {
+        println!(&quot;{:?}&quot;, s);
+    }
+}
+</code></pre></pre>
+<h4 id="不定长类型只能作为引用创建"><a class="header" href="#不定长类型只能作为引用创建">不定长类型只能作为引用创建</a></h4>
+<blockquote>
+<p>请注意,我们只能创建在编译时知道类型尺寸的特征对象。</p>
+</blockquote>
+<p>dyn Trait 是一个不定长类型,只能作为引用创建。我们还可以通过将特征对象置于其他指针类型之后来创建特征对象,例如 Box、Rc、Arc 等</p>
+<pre><pre class="playground"><code class="language-rust  editable">// dyn_trait.rs
+
+use std::fmt::Display;
+
+fn show_me(item: &amp;dyn Display) {
+    println!(&quot;{}&quot;, item);
+}
+
+fn main() {
+    show_me(&amp;&quot;Hello trait object&quot;);
+}
+</code></pre></pre>
+<h2 id="总结特征特征区间和特征对象"><a class="header" href="#总结特征特征区间和特征对象">总结特征、特征区间和特征对象</a></h2>
+<p>特征和泛型通过单态化(早期绑定)或运行时多态(后期绑定)提供了两种代码复用的方式。
+何时使用它们取决于具体情况和相关应用程序的需求：</p>
+<ol>
+<li>通常,错误类型会被分配到动态分发的序列,因为它们应该是很少被执行的代码路径。</li>
+<li>单态化对小型的应用场景来说非常方便,但是缺点是导致了代码的膨胀和重复,这会影响缓存效率,并增加二进制文件的大小。</li>
+</ol>
+<blockquote>
+<p>但是,在这两个选项中,静态分发应该是首选,除非系统对二进制文件大小存在严格的限制。</p>
+</blockquote>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <ol>
 <li>&lt;精通rust(第二版)&gt;-第四章：类型、泛型和特征</li>
@@ -981,7 +1098,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:02 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:42 UTC 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -1049,27 +1166,27 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="逻辑判断与循环"><a class="header" href="#逻辑判断与循环">逻辑判断与循环</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:05 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:45 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:03 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:43 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="函数式编程"><a class="header" href="#函数式编程">函数式编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="面向对象编程"><a class="header" href="#面向对象编程">面向对象编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型编程"><a class="header" href="#泛型编程">泛型编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:04 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:44 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:04 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:44 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="模块相关"><a class="header" href="#模块相关">模块相关</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo及类似包管理器介绍"><a class="header" href="#cargo及类似包管理器介绍">Cargo及类似包管理器介绍</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:06 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:05 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:45 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
 <ul>
@@ -1110,7 +1227,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:06 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -1312,16 +1429,16 @@ req          +---------&gt; |            |   |          | req handler    |
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:06 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:07 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:06 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:06 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Added by: kuanhsiaokuo, at: Thu Jun  2 23:19:28 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h1>
@@ -1330,7 +1447,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 02:26:08 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:07:48 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
