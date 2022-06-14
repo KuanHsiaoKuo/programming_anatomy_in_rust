@@ -174,13 +174,13 @@
                 </div>
                 <!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:32 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:53 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:29 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:50 UTC 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -265,6 +265,7 @@
 <li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BB%8E%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8">从函数返回引用：</a></li>
 </ul>
 </li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%9F%BA%E4%BA%8E%E5%80%9F%E7%94%A8%E8%A7%84%E5%88%99%E7%9A%84%E6%96%B9%E6%B3%95%E7%B1%BB%E5%9E%8B">基于借用规则的方法类型</a></li>
 </ul>
 </li>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%88%E5%AF%B9%E5%BC%95%E7%94%A8%E9%99%84%E5%8A%A0%E7%9A%84%E4%BF%A1%E6%81%AF">生命周期：针对引用附加的信息</a></li>
@@ -273,7 +274,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:29 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:50 UTC 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -781,6 +782,16 @@ fn main() {
     let value = get_a_borrowed_value();
 }
 </code></pre></pre>
+<h3 id="基于借用规则的方法类型"><a class="header" href="#基于借用规则的方法类型">基于借用规则的方法类型</a></h3>
+<blockquote>
+<p>借用规则还规定了如何定义类型的固有方法和特征的实例方法。以下是它们接收实例的方式,并且是根据限制由少到多排列的。</p>
+</blockquote>
+<ul>
+<li>&amp;self 方法:这些方法只对其成员具有不可变的访问权限。</li>
+<li>&amp;mut self 方法:这些方法能够可变地借用 self 实例。</li>
+<li>self 方法:这些方法拥有调用它的实例的所有权,并且类型在后续调用时将失效。</li>
+</ul>
+<p>对于自定义类型,相同的借用规则也适用于其作用域成员。</p>
 <h2 id="生命周期针对引用附加的信息"><a class="header" href="#生命周期针对引用附加的信息">生命周期：针对引用附加的信息</a></h2>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <ul>
@@ -807,7 +818,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:30 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:51 UTC 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -951,7 +962,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:30 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:51 UTC 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -1699,7 +1710,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:31 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:52 UTC 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -1767,27 +1778,27 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="逻辑判断与循环"><a class="header" href="#逻辑判断与循环">逻辑判断与循环</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:33 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:54 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:32 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:53 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="函数式编程"><a class="header" href="#函数式编程">函数式编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="面向对象编程"><a class="header" href="#面向对象编程">面向对象编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型编程"><a class="header" href="#泛型编程">泛型编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:33 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:53 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:33 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:54 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="模块相关"><a class="header" href="#模块相关">模块相关</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo及类似包管理器介绍"><a class="header" href="#cargo及类似包管理器介绍">Cargo及类似包管理器介绍</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:35 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:56 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:34 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:55 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
 <ul>
@@ -1828,7 +1839,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:34 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:55 UTC 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -2030,16 +2041,16 @@ req          +---------&gt; |            |   |          | req handler    |
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:34 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:55 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:35 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:56 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:35 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:56 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:35 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:56 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Added by: kuanhsiaokuo, at: Thu Jun  2 23:19:28 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h1>
@@ -2048,7 +2059,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:33:36 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:37:57 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
