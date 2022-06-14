@@ -274,7 +274,7 @@ Clone 有一个名为 clone 的方法,用于获取接收者的不可变引用,�
 {{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter05_memory_management_and_safety/ownership_closures.rs:1:}}
 ```
 
-## 借用: 规避所有权规则限制
+## 借用: 通过引用规避所有权规则限制
 
 ### 为何需要借用/引用
 
