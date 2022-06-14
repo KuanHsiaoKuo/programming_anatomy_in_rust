@@ -1,6 +1,6 @@
 // making_copy_types.rs
 
-#[derive(Copy, Debug)]
+#[derive(Copy, Debug)]  // the trait `Clone` is not implemented for `Dummy`
 struct Dummy;
 
 fn main() {
