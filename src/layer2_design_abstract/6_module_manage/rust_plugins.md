@@ -39,3 +39,6 @@
 ## 参考资源
 
 - <精通Rust(第二版)>-2.4 Cargo工具扩展
+- [Components - The rustup book](https://rust-lang.github.io/rustup/concepts/components.html)
+- [Rustup packages availability on x86_64-unknown-linux-gnu](https://rust-lang.github.io/rustup-components-history/)
+- [Channels - The rustup book](https://rust-lang.github.io/rustup/concepts/channels.html#nightly-availability)
