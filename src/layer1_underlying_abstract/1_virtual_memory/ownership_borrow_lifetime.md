@@ -1,4 +1,4 @@
-# 所有权四件套：所有权、作用域、借用与生命周期
+# 所有权三件套：所有权、借用与生命周期
 
 ![Ownership](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Ownership.jpeg)
 
