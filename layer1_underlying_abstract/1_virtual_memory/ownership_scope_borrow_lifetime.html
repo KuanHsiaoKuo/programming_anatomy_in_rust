@@ -189,8 +189,6 @@
 </li>
 <li><a href="#rust%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E8%A7%84%E5%88%99">Rust的所有权规则</a></li>
 <li><a href="#%E6%8F%A3%E6%91%A9%E6%89%80%E6%9C%89%E6%9D%83%E5%90%AB%E4%B9%89">揣摩所有权含义</a></li>
-</ul>
-</li>
 <li><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%89%80%E6%9C%89%E6%9D%83%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0">作用域：所有权考虑因素</a>
 <ul>
 <li><a href="#%E5%A4%9A%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90">多作用域的情况分析</a></li>
@@ -208,6 +206,8 @@
 <li><a href="#copy%E4%B8%8Eclone%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%88%99">Copy与Clone的实现原则</a></li>
 </ul>
 </li>
+</ul>
+</li>
 <li><a href="#%E5%80%9F%E7%94%A8-%E8%A7%84%E9%81%BF%E6%89%80%E6%9C%89%E6%9D%83%E8%A7%84%E5%88%99%E9%99%90%E5%88%B6">借用: 规避所有权规则限制</a></li>
 <li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%88%E5%AF%B9%E5%BC%95%E7%94%A8%E9%99%84%E5%8A%A0%E7%9A%84%E4%BF%A1%E6%81%AF">生命周期：针对引用附加的信息</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
@@ -215,7 +215,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 07:22:31 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 07:24:41 UTC 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -292,7 +292,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>每当我们将变量分配给某个其他变量或从变量读取数据时,Rust 会默认移动变量指向的值。所有权规则可以防止你通过多个访问点来修改值,这可能导致访问已被释放的变量,即使在单线程上下文中,使用允许多个值的可变别名的语言也是如此</p>
-<h2 id="作用域所有权考虑因素"><a class="header" href="#作用域所有权考虑因素">作用域：所有权考虑因素</a></h2>
+<h3 id="作用域所有权考虑因素"><a class="header" href="#作用域所有权考虑因素">作用域：所有权考虑因素</a></h3>
 <blockquote>
 <p>为了分析某个值何时超出作用域,所有权规则还会考虑变量的作用域</p>
 </blockquote>
@@ -302,7 +302,7 @@ fn main() {
 <li>代码中的作用域是由一对花括号表示的。无论何时使用块表达式都会创建一个作用域,即任何以花括号开头和结尾的表达式。</li>
 <li>此外,作用域支持互相嵌套,并且可以在子作用域中访问父作用域的元素,但反过来不行</li>
 </ol>
-<h3 id="多作用域的情况分析"><a class="header" href="#多作用域的情况分析">多作用域的情况分析</a></h3>
+<h4 id="多作用域的情况分析"><a class="header" href="#多作用域的情况分析">多作用域的情况分析</a></h4>
 <pre><pre class="playground"><code class="language-rust  editable">// scopes.rs
 
 /*
@@ -332,7 +332,7 @@ fn main() {
     } // level_1_number goes out of scope here
 } // level_0_str goes out of scope here
 </code></pre></pre>
-<h3 id="作用域是推断所有权时的一个重要属性"><a class="header" href="#作用域是推断所有权时的一个重要属性">作用域是推断所有权时的一个重要属性</a></h3>
+<h4 id="作用域是推断所有权时的一个重要属性"><a class="header" href="#作用域是推断所有权时的一个重要属性">作用域是推断所有权时的一个重要属性</a></h4>
 <blockquote>
 <p>作用域还会被用来推断后续介绍的借用和生命周期。</p>
 </blockquote>
@@ -342,7 +342,7 @@ fn main() {
 <li>这类似于在 C 语言中调用 free 函数,但这里是隐式的, 并且可以避免程序员忘记释放值。</li>
 <li>drop 方法来自 Drop 特征,它是为 Rust 中大部分堆分配类型实现的,可以轻松地自动释放资源。</li>
 </ol>
-<h2 id="引入移动和复制语义"><a class="header" href="#引入移动和复制语义">引入移动和复制语义</a></h2>
+<h3 id="引入移动和复制语义"><a class="header" href="#引入移动和复制语义">引入移动和复制语义</a></h3>
 <blockquote>
 <p>结合作用域判断一下下列代码是否正确</p>
 </blockquote>
@@ -359,16 +359,16 @@ fn main() {
     println!(&quot;{:?} {:?}&quot;, foo, bar); 
 }
 </code></pre></pre>
-<h3 id="语义是什么意思"><a class="header" href="#语义是什么意思">语义是什么意思</a></h3>
+<h4 id="语义是什么意思"><a class="header" href="#语义是什么意思">语义是什么意思</a></h4>
 <p>以移动语义为例，在 Rust 中,变量绑定默认具有移动语义。但这究竟意味着什么?要理解这一点,我们需要考虑如何在程序中使用变量。我们创建值或资源并将它们分配给变量,以便在程序中可以方便地引用它们。这些变量是指向值所在内存地址的名称。现在,诸如读取、赋值、添加及将它们传递给函数等对变量的操作,在访问变量指向值的方式上可能具有不同的语义或含义。在静态类型语言中,这些语义大致分为移动语义和复制语义。</p>
-<h3 id="移动语义变量访问或重新分配时默认"><a class="header" href="#移动语义变量访问或重新分配时默认">移动语义：变量访问或重新分配时默认</a></h3>
+<h4 id="移动语义变量访问或重新分配时默认"><a class="header" href="#移动语义变量访问或重新分配时默认">移动语义：变量访问或重新分配时默认</a></h4>
 <blockquote>
 <p>通过变量访问或重新分配给变量时移动到接收项的值表示移动语义。</p>
 </blockquote>
 <p>由于Rust 的仿射类型系统,它默认会采用移动语义。仿射类型系统的一个突出特点是值或资源只能使用一次,而 Rust 通过所有权规则展示此属性。</p>
-<h3 id="复制语义"><a class="header" href="#复制语义">复制语义</a></h3>
+<h4 id="复制语义"><a class="header" href="#复制语义">复制语义</a></h4>
 <p>默认情况下,通过变量分配或访问,以及从函数返回时复制的值(例如按位复制)具有复制语义。这意味着该值可以使用任意次数,每个值都是全新的。</p>
-<h3 id="使用copy特征更改语义"><a class="header" href="#使用copy特征更改语义">使用Copy特征更改语义</a></h3>
+<h4 id="使用copy特征更改语义"><a class="header" href="#使用copy特征更改语义">使用Copy特征更改语义</a></h4>
 <p>Rust 中的移动语义有时会受到限制。幸运的是,通过实现 Copy 特征可以更改类型的行为以遵循复制语义。基元和其他仅适用于堆栈的数据类型在默认情况下实现了上述特征,这也是前面的基元代码能够正常工作的原因</p>
 <pre><pre class="playground"><code class="language-rust  editable">// making_copy_types.rs
 
@@ -382,7 +382,7 @@ fn main() {
     println!(&quot;{:?}&quot;, b);
 }
 </code></pre></pre>
-<h3 id="copy-特征依赖于clone-特征"><a class="header" href="#copy-特征依赖于clone-特征">Copy 特征依赖于Clone 特征</a></h3>
+<h4 id="copy-特征依赖于clone-特征"><a class="header" href="#copy-特征依赖于clone-特征">Copy 特征依赖于Clone 特征</a></h4>
 <blockquote>
 <p>Clone 是 Copy 的父级特征, 任何实现 Copy 特征的类型必须实现 Clone。</p>
 </blockquote>
@@ -399,11 +399,11 @@ fn main() {
     println!(&quot;{:?}&quot;, b);
 }
 </code></pre></pre>
-<h3 id="区别一下copy与clone"><a class="header" href="#区别一下copy与clone">区别一下Copy与Clone</a></h3>
+<h4 id="区别一下copy与clone"><a class="header" href="#区别一下copy与clone">区别一下Copy与Clone</a></h4>
 <blockquote>
 <p>Copy 和 Clone 特征传达了在代码中使用类型时如何进行复制的原理。</p>
 </blockquote>
-<h3 id="copy与clone的实现原则"><a class="header" href="#copy与clone的实现原则">Copy与Clone的实现原则</a></h3>
+<h4 id="copy与clone的实现原则"><a class="header" href="#copy与clone的实现原则">Copy与Clone的实现原则</a></h4>
 <h2 id="借用-规避所有权规则限制"><a class="header" href="#借用-规避所有权规则限制">借用: 规避所有权规则限制</a></h2>
 <h2 id="生命周期针对引用附加的信息"><a class="header" href="#生命周期针对引用附加的信息">生命周期：针对引用附加的信息</a></h2>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
