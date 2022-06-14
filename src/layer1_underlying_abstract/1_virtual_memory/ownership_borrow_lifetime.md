@@ -33,7 +33,7 @@
          * [match表达式](#match表达式)
          * [impl代码块](#impl代码块)
          * [闭包](#闭包)
-   * [借用: 规避所有权规则限制](#借用-规避所有权规则限制)
+   * [借用: 通过引用规避所有权规则限制](#借用-通过引用规避所有权规则限制)
       * [为何需要借用/引用](#为何需要借用引用)
       * [借用 or 引用？](#借用-or-引用)
       * [两种借用方式](#两种借用方式)
@@ -49,7 +49,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 11:37:50 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 11:41:03 UTC 2022 -->
 
 <!--te-->
 
