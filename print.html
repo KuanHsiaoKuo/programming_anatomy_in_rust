@@ -174,13 +174,13 @@
                 </div>
                 <!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:43 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:03 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:40 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:01 UTC 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -188,6 +188,24 @@
 <p>而在rust语言编程中，内存的管理方式及其重要。所以这一层主要先介绍虚拟内存管理以及相关出现的内容安全问题，接着介绍rust是如何通过所有权、作用域和生命周期，引申出借用、移动语义、复制语义等一系列内容来解决内存安全问题。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="内存管理与内存安全"><a class="header" href="#内存管理与内存安全">内存管理与内存安全</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="所有权作用域与生命周期"><a class="header" href="#所有权作用域与生命周期">所有权、作用域与生命周期</a></h1>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Ownership.jpeg" alt="Ownership" /></p>
+<!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_scope_lifetime.html#%E6%89%80%E6%9C%89%E6%9D%83%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">所有权、作用域与生命周期</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_scope_lifetime.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:01 UTC 2022 -->
+<!--te-->
+<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<ul>
+<li><a href="https://www.ditsing.com/object-lifetime-and-ownership/">Object lifetime and ownership</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">What is Ownership? - The Rust Programming Language</a></li>
+<li>&lt;精通rust(第二版)&gt;-5.7 内存安全三原则</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%B5%B7%E6%BA%90">类型系统起源</a>
@@ -206,7 +224,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:41 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:02 UTC 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -350,7 +368,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:41 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:02 UTC 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -1081,7 +1099,7 @@ fn main() {
 <blockquote>
 <p>但是,在这两个选项中,静态分发应该是首选,除非系统对二进制文件大小存在严格的限制。</p>
 </blockquote>
-<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<h2 id="参考资源-1"><a class="header" href="#参考资源-1">参考资源</a></h2>
 <ol>
 <li>&lt;精通rust(第二版)&gt;-第四章：类型、泛型和特征</li>
 <li><a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html">Advanced Traits - The Rust Programming Language</a></li>
@@ -1098,7 +1116,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:42 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:03 UTC 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -1158,7 +1176,7 @@ fn main() {
 <li>属性（Attribute)</li>
 </ol>
 <h2 id="路径--"><a class="header" href="#路径--">路径: ::, ::&lt;&gt;</a></h2>
-<h2 id="参考资源-1"><a class="header" href="#参考资源-1">参考资源</a></h2>
+<h2 id="参考资源-2"><a class="header" href="#参考资源-2">参考资源</a></h2>
 <ol>
 <li><a href="https://time.geekbang.org/course/detail/100060601-286522">词法结构</a></li>
 </ol>
@@ -1166,27 +1184,27 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="逻辑判断与循环"><a class="header" href="#逻辑判断与循环">逻辑判断与循环</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:45 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:05 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:43 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:03 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="函数式编程"><a class="header" href="#函数式编程">函数式编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="面向对象编程"><a class="header" href="#面向对象编程">面向对象编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型编程"><a class="header" href="#泛型编程">泛型编程</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:44 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:04 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:44 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:04 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="模块相关"><a class="header" href="#模块相关">模块相关</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo及类似包管理器介绍"><a class="header" href="#cargo及类似包管理器介绍">Cargo及类似包管理器介绍</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:06 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:45 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:05 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
 <ul>
@@ -1227,7 +1245,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:05 UTC 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -1421,7 +1439,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li>具体的事件处理器。事件处理器接口的具体实现。使用描述符来识别事件和程序提供的服务。</li>
 <li>Reactor 管理器。事件处理器的调度核心。分离每个事件，调度事件管理器，调用具体的函数处理某个事件。</li>
 </ol>
-<h2 id="参考资源-2"><a class="header" href="#参考资源-2">参考资源</a></h2>
+<h2 id="参考资源-3"><a class="header" href="#参考资源-3">参考资源</a></h2>
 <ul>
 <li><a href="https://time.geekbang.org/course/detail/100060601-365835">88. IO模型</a></li>
 <li><a href="https://time.geekbang.org/course/detail/100060601-365838">89. epoll和io_uring</a></li>
@@ -1429,16 +1447,16 @@ req          +---------&gt; |            |   |          | req handler    |
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:06 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:06 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:06 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:46 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:06 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <!-- Added by: kuanhsiaokuo, at: Thu Jun  2 23:19:28 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><h1 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h1>
@@ -1447,7 +1465,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 03:07:48 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 03:29:07 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
