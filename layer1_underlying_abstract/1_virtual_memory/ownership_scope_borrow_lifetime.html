@@ -177,6 +177,7 @@
 <ul>
 <li><a href="#%E6%89%80%E6%9C%89%E6%9D%83%E5%9B%9B%E4%BB%B6%E5%A5%97%E6%89%80%E6%9C%89%E6%9D%83%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%80%9F%E7%94%A8%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">所有权四件套：所有权、作用域、借用与生命周期</a>
 <ul>
+<li><a href="#%E7%BB%BC%E8%BF%B0">综述</a></li>
 <li><a href="#%E6%89%80%E6%9C%89%E6%9D%83">所有权</a></li>
 <li><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a></li>
 <li><a href="#%E5%80%9F%E7%94%A8">借用</a></li>
@@ -186,8 +187,27 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 04:14:39 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 05:37:06 UTC 2022 -->
 <!--te-->
+<h2 id="综述"><a class="header" href="#综述">综述</a></h2>
+<pre><code class="language-text">┌───────────────────────────────────┐
+│                                   │
+│                                   │
+│         .───────.       ┌──────┐  │
+│       ,'         `.     │Borrow│  │
+│     ,'             `.   └──────┘  │
+│    ;   ┌─────────┐   :            │
+│    │   │OwnerShip│   │            │
+│    │   └─────────┘   │            │
+│    :     ┌─────┐     ; ┌────────┐ │
+│     ╲    │Scope│    ╱  │Lifetime│ │
+│      `.  └─────┘  ,'   └────────┘ │
+│        `.       ,'                │
+│          `─────'                  │
+│                                   │
+│                                   │
+└───────────────────────────────────┘
+</code></pre>
 <h2 id="所有权"><a class="header" href="#所有权">所有权</a></h2>
 <h2 id="作用域"><a class="header" href="#作用域">作用域</a></h2>
 <h2 id="借用"><a class="header" href="#借用">借用</a></h2>
