@@ -3,7 +3,7 @@
 ![Ownership](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Ownership.jpeg)
 
 <!--ts-->
-* [所有权四件套：所有权、作用域、借用与生命周期](#所有权四件套所有权作用域借用与生命周期)
+* [所有权三件套：所有权、借用与生命周期](#所有权三件套所有权借用与生命周期)
    * [综述](#综述)
    * [所有权](#所有权)
       * [资源所有者](#资源所有者)
@@ -28,7 +28,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jun 14 07:24:41 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jun 14 07:28:19 UTC 2022 -->
 
 <!--te-->
 
