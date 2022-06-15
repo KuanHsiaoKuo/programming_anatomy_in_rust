@@ -19,6 +19,8 @@ jobs:
         run: |
           #mkdir bin
           #curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+          mkdir .cargo
+          cp /bin/.cargo/*  /home/runner/.cargo/bin/mdbook-checklist
           echo "$(pwd)/bin" >> $GITHUB_PATH
       # - run: mdbook build && mdbook test # In case of custom book path: mdbook build path/to/mybook && mdbook test path/to/mybook
       - name: Update Toc
@@ -28,14 +30,17 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Auto update markdown TOC
-      - name: rust-cargo-install
-        uses: actions-rs/install@v0.1.2
-        with:
-          crate: mdbook-checklist
-          version: latest
-      # 由于构建太费时间，改成只在本地查看即可
-#      - name: add mdbook-checklist
-#        run: cargo install mdbook-checklist
+      # 预构建cargo install 相关crate
+      #- name: rust-cargo-install
+      #  uses: actions-rs/install@v0.1.2
+      #  with:
+      #    crate: mdbook-checklist
+      #    version: v0.1.1
+      - name: add mdbook-checklist
+        run: | 
+          cargo install mdbook-checklist
+          # 由于构建太费时间，只构建一次之后就保存到bin文件夹
+          cp /home/runner/.cargo/bin/* /bin/.cargo
       - run: mdbook build
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
