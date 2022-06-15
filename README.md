@@ -47,3 +47,4 @@ git lfs track '*.img'
 3. mdbook-admonish: 使用新的css文件
     - [tommilligan/mdbook-admonish: A preprocessor for mdbook to add Material Design admonishments.](https://github.com/tommilligan/mdbook-admonish)
     - [Overview - The mdbook-admonish book](https://tommilligan.github.io/mdbook-admonish/)
+    - [Admonitions - Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage)
