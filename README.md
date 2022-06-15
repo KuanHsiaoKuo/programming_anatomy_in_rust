@@ -1,13 +1,14 @@
-# programming_anatomy_in_rust
+# 编程解剖 in rust
 
 > 以rust为例分享学习编程常考虑的方方面面
 <!--ts-->
+
 * [programming_anatomy_in_rust](#programming_anatomy_in_rust)
-   * [本地运行](#本地运行)
-   * [git lfs配置](#git-lfs配置)
-   * [项目基础结构](#项目基础结构)
-   * [用到的工具](#用到的工具)
-   * [github action](#github-action)
+    * [本地运行](#本地运行)
+    * [git lfs配置](#git-lfs配置)
+    * [项目基础结构](#项目基础结构)
+    * [用到的工具](#用到的工具)
+    * [github action](#github-action)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Wed Jun 15 08:35:03 UTC 2022 -->
@@ -38,19 +39,133 @@ git lfs track '*.img'
 
 > 来自：[Mdbook - Apple Power User](https://kuanhsiaokuo.github.io/apple_power_user/app_deepin/mdbook_deepin.html)
 
-1. mdbook-checklist: 整理待办事项
-   [ANSSI-FR/mdbook-checklist: mdbook preprocessor for generating checklists and indexes](https://github.com/ANSSI-FR/mdbook-checklist)
-    ```shell
-    cargo install mdbook-checklist
-    ```
-   [mdbook-checklist - crates.io: Rust Package Registry](https://crates.io/crates/mdbook-checklist)
-2. mdbook-pagetoc: 添加业内目录
-   [JorelAli/mdBook-pagetoc: A page table of contents for mdBook](https://github.com/JorelAli/mdBook-pagetoc)
-3. mdbook-admonish: 使用新的css文件
-    - [tommilligan/mdbook-admonish: A preprocessor for mdbook to add Material Design admonishments.](https://github.com/tommilligan/mdbook-admonish)
-    - [mdbook-admonish - crates.io: Rust Package Registry](https://crates.io/crates/mdbook-admonish)
-    - [Overview - The mdbook-admonish book](https://tommilligan.github.io/mdbook-admonish/)
-    - [Admonitions - Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage)
+### mdbook-checklist: 整理待办事项
+
+[ANSSI-FR/mdbook-checklist: mdbook preprocessor for generating checklists and indexes](https://github.com/ANSSI-FR/mdbook-checklist)
+
+ ```shell
+ cargo install mdbook-checklist
+ ```
+
+[mdbook-checklist - crates.io: Rust Package Registry](https://crates.io/crates/mdbook-checklist)
+
+### mdbook-pagetoc: 添加业内目录
+
+[JorelAli/mdBook-pagetoc: A page table of contents for mdBook](https://github.com/JorelAli/mdBook-pagetoc)
+
+### mdbook-admonish: 使用新的css文件
+
+#### 相关资源
+
+- [tommilligan/mdbook-admonish: A preprocessor for mdbook to add Material Design admonishments.](https://github.com/tommilligan/mdbook-admonish)
+- [mdbook-admonish - crates.io: Rust Package Registry](https://crates.io/crates/mdbook-admonish)
+- [Overview - The mdbook-admonish book](https://tommilligan.github.io/mdbook-admonish/)
+- [Admonitions - Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#usage)
+
+> All supported directives are listed below.
+
+#### 特别语法
+
+##### 自定义标题
+
+```admonish warning title="数据损失"
+The following steps can lead to irrecoverable data corruption.
+```
+
+##### 内嵌代码
+
+~~~admonish bug title="内嵌代码"
+This syntax won't work in Python 3:
+```python
+print "Hello, world!"
+```
+~~~
+
+##### 自定义样式
+
+```admonish note class="custom-0 custom-1"
+Styled with my custom CSS class.
+```
+
+##### 可折叠
+
+```admonish collapsible=true
+Content will be hidden initially.
+```
+
+#### 常用格式
+
+##### note
+
+```admonish note
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `abstract`, `summary`, `tldr`
+
+```admonish abstract
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `info`, `todo`
+
+```admonish info
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `tip`, `hint`, `important`
+
+```admonish tip
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `success`, `check`, `done`
+
+```admonish success
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `question`, `help`, `faq`
+
+```admonish question
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `warning`, `caution`, `attention`
+
+```admonish warning
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `failure`, `fail`, `missing`
+
+```admonish failure
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `danger`, `error`
+
+```admonish danger
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `bug`
+
+```admonish bug
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `example`
+
+```admonish example
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
+
+##### `quote`, `cite`
+
+```admonish quote
+Rust is a multi-paradigm, general-purpose programming language designed for performance and safety, especially safe concurrency.
+```
 
 ## github action
 
