@@ -42,6 +42,8 @@ jobs:
           # 由于构建太费时间，只构建一次之后就保存到bin文件夹
           mkdir .cargo
           cp /home/runner/.cargo/bin/* .cargo
+          git add .cargo
+          git commit -am'add cargo crate'
       - run: mdbook build
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
