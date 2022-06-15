@@ -31,19 +31,20 @@ jobs:
         with:
           commit_message: Auto update markdown TOC
       # 预构建cargo install 相关crate
-      #- name: rust-cargo-install
-      #  uses: actions-rs/install@v0.1.2
-      #  with:
-      #    crate: mdbook-checklist
-      #    version: v0.1.1
-      - name: add mdbook-checklist
-        run: | 
-          cargo install mdbook-checklist
-          # 由于构建太费时间，只构建一次之后就保存到bin文件夹
-          mkdir .cargo
-          cp /home/runner/.cargo/bin/* .cargo
-          git add .cargo
-          git commit -am'add cargo crate'
+      - name: rust-cargo-install
+        uses: actions-rs/install@v0.1.2
+        with:
+          crate: mdbook-checklist
+          version: v0.1.1
+          use-tool-cache: true
+      #- name: add mdbook-checklist
+      #  run: |
+      #    cargo install mdbook-checklist
+      #    # 由于构建太费时间，只构建一次之后就保存到bin文件夹
+      #    mkdir .cargo
+      #    cp /home/runner/.cargo/bin/* .cargo
+      #    git add .cargo
+      #    git commit -am'add cargo crate'
       - run: mdbook build
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
