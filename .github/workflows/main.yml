@@ -37,6 +37,12 @@ jobs:
           crate: mdbook-checklist
           version: 0.1.1
           use-tool-cache: true # 打开这个，就只会在第一次进行构建
+      - name: rust-cargo-install
+        uses: actions-rs/install@v0.1.2
+        with:
+          crate: mdbook-admonish
+          version: 1.7.0
+          use-tool-cache: true # 打开这个，就只会在第一次进行构建
       #- name: add mdbook-checklist
       #  run: |
       #    cargo install mdbook-checklist
@@ -45,7 +51,9 @@ jobs:
       #    cp /home/runner/.cargo/bin/* .cargo
       #    git add .cargo
       #    git commit -am'add cargo crate'
-      - run: mdbook build
+      - run: |
+          mdbook build
+          
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages # The branch the action should deploy to.
