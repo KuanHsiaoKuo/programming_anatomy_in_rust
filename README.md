@@ -2,15 +2,14 @@
 
 > 以rust为例分享学习编程常考虑的方方面面
 <!--ts-->
-
 * [programming_anatomy_in_rust](#programming_anatomy_in_rust)
-    * [本地运行](#本地运行)
-    * [git lfs配置](#git-lfs配置)
-    * [项目基础结构](#项目基础结构)
-    * [用到的工具](#用到的工具)
+   * [本地运行](#本地运行)
+   * [git lfs配置](#git-lfs配置)
+   * [项目基础结构](#项目基础结构)
+   * [用到的工具](#用到的工具)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jun 15 02:41:28 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jun 15 03:22:57 UTC 2022 -->
 
 <!--te-->
 
