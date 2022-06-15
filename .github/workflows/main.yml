@@ -35,7 +35,7 @@ jobs:
         uses: actions-rs/install@v0.1.2
         with:
           crate: mdbook-checklist
-          version: v0.1.1
+          version: latest
           use-tool-cache: true
       #- name: add mdbook-checklist
       #  run: |
