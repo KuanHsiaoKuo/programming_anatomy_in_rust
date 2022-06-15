@@ -20,7 +20,7 @@ jobs:
           #mkdir bin
           #curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
           #mkdir .cargo
-          #cp /bin/.cargo/*  /home/runner/.cargo/bin/mdbook-checklist
+          #cp .cargo/*  /home/runner/.cargo/bin/
           echo "$(pwd)/bin" >> $GITHUB_PATH
       # - run: mdbook build && mdbook test # In case of custom book path: mdbook build path/to/mybook && mdbook test path/to/mybook
       - name: Update Toc
@@ -41,7 +41,7 @@ jobs:
           cargo install mdbook-checklist
           # 由于构建太费时间，只构建一次之后就保存到bin文件夹
           mkdir .cargo
-          cp /home/runner/.cargo/bin/* /bin/.cargo
+          cp /home/runner/.cargo/bin/* .cargo
       - run: mdbook build
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
