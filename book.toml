@@ -6,12 +6,6 @@ multilingual = false
 src = "src"
 title = "Programming Anatomy In Rust"
 
-
-
-[preprocessor.mermaid]
-command = "mdbook-mermaid"
-
-
 [output.html]
 theme = "mytheme"
 default-theme = "rust"
@@ -30,9 +24,15 @@ copy-js = true
 enable = false
 level = 0
 
+# Enables the `mdbook-mermaid` preprocessor
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+# Enables the `mdbook-checklist` preprocessor
 [preprocessor.checklist]
 title = "待完善: "
 
+# Enables the `mdbook-admonish` preprocessor
 [preprocessor.admonish]
 command = "mdbook-admonish"
 assets_version = "2.0.0" # do not edit: managed by `mdbook-admonish install`

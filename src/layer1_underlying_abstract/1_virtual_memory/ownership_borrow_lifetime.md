@@ -363,3 +363,7 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 - [What is Ownership? - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
 - <精通rust(第二版)>-5.7 内存安全三原则
 - [go没有虚拟机怎么运行gc的？ - 知乎](https://www.zhihu.com/question/58863427)
+
+[](../../templates/footer.md)
+[](../../templates/avatar.jpeg)
+{{#template ../../templates/footer.md, path=../../templates author=KuanHsiaoKuo}}
