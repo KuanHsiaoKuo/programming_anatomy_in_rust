@@ -70,7 +70,7 @@ git lfs track '*.img'
 
 [mdbook-checklist - crates.io: Rust Package Registry](https://crates.io/crates/mdbook-checklist)
 
-### mdbook-pagetoc: 添加业内目录
+### mdbook-pagetoc: 添加页旁目录
 
 [JorelAli/mdBook-pagetoc: A page table of contents for mdBook](https://github.com/JorelAli/mdBook-pagetoc)
 

@@ -50,8 +50,7 @@ abstract / become / box / do / final / macro / override / priv / typeof / unsize
 
 ## 路径: ::, ::<>
 
-
-
 ## 参考资源
 
-1. [词法结构](https://time.geekbang.org/course/detail/100060601-286522)
+- [词法结构](https://time.geekbang.org/course/detail/100060601-286522)
+- [Lexical structure - The Rust Reference](https://doc.rust-lang.org/stable/reference/lexical-structure.html)
