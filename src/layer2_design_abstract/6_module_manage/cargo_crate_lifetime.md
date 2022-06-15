@@ -1,5 +1,7 @@
 # Cargo与crate生命周期
 
+![cargo_ship](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/cargo_ship.jpeg)
+
 <!--ts-->
 
 * [Cargo与项目生命周期](#cargo与项目生命周期)
