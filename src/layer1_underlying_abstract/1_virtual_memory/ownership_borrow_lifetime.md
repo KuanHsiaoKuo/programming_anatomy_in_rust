@@ -308,6 +308,7 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 > 如果a 在借用它的代码行之前被销毁,则借用失效
 
 (存疑🤨，待修正🤔️)
+{{#check Note-1 | 借用失效情况并不存在}}
 
 ```rust, editable
 {{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter05_memory_management_and_safety/exclusive_borrow.rs:1:}}

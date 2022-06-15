@@ -29,3 +29,6 @@ copy-js = true
 [output.html.fold]
 enable = false
 level = 0
+
+[preprocessor.checklist]
+title = "待完善: "
