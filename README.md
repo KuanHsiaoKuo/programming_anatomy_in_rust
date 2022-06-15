@@ -43,6 +43,7 @@ git lfs track '*.img'
     ```shell
     cargo install mdbook-checklist
     ```
+   [mdbook-checklist - crates.io: Rust Package Registry](https://crates.io/crates/mdbook-checklist)
 2. mdbook-pagetoc: 添加业内目录
    [JorelAli/mdBook-pagetoc: A page table of contents for mdBook](https://github.com/JorelAli/mdBook-pagetoc)
 3. mdbook-admonish: 使用新的css文件
