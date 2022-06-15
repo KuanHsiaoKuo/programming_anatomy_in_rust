@@ -28,7 +28,12 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Auto update markdown TOC
-# 由于构建太费时间，改成只在本地查看即可
+      - name: rust-cargo-install
+        uses: actions-rs/install@v0.1.2
+        with:
+          crate: mdbook-checklist
+          version: latest
+      # 由于构建太费时间，改成只在本地查看即可
 #      - name: add mdbook-checklist
 #        run: cargo install mdbook-checklist
       - run: mdbook build
