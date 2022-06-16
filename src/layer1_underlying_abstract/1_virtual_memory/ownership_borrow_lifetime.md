@@ -358,6 +358,14 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 
 ## 生命周期：针对引用附加的信息
 
+### 从变量生命周期开始
+
+### 生命周期限定
+
+### 生命周期注解
+
+### 生命周期省略
+
 ## 参考资源
 
 - [Object lifetime and ownership](https://www.ditsing.com/object-lifetime-and-ownership/)
