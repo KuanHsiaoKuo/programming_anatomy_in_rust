@@ -1,18 +1,10 @@
 # 模块相关
 
 <!--ts-->
-* [模块相关](#模块相关)
-   * [模块方式](#模块方式)
-      * [嵌套模块](#嵌套模块)
-      * [文件模块](#文件模块)
-      * [目录模块](#目录模块)
-   * [嵌套导入](#嵌套导入)
-   * [再次导出](#再次导出)
-   * [隐私管理](#隐私管理)
-   * [参考资源](#参考资源)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Fri Jun 17 15:53:23 UTC 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 00:02:41 CST 2022 -->
 
 <!--te-->
 
