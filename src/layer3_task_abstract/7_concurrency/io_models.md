@@ -22,7 +22,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jun 17 23:49:30 CST 2022 -->
+<!-- Added by: runner, at: Fri Jun 17 15:53:24 UTC 2022 -->
 
 <!--te-->
 ## 1. 同步/异步、阻塞/非阻塞概念区别
