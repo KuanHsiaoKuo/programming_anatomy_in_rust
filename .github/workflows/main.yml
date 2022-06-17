@@ -15,10 +15,10 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - name: Update Toc First
-        run: |
-          chmod a+x scripts/update_toc_raw
-          scripts/update_toc_raw
+#      - name: Update Toc First
+#        run: |
+#          chmod a+x scripts/update_toc_raw
+#          scripts/update_toc_raw
       - name: Install mdbook
         run: |
           #mkdir bin
