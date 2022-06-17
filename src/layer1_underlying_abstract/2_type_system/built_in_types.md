@@ -10,8 +10,6 @@
    * [特征类型](#特征类型)
    * [参考资源](#参考资源)
 
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 00:27:24 CST 2022 -->
 
 <!--te-->
 

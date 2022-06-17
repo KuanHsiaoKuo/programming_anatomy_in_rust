@@ -1,11 +1,9 @@
 # 语句与表达式
 
 <!--ts-->
-* [语句与表达式](#语句与表达式)
-   * [参考资源](#参考资源)
 
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 00:27:34 CST 2022 -->
+* [语句与表达式](#语句与表达式)
+    * [参考资源](#参考资源)
 
 <!--te-->
 

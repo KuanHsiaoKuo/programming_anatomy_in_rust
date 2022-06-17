@@ -1,21 +1,19 @@
 # 区块链
 
 <!--ts-->
-* [区块链](#区块链)
-   * [Blockchains](#blockchains)
-   * [Blockchain Frameworks](#blockchain-frameworks)
-   * [Cross-Chain](#cross-chain)
-   * [Virtual Machines](#virtual-machines)
-   * [General-Purpose Consensus](#general-purpose-consensus)
-   * [P2P Network Libraries](#p2p-network-libraries)
-   * [Cryptography](#cryptography)
-   * [Layer2](#layer2)
-   * [Dapps](#dapps)
-   * [Other](#other)
-   * [参考资源](#参考资源)
 
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 00:28:50 CST 2022 -->
+* [区块链](#区块链)
+    * [Blockchains](#blockchains)
+    * [Blockchain Frameworks](#blockchain-frameworks)
+    * [Cross-Chain](#cross-chain)
+    * [Virtual Machines](#virtual-machines)
+    * [General-Purpose Consensus](#general-purpose-consensus)
+    * [P2P Network Libraries](#p2p-network-libraries)
+    * [Cryptography](#cryptography)
+    * [Layer2](#layer2)
+    * [Dapps](#dapps)
+    * [Other](#other)
+    * [参考资源](#参考资源)
 
 <!--te-->
 
