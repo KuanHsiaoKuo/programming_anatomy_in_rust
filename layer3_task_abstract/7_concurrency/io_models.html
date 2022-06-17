@@ -174,8 +174,63 @@
                 </div>
                 <h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
+<ul>
+<li><a href="#%E4%BB%8Eio%E6%A8%A1%E5%9E%8B%E5%BC%80%E5%A7%8B">从IO模型开始</a>
+<ul>
+<li><a href="#1-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A6%82%E5%BF%B5%E5%8C%BA%E5%88%AB">1. 同步/异步、阻塞/非阻塞概念区别</a>
+<ul>
+<li><a href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E5%85%B3%E6%B3%A8%E7%9A%84%E6%98%AF%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%B0%83%E7%94%A8%E8%80%85%E8%A7%86%E8%A7%92">同步和异步，关注的是消息通信机制。（调用者视角）</a></li>
+<li><a href="#%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%85%B3%E6%B3%A8%E7%9A%84%E6%98%AF%E7%A8%8B%E5%BA%8F%E7%AD%89%E5%BE%85%E8%B0%83%E7%94%A8%E7%BB%93%E6%9E%9C%E7%9A%84%E7%8A%B6%E6%80%81%E8%A2%AB%E8%B0%83%E7%94%A8%E8%80%85%E8%A7%86%E8%A7%92">阻塞和非阻塞，关注的是程序等待调用结果的状态。（被调用者视角）</a></li>
+<li><a href="#%E9%98%BB%E5%A1%9E%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%9C%89%E5%85%B3">阻塞，与系统调用有关。</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5io-%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB">2. 同步/异步IO 模型分类</a></li>
+<li><a href="#3-%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9Eio-blocking-io">3. 同步阻塞I/O (blocking I/O)</a></li>
+<li><a href="#4-io-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8io-multiplexing-">4. I/O 多路复用（I/O Multiplexing )</a></li>
+<li><a href="#5-epoll-%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A8%A1%E5%9E%8B">5. epoll: 同步阻塞/非阻塞模型</a>
+<ul>
+<li><a href="#epoll%E4%B8%89%E4%B8%AA%E5%87%BD%E6%95%B0">epoll三个函数</a></li>
+<li><a href="#epoll-%E4%B8%A4%E7%A7%8D%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6">epoll 两种触发机制：</a></li>
+<li><a href="#%E6%83%8A%E7%BE%A4%E9%97%AE%E9%A2%98">惊群问题：</a></li>
+</ul>
+</li>
+<li><a href="#6-%E5%BC%82%E6%AD%A5-io-%E6%A8%A1%E5%9E%8B-io_uring">6. 异步 I/O 模型: io_uring</a>
+<ul>
+<li><a href="#1-reactor%E5%8F%8D%E5%BA%94%E5%99%A8-%E6%A8%A1%E5%BC%8F">1. Reactor（反应器） 模式</a></li>
+<li><a href="#2-preactor%E4%B8%BB%E5%8A%A8%E5%99%A8-%E6%A8%A1%E5%BC%8F">2. Preactor（主动器） 模式</a></li>
+<li><a href="#reactor-model">Reactor Model:</a>
+<ul>
+<li><a href="#%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">三种实现方式：</a></li>
+<li><a href="#%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B">读写操作流程：</a></li>
+<li><a href="#%E5%8F%82%E4%B8%8E%E8%80%85">参与者：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 00:28:00 CST 2022 -->
+<p>=======</p>
 <!-- Added by: runner, at: Fri Jun 17 16:18:20 UTC 2022 -->
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>bf861689e4c7e5e7a945e820e642e32979349926</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
