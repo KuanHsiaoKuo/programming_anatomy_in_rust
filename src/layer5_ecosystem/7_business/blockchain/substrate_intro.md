@@ -17,3 +17,4 @@
 ## 参考资源
 
 - [paritytech/substrate: Substrate: The platform for blockchain innovators](https://github.com/paritytech/substrate)
+- [金晓 - 知乎](https://www.zhihu.com/people/jin-xiao-94-7/posts)
