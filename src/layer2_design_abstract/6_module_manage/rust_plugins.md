@@ -1,20 +1,10 @@
 # Rust扩展工具介绍
 
 <!--ts-->
-* [Rust扩展工具介绍](#rust扩展工具介绍)
-   * [Cargo子命令系列: cargo install ](#cargo子命令系列-cargo-install-)
-      * [cargo-watch](#cargo-watch)
-      * [cargo-edit](#cargo-edit)
-      * [cargo-deb](#cargo-deb)
-      * [cargo-outdated](#cargo-outdated)
-   * [rustup系列: rust component add &lt;tool_name&gt;](#rustup系列-rust-component-add-tool_name)
-      * [clippy](#clippy)
-      * [rustc](#rustc)
-      * [rustfmt](#rustfmt)
-   * [参考资源](#参考资源)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 00:02:42 CST 2022 -->
+<!-- Added by: runner, at: Fri Jun 17 16:06:12 UTC 2022 -->
 
 <!--te-->
 
