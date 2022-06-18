@@ -1,7 +1,9 @@
 <!--ts-->
-
 * [编程语言语法概述](#编程语言语法概述)
-    * [前言](#前言)
+   * [前言](#前言)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 12:39:29 CST 2022 -->
 
 <!--te-->
 
