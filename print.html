@@ -3176,7 +3176,8 @@ Wood是撑起了当前半个区块链世界的人。</p>
 </div>
 </div>
 <h3 id="跨链的重要性"><a class="header" href="#跨链的重要性">跨链的重要性</a></h3>
-<p>另一方面，在软件开发领域或者互联网领域，大家其实都发现了占据了框架的地位实际上一定程度上占据了这个领域开发的生态，更何况对于跨链来说，当大家的链都比较同质化后，跨链会更加的方便。现在大家都把跨链当作区块链下一个引爆点，而跨链的属性界定了做“跨链”的人基本上只能一家独大，成为垄断地位。而接入跨链的链越多，这个跨链就越垄断(因为大家使用跨链就是为了在不同的链之间兑换代币，能换的代币越多，使用这个跨链的人就越多，生态就越集中)，</p>
+<p>另一方面，在软件开发领域或者互联网领域，大家其实都发现了占据了框架的地位实际上一定程度上占据了这个领域开发的生态，更何况对于跨链来说，当大家的链都比较同质化后，跨链会更加的方便。现在大家都把跨链当作区块链下一个引爆点，而跨链的属性界定了做“跨链”的人基本上只能一家独大，成为垄断地位。而接入跨链的链越多，这个跨链就越垄断(
+因为大家使用跨链就是为了在不同的链之间兑换代币，能换的代币越多，使用这个跨链的人就越多，生态就越集中)，</p>
 <p>而Gavin Wood 提供的substrate框架又<strong>能解决大部分链都在重复解决的问题</strong>，所以大家就更倾向于使用substrate开发自己的链。</p>
 <div id="admonition-三角关系" class="admonition quote">
 <div class="admonition-title">
@@ -3188,6 +3189,7 @@ Wood是撑起了当前半个区块链世界的人。</p>
 </div>
 </div>
 <h2 id="总体设计"><a class="header" href="#总体设计">总体设计</a></h2>
+<h3 id="substrate-architecture"><a class="header" href="#substrate-architecture">Substrate Architecture</a></h3>
 <div id="admonition-substrte-architecture" class="admonition tip">
 <div class="admonition-title">
 <p>Substrte Architecture</p>
@@ -3228,6 +3230,9 @@ Wood是撑起了当前半个区块链世界的人。</p>
 </code></pre>
 </div>
 </div>
+<h3 id="只需要关注core"><a class="header" href="#只需要关注core">只需要关注Core</a></h3>
+<p>根据这样的划分，当开发者使用Substrate框架的时候，无需关心区块链基础功能也就是Core部分的工作，而只需关心自己链能够提供的功能，也就是Runtime部分的工作。</p>
+<p>注意图中虚拟机EVM也是Runtime的一个组件。与以太坊的结构相比，相当于把以太坊的智能合约功能也能随意作为一个链的功能组件添加进入使用Substrate开发的链中</p>
 <h2 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h2>
 <h2 id="功能逻辑"><a class="header" href="#功能逻辑">功能逻辑</a></h2>
 <h2 id="特色代码"><a class="header" href="#特色代码">特色代码</a></h2>
