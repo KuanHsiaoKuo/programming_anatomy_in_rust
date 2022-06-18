@@ -173,6 +173,7 @@
                     <nav class="pagetoc"></nav>
                 </div>
                 <h1 id="substrate介绍与源码解读"><a class="header" href="#substrate介绍与源码解读">Substrate介绍与源码解读</a></h1>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png" alt="what_is_substrate" /></p>
 <!--ts-->
 <ul>
 <li><a href="#substrate%E4%BB%8B%E7%BB%8D%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB">Substrate介绍与源码解读</a>
@@ -233,7 +234,48 @@ Wood是撑起了当前半个区块链世界的人。</p>
 <p>这样就会在“用户-链-跨链”这个三角关系中将三方的利益绑定在一起，互惠互利，共同进步。</p>
 </div>
 </div>
-<h2 id="项目模块"><a class="header" href="#项目模块">项目模块</a></h2>
+<h2 id="总体设计"><a class="header" href="#总体设计">总体设计</a></h2>
+<div id="admonition-substrte-architecture" class="admonition tip">
+<div class="admonition-title">
+<p>Substrte Architecture</p>
+<p><a class="admonition-anchor-link" href="#admonition-substrte-architecture"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                                       │
+│                                                                                                       │
+│      ┌─────────────────┐     ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐        │
+│      │ fund management │     │     Account     │    │    Contract     │    │   Democratic    │        │
+│      │    transfer     │     │     system      │    │       VM        │    │   referendum    │        │
+│      └─────────────────┘     └─────────────────┘    └─────────────────┘    └─────────────────┘        │
+│                                                                                                       │
+│                                                  ######  #     # #     # ####### ### #     # #######  │
+│      ┌─────────────────┐     ┌─────────────────┐ #     # #     # ##    #    #     #  ##   ## #        │
+│      │     Equity      │     │      etc.       │ #     # #     # # #   #    #     #  # # # # #        │
+│      │   calculation   │     │                 │ ######  #     # #  #  #    #     #  #  #  # #####    │
+│      └─────────────────┘     └─────────────────┘ #   #   #     # #   # #    #     #  #     # #        │
+│                                                  #    #  #     # #    ##    #     #  #     # #        │
+│                                                  #     #  #####  #     #    #    ### #     # #######  │
+├───────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                                       │
+│      ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐    ┌─────────────────┐       │
+│      │    Consensus    │     │ Network system  │     │     Trading     │    │                 │       │
+│      │    mechanism    │     │      (p2p)      │     │      Pool       │    │       RPC       │       │
+│      └─────────────────┘     └─────────────────┘     └─────────────────┘    │                 │       │
+│                                                                             └─────────────────┘       │
+│                                                             #####  ####### ######  #######            │
+│      ┌─────────────────┐                                   #     # #     # #     # #                  │
+│      │      etc.       │                                   #       #     # #     # #                  │
+│      │                 │                                   #       #     # ######  #####              │
+│      └─────────────────┘                                   #       #     # #   #   #                  │
+│                                                            #     # #     # #    #  #                  │
+│                                                             #####  ####### #     # #######            │
+│                                                                                                       │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+</div>
+</div>
+<h2 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h2>
 <h2 id="功能逻辑"><a class="header" href="#功能逻辑">功能逻辑</a></h2>
 <h2 id="特色代码"><a class="header" href="#特色代码">特色代码</a></h2>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
