@@ -1,5 +1,7 @@
 # Substrate介绍与源码解读
 
+![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
+
 <!--ts-->
 
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
@@ -50,8 +52,9 @@ Gavin Wood 在开发波卡的中途先暂停了波卡的开发，将波卡及以
 ```admonish quote title='三角关系'
 这样就会在“用户-链-跨链”这个三角关系中将三方的利益绑定在一起，互惠互利，共同进步。
 ```
+## 总体设计
 
-## 项目模块
+## 项目结构
 
 ## 功能逻辑
 
