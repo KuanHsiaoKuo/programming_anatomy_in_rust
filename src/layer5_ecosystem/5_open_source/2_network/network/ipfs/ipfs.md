@@ -27,11 +27,23 @@
       * [4 开放](#4-开放)
    * [IPFS的用途](#ipfs的用途)
    * [IPFS的POW机制](#ipfs的pow机制)
+   * [IPFS家族](#ipfs家族)
+      * [Main Projects](#main-projects)
+      * [Contributions](#contributions)
+      * [Movements](#movements)
+      * [IPFS 与 Filecoin](#ipfs-与-filecoin)
+         * [IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）](#ipfs数据的分发和定位数据传输协议类似http协议)
+         * [Filecoin: 数据存储（类似一个云存储）](#filecoin-数据存储类似一个云存储)
+         * [IPFS和Filecoin共同依赖libp2p项目。](#ipfs和filecoin共同依赖libp2p项目)
    * [使用IPFS的应用](#使用ipfs的应用)
+   * [IPFS网络如何运行](#ipfs网络如何运行)
+   * [IPFS: NAT traversal](#ipfs-nat-traversal)
+   * [BitSwap](#bitswap)
+   * [IPFS非rust实现版本](#ipfs非rust实现版本)
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 14:24:31 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 22:21:26 CST 2022 -->
 
 <!--te-->
 
@@ -158,6 +170,52 @@ IPFS不仅仅是为了加速web. 而是为了最终取代HTTP协议, 使互联�
 
 ## IPFS的POW机制
 
+## IPFS家族
+
+> [Work | Protocol Labs](https://protocol.ai/work/)
+
+### Main Projects
+
+![image-20220618215731222](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220618215731222.png)
+
+### Contributions
+
+![image-20220618220109640](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220618220109640.png)
+
+### Movements
+
+![image-20220618220532130](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220618220532130.png)
+
+### IPFS 与 Filecoin
+
+#### IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）
+
+- 传输：数据在节点之间进行传输
+- 定位：寻址，发现数据的存储位置
+- 存储：自己提供存储（可以保证存储的安全性），其它节点不保证数据存储的安全性
+- 用户：下载数据免费，自己提供服务器，自己搭建节点
+- 存储内容：只存储节点自己感兴趣的内容
+
+#### Filecoin: 数据存储（类似一个云存储）
+
+- 存储：付费存储，用户付费，矿工和Filecoin网络保证存储的安全性
+- 下载：付费下载，用户付费，矿工负责发送数据
+- 用户：不需要自己提供存储，也不需要自己提供节点
+- 存储内容：收费存储一切
+
+#### IPFS和Filecoin共同依赖libp2p项目。
+
+> Filecoin是IPFS的激励层，二者互补形式一对协议。为我们的互联网提供了很好的基础设施。
+
+
+了解上述的基本内容后：
+
+- 如果开发者仅仅想要的是一个安全、快速的云存储，那么选择Filecoin即可。
+- 如果开发者除了数据存储需求，还需要分发数据，那么选择IPFS即可。
+- 如果开发者既有数据存储需求，又有数据的分发需求，那么可以单独选择IPFS，也可以IPFS+Filecoin一起。
+
+> 注意：IPFS可以做Filecoin的事情，存储，而filecoin并不能做IPFS的事情，数据传输
+
 ## 使用IPFS的应用
 
 - ~~[akasha](https://github.com/AKASHAorg/Community/releases)： 基于以太坊和IPFS的社交网络~~
@@ -181,8 +239,20 @@ IPFS不仅仅是为了加速web. 而是为了最终取代HTTP协议, 使互联�
 > 一些过期项目：
 [IPFS Inactive repositories](https://github.com/ipfs-inactive?type=source)
 
+## IPFS网络如何运行
+
+## IPFS: NAT traversal
+
+## BitSwap
+
+## IPFS非rust实现版本
+
 ## 参考资源
 
 - [IPFS指南 - 知乎](https://www.zhihu.com/column/ipfsguide)
 - [rs-ipfs/rust-ipfs: The InterPlanetary File System (IPFS), implemented in Rust.](https://github.com/rs-ipfs/rust-ipfs)
 - [Rust IPFS - Open Collective](https://opencollective.com/rs-ipfs)
+- [IPFS网络是如何运行的(p2p网络) - 知乎](https://zhuanlan.zhihu.com/p/33170031)
+- [IPFS: NAT traversal(NAT穿越) - 知乎](https://zhuanlan.zhihu.com/p/33057094)
+- [IPFS: BitSwap协议(数据块交换) - 知乎](https://zhuanlan.zhihu.com/p/33148036)
+- [IPFS非rust实现版本](https://zhuanlan.zhihu.com/p/34158682)
