@@ -56,6 +56,7 @@
             - [前端基建](layer5_ecosystem/5_open_source/2_network/frontend/frontend.md)
             - [网络基建](layer5_ecosystem/5_open_source/2_network/network/network.md)
                 - [IPFS: 星际文件系统(InterPlanetary File System)](layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.md)
+                - [利用IPFS构建自己的去中心化分布式网站](layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.md)
             - [web开发](layer5_ecosystem/5_open_source/2_network/web/web.md)
         - [多媒体](layer5_ecosystem/5_open_source/3_media/media.md)
             - [音视频处理](layer5_ecosystem/5_open_source/3_media/av/av.md)
