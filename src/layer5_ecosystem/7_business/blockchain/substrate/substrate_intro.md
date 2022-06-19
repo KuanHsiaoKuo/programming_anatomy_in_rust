@@ -3,19 +3,31 @@
 ![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
 
 <!--ts-->
-
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
-    * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
-        * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
-        * [从波卡到Substrate](#从波卡到substrate)
-        * [跨链的重要性](#跨链的重要性)
-    * [项目模块](#项目模块)
-    * [功能逻辑](#功能逻辑)
-    * [特色代码](#特色代码)
-    * [参考资源](#参考资源)
+   * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
+      * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
+      * [从波卡到Substrate](#从波卡到substrate)
+      * [跨链的重要性](#跨链的重要性)
+   * [总体设计](#总体设计)
+      * [常见区块链设计](#常见区块链设计)
+         * [区块链系统基础部分](#区块链系统基础部分)
+         * [链的功能](#链的功能)
+         * [Substrate理念](#substrate理念)
+      * [Substrate Architecture](#substrate-architecture)
+      * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
+      * [明晰Runtime](#明晰runtime)
+         * [判断标准](#判断标准)
+      * [Substrate的Runtime](#substrate的runtime)
+         * [中心化升级流程](#中心化升级流程)
+         * [无央化升级流程(原先)](#无央化升级流程原先)
+         * [Substrate的不同](#substrate的不同)
+   * [项目结构](#项目结构)
+   * [功能逻辑](#功能逻辑)
+   * [特色代码](#特色代码)
+   * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jun 18 22:57:49 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 19 11:36:14 CST 2022 -->
 
 <!--te-->
 
@@ -177,7 +189,10 @@ Runtime：链功能
 
 ### Substrate的Runtime
 
+Substrate的Runtime当然没有止步于仅将区块链系统做了模块化划分，提供框架功能这一步，事实上，由于抽象出了Runtime，Substrate实现了以往所有区块链都无法实现的一个功能：区块链系统升级。
+
 #### 中心化升级流程
+
 ~~~admonish tip title='Centralized System Upgrading'
 ```text
 ┌────────────────────────────────Centralized System Upgrading(Internet App)────────────────────────────────┐
@@ -202,8 +217,9 @@ Runtime：链功能
 ```
 ~~~
 
-#### 无央化升级流程(原先)
+对于中心化的互联网系统而言，由于代码与数据的控制权在自己手上，所以可以随时进行版本的升级与修改。但是即便如此，也只有网页H5，后台代码可以做到随时升级，在移动互联网中，app还是需要用户自行更新。其中android生态尤为突出，apk版本的碎片化一度是困扰开发者的难题。为了应对app应用的碎片化，推出了许多功能各异的框架能够用户在不更新app的情况下进行“热更新”，一度成为技术的热门追捧。这些热更新的框架本质上都是允许从后台下载一段更新代码，通过各种方式加载运行新的代码来完成。一般情况下通过这种热更新提供的功能都会带来一定的性能损耗以运行最新的热更新代码。但是即便是热更新，更新代码的控制权也同样处于中心化组织的手中。
 
+#### 无央化升级流程(原先)
 
 ~~~admonish tip title='Decentralized System Upgrading(pre)'
 ```text
@@ -243,6 +259,28 @@ Runtime：链功能
 ```
 ~~~
 
+区块链领域就大大不同了。即便代码更新的权力在某个组织的手上，但是运行这些代码的人可不一定会听这个组织的指挥，无法容易的命令分散节点统一的进行新代码的部署更新。这是区块链带来的分布式自治的优点，同时也是一个巨大的缺点。比特币社区就是这个领域下的一个典型，由于比特币社区的分裂，部分人并不认同不更改区块大小而是采用隔离见证的方案，分裂出了BCH，对BTC的生态产生的极大的损害。ETH的升级同样也困难重重，每次升级都需要进行长时间的等待以防有节点未升级而产生的分叉。EOS由于其中心化的特点使得升级稍微简单一些，但仍然出现了由于升级带来的分叉的恶性事件。我们可以形象把区块链下的系统升级称为“全球升级”，因为其要求分布式环境下的大部分节点都更新了代码才使得升级能够成功。相较于中心化控制的系统，区块链系统的升级困难重重且充满风险。
+
+同时区块链的升级还有另一个问题：一个区块链系统升级后，不得不在代码中加入许多的“高度判断”，以区分不同高度下运行的代码，保证同步能够正常执行，兼容老数据。这种做法很原始但是又无法绕开，给开发者带来极大的思维负担，且需要大量的测试来保证不出现Bug。比如目前比特币的源码中就有许多的区块高度判定使得在同步老区块的时候执行老代码，新区块的时候执行新代码。而中心化系统的数据控制权在自己手上，并且也不存在需要从某个数据源同步的情况，所以完全不需要担心这个问题。
+
+#### Substrate的不同
+
+Substrate横空而出，推出了目前区块链领域最完美的升级方案。其采用“链上代码”的思想，将整个Runtime都做成了可直接更新的组件，让所有节点能够强制运行最新的Runtime代码。
+
+```admonish info title='Substrate Runtime'
+简单来说，Runtime在Substrate框架下，将会用同一份代码编译出两份可执行文件：
+1. 一份Rust的本地代码，我们一般称为native代码，native与其他代码无异，是这个执行文件中的二进制数据，直接运行。在Substrate的相关代码以native命名
+2. 一份wasm的链上代码，我们一般成为wasm代码，wasm被部署到链上，所有人可获取，wasm通过构建一个wasm的运行时环境执行 。在Substrate的相关代码以wasm命名 在节点启动的时候可以选择执行策略，使用native, possible，wasm或者both。不同的执行策略会执行不同的执行文件
+```
+
+由于这两份代码是由相同的代码编译出来的，所以其执行逻辑完全相同 (有一些很小的暗坑要注意)。其中wasm将会部署到链上，所有人都可以获取到，也就是说即使本地运行的不是最新版本的节点，只要同步了区块，一定可以获取到最新的wasm代码。
+
+换句话说，一个写在Runtime内部的代码，也就是代表这条链功能性的代码，存在两份，分别是native与wasm。wasm代码被部署到链上，是“链上数据”，可以通过同步区块所有人统一获取并执行。这样就可以保证在区块链中所有矿工执行的都是最新的代码。
+
+```admonish tip title='哪种更合理'
+这里需要强调，代码的部署可以通过“民主提议”，“sudo控制权限”，“开发者自定一种部署条件”等方式进行，到底哪种方式“更区块链”，“更合理”，不在本文讨论范围内，这与这条链的设计目的相关。Substrate只是提供了这种“热更新”的强大机制，如何使用这种机制是这条链的问题。
+```
+
 ## 项目结构
 
 ## 功能逻辑
@@ -254,3 +292,4 @@ Runtime：链功能
 - [paritytech/substrate: Substrate: The platform for blockchain innovators](https://github.com/paritytech/substrate)
 - [链块与分散的数据 - 知乎](https://www.zhihu.com/column/c_74315572)
 - [substrate 源码解析与运用 - 介绍 - 知乎](https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322)
+- [Substrate区块链开发 - 知乎](https://www.zhihu.com/column/substrate)
