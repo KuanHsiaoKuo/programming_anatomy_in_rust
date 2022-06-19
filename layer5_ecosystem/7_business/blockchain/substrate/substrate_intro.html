@@ -236,7 +236,72 @@ Wood是撑起了当前半个区块链世界的人。</p>
 </div>
 </div>
 <h2 id="总体设计"><a class="header" href="#总体设计">总体设计</a></h2>
+<h3 id="常见区块链设计"><a class="header" href="#常见区块链设计">常见区块链设计</a></h3>
+<p>目前所有的区块链系统几乎都是从比特币/以太坊模型演变而来。一般来说，一个区块链系统应该具有：</p>
+<h4 id="区块链系统基础部分"><a class="header" href="#区块链系统基础部分">区块链系统基础部分</a></h4>
+<ul>
+<li>共识系统 （区块链分布式基石）</li>
+<li>p2p连接与广播系统</li>
+<li>存储系统</li>
+<li>交易池系统</li>
+<li>rpc系统（区块链与外界交互主要通道）</li>
+</ul>
+<div id="admonition-基础通用" class="admonition info">
+<div class="admonition-title">
+<p>基础通用</p>
+<p><a class="admonition-anchor-link" href="#admonition-基础通用"></a></p>
+</div>
+<div>
+<p>基础部分是当前区块链模型下都会具备的组件，其中共识与P2P体现区块链的分布式本质</p>
+</div>
+</div>
+<h4 id="链的功能"><a class="header" href="#链的功能">链的功能</a></h4>
+<div id="admonition-竞争关键" class="admonition info">
+<div class="admonition-title">
+<p>竞争关键</p>
+<p><a class="admonition-anchor-link" href="#admonition-竞争关键"></a></p>
+</div>
+<div>
+<p>链功能是区块链间相互竞争的关键部分. 与系统基础部分相比，这部分差异很大，提供的是除去区块链模型外，这条链能够提供的功能。另一方面在区块链升级中，一般来说系统基础部分改动较小，而链的功能部分改动较大，特别是许多链为了追求开发速度，一开始只能提供转账功能，在后续的版本中才慢慢升级其他功能</p>
+</div>
+</div>
+<p>例如：</p>
+<ul>
+<li>比特币的UTXO结构加上交易脚本</li>
+<li>以太坊的虚拟机与智能合约</li>
+<li>eos的账户系统及虚拟机</li>
+<li>有的山寨币特化部分智能合约或部分native层成为系统级功能：
+<ul>
+<li>提供随机数</li>
+<li>提供质押对赌</li>
+<li>oracle数据输入</li>
+<li>引入复杂密码学方案</li>
+<li>等等。。。</li>
+</ul>
+</li>
+</ul>
+<h4 id="substrate理念"><a class="header" href="#substrate理念">Substrate理念</a></h4>
+<div id="admonition-分离变与不变" class="admonition tip">
+<div class="admonition-title">
+<p>分离变与不变</p>
+<p><a class="admonition-anchor-link" href="#admonition-分离变与不变"></a></p>
+</div>
+<div>
+<p>Substrate作为一个区块链框架，认为所有的链都应该具备区块链系统基础部分，而由开发者自由定制链的功能部分</p>
+</div>
+</div>
 <h3 id="substrate-architecture"><a class="header" href="#substrate-architecture">Substrate Architecture</a></h3>
+<p>Gavin Wood 作为以太坊实际核心的开发者，自然早已对这套系统的框架了然于心，所以从Substrate框架提出的开始（2018年9月），就对区块链系统作出了2个关键的区分：</p>
+<div id="admonition-coreruntime" class="admonition info">
+<div class="admonition-title">
+<p>Core&amp;Runtime</p>
+<p><a class="admonition-anchor-link" href="#admonition-coreruntime"></a></p>
+</div>
+<div>
+<p>Substrate Core: 系统基础部分
+Runtime：链功能</p>
+</div>
+</div>
 <div id="admonition-substrte-architecture" class="admonition tip">
 <div class="admonition-title">
 <p>Substrte Architecture</p>
@@ -277,9 +342,124 @@ Wood是撑起了当前半个区块链世界的人。</p>
 </code></pre>
 </div>
 </div>
-<h3 id="只需要关注core"><a class="header" href="#只需要关注core">只需要关注Core</a></h3>
+<h3 id="开发者只需要关注runtime链功能"><a class="header" href="#开发者只需要关注runtime链功能">开发者只需要关注Runtime(链功能)</a></h3>
 <p>根据这样的划分，当开发者使用Substrate框架的时候，无需关心区块链基础功能也就是Core部分的工作，而只需关心自己链能够提供的功能，也就是Runtime部分的工作。</p>
+<div id="admonition-vm类似以太坊的智能合约" class="admonition tip">
+<div class="admonition-title">
+<p>VM类似以太坊的智能合约</p>
+<p><a class="admonition-anchor-link" href="#admonition-vm类似以太坊的智能合约"></a></p>
+</div>
+<div>
 <p>注意图中虚拟机EVM也是Runtime的一个组件。与以太坊的结构相比，相当于把以太坊的智能合约功能也能随意作为一个链的功能组件添加进入使用Substrate开发的链中</p>
+</div>
+</div>
+<h3 id="明晰runtime"><a class="header" href="#明晰runtime">明晰Runtime</a></h3>
+<p>这里一直强调Runtime是“链的功能”有一些通俗与不严谨，这里使用一个更抽象的描述：</p>
+<div id="admonition-runtime明确" class="admonition danger">
+<div class="admonition-title">
+<p>Runtime明确</p>
+<p><a class="admonition-anchor-link" href="#admonition-runtime明确"></a></p>
+</div>
+<div>
+<p>需要对运行结果进行共识的功能部分应该归属于Runtime</p>
+</div>
+</div>
+<p>这个定义比较抽象，且由于需要对“世界状态”或类似概念有比较深入的了解才好解释，故不展开讲解。更严格来说，“需要对运行结果进行共识的功能组件”是“链的功能”的一个子集。</p>
+<h4 id="判断标准"><a class="header" href="#判断标准">判断标准</a></h4>
+<div id="admonition-判断标准" class="admonition tip">
+<div class="admonition-title">
+<p>判断标准</p>
+<p><a class="admonition-anchor-link" href="#admonition-判断标准"></a></p>
+</div>
+<div>
+<p>这里有一个简单的判定标准判断某个功能是否应该放在Runtime内：</p>
+<p>对于某个功能，若只改动一个节点的代码对于所有的逻辑运行的结果与其他不改动的节点运行的结果相同，则认为这个部分应该放在Runtime之外，如果运行结果不同，则认为应该放在Runtime之内。</p>
+</div>
+</div>
+<div id="admonition-举例" class="admonition example">
+<div class="admonition-title">
+<p>举例</p>
+<p><a class="admonition-anchor-link" href="#admonition-举例"></a></p>
+</div>
+<div>
+<p>举个例子：比如我改变了交易池的排序代码，使得对某个账户有利的交易能优先打包。这个改动会令自己这个节点产出的区块不公平的打包交易，但是只要打包出来的区块大家都可以认可，则所有节点共识的“状态的变化”仍然是一致的。很明显，这个功能组件不应该是Runtime的功能，因为它不会改变对于验证一个区块时的“状态变化”的验证。比如我改变了转账功能的代码，能给某个账户凭空增加钱，那么显然，这种改动对于这个改动过的节点执行的结果将会与其他节点不同，则共识不会通过。所以转账这个功能就应该放在Runtime当中，让所有节点执行的都是一致的。</p>
+</div>
+</div>
+<p>这部分结合native与wasm后会容易理解</p>
+<p>所以到底什么是Runtime，我认为使用“链上功能”来描述最为恰当，因为其隐含了对于执行结果的共识问题。</p>
+<h3 id="substrate的runtime"><a class="header" href="#substrate的runtime">Substrate的Runtime</a></h3>
+<h4 id="中心化升级流程"><a class="header" href="#中心化升级流程">中心化升级流程</a></h4>
+<div id="admonition-centralized-system-upgrading" class="admonition tip">
+<div class="admonition-title">
+<p>Centralized System Upgrading</p>
+<p><a class="admonition-anchor-link" href="#admonition-centralized-system-upgrading"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┌────────────────────────────────Centralized System Upgrading(Internet App)────────────────────────────────┐
+│                                                                                                          │
+│                                                                                                          │
+│                         ┌───────────────────┐      ┌─────────────┐    ┌─────────────┐    ┌─────────────┐ │
+│                     ┌──▶│    Update Code    │      │   Deploy    │    │   Upgrade   │    │ Centralized │ │
+│     .─────────.     │   │(Backend/Frontend)─┼──────▶   Server    │───▶│  Sucessful  │────▶Upgrade Easy │ │
+│    ╱           ╲    │   └───────────────────┘      └─────────────┘    └─────────────┘    └─────────────┘ │
+│   ( Bug/Upgrade )───┤                                                 ┌─────────────┐                    │
+│    `.         ,'    │                                                 │  Somebody   │                    │
+│      `───────'      │                                              ┌─▶│   Upgrade   ├─┐                  │
+│                     │   ┌───────────────────┐      ┌─────────────┐ │  └─────────────┘ │  ┌─────────────┐ │
+│                     └──▶│    Update Code    │      │   Publish   │ │                  │  │ Fragmented  │ │
+│                         │       (App)      ─┼──────▶  App Store  │─┤  ┌─────────────┐ ├─▶│   version   │ │
+│                         └───────────────────┘      └─────────────┘ │  │  Somebody   │ │  └─────────────┘ │
+│                                                                    └─▶│   Reject    │─┘                  │
+│                                                                       └─────────────┘                    │
+│                                                                                                          │
+│                                                                                                          │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+</div>
+</div>
+<h4 id="无央化升级流程原先"><a class="header" href="#无央化升级流程原先">无央化升级流程(原先)</a></h4>
+<div id="admonition-decentralized-system-upgradingpre" class="admonition tip">
+<div class="admonition-title">
+<p>Decentralized System Upgrading(pre)</p>
+<p><a class="admonition-anchor-link" href="#admonition-decentralized-system-upgradingpre"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┌───────────────────────────────────Decentralized System Upgrading(Blockchain Dapp)────────────────────────────────────┐
+│                                                                                                 ┌─────────────┐      │
+│                                                                                                 │   Upgrade   │      │
+│                                                                                  ┌───Yes───────▶│  Sucessful  │      │
+│                                                                                  │              └─────────────┘      │
+│                                                                                  Λ                                   │
+│                                                                                 ╱ ╲                                  │
+│                                                                                ╱   ╲                                 │
+│                                                                               ╱     ╲                                │
+│                                                          ┌────────┐          ╱       ╲                               │
+│                                                          │ Deploy │      Most deployments                            │
+│                                              ┌──Support─▶│  Node  │─────▶(Under Byzantine                            │
+│                                              │           └────────┘      Fault Tolerance)                            │
+│                                              │                               ╲       ╱                               │
+│                                              Λ                                ╲     ╱                                │
+│                                             ╱ ╲                                ╲   ╱                                 │
+│                                            ╱   ╲                                ╲ ╱                                  │
+│                                           ╱     ╲                                V              ┌──────────────────┐ │
+│     .─────────.      ┌─────────────┐     ╱       ╲                               │              │   Upgrade Fail   │ │
+│    ╱           ╲     │ Update Node │    ╱ Running ╲                              └───No────────▶│(Cause Fragmented)│ │
+│   ( Bug/Upgrade ─────▶    Code     ├────▶  Node    ▏                                            └──────────────────┘ │
+│    `.         ,'     └─────────────┘    ╲ (Minner ╱                                                       ▲          │
+│      `───────'                           ╲       ╱                                                        │          │
+│                                           ╲     ╱                                                         │          │
+│                                            ╲   ╱                                                          │          │
+│     .─────────.                             ╲ ╱                                                           │          │
+│  ,─'           '─.                           V                                                            │          │
+│ ;    Community    :                          │           ┌────────┐                                       │          │
+│ :    proposal     ;                          │           │ Reject │                                       │          │
+│  ╲   (BIP/EIP)   ╱                           └───Reject─▶│ Deploy │───────────────────────────────────────┘          │
+│   '─.         ,─'                                        └────────┘                                                  │
+│      `───────'                                                                                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+</div>
+</div>
 <h2 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h2>
 <h2 id="功能逻辑"><a class="header" href="#功能逻辑">功能逻辑</a></h2>
 <h2 id="特色代码"><a class="header" href="#特色代码">特色代码</a></h2>
