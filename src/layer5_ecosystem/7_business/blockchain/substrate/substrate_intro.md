@@ -3,34 +3,41 @@
 ![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
 
 <!--ts-->
-
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
-    * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
-        * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
-        * [从波卡到Substrate](#从波卡到substrate)
-        * [跨链的重要性](#跨链的重要性)
-    * [总体设计](#总体设计)
-        * [常见区块链设计](#常见区块链设计)
-            * [区块链系统基础部分](#区块链系统基础部分)
-            * [链的功能](#链的功能)
-            * [Substrate理念](#substrate理念)
-        * [Substrate Architecture](#substrate-architecture)
-        * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
-        * [明晰Runtime](#明晰runtime)
-            * [判断标准](#判断标准)
-        * [Substrate的Runtime](#substrate的runtime)
-            * [中心化升级流程](#中心化升级流程)
-            * [无央化升级流程(原先)](#无央化升级流程原先)
-            * [Substrate的不同](#substrate的不同)
-            * [以太坊合约更新策略](#以太坊合约更新策略)
-            * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
-    * [项目结构](#项目结构)
-    * [功能逻辑](#功能逻辑)
-    * [特色代码](#特色代码)
-    * [参考资源](#参考资源)
+   * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
+      * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
+      * [从波卡到Substrate](#从波卡到substrate)
+      * [跨链的重要性](#跨链的重要性)
+   * [总体设计](#总体设计)
+      * [常见区块链设计](#常见区块链设计)
+         * [区块链系统基础部分](#区块链系统基础部分)
+         * [链的功能](#链的功能)
+         * [Substrate理念](#substrate理念)
+      * [Substrate Architecture](#substrate-architecture)
+      * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
+      * [明晰Runtime](#明晰runtime)
+         * [判断标准](#判断标准)
+      * [Substrate的Runtime](#substrate的runtime)
+         * [中心化升级流程](#中心化升级流程)
+         * [无央化升级流程(原先)](#无央化升级流程原先)
+         * [Substrate的不同](#substrate的不同)
+         * [以太坊合约更新策略](#以太坊合约更新策略)
+         * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
+   * [项目结构](#项目结构)
+      * [客户端架构](#客户端架构)
+      * [Tree Level1](#tree-level1)
+      * [bin:](#bin)
+      * [client](#client)
+      * [FRAME](#frame)
+      * [primitives](#primitives)
+      * [scripts/ci](#scriptsci)
+      * [utils](#utils)
+   * [功能逻辑](#功能逻辑)
+   * [特色代码](#特色代码)
+   * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 19 23:22:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 17:58:31 CST 2022 -->
 
 <!--te-->
 
@@ -438,6 +445,7 @@ bin
 ```
 
 ### client
+
 ```shell
  tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
 client
@@ -475,7 +483,20 @@ client
 30 directories, 0 files
 ```
 
-### frame
+### FRAME
+
+```admonish info title='FRAME'
+The Framework for Runtime Aggregation of Modularized Entities (FRAME) is a set of modules and support libraries that simplify runtime development. 
+In Substrate , these modules are called Pallets, each hosting domain-specific logic to include in a chain's runtime.
+
+FRAME also provides some helper modules to interact with important Substrate Primitives that provide the interface to the core client.
+
+The following diagram shows the architectural overview of FRAME and its support libraries:
+```
+
+![frame-arch](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/frame-arch.png)
+
+[FRAME | Substrate_](https://docs.substrate.io/v3/runtime/frame/)
 
 ```shell
 tree frame -L 1 | pbcopy
@@ -548,6 +569,7 @@ frame
 ```
 
 ### primitives
+
 ```shell
 tree primitives -L 1 | pbcopy
 primitives
@@ -599,6 +621,7 @@ primitives
 ```
 
 ### scripts/ci
+
 ```shell
 tree scripts/ci | pbcopy
 scripts/ci
@@ -641,6 +664,7 @@ scripts/ci
 ```
 
 ### utils
+
 ```shell
 tree utils -L 1 | pbcopy
 utils
@@ -665,3 +689,4 @@ utils
 - [链块与分散的数据 - 知乎](https://www.zhihu.com/column/c_74315572)
 - [substrate 源码解析与运用 - 介绍 - 知乎](https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322)
 - [Substrate区块链开发 - 知乎](https://www.zhihu.com/column/substrate)
+- [Substrate Ecosystem | Substrate_](https://substrate.io/ecosystem/)

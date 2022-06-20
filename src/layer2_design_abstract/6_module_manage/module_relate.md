@@ -12,7 +12,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 19 23:20:12 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 17:57:44 CST 2022 -->
 
 <!--te-->
 
@@ -40,3 +40,4 @@ Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者
 - <精通Rust(第二版)>-7.9 模块、路径和导入
 - [Visibility and privacy - The Rust Reference](https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html)
 - [pub(in path), pub(crate), pub(super), and pub(self) - The Rust Reference](https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself)
+- [](https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA)
