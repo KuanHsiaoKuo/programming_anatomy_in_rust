@@ -379,7 +379,280 @@ Substrate横空而出，推出了目前区块链领域最完美的升级方案�
 ```
 ~~~
 
-### Total Tree
+### Tree Level1
+
+```shell
+ tree -L 1 | pbcopy                                                                                                                                                                                                                        ─╯
+.
+├── Cargo.lock
+├── Cargo.toml
+├── HEADER-APACHE2
+├── HEADER-GPL3
+├── LICENSE-APACHE2
+├── LICENSE-GPL3
+├── README.md
+├── bin
+├── client
+├── docker
+├── docs
+├── frame
+├── primitives
+├── rustfmt.toml
+├── scripts
+├── shell.nix
+├── test-utils
+└── utils
+
+9 directories, 9 files
+```
+
+### bin:
+
+```shell
+tree bin -L 2 | pbcopy                                                                                                                                                                                                                       ─╯
+bin
+├── node
+│   ├── bench
+│   ├── cli
+│   ├── executor
+│   ├── inspect
+│   ├── primitives
+│   ├── rpc
+│   ├── runtime
+│   └── testing
+├── node-template
+│   ├── LICENSE
+│   ├── README.md
+│   ├── docker-compose.yml
+│   ├── docs
+│   ├── node
+│   ├── pallets
+│   ├── runtime
+│   ├── scripts
+│   └── shell.nix
+└── utils
+    ├── chain-spec-builder
+    └── subkey
+
+18 directories, 4 files
+```
+
+### client
+```shell
+ tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
+client
+├── allocator
+├── api
+├── authority-discovery
+├── basic-authorship
+├── beefy
+├── block-builder
+├── chain-spec
+├── cli
+├── consensus
+├── db
+├── executor
+├── finality-grandpa
+├── informant
+├── keystore
+├── network
+├── network-gossip
+├── offchain
+├── peerset
+├── proposer-metrics
+├── rpc
+├── rpc-api
+├── rpc-servers
+├── service
+├── state-db
+├── sync-state-rpc
+├── sysinfo
+├── telemetry
+├── tracing
+├── transaction-pool
+└── utils
+
+30 directories, 0 files
+```
+
+### frame
+
+```shell
+tree frame -L 1 | pbcopy
+frame
+├── alliance
+├── assets
+├── atomic-swap
+├── aura
+├── authority-discovery
+├── authorship
+├── babe
+├── bags-list
+├── balances
+├── beefy
+├── beefy-mmr
+├── benchmarking
+├── bounties
+├── child-bounties
+├── collective
+├── contracts
+├── conviction-voting
+├── democracy
+├── election-provider-multi-phase
+├── election-provider-support
+├── elections-phragmen
+├── examples
+├── executive
+├── gilt
+├── grandpa
+├── identity
+├── im-online
+├── indices
+├── lottery
+├── membership
+├── merkle-mountain-range
+├── multisig
+├── nicks
+├── node-authorization
+├── nomination-pools
+├── offences
+├── preimage
+├── proxy
+├── randomness-collective-flip
+├── ranked-collective
+├── recovery
+├── referenda
+├── remark
+├── scheduler
+├── scored-pool
+├── session
+├── society
+├── staking
+├── state-trie-migration
+├── sudo
+├── support
+├── system
+├── timestamp
+├── tips
+├── transaction-payment
+├── transaction-storage
+├── treasury
+├── try-runtime
+├── uniques
+├── utility
+├── vesting
+└── whitelist
+
+62 directories, 0 files
+
+```
+
+### primitives
+```shell
+tree primitives -L 1 | pbcopy
+primitives
+├── api
+├── application-crypto
+├── arithmetic
+├── authority-discovery
+├── authorship
+├── beefy
+├── block-builder
+├── blockchain
+├── consensus
+├── core
+├── database
+├── debug-derive
+├── externalities
+├── finality-grandpa
+├── inherents
+├── io
+├── keyring
+├── keystore
+├── maybe-compressed-blob
+├── merkle-mountain-range
+├── npos-elections
+├── offchain
+├── panic-handler
+├── rpc
+├── runtime
+├── runtime-interface
+├── sandbox
+├── serializer
+├── session
+├── staking
+├── state-machine
+├── std
+├── storage
+├── tasks
+├── test-primitives
+├── timestamp
+├── tracing
+├── transaction-pool
+├── transaction-storage-proof
+├── trie
+├── version
+└── wasm-interface
+
+42 directories, 0 files
+
+```
+
+### scripts/ci
+```shell
+tree scripts/ci | pbcopy
+scripts/ci
+├── common
+│   └── lib.sh
+├── deny.toml
+├── docker
+│   ├── subkey.Dockerfile
+│   └── substrate.Dockerfile
+├── github
+│   ├── check_labels.sh
+│   └── generate_changelog.sh
+├── gitlab
+│   ├── check_runtime.sh
+│   ├── check_signed.sh
+│   ├── ensure-deps.sh
+│   ├── pipeline
+│   │   ├── build.yml
+│   │   ├── check.yml
+│   │   ├── publish.yml
+│   │   └── test.yml
+│   ├── publish_draft_release.sh
+│   └── skip_if_draft.sh
+├── monitoring
+│   ├── alerting-rules
+│   │   ├── alerting-rule-tests.yaml
+│   │   └── alerting-rules.yaml
+│   └── grafana-dashboards
+│       ├── README_dashboard.md
+│       ├── substrate-networking.json
+│       └── substrate-service-tasks.json
+├── node-template-release
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+└── node-template-release.sh
+
+10 directories, 23 files
+
+```
+
+### utils
+```shell
+tree utils -L 1 | pbcopy
+utils
+├── build-script-utils
+├── fork-tree
+├── frame
+├── prometheus
+└── wasm-builder
+
+5 directories, 0 files
+
+```
 
 ## 功能逻辑
 
