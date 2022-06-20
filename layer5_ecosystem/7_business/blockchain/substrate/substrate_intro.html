@@ -489,8 +489,7 @@ Runtime：链功能</p>
 </code></pre>
 </div>
 </div>
-<p>区块链领域就大大不同了。
-即便代码更新的权力在某个组织的手上，但是运行这些代码的人可不一定会听这个组织的指挥，无法容易的命令分散节点统一的进行新代码的部署更新。</p>
+<p>区块链领域就大大不同了。 即便代码更新的权力在某个组织的手上，但是运行这些代码的人可不一定会听这个组织的指挥，无法容易的命令分散节点统一的进行新代码的部署更新。</p>
 <div id="admonition-分布式自治的优缺点" class="admonition tip">
 <div class="admonition-title">
 <p>分布式自治的优缺点</p>
@@ -512,7 +511,7 @@ Runtime：链功能</p>
 <p>一个区块链系统升级后，不得不在代码中加入许多的“高度判断”，以区分不同高度下运行的代码，保证同步能够正常执行，兼容老数据。这种做法很原始但是又无法绕开，给开发者带来极大的思维负担，且需要大量的测试来保证不出现Bug。</p>
 </div>
 </div>
-比如目前比特币的源码中就有许多的区块高度判定使得在同步老区块的时候执行老代码，新区块的时候执行新代码。而中心化系统的数据控制权在自己手上，并且也不存在需要从某个数据源同步的情况，所以完全不需要担心这个问题。
+<p>比如目前比特币的源码中就有许多的区块高度判定使得在同步老区块的时候执行老代码，新区块的时候执行新代码。而中心化系统的数据控制权在自己手上，并且也不存在需要从某个数据源同步的情况，所以完全不需要担心这个问题。</p>
 <h4 id="substrate的不同"><a class="header" href="#substrate的不同">Substrate的不同</a></h4>
 <p>Substrate横空而出，推出了目前区块链领域最完美的升级方案。其采用“链上代码”的思想，将整个Runtime都做成了可直接更新的组件，让所有节点能够强制运行最新的Runtime代码。</p>
 <div id="admonition-substrate-runtime" class="admonition info">
@@ -549,7 +548,8 @@ Runtime：链功能</p>
 <p>我们使用以太坊中“合约更新策略”来解释Substrate的Runtime机制：</p>
 </div>
 </div>
-<p>由于以太坊部署一个合约后，其地址已经被固定，且数据完全存储在这个合约地址下，若这个合约需要升级功能或出现Bug，将会带来许多的问题（比如许多垃圾山寨币的ERC20合约有溢出漏洞，被攻击后损失惨重，只能通过重新部署合约，<strong>并将老合约的数据重新导入的方式</strong>进行合约升级，且此时的合约地址只能使用新的了）。</p>
+<p>由于以太坊部署一个合约后，其地址已经被固定，且数据完全存储在这个合约地址下，若这个合约需要升级功能或出现Bug，将会带来许多的问题（比如许多垃圾山寨币的ERC20合约有溢出漏洞，被攻击后损失惨重，只能通过重新部署合约，**
+并将老合约的数据重新导入的方式**进行合约升级，且此时的合约地址只能使用新的了）。</p>
 <p>许多开发人员不断探索后发展出了如下的以太坊合约升级方式：</p>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Substrate_runtime_intro.jpeg" alt="Substrate_runtime_intro" /></p>
 <p>熟悉以太坊的开发人员应该很容易理解上图表达的意思。</p>
@@ -583,11 +583,55 @@ Runtime：链功能</p>
 </div>
 </div>
 <h2 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h2>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/substrate_github.gif" alt="substrate_github" /></p>
+<h3 id="客户端架构"><a class="header" href="#客户端架构">客户端架构</a></h3>
+<div id="admonition-substrate-client" class="admonition tip">
+<div class="admonition-title">
+<p>Substrate Client</p>
+<p><a class="admonition-anchor-link" href="#admonition-substrate-client"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃         ___ _   _ ___ ___ _____ ___    _ _____ ___    ___ _    ___ ___ _  _ _____        ┃
+┃        / __| | | | _ ) __|_   _| _ \  /_\_   _| __|  / __| |  |_ _| __| \| |_   _|       ┃
+┃        \__ \ |_| | _ \__ \ | | |   / / _ \| | | _|  | (__| |__ | || _|| .` | | |         ┃
+┃        |___/\___/|___/___/ |_| |_|_\/_/ \_\_| |___|  \___|____|___|___|_|\_| |_|         ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃     ┌───────────────┐     ┌──────────────────────────────────────────────────────────┐   ┃
+┃     │               │     │                                                          │   ┃
+┃     │               │     │                                                          │   ┃
+┃     │               │     │                           RPC                            │   ┃
+┃     │               │     │                                                          │   ┃
+┃     │      P2P      │     │                                                          │   ┃
+┃     │    NETWORK    │     └──────────────────────────────────────────────────────────┘   ┃
+┃     │               │     ┌────────────────────────────────────────┐ ┌───────────────┐   ┃
+┃     │               │     │                                        │ │               │   ┃
+┃     │               │     │            ┌───────────────┐           │ │               │   ┃
+┃     │               │     │            │               │           │ │   CONSENSUS   │   ┃
+┃     └───────────────┘     │            │     Wasm      │           │ │               │   ┃
+┃          .───────.        │            │    Runtime    │           │ │               │   ┃
+┃       ,─'         '─.     │            │               │           │ └───────────────┘   ┃
+┃      ╱               ╲░   │            └───────────────┘           │                     ┃
+┃     ;     NATIVE      :░  │                                        │ ┌───────────────┐   ┃
+┃     :     RUNTIME     ;░░ │                                        │ │               │   ┃
+┃      ╲               ╱░░░ │                STORAGE                 │ │               │   ┃
+┃       ╲             ╱░░░  │                                        │ │   TELEMETRY   │   ┃
+┃        '─.       ,─'░░░   │                                        │ │               │   ┃
+┃          ░`─────'░░░░░    │                                        │ │               │   ┃
+┃             ░░░░░░░       └────────────────────────────────────────┘ └───────────────┘   ┃
+┃                                                                                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+</code></pre>
+</div>
+</div>
+<h3 id="total-tree"><a class="header" href="#total-tree">Total Tree</a></h3>
 <h2 id="功能逻辑"><a class="header" href="#功能逻辑">功能逻辑</a></h2>
 <h2 id="特色代码"><a class="header" href="#特色代码">特色代码</a></h2>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <ul>
 <li><a href="https://github.com/paritytech/substrate">paritytech/substrate: Substrate: The platform for blockchain innovators</a></li>
+<li><a href="https://docs.substrate.io/v3/getting-started/architecture/">Architecture | Substrate_</a></li>
 <li><a href="https://www.zhihu.com/column/c_74315572">链块与分散的数据 - 知乎</a></li>
 <li><a href="https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322">substrate 源码解析与运用 - 介绍 - 知乎</a></li>
 <li><a href="https://www.zhihu.com/column/substrate">Substrate区块链开发 - 知乎</a></li>
