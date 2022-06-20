@@ -212,7 +212,18 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a></li>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a>
+<ul>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9E%B6%E6%9E%84">客户端架构</a></li>
+<li><a href="#tree-level1">Tree Level1</a></li>
+<li><a href="#bin">bin:</a></li>
+<li><a href="#client">client</a></li>
+<li><a href="#frame">FRAME</a></li>
+<li><a href="#primitives">primitives</a></li>
+<li><a href="#scriptsci">scripts/ci</a></li>
+<li><a href="#utils">utils</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91">功能逻辑</a></li>
 <li><a href="#%E7%89%B9%E8%89%B2%E4%BB%A3%E7%A0%81">特色代码</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
@@ -220,7 +231,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 19 23:22:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 17:58:31 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -713,7 +724,21 @@ client
 
 30 directories, 0 files
 </code></pre>
-<h3 id="frame"><a class="header" href="#frame">frame</a></h3>
+<h3 id="frame"><a class="header" href="#frame">FRAME</a></h3>
+<div id="admonition-frame" class="admonition info">
+<div class="admonition-title">
+<p>FRAME</p>
+<p><a class="admonition-anchor-link" href="#admonition-frame"></a></p>
+</div>
+<div>
+<p>The Framework for Runtime Aggregation of Modularized Entities (FRAME) is a set of modules and support libraries that simplify runtime development. 
+In Substrate , these modules are called Pallets, each hosting domain-specific logic to include in a chain's runtime.</p>
+<p>FRAME also provides some helper modules to interact with important Substrate Primitives that provide the interface to the core client.</p>
+<p>The following diagram shows the architectural overview of FRAME and its support libraries:</p>
+</div>
+</div>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/frame-arch.png" alt="frame-arch" /></p>
+<p><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></p>
 <pre><code class="language-shell">tree frame -L 1 | pbcopy
 frame
 ├── alliance
@@ -892,6 +917,7 @@ utils
 <li><a href="https://www.zhihu.com/column/c_74315572">链块与分散的数据 - 知乎</a></li>
 <li><a href="https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322">substrate 源码解析与运用 - 介绍 - 知乎</a></li>
 <li><a href="https://www.zhihu.com/column/substrate">Substrate区块链开发 - 知乎</a></li>
+<li><a href="https://substrate.io/ecosystem/">Substrate Ecosystem | Substrate_</a></li>
 </ul>
 
             </main>

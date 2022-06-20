@@ -177,6 +177,20 @@
 <ul>
 <li><a href="#%E5%8C%BA%E5%9D%97%E9%93%BE">区块链</a>
 <ul>
+<li><a href="#layers">Layers</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%B1%82">数据层</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%B1%82">网络层</a></li>
+<li><a href="#%E5%85%B1%E8%AF%86%E5%B1%82">共识层</a>
+<ul>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6-pow-">工作量证明共识机制（ PoW ）</a></li>
+</ul>
+</li>
+<li><a href="#%E6%BF%80%E5%8A%B1%E5%B1%82">激励层</a></li>
+<li><a href="#%E5%90%88%E7%BA%A6%E5%B1%82">合约层</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8%E5%B1%82">应用层</a></li>
+</ul>
+</li>
 <li><a href="#blockchains">Blockchains</a></li>
 <li><a href="#blockchain-frameworks">Blockchain Frameworks</a></li>
 <li><a href="#cross-chain">Cross-Chain</a></li>
@@ -192,8 +206,85 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 19 23:22:15 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 17:58:28 CST 2022 -->
 <!--te-->
+<h2 id="layers"><a class="header" href="#layers">Layers</a></h2>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png" alt="img" /></p>
+<h3 id="数据层"><a class="header" href="#数据层">数据层</a></h3>
+<p>区块链是通过区块（block）存储数据，每个数据节点之间都包含所有数据，即分布式账本。每个区块都包括了区块的大小、区块头、区块所包含的交易数量及部分或所有的近期新交易。</p>
+<p>数据层主要是解决这些数据以什么样的形式组合在一起，形成一个有意义的区块。</p>
+<p>区块链的数据结构中包括两种哈希指针，它们均是不可篡改特性的数据结构基础。</p>
+<ol>
+<li>
+<p>一个是形成“区块+链”（block+chain）的链状数据结构</p>
+</li>
+<li>
+<p>另一个是哈希指针形成的梅克尔树（如下图所示）。</p>
+</li>
+</ol>
+<div id="admonition-用处" class="admonition tip">
+<div class="admonition-title">
+<p>用处</p>
+<p><a class="admonition-anchor-link" href="#admonition-用处"></a></p>
+</div>
+<div>
+<p>链状数据结构使得对某一区块内的数据的修改很容易被发现；
+梅克尔树的结构起类似作用，使得对其中的任何交易数据的修改很容易被发现。</p>
+</div>
+</div>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/9b432d8f0369921e21ac33f14c2bdeda.png" alt="img" /></p>
+<h3 id="网络层"><a class="header" href="#网络层">网络层</a></h3>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/b93a9b3345d59f5e13c0ec662a46f05a.png" alt="img" /></p>
+<p>区块链使用的是去中心化的网络架构，没有中心化服务器，依靠用户点对点交换信息，主要包括 P2P 组网机制、数据传播和验证机制。</p>
+<div id="admonition-p2p特性" class="admonition tip">
+<div class="admonition-title">
+<p>P2P特性</p>
+<p><a class="admonition-anchor-link" href="#admonition-p2p特性"></a></p>
+</div>
+<div>
+<p>正是由于节点的 P2P 特性，数据传输是分散在各个节点之间进行的，部分节点或网络遭到破坏对其他部分影响很小。</p>
+</div>
+</div>
+<p>节点指的是区块链客户端软件（比如比特币客户端、以太坊客户端），一般分为全节点和轻节点，全节点包含了所有区块链的区块数据，轻节点仅包括与自己相关的数据。</p>
+<h3 id="共识层"><a class="header" href="#共识层">共识层</a></h3>
+<p>共识层的功能是让高度分散的节点在 P2P 网络中，针对区块数据的有效性达成共识，决定了谁可以将新的区块添加到主链中（挖矿机制）。</p>
+<h4 id="工作量证明共识机制-pow-"><a class="header" href="#工作量证明共识机制-pow-">工作量证明共识机制（ PoW ）</a></h4>
+<div id="admonition-pow" class="admonition info">
+<div class="admonition-title">
+<p>PoW</p>
+<p><a class="admonition-anchor-link" href="#admonition-pow"></a></p>
+</div>
+<div>
+<p>矿工需要将网络中未确认的交易按梅克尔树组装成候选区块，在候选区块的头部有一个 32位的随机数区域，矿工需要反复调整随机数并计算，目标是让整个区块的哈希值小于一个“目标值”，谁先完成这个目标谁就有权力将交易记录到区块链分布式账本中并获得一定的奖励。</p>
+</div>
+</div>
+<p>挖矿的过程比拼的就是各个矿工节点的算力，可以变相认为谁的算力高谁的工作量就高，就有权力记账和获得奖励。</p>
+<ul>
+<li>比特币使用的是 PoW 机制；</li>
+<li>以太坊开始使用的是 PoW 机制，后来改成了 PoS 机制，原因是该机制交易速度更快、资源消耗更低。</li>
+</ul>
+<p>这种挖矿计算是非对称的，挖矿可能需要经过许多次哈希计算，而要验证的确找到有效的随机数，只需要一次计算就可以，因此其他节点能够很快验证交易是否已经被记入账本。</p>
+<h3 id="激励层"><a class="header" href="#激励层">激励层</a></h3>
+<p>激励层的功能主要是提供一些激励措施，鼓励节点参与记账，保证整个网络的安全运行。通过共识机制胜出取得记账权的节点能获得一定的奖励。</p>
+<p>目前比特币的激励措施是新区块产生时系统会奖励矿工一定的比特币（系统产生的新比特币，也会记录在分布式账本，来源地址是 0，因此整个过程叫挖矿），奖励最初是 50 个比特币，每四年减半一次，分别为 25 个、12.5
+个，以此类推。当比特币数量达到 2100 万枚的上限后（2140 年），激励就全靠交易的手续费了。以太坊交易是靠 gas 手续费来激励矿工。</p>
+<h3 id="合约层"><a class="header" href="#合约层">合约层</a></h3>
+<p>合约层封装了各类脚本、算法和智能合约，使得区块链具有可编程能力。例如，<strong>比特币的脚本</strong>中就规定了比特币的交易方式和过程中的种种细节，不过这种脚本使用不够便捷且不是图灵完备的。</p>
+<p>以太坊提出了智能合约的解决方案，提供了一种图灵完备的高级编程语言来编写智能合约，并使智能合约能够运行在分布式的以太坊虚拟机 EVM 上。</p>
+<div id="admonition-智能合约" class="admonition tip">
+<div class="admonition-title">
+<p>智能合约</p>
+<p><a class="admonition-anchor-link" href="#admonition-智能合约"></a></p>
+</div>
+<div>
+<p>智能合约就是存储在区块链上的一段代码，它们可以被区块链上的交易所触发，触发后，这段代码可以从区块链上读取数据或者向区块链上写入数据。</p>
+</div>
+</div>
+<p>区块链系统（比特币、以太坊）可以认为是一个分布式状态机，通过交易触发合约（脚本、智能合约）运行来改变状态机的状态。</p>
+<h3 id="应用层"><a class="header" href="#应用层">应用层</a></h3>
+<p>应用层封装了区块链的各种应用场景，具体应用可参见<strong>90+ #Ethereum Apps You Can Use Right Now</strong>。</p>
+<p>以下为一笔比特币转账交易的过程</p>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/e6b83641ed6467b392d04a3e6fe69492.png" alt="img" /></p>
 <h2 id="blockchains"><a class="header" href="#blockchains">Blockchains</a></h2>
 <ul>
 <li><a href="https://developer.aleo.org/aleo/getting_started/overview">Aleo</a>. Leo is a rust flavoured zk language.</li>
@@ -350,7 +441,12 @@ Rust and just like develop in a common backend.</li>
 </ul>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <ul>
-<li><a href="https://github.com/rust-in-blockchain/awesome-blockchain-rust">rust-in-blockchain/awesome-blockchain-rust: Collect libraries and packages about blockchain/cryptography in Rust</a></li>
+<li>
+<p><a href="https://web.archive.org/web/20220620094224/https://jishuin.proginn.com/p/763bfbd79e0a">Web3.0开发入门-技术圈</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-in-blockchain/awesome-blockchain-rust">rust-in-blockchain/awesome-blockchain-rust: Collect libraries and packages about blockchain/cryptography in Rust</a></p>
+</li>
 </ul>
 
             </main>
