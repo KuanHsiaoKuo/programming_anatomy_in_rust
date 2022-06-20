@@ -26,6 +26,7 @@
    * [项目结构](#项目结构)
       * [客户端架构](#客户端架构)
       * [Tree Level1](#tree-level1)
+         * [用Cargo组织代码](#用cargo组织代码)
       * [bin:](#bin)
       * [client](#client)
       * [FRAME](#frame)
@@ -37,7 +38,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 17:58:31 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 20:04:04 CST 2022 -->
 
 <!--te-->
 
@@ -413,6 +414,34 @@ Substrate横空而出，推出了目前区块链领域最完美的升级方案�
 9 directories, 9 files
 ```
 
+#### 用Cargo组织代码
+
+Substrate非常明显使用Cargo来组织代码：
+
+1. 项目根目录的Cargo.toml会用workspace+members导入各子模块
+
+```yaml
+[ workspace ]
+  resolver = "2"
+
+  members = [...]
+```
+
+```admonish info title='workspace+memgers'
+在[workspace]项下, members 属性表示工作区目录中的程序库列表
+```
+
+2. 各子模块之间也用Cargo.toml来相互导入使用
+
+```yaml
+[ dependencies ]
+  sc-consensus = { version = "0.10.0-dev", path = "../../client/consensus/common" }
+```
+
+```admonish tip title='高内聚，低耦合'
+这里正是通过Cargo.toml的语法，将模块功能内聚之后供调用
+```
+
 ### bin:
 
 ```shell
@@ -501,15 +530,15 @@ The following diagram shows the architectural overview of FRAME and its support 
 ```shell
 tree frame -L 1 | pbcopy
 frame
-├── alliance
-├── assets
-├── atomic-swap
-├── aura
-├── authority-discovery
+├── alliance: The Alliance Pallet provides a collective that curates a list of accounts and URLs, deemed by the voting members to be unscrupulous actors.
+├── assets: A simple, secure module for dealing with fungible assets. The Assets module provides functionality for asset management of fungible asset classes with a fixed supply
+├── atomic-swap: A module for atomically sending funds.
+├── aura: The Aura module extends Aura consensus by managing offline reporting.
+├── authority-discovery: This module is used by the client/authority-discovery to retrieve the current set of authorities.
 ├── authorship
 ├── babe
 ├── bags-list
-├── balances
+├── balances: The Balances module provides functionality for handling accounts and balances.
 ├── beefy
 ├── beefy-mmr
 ├── benchmarking
