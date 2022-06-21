@@ -12,6 +12,7 @@
         - [自定义类型](./layer1_underlying_abstract/2_type_system/user_defined_types.md)
         - [**泛型、特征及特征对象**](./layer1_underlying_abstract/2_type_system/generics_traits_objects.md)
     - [语言语法](./layer1_underlying_abstract/3_language_grammar/language_grammar.md)
+        - [注释与文档(rustdoc)](./layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.md)
         - [词法结构扫盲](./layer1_underlying_abstract/3_language_grammar/keywords_glossary.md)
         - [**绑定、赋值与匹配**](./layer1_underlying_abstract/3_language_grammar/binding_match_patterns.md)
         - [逻辑判断与循环♻️](./layer1_underlying_abstract/3_language_grammar/logical_decision_loops.md)
