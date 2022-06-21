@@ -54,7 +54,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 11:41:34 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 15:21:25 CST 2022 -->
 
 <!--te-->
 
@@ -382,3 +382,4 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 - [Lifetimes in Rust](https://hashrust.com/blog/lifetimes-in-rust/)
 - [Destructors - The Rust Reference](https://doc.rust-lang.org/stable/reference/destructors.html)
 - [Lifetime elision - The Rust Reference](https://doc.rust-lang.org/stable/reference/lifetime-elision.html)
+- [Understanding Ownership - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)

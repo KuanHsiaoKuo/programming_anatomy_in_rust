@@ -17,6 +17,7 @@
         - [**绑定、赋值与匹配**](./layer1_underlying_abstract/3_language_grammar/binding_match_patterns.md)
         - [逻辑判断与循环♻️](./layer1_underlying_abstract/3_language_grammar/logical_decision_loops.md)
         - [**语句与表达式**](./layer1_underlying_abstract/3_language_grammar/statements_expressions.md)
+        - [代码质量](./layer1_underlying_abstract/3_language_grammar/code_quality.md)
 - [Layer2: 设计抽象](./layer2_design_abstract/layer2_design_abstract.md)
     - [编程范式](./layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.md)
         - [函数式编程](./layer2_design_abstract/4_programming_paradigm/fp.md)

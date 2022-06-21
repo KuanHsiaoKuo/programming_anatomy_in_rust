@@ -71,7 +71,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 11:41:38 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 15:21:29 CST 2022 -->
 
 <!--te-->
 
@@ -469,3 +469,5 @@ dyn Trait 是一个不定长类型,只能作为引用创建。我们还可以通
 - [鸭子类型 - 维基百科，自由的百科全书](https://zh.m.wikipedia.org/zh-hans/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
 - [Trait and lifetime bounds - The Rust Reference](https://doc.rust-lang.org/stable/reference/trait-bounds.html)
 - [Special types and traits - The Rust Reference](https://doc.rust-lang.org/stable/reference/special-types-and-traits.html)
+- [Generic Types, Traits, and Lifetimes - The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html)
+- [Advanced Traits - The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)

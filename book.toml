@@ -4,7 +4,7 @@ description = "以rust为例分享学习编程常考虑的方方面面"
 language = "cn"
 multilingual = false
 src = "src"
-title = "Programming Anatomy In Rust"
+title = "Programming Anatomy In Rust 🦀"
 
 [output.html]
 theme = "mytheme"

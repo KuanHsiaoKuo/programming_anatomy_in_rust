@@ -11,7 +11,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 11:41:36 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 15:21:27 CST 2022 -->
 
 <!--te-->
 
@@ -30,3 +30,4 @@
 ## 参考资源
 
 - [Types - The Rust Reference](https://doc.rust-lang.org/stable/reference/types.html)
+- [Smart Pointers - The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
