@@ -24,7 +24,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 18:57:30 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:12:11 CST 2022 -->
 
 <!--te-->
 
@@ -278,3 +278,4 @@
 - [rust-in-blockchain/awesome-blockchain-rust: Collect libraries and packages about blockchain/cryptography in Rust](https://github.com/rust-in-blockchain/awesome-blockchain-rust)
 
 - [有了HTTP，为什么还要RPC？](https://mp.weixin.qq.com/s/jeoJeL7P7Q4J2vrIKVB5ZA)
+- [使用rust建立一个简单的区块链](/layer5_ecosystem/7_business/blockchain/build-a-block-in-rust.html)

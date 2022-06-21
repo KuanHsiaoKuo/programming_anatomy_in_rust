@@ -38,7 +38,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 18:57:32 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:12:15 CST 2022 -->
 
 <!--te-->
 
@@ -719,3 +719,4 @@ utils
 - [substrate 源码解析与运用 - 介绍 - 知乎](https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322)
 - [Substrate区块链开发 - 知乎](https://www.zhihu.com/column/substrate)
 - [Substrate Ecosystem | Substrate_](https://substrate.io/ecosystem/)
+- [Substrate blockchain development: Core concepts - LogRocket Blog](https://blog.logrocket.com/substrate-blockchain-framework-core-concepts/)

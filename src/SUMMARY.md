@@ -75,6 +75,7 @@
     - [安全参考](layer5_ecosystem/6_security/security.md)
     - [商业观察](layer5_ecosystem/7_business/business.md)
         - [区块链](layer5_ecosystem/7_business/blockchain/blockchain.md)
+            - [使用rust建立一个简单的区块链](layer5_ecosystem/7_business/blockchain/build-a-block-in-rust.md)
             - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
             - [Nervos CKB介绍与解析](layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.md)
             - [Solana](layer5_ecosystem/7_business/blockchain/solana.md)
