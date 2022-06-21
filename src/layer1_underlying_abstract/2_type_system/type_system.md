@@ -6,10 +6,15 @@
       * [3. 再来认真看看类型系统](#3-再来认真看看类型系统)
       * [4. 类型系统其实是一组规则](#4-类型系统其实是一组规则)
       * [5. 类型系统是对内存管理/安全的抽象](#5-类型系统是对内存管理安全的抽象)
+         * [动态类型大小](#动态类型大小)
+         * [类型布局](#类型布局)
+         * [内部可变性](#内部可变性)
+         * [子类型与协变](#子类型与协变)
+         * [强制转换(type coercions)](#强制转换type-coercions)
    * [参考资料](#参考资料)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 10:43:50 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 11:02:12 CST 2022 -->
 
 <!--te-->
 
@@ -43,6 +48,21 @@
 
 ### 5. 类型系统是对内存管理/安全的抽象
 
+#### 动态类型大小
+
+#### 类型布局
+
+#### 内部可变性
+
+#### 子类型与协变
+
+#### 强制转换(type coercions)
+
 ## 参考资料
 
-1. <精通Rust(第二版)>-4.1 类型系统及其重要性
+- <精通Rust(第二版)>-4.1 类型系统及其重要性
+- [Dynamically Sized Types - The Rust Reference](https://doc.rust-lang.org/stable/reference/dynamically-sized-types.html)
+- [Type layout - The Rust Reference](https://doc.rust-lang.org/stable/reference/type-layout.html)
+- [Interior mutability - The Rust Reference](https://doc.rust-lang.org/stable/reference/interior-mutability.html)
+- [Subtyping and Variance - The Rust Reference](https://doc.rust-lang.org/stable/reference/subtyping.html)
+- [Type coercions - The Rust Reference](https://doc.rust-lang.org/stable/reference/type-coercions.html)

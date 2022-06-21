@@ -34,12 +34,18 @@
          * [关联类型(特征)](#关联类型特征)
          * [继承(特征)](#继承特征)
       * [一些常用内置特征](#一些常用内置特征)
+         * [自动特征(Auto Traits)](#自动特征auto-traits)
+            * [Send &amp; Sync](#send--sync)
+            * [Unpin、 UnwindSafe &amp; RefUnwindSafe](#unpin-unwindsafe--refunwindsafe)
          * [Debug](#debug)
          * [PartialEq 和 Eq](#partialeq-和-eq)
          * [Copy和Clone](#copy和clone)
          * [Display](#display)
          * [Add](#add)
          * [Into 和 From](#into-和-from)
+         * [Drop](#drop)
+         * [Deref &amp; DerefMut](#deref--derefmut)
+         * [Sized<a href="https://doc.rust-lang.org/stable/reference/special-types-and-traits.html" rel="nofollow">Special types and traits - The Rust Reference</a>](#sizedspecial-types-and-traits---the-rust-reference)
       * [一个完整例子](#一个完整例子)
    * [特征区间：泛型+特征](#特征区间泛型特征)
       * [引出特征区间](#引出特征区间)
@@ -65,7 +71,7 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 10:43:50 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 11:02:11 CST 2022 -->
 
 <!--te-->
 
@@ -224,6 +230,12 @@ Rust也有一个类似且功能强大的结构,被称为特征。Rust中的特�
 
 ### 一些常用内置特征
 
+#### 自动特征(Auto Traits)
+
+##### Send & Sync
+
+##### Unpin、 UnwindSafe & RefUnwindSafe
+
 #### Debug
 
 这个特征有助于在控制台上输出类型以便进行调试。在组合类型的情况下,类型将以类似 JSON 的格式输出,其中带有花括号和其他括号,如果类型是字符串,将会用引号标识。这适用于 Rust 中的大多数内置类型。
@@ -246,6 +258,12 @@ Rust也有一个类似且功能强大的结构,被称为特征。Rust中的特�
 #### Add
 
 #### Into 和 From
+
+#### Drop
+
+#### Deref & DerefMut
+
+#### Sized[Special types and traits - The Rust Reference](https://doc.rust-lang.org/stable/reference/special-types-and-traits.html)
 
 ### 一个完整例子
 

@@ -49,11 +49,12 @@
       * [从变量生命周期开始](#从变量生命周期开始)
       * [生命周期限定](#生命周期限定)
       * [生命周期注解](#生命周期注解)
-      * [生命周期省略](#生命周期省略)
+      * [生命周期省略(Lifetime Elision)](#生命周期省略lifetime-elision)
+   * [销毁(Destructors)](#销毁destructors)
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 10:43:46 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 11:02:07 CST 2022 -->
 
 <!--te-->
 
@@ -367,7 +368,9 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 
 ### 生命周期注解
 
-### 生命周期省略
+### 生命周期省略(Lifetime Elision)
+
+## 销毁(Destructors)
 
 ## 参考资源
 
@@ -377,3 +380,5 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 - [go没有虚拟机怎么运行gc的？ - 知乎](https://www.zhihu.com/question/58863427)
 - [生命周期省略规则(Lifetime elision) - The Rust Reference](https://doc.rust-lang.org/stable/reference/lifetime-elision.html#lifetime-elision-in-functions)
 - [Lifetimes in Rust](https://hashrust.com/blog/lifetimes-in-rust/)
+- [Destructors - The Rust Reference](https://doc.rust-lang.org/stable/reference/destructors.html)
+- [Lifetime elision - The Rust Reference](https://doc.rust-lang.org/stable/reference/lifetime-elision.html)
