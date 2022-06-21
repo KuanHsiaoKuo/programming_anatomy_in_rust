@@ -51,6 +51,11 @@
 - [Command Line Applications in Rust](https://rust-cli.github.io/book/index.html)
 - [Rust 🦀 and WebAssembly 🕸](https://rustwasm.github.io/docs/book/)
 - [The Embedded Rust Book](https://doc.rust-lang.org/stable/embedded-book/)
+- [The rustup book](https://rust-lang.github.io/rustup/index.html)
+- [Guide to Rustc Development](https://rustc-dev-guide.rust-lang.org/)
+- [The Rust Programming Language Blog](https://blog.rust-lang.org/)
+
+> 更多资源：[Rust Lang Github Repositories](https://github.com/orgs/rust-lang/repositories?type=source)
 
 ## 本地运行
 

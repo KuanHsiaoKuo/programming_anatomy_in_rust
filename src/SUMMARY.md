@@ -25,7 +25,7 @@
         - [泛型编程](./layer2_design_abstract/4_programming_paradigm/gp.md)
     - [设计模式](./layer2_design_abstract/5_design_pattern/5_design_pattern.md)
     - [模块管理](./layer2_design_abstract/6_module_manage/6_module_manage.md)
-        - [模块使用](./layer2_design_abstract/6_module_manage/module_relate.md)
+        - [模块使用](./layer2_design_abstract/6_module_manage/package_crate_module_relates.md)
         - [Cargo与项目生命周期](./layer2_design_abstract/6_module_manage/cargo_crate_lifetime.md)
         - [Cargo run: rustc](./layer2_design_abstract/6_module_manage/cargo_rustc.md)
         - [Rust扩展工具](./layer2_design_abstract/6_module_manage/rust_plugins.md)
