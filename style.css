@@ -13,6 +13,7 @@
         margin-right: auto;
         left: calc(100% + (var(--content-max-width))/4 - 220px);
         position: absolute;
+
     }
     .pagetoc {
         position: fixed;
