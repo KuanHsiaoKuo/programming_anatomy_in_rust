@@ -3,6 +3,7 @@
 <!--ts-->
 * [区块链](#区块链)
    * [Layers](#layers)
+      * [OSI网络七层模型](#osi网络七层模型)
       * [数据层](#数据层)
       * [网络层](#网络层)
       * [共识层](#共识层)
@@ -23,13 +24,23 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 20 20:03:59 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 10:44:38 CST 2022 -->
 
 <!--te-->
 
 ## Layers
 
 ![img](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png)
+
+### OSI网络七层模型
+
+![图片](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/640.png)
+
+> 下图详细说明了各层作用
+
+![图片](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/640-20220621104210621.png)
+
+实际应用过程中，五层协议结构里面是没有表示层和会话层的。应该说它们和应用层合并了。
 
 ### 数据层
 
@@ -265,3 +276,5 @@
 - [Web3.0开发入门-技术圈](https://web.archive.org/web/20220620094224/https://jishuin.proginn.com/p/763bfbd79e0a)
 
 - [rust-in-blockchain/awesome-blockchain-rust: Collect libraries and packages about blockchain/cryptography in Rust](https://github.com/rust-in-blockchain/awesome-blockchain-rust)
+
+- [有了HTTP，为什么还要RPC？](https://mp.weixin.qq.com/s/jeoJeL7P7Q4J2vrIKVB5ZA)
