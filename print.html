@@ -509,6 +509,9 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%90%86%E5%BF%B5">Substrate理念</a></li>
 </ul>
 </li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%88%E8%AE%A4%E8%AF%86%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BA%E5%9D%97%E9%93%BE%E6%A1%86%E6%9E%B6">先认识一下：什么是区块链框架</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%8E%A5%E7%9D%80%E8%AF%B4%E8%AF%B4substrate%E4%B8%8Eweb3">接着说说Substrate与web3</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8web%E6%A1%86%E6%9E%B6%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%B1%BB%E6%AF%94">用web框架、游戏引擎类比</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-architecture">Substrate Architecture</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8runtime%E9%93%BE%E5%8A%9F%E8%83%BD">开发者只需要关注Runtime(链功能)</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%98%8E%E6%99%B0runtime">明晰Runtime</a>
@@ -535,12 +538,20 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8cargo%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81">用Cargo组织代码</a></li>
 </ul>
 </li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#bin">bin:</a></li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#client">client</a></li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#frame">FRAME</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-frame">Substrate FRAME</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-coreclient">Substrate Core(client)</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%B6%E4%BB%96">其他</a>
+<ul>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#primitives">primitives</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#scriptsci">scripts/ci</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#utils">utils</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91">功能逻辑</a></li>
@@ -556,7 +567,7 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:35 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:36 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -653,6 +664,69 @@ Wood是撑起了当前半个区块链世界的人。</p>
 <p>Substrate作为一个区块链框架，认为所有的链都应该具备区块链系统基础部分，而由开发者自由定制链的功能部分</p>
 </div>
 </div>
+<h3 id="先认识一下什么是区块链框架"><a class="header" href="#先认识一下什么是区块链框架">先认识一下：什么是区块链框架</a></h3>
+<p>简单来说，或者从本质上讲，区块链框架是一个（巨大的）工具和库的集合，用于构建一个完整的、可运行的、安全的、功能完整的（尽管是基本的）区块链。</p>
+<p>区块链框架负责处理以下方面的大部分繁重工作：</p>
+<ul>
+<li>共识P2P网络</li>
+<li>帐户管理</li>
+<li>基本的区块链逻辑（区块、交易等）</li>
+<li>区块链交互的客户端</li>
+</ul>
+<h3 id="接着说说substrate与web3"><a class="header" href="#接着说说substrate与web3">接着说说Substrate与web3</a></h3>
+<p>Substrate 可以被描述为一个区块链框架——具体来说，一个用于构建定制区块链的框架。这些区块链可以完全自主运行，这意味着它们不依赖任何外部技术来运行。</p>
+<p>然而，Substrate 背后的公司 Parity（由以太坊联合创始人 Gavin Wood 共同创立）也建立了 Polkadot 网络。 Polkadot 本质上是一个分散的、基于协议的区块链平台，用于实现安全的跨区块链通信。</p>
+<div id="admonition-波卡本身就是跨链桥梁" class="admonition tip">
+<div class="admonition-title">
+<p>波卡本身就是跨链桥梁</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-波卡本身就是跨链桥梁"></a></p>
+</div>
+<div>
+<p>这意味着 Polkadot可以用作区块链之间的一种桥梁，负责链之间的通信层，并使不同区块链（甚至是以太坊和比特币等系统）之间的交互成为可能。</p>
+</div>
+</div>
+<div id="admonition-web3愿景" class="admonition quote">
+<div class="admonition-title">
+<p>web3愿景</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-web3愿景"></a></p>
+</div>
+<div>
+<p>这代表着在实现 Web3 的愿景（一个分散的、基于区块链的互联网版本）方面取得了重大进展。</p>
+</div>
+</div>
+<p>由于它们是由同一个人开发的，因此 Substrate 对与Polkadot的集成具有一流的支持，因此您使用Substrate创建的任何区块链都可以无缝连接到 Polkadot。</p>
+<p>Substrate 还提供无分叉运行时升级——在不触发硬分叉的情况下升级区块链状态转换功能的能力。</p>
+<div id="admonition-文档教程" class="admonition info">
+<div class="admonition-title">
+<p>文档教程</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-文档教程"></a></p>
+</div>
+<div>
+<p>当然，由于提供了大量的代码，Substrate 附带了大量的文档和教程来帮助您入门。</p>
+</div>
+</div>
+<h3 id="用web框架游戏引擎类比"><a class="header" href="#用web框架游戏引擎类比">用web框架、游戏引擎类比</a></h3>
+<div id="admonition-sustrate与web框架大有不同" class="admonition warning">
+<div class="admonition-title">
+<p>Sustrate与web框架大有不同</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-sustrate与web框架大有不同"></a></p>
+</div>
+<div>
+<p>如果你以前使用过一个广泛的 Web 框架，那么区块链框架就是——根本不是这样的。范围、活动部件的数量、相关概念和扩展点只是处于不同的规模。</p>
+</div>
+</div>
+<blockquote>
+<p>一个更好的比较可能是一个成熟的游戏引擎（想想 Unity），它为你需要的一切功能提供基本实现，以及可能需要的许多扩展点，供自定义。</p>
+</blockquote>
+<p>当然，这意味着已经在架构方面做出了一些决定：你将无法轻易更改。</p>
+<p>根据你的用例，可能需要更多的可定制性，而框架可能会以某种方式对其进行限制。</p>
+<p>这是标准的权衡：区块链框架可以节省你的时间，但代价是你不得不忍受的一些事情。</p>
+<p>然而，正如我们将在下面更详细地探讨的那样，Substrate在这方面提供了一些灵活性。</p>
+<p>使您能够在多个阶段在更多的技术自由和易于开发之间进行选择。</p>
+<p>Substrate的后端是用 Rust 构建的。它（以及 Parity 通常所做的大部分工作）也是完全开源的。</p>
+<blockquote>
+<p>因此，您不仅可以使用 Substrate，还可以通过回馈和分叉其中的一部分来改进它，以根据您自己的需求进行定制。</p>
+</blockquote>
 <h3 id="substrate-architecture"><a class="header" href="#substrate-architecture">Substrate Architecture</a></h3>
 <p>Gavin Wood 作为以太坊实际核心的开发者，自然早已对这套系统的框架了然于心，所以从Substrate框架提出的开始（2018年9月），就对区块链系统作出了2个关键的区分：</p>
 <div id="admonition-coreruntime" class="admonition info">
@@ -961,7 +1035,10 @@ Runtime：链功能</p>
 </code></pre>
 </div>
 </div>
+<p>现在我们知道了 Substrate 是什么，让我们对框架、它的移动部分以及我们可以用来创建自定义区块链的扩展点进行高级概述。 由于我们在这里处理的是去中心化的点对点系统，所以我们谈论的基本单元是节点,这是我们的区块链运行的地方。
+该节点在客户端内部运行，并提供系统运行所需的所有基本组件，例如p2p网络、区块链的存储、块处理和共识的逻辑，以及从外部与区块链交互的能力。</p>
 <h3 id="tree-level1"><a class="header" href="#tree-level1">Tree Level1</a></h3>
+<p>首先来看看项目的整理结构：</p>
 <pre><code class="language-shell"> tree -L 1 | pbcopy                                                                                                                                                                                                                        ─╯
 .
 ├── Cargo.lock
@@ -1019,7 +1096,19 @@ Runtime：链功能</p>
 <p>这里正是通过Cargo.toml的语法，将模块功能内聚之后供调用</p>
 </div>
 </div>
-<h3 id="bin"><a class="header" href="#bin">bin:</a></h3>
+<h3 id="主要部分介绍nodeframecore"><a class="header" href="#主要部分介绍nodeframecore">主要部分介绍：Node、Frame、Core</a></h3>
+<h4 id="substrate-node"><a class="header" href="#substrate-node">Substrate Node:</a></h4>
+<p>我们将从 Substrate Node 开始。这是我们可以开始的最高级别；</p>
+<p>它提供了最多的预建功能和最少的技术自由度。它是完全可运行的，包括所有基本组件的默认实现，例如:</p>
+<ul>
+<li>账户管理</li>
+<li>特权访问</li>
+<li>共识</li>
+<li>...</li>
+</ul>
+<p>我们可以自定义链的创世块（即初始状态）以开始。 在这里，我们可以运行节点并熟悉 Substrate 提供的开箱即用的功能，玩转状态并与正在运行的区块链交互以熟悉。</p>
+<p>另一种实现相同目的的方法是使用 <a href="https://substrate.io/developers/playground/">Substrate Playground</a>，您可以在其中查看后端和前端模板以熟悉它们。
+然而，一旦我们准备好真正构建自己的区块链，我们最好降低一层并使用 FRAME。</p>
 <pre><code class="language-shell">tree bin -L 2 | pbcopy                                                                                                                                                                                                                       ─╯
 bin
 ├── node
@@ -1047,43 +1136,21 @@ bin
 
 18 directories, 4 files
 </code></pre>
-<h3 id="client"><a class="header" href="#client">client</a></h3>
-<pre><code class="language-shell"> tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
-client
-├── allocator
-├── api
-├── authority-discovery
-├── basic-authorship
-├── beefy
-├── block-builder
-├── chain-spec
-├── cli
-├── consensus
-├── db
-├── executor
-├── finality-grandpa
-├── informant
-├── keystore
-├── network
-├── network-gossip
-├── offchain
-├── peerset
-├── proposer-metrics
-├── rpc
-├── rpc-api
-├── rpc-servers
-├── service
-├── state-db
-├── sync-state-rpc
-├── sysinfo
-├── telemetry
-├── tracing
-├── transaction-pool
-└── utils
-
-30 directories, 0 files
-</code></pre>
-<h3 id="frame"><a class="header" href="#frame">FRAME</a></h3>
+<h4 id="substrate-frame"><a class="header" href="#substrate-frame">Substrate FRAME</a></h4>
+<p>FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
+，并具有高度的自由度来确定我们的区块链逻辑。</p>
+<p>我们基本上是从 Substrate 的预构建节点模板开始，可以添加所谓的托盘（Substrate 库模块的名称）来定制和扩展我们的链。</p>
+<p>在这个抽象级别，我们还能够完全自定义我们区块链的逻辑、状态和数据类型。这当然是大多数旨在接近 Substrate 的基本定制项目在易于开发和技术自由之间利用两全其美的地方。</p>
+<div id="admonition-专注定制" class="admonition tip">
+<div class="admonition-title">
+<p>专注定制</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-专注定制"></a></p>
+</div>
+<div>
+<p>从这个起点开始，我们必须投入最少的时间来建立我们的区块链，并且可以完全专注于我们自己的定制。</p>
+</div>
+</div>
+<p>我们仍然需要在它们到来时采用一些默认值——或者更确切地说，因为它们可以被配置——但是如果我们从根本上想要做不同的事情，我们可以从 Core 开始再降低一步。</p>
 <div id="admonition-frame" class="admonition info">
 <div class="admonition-title">
 <p>FRAME</p>
@@ -1166,7 +1233,61 @@ frame
 62 directories, 0 files
 
 </code></pre>
-<h3 id="primitives"><a class="header" href="#primitives">primitives</a></h3>
+<h4 id="substrate-coreclient"><a class="header" href="#substrate-coreclient">Substrate Core(client)</a></h4>
+<p>Substrate Core 本质上意味着我们可以以任何我们想要的方式实现我们的运行时，只要它以 WebAssembly 为目标并遵守 Substrate 块创建的基本法则。</p>
+<p>然后，我们可以使用这个运行时并在 Substrate 节点中运行它。</p>
+<div id="admonition-最高自由度" class="admonition info">
+<div class="admonition-title">
+<p>最高自由度</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-最高自由度"></a></p>
+</div>
+<div>
+<p>这种方法当然需要最多的工作和最高的难度，但它也具有最高的技术自由度，同时仍然能够在 Substrate 生态系统中无缝工作。</p>
+</div>
+</div>
+<p>说到 Substrate 的生态系统，有一个充满活力（充满活力）的开发者社区，他们在自己的项目中使用 Substrate，其中许多人通过共享自己的托盘来回馈生态系统。</p>
+<p>您可以通过使用诸如 <a href="https://substratemarketplace.com/">Substrate Market</a>
+之类的站点或仅在托管 <a href="https://crates.io/">crates.io: Rust Package Registry</a> 的任何地方找到托盘，因为 Substrate 托盘本质上是自包含的 Rust 库，您可以将其集成到您的
+Substrate 项目中, 并根据需要进行配置。</p>
+<p>与任何其他库一样，建议首先审核代码，并了解依赖外部代码与编写自己的代码之间的权衡。</p>
+<p>在玩了一点预建节点之后，我们应该专注于 FRAME，学习如何通过在 Substrate 模板节点之上构建自定义区块链。这也是许多精彩教程的起点。</p>
+<pre><code class="language-shell"> tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
+client
+├── allocator
+├── api
+├── authority-discovery
+├── basic-authorship
+├── beefy
+├── block-builder
+├── chain-spec
+├── cli
+├── consensus
+├── db
+├── executor
+├── finality-grandpa
+├── informant
+├── keystore
+├── network
+├── network-gossip
+├── offchain
+├── peerset
+├── proposer-metrics
+├── rpc
+├── rpc-api
+├── rpc-servers
+├── service
+├── state-db
+├── sync-state-rpc
+├── sysinfo
+├── telemetry
+├── tracing
+├── transaction-pool
+└── utils
+
+30 directories, 0 files
+</code></pre>
+<h3 id="其他"><a class="header" href="#其他">其他</a></h3>
+<h4 id="primitives"><a class="header" href="#primitives">primitives</a></h4>
 <pre><code class="language-shell">tree primitives -L 1 | pbcopy
 primitives
 ├── api
@@ -1215,7 +1336,7 @@ primitives
 42 directories, 0 files
 
 </code></pre>
-<h3 id="scriptsci"><a class="header" href="#scriptsci">scripts/ci</a></h3>
+<h4 id="scriptsci"><a class="header" href="#scriptsci">scripts/ci</a></h4>
 <pre><code class="language-shell">tree scripts/ci | pbcopy
 scripts/ci
 ├── common
@@ -1255,7 +1376,7 @@ scripts/ci
 10 directories, 23 files
 
 </code></pre>
-<h3 id="utils"><a class="header" href="#utils">utils</a></h3>
+<h4 id="utils"><a class="header" href="#utils">utils</a></h4>
 <pre><code class="language-shell">tree utils -L 1 | pbcopy
 utils
 ├── build-script-utils
@@ -1290,7 +1411,18 @@ utils
 <li><a href="https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322">substrate 源码解析与运用 - 介绍 - 知乎</a></li>
 <li><a href="https://www.zhihu.com/column/substrate">Substrate区块链开发 - 知乎</a></li>
 <li><a href="https://substrate.io/ecosystem/">Substrate Ecosystem | Substrate_</a></li>
-<li><a href="https://blog.logrocket.com/substrate-blockchain-framework-core-concepts/">Substrate blockchain development: Core concepts - LogRocket Blog</a></li>
+<li><a href="https://blog.logrocket.com/substrate-blockchain-framework-core-concepts/"><strong>Substrate blockchain development: Core concepts - LogRocket
+Blog</strong></a>：对Substrate的简要介绍</li>
+<li><a href="https://substrate.io/developers/playground/">Playground | Substrate_</a></li>
+<li><a href="https://substratemarketplace.com/">Substrate Market</a></li>
+<li><a href="https://crates.io/">crates.io: Rust Package Registry</a></li>
+<li><a href="https://docs.substrate.io/quick-start/">Quick start | Substrate Docs</a></li>
+<li><a href="https://docs.substrate.io/tutorials/">Tutorials | Substrate Docs</a></li>
+<li><a href="https://substrate.io/ecosystem/projects/">Projects | Substrate_</a>: 一些基于Substrate建立的项目，值得参考</li>
+<li><a href="https://docs.substrate.io/tutorials/v3/kitties/pt1/">Build the Substrate Kitties Chain | Substrate_</a>: 教你建立一个nft平台</li>
+<li><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></li>
+<li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
+<li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="底层抽象"><a class="header" href="#底层抽象">底层抽象</a></h1>
@@ -1299,7 +1431,7 @@ utils
 <li><a href="layer1_underlying_abstract/layer1_underlying_abstract.html#%E5%BA%95%E5%B1%82%E6%8A%BD%E8%B1%A1">底层抽象</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:52 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:15 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
@@ -1312,7 +1444,7 @@ utils
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:43 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:01 CST 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -1338,7 +1470,7 @@ utils
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:41 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:27:57 CST 2022 -->
 <!--te-->
 <h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <h3 id="online-book-2"><a class="header" href="#online-book-2">online-book</a></h3>
@@ -1447,7 +1579,7 @@ utils
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:43 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:00 CST 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -2031,7 +2163,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:07 CST 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -2096,7 +2228,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:44 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:02 CST 2022 -->
 <!--te-->
 <h2 id="基元类型"><a class="header" href="#基元类型">基元类型</a></h2>
 <h2 id="序列类型"><a class="header" href="#序列类型">序列类型</a></h2>
@@ -2128,7 +2260,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:44 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:03 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-4"><a class="header" href="#参考资源-4">参考资源</a></h2>
 <h3 id="online-book-6"><a class="header" href="#online-book-6">online-book</a></h3>
@@ -2153,7 +2285,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:07 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-5"><a class="header" href="#参考资源-5">参考资源</a></h2>
 <h3 id="online-book-7"><a class="header" href="#online-book-7">online-book</a></h3>
@@ -2292,7 +2424,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:46 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:05 CST 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -3064,7 +3196,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:51 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:12 CST 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -3100,7 +3232,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:48 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:09 CST 2022 -->
 <!--te-->
 <h2 id="注释方法"><a class="header" href="#注释方法">注释方法</a></h2>
 <h2 id="rustdoc使用"><a class="header" href="#rustdoc使用">rustdoc使用</a></h2>
@@ -3188,7 +3320,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:49 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:10 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-10"><a class="header" href="#参考资源-10">参考资源</a></h2>
 <h3 id="online-book-12"><a class="header" href="#online-book-12">online-book</a></h3>
@@ -3220,7 +3352,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:52 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:14 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-12"><a class="header" href="#参考资源-12">参考资源</a></h2>
 <h3 id="online-book-14"><a class="header" href="#online-book-14">online-book</a></h3>
@@ -3246,7 +3378,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:49 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:11 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-13"><a class="header" href="#参考资源-13">参考资源</a></h2>
 <h3 id="online-book-15"><a class="header" href="#online-book-15">online-book</a></h3>
@@ -3271,7 +3403,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:01 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:26 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-14"><a class="header" href="#参考资源-14">参考资源</a></h2>
 <h3 id="online-book-16"><a class="header" href="#online-book-16">online-book</a></h3>
@@ -3293,7 +3425,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:53 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:16 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-15"><a class="header" href="#参考资源-15">参考资源</a></h2>
 <h3 id="online-book-17"><a class="header" href="#online-book-17">online-book</a></h3>
@@ -3315,7 +3447,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:54 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:17 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-16"><a class="header" href="#参考资源-16">参考资源</a></h2>
 <h3 id="online-book-18"><a class="header" href="#online-book-18">online-book</a></h3>
@@ -3341,7 +3473,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:55 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:18 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-17"><a class="header" href="#参考资源-17">参考资源</a></h2>
 <h3 id="online-book-19"><a class="header" href="#online-book-19">online-book</a></h3>
@@ -3366,7 +3498,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:55 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:17 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-18"><a class="header" href="#参考资源-18">参考资源</a></h2>
 <h3 id="online-book-20"><a class="header" href="#online-book-20">online-book</a></h3>
@@ -3388,7 +3520,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:56 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:19 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-19"><a class="header" href="#参考资源-19">参考资源</a></h2>
 <h3 id="online-book-21"><a class="header" href="#online-book-21">online-book</a></h3>
@@ -3410,7 +3542,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:56 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:20 CST 2022 -->
 <!--te-->
 <p>对于一门编程语言，是否能够成为工程化开发工具的主要标准在于两点：</p>
 <ol>
@@ -3461,7 +3593,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:59 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:24 CST 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -3687,7 +3819,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:57 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:21 CST 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
 <h3 id="新建"><a class="header" href="#新建">新建</a></h3>
@@ -3759,7 +3891,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:58 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:21 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-23"><a class="header" href="#参考资源-23">参考资源</a></h2>
 <h3 id="online-book-25"><a class="header" href="#online-book-25">online-book</a></h3>
@@ -3802,7 +3934,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:00 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:25 CST 2022 -->
 <!--te-->
 <h2 id="cargo子命令系列-cargo-install"><a class="header" href="#cargo子命令系列-cargo-install">Cargo子命令系列: cargo install <binary crate name></a></h2>
 <h3 id="cargo-watch"><a class="header" href="#cargo-watch">cargo-watch</a></h3>
@@ -3843,7 +3975,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:33 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-25"><a class="header" href="#参考资源-25">参考资源</a></h2>
 <h3 id="online-book-27"><a class="header" href="#online-book-27">online-book</a></h3>
@@ -3865,7 +3997,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:03 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:29 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-26"><a class="header" href="#参考资源-26">参考资源</a></h2>
 <h3 id="online-book-28"><a class="header" href="#online-book-28">online-book</a></h3>
@@ -3917,7 +4049,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:04 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:30 CST 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -4135,7 +4267,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:27 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-28"><a class="header" href="#参考资源-28">参考资源</a></h2>
 <h3 id="online-book-30"><a class="header" href="#online-book-30">online-book</a></h3>
@@ -4161,7 +4293,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:27 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-29"><a class="header" href="#参考资源-29">参考资源</a></h2>
 <h3 id="online-book-31"><a class="header" href="#online-book-31">online-book</a></h3>
@@ -4183,7 +4315,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:05 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:31 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-30"><a class="header" href="#参考资源-30">参考资源</a></h2>
 <h3 id="online-book-32"><a class="header" href="#online-book-32">online-book</a></h3>
@@ -4205,7 +4337,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:08 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:35 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-31"><a class="header" href="#参考资源-31">参考资源</a></h2>
 <h3 id="online-book-33"><a class="header" href="#online-book-33">online-book</a></h3>
@@ -4227,7 +4359,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:34 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-32"><a class="header" href="#参考资源-32">参考资源</a></h2>
 <h3 id="online-book-34"><a class="header" href="#online-book-34">online-book</a></h3>
@@ -4249,7 +4381,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:33 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-33"><a class="header" href="#参考资源-33">参考资源</a></h2>
 <h3 id="online-book-35"><a class="header" href="#online-book-35">online-book</a></h3>
@@ -4271,7 +4403,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:40 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:43 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-34"><a class="header" href="#参考资源-34">参考资源</a></h2>
 <h3 id="online-book-36"><a class="header" href="#online-book-36">online-book</a></h3>
@@ -4283,7 +4415,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:12 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:28:48 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
@@ -4361,7 +4493,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:21 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:07 CST 2022 -->
 <!--te-->
 <h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
 <h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
@@ -4543,7 +4675,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:23 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:12 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-36"><a class="header" href="#参考资源-36">参考资源</a></h2>
 <ul>
@@ -4560,7 +4692,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:22 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:11 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-37"><a class="header" href="#参考资源-37">参考资源</a></h2>
 <ul>
@@ -4576,7 +4708,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:21 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:08 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-38"><a class="header" href="#参考资源-38">参考资源</a></h2>
 <ul>
@@ -4592,7 +4724,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:22 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:10 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-39"><a class="header" href="#参考资源-39">参考资源</a></h2>
 <ul>
@@ -4648,7 +4780,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:32 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:28 CST 2022 -->
 <!--te-->
 <h2 id="layers"><a class="header" href="#layers">Layers</a></h2>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png" alt="img" /></p>
@@ -4928,6 +5060,9 @@ Rust and just like develop in a common backend.</li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%90%86%E5%BF%B5">Substrate理念</a></li>
 </ul>
 </li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%88%E8%AE%A4%E8%AF%86%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BA%E5%9D%97%E9%93%BE%E6%A1%86%E6%9E%B6">先认识一下：什么是区块链框架</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%8E%A5%E7%9D%80%E8%AF%B4%E8%AF%B4substrate%E4%B8%8Eweb3">接着说说Substrate与web3</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8web%E6%A1%86%E6%9E%B6%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%B1%BB%E6%AF%94">用web框架、游戏引擎类比</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-architecture">Substrate Architecture</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8runtime%E9%93%BE%E5%8A%9F%E8%83%BD">开发者只需要关注Runtime(链功能)</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%98%8E%E6%99%B0runtime">明晰Runtime</a>
@@ -4954,12 +5089,20 @@ Rust and just like develop in a common backend.</li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8cargo%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81">用Cargo组织代码</a></li>
 </ul>
 </li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#bin">bin:</a></li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#client">client</a></li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#frame">FRAME</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-frame">Substrate FRAME</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-coreclient">Substrate Core(client)</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%B6%E4%BB%96">其他</a>
+<ul>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#primitives">primitives</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#scriptsci">scripts/ci</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#utils">utils</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91">功能逻辑</a></li>
@@ -4975,7 +5118,7 @@ Rust and just like develop in a common backend.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:35 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:36 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate-1"><a class="header" href="#gavin-wookpolkadot-and-substrate-1">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链-1"><a class="header" href="#gavin-wook与波卡跨链-1">Gavin Wook与波卡跨链</a></h3>
@@ -5072,6 +5215,69 @@ Wood是撑起了当前半个区块链世界的人。</p>
 <p>Substrate作为一个区块链框架，认为所有的链都应该具备区块链系统基础部分，而由开发者自由定制链的功能部分</p>
 </div>
 </div>
+<h3 id="先认识一下什么是区块链框架-1"><a class="header" href="#先认识一下什么是区块链框架-1">先认识一下：什么是区块链框架</a></h3>
+<p>简单来说，或者从本质上讲，区块链框架是一个（巨大的）工具和库的集合，用于构建一个完整的、可运行的、安全的、功能完整的（尽管是基本的）区块链。</p>
+<p>区块链框架负责处理以下方面的大部分繁重工作：</p>
+<ul>
+<li>共识P2P网络</li>
+<li>帐户管理</li>
+<li>基本的区块链逻辑（区块、交易等）</li>
+<li>区块链交互的客户端</li>
+</ul>
+<h3 id="接着说说substrate与web3-1"><a class="header" href="#接着说说substrate与web3-1">接着说说Substrate与web3</a></h3>
+<p>Substrate 可以被描述为一个区块链框架——具体来说，一个用于构建定制区块链的框架。这些区块链可以完全自主运行，这意味着它们不依赖任何外部技术来运行。</p>
+<p>然而，Substrate 背后的公司 Parity（由以太坊联合创始人 Gavin Wood 共同创立）也建立了 Polkadot 网络。 Polkadot 本质上是一个分散的、基于协议的区块链平台，用于实现安全的跨区块链通信。</p>
+<div id="admonition-波卡本身就是跨链桥梁" class="admonition tip">
+<div class="admonition-title">
+<p>波卡本身就是跨链桥梁</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-波卡本身就是跨链桥梁"></a></p>
+</div>
+<div>
+<p>这意味着 Polkadot可以用作区块链之间的一种桥梁，负责链之间的通信层，并使不同区块链（甚至是以太坊和比特币等系统）之间的交互成为可能。</p>
+</div>
+</div>
+<div id="admonition-web3愿景" class="admonition quote">
+<div class="admonition-title">
+<p>web3愿景</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-web3愿景"></a></p>
+</div>
+<div>
+<p>这代表着在实现 Web3 的愿景（一个分散的、基于区块链的互联网版本）方面取得了重大进展。</p>
+</div>
+</div>
+<p>由于它们是由同一个人开发的，因此 Substrate 对与Polkadot的集成具有一流的支持，因此您使用Substrate创建的任何区块链都可以无缝连接到 Polkadot。</p>
+<p>Substrate 还提供无分叉运行时升级——在不触发硬分叉的情况下升级区块链状态转换功能的能力。</p>
+<div id="admonition-文档教程" class="admonition info">
+<div class="admonition-title">
+<p>文档教程</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-文档教程"></a></p>
+</div>
+<div>
+<p>当然，由于提供了大量的代码，Substrate 附带了大量的文档和教程来帮助您入门。</p>
+</div>
+</div>
+<h3 id="用web框架游戏引擎类比-1"><a class="header" href="#用web框架游戏引擎类比-1">用web框架、游戏引擎类比</a></h3>
+<div id="admonition-sustrate与web框架大有不同" class="admonition warning">
+<div class="admonition-title">
+<p>Sustrate与web框架大有不同</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-sustrate与web框架大有不同"></a></p>
+</div>
+<div>
+<p>如果你以前使用过一个广泛的 Web 框架，那么区块链框架就是——根本不是这样的。范围、活动部件的数量、相关概念和扩展点只是处于不同的规模。</p>
+</div>
+</div>
+<blockquote>
+<p>一个更好的比较可能是一个成熟的游戏引擎（想想 Unity），它为你需要的一切功能提供基本实现，以及可能需要的许多扩展点，供自定义。</p>
+</blockquote>
+<p>当然，这意味着已经在架构方面做出了一些决定：你将无法轻易更改。</p>
+<p>根据你的用例，可能需要更多的可定制性，而框架可能会以某种方式对其进行限制。</p>
+<p>这是标准的权衡：区块链框架可以节省你的时间，但代价是你不得不忍受的一些事情。</p>
+<p>然而，正如我们将在下面更详细地探讨的那样，Substrate在这方面提供了一些灵活性。</p>
+<p>使您能够在多个阶段在更多的技术自由和易于开发之间进行选择。</p>
+<p>Substrate的后端是用 Rust 构建的。它（以及 Parity 通常所做的大部分工作）也是完全开源的。</p>
+<blockquote>
+<p>因此，您不仅可以使用 Substrate，还可以通过回馈和分叉其中的一部分来改进它，以根据您自己的需求进行定制。</p>
+</blockquote>
 <h3 id="substrate-architecture-1"><a class="header" href="#substrate-architecture-1">Substrate Architecture</a></h3>
 <p>Gavin Wood 作为以太坊实际核心的开发者，自然早已对这套系统的框架了然于心，所以从Substrate框架提出的开始（2018年9月），就对区块链系统作出了2个关键的区分：</p>
 <div id="admonition-coreruntime" class="admonition info">
@@ -5380,7 +5586,10 @@ Runtime：链功能</p>
 </code></pre>
 </div>
 </div>
+<p>现在我们知道了 Substrate 是什么，让我们对框架、它的移动部分以及我们可以用来创建自定义区块链的扩展点进行高级概述。 由于我们在这里处理的是去中心化的点对点系统，所以我们谈论的基本单元是节点,这是我们的区块链运行的地方。
+该节点在客户端内部运行，并提供系统运行所需的所有基本组件，例如p2p网络、区块链的存储、块处理和共识的逻辑，以及从外部与区块链交互的能力。</p>
 <h3 id="tree-level1-1"><a class="header" href="#tree-level1-1">Tree Level1</a></h3>
+<p>首先来看看项目的整理结构：</p>
 <pre><code class="language-shell"> tree -L 1 | pbcopy                                                                                                                                                                                                                        ─╯
 .
 ├── Cargo.lock
@@ -5438,7 +5647,19 @@ Runtime：链功能</p>
 <p>这里正是通过Cargo.toml的语法，将模块功能内聚之后供调用</p>
 </div>
 </div>
-<h3 id="bin-1"><a class="header" href="#bin-1">bin:</a></h3>
+<h3 id="主要部分介绍nodeframecore-1"><a class="header" href="#主要部分介绍nodeframecore-1">主要部分介绍：Node、Frame、Core</a></h3>
+<h4 id="substrate-node-1"><a class="header" href="#substrate-node-1">Substrate Node:</a></h4>
+<p>我们将从 Substrate Node 开始。这是我们可以开始的最高级别；</p>
+<p>它提供了最多的预建功能和最少的技术自由度。它是完全可运行的，包括所有基本组件的默认实现，例如:</p>
+<ul>
+<li>账户管理</li>
+<li>特权访问</li>
+<li>共识</li>
+<li>...</li>
+</ul>
+<p>我们可以自定义链的创世块（即初始状态）以开始。 在这里，我们可以运行节点并熟悉 Substrate 提供的开箱即用的功能，玩转状态并与正在运行的区块链交互以熟悉。</p>
+<p>另一种实现相同目的的方法是使用 <a href="https://substrate.io/developers/playground/">Substrate Playground</a>，您可以在其中查看后端和前端模板以熟悉它们。
+然而，一旦我们准备好真正构建自己的区块链，我们最好降低一层并使用 FRAME。</p>
 <pre><code class="language-shell">tree bin -L 2 | pbcopy                                                                                                                                                                                                                       ─╯
 bin
 ├── node
@@ -5466,43 +5687,21 @@ bin
 
 18 directories, 4 files
 </code></pre>
-<h3 id="client-1"><a class="header" href="#client-1">client</a></h3>
-<pre><code class="language-shell"> tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
-client
-├── allocator
-├── api
-├── authority-discovery
-├── basic-authorship
-├── beefy
-├── block-builder
-├── chain-spec
-├── cli
-├── consensus
-├── db
-├── executor
-├── finality-grandpa
-├── informant
-├── keystore
-├── network
-├── network-gossip
-├── offchain
-├── peerset
-├── proposer-metrics
-├── rpc
-├── rpc-api
-├── rpc-servers
-├── service
-├── state-db
-├── sync-state-rpc
-├── sysinfo
-├── telemetry
-├── tracing
-├── transaction-pool
-└── utils
-
-30 directories, 0 files
-</code></pre>
-<h3 id="frame-1"><a class="header" href="#frame-1">FRAME</a></h3>
+<h4 id="substrate-frame-1"><a class="header" href="#substrate-frame-1">Substrate FRAME</a></h4>
+<p>FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
+，并具有高度的自由度来确定我们的区块链逻辑。</p>
+<p>我们基本上是从 Substrate 的预构建节点模板开始，可以添加所谓的托盘（Substrate 库模块的名称）来定制和扩展我们的链。</p>
+<p>在这个抽象级别，我们还能够完全自定义我们区块链的逻辑、状态和数据类型。这当然是大多数旨在接近 Substrate 的基本定制项目在易于开发和技术自由之间利用两全其美的地方。</p>
+<div id="admonition-专注定制" class="admonition tip">
+<div class="admonition-title">
+<p>专注定制</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-专注定制"></a></p>
+</div>
+<div>
+<p>从这个起点开始，我们必须投入最少的时间来建立我们的区块链，并且可以完全专注于我们自己的定制。</p>
+</div>
+</div>
+<p>我们仍然需要在它们到来时采用一些默认值——或者更确切地说，因为它们可以被配置——但是如果我们从根本上想要做不同的事情，我们可以从 Core 开始再降低一步。</p>
 <div id="admonition-frame" class="admonition info">
 <div class="admonition-title">
 <p>FRAME</p>
@@ -5585,7 +5784,61 @@ frame
 62 directories, 0 files
 
 </code></pre>
-<h3 id="primitives-1"><a class="header" href="#primitives-1">primitives</a></h3>
+<h4 id="substrate-coreclient-1"><a class="header" href="#substrate-coreclient-1">Substrate Core(client)</a></h4>
+<p>Substrate Core 本质上意味着我们可以以任何我们想要的方式实现我们的运行时，只要它以 WebAssembly 为目标并遵守 Substrate 块创建的基本法则。</p>
+<p>然后，我们可以使用这个运行时并在 Substrate 节点中运行它。</p>
+<div id="admonition-最高自由度" class="admonition info">
+<div class="admonition-title">
+<p>最高自由度</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-最高自由度"></a></p>
+</div>
+<div>
+<p>这种方法当然需要最多的工作和最高的难度，但它也具有最高的技术自由度，同时仍然能够在 Substrate 生态系统中无缝工作。</p>
+</div>
+</div>
+<p>说到 Substrate 的生态系统，有一个充满活力（充满活力）的开发者社区，他们在自己的项目中使用 Substrate，其中许多人通过共享自己的托盘来回馈生态系统。</p>
+<p>您可以通过使用诸如 <a href="https://substratemarketplace.com/">Substrate Market</a>
+之类的站点或仅在托管 <a href="https://crates.io/">crates.io: Rust Package Registry</a> 的任何地方找到托盘，因为 Substrate 托盘本质上是自包含的 Rust 库，您可以将其集成到您的
+Substrate 项目中, 并根据需要进行配置。</p>
+<p>与任何其他库一样，建议首先审核代码，并了解依赖外部代码与编写自己的代码之间的权衡。</p>
+<p>在玩了一点预建节点之后，我们应该专注于 FRAME，学习如何通过在 Substrate 模板节点之上构建自定义区块链。这也是许多精彩教程的起点。</p>
+<pre><code class="language-shell"> tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
+client
+├── allocator
+├── api
+├── authority-discovery
+├── basic-authorship
+├── beefy
+├── block-builder
+├── chain-spec
+├── cli
+├── consensus
+├── db
+├── executor
+├── finality-grandpa
+├── informant
+├── keystore
+├── network
+├── network-gossip
+├── offchain
+├── peerset
+├── proposer-metrics
+├── rpc
+├── rpc-api
+├── rpc-servers
+├── service
+├── state-db
+├── sync-state-rpc
+├── sysinfo
+├── telemetry
+├── tracing
+├── transaction-pool
+└── utils
+
+30 directories, 0 files
+</code></pre>
+<h3 id="其他-1"><a class="header" href="#其他-1">其他</a></h3>
+<h4 id="primitives-1"><a class="header" href="#primitives-1">primitives</a></h4>
 <pre><code class="language-shell">tree primitives -L 1 | pbcopy
 primitives
 ├── api
@@ -5634,7 +5887,7 @@ primitives
 42 directories, 0 files
 
 </code></pre>
-<h3 id="scriptsci-1"><a class="header" href="#scriptsci-1">scripts/ci</a></h3>
+<h4 id="scriptsci-1"><a class="header" href="#scriptsci-1">scripts/ci</a></h4>
 <pre><code class="language-shell">tree scripts/ci | pbcopy
 scripts/ci
 ├── common
@@ -5674,7 +5927,7 @@ scripts/ci
 10 directories, 23 files
 
 </code></pre>
-<h3 id="utils-1"><a class="header" href="#utils-1">utils</a></h3>
+<h4 id="utils-1"><a class="header" href="#utils-1">utils</a></h4>
 <pre><code class="language-shell">tree utils -L 1 | pbcopy
 utils
 ├── build-script-utils
@@ -5709,7 +5962,18 @@ utils
 <li><a href="https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322">substrate 源码解析与运用 - 介绍 - 知乎</a></li>
 <li><a href="https://www.zhihu.com/column/substrate">Substrate区块链开发 - 知乎</a></li>
 <li><a href="https://substrate.io/ecosystem/">Substrate Ecosystem | Substrate_</a></li>
-<li><a href="https://blog.logrocket.com/substrate-blockchain-framework-core-concepts/">Substrate blockchain development: Core concepts - LogRocket Blog</a></li>
+<li><a href="https://blog.logrocket.com/substrate-blockchain-framework-core-concepts/"><strong>Substrate blockchain development: Core concepts - LogRocket
+Blog</strong></a>：对Substrate的简要介绍</li>
+<li><a href="https://substrate.io/developers/playground/">Playground | Substrate_</a></li>
+<li><a href="https://substratemarketplace.com/">Substrate Market</a></li>
+<li><a href="https://crates.io/">crates.io: Rust Package Registry</a></li>
+<li><a href="https://docs.substrate.io/quick-start/">Quick start | Substrate Docs</a></li>
+<li><a href="https://docs.substrate.io/tutorials/">Tutorials | Substrate Docs</a></li>
+<li><a href="https://substrate.io/ecosystem/projects/">Projects | Substrate_</a>: 一些基于Substrate建立的项目，值得参考</li>
+<li><a href="https://docs.substrate.io/tutorials/v3/kitties/pt1/">Build the Substrate Kitties Chain | Substrate_</a>: 教你建立一个nft平台</li>
+<li><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></li>
+<li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
+<li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
 </ul>
 <h3 id="local-39"><a class="header" href="#local-39">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nervosckb"><a class="header" href="#nervosckb">nervos/ckb</a></h1>
@@ -5728,7 +5992,7 @@ utils
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:33 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:33 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-43"><a class="header" href="#参考资源-43">参考资源</a></h2>
 <h3 id="online-book-40"><a class="header" href="#online-book-40">online-book</a></h3>
@@ -5753,7 +6017,7 @@ utils
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:33 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 00:29:34 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-44"><a class="header" href="#参考资源-44">参考资源</a></h2>
 <h3 id="online-book-41"><a class="header" href="#online-book-41">online-book</a></h3>
