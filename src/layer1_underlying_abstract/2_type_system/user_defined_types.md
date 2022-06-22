@@ -3,12 +3,21 @@
 <!--ts-->
 * [自定义类型](#自定义类型)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:47 CST 2022 -->
 
 <!--te-->
 
 ## 参考资源
 
+### online-book
+
 - [Using Structs to Structure Related Data - The Rust Programming Language](https://doc.rust-lang.org/book/ch05-00-structs.html)
+
+### fragment
+
+### local

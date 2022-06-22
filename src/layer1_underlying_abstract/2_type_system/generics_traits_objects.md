@@ -69,9 +69,12 @@
          * [不定长类型只能作为引用创建](#不定长类型只能作为引用创建)
    * [总结特征、特征区间和特征对象](#总结特征特征区间和特征对象)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:17 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:46 CST 2022 -->
 
 <!--te-->
 
@@ -462,12 +465,20 @@ dyn Trait 是一个不定长类型,只能作为引用创建。我们还可以通
 
 ## 参考资源
 
-- <精通rust(第二版)>-第四章：类型、泛型和特征
+### online-book
+
 - [Advanced Traits - The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)
-- [Rust traits: A deep dive - LogRocket Blog](https://blog.logrocket.com/rust-traits-a-deep-dive/)
-- 《代码之髓》- 第五章：函数
-- [鸭子类型 - 维基百科，自由的百科全书](https://zh.m.wikipedia.org/zh-hans/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
 - [Trait and lifetime bounds - The Rust Reference](https://doc.rust-lang.org/stable/reference/trait-bounds.html)
 - [Special types and traits - The Rust Reference](https://doc.rust-lang.org/stable/reference/special-types-and-traits.html)
 - [Generic Types, Traits, and Lifetimes - The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html)
 - [Advanced Traits - The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)
+
+### fragment
+
+- [Rust traits: A deep dive - LogRocket Blog](https://blog.logrocket.com/rust-traits-a-deep-dive/)
+- [鸭子类型 - 维基百科，自由的百科全书](https://zh.m.wikipedia.org/zh-hans/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
+
+### local
+
+- [<精通rust(第二版)>-第四章：类型、泛型和特征](marginnote3app://note/91DC4A44-A289-4D0F-B1D1-89D75181E736)
+- [《代码之髓》- 第五章：函数](marginnote3app://note/6D348DE0-2C5C-42E6-A404-4CF0CA1C5678)

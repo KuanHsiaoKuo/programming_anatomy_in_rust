@@ -17,9 +17,12 @@
       * [嵌套导入](#嵌套导入)
       * [再次导出](#再次导出)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:33 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:59 CST 2022 -->
 
 <!--te-->
 
@@ -151,12 +154,20 @@ Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者
 
 ## 参考资源
 
-- <精通Rust(第二版)>-2.2模块
-- <精通Rust(第二版)>-7.9 模块、路径和导入
+### online-book
+
 - [Visibility and privacy - The Rust Reference](https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html)
 - [pub(in path), pub(crate), pub(super), and pub(self) - The Rust Reference](https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself)
-- [了解下Rust 模块使用方式](https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA)
 - [Managing Growing Projects with Packages, Crates, and Modules - The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 - [Modules - Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/mod.html)
 - [Crates - Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/crates.html)
+
+### fragment
+
+- [了解下Rust 模块使用方式](https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA)
 - [Confused about Package vs. Crate terminology. : rust](https://www.reddit.com/r/rust/comments/lvtzri/confused_about_package_vs_crate_terminology/)
+
+### local
+
+- [<精通Rust(第二版)>-2.2模块](marginnote3app://note/CF61A2D3-C05C-49B2-943A-777D4A4A6434)
+- [<精通Rust(第二版)>-7.9 模块、路径和导入](marginnote3app://note/72AB7939-56B0-4797-8307-09E7F9905417)

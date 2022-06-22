@@ -48,9 +48,12 @@
       * [脚本](#脚本)
       * [项目](#项目)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:30 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:57 CST 2022 -->
 
 <!--te-->
 
@@ -142,6 +145,13 @@
 
 ## 参考资源
 
-- <精通Rust(第二版)>-2.3 Cargo和程序库
+### online-book
+
 - [Cargo Commands - The Cargo Book](https://doc.rust-lang.org/cargo/commands/index.html)
 - [Cargo - Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/cargo.html)
+
+### fragment
+
+### local
+
+- [<精通Rust(第二版)>-2.3 Cargo和程序库](marginnote3app://note/607C0511-4592-4F59-A8C0-AD8017A503FE)

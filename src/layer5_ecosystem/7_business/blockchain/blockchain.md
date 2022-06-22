@@ -22,9 +22,12 @@
    * [Dapps](#dapps)
    * [Other](#other)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:12:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:32 CST 2022 -->
 
 <!--te-->
 
@@ -273,9 +276,13 @@
 
 ## 参考资源
 
+### online-book
+
+### fragment
+
 - [Web3.0开发入门-技术圈](https://web.archive.org/web/20220620094224/https://jishuin.proginn.com/p/763bfbd79e0a)
-
 - [rust-in-blockchain/awesome-blockchain-rust: Collect libraries and packages about blockchain/cryptography in Rust](https://github.com/rust-in-blockchain/awesome-blockchain-rust)
-
 - [有了HTTP，为什么还要RPC？](https://mp.weixin.qq.com/s/jeoJeL7P7Q4J2vrIKVB5ZA)
 - [使用rust建立一个简单的区块链](/layer5_ecosystem/7_business/blockchain/build-a-block-in-rust.html)
+
+### local

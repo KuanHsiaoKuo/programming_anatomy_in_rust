@@ -36,9 +36,12 @@
    * [功能逻辑](#功能逻辑)
    * [特色代码](#特色代码)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:12:15 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:35 CST 2022 -->
 
 <!--te-->
 
@@ -717,10 +720,17 @@ utils
 
 ## 参考资源
 
+### online-book
+
 - [paritytech/substrate: Substrate: The platform for blockchain innovators](https://github.com/paritytech/substrate)
 - [Architecture | Substrate_](https://docs.substrate.io/v3/getting-started/architecture/)
+
+### fragment
+
 - [链块与分散的数据 - 知乎](https://www.zhihu.com/column/c_74315572)
 - [substrate 源码解析与运用 - 介绍 - 知乎](https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322)
 - [Substrate区块链开发 - 知乎](https://www.zhihu.com/column/substrate)
 - [Substrate Ecosystem | Substrate_](https://substrate.io/ecosystem/)
 - [Substrate blockchain development: Core concepts - LogRocket Blog](https://blog.logrocket.com/substrate-blockchain-framework-core-concepts/)
+
+### local

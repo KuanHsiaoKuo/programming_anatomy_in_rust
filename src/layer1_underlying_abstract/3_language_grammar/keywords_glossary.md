@@ -52,5 +52,12 @@ abstract / become / box / do / final / macro / override / priv / typeof / unsize
 
 ## 参考资源
 
-- [词法结构](https://time.geekbang.org/course/detail/100060601-286522)
+### online-book
+
 - [Lexical structure - The Rust Reference](https://doc.rust-lang.org/stable/reference/lexical-structure.html)
+
+### fragment
+
+- [词法结构](https://time.geekbang.org/course/detail/100060601-286522)
+
+### local

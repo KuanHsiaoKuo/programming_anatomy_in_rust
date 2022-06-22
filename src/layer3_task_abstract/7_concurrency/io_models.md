@@ -1,4 +1,5 @@
 # 从IO模型开始
+
 <!--ts-->
 * [从IO模型开始](#从io模型开始)
    * [1. 同步/异步、阻塞/非阻塞概念区别](#1-同步异步阻塞非阻塞概念区别)
@@ -20,11 +21,15 @@
          * [读写操作流程：](#读写操作流程)
          * [参与者：](#参与者)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:37 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:04 CST 2022 -->
 
 <!--te-->
+
 ## 1. 同步/异步、阻塞/非阻塞概念区别
 
 ### 同步和异步，关注的是消息通信机制。（调用者视角）
@@ -99,8 +104,7 @@ Application               kernel
 
 IO多路复用是一种同步IO模型，实现一个线程可以监视多个文件句柄。
 
-支持I/O多路复用的系统调用有 select/pselect/poll/epoll，本质都是同步I/O，因为数据拷贝都是阻塞的。
-通过 select/epoll 来判断数据报是否准备好，即判断可读可写状态。
+支持I/O多路复用的系统调用有 select/pselect/poll/epoll，本质都是同步I/O，因为数据拷贝都是阻塞的。 通过 select/epoll 来判断数据报是否准备好，即判断可读可写状态。
 
 ## 5. epoll: 同步阻塞/非阻塞模型
 
@@ -143,8 +147,8 @@ epoll_create  +---->    |            |   |     |  |      |     |         +--+-+ 
 
 ### 惊群问题：
 
-当多个进程/线程调用epoll_wait时会阻塞等待，当内核触发可读写事件，所有进程/线程都会进行响应，但是实际上只有一个进程/线程真实处理这些事件。
-Liux 4.5 通过引入 EPOLLEXCLUSIVE 标识来保证一个事件发生时候只有一个线程会被唤醒，以避免多侦听下的惊群问题。
+当多个进程/线程调用epoll_wait时会阻塞等待，当内核触发可读写事件，所有进程/线程都会进行响应，但是实际上只有一个进程/线程真实处理这些事件。 Liux 4.5 通过引入 EPOLLEXCLUSIVE
+标识来保证一个事件发生时候只有一个线程会被唤醒，以避免多侦听下的惊群问题。
 
 ## 6. 异步 I/O 模型: io_uring
 
@@ -238,14 +242,21 @@ req          +---------> |            |   |          | req handler    |
 4. 事件处理器执行读写操作
 
 #### 参与者：
+
 1. 描述符（handle）：操作系统提供的资源，识别 socket等。
 2. 同步事件多路分离器。开启事件循环，等待事件的发生。封装了 多路复用函数 select/poll/epoll等。
 3. 事件处理器。提供回调函数，用于描述与应用程序相关的某个事件的操作。
 4. 具体的事件处理器。事件处理器接口的具体实现。使用描述符来识别事件和程序提供的服务。
 5. Reactor 管理器。事件处理器的调度核心。分离每个事件，调度事件管理器，调用具体的函数处理某个事件。
 
-
 ## 参考资源
+
+### online-book
+
 - [88. IO模型](https://time.geekbang.org/course/detail/100060601-365835)
 - [89. epoll和io_uring](https://time.geekbang.org/course/detail/100060601-365838)
 - [90. 事件驱动编程模型](https://time.geekbang.org/course/detail/100060601-367808)
+
+### fragment
+
+### local

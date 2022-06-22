@@ -9,9 +9,12 @@
    * [指针类型](#指针类型)
    * [特征类型](#特征类型)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:15 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:44 CST 2022 -->
 
 <!--te-->
 
@@ -29,5 +32,11 @@
 
 ## 参考资源
 
+### online-book
+
 - [Types - The Rust Reference](https://doc.rust-lang.org/stable/reference/types.html)
 - [Smart Pointers - The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
+
+### fragment
+
+### local

@@ -57,6 +57,11 @@
 
 > 更多资源：[Rust Lang Github Repositories](https://github.com/orgs/rust-lang/repositories?type=source)
 
+## 参考资源说明
+1. online-book: 主要指各种在线电子书
+2. fragment: 主要指各种博客、论坛，比如reddit
+3. local：指在本地用marginnote/devonthink等创建的知识点链接，只是对应本地跳转。
+
 ## 本地运行
 
 ```shell

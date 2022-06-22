@@ -12,9 +12,12 @@
          * [子类型与协变](#子类型与协变)
          * [强制转换(type coercions)](#强制转换type-coercions)
    * [参考资料](#参考资料)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:18 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:47 CST 2022 -->
 
 <!--te-->
 
@@ -60,9 +63,17 @@
 
 ## 参考资料
 
-- <精通Rust(第二版)>-4.1 类型系统及其重要性
+### online-book
+
 - [Dynamically Sized Types - The Rust Reference](https://doc.rust-lang.org/stable/reference/dynamically-sized-types.html)
 - [Type layout - The Rust Reference](https://doc.rust-lang.org/stable/reference/type-layout.html)
 - [Interior mutability - The Rust Reference](https://doc.rust-lang.org/stable/reference/interior-mutability.html)
 - [Subtyping and Variance - The Rust Reference](https://doc.rust-lang.org/stable/reference/subtyping.html)
 - [Type coercions - The Rust Reference](https://doc.rust-lang.org/stable/reference/type-coercions.html)
+
+### fragment
+
+### local
+
+- [<精通Rust(第二版)>-4.1 类型系统及其重要性](marginnote3app://note/7D37028B-C1FB-47BC-AA50-4EBA22EB9CC7)
+

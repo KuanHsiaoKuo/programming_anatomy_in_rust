@@ -12,9 +12,12 @@
       * [rustc](#rustc)
       * [rustfmt](#rustfmt)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:33 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:00 CST 2022 -->
 
 <!--te-->
 
@@ -38,7 +41,15 @@
 
 ## 参考资源
 
-- <精通Rust(第二版)>-2.4 Cargo工具扩展
+### online-book
+
 - [Components - The rustup book](https://rust-lang.github.io/rustup/concepts/components.html)
-- [Rustup packages availability on x86_64-unknown-linux-gnu](https://rust-lang.github.io/rustup-components-history/)
 - [Channels - The rustup book](https://rust-lang.github.io/rustup/concepts/channels.html#nightly-availability)
+
+### fragment
+
+- [Rustup packages availability on x86_64-unknown-linux-gnu](https://rust-lang.github.io/rustup-components-history/)
+
+### local
+
+- [<精通Rust(第二版)>-2.4 Cargo工具扩展](marginnote3app://note/5D418160-6AC9-4FEF-843F-DA262F6A7DEB)

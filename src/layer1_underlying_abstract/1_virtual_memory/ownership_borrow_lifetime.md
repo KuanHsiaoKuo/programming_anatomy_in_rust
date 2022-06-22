@@ -52,9 +52,12 @@
       * [生命周期省略(Lifetime Elision)](#生命周期省略lifetime-elision)
    * [销毁(Destructors)](#销毁destructors)
    * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:18:43 CST 2022 -->
 
 <!--te-->
 
@@ -374,12 +377,20 @@ Rust的所有权规则非常严格, 因为它只允许我们使用类型一次�
 
 ## 参考资源
 
-- [Object lifetime and ownership](https://www.ditsing.com/object-lifetime-and-ownership/)
+### online-book
+
 - [What is Ownership? - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
-- <精通rust(第二版)>-5.7 内存安全三原则
-- [go没有虚拟机怎么运行gc的？ - 知乎](https://www.zhihu.com/question/58863427)
 - [生命周期省略规则(Lifetime elision) - The Rust Reference](https://doc.rust-lang.org/stable/reference/lifetime-elision.html#lifetime-elision-in-functions)
-- [Lifetimes in Rust](https://hashrust.com/blog/lifetimes-in-rust/)
 - [Destructors - The Rust Reference](https://doc.rust-lang.org/stable/reference/destructors.html)
 - [Lifetime elision - The Rust Reference](https://doc.rust-lang.org/stable/reference/lifetime-elision.html)
 - [Understanding Ownership - The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+
+### fragment
+
+- [Object lifetime and ownership](https://www.ditsing.com/object-lifetime-and-ownership/)
+- [go没有虚拟机怎么运行gc的？ - 知乎](https://www.zhihu.com/question/58863427)
+- [Lifetimes in Rust](https://hashrust.com/blog/lifetimes-in-rust/)
+
+### local
+
+- [<精通rust(第二版)>-5.7 内存安全三原则](marginnote3app://note/72B2EE33-36EE-4FE6-A088-FEBE54D61E8D)
