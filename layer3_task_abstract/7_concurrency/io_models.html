@@ -207,12 +207,18 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="#online-book">online-book</a></li>
+<li><a href="#fragment">fragment</a></li>
+<li><a href="#local">local</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 21 20:11:37 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 22 16:19:04 CST 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -282,8 +288,7 @@ I/O 模 型  +---+
 <p>异步I/O，recvfrom总是立即返回，两个阶段都由内核完成。</p>
 <h2 id="4-io-多路复用io-multiplexing-"><a class="header" href="#4-io-多路复用io-multiplexing-">4. I/O 多路复用（I/O Multiplexing )</a></h2>
 <p>IO多路复用是一种同步IO模型，实现一个线程可以监视多个文件句柄。</p>
-<p>支持I/O多路复用的系统调用有 select/pselect/poll/epoll，本质都是同步I/O，因为数据拷贝都是阻塞的。
-通过 select/epoll 来判断数据报是否准备好，即判断可读可写状态。</p>
+<p>支持I/O多路复用的系统调用有 select/pselect/poll/epoll，本质都是同步I/O，因为数据拷贝都是阻塞的。 通过 select/epoll 来判断数据报是否准备好，即判断可读可写状态。</p>
 <h2 id="5-epoll-同步阻塞非阻塞模型"><a class="header" href="#5-epoll-同步阻塞非阻塞模型">5. epoll: 同步阻塞/非阻塞模型</a></h2>
 <pre><code class="language-text">                        +--------------------------------+     +-------------------------+
                         | epoll_ctl                      |     | epoll_wait              |
@@ -321,8 +326,8 @@ epoll_create  +----&gt;    |            |   |     |  |      |     |         +--+
 <li>边缘触发机制（ET)。缓冲区空或满的状态才触发读写。nginx 使用该方式，避免频繁读写。</li>
 </ul>
 <h3 id="惊群问题"><a class="header" href="#惊群问题">惊群问题：</a></h3>
-<p>当多个进程/线程调用epoll_wait时会阻塞等待，当内核触发可读写事件，所有进程/线程都会进行响应，但是实际上只有一个进程/线程真实处理这些事件。
-Liux 4.5 通过引入 EPOLLEXCLUSIVE 标识来保证一个事件发生时候只有一个线程会被唤醒，以避免多侦听下的惊群问题。</p>
+<p>当多个进程/线程调用epoll_wait时会阻塞等待，当内核触发可读写事件，所有进程/线程都会进行响应，但是实际上只有一个进程/线程真实处理这些事件。 Liux 4.5 通过引入 EPOLLEXCLUSIVE
+标识来保证一个事件发生时候只有一个线程会被唤醒，以避免多侦听下的惊群问题。</p>
 <h2 id="6-异步-io-模型-io_uring"><a class="header" href="#6-异步-io-模型-io_uring">6. 异步 I/O 模型: io_uring</a></h2>
 <p>Linux AIO 实现的并不理想，所以引入了新的异步I/O接口 io_uring。</p>
 <pre><code class="language-text">+----+ Head  +---------+               +----------+ Head
@@ -407,11 +412,14 @@ req          +---------&gt; |            |   |          | req handler    |
 <li>Reactor 管理器。事件处理器的调度核心。分离每个事件，调度事件管理器，调用具体的函数处理某个事件。</li>
 </ol>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
 <ul>
 <li><a href="https://time.geekbang.org/course/detail/100060601-365835">88. IO模型</a></li>
 <li><a href="https://time.geekbang.org/course/detail/100060601-365838">89. epoll和io_uring</a></li>
 <li><a href="https://time.geekbang.org/course/detail/100060601-367808">90. 事件驱动编程模型</a></li>
 </ul>
+<h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
+<h3 id="local"><a class="header" href="#local">local</a></h3>
 
             </main>
 
