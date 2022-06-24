@@ -2,6 +2,8 @@
 
 <!--ts-->
 * [Substrate项目介绍](#substrate项目介绍)
+   * [Case Study](#case-study)
+      * [Acala Network](#acala-network)
    * [分类介绍](#分类介绍)
    * [DeFi](#defi)
    * [Wallet](#wallet)
@@ -15,6 +17,10 @@
       * [DatDot](#datdot)
       * [Equilibrium.co](#equilibriumco)
    * [IoT](#iot)
+      * [Data Highway](#data-highway)
+      * [Nodle](#nodle)
+      * [Origin Trail](#origin-trail)
+      * [Robonomics(Airalabs)](#robonomicsairalabs)
    * [Gaming](#gaming)
       * [Ajuna Network](#ajuna-network)
       * [Bit.Country](#bitcountry)
@@ -30,13 +36,23 @@
    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Thu Jun 23 14:41:16 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Fri Jun 24 15:35:55 CST 2022 -->
 
 <!--te-->
 
 ```admonish tip title='他山之石，可以攻玉'
 都知道Substrate框架开发区块链项目功能强大，那么这里可以先看看Substrate至少能做到什么程度
 ```
+
+## Case Study
+
+这里主要重点看几个案例学习项目。
+
+### Acala Network
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Acala%20Network.png" alt="img" style="zoom: 25%;" />
+
+Acala is a decentralized stablecoin platform that powers cross-blockchain open finance applications.
 
 ## 分类介绍
 
@@ -90,6 +106,29 @@ DatDot is a Distributed (peer-to-peer ) File Hosting Network, leveraging on the 
 Equillibrium is building a Rust-based implementation of the InterPlanetary File System (IPFS) Protocol.
 
 ## IoT
+### Data Highway
+
+![img](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/data%20highway.png)
+
+DataHighway is a DAO that incentivizes the community to run a sophisticated IoT parachain based on Polkadot using the DHX token.
+
+### Nodle
+
+![img](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Nodle.png)
+
+Nodle is the world’s largest ecosystem of connected devices, providing infrastructure, software and access to data for the Internet of Things.
+
+### Origin Trail
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Origin%20Trail.svg" alt="img" style="zoom: 400%;" />
+
+OriginTrail is an ecosystem dedicated to making global supply chains work together by enabling a universal, collaborative and trusted data exchange.
+
+### Robonomics(Airalabs)
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/robonomics%20(airalabs).png" alt="img" style="zoom:67%;" />
+
+Robonomics Network is a set of open-source packages for Robotics, Smart Cities and Industry 4.0 developers.
 
 ## Gaming
 ### Ajuna Network
