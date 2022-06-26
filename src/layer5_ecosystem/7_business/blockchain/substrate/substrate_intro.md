@@ -3,47 +3,48 @@
 ![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
 
 <!--ts-->
+
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
-   * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
-      * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
-      * [从波卡到Substrate](#从波卡到substrate)
-      * [跨链的重要性](#跨链的重要性)
-   * [总体设计](#总体设计)
-      * [常见区块链设计](#常见区块链设计)
-         * [区块链系统基础部分](#区块链系统基础部分)
-         * [链的功能](#链的功能)
-         * [Substrate理念](#substrate理念)
-      * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
-      * [接着说说Substrate与web3](#接着说说substrate与web3)
-      * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
-      * [Substrate Architecture](#substrate-architecture)
-      * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
-      * [明晰Runtime](#明晰runtime)
-         * [判断标准](#判断标准)
-      * [Substrate的Runtime](#substrate的runtime)
-         * [中心化升级流程](#中心化升级流程)
-         * [无央化升级流程(原先)](#无央化升级流程原先)
-         * [Substrate的不同](#substrate的不同)
-         * [以太坊合约更新策略](#以太坊合约更新策略)
-         * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
-   * [项目结构](#项目结构)
-      * [客户端架构](#客户端架构)
-      * [Tree Level1](#tree-level1)
-         * [用Cargo组织代码](#用cargo组织代码)
-      * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
-         * [Substrate Node:](#substrate-node)
-         * [Substrate FRAME](#substrate-frame)
-         * [Substrate Core(client)](#substrate-coreclient)
-      * [其他](#其他)
-         * [primitives](#primitives)
-         * [scripts/ci](#scriptsci)
-         * [utils](#utils)
-   * [功能逻辑](#功能逻辑)
-   * [特色代码](#特色代码)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
+        * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
+        * [从波卡到Substrate](#从波卡到substrate)
+        * [跨链的重要性](#跨链的重要性)
+    * [总体设计](#总体设计)
+        * [常见区块链设计](#常见区块链设计)
+            * [区块链系统基础部分](#区块链系统基础部分)
+            * [链的功能](#链的功能)
+            * [Substrate理念](#substrate理念)
+        * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
+        * [接着说说Substrate与web3](#接着说说substrate与web3)
+        * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
+        * [Substrate Architecture](#substrate-architecture)
+        * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
+        * [明晰Runtime](#明晰runtime)
+            * [判断标准](#判断标准)
+        * [Substrate的Runtime](#substrate的runtime)
+            * [中心化升级流程](#中心化升级流程)
+            * [无央化升级流程(原先)](#无央化升级流程原先)
+            * [Substrate的不同](#substrate的不同)
+            * [以太坊合约更新策略](#以太坊合约更新策略)
+            * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
+    * [项目结构](#项目结构)
+        * [客户端架构](#客户端架构)
+        * [Tree Level1](#tree-level1)
+            * [用Cargo组织代码](#用cargo组织代码)
+        * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
+            * [Substrate Node:](#substrate-node)
+            * [Substrate FRAME](#substrate-frame)
+            * [Substrate Core(client)](#substrate-coreclient)
+        * [其他](#其他)
+            * [primitives](#primitives)
+            * [scripts/ci](#scriptsci)
+            * [utils](#utils)
+    * [功能逻辑](#功能逻辑)
+    * [特色代码](#特色代码)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:23 CST 2022 -->
@@ -540,7 +541,7 @@ bin
 │   ├── rpc
 │   ├── runtime
 │   └── testing
-├── node-template
+├── node-template: 使用Substrate写项目的基础模版
 │   ├── LICENSE
 │   ├── README.md
 │   ├── docker-compose.yml
@@ -556,6 +557,48 @@ bin
 
 18 directories, 4 files
 ```
+
+##### 重点说说node、pallets和runtime
+
+```admonish tip title='node、pallets、runtimes'
+│   ├── node: 链的一些基础功能的实现（或者说比较底层的实现，如网络、rpc，搭建链的最基础的code)
+│   ├── pallets: 放置的就是各个pallet，也就是业务相关的模块
+│   ├── runtime: 可以简单理解为把所有pallet组合到一起，也就是业务相关的逻辑
+```
+
+三者的关系大致如下：
+
+~~~admonish important title='node、pallets、runtime的关系'
+```text
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃             ___ _   _ ___ ___ _____ ___    _ _____ ___   _  _  ___  ___  ___             ┃
+┃            / __| | | | _ ) __|_   _| _ \  /_\_   _| __| | \| |/ _ \|   \| __|            ┃
+┃            \__ \ |_| | _ \__ \ | | |   / / _ \| | | _|  | .` | (_) | |) | _|             ┃
+┃            |___/\___/|___/___/ |_| |_|_\/_/ \_\_| |___| |_|\_|\___/|___/|___|            ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃
+┃  ┃                         ___ _   _ _  _ _____ ___ __  __ ___                         ┃ ┃
+┃  ┃                        | _ \ | | | \| |_   _|_ _|  \/  | __|                        ┃ ┃
+┃  ┃                        |   / |_| | .` | | |  | || |\/| | _|                         ┃ ┃
+┃  ┃                        |_|_\\___/|_|\_| |_| |___|_|  |_|___|                        ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃    ┌───────────────┐    ┌───────────────┐    ┌───────────────┐   ┌───────────────┐  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    │   pallet 1    │    │   pallet 2    │    │      ...      │   │   pallet n    │  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    └───────────────┘    └───────────────┘    └───────────────┘   └───────────────┘  ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+~~~
+
+> 当然，对于pallets来说，在runtime中使用的pallet，有些是我们自己开发的pallet，有些是substrate中已经开发好的pallet，甚至还有些是pallet是第三方开发的pallet。
 
 #### Substrate FRAME
 
@@ -838,6 +881,7 @@ utils
 
 - [paritytech/substrate: Substrate: The platform for blockchain innovators](https://github.com/paritytech/substrate)
 - [Architecture | Substrate_](https://docs.substrate.io/v3/getting-started/architecture/)
+- [substrate轻松学](https://www.bilibili.com/video/BV1KT4y1Y7Uf)
 
 ### fragment
 
@@ -857,5 +901,6 @@ utils
 - [FRAME | Substrate_](https://docs.substrate.io/v3/runtime/frame/)
 - [The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium](https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2)
 - [How-to quick reference guides | Substrate Docs](https://docs.substrate.io/reference/how-to-guides/)
+- [编写简单的pallet](https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ)
 
 ### local
