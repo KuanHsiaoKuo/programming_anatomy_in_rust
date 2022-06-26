@@ -1,39 +1,40 @@
 # Substrate项目介绍
 
 <!--ts-->
+
 * [Substrate项目介绍](#substrate项目介绍)
-   * [Case Study](#case-study)
-      * [Acala Network](#acala-network)
-   * [分类介绍](#分类介绍)
-   * [DeFi](#defi)
-   * [Wallet](#wallet)
-   * [Identity](#identity)
-   * [Social](#social)
-   * [Smart Contracts](#smart-contracts)
-   * [File Storage](#file-storage)
-      * [Bluzelle](#bluzelle)
-      * [Cere](#cere)
-      * [Crust Network](#crust-network)
-      * [DatDot](#datdot)
-      * [Equilibrium.co](#equilibriumco)
-   * [IoT](#iot)
-      * [Data Highway](#data-highway)
-      * [Nodle](#nodle)
-      * [Origin Trail](#origin-trail)
-      * [Robonomics(Airalabs)](#robonomicsairalabs)
-   * [Gaming](#gaming)
-      * [Ajuna Network](#ajuna-network)
-      * [Bit.Country](#bitcountry)
-      * [Celer Network](#celer-network)
-      * [Everdream Soft](#everdream-soft)
-      * [GameDAO](#gamedao)
-      * [Sensorium Corporation](#sensorium-corporation)
-   * [Bridge](#bridge)
-   * [Infrastructure](#infrastructure)
-   * [Relay Chain](#relay-chain)
-   * [NFTs](#nfts)
-      * [Unique Network](#unique-network)
-   * [参考资源](#参考资源)
+    * [Case Study](#case-study)
+        * [Acala Network](#acala-network)
+    * [分类介绍](#分类介绍)
+    * [DeFi](#defi)
+    * [Wallet](#wallet)
+    * [Identity](#identity)
+    * [Social](#social)
+    * [Smart Contracts](#smart-contracts)
+    * [File Storage](#file-storage)
+        * [Bluzelle](#bluzelle)
+        * [Cere](#cere)
+        * [Crust Network](#crust-network)
+        * [DatDot](#datdot)
+        * [Equilibrium.co](#equilibriumco)
+    * [IoT](#iot)
+        * [Data Highway](#data-highway)
+        * [Nodle](#nodle)
+        * [Origin Trail](#origin-trail)
+        * [Robonomics(Airalabs)](#robonomicsairalabs)
+    * [Gaming](#gaming)
+        * [Ajuna Network](#ajuna-network)
+        * [Bit.Country](#bitcountry)
+        * [Celer Network](#celer-network)
+        * [Everdream Soft](#everdream-soft)
+        * [GameDAO](#gamedao)
+        * [Sensorium Corporation](#sensorium-corporation)
+    * [Bridge](#bridge)
+    * [Infrastructure](#infrastructure)
+    * [Relay Chain](#relay-chain)
+    * [NFTs](#nfts)
+        * [Unique Network](#unique-network)
+    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Fri Jun 24 15:35:55 CST 2022 -->
@@ -48,13 +49,71 @@
 
 这里主要重点看几个案例学习项目。
 
-### Acala Network
+### Acala Network: Defi
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Acala%20Network.png" alt="img" style="zoom: 25%;" />
 
 Acala is a decentralized stablecoin platform that powers cross-blockchain open finance applications.
 
-## 分类介绍
+#### Case Study
+
+[Acala Network Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/acala/)
+
+### Astar Network: Smart Contracts
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Astar%20Network.png" alt="img" style="zoom:150%;" />
+
+Astar Network is a scaling dapps platform on Substrate compatible with Ethereum Virtual Machine (EVM) and connected to Polkadot.
+
+#### Case Study
+
+
+
+[Astar Network Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/astar/)
+
+### Equilibrium
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/equilibrium.png" alt="img" style="zoom:65%;" />
+
+Equilibrium introduces a cross-chain money market that combines pooled lending with synthetic asset generation and trading
+
+#### Case Study
+
+[Equilibrium Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/equilibrium/)
+
+### Moonbeam: Smart Contracts
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Moonbeam.png" alt="img" style="zoom:150%;" />
+
+Decentralized and permissionless, Moonbeam provides an Ethereum-compatible smart contract platform that makes it easy to build natively interoperable applications.
+
+#### Case Study
+
+[Moonbeam Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/moonbeam/)
+
+### Polkadex: DeFi, Infrastructure
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Polkadex.png" alt="img" style="zoom:67%;" />
+
+Polkadex is a Open Source, Decentralized Exchange Platform that features feeless trades, Market Order, AMM and full focus on UI.
+
+#### Case Study
+
+[Polkadex Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/polkadex/)
+
+### Unique Network: NFTs
+
+<img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Unique%20Network-6253646.png" alt="img" style="zoom:400%;" />
+
+Unique Network is an infrastructure for the next generation NFTs, offering developers independence from network-wide transaction fees and upgrades.
+
+#### Case Study
+
+[Unique Network Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/unique/)
+
+
+
+## 分类介绍: 144
 
 这里主要学习网站上面的分类方法，首先分成DeFi、Wallet、Identity、Social、Smart Contracts、File Storage、IoT、Gaming、Bridge、Infrastructure、Relay
 Chain、NFTs这些类别，然后再加上是否企业级别的标记.
@@ -63,17 +122,17 @@ Chain、NFTs这些类别，然后再加上是否企业级别的标记.
 这里的项目有些直接提供案例学习，也会有相应标出
 ```
 
-## DeFi
+## DeFi: 35
 
-## Wallet
+## Wallet: 16
 
-## Identity
+## Identity: 14
 
-## Social
+## Social: 5
 
-## Smart Contracts
+## Smart Contracts: 10
 
-## File Storage
+## File Storage: 5
 
 ### Bluzelle
 
@@ -85,13 +144,15 @@ The Bluzelle project enables dapps to store their data in a place that is both d
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/cere.svg" alt="img" style="zoom:50%;" />
 
-Delivers fast-tracked consumer enterprise adoption through decentralized data clouds, data interoperability and SaaS DeFi.
+Delivers fast-tracked consumer enterprise adoption through decentralized data clouds, data interoperability and SaaS
+DeFi.
 
 ### Crust Network
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/crust%20network.png" alt="img" style="zoom:67%;" />
 
-Crust Network implements a decentralized cloud blockchain based on Polkadot. It is designed to build a decentralized cloud ecosystem that values data privacy and ownership.
+Crust Network implements a decentralized cloud blockchain based on Polkadot. It is designed to build a decentralized
+cloud ecosystem that values data privacy and ownership.
 
 ### DatDot
 
@@ -105,24 +166,28 @@ DatDot is a Distributed (peer-to-peer ) File Hosting Network, leveraging on the 
 
 Equillibrium is building a Rust-based implementation of the InterPlanetary File System (IPFS) Protocol.
 
-## IoT
+## IoT: 4
+
 ### Data Highway
 
 ![img](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/data%20highway.png)
 
-DataHighway is a DAO that incentivizes the community to run a sophisticated IoT parachain based on Polkadot using the DHX token.
+DataHighway is a DAO that incentivizes the community to run a sophisticated IoT parachain based on Polkadot using the
+DHX token.
 
 ### Nodle
 
 ![img](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Nodle.png)
 
-Nodle is the world’s largest ecosystem of connected devices, providing infrastructure, software and access to data for the Internet of Things.
+Nodle is the world’s largest ecosystem of connected devices, providing infrastructure, software and access to data for
+the Internet of Things.
 
 ### Origin Trail
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Origin%20Trail.svg" alt="img" style="zoom: 400%;" />
 
-OriginTrail is an ecosystem dedicated to making global supply chains work together by enabling a universal, collaborative and trusted data exchange.
+OriginTrail is an ecosystem dedicated to making global supply chains work together by enabling a universal,
+collaborative and trusted data exchange.
 
 ### Robonomics(Airalabs)
 
@@ -130,12 +195,14 @@ OriginTrail is an ecosystem dedicated to making global supply chains work togeth
 
 Robonomics Network is a set of open-source packages for Robotics, Smart Cities and Industry 4.0 developers.
 
-## Gaming
+## Gaming: 7
+
 ### Ajuna Network
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Ajuna%20Network.png" alt="img" style="zoom: 33%;" />
 
-Ajuna Network is an infrastructure for Blockhain Games, featureing a full featured UnitySDK and UnrealSDK built on Substrate.
+Ajuna Network is an infrastructure for Blockhain Games, featureing a full featured UnitySDK and UnrealSDK built on
+Substrate.
 
 ### Bit.Country
 
@@ -147,7 +214,8 @@ Bit.Country is a decentralized world where everyone can start their own metavers
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/celer%20network.png" alt="img" style="zoom: 33%;" />
 
-Celer Network enables fast, easy and secure off-chain transactions for payment transactions and generalized off-chain smart contract.
+Celer Network enables fast, easy and secure off-chain transactions for payment transactions and generalized off-chain
+smart contract.
 
 ### Everdream Soft
 
@@ -165,21 +233,23 @@ GameDAO is democratic and transparent crowdfunding for video game creators, publ
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Sensorium%20Corporation.jpeg" alt="img" style="zoom:75%;" />
 
-Sensorium Galaxy leverages state-of-the-art blockchain technologies to make the future of content distribution safe for both the public and artists.
+Sensorium Galaxy leverages state-of-the-art blockchain technologies to make the future of content distribution safe for
+both the public and artists.
 
-## Bridge
+## Bridge: 4
 
-## Infrastructure
+## Infrastructure: 39
 
-## Relay Chain
+## Relay Chain: 2
 
-## NFTs
+## NFTs: 1
 
 ### Unique Network
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Unique%20Network.png" alt="img" style="zoom: 250%;" />
 
-Unique Network is an infrastructure for the next generation NFTs, offering developers independence from network-wide transaction fees and upgrades.
+Unique Network is an infrastructure for the next generation NFTs, offering developers independence from network-wide
+transaction fees and upgrades.
 
 ## 参考资源
 
