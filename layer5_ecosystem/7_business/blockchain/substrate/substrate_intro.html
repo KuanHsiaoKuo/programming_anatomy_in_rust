@@ -225,7 +225,11 @@
 </li>
 <li><a href="#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
 <ul>
-<li><a href="#substrate-node">Substrate Node:</a></li>
+<li><a href="#substrate-node">Substrate Node:</a>
+<ul>
+<li><a href="#%E9%87%8D%E7%82%B9%E8%AF%B4%E8%AF%B4nodepallets%E5%92%8Cruntime">重点说说node、pallets和runtime</a></li>
+</ul>
+</li>
 <li><a href="#substrate-frame">Substrate FRAME</a></li>
 <li><a href="#substrate-coreclient">Substrate Core(client)</a></li>
 </ul>
@@ -252,7 +256,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:23 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:11 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -805,7 +809,7 @@ bin
 │   ├── rpc
 │   ├── runtime
 │   └── testing
-├── node-template
+├── node-template: 使用Substrate写项目的基础模版
 │   ├── LICENSE
 │   ├── README.md
 │   ├── docker-compose.yml
@@ -821,6 +825,56 @@ bin
 
 18 directories, 4 files
 </code></pre>
+<h5 id="重点说说nodepallets和runtime"><a class="header" href="#重点说说nodepallets和runtime">重点说说node、pallets和runtime</a></h5>
+<div id="admonition-nodepalletsruntimes" class="admonition tip">
+<div class="admonition-title">
+<p>node、pallets、runtimes</p>
+<p><a class="admonition-anchor-link" href="#admonition-nodepalletsruntimes"></a></p>
+</div>
+<div>
+<p>│   ├── node: 链的一些基础功能的实现（或者说比较底层的实现，如网络、rpc，搭建链的最基础的code)
+│   ├── pallets: 放置的就是各个pallet，也就是业务相关的模块
+│   ├── runtime: 可以简单理解为把所有pallet组合到一起，也就是业务相关的逻辑</p>
+</div>
+</div>
+<p>三者的关系大致如下：</p>
+<div id="admonition-nodepalletsruntime的关系" class="admonition tip">
+<div class="admonition-title">
+<p>node、pallets、runtime的关系</p>
+<p><a class="admonition-anchor-link" href="#admonition-nodepalletsruntime的关系"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃             ___ _   _ ___ ___ _____ ___    _ _____ ___   _  _  ___  ___  ___             ┃
+┃            / __| | | | _ ) __|_   _| _ \  /_\_   _| __| | \| |/ _ \|   \| __|            ┃
+┃            \__ \ |_| | _ \__ \ | | |   / / _ \| | | _|  | .` | (_) | |) | _|             ┃
+┃            |___/\___/|___/___/ |_| |_|_\/_/ \_\_| |___| |_|\_|\___/|___/|___|            ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃
+┃  ┃                         ___ _   _ _  _ _____ ___ __  __ ___                         ┃ ┃
+┃  ┃                        | _ \ | | | \| |_   _|_ _|  \/  | __|                        ┃ ┃
+┃  ┃                        |   / |_| | .` | | |  | || |\/| | _|                         ┃ ┃
+┃  ┃                        |_|_\\___/|_|\_| |_| |___|_|  |_|___|                        ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃    ┌───────────────┐    ┌───────────────┐    ┌───────────────┐   ┌───────────────┐  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    │   pallet 1    │    │   pallet 2    │    │      ...      │   │   pallet n    │  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    └───────────────┘    └───────────────┘    └───────────────┘   └───────────────┘  ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+</code></pre>
+</div>
+</div>
+<blockquote>
+<p>当然，对于pallets来说，在runtime中使用的pallet，有些是我们自己开发的pallet，有些是substrate中已经开发好的pallet，甚至还有些是pallet是第三方开发的pallet。</p>
+</blockquote>
 <h4 id="substrate-frame"><a class="header" href="#substrate-frame">Substrate FRAME</a></h4>
 <p>FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
 ，并具有高度的自由度来确定我们的区块链逻辑。</p>
@@ -1089,6 +1143,7 @@ utils
 <ul>
 <li><a href="https://github.com/paritytech/substrate">paritytech/substrate: Substrate: The platform for blockchain innovators</a></li>
 <li><a href="https://docs.substrate.io/v3/getting-started/architecture/">Architecture | Substrate_</a></li>
+<li><a href="https://www.bilibili.com/video/BV1KT4y1Y7Uf">substrate轻松学</a></li>
 </ul>
 <h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
 <ul>
@@ -1108,6 +1163,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></li>
 <li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
 <li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
+<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 

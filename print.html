@@ -540,7 +540,11 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 </li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
 <ul>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%87%8D%E7%82%B9%E8%AF%B4%E8%AF%B4nodepallets%E5%92%8Cruntime">重点说说node、pallets和runtime</a></li>
+</ul>
+</li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-frame">Substrate FRAME</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-coreclient">Substrate Core(client)</a></li>
 </ul>
@@ -567,7 +571,7 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:23 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:11 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -1120,7 +1124,7 @@ bin
 │   ├── rpc
 │   ├── runtime
 │   └── testing
-├── node-template
+├── node-template: 使用Substrate写项目的基础模版
 │   ├── LICENSE
 │   ├── README.md
 │   ├── docker-compose.yml
@@ -1136,6 +1140,56 @@ bin
 
 18 directories, 4 files
 </code></pre>
+<h5 id="重点说说nodepallets和runtime"><a class="header" href="#重点说说nodepallets和runtime">重点说说node、pallets和runtime</a></h5>
+<div id="admonition-nodepalletsruntimes" class="admonition tip">
+<div class="admonition-title">
+<p>node、pallets、runtimes</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-nodepalletsruntimes"></a></p>
+</div>
+<div>
+<p>│   ├── node: 链的一些基础功能的实现（或者说比较底层的实现，如网络、rpc，搭建链的最基础的code)
+│   ├── pallets: 放置的就是各个pallet，也就是业务相关的模块
+│   ├── runtime: 可以简单理解为把所有pallet组合到一起，也就是业务相关的逻辑</p>
+</div>
+</div>
+<p>三者的关系大致如下：</p>
+<div id="admonition-nodepalletsruntime的关系" class="admonition tip">
+<div class="admonition-title">
+<p>node、pallets、runtime的关系</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-nodepalletsruntime的关系"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃             ___ _   _ ___ ___ _____ ___    _ _____ ___   _  _  ___  ___  ___             ┃
+┃            / __| | | | _ ) __|_   _| _ \  /_\_   _| __| | \| |/ _ \|   \| __|            ┃
+┃            \__ \ |_| | _ \__ \ | | |   / / _ \| | | _|  | .` | (_) | |) | _|             ┃
+┃            |___/\___/|___/___/ |_| |_|_\/_/ \_\_| |___| |_|\_|\___/|___/|___|            ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃
+┃  ┃                         ___ _   _ _  _ _____ ___ __  __ ___                         ┃ ┃
+┃  ┃                        | _ \ | | | \| |_   _|_ _|  \/  | __|                        ┃ ┃
+┃  ┃                        |   / |_| | .` | | |  | || |\/| | _|                         ┃ ┃
+┃  ┃                        |_|_\\___/|_|\_| |_| |___|_|  |_|___|                        ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃    ┌───────────────┐    ┌───────────────┐    ┌───────────────┐   ┌───────────────┐  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    │   pallet 1    │    │   pallet 2    │    │      ...      │   │   pallet n    │  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    └───────────────┘    └───────────────┘    └───────────────┘   └───────────────┘  ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+</code></pre>
+</div>
+</div>
+<blockquote>
+<p>当然，对于pallets来说，在runtime中使用的pallet，有些是我们自己开发的pallet，有些是substrate中已经开发好的pallet，甚至还有些是pallet是第三方开发的pallet。</p>
+</blockquote>
 <h4 id="substrate-frame"><a class="header" href="#substrate-frame">Substrate FRAME</a></h4>
 <p>FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
 ，并具有高度的自由度来确定我们的区块链逻辑。</p>
@@ -1404,6 +1458,7 @@ utils
 <ul>
 <li><a href="https://github.com/paritytech/substrate">paritytech/substrate: Substrate: The platform for blockchain innovators</a></li>
 <li><a href="https://docs.substrate.io/v3/getting-started/architecture/">Architecture | Substrate_</a></li>
+<li><a href="https://www.bilibili.com/video/BV1KT4y1Y7Uf">substrate轻松学</a></li>
 </ul>
 <h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
 <ul>
@@ -1423,6 +1478,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></li>
 <li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
 <li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
+<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="底层抽象"><a class="header" href="#底层抽象">底层抽象</a></h1>
@@ -1431,7 +1487,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="layer1_underlying_abstract/layer1_underlying_abstract.html#%E5%BA%95%E5%B1%82%E6%8A%BD%E8%B1%A1">底层抽象</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:42 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:29 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
@@ -1444,7 +1500,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:33 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:03 CST 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -1470,7 +1526,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:31 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:01 CST 2022 -->
 <!--te-->
 <h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <h3 id="online-book-2"><a class="header" href="#online-book-2">online-book</a></h3>
@@ -1579,7 +1635,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:32 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:02 CST 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -2163,7 +2219,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:36 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:06 CST 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -2228,7 +2284,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:34 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:04 CST 2022 -->
 <!--te-->
 <h2 id="基元类型"><a class="header" href="#基元类型">基元类型</a></h2>
 <h2 id="序列类型"><a class="header" href="#序列类型">序列类型</a></h2>
@@ -2260,7 +2316,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:34 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:04 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-4"><a class="header" href="#参考资源-4">参考资源</a></h2>
 <h3 id="online-book-6"><a class="header" href="#online-book-6">online-book</a></h3>
@@ -2285,7 +2341,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:37 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:07 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-5"><a class="header" href="#参考资源-5">参考资源</a></h2>
 <h3 id="online-book-7"><a class="header" href="#online-book-7">online-book</a></h3>
@@ -2424,7 +2480,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:36 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:05 CST 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -3196,7 +3252,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:40 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:27 CST 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -3232,7 +3288,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:38 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:08 CST 2022 -->
 <!--te-->
 <h2 id="注释方法"><a class="header" href="#注释方法">注释方法</a></h2>
 <h2 id="rustdoc使用"><a class="header" href="#rustdoc使用">rustdoc使用</a></h2>
@@ -3320,7 +3376,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:38 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:06:08 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-10"><a class="header" href="#参考资源-10">参考资源</a></h2>
 <h3 id="online-book-12"><a class="header" href="#online-book-12">online-book</a></h3>
@@ -3352,7 +3408,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:42 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:28 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-12"><a class="header" href="#参考资源-12">参考资源</a></h2>
 <h3 id="online-book-14"><a class="header" href="#online-book-14">online-book</a></h3>
@@ -3364,21 +3420,8 @@ fn main() {
 <h3 id="local-14"><a class="header" href="#local-14">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码质量异常测试与日志"><a class="header" href="#代码质量异常测试与日志">代码质量：异常、测试与日志</a></h1>
 <!--ts-->
-<ul>
-<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%BC%82%E5%B8%B8%E6%B5%8B%E8%AF%95%E4%B8%8E%E6%97%A5%E5%BF%97">代码质量：异常、测试与日志</a>
-<ul>
-<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
-<ul>
-<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#online-book">online-book</a></li>
-<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#fragment">fragment</a></li>
-<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#local">local</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:39 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:26 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-13"><a class="header" href="#参考资源-13">参考资源</a></h2>
 <h3 id="online-book-15"><a class="header" href="#online-book-15">online-book</a></h3>
@@ -3403,7 +3446,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:50 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:37 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-14"><a class="header" href="#参考资源-14">参考资源</a></h2>
 <h3 id="online-book-16"><a class="header" href="#online-book-16">online-book</a></h3>
@@ -3425,7 +3468,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:43 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:30 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-15"><a class="header" href="#参考资源-15">参考资源</a></h2>
 <h3 id="online-book-17"><a class="header" href="#online-book-17">online-book</a></h3>
@@ -3447,7 +3490,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:43 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:30 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-16"><a class="header" href="#参考资源-16">参考资源</a></h2>
 <h3 id="online-book-18"><a class="header" href="#online-book-18">online-book</a></h3>
@@ -3473,7 +3516,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:45 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:32 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-17"><a class="header" href="#参考资源-17">参考资源</a></h2>
 <h3 id="online-book-19"><a class="header" href="#online-book-19">online-book</a></h3>
@@ -3498,7 +3541,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:44 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:31 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-18"><a class="header" href="#参考资源-18">参考资源</a></h2>
 <h3 id="online-book-20"><a class="header" href="#online-book-20">online-book</a></h3>
@@ -3520,7 +3563,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:45 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:33 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-19"><a class="header" href="#参考资源-19">参考资源</a></h2>
 <h3 id="online-book-21"><a class="header" href="#online-book-21">online-book</a></h3>
@@ -3542,7 +3585,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:46 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:33 CST 2022 -->
 <!--te-->
 <p>对于一门编程语言，是否能够成为工程化开发工具的主要标准在于两点：</p>
 <ol>
@@ -3593,7 +3636,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:49 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:36 CST 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -3819,7 +3862,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:34 CST 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
 <h3 id="新建"><a class="header" href="#新建">新建</a></h3>
@@ -3891,7 +3934,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:35 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-23"><a class="header" href="#参考资源-23">参考资源</a></h2>
 <h3 id="online-book-25"><a class="header" href="#online-book-25">online-book</a></h3>
@@ -3934,7 +3977,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:49 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:37 CST 2022 -->
 <!--te-->
 <h2 id="cargo子命令系列-cargo-install"><a class="header" href="#cargo子命令系列-cargo-install">Cargo子命令系列: cargo install <binary crate name></a></h2>
 <h3 id="cargo-watch"><a class="header" href="#cargo-watch">cargo-watch</a></h3>
@@ -3975,7 +4018,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:55 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:42 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-25"><a class="header" href="#参考资源-25">参考资源</a></h2>
 <h3 id="online-book-27"><a class="header" href="#online-book-27">online-book</a></h3>
@@ -3997,7 +4040,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:52 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:39 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-26"><a class="header" href="#参考资源-26">参考资源</a></h2>
 <h3 id="online-book-28"><a class="header" href="#online-book-28">online-book</a></h3>
@@ -4049,7 +4092,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:53 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:40 CST 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -4267,7 +4310,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:51 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:38 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-28"><a class="header" href="#参考资源-28">参考资源</a></h2>
 <h3 id="online-book-30"><a class="header" href="#online-book-30">online-book</a></h3>
@@ -4293,7 +4336,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:51 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:39 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-29"><a class="header" href="#参考资源-29">参考资源</a></h2>
 <h3 id="online-book-31"><a class="header" href="#online-book-31">online-book</a></h3>
@@ -4315,7 +4358,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:54 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:41 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-30"><a class="header" href="#参考资源-30">参考资源</a></h2>
 <h3 id="online-book-32"><a class="header" href="#online-book-32">online-book</a></h3>
@@ -4337,7 +4380,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:57 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:44 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-31"><a class="header" href="#参考资源-31">参考资源</a></h2>
 <h3 id="online-book-33"><a class="header" href="#online-book-33">online-book</a></h3>
@@ -4359,7 +4402,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:56 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:43 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-32"><a class="header" href="#参考资源-32">参考资源</a></h2>
 <h3 id="online-book-34"><a class="header" href="#online-book-34">online-book</a></h3>
@@ -4381,7 +4424,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:36:56 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:43 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-33"><a class="header" href="#参考资源-33">参考资源</a></h2>
 <h3 id="online-book-35"><a class="header" href="#online-book-35">online-book</a></h3>
@@ -4403,7 +4446,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:28 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:16 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-34"><a class="header" href="#参考资源-34">参考资源</a></h2>
 <h3 id="online-book-36"><a class="header" href="#online-book-36">online-book</a></h3>
@@ -4415,7 +4458,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:01 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:48 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
@@ -4493,7 +4536,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:09 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:56 CST 2022 -->
 <!--te-->
 <h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
 <h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
@@ -4675,7 +4718,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:58 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-36"><a class="header" href="#参考资源-36">参考资源</a></h2>
 <ul>
@@ -4692,7 +4735,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:58 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-37"><a class="header" href="#参考资源-37">参考资源</a></h2>
 <ul>
@@ -4708,7 +4751,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:10 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:56 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-38"><a class="header" href="#参考资源-38">参考资源</a></h2>
 <ul>
@@ -4724,7 +4767,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:10 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:07:57 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-39"><a class="header" href="#参考资源-39">参考资源</a></h2>
 <ul>
@@ -4780,7 +4823,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:20 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:07 CST 2022 -->
 <!--te-->
 <h2 id="layers"><a class="header" href="#layers">Layers</a></h2>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png" alt="img" /></p>
@@ -5091,7 +5134,11 @@ Rust and just like develop in a common backend.</li>
 </li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
 <ul>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%87%8D%E7%82%B9%E8%AF%B4%E8%AF%B4nodepallets%E5%92%8Cruntime">重点说说node、pallets和runtime</a></li>
+</ul>
+</li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-frame">Substrate FRAME</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-coreclient">Substrate Core(client)</a></li>
 </ul>
@@ -5118,7 +5165,7 @@ Rust and just like develop in a common backend.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:23 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:11 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate-1"><a class="header" href="#gavin-wookpolkadot-and-substrate-1">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链-1"><a class="header" href="#gavin-wook与波卡跨链-1">Gavin Wook与波卡跨链</a></h3>
@@ -5671,7 +5718,7 @@ bin
 │   ├── rpc
 │   ├── runtime
 │   └── testing
-├── node-template
+├── node-template: 使用Substrate写项目的基础模版
 │   ├── LICENSE
 │   ├── README.md
 │   ├── docker-compose.yml
@@ -5687,6 +5734,56 @@ bin
 
 18 directories, 4 files
 </code></pre>
+<h5 id="重点说说nodepallets和runtime-1"><a class="header" href="#重点说说nodepallets和runtime-1">重点说说node、pallets和runtime</a></h5>
+<div id="admonition-nodepalletsruntimes" class="admonition tip">
+<div class="admonition-title">
+<p>node、pallets、runtimes</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-nodepalletsruntimes"></a></p>
+</div>
+<div>
+<p>│   ├── node: 链的一些基础功能的实现（或者说比较底层的实现，如网络、rpc，搭建链的最基础的code)
+│   ├── pallets: 放置的就是各个pallet，也就是业务相关的模块
+│   ├── runtime: 可以简单理解为把所有pallet组合到一起，也就是业务相关的逻辑</p>
+</div>
+</div>
+<p>三者的关系大致如下：</p>
+<div id="admonition-nodepalletsruntime的关系" class="admonition tip">
+<div class="admonition-title">
+<p>node、pallets、runtime的关系</p>
+<p><a class="admonition-anchor-link" href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#admonition-nodepalletsruntime的关系"></a></p>
+</div>
+<div>
+<pre><code class="language-text">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃             ___ _   _ ___ ___ _____ ___    _ _____ ___   _  _  ___  ___  ___             ┃
+┃            / __| | | | _ ) __|_   _| _ \  /_\_   _| __| | \| |/ _ \|   \| __|            ┃
+┃            \__ \ |_| | _ \__ \ | | |   / / _ \| | | _|  | .` | (_) | |) | _|             ┃
+┃            |___/\___/|___/___/ |_| |_|_\/_/ \_\_| |___| |_|\_|\___/|___/|___|            ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃                                                                                          ┃
+┃  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ┃
+┃  ┃                         ___ _   _ _  _ _____ ___ __  __ ___                         ┃ ┃
+┃  ┃                        | _ \ | | | \| |_   _|_ _|  \/  | __|                        ┃ ┃
+┃  ┃                        |   / |_| | .` | | |  | || |\/| | _|                         ┃ ┃
+┃  ┃                        |_|_\\___/|_|\_| |_| |___|_|  |_|___|                        ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┃    ┌───────────────┐    ┌───────────────┐    ┌───────────────┐   ┌───────────────┐  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    │   pallet 1    │    │   pallet 2    │    │      ...      │   │   pallet n    │  ┃ ┃
+┃  ┃    │               │    │               │    │               │   │               │  ┃ ┃
+┃  ┃    └───────────────┘    └───────────────┘    └───────────────┘   └───────────────┘  ┃ ┃
+┃  ┃                                                                                     ┃ ┃
+┃  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+</code></pre>
+</div>
+</div>
+<blockquote>
+<p>当然，对于pallets来说，在runtime中使用的pallet，有些是我们自己开发的pallet，有些是substrate中已经开发好的pallet，甚至还有些是pallet是第三方开发的pallet。</p>
+</blockquote>
 <h4 id="substrate-frame-1"><a class="header" href="#substrate-frame-1">Substrate FRAME</a></h4>
 <p>FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
 ，并具有高度的自由度来确定我们的区块链逻辑。</p>
@@ -5955,6 +6052,7 @@ utils
 <ul>
 <li><a href="https://github.com/paritytech/substrate">paritytech/substrate: Substrate: The platform for blockchain innovators</a></li>
 <li><a href="https://docs.substrate.io/v3/getting-started/architecture/">Architecture | Substrate_</a></li>
+<li><a href="https://www.bilibili.com/video/BV1KT4y1Y7Uf">substrate轻松学</a></li>
 </ul>
 <h3 id="fragment-39"><a class="header" href="#fragment-39">fragment</a></h3>
 <ul>
@@ -5974,6 +6072,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></li>
 <li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
 <li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
+<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></li>
 </ul>
 <h3 id="local-39"><a class="header" href="#local-39">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="substrate项目介绍"><a class="header" href="#substrate项目介绍">Substrate项目介绍</a></h1>
@@ -6061,7 +6160,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:24 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:12 CST 2022 -->
 <!--te-->
 <div id="admonition-他山之石可以攻玉" class="admonition tip">
 <div class="admonition-title">
@@ -6205,7 +6304,7 @@ transaction fees and upgrades.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:21 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:09 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-44"><a class="header" href="#参考资源-44">参考资源</a></h2>
 <h3 id="online-book-40"><a class="header" href="#online-book-40">online-book</a></h3>
@@ -6230,7 +6329,7 @@ transaction fees and upgrades.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 22:37:22 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:09 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-45"><a class="header" href="#参考资源-45">参考资源</a></h2>
 <h3 id="online-book-41"><a class="header" href="#online-book-41">online-book</a></h3>
