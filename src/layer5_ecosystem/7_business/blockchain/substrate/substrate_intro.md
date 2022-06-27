@@ -3,48 +3,49 @@
 ![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
 
 <!--ts-->
+
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
-   * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
-      * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
-      * [从波卡到Substrate](#从波卡到substrate)
-      * [跨链的重要性](#跨链的重要性)
-   * [总体设计](#总体设计)
-      * [常见区块链设计](#常见区块链设计)
-         * [区块链系统基础部分](#区块链系统基础部分)
-         * [链的功能](#链的功能)
-         * [Substrate理念](#substrate理念)
-      * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
-      * [接着说说Substrate与web3](#接着说说substrate与web3)
-      * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
-      * [Substrate Architecture](#substrate-architecture)
-      * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
-      * [明晰Runtime](#明晰runtime)
-         * [判断标准](#判断标准)
-      * [Substrate的Runtime](#substrate的runtime)
-         * [中心化升级流程](#中心化升级流程)
-         * [无央化升级流程(原先)](#无央化升级流程原先)
-         * [Substrate的不同](#substrate的不同)
-         * [以太坊合约更新策略](#以太坊合约更新策略)
-         * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
-   * [项目结构](#项目结构)
-      * [客户端架构](#客户端架构)
-      * [Tree Level1](#tree-level1)
-         * [用Cargo组织代码](#用cargo组织代码)
-      * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
-         * [Substrate Node:](#substrate-node)
-            * [重点说说node、pallets和runtime](#重点说说nodepallets和runtime)
-         * [Substrate FRAME](#substrate-frame)
-         * [Substrate Core(client)](#substrate-coreclient)
-      * [其他](#其他)
-         * [primitives](#primitives)
-         * [scripts/ci](#scriptsci)
-         * [utils](#utils)
-   * [功能逻辑](#功能逻辑)
-   * [特色代码](#特色代码)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
+        * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
+        * [从波卡到Substrate](#从波卡到substrate)
+        * [跨链的重要性](#跨链的重要性)
+    * [总体设计](#总体设计)
+        * [常见区块链设计](#常见区块链设计)
+            * [区块链系统基础部分](#区块链系统基础部分)
+            * [链的功能](#链的功能)
+            * [Substrate理念](#substrate理念)
+        * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
+        * [接着说说Substrate与web3](#接着说说substrate与web3)
+        * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
+        * [Substrate Architecture](#substrate-architecture)
+        * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
+        * [明晰Runtime](#明晰runtime)
+            * [判断标准](#判断标准)
+        * [Substrate的Runtime](#substrate的runtime)
+            * [中心化升级流程](#中心化升级流程)
+            * [无央化升级流程(原先)](#无央化升级流程原先)
+            * [Substrate的不同](#substrate的不同)
+            * [以太坊合约更新策略](#以太坊合约更新策略)
+            * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
+    * [项目结构](#项目结构)
+        * [客户端架构](#客户端架构)
+        * [Tree Level1](#tree-level1)
+            * [用Cargo组织代码](#用cargo组织代码)
+        * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
+            * [Substrate Node:](#substrate-node)
+                * [重点说说node、pallets和runtime](#重点说说nodepallets和runtime)
+            * [Substrate FRAME](#substrate-frame)
+            * [Substrate Core(client)](#substrate-coreclient)
+        * [其他](#其他)
+            * [primitives](#primitives)
+            * [scripts/ci](#scriptsci)
+            * [utils](#utils)
+    * [功能逻辑](#功能逻辑)
+    * [特色代码](#特色代码)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Mon Jun 27 17:07:14 CST 2022 -->
@@ -605,7 +606,7 @@ bin
 FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
 ，并具有高度的自由度来确定我们的区块链逻辑。
 
-我们基本上是从 Substrate 的预构建节点模板开始，可以添加所谓的托盘（Substrate 库模块的名称）来定制和扩展我们的链。
+我们基本上是从 Substrate 的预构建节点模板开始，可以添加所谓的托盘（pallet, Substrate 库模块的名称）来定制和扩展我们的链。
 
 在这个抽象级别，我们还能够完全自定义我们区块链的逻辑、状态和数据类型。这当然是大多数旨在接近 Substrate 的基本定制项目在易于开发和技术自由之间利用两全其美的地方。
 
@@ -708,11 +709,11 @@ Substrate Core 本质上意味着我们可以以任何我们想要的方式实�
 这种方法当然需要最多的工作和最高的难度，但它也具有最高的技术自由度，同时仍然能够在 Substrate 生态系统中无缝工作。
 ```
 
-说到 Substrate 的生态系统，有一个充满活力（充满活力）的开发者社区，他们在自己的项目中使用 Substrate，其中许多人通过共享自己的托盘来回馈生态系统。
+说到 Substrate 的生态系统，有一个充满活力（充满活力）的开发者社区，他们在自己的项目中使用 Substrate，其中许多人通过共享自己的托盘(pallet)来回馈生态系统。
 
 您可以通过使用诸如 [Substrate Market](https://substratemarketplace.com/)
-之类的站点或仅在托管 [crates.io: Rust Package Registry](https://crates.io/) 的任何地方找到托盘，因为 Substrate 托盘本质上是自包含的 Rust 库，您可以将其集成到您的
-Substrate 项目中, 并根据需要进行配置。
+之类的站点或仅在托管 [crates.io: Rust Package Registry](https://crates.io/) 的任何地方找到托盘(pallet)，因为 Substrate 托盘本质上是自包含的 Rust
+库，您可以将其集成到您的 Substrate 项目中, 并根据需要进行配置。
 
 与任何其他库一样，建议首先审核代码，并了解依赖外部代码与编写自己的代码之间的权衡。
 
@@ -886,6 +887,7 @@ utils
 ### fragment
 
 - [链块与分散的数据 - 知乎](https://www.zhihu.com/column/c_74315572)
+- [区块链与substrate](https://web.archive.org/web/20220627112702/https://mp.weixin.qq.com/s/MP0LXWVqUn5R4C6fAbe1nQ)
 - [substrate 源码解析与运用 - 介绍 - 知乎](https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322)
 - [Substrate区块链开发 - 知乎](https://www.zhihu.com/column/substrate)
 - [Substrate Ecosystem | Substrate_](https://substrate.io/ecosystem/)
@@ -901,6 +903,55 @@ utils
 - [FRAME | Substrate_](https://docs.substrate.io/v3/runtime/frame/)
 - [The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium](https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2)
 - [How-to quick reference guides | Substrate Docs](https://docs.substrate.io/reference/how-to-guides/)
+
+### Runtime
+
+- [剖析Substrate Runtime - 知乎](https://web.archive.org/web/20220627114404/https://zhuanlan.zhihu.com/p/79539782)
+  > 基于Substrate开发自己的运行时模块，会遇到一个比较大的挑战，就是理解Substrate运行时（Runtime）。
+  > 本文首先介绍了Runtime的架构，类型，常用宏，并结合一个实际的演示项目，做了具体代码分析，以帮助大家更好地理解在Substrate中它们是如何一起工作的。
+
+### pallet相关
+
+- [Pallet前置知识](https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg)
+    - trait的孤儿规则
+    - trait对象
+    - trait的继承
+    - 关联类型
+    - 定义Config trait，然后为Pallet实现相应的trait，最后在main函数中使用它
 - [编写简单的pallet](https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ)
+    - node-template的结构
+    - 编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.
+        1. 依赖;
+        2. pallet类型声明;
+        3. config trait;
+        4. 定义要使用的链上存储;
+        5. 事件;
+        6. 钩子函数;
+        7. 交易调用函数;
+    - 举例编写simple-pallet
+      > 功能介绍: simple-pallet是一个存证的pallet，简单说就是提供一个存取一段hash到链上的功能，和从链上读取的功能。
+    - 将pallet添加到runtime中
+    - 编译运行
+    - 调试使用pallet中的功能
+- [Pallet的组成](https://web.archive.org/web/20220627101333/https://mp.weixin.qq.com/s/1M2HBpxIDVPDwHvbTLEk4w)
+  > 要想熟练的开发pallet，我们必须得把pallet中的各个组成部分弄清楚。本节，我们就按照模板中的各个部分的顺序来讲解pallet的组成
+    1. 导出和依赖：Pub mod pallet{}就是将我们的pallet暴露出来， pub use pallet::*;是可以使用pallet中的所有类型，函数，数据等
+    2. pallet类型声明：它是一系列trait和方法的拥有者，实际的作用类似于占位符，这里举例rust程序
+    3. config trait： 这部分是指定Runtime的配置trait，Pallet中使用的一些类型和常量在此trait中进行配置。
+    4. 定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
+        - Storage Value: 存储单个的值, 无键
+        - Storage Map: 以map方式存储，单键，key-value
+        - Storage Double Map: 以双键方式存储，(key1, key2)-value
+        - Storage N Map: 以多键方式存储，(key1, key2, ..., keyn)-value
+    5. 事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型
+    6. 钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中
+    7. 交易调用函数: Extrinsic则是可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能。比如交易
+- [pallet中的config](https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw)
+- [在pallet中使用其他pallet](https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ)
+- [封装和扩展现有的pallet](https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA)
+- [调试pallet](https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g)
+- [为pallet编写tests](https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg)
+- [为pallet自定义rpc接口](https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA)
+- [pallet中Error类型的使用](https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA)
 
 ### local
