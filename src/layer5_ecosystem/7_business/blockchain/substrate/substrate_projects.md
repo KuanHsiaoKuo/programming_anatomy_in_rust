@@ -1,50 +1,51 @@
 # Substrate项目介绍
 
 <!--ts-->
+
 * [Substrate项目介绍](#substrate项目介绍)
-   * [Case Study](#case-study)
-      * [Acala Network: Defi](#acala-network-defi)
-         * [Case Study](#case-study-1)
-      * [Astar Network: Smart Contracts](#astar-network-smart-contracts)
-         * [Case Study](#case-study-2)
-      * [Equilibrium](#equilibrium)
-         * [Case Study](#case-study-3)
-      * [Moonbeam: Smart Contracts](#moonbeam-smart-contracts)
-         * [Case Study](#case-study-4)
-      * [Polkadex: DeFi, Infrastructure](#polkadex-defi-infrastructure)
-         * [Case Study](#case-study-5)
-      * [Unique Network: NFTs](#unique-network-nfts)
-         * [Case Study](#case-study-6)
-   * [分类介绍: 144](#分类介绍-144)
-   * [DeFi: 35](#defi-35)
-   * [Wallet: 16](#wallet-16)
-   * [Identity: 14](#identity-14)
-   * [Social: 5](#social-5)
-   * [Smart Contracts: 10](#smart-contracts-10)
-   * [File Storage: 5](#file-storage-5)
-      * [Bluzelle](#bluzelle)
-      * [Cere](#cere)
-      * [Crust Network](#crust-network)
-      * [DatDot](#datdot)
-      * [Equilibrium.co](#equilibriumco)
-   * [IoT: 4](#iot-4)
-      * [Data Highway](#data-highway)
-      * [Nodle](#nodle)
-      * [Origin Trail](#origin-trail)
-      * [Robonomics(Airalabs)](#robonomicsairalabs)
-   * [Gaming: 7](#gaming-7)
-      * [Ajuna Network](#ajuna-network)
-      * [Bit.Country](#bitcountry)
-      * [Celer Network](#celer-network)
-      * [Everdream Soft](#everdream-soft)
-      * [GameDAO](#gamedao)
-      * [Sensorium Corporation](#sensorium-corporation)
-   * [Bridge: 4](#bridge-4)
-   * [Infrastructure: 39](#infrastructure-39)
-   * [Relay Chain: 2](#relay-chain-2)
-   * [NFTs: 1](#nfts-1)
-      * [Unique Network](#unique-network)
-   * [参考资源](#参考资源)
+    * [Case Study](#case-study)
+        * [Acala Network: Defi](#acala-network-defi)
+            * [Case Study](#case-study-1)
+        * [Astar Network: Smart Contracts](#astar-network-smart-contracts)
+            * [Case Study](#case-study-2)
+        * [Equilibrium](#equilibrium)
+            * [Case Study](#case-study-3)
+        * [Moonbeam: Smart Contracts](#moonbeam-smart-contracts)
+            * [Case Study](#case-study-4)
+        * [Polkadex: DeFi, Infrastructure](#polkadex-defi-infrastructure)
+            * [Case Study](#case-study-5)
+        * [Unique Network: NFTs](#unique-network-nfts)
+            * [Case Study](#case-study-6)
+    * [分类介绍: 144](#分类介绍-144)
+    * [DeFi: 35](#defi-35)
+    * [Wallet: 16](#wallet-16)
+    * [Identity: 14](#identity-14)
+    * [Social: 5](#social-5)
+    * [Smart Contracts: 10](#smart-contracts-10)
+    * [File Storage: 5](#file-storage-5)
+        * [Bluzelle](#bluzelle)
+        * [Cere](#cere)
+        * [Crust Network](#crust-network)
+        * [DatDot](#datdot)
+        * [Equilibrium.co](#equilibriumco)
+    * [IoT: 4](#iot-4)
+        * [Data Highway](#data-highway)
+        * [Nodle](#nodle)
+        * [Origin Trail](#origin-trail)
+        * [Robonomics(Airalabs)](#robonomicsairalabs)
+    * [Gaming: 7](#gaming-7)
+        * [Ajuna Network](#ajuna-network)
+        * [Bit.Country](#bitcountry)
+        * [Celer Network](#celer-network)
+        * [Everdream Soft](#everdream-soft)
+        * [GameDAO](#gamedao)
+        * [Sensorium Corporation](#sensorium-corporation)
+    * [Bridge: 4](#bridge-4)
+    * [Infrastructure: 39](#infrastructure-39)
+    * [Relay Chain: 2](#relay-chain-2)
+    * [NFTs: 1](#nfts-1)
+        * [Unique Network](#unique-network)
+    * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jun 26 23:08:12 CST 2022 -->
@@ -73,11 +74,10 @@ Acala is a decentralized stablecoin platform that powers cross-blockchain open f
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Astar%20Network.png" alt="img" style="zoom:150%;" />
 
-Astar Network is a scaling dapps platform on Substrate compatible with Ethereum Virtual Machine (EVM) and connected to Polkadot.
+Astar Network is a scaling dapps platform on Substrate compatible with Ethereum Virtual Machine (EVM) and connected to
+Polkadot.
 
 #### Case Study
-
-
 
 [Astar Network Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/astar/)
 
@@ -85,7 +85,8 @@ Astar Network is a scaling dapps platform on Substrate compatible with Ethereum 
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/equilibrium.png" alt="img" style="zoom:65%;" />
 
-Equilibrium introduces a cross-chain money market that combines pooled lending with synthetic asset generation and trading
+Equilibrium introduces a cross-chain money market that combines pooled lending with synthetic asset generation and
+trading
 
 #### Case Study
 
@@ -95,7 +96,8 @@ Equilibrium introduces a cross-chain money market that combines pooled lending w
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Moonbeam.png" alt="img" style="zoom:150%;" />
 
-Decentralized and permissionless, Moonbeam provides an Ethereum-compatible smart contract platform that makes it easy to build natively interoperable applications.
+Decentralized and permissionless, Moonbeam provides an Ethereum-compatible smart contract platform that makes it easy to
+build natively interoperable applications.
 
 #### Case Study
 
@@ -105,7 +107,8 @@ Decentralized and permissionless, Moonbeam provides an Ethereum-compatible smart
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Polkadex.png" alt="img" style="zoom:67%;" />
 
-Polkadex is a Open Source, Decentralized Exchange Platform that features feeless trades, Market Order, AMM and full focus on UI.
+Polkadex is a Open Source, Decentralized Exchange Platform that features feeless trades, Market Order, AMM and full
+focus on UI.
 
 #### Case Study
 
@@ -115,13 +118,12 @@ Polkadex is a Open Source, Decentralized Exchange Platform that features feeless
 
 <img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Unique%20Network-6253646.png" alt="img" style="zoom:400%;" />
 
-Unique Network is an infrastructure for the next generation NFTs, offering developers independence from network-wide transaction fees and upgrades.
+Unique Network is an infrastructure for the next generation NFTs, offering developers independence from network-wide
+transaction fees and upgrades.
 
 #### Case Study
 
 [Unique Network Case Study | Substrate_](https://substrate.io/ecosystem/projects/case-studies/unique/)
-
-
 
 ## 分类介绍: 144
 
