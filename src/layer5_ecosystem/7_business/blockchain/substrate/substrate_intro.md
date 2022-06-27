@@ -3,50 +3,51 @@
 ![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
 
 <!--ts-->
+
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
-   * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
-      * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
-      * [从波卡到Substrate](#从波卡到substrate)
-      * [跨链的重要性](#跨链的重要性)
-   * [总体设计](#总体设计)
-      * [常见区块链设计](#常见区块链设计)
-         * [区块链系统基础部分](#区块链系统基础部分)
-         * [链的功能](#链的功能)
-         * [Substrate理念](#substrate理念)
-      * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
-      * [接着说说Substrate与web3](#接着说说substrate与web3)
-      * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
-      * [Substrate Architecture](#substrate-architecture)
-      * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
-      * [明晰Runtime](#明晰runtime)
-         * [判断标准](#判断标准)
-      * [Substrate的Runtime](#substrate的runtime)
-         * [中心化升级流程](#中心化升级流程)
-         * [无央化升级流程(原先)](#无央化升级流程原先)
-         * [Substrate的不同](#substrate的不同)
-         * [以太坊合约更新策略](#以太坊合约更新策略)
-         * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
-   * [项目结构](#项目结构)
-      * [客户端架构](#客户端架构)
-      * [Tree Level1](#tree-level1)
-         * [用Cargo组织代码](#用cargo组织代码)
-      * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
-         * [Substrate Node:](#substrate-node)
-            * [重点说说node、pallets和runtime](#重点说说nodepallets和runtime)
-         * [Substrate FRAME](#substrate-frame)
-         * [Substrate Core(client)](#substrate-coreclient)
-      * [其他](#其他)
-         * [primitives](#primitives)
-         * [scripts/ci](#scriptsci)
-         * [utils](#utils)
-   * [功能逻辑](#功能逻辑)
-   * [特色代码](#特色代码)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [Runtime](#runtime)
-      * [pallet相关](#pallet相关)
-      * [local](#local)
+    * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
+        * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
+        * [从波卡到Substrate](#从波卡到substrate)
+        * [跨链的重要性](#跨链的重要性)
+    * [总体设计](#总体设计)
+        * [常见区块链设计](#常见区块链设计)
+            * [区块链系统基础部分](#区块链系统基础部分)
+            * [链的功能](#链的功能)
+            * [Substrate理念](#substrate理念)
+        * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
+        * [接着说说Substrate与web3](#接着说说substrate与web3)
+        * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
+        * [Substrate Architecture](#substrate-architecture)
+        * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
+        * [明晰Runtime](#明晰runtime)
+            * [判断标准](#判断标准)
+        * [Substrate的Runtime](#substrate的runtime)
+            * [中心化升级流程](#中心化升级流程)
+            * [无央化升级流程(原先)](#无央化升级流程原先)
+            * [Substrate的不同](#substrate的不同)
+            * [以太坊合约更新策略](#以太坊合约更新策略)
+            * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
+    * [项目结构](#项目结构)
+        * [客户端架构](#客户端架构)
+        * [Tree Level1](#tree-level1)
+            * [用Cargo组织代码](#用cargo组织代码)
+        * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
+            * [Substrate Node:](#substrate-node)
+                * [重点说说node、pallets和runtime](#重点说说nodepallets和runtime)
+            * [Substrate FRAME](#substrate-frame)
+            * [Substrate Core(client)](#substrate-coreclient)
+        * [其他](#其他)
+            * [primitives](#primitives)
+            * [scripts/ci](#scriptsci)
+            * [utils](#utils)
+    * [功能逻辑](#功能逻辑)
+    * [特色代码](#特色代码)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [Runtime](#runtime)
+        * [pallet相关](#pallet相关)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:04:00 CST 2022 -->
@@ -939,20 +940,62 @@ utils
     1. 导出和依赖：Pub mod pallet{}就是将我们的pallet暴露出来， pub use pallet::*;是可以使用pallet中的所有类型，函数，数据等
     2. pallet类型声明：它是一系列trait和方法的拥有者，实际的作用类似于占位符，这里举例rust程序
     3. config trait： 这部分是指定Runtime的配置trait，Pallet中使用的一些类型和常量在此trait中进行配置。
-    4. 定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
+    4. Storage-定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
         - Storage Value: 存储单个的值, 无键
         - Storage Map: 以map方式存储，单键，key-value
         - Storage Double Map: 以双键方式存储，(key1, key2)-value
         - Storage N Map: 以多键方式存储，(key1, key2, ..., keyn)-value
-    5. 事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型
-    6. 钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中
-    7. 交易调用函数: Extrinsic则是可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能。比如交易
+    5. Event-事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型
+    6. hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中
+    7. Extrinsic-交易调用函数: Extrinsic则是**可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能**。比如交易
+- [pallet中Error类型的使用](https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA)
+  > 在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。
+    - 错误类型的定义
+    - 在函数中返回错误
+    - 简单示例
 - [pallet中的config](https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw)
+    - 好好理解rust中关于trait和关联类型相关的知识
+    - pallet 简单示例: 介绍一个存储学生信息的pallet，其中存储逻辑写在extrinsic中
+    - 在Config中定义配置类型：主要使用trait约束和关联类型改写
+    - 在runtime中指定具体的类型
+    - 构建、交互与调试
+    - [参考资料](https://docs.substrate.io/v3/runtime/events-and-errors/)
 - [在pallet中使用其他pallet](https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ)
+    - 在自己的pallet中使用其它的pallet主要有以下几种情况：
+        1. 指定某个现成的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个现成的pallet；
+        2. 指定某个自定义的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个自定义的pallet；
+        3. 封装和扩展现有的 pallet 。
+    - 在runtime中直接指定某个类型为其它的pallet
+      > 这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者
+        - [详情](https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343)
+    - pallet中使用其它pallet的storage
+      > 自定义两个pallet，分别叫做pallet-use-other-pallet1和pallet-storage-provider，然后我们在前一个pallet中读取和存储后一个pallet
 - [封装和扩展现有的pallet](https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA)
+    - 这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。
+      > 在我们的封装中，将contracts pallet的call函数封装成sudo_call，即需要root权限才能调用。同时，我们在runtime中加载contracts时，去掉直接调用contracts函数的方式。
+    - 整个方式我们分成两大步骤，如下：
+        1. 编写extend-pallet;
+        2. 在runtime配置extend- pallet 和contracts pallet。
+    - [文档资料](https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/)
+
 - [调试pallet](https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g)
+    - 在pallet开发时主要有以下几种调试方式：
+        1. logging uilities;
+        2. printable trait;
+        3. print函数;
+        4. if_std.
+    - 使用logging uilities
+    - 使用 printable trait
+    - 使用print函数
+    - 使用 if_std
+    - [文档资料](https://docs.substrate.io/v3/runtime/debugging/)
 - [为pallet编写tests](https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg)
 - [为pallet自定义rpc接口](https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA)
-- [pallet中Error类型的使用](https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA)
+  > pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：
+    1. 编写 mock runtime;
+    2. 编写pallet的genesisconfig;
+    3. 编写测试。
+
+    - [文档资料](https://docs.substrate.io/v3/runtime/custom-rpcs/)
 
 ### local
