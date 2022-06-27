@@ -573,7 +573,7 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:04:00 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:46 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -1493,7 +1493,8 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </ul>
 <h3 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h3>
 <ul>
-<li><a href="https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg">Pallet前置知识</a>
+<li>
+<p><a href="https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg">Pallet前置知识</a></p>
 <ul>
 <li>trait的孤儿规则</li>
 <li>trait对象</li>
@@ -1502,7 +1503,8 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>定义Config trait，然后为Pallet实现相应的trait，最后在main函数中使用它</li>
 </ul>
 </li>
-<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a>
+<li>
+<p><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></p>
 <ul>
 <li>node-template的结构</li>
 <li>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.
@@ -1526,7 +1528,8 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>调试使用pallet中的功能</li>
 </ul>
 </li>
-<li><a href="https://web.archive.org/web/20220627101333/https://mp.weixin.qq.com/s/1M2HBpxIDVPDwHvbTLEk4w">Pallet的组成</a>
+<li>
+<p><a href="https://web.archive.org/web/20220627101333/https://mp.weixin.qq.com/s/1M2HBpxIDVPDwHvbTLEk4w">Pallet的组成</a></p>
 <blockquote>
 <p>要想熟练的开发pallet，我们必须得把pallet中的各个组成部分弄清楚。本节，我们就按照模板中的各个部分的顺序来讲解pallet的组成</p>
 </blockquote>
@@ -1534,7 +1537,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>导出和依赖：Pub mod pallet{}就是将我们的pallet暴露出来， pub use pallet::*;是可以使用pallet中的所有类型，函数，数据等</li>
 <li>pallet类型声明：它是一系列trait和方法的拥有者，实际的作用类似于占位符，这里举例rust程序</li>
 <li>config trait： 这部分是指定Runtime的配置trait，Pallet中使用的一些类型和常量在此trait中进行配置。</li>
-<li>定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
+<li>Storage-定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
 <ul>
 <li>Storage Value: 存储单个的值, 无键</li>
 <li>Storage Map: 以map方式存储，单键，key-value</li>
@@ -1542,18 +1545,110 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>Storage N Map: 以多键方式存储，(key1, key2, ..., keyn)-value</li>
 </ul>
 </li>
-<li>事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
-<li>钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
-<li>交易调用函数: Extrinsic则是可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能。比如交易</li>
+<li>Event-事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
+<li>hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
+<li>Extrinsic-交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
 </ol>
 </li>
-<li><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a></li>
-<li><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></li>
-<li><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></li>
-<li><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a></li>
-<li><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></li>
-<li><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></li>
-<li><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></li>
+<li>
+<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></p>
+<blockquote>
+<p>在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
+</blockquote>
+<ul>
+<li>错误类型的定义</li>
+<li>在函数中返回错误</li>
+<li>简单示例</li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a></p>
+<ul>
+<li>好好理解rust中关于trait和关联类型相关的知识</li>
+<li>pallet 简单示例: 介绍一个存储学生信息的pallet，其中存储逻辑写在extrinsic中</li>
+<li>在Config中定义配置类型：主要使用trait约束和关联类型改写</li>
+<li>在runtime中指定具体的类型</li>
+<li>构建、交互与调试</li>
+<li><a href="https://docs.substrate.io/v3/runtime/events-and-errors/">参考资料</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></p>
+<ul>
+<li>在自己的pallet中使用其它的pallet主要有以下几种情况：
+<ol>
+<li>指定某个现成的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个现成的pallet；</li>
+<li>指定某个自定义的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个自定义的pallet；</li>
+<li>封装和扩展现有的 pallet 。</li>
+</ol>
+</li>
+<li>在runtime中直接指定某个类型为其它的pallet
+<blockquote>
+<p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343">详情</a></li>
+</ul>
+</li>
+<li>pallet中使用其它pallet的storage
+<blockquote>
+<p>自定义两个pallet，分别叫做pallet-use-other-pallet1和pallet-storage-provider，然后我们在前一个pallet中读取和存储后一个pallet</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></p>
+<ul>
+<li>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。
+<blockquote>
+<p>在我们的封装中，将contracts pallet的call函数封装成sudo_call，即需要root权限才能调用。同时，我们在runtime中加载contracts时，去掉直接调用contracts函数的方式。</p>
+</blockquote>
+</li>
+<li>整个方式我们分成两大步骤，如下：
+<ol>
+<li>编写extend-pallet;</li>
+<li>在runtime配置extend- pallet 和contracts pallet。</li>
+</ol>
+</li>
+<li><a href="https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/">文档资料</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a></p>
+<ul>
+<li>在pallet开发时主要有以下几种调试方式：
+<ol>
+<li>logging uilities;</li>
+<li>printable trait;</li>
+<li>print函数;</li>
+<li>if_std.</li>
+</ol>
+</li>
+<li>使用logging uilities</li>
+<li>使用 printable trait</li>
+<li>使用print函数</li>
+<li>使用 if_std</li>
+<li><a href="https://docs.substrate.io/v3/runtime/debugging/">文档资料</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></p>
+<blockquote>
+<p>pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
+</blockquote>
+<ol>
+<li>编写 mock runtime;</li>
+<li>编写pallet的genesisconfig;</li>
+<li>编写测试。</li>
+</ol>
+<ul>
+<li><a href="https://docs.substrate.io/v3/runtime/custom-rpcs/">文档资料</a></li>
+</ul>
+</li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="底层抽象"><a class="header" href="#底层抽象">底层抽象</a></h1>
@@ -1562,7 +1657,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="layer1_underlying_abstract/layer1_underlying_abstract.html#%E5%BA%95%E5%B1%82%E6%8A%BD%E8%B1%A1">底层抽象</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:55 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
@@ -1575,7 +1670,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:15 CST 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -1601,7 +1696,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:00 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:12 CST 2022 -->
 <!--te-->
 <h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <h3 id="online-book-2"><a class="header" href="#online-book-2">online-book</a></h3>
@@ -1710,7 +1805,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:01 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:14 CST 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -2294,7 +2389,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:05 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:19 CST 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -2359,7 +2454,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:16 CST 2022 -->
 <!--te-->
 <h2 id="基元类型"><a class="header" href="#基元类型">基元类型</a></h2>
 <h2 id="序列类型"><a class="header" href="#序列类型">序列类型</a></h2>
@@ -2391,7 +2486,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:03 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:16 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-4"><a class="header" href="#参考资源-4">参考资源</a></h2>
 <h3 id="online-book-6"><a class="header" href="#online-book-6">online-book</a></h3>
@@ -2416,7 +2511,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:20 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-5"><a class="header" href="#参考资源-5">参考资源</a></h2>
 <h3 id="online-book-7"><a class="header" href="#online-book-7">online-book</a></h3>
@@ -2555,7 +2650,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:04 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:01:18 CST 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -3327,7 +3422,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:09 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:53 CST 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -3347,23 +3442,8 @@ fn main() {
 <h3 id="local-9"><a class="header" href="#local-9">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="注释与文档rustdoc"><a class="header" href="#注释与文档rustdoc">注释与文档(rustdoc)</a></h1>
 <!--ts-->
-<ul>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#%E6%B3%A8%E9%87%8A%E4%B8%8E%E6%96%87%E6%A1%A3rustdoc">注释与文档(rustdoc)</a>
-<ul>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#%E6%B3%A8%E9%87%8A%E6%96%B9%E6%B3%95">注释方法</a></li>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#rustdoc%E4%BD%BF%E7%94%A8">rustdoc使用</a></li>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
-<ul>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#online-book">online-book</a></li>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#fragment">fragment</a></li>
-<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#local">local</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:50 CST 2022 -->
 <!--te-->
 <h2 id="注释方法"><a class="header" href="#注释方法">注释方法</a></h2>
 <h2 id="rustdoc使用"><a class="header" href="#rustdoc使用">rustdoc使用</a></h2>
@@ -3451,7 +3531,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:50 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-10"><a class="header" href="#参考资源-10">参考资源</a></h2>
 <h3 id="online-book-12"><a class="header" href="#online-book-12">online-book</a></h3>
@@ -3483,7 +3563,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:55 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-12"><a class="header" href="#参考资源-12">参考资源</a></h2>
 <h3 id="online-book-14"><a class="header" href="#online-book-14">online-book</a></h3>
@@ -3509,7 +3589,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:08 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:51 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-13"><a class="header" href="#参考资源-13">参考资源</a></h2>
 <h3 id="online-book-15"><a class="header" href="#online-book-15">online-book</a></h3>
@@ -3534,7 +3614,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:05 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-14"><a class="header" href="#参考资源-14">参考资源</a></h2>
 <h3 id="online-book-16"><a class="header" href="#online-book-16">online-book</a></h3>
@@ -3556,7 +3636,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:12 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:56 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-15"><a class="header" href="#参考资源-15">参考资源</a></h2>
 <h3 id="online-book-17"><a class="header" href="#online-book-17">online-book</a></h3>
@@ -3578,7 +3658,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:57 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-16"><a class="header" href="#参考资源-16">参考资源</a></h2>
 <h3 id="online-book-18"><a class="header" href="#online-book-18">online-book</a></h3>
@@ -3604,7 +3684,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:14 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:58 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-17"><a class="header" href="#参考资源-17">参考资源</a></h2>
 <h3 id="online-book-19"><a class="header" href="#online-book-19">online-book</a></h3>
@@ -3629,7 +3709,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:58 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-18"><a class="header" href="#参考资源-18">参考资源</a></h2>
 <h3 id="online-book-20"><a class="header" href="#online-book-20">online-book</a></h3>
@@ -3651,7 +3731,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:15 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:02:59 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-19"><a class="header" href="#参考资源-19">参考资源</a></h2>
 <h3 id="online-book-21"><a class="header" href="#online-book-21">online-book</a></h3>
@@ -3673,7 +3753,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:15 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:00 CST 2022 -->
 <!--te-->
 <p>对于一门编程语言，是否能够成为工程化开发工具的主要标准在于两点：</p>
 <ol>
@@ -3724,7 +3804,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:18 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:03 CST 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -3950,7 +4030,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:16 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:01 CST 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
 <h3 id="新建"><a class="header" href="#新建">新建</a></h3>
@@ -4022,7 +4102,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:17 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:02 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-23"><a class="header" href="#参考资源-23">参考资源</a></h2>
 <h3 id="online-book-25"><a class="header" href="#online-book-25">online-book</a></h3>
@@ -4065,7 +4145,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:04 CST 2022 -->
 <!--te-->
 <h2 id="cargo子命令系列-cargo-install"><a class="header" href="#cargo子命令系列-cargo-install">Cargo子命令系列: cargo install <binary crate name></a></h2>
 <h3 id="cargo-watch"><a class="header" href="#cargo-watch">cargo-watch</a></h3>
@@ -4106,7 +4186,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:25 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:11 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-25"><a class="header" href="#参考资源-25">参考资源</a></h2>
 <h3 id="online-book-27"><a class="header" href="#online-book-27">online-book</a></h3>
@@ -4128,7 +4208,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:21 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:07 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-26"><a class="header" href="#参考资源-26">参考资源</a></h2>
 <h3 id="online-book-28"><a class="header" href="#online-book-28">online-book</a></h3>
@@ -4180,7 +4260,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:22 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:08 CST 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -4398,7 +4478,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:20 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:06 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-28"><a class="header" href="#参考资源-28">参考资源</a></h2>
 <h3 id="online-book-30"><a class="header" href="#online-book-30">online-book</a></h3>
@@ -4424,7 +4504,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:21 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:06 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-29"><a class="header" href="#参考资源-29">参考资源</a></h2>
 <h3 id="online-book-31"><a class="header" href="#online-book-31">online-book</a></h3>
@@ -4446,7 +4526,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:23 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:09 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-30"><a class="header" href="#参考资源-30">参考资源</a></h2>
 <h3 id="online-book-32"><a class="header" href="#online-book-32">online-book</a></h3>
@@ -4468,7 +4548,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:28 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:13 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-31"><a class="header" href="#参考资源-31">参考资源</a></h2>
 <h3 id="online-book-33"><a class="header" href="#online-book-33">online-book</a></h3>
@@ -4490,7 +4570,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:27 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:12 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-32"><a class="header" href="#参考资源-32">参考资源</a></h2>
 <h3 id="online-book-34"><a class="header" href="#online-book-34">online-book</a></h3>
@@ -4512,7 +4592,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:26 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:11 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-33"><a class="header" href="#参考资源-33">参考资源</a></h2>
 <h3 id="online-book-35"><a class="header" href="#online-book-35">online-book</a></h3>
@@ -4534,7 +4614,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:04:05 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:51 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-34"><a class="header" href="#参考资源-34">参考资源</a></h2>
 <h3 id="online-book-36"><a class="header" href="#online-book-36">online-book</a></h3>
@@ -4546,7 +4626,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:35 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:17 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
@@ -4624,7 +4704,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:45 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:28 CST 2022 -->
 <!--te-->
 <h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
 <h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
@@ -4806,7 +4886,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:48 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:31 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-36"><a class="header" href="#参考资源-36">参考资源</a></h2>
 <ul>
@@ -4823,7 +4903,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:30 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-37"><a class="header" href="#参考资源-37">参考资源</a></h2>
 <ul>
@@ -4839,7 +4919,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:46 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:28 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-38"><a class="header" href="#参考资源-38">参考资源</a></h2>
 <ul>
@@ -4855,7 +4935,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:46 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:29 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-39"><a class="header" href="#参考资源-39">参考资源</a></h2>
 <ul>
@@ -4911,7 +4991,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:56 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:40 CST 2022 -->
 <!--te-->
 <h2 id="layers"><a class="header" href="#layers">Layers</a></h2>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png" alt="img" /></p>
@@ -5255,7 +5335,7 @@ Rust and just like develop in a common backend.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:04:00 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:46 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate-1"><a class="header" href="#gavin-wookpolkadot-and-substrate-1">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链-1"><a class="header" href="#gavin-wook与波卡跨链-1">Gavin Wook与波卡跨链</a></h3>
@@ -6175,7 +6255,8 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </ul>
 <h3 id="pallet相关-1"><a class="header" href="#pallet相关-1">pallet相关</a></h3>
 <ul>
-<li><a href="https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg">Pallet前置知识</a>
+<li>
+<p><a href="https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg">Pallet前置知识</a></p>
 <ul>
 <li>trait的孤儿规则</li>
 <li>trait对象</li>
@@ -6184,7 +6265,8 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>定义Config trait，然后为Pallet实现相应的trait，最后在main函数中使用它</li>
 </ul>
 </li>
-<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a>
+<li>
+<p><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></p>
 <ul>
 <li>node-template的结构</li>
 <li>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.
@@ -6208,7 +6290,8 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>调试使用pallet中的功能</li>
 </ul>
 </li>
-<li><a href="https://web.archive.org/web/20220627101333/https://mp.weixin.qq.com/s/1M2HBpxIDVPDwHvbTLEk4w">Pallet的组成</a>
+<li>
+<p><a href="https://web.archive.org/web/20220627101333/https://mp.weixin.qq.com/s/1M2HBpxIDVPDwHvbTLEk4w">Pallet的组成</a></p>
 <blockquote>
 <p>要想熟练的开发pallet，我们必须得把pallet中的各个组成部分弄清楚。本节，我们就按照模板中的各个部分的顺序来讲解pallet的组成</p>
 </blockquote>
@@ -6216,7 +6299,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>导出和依赖：Pub mod pallet{}就是将我们的pallet暴露出来， pub use pallet::*;是可以使用pallet中的所有类型，函数，数据等</li>
 <li>pallet类型声明：它是一系列trait和方法的拥有者，实际的作用类似于占位符，这里举例rust程序</li>
 <li>config trait： 这部分是指定Runtime的配置trait，Pallet中使用的一些类型和常量在此trait中进行配置。</li>
-<li>定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
+<li>Storage-定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
 <ul>
 <li>Storage Value: 存储单个的值, 无键</li>
 <li>Storage Map: 以map方式存储，单键，key-value</li>
@@ -6224,18 +6307,110 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li>Storage N Map: 以多键方式存储，(key1, key2, ..., keyn)-value</li>
 </ul>
 </li>
-<li>事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
-<li>钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
-<li>交易调用函数: Extrinsic则是可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能。比如交易</li>
+<li>Event-事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
+<li>hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
+<li>Extrinsic-交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
 </ol>
 </li>
-<li><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a></li>
-<li><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></li>
-<li><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></li>
-<li><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a></li>
-<li><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></li>
-<li><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></li>
-<li><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></li>
+<li>
+<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></p>
+<blockquote>
+<p>在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
+</blockquote>
+<ul>
+<li>错误类型的定义</li>
+<li>在函数中返回错误</li>
+<li>简单示例</li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a></p>
+<ul>
+<li>好好理解rust中关于trait和关联类型相关的知识</li>
+<li>pallet 简单示例: 介绍一个存储学生信息的pallet，其中存储逻辑写在extrinsic中</li>
+<li>在Config中定义配置类型：主要使用trait约束和关联类型改写</li>
+<li>在runtime中指定具体的类型</li>
+<li>构建、交互与调试</li>
+<li><a href="https://docs.substrate.io/v3/runtime/events-and-errors/">参考资料</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></p>
+<ul>
+<li>在自己的pallet中使用其它的pallet主要有以下几种情况：
+<ol>
+<li>指定某个现成的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个现成的pallet；</li>
+<li>指定某个自定义的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个自定义的pallet；</li>
+<li>封装和扩展现有的 pallet 。</li>
+</ol>
+</li>
+<li>在runtime中直接指定某个类型为其它的pallet
+<blockquote>
+<p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343">详情</a></li>
+</ul>
+</li>
+<li>pallet中使用其它pallet的storage
+<blockquote>
+<p>自定义两个pallet，分别叫做pallet-use-other-pallet1和pallet-storage-provider，然后我们在前一个pallet中读取和存储后一个pallet</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></p>
+<ul>
+<li>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。
+<blockquote>
+<p>在我们的封装中，将contracts pallet的call函数封装成sudo_call，即需要root权限才能调用。同时，我们在runtime中加载contracts时，去掉直接调用contracts函数的方式。</p>
+</blockquote>
+</li>
+<li>整个方式我们分成两大步骤，如下：
+<ol>
+<li>编写extend-pallet;</li>
+<li>在runtime配置extend- pallet 和contracts pallet。</li>
+</ol>
+</li>
+<li><a href="https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/">文档资料</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a></p>
+<ul>
+<li>在pallet开发时主要有以下几种调试方式：
+<ol>
+<li>logging uilities;</li>
+<li>printable trait;</li>
+<li>print函数;</li>
+<li>if_std.</li>
+</ol>
+</li>
+<li>使用logging uilities</li>
+<li>使用 printable trait</li>
+<li>使用print函数</li>
+<li>使用 if_std</li>
+<li><a href="https://docs.substrate.io/v3/runtime/debugging/">文档资料</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></p>
+<blockquote>
+<p>pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
+</blockquote>
+<ol>
+<li>编写 mock runtime;</li>
+<li>编写pallet的genesisconfig;</li>
+<li>编写测试。</li>
+</ol>
+<ul>
+<li><a href="https://docs.substrate.io/v3/runtime/custom-rpcs/">文档资料</a></li>
+</ul>
+</li>
 </ul>
 <h3 id="local-39"><a class="header" href="#local-39">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="substrate项目介绍"><a class="header" href="#substrate项目介绍">Substrate项目介绍</a></h1>
@@ -6323,7 +6498,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:04:01 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:47 CST 2022 -->
 <!--te-->
 <div id="admonition-他山之石可以攻玉" class="admonition tip">
 <div class="admonition-title">
@@ -6481,7 +6656,7 @@ transaction fees and upgrades.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:59 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:44 CST 2022 -->
 <!--te-->
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <ul>
@@ -6780,7 +6955,7 @@ Josep M Sobrepere.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:57 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:42 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-45"><a class="header" href="#参考资源-45">参考资源</a></h2>
 <h3 id="online-book-40"><a class="header" href="#online-book-40">online-book</a></h3>
@@ -6805,7 +6980,7 @@ Josep M Sobrepere.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:03:58 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:43 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-46"><a class="header" href="#参考资源-46">参考资源</a></h2>
 <h3 id="online-book-41"><a class="header" href="#online-book-41">online-book</a></h3>
