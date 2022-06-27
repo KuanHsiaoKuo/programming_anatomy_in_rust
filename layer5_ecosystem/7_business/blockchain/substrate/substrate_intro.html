@@ -249,6 +249,8 @@
 <ul>
 <li><a href="#online-book">online-book</a></li>
 <li><a href="#fragment">fragment</a></li>
+<li><a href="#runtime">Runtime</a></li>
+<li><a href="#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
 <li><a href="#local">local</a></li>
 </ul>
 </li>
@@ -256,7 +258,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 17:07:14 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jun 27 20:04:00 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -878,7 +880,7 @@ bin
 <h4 id="substrate-frame"><a class="header" href="#substrate-frame">Substrate FRAME</a></h4>
 <p>FRAME (Framework for Runtime Aggregation of Modularized Entities) 是一个框架，用于从现有库构建 Substrate 运行时(Runtime)
 ，并具有高度的自由度来确定我们的区块链逻辑。</p>
-<p>我们基本上是从 Substrate 的预构建节点模板开始，可以添加所谓的托盘（Substrate 库模块的名称）来定制和扩展我们的链。</p>
+<p>我们基本上是从 Substrate 的预构建节点模板开始，可以添加所谓的托盘（pallet, Substrate 库模块的名称）来定制和扩展我们的链。</p>
 <p>在这个抽象级别，我们还能够完全自定义我们区块链的逻辑、状态和数据类型。这当然是大多数旨在接近 Substrate 的基本定制项目在易于开发和技术自由之间利用两全其美的地方。</p>
 <div id="admonition-专注定制" class="admonition tip">
 <div class="admonition-title">
@@ -984,10 +986,10 @@ frame
 <p>这种方法当然需要最多的工作和最高的难度，但它也具有最高的技术自由度，同时仍然能够在 Substrate 生态系统中无缝工作。</p>
 </div>
 </div>
-<p>说到 Substrate 的生态系统，有一个充满活力（充满活力）的开发者社区，他们在自己的项目中使用 Substrate，其中许多人通过共享自己的托盘来回馈生态系统。</p>
+<p>说到 Substrate 的生态系统，有一个充满活力（充满活力）的开发者社区，他们在自己的项目中使用 Substrate，其中许多人通过共享自己的托盘(pallet)来回馈生态系统。</p>
 <p>您可以通过使用诸如 <a href="https://substratemarketplace.com/">Substrate Market</a>
-之类的站点或仅在托管 <a href="https://crates.io/">crates.io: Rust Package Registry</a> 的任何地方找到托盘，因为 Substrate 托盘本质上是自包含的 Rust 库，您可以将其集成到您的
-Substrate 项目中, 并根据需要进行配置。</p>
+之类的站点或仅在托管 <a href="https://crates.io/">crates.io: Rust Package Registry</a> 的任何地方找到托盘(pallet)，因为 Substrate 托盘本质上是自包含的 Rust
+库，您可以将其集成到您的 Substrate 项目中, 并根据需要进行配置。</p>
 <p>与任何其他库一样，建议首先审核代码，并了解依赖外部代码与编写自己的代码之间的权衡。</p>
 <p>在玩了一点预建节点之后，我们应该专注于 FRAME，学习如何通过在 Substrate 模板节点之上构建自定义区块链。这也是许多精彩教程的起点。</p>
 <pre><code class="language-shell"> tree client -L 1 | pbcopy                                                                                                                                                                                                                    ─╯
@@ -1148,6 +1150,7 @@ utils
 <h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
 <ul>
 <li><a href="https://www.zhihu.com/column/c_74315572">链块与分散的数据 - 知乎</a></li>
+<li><a href="https://web.archive.org/web/20220627112702/https://mp.weixin.qq.com/s/MP0LXWVqUn5R4C6fAbe1nQ">区块链与substrate</a></li>
 <li><a href="https://web.archive.org/web/20220618042220/https://zhuanlan.zhihu.com/p/47805322">substrate 源码解析与运用 - 介绍 - 知乎</a></li>
 <li><a href="https://www.zhihu.com/column/substrate">Substrate区块链开发 - 知乎</a></li>
 <li><a href="https://substrate.io/ecosystem/">Substrate Ecosystem | Substrate_</a></li>
@@ -1163,7 +1166,79 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="https://docs.substrate.io/v3/runtime/frame/">FRAME | Substrate_</a></li>
 <li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
 <li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
-<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></li>
+</ul>
+<h3 id="runtime"><a class="header" href="#runtime">Runtime</a></h3>
+<ul>
+<li><a href="https://web.archive.org/web/20220627114404/https://zhuanlan.zhihu.com/p/79539782">剖析Substrate Runtime - 知乎</a>
+<blockquote>
+<p>基于Substrate开发自己的运行时模块，会遇到一个比较大的挑战，就是理解Substrate运行时（Runtime）。
+本文首先介绍了Runtime的架构，类型，常用宏，并结合一个实际的演示项目，做了具体代码分析，以帮助大家更好地理解在Substrate中它们是如何一起工作的。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h3>
+<ul>
+<li><a href="https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg">Pallet前置知识</a>
+<ul>
+<li>trait的孤儿规则</li>
+<li>trait对象</li>
+<li>trait的继承</li>
+<li>关联类型</li>
+<li>定义Config trait，然后为Pallet实现相应的trait，最后在main函数中使用它</li>
+</ul>
+</li>
+<li><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a>
+<ul>
+<li>node-template的结构</li>
+<li>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.
+<ol>
+<li>依赖;</li>
+<li>pallet类型声明;</li>
+<li>config trait;</li>
+<li>定义要使用的链上存储;</li>
+<li>事件;</li>
+<li>钩子函数;</li>
+<li>交易调用函数;</li>
+</ol>
+</li>
+<li>举例编写simple-pallet
+<blockquote>
+<p>功能介绍: simple-pallet是一个存证的pallet，简单说就是提供一个存取一段hash到链上的功能，和从链上读取的功能。</p>
+</blockquote>
+</li>
+<li>将pallet添加到runtime中</li>
+<li>编译运行</li>
+<li>调试使用pallet中的功能</li>
+</ul>
+</li>
+<li><a href="https://web.archive.org/web/20220627101333/https://mp.weixin.qq.com/s/1M2HBpxIDVPDwHvbTLEk4w">Pallet的组成</a>
+<blockquote>
+<p>要想熟练的开发pallet，我们必须得把pallet中的各个组成部分弄清楚。本节，我们就按照模板中的各个部分的顺序来讲解pallet的组成</p>
+</blockquote>
+<ol>
+<li>导出和依赖：Pub mod pallet{}就是将我们的pallet暴露出来， pub use pallet::*;是可以使用pallet中的所有类型，函数，数据等</li>
+<li>pallet类型声明：它是一系列trait和方法的拥有者，实际的作用类似于占位符，这里举例rust程序</li>
+<li>config trait： 这部分是指定Runtime的配置trait，Pallet中使用的一些类型和常量在此trait中进行配置。</li>
+<li>定义要使用的链上存储： 存储（Storage）允许我们在链上存储数据，使用它存储的数据可以通过Runtime进行访问。substrate提供了四种存储方式，分别是：
+<ul>
+<li>Storage Value: 存储单个的值, 无键</li>
+<li>Storage Map: 以map方式存储，单键，key-value</li>
+<li>Storage Double Map: 以双键方式存储，(key1, key2)-value</li>
+<li>Storage N Map: 以多键方式存储，(key1, key2, ..., keyn)-value</li>
+</ul>
+</li>
+<li>事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
+<li>钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
+<li>交易调用函数: Extrinsic则是可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能。比如交易</li>
+</ol>
+</li>
+<li><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a></li>
+<li><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></li>
+<li><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></li>
+<li><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a></li>
+<li><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></li>
+<li><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></li>
+<li><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 
