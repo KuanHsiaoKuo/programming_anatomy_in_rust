@@ -1,6 +1,13 @@
 # 尝试Substrate
 
 <!--ts-->
+* [尝试Substrate](#尝试substrate)
+   * [参考资源](#参考资源)
+      * [substrate文档练习](#substrate文档练习)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 23:41:11 CST 2022 -->
+
 <!--te-->
 
 ## 参考资源

@@ -1,6 +1,13 @@
 # Substrate深入尝试pallet
 
 <!--ts-->
+* [Substrate深入尝试pallet](#substrate深入尝试pallet)
+   * [参考资源](#参考资源)
+      * [pallet相关](#pallet相关)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 23:41:08 CST 2022 -->
+
 <!--te-->
 
 ## 参考资源
