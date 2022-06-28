@@ -3,50 +3,51 @@
 ![what_is_substrate](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png)
 
 <!--ts-->
+
 * [Substrate介绍与源码解读](#substrate介绍与源码解读)
-   * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
-      * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
-      * [从波卡到Substrate](#从波卡到substrate)
-      * [跨链的重要性](#跨链的重要性)
-   * [总体设计](#总体设计)
-      * [常见区块链设计](#常见区块链设计)
-         * [区块链系统基础部分](#区块链系统基础部分)
-         * [链的功能](#链的功能)
-         * [Substrate理念](#substrate理念)
-      * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
-      * [接着说说Substrate与web3](#接着说说substrate与web3)
-      * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
-      * [Substrate Architecture](#substrate-architecture)
-      * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
-      * [明晰Runtime](#明晰runtime)
-         * [判断标准](#判断标准)
-      * [Substrate的Runtime](#substrate的runtime)
-         * [中心化升级流程](#中心化升级流程)
-         * [无央化升级流程(原先)](#无央化升级流程原先)
-         * [Substrate的不同](#substrate的不同)
-         * [以太坊合约更新策略](#以太坊合约更新策略)
-         * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
-   * [项目结构](#项目结构)
-      * [客户端架构](#客户端架构)
-      * [Tree Level1](#tree-level1)
-         * [用Cargo组织代码](#用cargo组织代码)
-      * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
-         * [Substrate Node:](#substrate-node)
-            * [重点说说node、pallets和runtime](#重点说说nodepallets和runtime)
-         * [Substrate FRAME](#substrate-frame)
-         * [Substrate Core(client)](#substrate-coreclient)
-      * [其他](#其他)
-         * [primitives](#primitives)
-         * [scripts/ci](#scriptsci)
-         * [utils](#utils)
-   * [功能逻辑](#功能逻辑)
-   * [特色代码](#特色代码)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [Runtime](#runtime)
-      * [pallet相关](#pallet相关)
-      * [local](#local)
+    * [Gavin Wook、Polkadot and Substrate](#gavin-wookpolkadot-and-substrate)
+        * [Gavin Wook与波卡跨链](#gavin-wook与波卡跨链)
+        * [从波卡到Substrate](#从波卡到substrate)
+        * [跨链的重要性](#跨链的重要性)
+    * [总体设计](#总体设计)
+        * [常见区块链设计](#常见区块链设计)
+            * [区块链系统基础部分](#区块链系统基础部分)
+            * [链的功能](#链的功能)
+            * [Substrate理念](#substrate理念)
+        * [先认识一下：什么是区块链框架](#先认识一下什么是区块链框架)
+        * [接着说说Substrate与web3](#接着说说substrate与web3)
+        * [用web框架、游戏引擎类比](#用web框架游戏引擎类比)
+        * [Substrate Architecture](#substrate-architecture)
+        * [开发者只需要关注Runtime(链功能)](#开发者只需要关注runtime链功能)
+        * [明晰Runtime](#明晰runtime)
+            * [判断标准](#判断标准)
+        * [Substrate的Runtime](#substrate的runtime)
+            * [中心化升级流程](#中心化升级流程)
+            * [无央化升级流程(原先)](#无央化升级流程原先)
+            * [Substrate的不同](#substrate的不同)
+            * [以太坊合约更新策略](#以太坊合约更新策略)
+            * [Substrate对应‘合约更新策略’](#substrate对应合约更新策略)
+    * [项目结构](#项目结构)
+        * [客户端架构](#客户端架构)
+        * [Tree Level1](#tree-level1)
+            * [用Cargo组织代码](#用cargo组织代码)
+        * [主要部分介绍：Node、Frame、Core](#主要部分介绍nodeframecore)
+            * [Substrate Node:](#substrate-node)
+                * [重点说说node、pallets和runtime](#重点说说nodepallets和runtime)
+            * [Substrate FRAME](#substrate-frame)
+            * [Substrate Core(client)](#substrate-coreclient)
+        * [其他](#其他)
+            * [primitives](#primitives)
+            * [scripts/ci](#scriptsci)
+            * [utils](#utils)
+    * [功能逻辑](#功能逻辑)
+    * [特色代码](#特色代码)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [Runtime](#runtime)
+        * [pallet相关](#pallet相关)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Tue Jun 28 00:03:46 CST 2022 -->
@@ -946,7 +947,32 @@ utils
         - Storage N Map: 以多键方式存储，(key1, key2, ..., keyn)-value
     5. Event-事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型
     6. hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中
-    7. Extrinsic-交易调用函数: Extrinsic则是**可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能**。比如交易
+    7. Extrinsic-调度函数，交易调用函数: Extrinsic则是**可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能**。比如交易
+- [hooks: pallet的🪝钩子函数使用](https://web.archive.org/web/20220628021501/https://mp.weixin.qq.com/s/tPyB9CuTVP2Y1DGgl_VPyQ)
+    - substrate中的执行过程
+        1. 初始化区块（Initializes the block）
+        2. 执行区块（Executes extrinsics）
+        3. 确认区块（ Finalizes the block）.
+    - hooks介绍:
+        1. on_finalize: 在区块 finalize 的时候调用。
+        2. on_idle：区块finalize的时候调用，不过比on_finalize先调用。
+        3. on_initialize：区块初始化的时候调用。
+        4. on_runtime_upgrade：执行模块升级的时候调用。
+        5. pre_upgrade：升级之前的检查。
+        6. post_upgrade：升级之后的处理。
+        7. offchain_worker：在一个 pallet 上实现此函数后可以在此函数中长时间的执行需要链下执行的功能。该函数会在每次区块导入的时候调用。后续我们讲ocw使用的时候就需要和这个函数打交道。
+        8. integrity_test：运行集成测试。
+    - 示例
+    - [资料](https://docs.substrate.io/v3/concepts/execution/)
+    - [substrate源码](https://paritytech.github.io/substrate/master/frame_support/traits/trait.Hooks.html)
+- [substrate轻松学：写调度函数](https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg)
+  > 调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。
+    - Signed transactions
+    - Unsigned transactions
+    - 通常写法：调度函数的位置->函数体的写法->权重->transactional
+    - 示例
+    -
+    参考：[extrinsics](https://docs.substrate.io/v3/concepts/extrinsics/)&[weights-and-fees](https://docs.substrate.io/v3/runtime/weights-and-fees/)
 - [pallet中Error类型的使用](https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA)
   > 在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。
     - 错误类型的定义
