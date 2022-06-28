@@ -1547,8 +1547,49 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 <li>Event-事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
 <li>hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
-<li>Extrinsic-交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
+<li>Extrinsic-调度函数，交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
 </ol>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220628021501/https://mp.weixin.qq.com/s/tPyB9CuTVP2Y1DGgl_VPyQ">hooks: pallet的🪝钩子函数使用</a></p>
+<ul>
+<li>substrate中的执行过程
+<ol>
+<li>初始化区块（Initializes the block）</li>
+<li>执行区块（Executes extrinsics）</li>
+<li>确认区块（ Finalizes the block）.</li>
+</ol>
+</li>
+<li>hooks介绍:
+<ol>
+<li>on_finalize: 在区块 finalize 的时候调用。</li>
+<li>on_idle：区块finalize的时候调用，不过比on_finalize先调用。</li>
+<li>on_initialize：区块初始化的时候调用。</li>
+<li>on_runtime_upgrade：执行模块升级的时候调用。</li>
+<li>pre_upgrade：升级之前的检查。</li>
+<li>post_upgrade：升级之后的处理。</li>
+<li>offchain_worker：在一个 pallet 上实现此函数后可以在此函数中长时间的执行需要链下执行的功能。该函数会在每次区块导入的时候调用。后续我们讲ocw使用的时候就需要和这个函数打交道。</li>
+<li>integrity_test：运行集成测试。</li>
+</ol>
+</li>
+<li>示例</li>
+<li><a href="https://docs.substrate.io/v3/concepts/execution/">资料</a></li>
+<li><a href="https://paritytech.github.io/substrate/master/frame_support/traits/trait.Hooks.html">substrate源码</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg">substrate轻松学：写调度函数</a></p>
+<blockquote>
+<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
+</blockquote>
+<ul>
+<li>Signed transactions</li>
+<li>Unsigned transactions</li>
+<li>通常写法：调度函数的位置-&gt;函数体的写法-&gt;权重-&gt;transactional</li>
+<li>示例</li>
+<li></li>
+</ul>
+<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
 </li>
 <li>
 <p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></p>
@@ -6309,8 +6350,49 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 <li>Event-事件：当pallet需要把运行时上的更改或变化通知给外部主体时，就需要用到事件。事件是一个枚举类型</li>
 <li>hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
-<li>Extrinsic-交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
+<li>Extrinsic-调度函数，交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
 </ol>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220628021501/https://mp.weixin.qq.com/s/tPyB9CuTVP2Y1DGgl_VPyQ">hooks: pallet的🪝钩子函数使用</a></p>
+<ul>
+<li>substrate中的执行过程
+<ol>
+<li>初始化区块（Initializes the block）</li>
+<li>执行区块（Executes extrinsics）</li>
+<li>确认区块（ Finalizes the block）.</li>
+</ol>
+</li>
+<li>hooks介绍:
+<ol>
+<li>on_finalize: 在区块 finalize 的时候调用。</li>
+<li>on_idle：区块finalize的时候调用，不过比on_finalize先调用。</li>
+<li>on_initialize：区块初始化的时候调用。</li>
+<li>on_runtime_upgrade：执行模块升级的时候调用。</li>
+<li>pre_upgrade：升级之前的检查。</li>
+<li>post_upgrade：升级之后的处理。</li>
+<li>offchain_worker：在一个 pallet 上实现此函数后可以在此函数中长时间的执行需要链下执行的功能。该函数会在每次区块导入的时候调用。后续我们讲ocw使用的时候就需要和这个函数打交道。</li>
+<li>integrity_test：运行集成测试。</li>
+</ol>
+</li>
+<li>示例</li>
+<li><a href="https://docs.substrate.io/v3/concepts/execution/">资料</a></li>
+<li><a href="https://paritytech.github.io/substrate/master/frame_support/traits/trait.Hooks.html">substrate源码</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg">substrate轻松学：写调度函数</a></p>
+<blockquote>
+<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
+</blockquote>
+<ul>
+<li>Signed transactions</li>
+<li>Unsigned transactions</li>
+<li>通常写法：调度函数的位置-&gt;函数体的写法-&gt;权重-&gt;transactional</li>
+<li>示例</li>
+<li></li>
+</ul>
+<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
 </li>
 <li>
 <p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></p>
