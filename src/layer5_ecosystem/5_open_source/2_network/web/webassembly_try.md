@@ -1,6 +1,13 @@
 # 基于Rust尝试WebAssembly
 
 <!--ts-->
+* [基于Rust尝试WebAssembly](#基于rust尝试webassembly)
+   * [参考资源](#参考资源)
+      * [关于康威游戏(Conway's Game)](#关于康威游戏conways-game)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 14:46:05 CST 2022 -->
+
 <!--te-->
 
 ## 参考资源
