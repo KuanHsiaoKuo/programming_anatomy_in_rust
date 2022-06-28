@@ -65,6 +65,7 @@
                     - [IPFS伴侣插件](layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.md)
                     - [IPFS+ngrok](layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.md)
             - [web开发](layer5_ecosystem/5_open_source/2_network/web/web.md)
+                - [基于Rust尝试WebAssembly](layer5_ecosystem/5_open_source/2_network/web/webassembly_try.md)
         - [多媒体](layer5_ecosystem/5_open_source/3_media/media.md)
             - [音视频处理](layer5_ecosystem/5_open_source/3_media/av/av.md)
             - [游戏开发](layer5_ecosystem/5_open_source/3_media/game/game.md)
