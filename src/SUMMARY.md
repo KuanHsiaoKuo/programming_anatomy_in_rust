@@ -2,6 +2,7 @@
 
 - [总览](./overview.md)
     - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
+    - [Rust话题](layer5_ecosystem/1_learning_resource/talks.md)
 - [Layer1: 底层抽象](./layer1_underlying_abstract/layer1_underlying_abstract.md)
     - [虚拟内存管理](./layer1_underlying_abstract/1_virtual_memory/virtual_memory.md)
         - [内存管理与内存安全](./layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.md)
