@@ -1,14 +1,283 @@
 # 尝试Substrate
 
 <!--ts-->
+
 * [尝试Substrate](#尝试substrate)
-   * [参考资源](#参考资源)
-      * [substrate文档练习](#substrate文档练习)
+    * [参考资源](#参考资源)
+        * [substrate文档练习](#substrate文档练习)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Fri Jul  1 16:11:41 CST 2022 -->
 
 <!--te-->
+
+## 初体验Substrate链
+
+这里主要使用官方提供的默认模版启动节点。
+
+### 设置开发环境
+
+#### 使用rustup设置rust环境
+
+```shell
+# 1.安装预编译包
+sudo apt update && sudo apt install -y git clang curl libssl-dev llvm libudev-dev
+
+# 2.安装Rust编译环境
+curl https://sh.rustup.rs -sSf | sh
+source ~/.cargo/env
+rustup default stable
+rustup update
+rustup update nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
+```
+
+#### 检查环境
+
+```shell
+rustc --version
+rustup show
+```
+
+### 启动链节点
+
+~~~admonish info title='node-template'
+node-template实际上是官方提供的使用substrate开发的模板链，可以理解为substrate官方提供的样例，后续任何人想使用substrate可以在这个样例的基础上进行修改，这样开发链就更方便。
+> 这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。
+~~~
+
+### 下载node-template
+
+```shell
+git clone https://github.com/substrate-developer-hub/substrate-node-template
+cd substrate-node-template
+git checkout latest
+```
+
+~~~admonish info title='node-template项目结构'
+```shell
+tree -L 2                                                                                                                                                                                                                              ─╯
+.
+├── Cargo.lock
+├── Cargo.toml
+├── LICENSE
+├── README.md
+├── docker-compose.yml
+├── docs
+│   └── rust-setup.md
+├── node
+│   ├── Cargo.toml
+│   ├── build.rs
+│   └── src
+├── pallets
+│   └── template
+├── runtime
+│   ├── Cargo.toml
+│   ├── build.rs
+│   └── src
+├── rustfmt.toml
+├── scripts
+│   ├── docker_run.sh
+│   └── init.sh
+├── shell.nix
+└── target
+    ├── CACHEDIR.TAG
+    └── release
+
+10 directories, 15 files
+```
+~~~
+
+#### Cargo.toml
+
+```toml
+[workspace]
+members = [
+    "node",
+    "pallets/template",
+    "runtime",
+]
+[profile.release]
+panic = "unwind"
+```
+
+> 可见node-template主要包含三部分：node、pallets/template、runtime
+
+### 编译
+
+```shell
+cargo build --release
+```
+
+> 这个过程比较慢，会下载并编译上面三部分内的Cargo.toml列出的所有包
+
+#### 可能遇到的问题
+
+- 安装cmake
+
+```shell
+brew install cmake
+```
+
+#### 运行节点
+
+```shell
+./target/release/node-template --dev
+```
+
+#### 使用polkadot-js访问节点
+
+```admonish info title='polkadot-js-app'
+在substrate官方的教程中，是使用了substrate的前端模板来访问刚才启动的节点。但是在实际的开发中，后端人员其实更多的使用polkadot-js-app来访问我们的节点，所以这里我们也使用它来访问我们的节点。
+```
+
+- 在浏览器中输入https://polkadot.js.org/apps, 点击左上角会展开；
+
+![CleanShot 2022-07-01 at 20.08.02@2x](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-01%20at%2020.08.02%402x.png)
+
+- 在展开的菜单中点击DEVELOPMENT；
+
+- 点击Local Node；
+
+- 点击switch。
+
+![CleanShot 2022-07-01 at 20.17.59@2x](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-01%20at%2020.17.59%402x.png)
+
+## Substrate使用方式
+
+> 使用substrate的方式主要有以下几种：
+
+### 使用subtrate node
+
+开发者可以运行已经设计好的substrate节点，并配置genesis区块，在此方式下只需要提供一个json文件就可以启动自己的区块链。其实我们上一节的substrate初体验，也可以看成是使用此种方式的一个例子。
+
+### 使用substrate frame
+
+frame其实是一组模块（pallet）和支持库。使用substrate frame可以轻松的创建自己的自定义运行时，因为frame是用来构建底层节点的。使用frame还可以配置数据类型，也可以从模块库中选择甚至是添加自己定义的模块。
+
+### 使用substrate core
+
+使用substrate code运行开发者完全从头开始设计运行时（runtime，问题：什么是runtime？），当然此种方式也是使用substrate自由度最大的方式。
+
+```admonish tip title='几种方式的关系可以用图描述如下：技术自由 vs 开发便利'
+![Technical freedom vs development ease](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/technical-freedom.png)
+```
+
+## 添加一个Pallet到Runtime
+
+> substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet
+
+接下来接着使用前面的node template
+
+### runtime结构分析
+
+```shell
+tree -L 2 runtime                                                                                               ─╯
+runtime
+├── Cargo.toml
+├── build.rs
+└── src
+    └── lib.rs
+
+1 directory, 3 files
+```
+
+### runtime/Cargo.toml结构分析
+
+#### [package]{...}
+
+#### [package.metadata.docs.rs]{...}
+
+#### [dependencies]{...}
+
+#### [build-dependencies]{...}
+
+#### [features]{...}
+
+### 四步添加pallet
+
+#### 添加依赖: Cargo.toml/[dependincies]
+
+```toml
+pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
+```
+
+#### 添加feature: Cargo.toml/[features]
+
+```toml
+[features]
+default = ["std"]
+std = [
+    #--snip--
+    'pallet-nicks/std',
+    #--snip--
+]
+```
+
+#### 配置->添加config接口: src/lib.rs
+
+```rust
+/// Add this code block to your template for Nicks:
+parameter_types! {
+    // Choose a fee that incentivizes desireable behavior.
+    pub const NickReservationFee: u128 = 100;
+    pub const MinNickLength: usize = 8;
+    // Maximum bounds on storage are important to secure your chain.
+    pub const MaxNickLength: usize = 32;
+}
+
+impl pallet_nicks::Config for Runtime {
+    // The Balances pallet implements the ReservableCurrency trait.
+    // https://substrate.dev/rustdocs/v3.0.0/pallet_balances/index.html#implementations-2
+    type Currency = pallet_balances::Module<Runtime>;
+
+    // Use the NickReservationFee from the parameter_types block.
+    type ReservationFee = NickReservationFee;
+
+    // No action is taken when deposits are forfeited.
+    type Slashed = ();
+
+    // Configure the FRAME System Root origin as the Nick pallet admin.
+    // https://substrate.dev/rustdocs/v3.0.0/frame_system/enum.RawOrigin.html#variant.Root
+    type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+
+    // Use the MinNickLength from the parameter_types block.
+    type MinLength = MinNickLength;
+
+    // Use the MaxNickLength from the parameter_types block.
+    type MaxLength = MaxNickLength;
+
+    // The ubiquitous event type.
+    type Event = Event;
+}
+```
+
+#### 定义运行时: src/lib.rs/construct_runtime!
+
+```rust
+construct_runtime!(
+    pub enum Runtime where
+        Block = Block,
+        NodeBlock = opaque::Block,
+        UncheckedExtrinsic = UncheckedExtrinsic
+    {
+        /* --snip-- */
+
+        /*** Add This Line ***/
+        Nicks: pallet_nicks::{Module, Call, Storage, Event<T>},
+    }
+);
+```
+
+### 编译->运行->启动前端
+
+```shell
+cargo build --release
+./target/release/node-template --dev --tmp
+yarn start
+```
+
+### 导入Pallet
 
 ## 参考资源
 
@@ -18,12 +287,12 @@
   > substrate官方教程里面的[第一课](https://docs.substrate.io/tutorials/v3/create-your-first-substrate-chain/)名称叫做创建我们的第一条链，
   > 实际上我觉得应该叫做启动substrate默认模板链的节点更贴切，因为这个教程里面实际上就是把一个用substrate已经开发好的模板链的代码拉下来，然后编译一下，然后再启动起来。
   > 这个过程实际上和我们拉一个比特币的代码，然后编译下然后再启动 ，并没有太大的不同。
+
     - substrate 开发环境
-    - 启动链的节点：
-      > 这里要用到node-template的代码。node-template实际上是官方提供的使用substrate开发的模板链，
-      > 可以理解为substrate官方提供的样例，后续任何人想使用substrate可以在这个样例的基础上进行修改，这样开发链就更方便。
-      > 这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。
-      > 那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。
+      > - 启动链的节点：
+          > 这里要用到node-template的代码。node-template实际上是官方提供的使用substrate开发的模板链，
+          > 可以理解为substrate官方提供的样例，后续任何人想使用substrate可以在这个样例的基础上进行修改，这样开发链就更方便。
+          > 这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。 那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。
     - 使用polkadot-js访问节点:
       在substrate官方的教程中，是使用了substrate的前端模板来访问刚才启动的节点。但是在实际的开发中，后端人员其实更多的使用polkadot-js-app来访问我们的节点，所以这里我们也使用它来访问我们的节点。
     - [文档资料](https://docs.substrate.io/tutorials/v3/create-your-first-substrate-chain/)
@@ -123,4 +392,4 @@
     - 启动parachain；
     - parachain注册；
     - 和parachain交互；
-    - 连接到添加的parachain节点。
+    - 连接到添加的parachain节点。 
