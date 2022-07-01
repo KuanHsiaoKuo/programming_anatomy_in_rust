@@ -6,7 +6,7 @@
       * [substrate文档练习](#substrate文档练习)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 23:41:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 29 10:31:34 CST 2022 -->
 
 <!--te-->
 

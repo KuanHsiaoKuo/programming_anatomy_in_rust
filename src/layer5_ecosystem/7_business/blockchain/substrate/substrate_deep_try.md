@@ -1,12 +1,13 @@
 # Substrate深入尝试pallet
 
 <!--ts-->
+
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
-   * [参考资源](#参考资源)
-      * [pallet相关](#pallet相关)
+    * [参考资源](#参考资源)
+        * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 23:41:08 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 29 10:31:31 CST 2022 -->
 
 <!--te-->
 
@@ -122,3 +123,12 @@
     3. 编写测试。
 
     - [文档资料](https://docs.substrate.io/v3/runtime/custom-rpcs/)
+- [为pallet编写benchmarking](https://web.archive.org/web/20220701080314/https://mp.weixin.qq.com/s/8DsbCwL8XkiIEbTlHx4oAg)
+  > 为pallet编写benchmarking分两种情况，如下：
+    1. 对函数进行性能测试时需要的构造条件不会涉及到本pallet以外的其它pallet；
+    2. 在对函数进行性能测试时需要先使用其它的 pallet 构造测试的先决条件。
+    ~~~admonish info title='大部分用第一种'
+    - 第一种情况相对来说比较简单，这个也比较好找到例子。
+    - 第二种情况则比较复杂，写起来也比较麻烦。
+    - 不过在我们的开发中，大部分都是第一种情况。
+    ~~~

@@ -1,10 +1,14 @@
 # 自定义类型
 
 <!--ts-->
-
+* [自定义类型](#自定义类型)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jun 28 23:40:18 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Wed Jun 29 10:30:44 CST 2022 -->
 
 <!--te-->
 
