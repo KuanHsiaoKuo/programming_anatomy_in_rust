@@ -177,6 +177,60 @@
 <ul>
 <li><a href="#%E5%B0%9D%E8%AF%95substrate">尝试Substrate</a>
 <ul>
+<li><a href="#%E5%88%9D%E4%BD%93%E9%AA%8Csubstrate%E9%93%BE">初体验Substrate链</a>
+<ul>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">设置开发环境</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8rustup%E8%AE%BE%E7%BD%AErust%E7%8E%AF%E5%A2%83">使用rustup设置rust环境</a></li>
+<li><a href="#%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83">检查环境</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%AF%E5%8A%A8%E9%93%BE%E8%8A%82%E7%82%B9">启动链节点</a></li>
+<li><a href="#%E4%B8%8B%E8%BD%BDnode-template">下载node-template</a>
+<ul>
+<li><a href="#cargotoml">Cargo.toml</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E8%AF%91">编译</a>
+<ul>
+<li><a href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能遇到的问题</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">运行节点</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8polkadot-js%E8%AE%BF%E9%97%AE%E8%8A%82%E7%82%B9">使用polkadot-js访问节点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#substrate%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">Substrate使用方式</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8subtrate-node">使用subtrate node</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8substrate-frame">使用substrate frame</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8substrate-core">使用substrate core</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">添加一个Pallet到Runtime</a>
+<ul>
+<li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
+<li><a href="#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
+<ul>
+<li><a href="#package">[package]{...}</a></li>
+<li><a href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></li>
+<li><a href="#dependencies">[dependencies]{...}</a></li>
+<li><a href="#build-dependencies">[build-dependencies]{...}</a></li>
+<li><a href="#features">[features]{...}</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B%E6%AD%A5%E6%B7%BB%E5%8A%A0pallet">四步添加pallet</a>
+<ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-%E6%B7%BB%E5%8A%A0config%E6%8E%A5%E5%8F%A3-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E8%BF%90%E8%A1%8C%E6%97%B6-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E8%AF%91-%E8%BF%90%E8%A1%8C-%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF">编译-&gt;运行-&gt;启动前端</a></li>
+<li><a href="#%E5%AF%BC%E5%85%A5pallet">导入Pallet</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
 <ul>
 <li><a href="#substrate%E6%96%87%E6%A1%A3%E7%BB%83%E4%B9%A0">substrate文档练习</a></li>
@@ -186,8 +240,253 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 16:11:41 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:17 CST 2022 -->
 <!--te-->
+<h2 id="初体验substrate链"><a class="header" href="#初体验substrate链">初体验Substrate链</a></h2>
+<p>这里主要使用官方提供的默认模版启动节点。</p>
+<h3 id="设置开发环境"><a class="header" href="#设置开发环境">设置开发环境</a></h3>
+<h4 id="使用rustup设置rust环境"><a class="header" href="#使用rustup设置rust环境">使用rustup设置rust环境</a></h4>
+<pre><code class="language-shell"># 1.安装预编译包
+sudo apt update &amp;&amp; sudo apt install -y git clang curl libssl-dev llvm libudev-dev
+
+# 2.安装Rust编译环境
+curl https://sh.rustup.rs -sSf | sh
+source ~/.cargo/env
+rustup default stable
+rustup update
+rustup update nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
+</code></pre>
+<h4 id="检查环境"><a class="header" href="#检查环境">检查环境</a></h4>
+<pre><code class="language-shell">rustc --version
+rustup show
+</code></pre>
+<h3 id="启动链节点"><a class="header" href="#启动链节点">启动链节点</a></h3>
+<div id="admonition-node-template" class="admonition info">
+<div class="admonition-title">
+<p>node-template</p>
+<p><a class="admonition-anchor-link" href="#admonition-node-template"></a></p>
+</div>
+<div>
+<p>node-template实际上是官方提供的使用substrate开发的模板链，可以理解为substrate官方提供的样例，后续任何人想使用substrate可以在这个样例的基础上进行修改，这样开发链就更方便。</p>
+<blockquote>
+<p>这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。</p>
+</blockquote>
+</div>
+</div>
+<h3 id="下载node-template"><a class="header" href="#下载node-template">下载node-template</a></h3>
+<pre><code class="language-shell">git clone https://github.com/substrate-developer-hub/substrate-node-template
+cd substrate-node-template
+git checkout latest
+</code></pre>
+<div id="admonition-node-template项目结构" class="admonition info">
+<div class="admonition-title">
+<p>node-template项目结构</p>
+<p><a class="admonition-anchor-link" href="#admonition-node-template项目结构"></a></p>
+</div>
+<div>
+<pre><code class="language-shell">tree -L 2                                                                                                                                                                                                                              ─╯
+.
+├── Cargo.lock
+├── Cargo.toml
+├── LICENSE
+├── README.md
+├── docker-compose.yml
+├── docs
+│   └── rust-setup.md
+├── node
+│   ├── Cargo.toml
+│   ├── build.rs
+│   └── src
+├── pallets
+│   └── template
+├── runtime
+│   ├── Cargo.toml
+│   ├── build.rs
+│   └── src
+├── rustfmt.toml
+├── scripts
+│   ├── docker_run.sh
+│   └── init.sh
+├── shell.nix
+└── target
+    ├── CACHEDIR.TAG
+    └── release
+
+10 directories, 15 files
+</code></pre>
+</div>
+</div>
+<h4 id="cargotoml"><a class="header" href="#cargotoml">Cargo.toml</a></h4>
+<pre><code class="language-toml">[workspace]
+members = [
+    &quot;node&quot;,
+    &quot;pallets/template&quot;,
+    &quot;runtime&quot;,
+]
+[profile.release]
+panic = &quot;unwind&quot;
+</code></pre>
+<blockquote>
+<p>可见node-template主要包含三部分：node、pallets/template、runtime</p>
+</blockquote>
+<h3 id="编译"><a class="header" href="#编译">编译</a></h3>
+<pre><code class="language-shell">cargo build --release
+</code></pre>
+<blockquote>
+<p>这个过程比较慢，会下载并编译上面三部分内的Cargo.toml列出的所有包</p>
+</blockquote>
+<h4 id="可能遇到的问题"><a class="header" href="#可能遇到的问题">可能遇到的问题</a></h4>
+<ul>
+<li>安装cmake</li>
+</ul>
+<pre><code class="language-shell">brew install cmake
+</code></pre>
+<h4 id="运行节点"><a class="header" href="#运行节点">运行节点</a></h4>
+<pre><code class="language-shell">./target/release/node-template --dev
+</code></pre>
+<h4 id="使用polkadot-js访问节点"><a class="header" href="#使用polkadot-js访问节点">使用polkadot-js访问节点</a></h4>
+<div id="admonition-polkadot-js-app" class="admonition info">
+<div class="admonition-title">
+<p>polkadot-js-app</p>
+<p><a class="admonition-anchor-link" href="#admonition-polkadot-js-app"></a></p>
+</div>
+<div>
+<p>在substrate官方的教程中，是使用了substrate的前端模板来访问刚才启动的节点。但是在实际的开发中，后端人员其实更多的使用polkadot-js-app来访问我们的节点，所以这里我们也使用它来访问我们的节点。</p>
+</div>
+</div>
+<ul>
+<li>在浏览器中输入https://polkadot.js.org/apps, 点击左上角会展开；</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-01%20at%2020.08.02%402x.png" alt="CleanShot 2022-07-01 at 20.08.02@2x" /></p>
+<ul>
+<li>
+<p>在展开的菜单中点击DEVELOPMENT；</p>
+</li>
+<li>
+<p>点击Local Node；</p>
+</li>
+<li>
+<p>点击switch。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-01%20at%2020.17.59%402x.png" alt="CleanShot 2022-07-01 at 20.17.59@2x" /></p>
+<h2 id="substrate使用方式"><a class="header" href="#substrate使用方式">Substrate使用方式</a></h2>
+<blockquote>
+<p>使用substrate的方式主要有以下几种：</p>
+</blockquote>
+<h3 id="使用subtrate-node"><a class="header" href="#使用subtrate-node">使用subtrate node</a></h3>
+<p>开发者可以运行已经设计好的substrate节点，并配置genesis区块，在此方式下只需要提供一个json文件就可以启动自己的区块链。其实我们上一节的substrate初体验，也可以看成是使用此种方式的一个例子。</p>
+<h3 id="使用substrate-frame"><a class="header" href="#使用substrate-frame">使用substrate frame</a></h3>
+<p>frame其实是一组模块（pallet）和支持库。使用substrate frame可以轻松的创建自己的自定义运行时，因为frame是用来构建底层节点的。使用frame还可以配置数据类型，也可以从模块库中选择甚至是添加自己定义的模块。</p>
+<h3 id="使用substrate-core"><a class="header" href="#使用substrate-core">使用substrate core</a></h3>
+<p>使用substrate code运行开发者完全从头开始设计运行时（runtime，问题：什么是runtime？），当然此种方式也是使用substrate自由度最大的方式。</p>
+<div id="admonition-几种方式的关系可以用图描述如下技术自由-vs-开发便利" class="admonition tip">
+<div class="admonition-title">
+<p>几种方式的关系可以用图描述如下：技术自由 vs 开发便利</p>
+<p><a class="admonition-anchor-link" href="#admonition-几种方式的关系可以用图描述如下技术自由-vs-开发便利"></a></p>
+</div>
+<div>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/technical-freedom.png" alt="Technical freedom vs development ease" /></p>
+</div>
+</div>
+<h2 id="添加一个pallet到runtime"><a class="header" href="#添加一个pallet到runtime">添加一个Pallet到Runtime</a></h2>
+<blockquote>
+<p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
+</blockquote>
+<p>接下来接着使用前面的node template</p>
+<h3 id="runtime结构分析"><a class="header" href="#runtime结构分析">runtime结构分析</a></h3>
+<pre><code class="language-shell">tree -L 2 runtime                                                                                               ─╯
+runtime
+├── Cargo.toml
+├── build.rs
+└── src
+    └── lib.rs
+
+1 directory, 3 files
+</code></pre>
+<h3 id="runtimecargotoml结构分析"><a class="header" href="#runtimecargotoml结构分析">runtime/Cargo.toml结构分析</a></h3>
+<h4 id="package"><a class="header" href="#package">[package]{...}</a></h4>
+<h4 id="packagemetadatadocsrs"><a class="header" href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></h4>
+<h4 id="dependencies"><a class="header" href="#dependencies">[dependencies]{...}</a></h4>
+<h4 id="build-dependencies"><a class="header" href="#build-dependencies">[build-dependencies]{...}</a></h4>
+<h4 id="features"><a class="header" href="#features">[features]{...}</a></h4>
+<h3 id="四步添加pallet"><a class="header" href="#四步添加pallet">四步添加pallet</a></h3>
+<h4 id="添加依赖-cargotomldependincies"><a class="header" href="#添加依赖-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></h4>
+<pre><code class="language-toml">pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
+</code></pre>
+<h4 id="添加feature-cargotomlfeatures"><a class="header" href="#添加feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></h4>
+<pre><code class="language-toml">[features]
+default = [&quot;std&quot;]
+std = [
+    #--snip--
+    'pallet-nicks/std',
+    #--snip--
+]
+</code></pre>
+<h4 id="配置-添加config接口-srclibrs"><a class="header" href="#配置-添加config接口-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></h4>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Add this code block to your template for Nicks:
+parameter_types! {
+    // Choose a fee that incentivizes desireable behavior.
+    pub const NickReservationFee: u128 = 100;
+    pub const MinNickLength: usize = 8;
+    // Maximum bounds on storage are important to secure your chain.
+    pub const MaxNickLength: usize = 32;
+}
+
+impl pallet_nicks::Config for Runtime {
+    // The Balances pallet implements the ReservableCurrency trait.
+    // https://substrate.dev/rustdocs/v3.0.0/pallet_balances/index.html#implementations-2
+    type Currency = pallet_balances::Module&lt;Runtime&gt;;
+
+    // Use the NickReservationFee from the parameter_types block.
+    type ReservationFee = NickReservationFee;
+
+    // No action is taken when deposits are forfeited.
+    type Slashed = ();
+
+    // Configure the FRAME System Root origin as the Nick pallet admin.
+    // https://substrate.dev/rustdocs/v3.0.0/frame_system/enum.RawOrigin.html#variant.Root
+    type ForceOrigin = frame_system::EnsureRoot&lt;AccountId&gt;;
+
+    // Use the MinNickLength from the parameter_types block.
+    type MinLength = MinNickLength;
+
+    // Use the MaxNickLength from the parameter_types block.
+    type MaxLength = MaxNickLength;
+
+    // The ubiquitous event type.
+    type Event = Event;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="定义运行时-srclibrsconstruct_runtime"><a class="header" href="#定义运行时-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></h4>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>construct_runtime!(
+    pub enum Runtime where
+        Block = Block,
+        NodeBlock = opaque::Block,
+        UncheckedExtrinsic = UncheckedExtrinsic
+    {
+        /* --snip-- */
+
+        /*** Add This Line ***/
+        Nicks: pallet_nicks::{Module, Call, Storage, Event&lt;T&gt;},
+    }
+);
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="编译-运行-启动前端"><a class="header" href="#编译-运行-启动前端">编译-&gt;运行-&gt;启动前端</a></h3>
+<pre><code class="language-shell">cargo build --release
+./target/release/node-template --dev --tmp
+yarn start
+</code></pre>
+<h3 id="导入pallet"><a class="header" href="#导入pallet">导入Pallet</a></h3>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h3 id="substrate文档练习"><a class="header" href="#substrate文档练习">substrate文档练习</a></h3>
 <ul>
@@ -199,13 +498,14 @@
 这个过程实际上和我们拉一个比特币的代码，然后编译下然后再启动 ，并没有太大的不同。</p>
 </blockquote>
 <ul>
-<li>substrate 开发环境</li>
-<li>启动链的节点：
+<li>substrate 开发环境
 <blockquote>
-<p>这里要用到node-template的代码。node-template实际上是官方提供的使用substrate开发的模板链，
-可以理解为substrate官方提供的样例，后续任何人想使用substrate可以在这个样例的基础上进行修改，这样开发链就更方便。
-这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。
-那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。</p>
+<ul>
+<li>启动链的节点：
+&gt; 这里要用到node-template的代码。node-template实际上是官方提供的使用substrate开发的模板链，
+&gt; 可以理解为substrate官方提供的样例，后续任何人想使用substrate可以在这个样例的基础上进行修改，这样开发链就更方便。
+&gt; 这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。 那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。</li>
+</ul>
 </blockquote>
 </li>
 <li>使用polkadot-js访问节点:
@@ -412,7 +712,7 @@ substrate可以在不分叉的情况下更新runtime，因为运行时的定义�
 <li>启动parachain；</li>
 <li>parachain注册；</li>
 <li>和parachain交互；</li>
-<li>连接到添加的parachain节点。</li>
+<li>连接到添加的parachain节点。 </li>
 </ul>
 </li>
 </ul>

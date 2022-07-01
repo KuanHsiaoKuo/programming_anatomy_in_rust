@@ -217,7 +217,21 @@
 </li>
 <li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a>
 <ul>
-<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9E%B6%E6%9E%84">客户端架构</a></li>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9E%B6%E6%9E%84">客户端架构</a>
+<ul>
+<li><a href="#%E6%9E%B6%E6%9E%84%E5%9B%BE">架构图</a></li>
+<li><a href="#%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E">模块说明</a>
+<ul>
+<li><a href="#%E5%AD%98%E5%82%A8">存储</a></li>
+<li><a href="#runtime">Runtime</a></li>
+<li><a href="#p2p%E7%BD%91%E7%BB%9C">p2p网络</a></li>
+<li><a href="#%E5%85%B1%E8%AF%86">共识</a></li>
+<li><a href="#rpc">RPC</a></li>
+<li><a href="#telemetry-%E9%81%A5%E6%B5%8B">telemetry （遥测）</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#tree-level1">Tree Level1</a>
 <ul>
 <li><a href="#%E7%94%A8cargo%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81">用Cargo组织代码</a></li>
@@ -249,7 +263,7 @@
 <ul>
 <li><a href="#online-book">online-book</a></li>
 <li><a href="#fragment">fragment</a></li>
-<li><a href="#runtime">Runtime</a></li>
+<li><a href="#runtime-1">Runtime</a></li>
 <li><a href="#local">local</a></li>
 </ul>
 </li>
@@ -257,7 +271,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 16:11:39 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:15 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -685,6 +699,7 @@ Runtime：链功能</p>
 <h2 id="项目结构"><a class="header" href="#项目结构">项目结构</a></h2>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/substrate_github.gif" alt="substrate_github" /></p>
 <h3 id="客户端架构"><a class="header" href="#客户端架构">客户端架构</a></h3>
+<h4 id="架构图"><a class="header" href="#架构图">架构图</a></h4>
 <div id="admonition-substrate-client" class="admonition tip">
 <div class="admonition-title">
 <p>Substrate Client</p>
@@ -725,8 +740,26 @@ Runtime：链功能</p>
 </code></pre>
 </div>
 </div>
-<p>现在我们知道了 Substrate 是什么，让我们对框架、它的移动部分以及我们可以用来创建自定义区块链的扩展点进行高级概述。 由于我们在这里处理的是去中心化的点对点系统，所以我们谈论的基本单元是节点,这是我们的区块链运行的地方。
+<p>现在我们知道了 Substrate 是什么，让我们对框架、它的移动部分以及我们可以用来创建自定义区块链的扩展点进行高级概述。 
+由于我们在这里处理的是去中心化的点对点系统，所以我们谈论的基本单元是节点,这是我们的区块链运行的地方。
 该节点在客户端内部运行，并提供系统运行所需的所有基本组件，例如p2p网络、区块链的存储、块处理和共识的逻辑，以及从外部与区块链交互的能力。</p>
+<h4 id="模块说明"><a class="header" href="#模块说明">模块说明</a></h4>
+<blockquote>
+<p>substrate客户端是基于substrate实现的区块链的节点客户端（可以理解为全节点），
+它主要由以下几个组件组成（以下也就是告诉我们实现一条链由哪几部分组成）：</p>
+</blockquote>
+<h5 id="存储"><a class="header" href="#存储">存储</a></h5>
+<p>用来维持区块链系统所呈现的状态演变。substrate提供了的存储方式是一种简单有效的key-value对存储机制的方式。</p>
+<h5 id="runtime"><a class="header" href="#runtime">Runtime</a></h5>
+<p>这里就可以回答上面的问题，什么是runtime？runtime定义了区块的处理方式，主要是状态转换的逻辑。在substrate中，runtime code被编译成wasm作为区块链存储状态的一部分。</p>
+<h5 id="p2p网络"><a class="header" href="#p2p网络">p2p网络</a></h5>
+<p>允许客户端和其它网络参与者进行通信。</p>
+<h5 id="共识"><a class="header" href="#共识">共识</a></h5>
+<p>提供了一种逻辑，能使网络参与者就区块链的状态达成一致。 substrate 支持提供自定义的共识引擎。</p>
+<h5 id="rpc"><a class="header" href="#rpc">RPC</a></h5>
+<p>远程过程调用。</p>
+<h5 id="telemetry-遥测"><a class="header" href="#telemetry-遥测">telemetry （遥测）</a></h5>
+<p>通过嵌入式Prometheus服务器的方式对外展示（我理解应该是类似于区块链浏览器一样的东西，或者是提供信息给区块链浏览器展示）。</p>
 <h3 id="tree-level1"><a class="header" href="#tree-level1">Tree Level1</a></h3>
 <p>首先来看看项目的整理结构：</p>
 <pre><code class="language-shell"> tree -L 1 | pbcopy                                                                                                                                                                                                                        ─╯
@@ -1166,7 +1199,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="https://medium.com/frctls/the-substrate-guide-i-wish-i-had-6bc76b10ddd2">The Substrate Guide I Wish I Had. Fractal’s blockchain lead Shelby… | by Fractal | Fractal | Medium</a></li>
 <li><a href="https://docs.substrate.io/reference/how-to-guides/">How-to quick reference guides | Substrate Docs</a></li>
 </ul>
-<h3 id="runtime"><a class="header" href="#runtime">Runtime</a></h3>
+<h3 id="runtime-1"><a class="header" href="#runtime-1">Runtime</a></h3>
 <ul>
 <li><a href="https://web.archive.org/web/20220627114404/https://zhuanlan.zhihu.com/p/79539782">剖析Substrate Runtime - 知乎</a>
 <blockquote>
