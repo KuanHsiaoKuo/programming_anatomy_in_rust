@@ -1,28 +1,10 @@
 # 模块相关
 
 <!--ts-->
-* [模块相关](#模块相关)
-   * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
-      * [Package: 包含Cargo.toml](#package-包含cargotoml)
-      * [workspace与package](#workspace与package)
-      * [crate: 主要在Cargo.toml的[bin]/[lib]中指明](#crate-主要在cargotoml的binlib中指明)
-      * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
-      * [module](#module)
-   * [模块呈现方式](#模块呈现方式)
-      * [嵌套模块](#嵌套模块)
-      * [文件模块](#文件模块)
-      * [目录模块](#目录模块)
-   * [隐私与导入导出](#隐私与导入导出)
-      * [隐私管理](#隐私管理)
-      * [嵌套导入](#嵌套导入)
-      * [再次导出](#再次导出)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 16:10:34 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:11:36 CST 2022 -->
 
 <!--te-->
 

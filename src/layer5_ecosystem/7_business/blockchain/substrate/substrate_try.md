@@ -1,13 +1,42 @@
 # 尝试Substrate
 
 <!--ts-->
-
 * [尝试Substrate](#尝试substrate)
-    * [参考资源](#参考资源)
-        * [substrate文档练习](#substrate文档练习)
+   * [初体验Substrate链](#初体验substrate链)
+      * [设置开发环境](#设置开发环境)
+         * [使用rustup设置rust环境](#使用rustup设置rust环境)
+         * [检查环境](#检查环境)
+      * [启动链节点](#启动链节点)
+      * [下载node-template](#下载node-template)
+         * [Cargo.toml](#cargotoml)
+      * [编译](#编译)
+         * [可能遇到的问题](#可能遇到的问题)
+         * [运行节点](#运行节点)
+         * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
+   * [Substrate使用方式](#substrate使用方式)
+      * [使用subtrate node](#使用subtrate-node)
+      * [使用substrate frame](#使用substrate-frame)
+      * [使用substrate core](#使用substrate-core)
+   * [添加一个Pallet到Runtime](#添加一个pallet到runtime)
+      * [runtime结构分析](#runtime结构分析)
+      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+         * [[package]{...}](#package)
+         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+         * [[dependencies]{...}](#dependencies)
+         * [[build-dependencies]{...}](#build-dependencies)
+         * [[features]{...}](#features)
+      * [四步添加pallet](#四步添加pallet)
+         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+      * [导入Pallet](#导入pallet)
+   * [参考资源](#参考资源)
+      * [substrate文档练习](#substrate文档练习)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 16:11:41 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:17 CST 2022 -->
 
 <!--te-->
 
