@@ -68,6 +68,26 @@ runtime
 pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
 ```
 
+~~~admonish warn title='排地雷'
+由于官方文档和代码一直都在更新，可能会出现问题，这里就需要根据默认依赖的substrate分支进行更换
+```toml
+[dependencies]
+sp-std = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24" }
+```
+如上所示，对应的分支为：branch = "polkadot-v0.9.24", 所以需要改成：
+
+```toml
+[dependencies.pallet-nicks]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+#tag = 'monthly-2021-10'
+#tag = 'monthly-2022-04'
+branch = "polkadot-v0.9.24"
+version = '4.0.0-dev'
+```
+> 详见: [cargo 与 git](/layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-与-git-的关联)
+~~~
+
 #### 添加feature: Cargo.toml/[features]
 
 ```toml

@@ -1,26 +1,27 @@
 # 尝试Substrate
 
 <!--ts-->
+
 * [尝试Substrate](#尝试substrate)
-   * [初体验Substrate链](#初体验substrate链)
-      * [设置开发环境](#设置开发环境)
-         * [使用rustup设置rust环境](#使用rustup设置rust环境)
-         * [检查环境](#检查环境)
-      * [启动链节点](#启动链节点)
-         * [下载node-template](#下载node-template)
-         * [node-templeate项目结构](#node-templeate项目结构)
-         * [Cargo.toml](#cargotoml)
-         * [编译](#编译)
-         * [可能遇到的问题](#可能遇到的问题)
-         * [本地运行节点](#本地运行节点)
-         * [docker运行节点](#docker运行节点)
-         * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
-   * [Substrate使用方式](#substrate使用方式)
-      * [使用subtrate node](#使用subtrate-node)
-      * [使用substrate frame](#使用substrate-frame)
-      * [使用substrate core](#使用substrate-core)
-   * [参考资源](#参考资源)
-      * [substrate文档练习](#substrate文档练习)
+    * [初体验Substrate链](#初体验substrate链)
+        * [设置开发环境](#设置开发环境)
+            * [使用rustup设置rust环境](#使用rustup设置rust环境)
+            * [检查环境](#检查环境)
+        * [启动链节点](#启动链节点)
+            * [下载node-template](#下载node-template)
+            * [node-templeate项目结构](#node-templeate项目结构)
+            * [Cargo.toml](#cargotoml)
+            * [编译](#编译)
+            * [可能遇到的问题](#可能遇到的问题)
+            * [本地运行节点](#本地运行节点)
+            * [docker运行节点](#docker运行节点)
+            * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
+    * [Substrate使用方式](#substrate使用方式)
+        * [使用subtrate node](#使用subtrate-node)
+        * [使用substrate frame](#使用substrate-frame)
+        * [使用substrate core](#使用substrate-core)
+    * [参考资源](#参考资源)
+        * [substrate文档练习](#substrate文档练习)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:06 CST 2022 -->
@@ -30,6 +31,13 @@
 ## 初体验Substrate链
 
 这里主要使用官方提供的默认模版启动节点。
+
+```admonish warn title='一定要注意文档是否更新'
+由于rust对crate的版本只能检查，无法解决冲突问题，需要手动进行，所以一定要注意文档是否有更新，尤其是里面的代码
+```
+
+[New Substrate documentation released · Issue #1132 · substrate-developer-hub/substrate-docs](https://github.com/substrate-developer-hub/substrate-docs/issues/1132)
+> 另外，substrate官方文档也一直处在更新状态中。
 
 ### 设置开发环境
 
@@ -73,7 +81,9 @@ git checkout latest
 ~~~admonish warn title='⚠️注意查看最新分支的编号'
 /home/substrate-node-template on  #polkadot-v0.9.24
 ~~~
+
 #### node-templeate项目结构
+
 ~~~admonish info title='node-template项目结构'
 ```shell
 tree -L 2                                                                                                                                                                                                                              ─╯
@@ -122,6 +132,25 @@ panic = "unwind"
 ```
 
 > 可见node-template主要包含三部分：node、pallets/template、runtime
+
+#### 编译前的检查
+
+```shell
+cargo check -p node-template-runtime
+```
+
+~~~admonish tip title='IDEA将会在修改Cargo.toml之后自动执行指令进行检查'
+```shell
+cargo metadata --verbose --format-version 1 --all-features
+```
+~~~
+
+- [cargo metadata - The Cargo Book](https://doc.rust-lang.org/cargo/commands/cargo-metadata.html)
+
+> Output JSON to stdout containing information about the workspace members and resolved dependencies of the current package.
+
+It is recommended to include the --format-version flag to future-proof your code to ensure the output is in the format
+you are expecting.
 
 #### 编译
 
@@ -184,8 +213,6 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 ```admonish tip title='几种方式的关系可以用图描述如下：技术自由 vs 开发便利'
 ![Technical freedom vs development ease](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/technical-freedom.png)
 ```
-
-
 
 ## 参考资源
 
