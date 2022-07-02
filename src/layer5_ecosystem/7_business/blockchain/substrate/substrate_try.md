@@ -7,36 +7,23 @@
          * [使用rustup设置rust环境](#使用rustup设置rust环境)
          * [检查环境](#检查环境)
       * [启动链节点](#启动链节点)
-      * [下载node-template](#下载node-template)
+         * [下载node-template](#下载node-template)
+         * [node-templeate项目结构](#node-templeate项目结构)
          * [Cargo.toml](#cargotoml)
-      * [编译](#编译)
+         * [编译](#编译)
          * [可能遇到的问题](#可能遇到的问题)
-         * [运行节点](#运行节点)
+         * [本地运行节点](#本地运行节点)
+         * [docker运行节点](#docker运行节点)
          * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
    * [Substrate使用方式](#substrate使用方式)
       * [使用subtrate node](#使用subtrate-node)
       * [使用substrate frame](#使用substrate-frame)
       * [使用substrate core](#使用substrate-core)
-   * [添加一个Pallet到Runtime](#添加一个pallet到runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
-         * [[package]{...}](#package)
-         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
-         * [[dependencies]{...}](#dependencies)
-         * [[build-dependencies]{...}](#build-dependencies)
-         * [[features]{...}](#features)
-      * [四步添加pallet](#四步添加pallet)
-         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
-         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
-         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
-         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
-      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-      * [导入Pallet](#导入pallet)
    * [参考资源](#参考资源)
       * [substrate文档练习](#substrate文档练习)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:17 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:06 CST 2022 -->
 
 <!--te-->
 
@@ -75,7 +62,7 @@ node-template实际上是官方提供的使用substrate开发的模板链，可�
 > 这就好比以前的好多山寨链，在btc的源码上改下创世区块的配置，就是一条新链。那么substrate其实也一样，提供了node-template这样一个模板，后续根据需求在这个上面改吧改吧，就能产生一条新链。
 ~~~
 
-### 下载node-template
+#### 下载node-template
 
 ```shell
 git clone https://github.com/substrate-developer-hub/substrate-node-template
@@ -83,6 +70,10 @@ cd substrate-node-template
 git checkout latest
 ```
 
+~~~admonish warn title='⚠️注意查看最新分支的编号'
+/home/substrate-node-template on  #polkadot-v0.9.24
+~~~
+#### node-templeate项目结构
 ~~~admonish info title='node-template项目结构'
 ```shell
 tree -L 2                                                                                                                                                                                                                              ─╯
@@ -132,7 +123,7 @@ panic = "unwind"
 
 > 可见node-template主要包含三部分：node、pallets/template、runtime
 
-### 编译
+#### 编译
 
 ```shell
 cargo build --release
@@ -148,11 +139,13 @@ cargo build --release
 brew install cmake
 ```
 
-#### 运行节点
+#### 本地运行节点
 
 ```shell
 ./target/release/node-template --dev
 ```
+
+#### docker运行节点
 
 #### 使用polkadot-js访问节点
 
@@ -192,121 +185,7 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 ![Technical freedom vs development ease](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/technical-freedom.png)
 ```
 
-## 添加一个Pallet到Runtime
 
-> substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet
-
-接下来接着使用前面的node template
-
-### runtime结构分析
-
-```shell
-tree -L 2 runtime                                                                                               ─╯
-runtime
-├── Cargo.toml
-├── build.rs
-└── src
-    └── lib.rs
-
-1 directory, 3 files
-```
-
-### runtime/Cargo.toml结构分析
-
-#### [package]{...}
-
-#### [package.metadata.docs.rs]{...}
-
-#### [dependencies]{...}
-
-#### [build-dependencies]{...}
-
-#### [features]{...}
-
-### 四步添加pallet
-
-#### 添加依赖: Cargo.toml/[dependincies]
-
-```toml
-pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
-```
-
-#### 添加feature: Cargo.toml/[features]
-
-```toml
-[features]
-default = ["std"]
-std = [
-    #--snip--
-    'pallet-nicks/std',
-    #--snip--
-]
-```
-
-#### 配置->添加config接口: src/lib.rs
-
-```rust
-/// Add this code block to your template for Nicks:
-parameter_types! {
-    // Choose a fee that incentivizes desireable behavior.
-    pub const NickReservationFee: u128 = 100;
-    pub const MinNickLength: usize = 8;
-    // Maximum bounds on storage are important to secure your chain.
-    pub const MaxNickLength: usize = 32;
-}
-
-impl pallet_nicks::Config for Runtime {
-    // The Balances pallet implements the ReservableCurrency trait.
-    // https://substrate.dev/rustdocs/v3.0.0/pallet_balances/index.html#implementations-2
-    type Currency = pallet_balances::Module<Runtime>;
-
-    // Use the NickReservationFee from the parameter_types block.
-    type ReservationFee = NickReservationFee;
-
-    // No action is taken when deposits are forfeited.
-    type Slashed = ();
-
-    // Configure the FRAME System Root origin as the Nick pallet admin.
-    // https://substrate.dev/rustdocs/v3.0.0/frame_system/enum.RawOrigin.html#variant.Root
-    type ForceOrigin = frame_system::EnsureRoot<AccountId>;
-
-    // Use the MinNickLength from the parameter_types block.
-    type MinLength = MinNickLength;
-
-    // Use the MaxNickLength from the parameter_types block.
-    type MaxLength = MaxNickLength;
-
-    // The ubiquitous event type.
-    type Event = Event;
-}
-```
-
-#### 定义运行时: src/lib.rs/construct_runtime!
-
-```rust
-construct_runtime!(
-    pub enum Runtime where
-        Block = Block,
-        NodeBlock = opaque::Block,
-        UncheckedExtrinsic = UncheckedExtrinsic
-    {
-        /* --snip-- */
-
-        /*** Add This Line ***/
-        Nicks: pallet_nicks::{Module, Call, Storage, Event<T>},
-    }
-);
-```
-
-### 编译->运行->启动前端
-
-```shell
-cargo build --release
-./target/release/node-template --dev --tmp
-yarn start
-```
-
-### 导入Pallet
 
 ## 参考资源
 
@@ -341,12 +220,7 @@ yarn start
         4. 共识: 提供了一种逻辑，能使网络参与者就区块链的状态达成一致。substrate支持提供自定义的共识引擎。
         5. RPC: 远程过程调用。
         6. telemetry: 通过嵌入式Prometheus服务器的方式对外展示（我理解应该是类似于区块链浏览器一样的东西，或者是提供信息给区块链浏览器展示）。
-- [添加一个pallet到runtime](https://web.archive.org/web/20220628065009/https://mp.weixin.qq.com/s/iQ6a-diWMfYDghuLVPJd9Q)
-  > substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet。本节我们将学习如何将Pallet添加到runtime中。
-    1. 安装Node Template
-    2. 导入Pallet
-    3. 配置Pallet
-    4. 将Nicks添加到construct_runtime!中
+
 - [构建一个PoE(Prove of Existence)去中心化的应用](https://web.archive.org/web/20220628065030/https://mp.weixin.qq.com/s/MrnenO7AWhrf_-3Qs-aRJg)
   > substrat官方手册的第三个例子，使用substrate来创建自定义的存在证明dapp。我们本节的主要内容分为以下三步：
     1. 基于node template启动一条substrate的链。

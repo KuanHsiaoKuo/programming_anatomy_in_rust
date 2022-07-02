@@ -3,17 +3,165 @@
 <!--ts-->
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
    * [参考资源](#参考资源)
+   * [添加一个Pallet到Runtime](#添加一个pallet到runtime)
+      * [runtime结构分析](#runtime结构分析)
+      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+         * [[package]{...}](#package)
+         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+         * [[dependencies]{...}](#dependencies)
+         * [[build-dependencies]{...}](#build-dependencies)
+         * [[features]{...}](#features)
+      * [四步添加pallet](#四步添加pallet)
+         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+      * [导入Pallet](#导入pallet)
+      * [可能出现的问题](#可能出现的问题)
+   * [参考资料](#参考资料)
       * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:03 CST 2022 -->
 
 <!--te-->
 
 ## 参考资源
 
+## 添加一个Pallet到Runtime
+
+> substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet
+
+接下来接着使用前面的node template
+
+### runtime结构分析
+
+```shell
+tree -L 2 runtime                                                                                               ─╯
+runtime
+├── Cargo.toml
+├── build.rs
+└── src
+    └── lib.rs
+
+1 directory, 3 files
+```
+
+### runtime/Cargo.toml结构分析
+
+#### [package]{...}
+
+#### [package.metadata.docs.rs]{...}
+
+#### [dependencies]{...}
+
+#### [build-dependencies]{...}
+
+#### [features]{...}
+
+### 四步添加pallet
+
+#### 添加依赖: Cargo.toml/[dependincies]
+
+```toml
+pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
+```
+
+#### 添加feature: Cargo.toml/[features]
+
+```toml
+[features]
+default = ["std"]
+std = [
+    #--snip--
+    'pallet-nicks/std',
+    #--snip--
+]
+```
+
+#### 配置->添加config接口: src/lib.rs
+
+```rust
+/// Add this code block to your template for Nicks:
+parameter_types! {
+    // Choose a fee that incentivizes desireable behavior.
+    pub const NickReservationFee: u128 = 100;
+    pub const MinNickLength: usize = 8;
+    // Maximum bounds on storage are important to secure your chain.
+    pub const MaxNickLength: usize = 32;
+}
+
+impl pallet_nicks::Config for Runtime {
+    // The Balances pallet implements the ReservableCurrency trait.
+    // https://substrate.dev/rustdocs/v3.0.0/pallet_balances/index.html#implementations-2
+    type Currency = pallet_balances::Module<Runtime>;
+
+    // Use the NickReservationFee from the parameter_types block.
+    type ReservationFee = NickReservationFee;
+
+    // No action is taken when deposits are forfeited.
+    type Slashed = ();
+
+    // Configure the FRAME System Root origin as the Nick pallet admin.
+    // https://substrate.dev/rustdocs/v3.0.0/frame_system/enum.RawOrigin.html#variant.Root
+    type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+
+    // Use the MinNickLength from the parameter_types block.
+    type MinLength = MinNickLength;
+
+    // Use the MaxNickLength from the parameter_types block.
+    type MaxLength = MaxNickLength;
+
+    // The ubiquitous event type.
+    type Event = Event;
+}
+```
+
+#### 定义运行时: src/lib.rs/construct_runtime!
+
+```rust
+construct_runtime!(
+    pub enum Runtime where
+        Block = Block,
+        NodeBlock = opaque::Block,
+        UncheckedExtrinsic = UncheckedExtrinsic
+    {
+        /* --snip-- */
+
+        /*** Add This Line ***/
+        Nicks: pallet_nicks::{Module, Call, Storage, Event<T>},
+    }
+);
+```
+
+### 编译->运行->启动前端
+
+```shell
+cargo build --release
+./target/release/node-template --dev --tmp
+yarn start
+```
+
+### 导入Pallet
+
+### 可能出现的问题
+
+- [Conflicts when adding pallet to substrate-node-template · Issue #9 · substrate-developer-hub/pallet-did](https://github.com/substrate-developer-hub/pallet-did/issues/9)
+- [substrate node template - "error: failed to select a version for `parity-util-mem`" - Substrate and Polkadot Stack Exchange](https://substrate.stackexchange.com/questions/2774/error-failed-to-select-a-version-for-parity-util-mem)
+
+## 参考资料
+
 ### pallet相关
 
+- [添加一个pallet到runtime](https://web.archive.org/web/20220628065009/https://mp.weixin.qq.com/s/iQ6a-diWMfYDghuLVPJd9Q)
+  > substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet。本节我们将学习如何将Pallet添加到runtime中。
+    1. 安装Node Template
+    2. 导入Pallet
+    3. 配置Pallet
+    4. 将Nicks添加到construct_runtime!中
+
+    - [Add a pallet to the runtime | Substrate_ Docs](https://docs.substrate.io/tutorials/work-with-pallets/add-a-pallet/)
 - [Pallet前置知识](https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg)
     - trait的孤儿规则
     - trait对象
