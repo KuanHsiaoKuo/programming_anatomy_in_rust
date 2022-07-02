@@ -175,8 +175,91 @@
                 <h1 id="cargo与crate生命周期"><a class="header" href="#cargo与crate生命周期">Cargo与crate生命周期</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/cargo_ship.jpeg" alt="cargo_ship" /></p>
 <!--ts-->
+<ul>
+<li><a href="#cargo%E4%B8%8Ecrate%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">Cargo与crate生命周期</a>
+<ul>
+<li><a href="#cargo--%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%90%86%E8%A7%A3cargo%E6%8C%87%E4%BB%A4%E7%B3%BB%E5%88%97">cargo : 用生命周期理解Cargo指令系列</a>
+<ul>
+<li><a href="#%E6%96%B0%E5%BB%BA">新建</a>
+<ul>
+<li><a href="#cargo-new">cargo new</a></li>
+<li><a href="#cargo-init">cargo init</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%80%E5%8F%91">开发</a>
+<ul>
+<li><a href="#cargo-clean">cargo clean</a></li>
+<li><a href="#cargo-doc">cargo doc</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86">依赖管理</a>
+<ul>
+<li><a href="#cargo-check">cargo check</a></li>
+<li><a href="#cargo-fix">cargo fix</a></li>
+<li><a href="#cargo-fetch">cargo fetch</a></li>
+<li><a href="#cargo-searchinstalluninstall">cargo search/install/uninstall</a></li>
+<li><a href="#cargo-report">cargo report</a></li>
+<li><a href="#cargo-generate-lockfile">cargo generate-lockfile</a></li>
+<li><a href="#cargo-locate-project">cargo locate-project</a></li>
+<li><a href="#cargo-metadata">cargo metadata</a></li>
+<li><a href="#cargo-pkgid">cargo pkgid</a></li>
+<li><a href="#cargo-tree">cargo tree</a></li>
+<li><a href="#cargo-update">cargo update</a></li>
+<li><a href="#cargo-vendor">cargo vendor</a></li>
+<li><a href="#cargo-verify-project">cargo verify-project</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%8B%E8%AF%95">测试</a>
+<ul>
+<li><a href="#cargo-test">cargo test</a></li>
+<li><a href="#cargo-bench">cargo bench</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%90%E8%A1%8C">运行</a>
+<ul>
+<li><a href="#cargo-run">cargo run</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9E%84%E5%BB%BA">构建</a>
+<ul>
+<li><a href="#cargo-rustc">cargo rustc</a></li>
+<li><a href="#cargo-build">cargo build</a></li>
+<li><a href="#cargo-rustdoc">cargo rustdoc</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%91%E5%B8%83">发布</a>
+<ul>
+<li><a href="#cargo-login">cargo login</a></li>
+<li><a href="#cargo-owner">cargo owner</a></li>
+<li><a href="#cargo-package">cargo package</a></li>
+<li><a href="#cargo-publish">cargo publish</a></li>
+<li><a href="#cargo-yank">cargo yank</a></li>
+<li><a href="#cargo-owner-1">cargo owner</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%B4%E6%8A%A4">维护</a></li>
+<li><a href="#%E5%88%86%E5%8C%BA">分区</a></li>
+</ul>
+</li>
+<li><a href="#cargotoml%E7%BB%86%E8%AF%B4">Cargo.toml细说</a></li>
+<li><a href="#rust%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93">Rust程序运行方式总结</a>
+<ul>
+<li><a href="#%E8%84%9A%E6%9C%AC">脚本</a></li>
+<li><a href="#%E9%A1%B9%E7%9B%AE">项目</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="#online-book">online-book</a></li>
+<li><a href="#fragment">fragment</a></li>
+<li><a href="#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:11:15 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:04:19 CST 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
 <h3 id="新建"><a class="header" href="#新建">新建</a></h3>

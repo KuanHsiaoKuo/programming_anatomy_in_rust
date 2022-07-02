@@ -177,7 +177,33 @@
 <ul>
 <li><a href="#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
 <ul>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">添加一个Pallet到Runtime</a>
+<ul>
+<li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
+<li><a href="#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
+<ul>
+<li><a href="#package">[package]{...}</a></li>
+<li><a href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></li>
+<li><a href="#dependencies">[dependencies]{...}</a></li>
+<li><a href="#build-dependencies">[build-dependencies]{...}</a></li>
+<li><a href="#features">[features]{...}</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B%E6%AD%A5%E6%B7%BB%E5%8A%A0pallet">四步添加pallet</a>
+<ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-%E6%B7%BB%E5%8A%A0config%E6%8E%A5%E5%8F%A3-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E8%BF%90%E8%A1%8C%E6%97%B6-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E8%AF%91-%E8%BF%90%E8%A1%8C-%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF">编译-&gt;运行-&gt;启动前端</a></li>
+<li><a href="#%E5%AF%BC%E5%85%A5pallet">导入Pallet</a></li>
+<li><a href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能出现的问题</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
 <ul>
 <li><a href="#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
 </ul>
@@ -186,11 +212,129 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:03 CST 2022 -->
 <!--te-->
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<h2 id="添加一个pallet到runtime"><a class="header" href="#添加一个pallet到runtime">添加一个Pallet到Runtime</a></h2>
+<blockquote>
+<p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
+</blockquote>
+<p>接下来接着使用前面的node template</p>
+<h3 id="runtime结构分析"><a class="header" href="#runtime结构分析">runtime结构分析</a></h3>
+<pre><code class="language-shell">tree -L 2 runtime                                                                                               ─╯
+runtime
+├── Cargo.toml
+├── build.rs
+└── src
+    └── lib.rs
+
+1 directory, 3 files
+</code></pre>
+<h3 id="runtimecargotoml结构分析"><a class="header" href="#runtimecargotoml结构分析">runtime/Cargo.toml结构分析</a></h3>
+<h4 id="package"><a class="header" href="#package">[package]{...}</a></h4>
+<h4 id="packagemetadatadocsrs"><a class="header" href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></h4>
+<h4 id="dependencies"><a class="header" href="#dependencies">[dependencies]{...}</a></h4>
+<h4 id="build-dependencies"><a class="header" href="#build-dependencies">[build-dependencies]{...}</a></h4>
+<h4 id="features"><a class="header" href="#features">[features]{...}</a></h4>
+<h3 id="四步添加pallet"><a class="header" href="#四步添加pallet">四步添加pallet</a></h3>
+<h4 id="添加依赖-cargotomldependincies"><a class="header" href="#添加依赖-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></h4>
+<pre><code class="language-toml">pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
+</code></pre>
+<h4 id="添加feature-cargotomlfeatures"><a class="header" href="#添加feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></h4>
+<pre><code class="language-toml">[features]
+default = [&quot;std&quot;]
+std = [
+    #--snip--
+    'pallet-nicks/std',
+    #--snip--
+]
+</code></pre>
+<h4 id="配置-添加config接口-srclibrs"><a class="header" href="#配置-添加config接口-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></h4>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Add this code block to your template for Nicks:
+parameter_types! {
+    // Choose a fee that incentivizes desireable behavior.
+    pub const NickReservationFee: u128 = 100;
+    pub const MinNickLength: usize = 8;
+    // Maximum bounds on storage are important to secure your chain.
+    pub const MaxNickLength: usize = 32;
+}
+
+impl pallet_nicks::Config for Runtime {
+    // The Balances pallet implements the ReservableCurrency trait.
+    // https://substrate.dev/rustdocs/v3.0.0/pallet_balances/index.html#implementations-2
+    type Currency = pallet_balances::Module&lt;Runtime&gt;;
+
+    // Use the NickReservationFee from the parameter_types block.
+    type ReservationFee = NickReservationFee;
+
+    // No action is taken when deposits are forfeited.
+    type Slashed = ();
+
+    // Configure the FRAME System Root origin as the Nick pallet admin.
+    // https://substrate.dev/rustdocs/v3.0.0/frame_system/enum.RawOrigin.html#variant.Root
+    type ForceOrigin = frame_system::EnsureRoot&lt;AccountId&gt;;
+
+    // Use the MinNickLength from the parameter_types block.
+    type MinLength = MinNickLength;
+
+    // Use the MaxNickLength from the parameter_types block.
+    type MaxLength = MaxNickLength;
+
+    // The ubiquitous event type.
+    type Event = Event;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="定义运行时-srclibrsconstruct_runtime"><a class="header" href="#定义运行时-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></h4>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>construct_runtime!(
+    pub enum Runtime where
+        Block = Block,
+        NodeBlock = opaque::Block,
+        UncheckedExtrinsic = UncheckedExtrinsic
+    {
+        /* --snip-- */
+
+        /*** Add This Line ***/
+        Nicks: pallet_nicks::{Module, Call, Storage, Event&lt;T&gt;},
+    }
+);
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="编译-运行-启动前端"><a class="header" href="#编译-运行-启动前端">编译-&gt;运行-&gt;启动前端</a></h3>
+<pre><code class="language-shell">cargo build --release
+./target/release/node-template --dev --tmp
+yarn start
+</code></pre>
+<h3 id="导入pallet"><a class="header" href="#导入pallet">导入Pallet</a></h3>
+<h3 id="可能出现的问题"><a class="header" href="#可能出现的问题">可能出现的问题</a></h3>
+<ul>
+<li><a href="https://github.com/substrate-developer-hub/pallet-did/issues/9">Conflicts when adding pallet to substrate-node-template · Issue #9 · substrate-developer-hub/pallet-did</a></li>
+<li><a href="https://substrate.stackexchange.com/questions/2774/error-failed-to-select-a-version-for-parity-util-mem">substrate node template - &quot;error: failed to select a version for <code>parity-util-mem</code>&quot; - Substrate and Polkadot Stack Exchange</a></li>
+</ul>
+<h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
 <h3 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h3>
 <ul>
+<li>
+<p><a href="https://web.archive.org/web/20220628065009/https://mp.weixin.qq.com/s/iQ6a-diWMfYDghuLVPJd9Q">添加一个pallet到runtime</a></p>
+<blockquote>
+<p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet。本节我们将学习如何将Pallet添加到runtime中。</p>
+</blockquote>
+<ol>
+<li>安装Node Template</li>
+<li>导入Pallet</li>
+<li>配置Pallet</li>
+<li>将Nicks添加到construct_runtime!中</li>
+</ol>
+<ul>
+<li><a href="https://docs.substrate.io/tutorials/work-with-pallets/add-a-pallet/">Add a pallet to the runtime | Substrate_ Docs</a></li>
+</ul>
+</li>
 <li>
 <p><a href="https://web.archive.org/web/20220627101518/https://mp.weixin.qq.com/s/wPVbEeIVKdXGro0QYsmJBg">Pallet前置知识</a></p>
 <ul>

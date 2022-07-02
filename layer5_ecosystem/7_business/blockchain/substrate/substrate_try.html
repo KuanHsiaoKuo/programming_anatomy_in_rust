@@ -185,16 +185,15 @@
 <li><a href="#%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83">检查环境</a></li>
 </ul>
 </li>
-<li><a href="#%E5%90%AF%E5%8A%A8%E9%93%BE%E8%8A%82%E7%82%B9">启动链节点</a></li>
-<li><a href="#%E4%B8%8B%E8%BD%BDnode-template">下载node-template</a>
+<li><a href="#%E5%90%AF%E5%8A%A8%E9%93%BE%E8%8A%82%E7%82%B9">启动链节点</a>
 <ul>
+<li><a href="#%E4%B8%8B%E8%BD%BDnode-template">下载node-template</a></li>
+<li><a href="#node-templeate%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">node-templeate项目结构</a></li>
 <li><a href="#cargotoml">Cargo.toml</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%96%E8%AF%91">编译</a>
-<ul>
+<li><a href="#%E7%BC%96%E8%AF%91">编译</a></li>
 <li><a href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能遇到的问题</a></li>
-<li><a href="#%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">运行节点</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">本地运行节点</a></li>
+<li><a href="#docker%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">docker运行节点</a></li>
 <li><a href="#%E4%BD%BF%E7%94%A8polkadot-js%E8%AE%BF%E9%97%AE%E8%8A%82%E7%82%B9">使用polkadot-js访问节点</a></li>
 </ul>
 </li>
@@ -207,30 +206,6 @@
 <li><a href="#%E4%BD%BF%E7%94%A8substrate-core">使用substrate core</a></li>
 </ul>
 </li>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">添加一个Pallet到Runtime</a>
-<ul>
-<li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
-<li><a href="#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
-<ul>
-<li><a href="#package">[package]{...}</a></li>
-<li><a href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></li>
-<li><a href="#dependencies">[dependencies]{...}</a></li>
-<li><a href="#build-dependencies">[build-dependencies]{...}</a></li>
-<li><a href="#features">[features]{...}</a></li>
-</ul>
-</li>
-<li><a href="#%E5%9B%9B%E6%AD%A5%E6%B7%BB%E5%8A%A0pallet">四步添加pallet</a>
-<ul>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></li>
-<li><a href="#%E6%B7%BB%E5%8A%A0feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE-%E6%B7%BB%E5%8A%A0config%E6%8E%A5%E5%8F%A3-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></li>
-<li><a href="#%E5%AE%9A%E4%B9%89%E8%BF%90%E8%A1%8C%E6%97%B6-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%96%E8%AF%91-%E8%BF%90%E8%A1%8C-%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF">编译-&gt;运行-&gt;启动前端</a></li>
-<li><a href="#%E5%AF%BC%E5%85%A5pallet">导入Pallet</a></li>
-</ul>
-</li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
 <ul>
 <li><a href="#substrate%E6%96%87%E6%A1%A3%E7%BB%83%E4%B9%A0">substrate文档练习</a></li>
@@ -240,7 +215,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Fri Jul  1 21:12:17 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:06 CST 2022 -->
 <!--te-->
 <h2 id="初体验substrate链"><a class="header" href="#初体验substrate链">初体验Substrate链</a></h2>
 <p>这里主要使用官方提供的默认模版启动节点。</p>
@@ -274,11 +249,21 @@ rustup show
 </blockquote>
 </div>
 </div>
-<h3 id="下载node-template"><a class="header" href="#下载node-template">下载node-template</a></h3>
+<h4 id="下载node-template"><a class="header" href="#下载node-template">下载node-template</a></h4>
 <pre><code class="language-shell">git clone https://github.com/substrate-developer-hub/substrate-node-template
 cd substrate-node-template
 git checkout latest
 </code></pre>
+<div id="admonition-注意查看最新分支的编号" class="admonition note">
+<div class="admonition-title">
+<p>⚠️注意查看最新分支的编号</p>
+<p><a class="admonition-anchor-link" href="#admonition-注意查看最新分支的编号"></a></p>
+</div>
+<div>
+<p>/home/substrate-node-template on  #polkadot-v0.9.24</p>
+</div>
+</div>
+#### node-templeate项目结构
 <div id="admonition-node-template项目结构" class="admonition info">
 <div class="admonition-title">
 <p>node-template项目结构</p>
@@ -330,7 +315,7 @@ panic = &quot;unwind&quot;
 <blockquote>
 <p>可见node-template主要包含三部分：node、pallets/template、runtime</p>
 </blockquote>
-<h3 id="编译"><a class="header" href="#编译">编译</a></h3>
+<h4 id="编译"><a class="header" href="#编译">编译</a></h4>
 <pre><code class="language-shell">cargo build --release
 </code></pre>
 <blockquote>
@@ -342,9 +327,10 @@ panic = &quot;unwind&quot;
 </ul>
 <pre><code class="language-shell">brew install cmake
 </code></pre>
-<h4 id="运行节点"><a class="header" href="#运行节点">运行节点</a></h4>
+<h4 id="本地运行节点"><a class="header" href="#本地运行节点">本地运行节点</a></h4>
 <pre><code class="language-shell">./target/release/node-template --dev
 </code></pre>
+<h4 id="docker运行节点"><a class="header" href="#docker运行节点">docker运行节点</a></h4>
 <h4 id="使用polkadot-js访问节点"><a class="header" href="#使用polkadot-js访问节点">使用polkadot-js访问节点</a></h4>
 <div id="admonition-polkadot-js-app" class="admonition info">
 <div class="admonition-title">
@@ -390,103 +376,6 @@ panic = &quot;unwind&quot;
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/technical-freedom.png" alt="Technical freedom vs development ease" /></p>
 </div>
 </div>
-<h2 id="添加一个pallet到runtime"><a class="header" href="#添加一个pallet到runtime">添加一个Pallet到Runtime</a></h2>
-<blockquote>
-<p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
-</blockquote>
-<p>接下来接着使用前面的node template</p>
-<h3 id="runtime结构分析"><a class="header" href="#runtime结构分析">runtime结构分析</a></h3>
-<pre><code class="language-shell">tree -L 2 runtime                                                                                               ─╯
-runtime
-├── Cargo.toml
-├── build.rs
-└── src
-    └── lib.rs
-
-1 directory, 3 files
-</code></pre>
-<h3 id="runtimecargotoml结构分析"><a class="header" href="#runtimecargotoml结构分析">runtime/Cargo.toml结构分析</a></h3>
-<h4 id="package"><a class="header" href="#package">[package]{...}</a></h4>
-<h4 id="packagemetadatadocsrs"><a class="header" href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></h4>
-<h4 id="dependencies"><a class="header" href="#dependencies">[dependencies]{...}</a></h4>
-<h4 id="build-dependencies"><a class="header" href="#build-dependencies">[build-dependencies]{...}</a></h4>
-<h4 id="features"><a class="header" href="#features">[features]{...}</a></h4>
-<h3 id="四步添加pallet"><a class="header" href="#四步添加pallet">四步添加pallet</a></h3>
-<h4 id="添加依赖-cargotomldependincies"><a class="header" href="#添加依赖-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></h4>
-<pre><code class="language-toml">pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
-</code></pre>
-<h4 id="添加feature-cargotomlfeatures"><a class="header" href="#添加feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></h4>
-<pre><code class="language-toml">[features]
-default = [&quot;std&quot;]
-std = [
-    #--snip--
-    'pallet-nicks/std',
-    #--snip--
-]
-</code></pre>
-<h4 id="配置-添加config接口-srclibrs"><a class="header" href="#配置-添加config接口-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>/// Add this code block to your template for Nicks:
-parameter_types! {
-    // Choose a fee that incentivizes desireable behavior.
-    pub const NickReservationFee: u128 = 100;
-    pub const MinNickLength: usize = 8;
-    // Maximum bounds on storage are important to secure your chain.
-    pub const MaxNickLength: usize = 32;
-}
-
-impl pallet_nicks::Config for Runtime {
-    // The Balances pallet implements the ReservableCurrency trait.
-    // https://substrate.dev/rustdocs/v3.0.0/pallet_balances/index.html#implementations-2
-    type Currency = pallet_balances::Module&lt;Runtime&gt;;
-
-    // Use the NickReservationFee from the parameter_types block.
-    type ReservationFee = NickReservationFee;
-
-    // No action is taken when deposits are forfeited.
-    type Slashed = ();
-
-    // Configure the FRAME System Root origin as the Nick pallet admin.
-    // https://substrate.dev/rustdocs/v3.0.0/frame_system/enum.RawOrigin.html#variant.Root
-    type ForceOrigin = frame_system::EnsureRoot&lt;AccountId&gt;;
-
-    // Use the MinNickLength from the parameter_types block.
-    type MinLength = MinNickLength;
-
-    // Use the MaxNickLength from the parameter_types block.
-    type MaxLength = MaxNickLength;
-
-    // The ubiquitous event type.
-    type Event = Event;
-}
-<span class="boring">}
-</span></code></pre></pre>
-<h4 id="定义运行时-srclibrsconstruct_runtime"><a class="header" href="#定义运行时-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>construct_runtime!(
-    pub enum Runtime where
-        Block = Block,
-        NodeBlock = opaque::Block,
-        UncheckedExtrinsic = UncheckedExtrinsic
-    {
-        /* --snip-- */
-
-        /*** Add This Line ***/
-        Nicks: pallet_nicks::{Module, Call, Storage, Event&lt;T&gt;},
-    }
-);
-<span class="boring">}
-</span></code></pre></pre>
-<h3 id="编译-运行-启动前端"><a class="header" href="#编译-运行-启动前端">编译-&gt;运行-&gt;启动前端</a></h3>
-<pre><code class="language-shell">cargo build --release
-./target/release/node-template --dev --tmp
-yarn start
-</code></pre>
-<h3 id="导入pallet"><a class="header" href="#导入pallet">导入Pallet</a></h3>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h3 id="substrate文档练习"><a class="header" href="#substrate文档练习">substrate文档练习</a></h3>
 <ul>
@@ -548,18 +437,6 @@ yarn start
 </ol>
 </li>
 </ul>
-</li>
-<li>
-<p><a href="https://web.archive.org/web/20220628065009/https://mp.weixin.qq.com/s/iQ6a-diWMfYDghuLVPJd9Q">添加一个pallet到runtime</a></p>
-<blockquote>
-<p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet。本节我们将学习如何将Pallet添加到runtime中。</p>
-</blockquote>
-<ol>
-<li>安装Node Template</li>
-<li>导入Pallet</li>
-<li>配置Pallet</li>
-<li>将Nicks添加到construct_runtime!中</li>
-</ol>
 </li>
 <li>
 <p><a href="https://web.archive.org/web/20220628065030/https://mp.weixin.qq.com/s/MrnenO7AWhrf_-3Qs-aRJg">构建一个PoE(Prove of Existence)去中心化的应用</a></p>
