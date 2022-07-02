@@ -1,21 +1,32 @@
 # cargo与rustc
 
 <!--ts-->
-
 * [cargo与rustc](#cargo与rustc)
-    * [rustc](#rustc)
-        * [rustc是什么](#rustc是什么)
-        * [基础使用](#基础使用)
-        * [rustc与cargo的关系](#rustc与cargo的关系)
-    * [cargo style](#cargo-style)
-    * [cargo essential structure](#cargo-essential-structure)
-    * [参考资源](#参考资源)
-        * [online-book](#online-book)
-        * [fragment](#fragment)
-        * [local](#local)
+   * [rustc](#rustc)
+      * [rustc是什么](#rustc是什么)
+      * [基础使用](#基础使用)
+      * [rustc与cargo的关系](#rustc与cargo的关系)
+   * [cargo style](#cargo-style)
+   * [cargo essential structure](#cargo-essential-structure)
+   * [.cargo 扩展](#cargo-扩展)
+      * [tree overview](#tree-overview)
+      * [bin](#bin)
+      * [env](#env)
+      * [git](#git)
+      * [registry](#registry)
+   * [Cargo 与 git 的关联！](#cargo-与-git-的关联)
+      * [cargo tree](#cargo-tree)
+      * [git](#git-1)
+      * [关于依赖冲突问题](#关于依赖冲突问题)
+   * [Cargo相关问题解决](#cargo相关问题解决)
+      * [版本冲突：failed to select a version for the requirement](#版本冲突failed-to-select-a-version-for-the-requirement)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:04:20 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:03:50 CST 2022 -->
 
 <!--te-->
 

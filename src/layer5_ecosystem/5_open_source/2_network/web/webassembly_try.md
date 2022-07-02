@@ -6,7 +6,7 @@
       * [关于康威游戏(Conway's Game)](#关于康威游戏conways-game)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:04:51 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:07:50 CST 2022 -->
 
 <!--te-->
 
