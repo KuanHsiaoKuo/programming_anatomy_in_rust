@@ -212,7 +212,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:03 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:08:02 CST 2022 -->
 <!--te-->
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h2 id="添加一个pallet到runtime"><a class="header" href="#添加一个pallet到runtime">添加一个Pallet到Runtime</a></h2>
@@ -240,6 +240,30 @@ runtime
 <h4 id="添加依赖-cargotomldependincies"><a class="header" href="#添加依赖-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></h4>
 <pre><code class="language-toml">pallet-nicks = { default-features = false, version = '4.0.0-dev', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-08' }
 </code></pre>
+<div id="admonition-排地雷" class="admonition note">
+<div class="admonition-title">
+<p>排地雷</p>
+<p><a class="admonition-anchor-link" href="#admonition-排地雷"></a></p>
+</div>
+<div>
+<p>由于官方文档和代码一直都在更新，可能会出现问题，这里就需要根据默认依赖的substrate分支进行更换</p>
+<pre><code class="language-toml">[dependencies]
+sp-std = { version = &quot;4.0.0-dev&quot;, default-features = false, git = &quot;https://github.com/paritytech/substrate.git&quot;, branch = &quot;polkadot-v0.9.24&quot; }
+</code></pre>
+<p>如上所示，对应的分支为：branch = &quot;polkadot-v0.9.24&quot;, 所以需要改成：</p>
+<pre><code class="language-toml">[dependencies.pallet-nicks]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+#tag = 'monthly-2021-10'
+#tag = 'monthly-2022-04'
+branch = &quot;polkadot-v0.9.24&quot;
+version = '4.0.0-dev'
+</code></pre>
+<blockquote>
+<p>详见: <a href="/layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-%E4%B8%8E-git-%E7%9A%84%E5%85%B3%E8%81%94">cargo 与 git</a></p>
+</blockquote>
+</div>
+</div>
 <h4 id="添加feature-cargotomlfeatures"><a class="header" href="#添加feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></h4>
 <pre><code class="language-toml">[features]
 default = [&quot;std&quot;]

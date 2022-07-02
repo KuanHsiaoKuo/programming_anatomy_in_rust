@@ -186,6 +186,27 @@
 </li>
 <li><a href="#cargo-style">cargo style</a></li>
 <li><a href="#cargo-essential-structure">cargo essential structure</a></li>
+<li><a href="#cargo-%E6%89%A9%E5%B1%95">.cargo 扩展</a>
+<ul>
+<li><a href="#tree-overview">tree overview</a></li>
+<li><a href="#bin">bin</a></li>
+<li><a href="#env">env</a></li>
+<li><a href="#git">git</a></li>
+<li><a href="#registry">registry</a></li>
+</ul>
+</li>
+<li><a href="#cargo-%E4%B8%8E-git-%E7%9A%84%E5%85%B3%E8%81%94">Cargo 与 git 的关联！</a>
+<ul>
+<li><a href="#cargo-tree">cargo tree</a></li>
+<li><a href="#git-1">git</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98">关于依赖冲突问题</a></li>
+</ul>
+</li>
+<li><a href="#cargo%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">Cargo相关问题解决</a>
+<ul>
+<li><a href="#%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81failed-to-select-a-version-for-the-requirement">版本冲突：failed to select a version for the requirement</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
 <ul>
 <li><a href="#online-book">online-book</a></li>
@@ -197,7 +218,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:04:20 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:03:50 CST 2022 -->
 <!--te-->
 <h2 id="rustc"><a class="header" href="#rustc">rustc</a></h2>
 <h3 id="rustc是什么"><a class="header" href="#rustc是什么">rustc是什么</a></h3>
@@ -233,6 +254,12 @@
 </div>
 <h2 id="cargo-essential-structure"><a class="header" href="#cargo-essential-structure">cargo essential structure</a></h2>
 <p>但是对于大多数场景下，一般采用如下的项目结构</p>
+<div id="admonition-rust-package-structure" class="admonition tip">
+<div class="admonition-title">
+<p>rust package structure</p>
+<p><a class="admonition-anchor-link" href="#admonition-rust-package-structure"></a></p>
+</div>
+<div>
 <pre><code class="language-shell">$ tree use-benchmarking -L 2                                                                                                                                                                                                             ─╯
 use-benchmarking
 ├── Cargo.toml
@@ -246,6 +273,213 @@ use-benchmarking
 
 1 directory, 7 files
 </code></pre>
+</div>
+</div>
+<h2 id="cargo-扩展"><a class="header" href="#cargo-扩展">.cargo 扩展</a></h2>
+<p>除了cargo, 它的全局相关配置文件都会放在$HOME/.cargo目录下，这里值得看看</p>
+<h3 id="tree-overview"><a class="header" href="#tree-overview">tree overview</a></h3>
+<pre><code class="language-shell">tree -L 1 $HOME/.cargo                                                                                                                                                                                                                 ─╯
+├── bin # 安装的二进制相关可执行文件
+├── env # rustup的环境变量设置脚本
+├── git
+└── registry
+</code></pre>
+<h3 id="bin"><a class="header" href="#bin">bin</a></h3>
+<pre><code class="language-shell">tree -L 1 $HOME/.cargo/bin                                                                                                                                                                                                             ─╯
+├── cargo -&gt; /usr/local/bin/rustup-init
+├── cargo-clippy -&gt; /usr/local/bin/rustup-init
+├── cargo-fmt -&gt; /usr/local/bin/rustup-init
+├── cargo-miri -&gt; /usr/local/bin/rustup-init
+├── clippy-driver -&gt; /usr/local/bin/rustup-init
+├── mdbook
+├── mdbook-admonish
+├── mdbook-checklist
+├── mdbook-mermaid
+├── mdbook-pdf
+├── mdbook-rss
+├── mdbook-template
+├── rls -&gt; /usr/local/bin/rustup-init
+├── rust-gdb -&gt; /usr/local/bin/rustup-init
+├── rust-lldb -&gt; /usr/local/bin/rustup-init
+├── rustc -&gt; /usr/local/bin/rustup-init
+├── rustdoc -&gt; /usr/local/bin/rustup-init
+├── rustfmt -&gt; /usr/local/bin/rustup-init
+└── rustup -&gt; /usr/local/bin/rustup-init
+
+0 directories, 19 files
+</code></pre>
+<h3 id="env"><a class="header" href="#env">env</a></h3>
+<pre><code class="language-shell">#!/bin/sh
+# rustup shell setup
+# affix colons on either side of $PATH to simplify matching
+case &quot;:${PATH}:&quot; in
+    *:&quot;$HOME/.cargo/bin&quot;:*)
+        ;;
+    *)
+        # Prepending path in case a system-installed rustc needs to be overridden
+        export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;
+        ;;
+esac
+</code></pre>
+<h3 id="git"><a class="header" href="#git">git</a></h3>
+<pre><code class="language-shell">tree -L 3 $HOME/.cargo/git                                                                                                                                                                                                             ─╯
+/Users/kuanhsiaokuo/.cargo/git
+├── checkouts
+│   ├── substrate-7e08433d4c370a21
+│   │   ├── 174735e
+│   │   ├── 257cdb5
+│   │   ├── 279593d
+│   │   ├── 3348e14
+│   │   ├── 346471d
+│   │   ├── 4d28ebe
+│   │   ├── 7ba4e4c
+│   │   ├── 7eb671f
+│   │   ├── 814752f
+│   │   ├── 852bab0
+│   │   ├── b6c1c1b
+│   │   └── bf9683e
+│   └── unveil-rs-403565214a7cc66c
+│       └── 3d8e9ad
+└── db
+    ├── substrate-7e08433d4c370a21
+    │   ├── FETCH_HEAD
+    │   ├── HEAD
+    │   ├── config
+    │   ├── description
+    │   ├── hooks
+    │   ├── info
+    │   ├── objects
+    │   └── refs
+    └── unveil-rs-403565214a7cc66c
+        ├── FETCH_HEAD
+        ├── HEAD
+        ├── config
+        ├── description
+        ├── hooks
+        ├── info
+        ├── objects
+        └── refs
+
+27 directories, 8 files
+</code></pre>
+<h3 id="registry"><a class="header" href="#registry">registry</a></h3>
+<pre><code class="language-shell">tree -L 2 $HOME/.cargo/registry                                                                                                                                                                                                        ─╯
+/Users/kuanhsiaokuo/.cargo/registry
+├── cache
+│   └── github.com-1ecc6299db9ec823
+├── index
+│   └── github.com-1ecc6299db9ec823
+└── src
+    └── github.com-1ecc6299db9ec823
+
+6 directories, 0 files
+</code></pre>
+<h2 id="cargo-与-git-的关联"><a class="header" href="#cargo-与-git-的关联">Cargo 与 git 的关联！</a></h2>
+<h3 id="cargo-tree"><a class="header" href="#cargo-tree">cargo tree</a></h3>
+<ol>
+<li>Cargo.toml是分等级的，最外层的Cargo.toml里面可以只用一个members，然后里面列出内部包含的其他packages</li>
+</ol>
+<div id="admonition-substrate-node-template为例" class="admonition info">
+<div class="admonition-title">
+<p>substrate-node-template为例</p>
+<p><a class="admonition-anchor-link" href="#admonition-substrate-node-template为例"></a></p>
+</div>
+<div>
+<blockquote>
+<p>最外层的Cargo.toml</p>
+</blockquote>
+<pre><code class="language-toml">[workspace]
+members = [
+    &quot;node&quot;,
+    &quot;pallets/template&quot;,
+    &quot;runtime&quot;,
+]
+[profile.release]
+panic = &quot;unwind&quot;
+</code></pre>
+</div>
+</div>
+<ol start="2">
+<li>然后内部的其他packages就需要列出用到的[dependencies]</li>
+<li>dependencies的完整使用参数如下：</li>
+</ol>
+<div id="admonition-dependencies写法一" class="admonition info">
+<div class="admonition-title">
+<p>dependencies写法一</p>
+<p><a class="admonition-anchor-link" href="#admonition-dependencies写法一"></a></p>
+</div>
+<div>
+<pre><code class="language-toml">[dependencies]
+pallet-aura = { version = &quot;4.0.0-dev&quot;, default-features = false, git = &quot;https://github.com/paritytech/substrate.git&quot;, branch = &quot;polkadot-v0.9.24&quot; }
+</code></pre>
+</div>
+</div>
+<div id="admonition-dependencies写法二" class="admonition info">
+<div class="admonition-title">
+<p>dependencies写法二</p>
+<p><a class="admonition-anchor-link" href="#admonition-dependencies写法二"></a></p>
+</div>
+<div>
+<pre><code class="language-toml">[dependencies.pallet-aura]
+version = &quot;4.0.0-dev&quot;
+default-features = false
+git = &quot;https://github.com/paritytech/substrate.git&quot;
+branch = &quot;polkadot-v0.9.24&quot;
+</code></pre>
+<blockquote>
+<p>这里的branch也可以用tag(git tag)</p>
+</blockquote>
+</div>
+</div>
+### git
+<blockquote>
+<p>上面dependencie里面的git+branch/tag唯一确定了一份代码，cargo下载对应的git代码之后，会从最外层Cargo.toml顺着members一层层找到[package]如下所示的Cargo.toml来确定对应的依赖包</p>
+</blockquote>
+<div id="admonition-substrateframeauracargotoml" class="admonition tip">
+<div class="admonition-title">
+<p>substrate/frame/aura/Cargo.toml</p>
+<p><a class="admonition-anchor-link" href="#admonition-substrateframeauracargotoml"></a></p>
+</div>
+<div>
+<pre><code class="language-toml">[package]
+name = &quot;pallet-aura&quot;
+version = &quot;4.0.0-dev&quot;
+authors = [&quot;Parity Technologies &lt;admin@parity.io&gt;&quot;]
+edition = &quot;2021&quot;
+license = &quot;Apache-2.0&quot;
+homepage = &quot;https://substrate.io&quot;
+repository = &quot;https://github.com/paritytech/substrate/&quot;
+description = &quot;FRAME AURA consensus pallet&quot;
+readme = &quot;README.md&quot;
+</code></pre>
+</div>
+</div>
+<h3 id="关于依赖冲突问题"><a class="header" href="#关于依赖冲突问题">关于依赖冲突问题</a></h3>
+<p>目前Cargo无法解决依赖冲突问题，一般都会是因为dependencies里面的git+branch/tag对应的依赖更新导致。</p>
+<div id="admonition-顺藤摸瓜一一排查" class="admonition tip">
+<div class="admonition-title">
+<p>顺藤摸瓜，一一排查</p>
+<p><a class="admonition-anchor-link" href="#admonition-顺藤摸瓜一一排查"></a></p>
+</div>
+<div>
+<p>这时需要根据冲突的包，切换分支/tag, 找到对应的branch/tag来更新</p>
+</div>
+</div>
+<blockquote>
+<p>应用场景: <a href="/layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96-cargotomldependincies">substrate添加pallet</a></p>
+</blockquote>
+<h2 id="cargo相关问题解决"><a class="header" href="#cargo相关问题解决">Cargo相关问题解决</a></h2>
+<h3 id="版本冲突failed-to-select-a-version-for-the-requirement"><a class="header" href="#版本冲突failed-to-select-a-version-for-the-requirement">版本冲突：failed to select a version for the requirement</a></h3>
+<ul>
+<li>删除registry
+<a href="https://web.archive.org/web/20220702104818/https://blog.illixion.com/2021/10/fix-failed-to-select-a-version-cargo/">How to fix &quot;failed to select a version for the requirement&quot; in Rust's Cargo - Manual</a></li>
+</ul>
+<pre><code class="language-admonist info title='解决方案'">Apparently, Cargo can sometimes get into a state where its local registry cache will corrupt itself, and Cargo won’t be able to discover new versions of the dependencies. To resolve this, delete the ~/.cargo/registry folder and run the build command again.
+</code></pre>
+<ul>
+<li>修改dependencies
+<a href="https://web.archive.org/web/20220702110637/https://qiita.com/bc_yuuuuuki/items/6f566ddef60a201af1bc">cargo install 出现需求版本选择失败怎么办--Qiita</a></li>
+</ul>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
 <ul>

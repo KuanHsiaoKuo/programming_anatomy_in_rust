@@ -190,6 +190,7 @@
 <li><a href="#%E4%B8%8B%E8%BD%BDnode-template">下载node-template</a></li>
 <li><a href="#node-templeate%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">node-templeate项目结构</a></li>
 <li><a href="#cargotoml">Cargo.toml</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91%E5%89%8D%E7%9A%84%E6%A3%80%E6%9F%A5">编译前的检查</a></li>
 <li><a href="#%E7%BC%96%E8%AF%91">编译</a></li>
 <li><a href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能遇到的问题</a></li>
 <li><a href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">本地运行节点</a></li>
@@ -215,10 +216,23 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jul  2 17:05:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:08:05 CST 2022 -->
 <!--te-->
 <h2 id="初体验substrate链"><a class="header" href="#初体验substrate链">初体验Substrate链</a></h2>
 <p>这里主要使用官方提供的默认模版启动节点。</p>
+<div id="admonition-一定要注意文档是否更新" class="admonition note">
+<div class="admonition-title">
+<p>一定要注意文档是否更新</p>
+<p><a class="admonition-anchor-link" href="#admonition-一定要注意文档是否更新"></a></p>
+</div>
+<div>
+<p>由于rust对crate的版本只能检查，无法解决冲突问题，需要手动进行，所以一定要注意文档是否有更新，尤其是里面的代码</p>
+</div>
+</div>
+<p><a href="https://github.com/substrate-developer-hub/substrate-docs/issues/1132">New Substrate documentation released · Issue #1132 · substrate-developer-hub/substrate-docs</a></p>
+<blockquote>
+<p>另外，substrate官方文档也一直处在更新状态中。</p>
+</blockquote>
 <h3 id="设置开发环境"><a class="header" href="#设置开发环境">设置开发环境</a></h3>
 <h4 id="使用rustup设置rust环境"><a class="header" href="#使用rustup设置rust环境">使用rustup设置rust环境</a></h4>
 <pre><code class="language-shell"># 1.安装预编译包
@@ -263,7 +277,7 @@ git checkout latest
 <p>/home/substrate-node-template on  #polkadot-v0.9.24</p>
 </div>
 </div>
-#### node-templeate项目结构
+<h4 id="node-templeate项目结构"><a class="header" href="#node-templeate项目结构">node-templeate项目结构</a></h4>
 <div id="admonition-node-template项目结构" class="admonition info">
 <div class="admonition-title">
 <p>node-template项目结构</p>
@@ -315,6 +329,27 @@ panic = &quot;unwind&quot;
 <blockquote>
 <p>可见node-template主要包含三部分：node、pallets/template、runtime</p>
 </blockquote>
+<h4 id="编译前的检查"><a class="header" href="#编译前的检查">编译前的检查</a></h4>
+<pre><code class="language-shell">cargo check -p node-template-runtime
+</code></pre>
+<div id="admonition-idea将会在修改cargotoml之后自动执行指令进行检查" class="admonition tip">
+<div class="admonition-title">
+<p>IDEA将会在修改Cargo.toml之后自动执行指令进行检查</p>
+<p><a class="admonition-anchor-link" href="#admonition-idea将会在修改cargotoml之后自动执行指令进行检查"></a></p>
+</div>
+<div>
+<pre><code class="language-shell">cargo metadata --verbose --format-version 1 --all-features
+</code></pre>
+</div>
+</div>
+<ul>
+<li><a href="https://doc.rust-lang.org/cargo/commands/cargo-metadata.html">cargo metadata - The Cargo Book</a></li>
+</ul>
+<blockquote>
+<p>Output JSON to stdout containing information about the workspace members and resolved dependencies of the current package.</p>
+</blockquote>
+<p>It is recommended to include the --format-version flag to future-proof your code to ensure the output is in the format
+you are expecting.</p>
 <h4 id="编译"><a class="header" href="#编译">编译</a></h4>
 <pre><code class="language-shell">cargo build --release
 </code></pre>
