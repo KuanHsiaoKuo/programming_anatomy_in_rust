@@ -3,53 +3,54 @@
 ![cargo_ship](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/cargo_ship.jpeg)
 
 <!--ts-->
+
 * [Cargo与crate生命周期](#cargo与crate生命周期)
-   * [cargo : 用生命周期理解Cargo指令系列](#cargo--用生命周期理解cargo指令系列)
-      * [新建](#新建)
-         * [cargo new](#cargo-new)
-         * [cargo init](#cargo-init)
-      * [开发](#开发)
-         * [cargo clean](#cargo-clean)
-         * [cargo doc](#cargo-doc)
-      * [依赖管理](#依赖管理)
-         * [cargo check](#cargo-check)
-         * [cargo fix](#cargo-fix)
-         * [cargo fetch](#cargo-fetch)
-         * [cargo search/install/uninstall](#cargo-searchinstalluninstall)
-         * [cargo report](#cargo-report)
-         * [cargo generate-lockfile](#cargo-generate-lockfile)
-         * [cargo locate-project](#cargo-locate-project)
-         * [cargo metadata](#cargo-metadata)
-         * [cargo pkgid](#cargo-pkgid)
-         * [cargo tree](#cargo-tree)
-         * [cargo update](#cargo-update)
-         * [cargo vendor](#cargo-vendor)
-         * [cargo verify-project](#cargo-verify-project)
-      * [测试](#测试)
-         * [cargo test](#cargo-test)
-         * [cargo bench](#cargo-bench)
-      * [运行](#运行)
-         * [cargo run](#cargo-run)
-      * [构建](#构建)
-         * [cargo rustc](#cargo-rustc)
-         * [cargo build](#cargo-build)
-         * [cargo rustdoc](#cargo-rustdoc)
-      * [发布](#发布)
-         * [cargo login](#cargo-login)
-         * [cargo owner](#cargo-owner)
-         * [cargo package](#cargo-package)
-         * [cargo publish](#cargo-publish)
-         * [cargo yank](#cargo-yank)
-      * [维护](#维护)
-      * [分区](#分区)
-   * [Cargo.toml细说](#cargotoml细说)
-   * [Rust程序运行方式总结](#rust程序运行方式总结)
-      * [脚本](#脚本)
-      * [项目](#项目)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [cargo : 用生命周期理解Cargo指令系列](#cargo--用生命周期理解cargo指令系列)
+        * [新建](#新建)
+            * [cargo new](#cargo-new)
+            * [cargo init](#cargo-init)
+        * [开发](#开发)
+            * [cargo clean](#cargo-clean)
+            * [cargo doc](#cargo-doc)
+        * [依赖管理](#依赖管理)
+            * [cargo check](#cargo-check)
+            * [cargo fix](#cargo-fix)
+            * [cargo fetch](#cargo-fetch)
+            * [cargo search/install/uninstall](#cargo-searchinstalluninstall)
+            * [cargo report](#cargo-report)
+            * [cargo generate-lockfile](#cargo-generate-lockfile)
+            * [cargo locate-project](#cargo-locate-project)
+            * [cargo metadata](#cargo-metadata)
+            * [cargo pkgid](#cargo-pkgid)
+            * [cargo tree](#cargo-tree)
+            * [cargo update](#cargo-update)
+            * [cargo vendor](#cargo-vendor)
+            * [cargo verify-project](#cargo-verify-project)
+        * [测试](#测试)
+            * [cargo test](#cargo-test)
+            * [cargo bench](#cargo-bench)
+        * [运行](#运行)
+            * [cargo run](#cargo-run)
+        * [构建](#构建)
+            * [cargo rustc](#cargo-rustc)
+            * [cargo build](#cargo-build)
+            * [cargo rustdoc](#cargo-rustdoc)
+        * [发布](#发布)
+            * [cargo login](#cargo-login)
+            * [cargo owner](#cargo-owner)
+            * [cargo package](#cargo-package)
+            * [cargo publish](#cargo-publish)
+            * [cargo yank](#cargo-yank)
+        * [维护](#维护)
+        * [分区](#分区)
+    * [Cargo.toml细说](#cargotoml细说)
+    * [Rust程序运行方式总结](#rust程序运行方式总结)
+        * [脚本](#脚本)
+        * [项目](#项目)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:03:50 CST 2022 -->
@@ -73,6 +74,8 @@
 ### 依赖管理
 
 #### cargo check
+
+该命令用来快速检查当前代码是否可以通过编译，但是不去生成真正可执行的程序。这样可以加快我们的检查速度。
 
 #### cargo fix
 
@@ -114,6 +117,12 @@
 
 #### cargo build
 
+```shell
+cargo build --release
+```
+
+> 该命令将会在 target/release/目录下生成优化过的可执行程序。这样生成的可执行程序拥有更好的性能。
+
 #### cargo rustdoc
 
 ### 发布
@@ -127,7 +136,6 @@
 #### cargo publish
 
 #### cargo yank
-
 
 ### 维护
 

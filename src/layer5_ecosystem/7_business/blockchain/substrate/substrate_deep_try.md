@@ -29,7 +29,7 @@
 
 ## 参考资源
 
-## 添加一个Pallet到Runtime
+## 设置昵称：添加第一个Pallet到Runtime
 
 > substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet
 
@@ -163,12 +163,34 @@ cargo build --release
 yarn start
 ```
 
-### 导入Pallet
+### 验证功能
+#### 为帐户设置昵称
+- 检查帐户选择列表以验证当前选择了 Alice 帐户。
+- 在 Pallet Interactor 组件中，确认选择了 Extrinsic。 
+- 从可调用的托盘列表中选择nicks。 
+- 选择 **settName** 作为要从 nicks palette 调用的函数。 
+- 键入一个长于 MinNickLength（8 个字符）且不长于 MaxNickLength（32 个字符）的名称。 
+- 单击Signed以执行该功能。
+
+![CleanShot 2022-07-03 at 10.51.26](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.51.26.png)
+
+![CleanShot 2022-07-03 at 10.54.34](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.54.34.png)
+#### 使用Nicks pallet查询账户信息
+
+![CleanShot 2022-07-03 at 11.00.08](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2011.00.08.png)
+
+- 按图所示进行设置，查询，复制Alice的地址进行查询会返回一个元组，里面的两个值分别指：
+
+    - Alice 帐户的十六进制编码昵称。 
+    - 为保护昵称而从 Alice 的账户中保留的金额。
+> 如果使用Bob的地址，会返回None，因为没有给他设置昵称。
 
 ### 可能出现的问题
 
 - [Conflicts when adding pallet to substrate-node-template · Issue #9 · substrate-developer-hub/pallet-did](https://github.com/substrate-developer-hub/pallet-did/issues/9)
 - [substrate node template - "error: failed to select a version for `parity-util-mem`" - Substrate and Polkadot Stack Exchange](https://substrate.stackexchange.com/questions/2774/error-failed-to-select-a-version-for-parity-util-mem)
+
+
 
 ## 参考资料
 

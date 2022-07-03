@@ -113,6 +113,11 @@ required-features = ["frobnicate"]
 
 ```
 
+```admonish tip title='package和crate'
+在rust中，最小编译单元叫crate，package是一个或多个crate的集合。
+> 也就是说，如果package没有指明crate，本身就是一个crate
+```
+
 ### 再来对比workspace、package和crate
 
 ```admonish info title='hierarchy'
