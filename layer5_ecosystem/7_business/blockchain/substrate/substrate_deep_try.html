@@ -178,7 +178,7 @@
 <li><a href="#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
 <ul>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">添加一个Pallet到Runtime</a>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">设置昵称：添加第一个Pallet到Runtime</a>
 <ul>
 <li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
 <li><a href="#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
@@ -199,7 +199,12 @@
 </ul>
 </li>
 <li><a href="#%E7%BC%96%E8%AF%91-%E8%BF%90%E8%A1%8C-%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF">编译-&gt;运行-&gt;启动前端</a></li>
-<li><a href="#%E5%AF%BC%E5%85%A5pallet">导入Pallet</a></li>
+<li><a href="#%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD">验证功能</a>
+<ul>
+<li><a href="#%E4%B8%BA%E5%B8%90%E6%88%B7%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0">为帐户设置昵称</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8nicks-pallet%E6%9F%A5%E8%AF%A2%E8%B4%A6%E6%88%B7%E4%BF%A1%E6%81%AF">使用Nicks pallet查询账户信息</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能出现的问题</a></li>
 </ul>
 </li>
@@ -212,10 +217,10 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:08:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 11:07:28 CST 2022 -->
 <!--te-->
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
-<h2 id="添加一个pallet到runtime"><a class="header" href="#添加一个pallet到runtime">添加一个Pallet到Runtime</a></h2>
+<h2 id="设置昵称添加第一个pallet到runtime"><a class="header" href="#设置昵称添加第一个pallet到runtime">设置昵称：添加第一个Pallet到Runtime</a></h2>
 <blockquote>
 <p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
 </blockquote>
@@ -335,7 +340,32 @@ impl pallet_nicks::Config for Runtime {
 ./target/release/node-template --dev --tmp
 yarn start
 </code></pre>
-<h3 id="导入pallet"><a class="header" href="#导入pallet">导入Pallet</a></h3>
+<h3 id="验证功能"><a class="header" href="#验证功能">验证功能</a></h3>
+<h4 id="为帐户设置昵称"><a class="header" href="#为帐户设置昵称">为帐户设置昵称</a></h4>
+<ul>
+<li>检查帐户选择列表以验证当前选择了 Alice 帐户。</li>
+<li>在 Pallet Interactor 组件中，确认选择了 Extrinsic。 </li>
+<li>从可调用的托盘列表中选择nicks。 </li>
+<li>选择 <strong>settName</strong> 作为要从 nicks palette 调用的函数。 </li>
+<li>键入一个长于 MinNickLength（8 个字符）且不长于 MaxNickLength（32 个字符）的名称。 </li>
+<li>单击Signed以执行该功能。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.51.26.png" alt="CleanShot 2022-07-03 at 10.51.26" /></p>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.54.34.png" alt="CleanShot 2022-07-03 at 10.54.34" /></p>
+<h4 id="使用nicks-pallet查询账户信息"><a class="header" href="#使用nicks-pallet查询账户信息">使用Nicks pallet查询账户信息</a></h4>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2011.00.08.png" alt="CleanShot 2022-07-03 at 11.00.08" /></p>
+<ul>
+<li>
+<p>按图所示进行设置，查询，复制Alice的地址进行查询会返回一个元组，里面的两个值分别指：</p>
+<ul>
+<li>Alice 帐户的十六进制编码昵称。 </li>
+<li>为保护昵称而从 Alice 的账户中保留的金额。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>如果使用Bob的地址，会返回None，因为没有给他设置昵称。</p>
+</blockquote>
 <h3 id="可能出现的问题"><a class="header" href="#可能出现的问题">可能出现的问题</a></h3>
 <ul>
 <li><a href="https://github.com/substrate-developer-hub/pallet-did/issues/9">Conflicts when adding pallet to substrate-node-template · Issue #9 · substrate-developer-hub/pallet-did</a></li>
