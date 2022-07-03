@@ -202,9 +202,14 @@
 <li><a href="#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98">关于依赖冲突问题</a></li>
 </ul>
 </li>
+<li><a href="#cargo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">Cargo项目结构</a></li>
 <li><a href="#cargo%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">Cargo相关问题解决</a>
 <ul>
 <li><a href="#%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81failed-to-select-a-version-for-the-requirement">版本冲突：failed to select a version for the requirement</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E8%AF%B4%E6%98%8E">基础说明</a></li>
+<li><a href="#cargotoml%E5%92%8Ccargolock">cargo.toml和cargo.lock</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E6%B8%85%E7%90%86%E6%9B%B4%E6%96%B0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85">构建、清理、更新以及安装</a></li>
+<li><a href="#mainrs-%E5%92%8C-librs">main.rs 和 lib.rs</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
@@ -218,7 +223,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 19:16:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 20:43:13 CST 2022 -->
 <!--te-->
 <h2 id="rustc"><a class="header" href="#rustc">rustc</a></h2>
 <h3 id="rustc是什么"><a class="header" href="#rustc是什么">rustc是什么</a></h3>
@@ -431,7 +436,7 @@ branch = &quot;polkadot-v0.9.24&quot;
 </blockquote>
 </div>
 </div>
-### git
+<h3 id="git-1"><a class="header" href="#git-1">git</a></h3>
 <blockquote>
 <p>上面dependencie里面的git+branch/tag唯一确定了一份代码，cargo下载对应的git代码之后，会从最外层Cargo.toml顺着members一层层找到[package]如下所示的Cargo.toml来确定对应的依赖包</p>
 </blockquote>
@@ -468,6 +473,7 @@ readme = &quot;README.md&quot;
 <blockquote>
 <p>应用场景: <a href="/layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96-cargotomldependincies">substrate添加pallet</a></p>
 </blockquote>
+<h2 id="cargo项目结构"><a class="header" href="#cargo项目结构">Cargo项目结构</a></h2>
 <h2 id="cargo相关问题解决"><a class="header" href="#cargo相关问题解决">Cargo相关问题解决</a></h2>
 <h3 id="版本冲突failed-to-select-a-version-for-the-requirement"><a class="header" href="#版本冲突failed-to-select-a-version-for-the-requirement">版本冲突：failed to select a version for the requirement</a></h3>
 <ul>
@@ -480,6 +486,39 @@ readme = &quot;README.md&quot;
 <li>修改dependencies
 <a href="https://web.archive.org/web/20220702110637/https://qiita.com/bc_yuuuuuki/items/6f566ddef60a201af1bc">cargo install 出现需求版本选择失败怎么办--Qiita</a></li>
 </ul>
+<h3 id="基础说明"><a class="header" href="#基础说明">基础说明</a></h3>
+<p><img src="https://web.archive.org/web/20220621034241im_/https://pp88.org/rust.zui.jia.shi.jian.rust.zui.jia.shi.jian/cargo.xiang.mu.pei.zhi.ji.jie.gou/project-structure.png" alt="hello_world_project_sturcture" /></p>
+<ul>
+<li>cargo.toml和cargo.lock文件总是位于项目根目录下。</li>
+<li>源代码位于src目录下。</li>
+<li>默认的库入口文件是src/lib.rs。</li>
+<li>默认的可执行程序入口文件是src/main.rs。</li>
+<li>其他可选的可执行文件位于src/bin/*.rs(这里每一个rs文件均对应一个可执行文件)。</li>
+<li>外部测试源代码文件位于tests目录下。</li>
+<li>示例程序源代码文件位于examples。</li>
+<li>基准测试源代码文件位于benches目录下。</li>
+</ul>
+<h3 id="cargotoml和cargolock"><a class="header" href="#cargotoml和cargolock">cargo.toml和cargo.lock</a></h3>
+<p>cargo.toml和cargo.lock是cargo项目代码管理的核心两个文件，cargo工具的所有活动均基于这两个文件。</p>
+<p>cargo.toml是cargo特有的项目数据描述文件，对于猿们而言，cargo.toml文件存储了项目的所有信息，它直接面向rust猿，猿们如果想让自己的rust项目能够按照期望的方式进行构建、测试和运行，那么，必须按照合理的方式构建’cargo.toml’。</p>
+<p>而cargo.lock文件则不直接面向猿，猿们也不需要直接去修改这个文件。lock文件是cargo工具根据同一项目的toml文件生成的项目依赖详细清单文件，所以我们一般不用不管他，只需要对着cargo.toml文件撸就行了。</p>
+<h3 id="构建清理更新以及安装"><a class="header" href="#构建清理更新以及安装">构建、清理、更新以及安装</a></h3>
+<blockquote>
+<p>领会了toml描述文件的写法，是一个重要的方面。另一个重要的方面，就是cargo工具本身为我们程序猿提供的各种好用的工具。如果大家感兴趣，自己在终端中输入’cargo –help’查看即可。</p>
+</blockquote>
+<ol>
+<li>其中开发时最常用的命令就是'cargo build'，用于构建项目。</li>
+<li>此外，'cargo clean'命令可以清理target文件夹中的所有内容；</li>
+<li>'cargo update'根据toml描述文件重新检索并更新各种依赖项的信息，并写入lock文件，例如依赖项版本的更新变化等等；</li>
+<li>'cargo install'可用于实际的生产部署。这些命令在实际的开发部署中均是非常有用的。</li>
+</ol>
+<h3 id="mainrs-和-librs"><a class="header" href="#mainrs-和-librs">main.rs 和 lib.rs</a></h3>
+<ul>
+<li><a href="https://web.archive.org/web/20220703121446/https://juejin.cn/post/6919738138135003150">Rust 模块系统 - 掘金</a></li>
+<li><a href="https://web.archive.org/web/20220703121604/https://stackoverflow.com/questions/57756927/rust-modules-confusion-when-there-is-main-rs-and-lib-rs">Rust modules confusion when there is main.rs and lib.rs - Stack Overflow</a></li>
+<li><a href="https://www.reddit.com/r/rust/comments/c41iph/mainrs_vs_librs/">main.rs vs lib.rs : rust</a></li>
+<li><a href="https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499">Main.rs and lib.rs at same level - help - The Rust Programming Language Forum</a></li>
+</ul>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
 <ul>
@@ -488,6 +527,7 @@ readme = &quot;README.md&quot;
 <h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
 <ul>
 <li><a href="https://skyao.io/learning-rust/docs/build/rustc.html">Rustc | Rust学习笔记</a></li>
+<li><a href="https://web.archive.org/web/20220621034241/https://pp88.org/rust.zui.jia.shi.jian.rust.zui.jia.shi.jian/cargo.xiang.mu.pei.zhi.ji.jie.gou/">Cargo项目配置及结构 | 皮皮爸(pp8)</a></li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 

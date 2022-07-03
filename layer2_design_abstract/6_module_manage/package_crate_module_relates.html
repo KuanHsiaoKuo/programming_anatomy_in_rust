@@ -181,7 +181,11 @@
 <ul>
 <li><a href="#package-%E5%8C%85%E5%90%ABcargotoml">Package: 包含Cargo.toml</a></li>
 <li><a href="#workspace%E4%B8%8Epackage">workspace与package</a></li>
-<li><a href="#crate-%E4%B8%BB%E8%A6%81%E5%9C%A8cargotoml%E7%9A%84binlib%E4%B8%AD%E6%8C%87%E6%98%8E">crate: 主要在Cargo.toml的[bin]/[lib]中指明</a></li>
+<li><a href="#crate">crate</a>
+<ul>
+<li><a href="#%E5%9C%A8cargotoml%E7%9A%84binlib%E4%B8%AD%E6%8C%87%E6%98%8E">在Cargo.toml的[bin]/[lib]中指明</a></li>
+</ul>
+</li>
 <li><a href="#%E5%86%8D%E6%9D%A5%E5%AF%B9%E6%AF%94workspacepackage%E5%92%8Ccrate">再来对比workspace、package和crate</a></li>
 <li><a href="#module">module</a></li>
 </ul>
@@ -211,7 +215,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 19:16:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 20:43:14 CST 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -265,7 +269,8 @@ blake2 = { opt-level = 3 }
 <blockquote>
 <p>A Cargo.toml file can simultaneously define a package and a workspace to which it belongs, but that package is still a member of that workspace, not the other way around.</p>
 </blockquote>
-<h3 id="crate-主要在cargotoml的binlib中指明"><a class="header" href="#crate-主要在cargotoml的binlib中指明">crate: 主要在Cargo.toml的[bin]/[lib]中指明</a></h3>
+<h3 id="crate"><a class="header" href="#crate">crate</a></h3>
+<h4 id="在cargotoml的binlib中指明"><a class="header" href="#在cargotoml的binlib中指明">在Cargo.toml的[bin]/[lib]中指明</a></h4>
 <p><a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html?highlight=bin#library">Cargo Targets - The Cargo Book</a></p>
 <div id="admonition-crate" class="admonition tip">
 <div class="admonition-title">
@@ -326,6 +331,16 @@ modulo hyphens vs underscores), this is not required in any way -- but for the m
 difference unless you're paying attention to the weeds and edge cases.</p>
 <h3 id="module"><a class="header" href="#module">module</a></h3>
 <p>在rust中，module(模块)更多还是一种逻辑上的概念，主要使用mod关键字，下面会具体说说</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod say {
+    pub fn hello() {
+        println!(&quot;Hello, world!&quot;);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="模块呈现方式"><a class="header" href="#模块呈现方式">模块呈现方式</a></h2>
 <h3 id="嵌套模块"><a class="header" href="#嵌套模块">嵌套模块</a></h3>
 <h3 id="文件模块"><a class="header" href="#文件模块">文件模块</a></h3>
@@ -356,6 +371,13 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 <ul>
 <li><a href="https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA">了解下Rust 模块使用方式</a></li>
 <li><a href="https://www.reddit.com/r/rust/comments/lvtzri/confused_about_package_vs_crate_terminology/">Confused about Package vs. Crate terminology. : rust</a></li>
+<li><a href="https://course.rs/basic/crate-module/intro.html">包和模块 - Rust语言圣经(Rust Course)</a>
+<ul>
+<li>项目(Packages)：一个 Cargo 提供的 feature，可以用来构建、测试和分享包</li>
+<li>包(Crate)：一个由多个模块组成的树形结构，可以作为三方库进行分发，也可以生成可执行文件进行运行</li>
+<li>模块(Module)：可以一个文件多个模块，也可以一个文件一个模块，模块可以被认为是真实项目中的代码组织单元</li>
+</ul>
+</li>
 </ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 <ul>
