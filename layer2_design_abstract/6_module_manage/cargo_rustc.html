@@ -210,6 +210,12 @@
 <li><a href="#cargotoml%E5%92%8Ccargolock">cargo.toml和cargo.lock</a></li>
 <li><a href="#%E6%9E%84%E5%BB%BA%E6%B8%85%E7%90%86%E6%9B%B4%E6%96%B0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85">构建、清理、更新以及安装</a></li>
 <li><a href="#mainrs-%E5%92%8C-librs">main.rs 和 lib.rs</a></li>
+<li><a href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8substrate%E7%9A%84substrate-node-template">实际应用：Substrate的substrate-node-template</a>
+<ul>
+<li><a href="#%E5%8C%BA%E5%88%ABcargo-run%E4%B8%8Ecargo-build">区别cargo run与cargo build</a></li>
+<li><a href="#%E5%9C%A8node%E5%8C%85%E9%87%8C%E9%9D%A2%E5%AD%98%E5%9C%A8mainrs">在node包里面存在main.rs</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
@@ -223,7 +229,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 20:43:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul  4 00:56:58 CST 2022 -->
 <!--te-->
 <h2 id="rustc"><a class="header" href="#rustc">rustc</a></h2>
 <h3 id="rustc是什么"><a class="header" href="#rustc是什么">rustc是什么</a></h3>
@@ -514,11 +520,218 @@ readme = &quot;README.md&quot;
 </ol>
 <h3 id="mainrs-和-librs"><a class="header" href="#mainrs-和-librs">main.rs 和 lib.rs</a></h3>
 <ul>
-<li><a href="https://web.archive.org/web/20220703121446/https://juejin.cn/post/6919738138135003150">Rust 模块系统 - 掘金</a></li>
-<li><a href="https://web.archive.org/web/20220703121604/https://stackoverflow.com/questions/57756927/rust-modules-confusion-when-there-is-main-rs-and-lib-rs">Rust modules confusion when there is main.rs and lib.rs - Stack Overflow</a></li>
-<li><a href="https://www.reddit.com/r/rust/comments/c41iph/mainrs_vs_librs/">main.rs vs lib.rs : rust</a></li>
-<li><a href="https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499">Main.rs and lib.rs at same level - help - The Rust Programming Language Forum</a></li>
+<li>
+<p><a href="https://web.archive.org/web/20220703121446/https://juejin.cn/post/6919738138135003150">Rust 模块系统 - 掘金</a></p>
+<blockquote>
+<p>包（package）创建规则：</p>
+</blockquote>
+<pre><code>- 一个包中至多只能包含一个库Crate。
+- 包中可以包含任意多个二进制Crate。
+- 包中至少包含一个 crate，无论是库的还是二进制的。
+- 包中应该包含一个 Cargo.toml 配置文件，用来说明如何去构建这些 crate。
+</code></pre>
+<blockquote>
+<p>示例一：cargo new --bin 创建一个包含 二进制Crate 的包
+示例二：cargo new --lib 创建一个包含库(lib)crate的包
+示例三：--lib和--bin不可以同时使用，这种情况下可以示例一的基础上自己创建一个lib.rs文件</p>
+</blockquote>
+<ul>
+<li>一般情况下，我们将与程序运行相关的代码放在 main.rs 文件，其他真正的任务逻辑放在 lib.rs 文件中。</li>
 </ul>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220703121604/https://stackoverflow.com/questions/57756927/rust-modules-confusion-when-there-is-main-rs-and-lib-rs">Rust modules confusion when there is main.rs and lib.rs - Stack Overflow</a></p>
+</li>
+</ul>
+<blockquote>
+<p>这里有人详细介绍了只有lib.rs/main.rs的情况下，执行cargo run的情况。没有main.rs的时候，cargo run会告诉你：error: a bin target must be available for <code>cargo run</code></p>
+</blockquote>
+<ul>
+<li><a href="https://www.reddit.com/r/rust/comments/c41iph/mainrs_vs_librs/">main.rs vs lib.rs : rust</a></li>
+</ul>
+<blockquote>
+<p>A common pattern, even for binary-only crates, is to declare a &quot;library&quot; providing the majority of functionality, and then have main.rs just implement argument parsing and use that library.
+This allows for integration tests written against the library, which might otherwise be hard to do with only main.rs.</p>
+</blockquote>
+<ul>
+<li><a href="https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499">Main.rs and lib.rs at same level - help - The Rust Programming Language Forum</a>
+<blockquote>
+<p>这里有人跟着官方文档制作命令行工具时发现同样的疑惑点，底下有人引用了这个链接</p>
+</blockquote>
+<ul>
+<li><a href="https://web.archive.org/web/20220424212816/https://doc.rust-lang.org/book/ch12-03-improving-error-handling-and-modularity.html#separation-of-concerns-for-binary-projects">Separation of Conerns for Binary Projects - The Rust Programming Language</a></li>
+</ul>
+</li>
+</ul>
+<div id="admonition-allocating-responsibilty-for-multiple-tasks" class="admonition quote">
+<div class="admonition-title">
+<p>Allocating Responsibilty for Multiple Tasks</p>
+<p><a class="admonition-anchor-link" href="#admonition-allocating-responsibilty-for-multiple-tasks"></a></p>
+</div>
+<div>
+<p>The organizational problem of allocating responsibility for multiple tasks to the main function is common to many binary projects. As a result, the Rust community has developed a process to use as a guideline for splitting the separate concerns of a binary program when main starts getting large. The process has the following steps:</p>
+<ol>
+<li>Split your program into a main.rs and a lib.rs and move your program’s logic to lib.rs.</li>
+<li>As long as your command line parsing logic is small, it can remain in main.rs.</li>
+<li>When the command line parsing logic starts getting complicated, extract it from main.rs and move it to lib.rs.</li>
+</ol>
+<blockquote>
+<p>The responsibilities that remain in the main function after this process should be limited to the following:</p>
+</blockquote>
+<ul>
+<li>Calling the command line parsing logic with the argument values</li>
+<li>Setting up any other configuration</li>
+<li>Calling a run function in lib.rs</li>
+<li>Handling the error if run returns an error</li>
+</ul>
+<blockquote>
+<p>This pattern is about separating concerns:</p>
+</blockquote>
+<ol>
+<li>main.rs handles running the program</li>
+<li>and lib.rs handles all the logic of the task at hand. </li>
+</ol>
+<blockquote>
+<p>Because you can’t test the main function directly, this structure lets you test all of your program’s logic by moving it into functions in lib.rs. 
+The only code that remains in main.rs will be small enough to verify its correctness by reading it. 
+Let’s rework our program by following this process.</p>
+</blockquote>
+</div>
+</div>
+<div id="admonition-明确职责-用mvc类比" class="admonition tip">
+<div class="admonition-title">
+<p>明确职责, 用MVC类比</p>
+<p><a class="admonition-anchor-link" href="#admonition-明确职责-用mvc类比"></a></p>
+</div>
+<div>
+<blockquote>
+<p>也就是说</p>
+</blockquote>
+<ol>
+<li>main.rs只负责调用、配置和处理异常， 类似View</li>
+<li>lib.rs主要负责具体的业务逻辑, 类似Control+Model</li>
+</ol>
+</div>
+</div>
+<div id="admonition-用crate来区分" class="admonition quote">
+<div class="admonition-title">
+<p>用crate来区分</p>
+<p><a class="admonition-anchor-link" href="#admonition-用crate来区分"></a></p>
+</div>
+<div>
+<p>Note that the main.rs does not declare any modules with mod, it only imports them with use (the distinction between the two is something a lot of new Rust programmers struggle with!).</p>
+<p>The reason for this is that, in projects with both a lib.rs and a main.rs:</p>
+<blockquote>
+<p>Cargo effectively treats lib.rs as the root of your crate, and main.rs as a seperate binary that depends on your crate.</p>
+</blockquote>
+</div>
+</div>
+<div id="admonition-用binary和library来区分" class="admonition quote">
+<div class="admonition-title">
+<p>用binary和library来区分</p>
+<p><a class="admonition-anchor-link" href="#admonition-用binary和library来区分"></a></p>
+</div>
+<div>
+<p><strong>main.rs is always the root of your binary, and lib.rs is always the root of your library.</strong></p>
+<blockquote>
+<p>The important things to realize are:</p>
+</blockquote>
+<ul>
+<li>These two roots are compiled seperately, and have their own entirely seperate module structure.</li>
+<li>When you use the mod keyword, you are creating a module, not importing a module.</li>
+<li>You almost never want to have multiple mod statements for a single file, as you'll be duplicating the content.</li>
+<li>If you want to use something from an existing module or from a library, that's what the use keyword is for.</li>
+</ul>
+<blockquote>
+<p>Let's walk through your example:</p>
+</blockquote>
+<ol>
+<li>In lib.rs, you use <strong>mod</strong> to declare that your library has two top level modules, cli and internal. There are corresponding files in the right place in your project, so Cargo knows how to link it all up. This part is fine, and what you intended to happen!</li>
+<li>However, when you write mod lib in your main.rs, you're not importing your library! You're actually declaring that your binary has it's own top level module, which just happens to be called lib. Cargo then sees that there is a file called lib.rs in the folder, and links that in, even though that's not what you intended. It then sees that the lib.rs file has two mod statements and treats these as submodules of the binary's lib module. The files aren't in the right place for that to work, so compilation fails.</li>
+<li>So the root cause of your issue is that you've effectively told the compiler to create your module structure twice, <strong>once in your library and once in your binary</strong>. </li>
+<li>You really only meant to define these modules in your library, and then use them into your binary.</li>
+</ol>
+</div>
+</div>
+<h3 id="实际应用substrate的substrate-node-template"><a class="header" href="#实际应用substrate的substrate-node-template">实际应用：Substrate的substrate-node-template</a></h3>
+<blockquote>
+<p>根据官方文档知道，substrate是各种lib包，那么开发时如何运行呢？</p>
+</blockquote>
+<h4 id="区别cargo-run与cargo-build"><a class="header" href="#区别cargo-run与cargo-build">区别cargo run与cargo build</a></h4>
+<ul>
+<li><a href="https://kaisery.github.io/trpl-zh-cn/ch01-03-hello-cargo.html#%E6%9E%84%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8C-cargo-%E9%A1%B9%E7%9B%AE">构建并运行Cargo - Rust 程序设计语言 简体中文版</a></li>
+</ul>
+<h4 id="在node包里面存在mainrs"><a class="header" href="#在node包里面存在mainrs">在node包里面存在main.rs</a></h4>
+<ol>
+<li>根Cargo.toml里面告诉cargo，这个项目总共有三个包</li>
+</ol>
+<div id="admonition-根cargotoml" class="admonition info">
+<div class="admonition-title">
+<p>根Cargo.toml</p>
+<p><a class="admonition-anchor-link" href="#admonition-根cargotoml"></a></p>
+</div>
+<div>
+<pre><code class="language-toml">[workspace]
+members = [
+    &quot;node&quot;,
+    &quot;pallets/template&quot;,
+    &quot;runtime&quot;,
+]
+[profile.release]
+panic = &quot;unwind&quot;
+</code></pre>
+</div>
+</div>
+<ol start="2">
+<li>然后cargo找到包含main.rs的node包作为入口</li>
+</ol>
+<div id="admonition-node-tree" class="admonition tip">
+<div class="admonition-title">
+<p>node tree</p>
+<p><a class="admonition-anchor-link" href="#admonition-node-tree"></a></p>
+</div>
+<div>
+<pre><code class="language-shell"> tree -L 2 node                                                                                                                                                                                                                         ─╯
+node
+├── Cargo.toml
+├── build.rs
+└── src
+    ├── chain_spec.rs
+    ├── cli.rs
+    ├── command.rs
+    ├── command_helper.rs
+    ├── lib.rs
+    ├── main.rs
+    ├── rpc.rs
+    └── service.rs
+
+1 directory, 10 files
+</code></pre>
+</div>
+</div>
+<ol start="3">
+<li>node/main.rs里面使用了文件名crate</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust">//! Substrate Node Template CLI library.
+#![warn(missing_docs)]
+
+mod chain_spec;
+#[macro_use]
+// 对应service.rs
+mod service;
+// 对应cli.rs
+mod cli;
+// 对应command.rs
+mod command;
+// 对应command_helper.rs
+mod command_helper;
+// 对应rpc.rs
+mod rpc;
+
+fn main() -&gt; sc_cli::Result&lt;()&gt; {
+    command::run()
+
+</code></pre></pre>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
 <ul>
