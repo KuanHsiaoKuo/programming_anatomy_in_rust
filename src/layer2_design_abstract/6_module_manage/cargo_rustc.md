@@ -1,34 +1,35 @@
 # cargo与rustc
 
 <!--ts-->
+
 * [cargo与rustc](#cargo与rustc)
-   * [rustc](#rustc)
-      * [rustc是什么](#rustc是什么)
-      * [基础使用](#基础使用)
-      * [rustc与cargo的关系](#rustc与cargo的关系)
-   * [cargo style](#cargo-style)
-   * [cargo essential structure](#cargo-essential-structure)
-   * [.cargo 扩展](#cargo-扩展)
-      * [tree overview](#tree-overview)
-      * [bin](#bin)
-      * [env](#env)
-      * [git](#git)
-      * [registry](#registry)
-   * [Cargo 与 git 的关联！](#cargo-与-git-的关联)
-      * [cargo tree](#cargo-tree)
-      * [git](#git-1)
-      * [关于依赖冲突问题](#关于依赖冲突问题)
-   * [Cargo项目结构](#cargo项目结构)
-   * [Cargo相关问题解决](#cargo相关问题解决)
-      * [版本冲突：failed to select a version for the requirement](#版本冲突failed-to-select-a-version-for-the-requirement)
-      * [基础说明](#基础说明)
-      * [cargo.toml和cargo.lock](#cargotoml和cargolock)
-      * [构建、清理、更新以及安装](#构建清理更新以及安装)
-      * [main.rs 和 lib.rs](#mainrs-和-librs)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [rustc](#rustc)
+        * [rustc是什么](#rustc是什么)
+        * [基础使用](#基础使用)
+        * [rustc与cargo的关系](#rustc与cargo的关系)
+    * [cargo style](#cargo-style)
+    * [cargo essential structure](#cargo-essential-structure)
+    * [.cargo 扩展](#cargo-扩展)
+        * [tree overview](#tree-overview)
+        * [bin](#bin)
+        * [env](#env)
+        * [git](#git)
+        * [registry](#registry)
+    * [Cargo 与 git 的关联！](#cargo-与-git-的关联)
+        * [cargo tree](#cargo-tree)
+        * [git](#git-1)
+        * [关于依赖冲突问题](#关于依赖冲突问题)
+    * [Cargo项目结构](#cargo项目结构)
+    * [Cargo相关问题解决](#cargo相关问题解决)
+        * [版本冲突：failed to select a version for the requirement](#版本冲突failed-to-select-a-version-for-the-requirement)
+        * [基础说明](#基础说明)
+        * [cargo.toml和cargo.lock](#cargotoml和cargolock)
+        * [构建、清理、更新以及安装](#构建清理更新以及安装)
+        * [main.rs 和 lib.rs](#mainrs-和-librs)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jul  3 20:43:13 CST 2022 -->
@@ -323,9 +324,154 @@ cargo.toml是cargo特有的项目数据描述文件，对于猿们而言，cargo
 ### main.rs 和 lib.rs
 
 - [Rust 模块系统 - 掘金](https://web.archive.org/web/20220703121446/https://juejin.cn/post/6919738138135003150)
+  > 包（package）创建规则：
+
+      - 一个包中至多只能包含一个库Crate。
+      - 包中可以包含任意多个二进制Crate。
+      - 包中至少包含一个 crate，无论是库的还是二进制的。
+      - 包中应该包含一个 Cargo.toml 配置文件，用来说明如何去构建这些 crate。
+  > 示例一：cargo new --bin 创建一个包含 二进制Crate 的包
+  > 示例二：cargo new --lib 创建一个包含库(lib)crate的包
+  > 示例三：--lib和--bin不可以同时使用，这种情况下可以示例一的基础上自己创建一个lib.rs文件
+    - 一般情况下，我们将与程序运行相关的代码放在 main.rs 文件，其他真正的任务逻辑放在 lib.rs 文件中。
 - [Rust modules confusion when there is main.rs and lib.rs - Stack Overflow](https://web.archive.org/web/20220703121604/https://stackoverflow.com/questions/57756927/rust-modules-confusion-when-there-is-main-rs-and-lib-rs)
+
+> 这里有人详细介绍了只有lib.rs/main.rs的情况下，执行cargo run的情况。没有main.rs的时候，cargo run会告诉你：error: a bin target must be available for `cargo run`
+
 - [main.rs vs lib.rs : rust](https://www.reddit.com/r/rust/comments/c41iph/mainrs_vs_librs/)
+
+> A common pattern, even for binary-only crates, is to declare a "library" providing the majority of functionality, and then have main.rs just implement argument parsing and use that library.
+> This allows for integration tests written against the library, which might otherwise be hard to do with only main.rs.
+
 - [Main.rs and lib.rs at same level - help - The Rust Programming Language Forum](https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499)
+  > 这里有人跟着官方文档制作命令行工具时发现同样的疑惑点，底下有人引用了这个链接
+    - [Separation of Conerns for Binary Projects - The Rust Programming Language](https://web.archive.org/web/20220424212816/https://doc.rust-lang.org/book/ch12-03-improving-error-handling-and-modularity.html#separation-of-concerns-for-binary-projects)
+
+```admonish quote title='Allocating Responsibilty for Multiple Tasks'
+The organizational problem of allocating responsibility for multiple tasks to the main function is common to many binary projects. As a result, the Rust community has developed a process to use as a guideline for splitting the separate concerns of a binary program when main starts getting large. The process has the following steps:
+
+1. Split your program into a main.rs and a lib.rs and move your program’s logic to lib.rs.
+2. As long as your command line parsing logic is small, it can remain in main.rs.
+3. When the command line parsing logic starts getting complicated, extract it from main.rs and move it to lib.rs.
+
+> The responsibilities that remain in the main function after this process should be limited to the following:
+
+- Calling the command line parsing logic with the argument values
+- Setting up any other configuration
+- Calling a run function in lib.rs
+- Handling the error if run returns an error
+
+> This pattern is about separating concerns:
+1. main.rs handles running the program
+2. and lib.rs handles all the logic of the task at hand. 
+
+> Because you can’t test the main function directly, this structure lets you test all of your program’s logic by moving it into functions in lib.rs. 
+> The only code that remains in main.rs will be small enough to verify its correctness by reading it. 
+> Let’s rework our program by following this process.
+```
+
+```admonish tip title='明确职责, 用MVC类比'
+> 也就是说
+1. main.rs只负责调用、配置和处理异常， 类似View
+2. lib.rs主要负责具体的业务逻辑, 类似Control+Model
+```
+
+```admonish quote title='用crate来区分'
+Note that the main.rs does not declare any modules with mod, it only imports them with use (the distinction between the two is something a lot of new Rust programmers struggle with!).
+
+The reason for this is that, in projects with both a lib.rs and a main.rs:
+> Cargo effectively treats lib.rs as the root of your crate, and main.rs as a seperate binary that depends on your crate.
+```
+
+```admonish quote title='用binary和library来区分'
+**main.rs is always the root of your binary, and lib.rs is always the root of your library.**
+
+> The important things to realize are:
+
+- These two roots are compiled seperately, and have their own entirely seperate module structure.
+- When you use the mod keyword, you are creating a module, not importing a module.
+- You almost never want to have multiple mod statements for a single file, as you'll be duplicating the content.
+- If you want to use something from an existing module or from a library, that's what the use keyword is for.
+
+> Let's walk through your example:
+
+1. In lib.rs, you use **mod** to declare that your library has two top level modules, cli and internal. There are corresponding files in the right place in your project, so Cargo knows how to link it all up. This part is fine, and what you intended to happen!
+2. However, when you write mod lib in your main.rs, you're not importing your library! You're actually declaring that your binary has it's own top level module, which just happens to be called lib. Cargo then sees that there is a file called lib.rs in the folder, and links that in, even though that's not what you intended. It then sees that the lib.rs file has two mod statements and treats these as submodules of the binary's lib module. The files aren't in the right place for that to work, so compilation fails.
+3. So the root cause of your issue is that you've effectively told the compiler to create your module structure twice, **once in your library and once in your binary**. 
+4. You really only meant to define these modules in your library, and then use them into your binary.
+
+```
+
+### 实际应用：Substrate的substrate-node-template
+
+> 根据官方文档知道，substrate是各种lib包，那么开发时如何运行呢？
+
+#### 区别cargo run与cargo build
+
+- [构建并运行Cargo - Rust 程序设计语言 简体中文版](https://kaisery.github.io/trpl-zh-cn/ch01-03-hello-cargo.html#%E6%9E%84%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8C-cargo-%E9%A1%B9%E7%9B%AE)
+
+#### 在node包里面存在main.rs
+
+1. 根Cargo.toml里面告诉cargo，这个项目总共有三个包
+
+~~~admonish info title='根Cargo.toml'
+```toml
+[workspace]
+members = [
+    "node",
+    "pallets/template",
+    "runtime",
+]
+[profile.release]
+panic = "unwind"
+```
+~~~
+
+2. 然后cargo找到包含main.rs的node包作为入口
+
+~~~admonish tip title='node tree'
+```shell
+ tree -L 2 node                                                                                                                                                                                                                         ─╯
+node
+├── Cargo.toml
+├── build.rs
+└── src
+    ├── chain_spec.rs
+    ├── cli.rs
+    ├── command.rs
+    ├── command_helper.rs
+    ├── lib.rs
+    ├── main.rs
+    ├── rpc.rs
+    └── service.rs
+
+1 directory, 10 files
+```
+~~~
+
+3. node/main.rs里面使用了文件名crate
+
+```rust
+//! Substrate Node Template CLI library.
+#![warn(missing_docs)]
+
+mod chain_spec;
+#[macro_use]
+// 对应service.rs
+mod service;
+// 对应cli.rs
+mod cli;
+// 对应command.rs
+mod command;
+// 对应command_helper.rs
+mod command_helper;
+// 对应rpc.rs
+mod rpc;
+
+fn main() -> sc_cli::Result<()> {
+    command::run()
+
+```
 
 ## 参考资源
 
