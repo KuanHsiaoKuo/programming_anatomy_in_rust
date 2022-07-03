@@ -1,32 +1,33 @@
 # Substrate深入尝试pallet
 
 <!--ts-->
-
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
-    * [参考资源](#参考资源)
-    * [设置昵称：添加第一个Pallet到Runtime](#设置昵称添加第一个pallet到runtime)
-        * [runtime结构分析](#runtime结构分析)
-        * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
-            * [[package]{...}](#package)
-            * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
-            * [[dependencies]{...}](#dependencies)
-            * [[build-dependencies]{...}](#build-dependencies)
-            * [[features]{...}](#features)
-        * [四步添加pallet](#四步添加pallet)
-            * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
-            * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
-            * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
-            * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
-        * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-        * [验证功能](#验证功能)
-            * [为帐户设置昵称](#为帐户设置昵称)
-            * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-        * [可能出现的问题](#可能出现的问题)
-    * [参考资料](#参考资料)
-        * [pallet相关](#pallet相关)
+   * [文档/代码更新问题](#文档代码更新问题)
+   * [1. 设置昵称：添加第一个Pallet到Runtime](#1-设置昵称添加第一个pallet到runtime)
+      * [runtime结构分析](#runtime结构分析)
+      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+         * [[package]{...}](#package)
+         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+         * [[dependencies]{...}](#dependencies)
+         * [[build-dependencies]{...}](#build-dependencies)
+         * [[features]{...}](#features)
+      * [四步添加pallet](#四步添加pallet)
+         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+      * [验证功能](#验证功能)
+         * [为帐户设置昵称](#为帐户设置昵称)
+         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+      * [可能出现的问题](#可能出现的问题)
+   * [2. 指定调用源头unsigned, signed or sudo](#2-指定调用源头unsigned-signed-or-sudo)
+      * [signed与sudo有不同权限。](#signed与sudo有不同权限)
+   * [参考资料](#参考资料)
+      * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 11:07:28 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 19:16:42 CST 2022 -->
 
 <!--te-->
 
