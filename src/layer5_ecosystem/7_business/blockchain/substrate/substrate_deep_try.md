@@ -3,7 +3,7 @@
 <!--ts-->
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
    * [参考资源](#参考资源)
-   * [添加一个Pallet到Runtime](#添加一个pallet到runtime)
+   * [设置昵称：添加第一个Pallet到Runtime](#设置昵称添加第一个pallet到runtime)
       * [runtime结构分析](#runtime结构分析)
       * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
          * [[package]{...}](#package)
@@ -17,13 +17,15 @@
          * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
          * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
       * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-      * [导入Pallet](#导入pallet)
+      * [验证功能](#验证功能)
+         * [为帐户设置昵称](#为帐户设置昵称)
+         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
       * [可能出现的问题](#可能出现的问题)
    * [参考资料](#参考资料)
       * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:08:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 11:07:28 CST 2022 -->
 
 <!--te-->
 

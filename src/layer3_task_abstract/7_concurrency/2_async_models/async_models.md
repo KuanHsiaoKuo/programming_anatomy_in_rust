@@ -1,14 +1,10 @@
 # 异步模型
 
 <!--ts-->
-* [异步模型](#异步模型)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 00:03:54 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 11:06:53 CST 2022 -->
 
 <!--te-->
 
