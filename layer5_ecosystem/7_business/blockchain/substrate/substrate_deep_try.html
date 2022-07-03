@@ -177,8 +177,8 @@
 <ul>
 <li><a href="#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
 <ul>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
-<li><a href="#%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">设置昵称：添加第一个Pallet到Runtime</a>
+<li><a href="#%E6%96%87%E6%A1%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98">文档/代码更新问题</a></li>
+<li><a href="#1-%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">1. 设置昵称：添加第一个Pallet到Runtime</a>
 <ul>
 <li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
 <li><a href="#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
@@ -208,6 +208,11 @@
 <li><a href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能出现的问题</a></li>
 </ul>
 </li>
+<li><a href="#2-%E6%8C%87%E5%AE%9A%E8%B0%83%E7%94%A8%E6%BA%90%E5%A4%B4unsigned-signed-or-sudo">2. 指定调用源头unsigned, signed or sudo</a>
+<ul>
+<li><a href="#signed%E4%B8%8Esudo%E6%9C%89%E4%B8%8D%E5%90%8C%E6%9D%83%E9%99%90">signed与sudo有不同权限。</a></li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
 <ul>
 <li><a href="#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
@@ -217,14 +222,19 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 11:07:28 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul  3 19:16:42 CST 2022 -->
 <!--te-->
-<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
-<h2 id="设置昵称添加第一个pallet到runtime"><a class="header" href="#设置昵称添加第一个pallet到runtime">设置昵称：添加第一个Pallet到Runtime</a></h2>
+<h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
+<pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
+</code></pre>
+<h2 id="1-设置昵称添加第一个pallet到runtime"><a class="header" href="#1-设置昵称添加第一个pallet到runtime">1. 设置昵称：添加第一个Pallet到Runtime</a></h2>
 <blockquote>
 <p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
 </blockquote>
-<p>接下来接着使用前面的node template</p>
+<ul>
+<li><a href="https://docs.substrate.io/tutorials/work-with-pallets/add-a-pallet/">Add a pallet to the runtime | Substrate_ Docs</a>
+接下来接着使用前面的node template</li>
+</ul>
 <h3 id="runtime结构分析"><a class="header" href="#runtime结构分析">runtime结构分析</a></h3>
 <pre><code class="language-shell">tree -L 2 runtime                                                                                               ─╯
 runtime
@@ -344,10 +354,10 @@ yarn start
 <h4 id="为帐户设置昵称"><a class="header" href="#为帐户设置昵称">为帐户设置昵称</a></h4>
 <ul>
 <li>检查帐户选择列表以验证当前选择了 Alice 帐户。</li>
-<li>在 Pallet Interactor 组件中，确认选择了 Extrinsic。 </li>
-<li>从可调用的托盘列表中选择nicks。 </li>
-<li>选择 <strong>settName</strong> 作为要从 nicks palette 调用的函数。 </li>
-<li>键入一个长于 MinNickLength（8 个字符）且不长于 MaxNickLength（32 个字符）的名称。 </li>
+<li>在 Pallet Interactor 组件中，确认选择了 Extrinsic。</li>
+<li>从可调用的托盘列表中选择nicks。</li>
+<li>选择 <strong>settName</strong> 作为要从 nicks palette 调用的函数。</li>
+<li>键入一个长于 MinNickLength（8 个字符）且不长于 MaxNickLength（32 个字符）的名称。</li>
 <li>单击Signed以执行该功能。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.51.26.png" alt="CleanShot 2022-07-03 at 10.51.26" /></p>
@@ -358,7 +368,7 @@ yarn start
 <li>
 <p>按图所示进行设置，查询，复制Alice的地址进行查询会返回一个元组，里面的两个值分别指：</p>
 <ul>
-<li>Alice 帐户的十六进制编码昵称。 </li>
+<li>Alice 帐户的十六进制编码昵称。</li>
 <li>为保护昵称而从 Alice 的账户中保留的金额。</li>
 </ul>
 </li>
@@ -370,6 +380,50 @@ yarn start
 <ul>
 <li><a href="https://github.com/substrate-developer-hub/pallet-did/issues/9">Conflicts when adding pallet to substrate-node-template · Issue #9 · substrate-developer-hub/pallet-did</a></li>
 <li><a href="https://substrate.stackexchange.com/questions/2774/error-failed-to-select-a-version-for-parity-util-mem">substrate node template - &quot;error: failed to select a version for <code>parity-util-mem</code>&quot; - Substrate and Polkadot Stack Exchange</a></li>
+</ul>
+<h2 id="2-指定调用源头unsigned-signed-or-sudo"><a class="header" href="#2-指定调用源头unsigned-signed-or-sudo">2. 指定调用源头unsigned, signed or sudo</a></h2>
+<ul>
+<li><a href="https://docs.substrate.io/tutorials/work-with-pallets/specify-origin/">Specify the origin for a call | Substrate_ Docs</a></li>
+</ul>
+<blockquote>
+<p>前面已经介绍用Alice的地址来设置并查询nickname(setName)，里面还有其他函数(killName、forceName、clearName)这里将会进行调用验证</p>
+</blockquote>
+<h3 id="signed与sudo有不同权限"><a class="header" href="#signed与sudo有不同权限">signed与sudo有不同权限。</a></h3>
+<p>点击Sudo按钮将会发出一个 Sudid 事件以通知节点参与者 Root 源发送了一个呼叫。 但是，内部调度会因 DispatchError 而失败（Sudo 按钮的 sudo 函数是“外部”调度）。</p>
+<blockquote>
+<p>特别是，这是 DispatchError::Module 变体的一个实例，它会提供两个元数据：一个索引号和一个错误号。</p>
+</blockquote>
+<ul>
+<li>索引号与产生错误的pallet有关；它对应于construct_runtime!中pallet的索引（位置）！。</li>
+<li>错误编号与该托盘的错误枚举中相关变体的索引相对应。</li>
+</ul>
+<blockquote>
+<p>使用这些数字查找托盘错误时，请记住索引是从零开始。</p>
+</blockquote>
+<p>比如：</p>
+<ul>
+<li>索引为 9（第十个托盘），对应nicks,</li>
+<li>错误为 2（第三个错误）,
+对应<a href="https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L99-L108">substrate源码</a>中定义的第三个错误</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Error for the nicks pallet.
+#[pallet::error]
+pub enum Error&lt;T&gt; {
+    /// A name is too short.    
+    TooShort,
+    /// A name is too long.
+    TooLong,
+    /// An account isn't named.
+    Unnamed,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>取决于您的construct_runtime中尼克斯托盘的位置！宏，您可能会看到不同的索引编号。不管 index 的值如何，你应该看到错误值是 2，它对应于 Nick 的 Pallet 的 Error 枚举的第三个变体，Unnamed
+变体。这应该不足为奇，因为 Bob 尚未保留昵称，因此无法清除！</li>
 </ul>
 <h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
 <h3 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h3>
