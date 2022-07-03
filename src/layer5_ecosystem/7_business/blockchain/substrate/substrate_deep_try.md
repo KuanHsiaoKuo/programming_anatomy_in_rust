@@ -1,41 +1,47 @@
 # Substrate深入尝试pallet
 
 <!--ts-->
+
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
-   * [参考资源](#参考资源)
-   * [设置昵称：添加第一个Pallet到Runtime](#设置昵称添加第一个pallet到runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
-         * [[package]{...}](#package)
-         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
-         * [[dependencies]{...}](#dependencies)
-         * [[build-dependencies]{...}](#build-dependencies)
-         * [[features]{...}](#features)
-      * [四步添加pallet](#四步添加pallet)
-         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
-         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
-         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
-         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
-      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-      * [验证功能](#验证功能)
-         * [为帐户设置昵称](#为帐户设置昵称)
-         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-      * [可能出现的问题](#可能出现的问题)
-   * [参考资料](#参考资料)
-      * [pallet相关](#pallet相关)
+    * [参考资源](#参考资源)
+    * [设置昵称：添加第一个Pallet到Runtime](#设置昵称添加第一个pallet到runtime)
+        * [runtime结构分析](#runtime结构分析)
+        * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+            * [[package]{...}](#package)
+            * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+            * [[dependencies]{...}](#dependencies)
+            * [[build-dependencies]{...}](#build-dependencies)
+            * [[features]{...}](#features)
+        * [四步添加pallet](#四步添加pallet)
+            * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+            * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+            * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+            * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+        * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+        * [验证功能](#验证功能)
+            * [为帐户设置昵称](#为帐户设置昵称)
+            * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+        * [可能出现的问题](#可能出现的问题)
+    * [参考资料](#参考资料)
+        * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jul  3 11:07:28 CST 2022 -->
 
 <!--te-->
 
-## 参考资源
+## 文档/代码更新问题
 
-## 设置昵称：添加第一个Pallet到Runtime
+```admonisth warn title='substrate文档更新带来的问题'
+由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
+```
+
+## 1. 设置昵称：添加第一个Pallet到Runtime
 
 > substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet
 
-接下来接着使用前面的node template
+- [Add a pallet to the runtime | Substrate_ Docs](https://docs.substrate.io/tutorials/work-with-pallets/add-a-pallet/)
+  接下来接着使用前面的node template
 
 ### runtime结构分析
 
@@ -166,25 +172,29 @@ yarn start
 ```
 
 ### 验证功能
+
 #### 为帐户设置昵称
+
 - 检查帐户选择列表以验证当前选择了 Alice 帐户。
-- 在 Pallet Interactor 组件中，确认选择了 Extrinsic。 
-- 从可调用的托盘列表中选择nicks。 
-- 选择 **settName** 作为要从 nicks palette 调用的函数。 
-- 键入一个长于 MinNickLength（8 个字符）且不长于 MaxNickLength（32 个字符）的名称。 
+- 在 Pallet Interactor 组件中，确认选择了 Extrinsic。
+- 从可调用的托盘列表中选择nicks。
+- 选择 **settName** 作为要从 nicks palette 调用的函数。
+- 键入一个长于 MinNickLength（8 个字符）且不长于 MaxNickLength（32 个字符）的名称。
 - 单击Signed以执行该功能。
 
 ![CleanShot 2022-07-03 at 10.51.26](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.51.26.png)
 
 ![CleanShot 2022-07-03 at 10.54.34](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2010.54.34.png)
+
 #### 使用Nicks pallet查询账户信息
 
 ![CleanShot 2022-07-03 at 11.00.08](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-03%20at%2011.00.08.png)
 
 - 按图所示进行设置，查询，复制Alice的地址进行查询会返回一个元组，里面的两个值分别指：
 
-    - Alice 帐户的十六进制编码昵称。 
+    - Alice 帐户的十六进制编码昵称。
     - 为保护昵称而从 Alice 的账户中保留的金额。
+
 > 如果使用Bob的地址，会返回None，因为没有给他设置昵称。
 
 ### 可能出现的问题
@@ -192,7 +202,44 @@ yarn start
 - [Conflicts when adding pallet to substrate-node-template · Issue #9 · substrate-developer-hub/pallet-did](https://github.com/substrate-developer-hub/pallet-did/issues/9)
 - [substrate node template - "error: failed to select a version for `parity-util-mem`" - Substrate and Polkadot Stack Exchange](https://substrate.stackexchange.com/questions/2774/error-failed-to-select-a-version-for-parity-util-mem)
 
+## 2. 指定调用源头unsigned, signed or sudo
 
+- [Specify the origin for a call | Substrate_ Docs](https://docs.substrate.io/tutorials/work-with-pallets/specify-origin/)
+
+> 前面已经介绍用Alice的地址来设置并查询nickname(setName)，里面还有其他函数(killName、forceName、clearName)这里将会进行调用验证
+
+### signed与sudo有不同权限。
+
+点击Sudo按钮将会发出一个 Sudid 事件以通知节点参与者 Root 源发送了一个呼叫。 但是，内部调度会因 DispatchError 而失败（Sudo 按钮的 sudo 函数是“外部”调度）。
+
+> 特别是，这是 DispatchError::Module 变体的一个实例，它会提供两个元数据：一个索引号和一个错误号。
+
+- 索引号与产生错误的pallet有关；它对应于construct_runtime!中pallet的索引（位置）！。
+- 错误编号与该托盘的错误枚举中相关变体的索引相对应。
+
+> 使用这些数字查找托盘错误时，请记住索引是从零开始。
+
+比如：
+
+- 索引为 9（第十个托盘），对应nicks,
+- 错误为 2（第三个错误）,
+  对应[substrate源码](https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L99-L108)中定义的第三个错误
+
+```rust
+/// Error for the nicks pallet.
+#[pallet::error]
+pub enum Error<T> {
+    /// A name is too short.    
+    TooShort,
+    /// A name is too long.
+    TooLong,
+    /// An account isn't named.
+    Unnamed,
+}
+```
+
+- 取决于您的construct_runtime中尼克斯托盘的位置！宏，您可能会看到不同的索引编号。不管 index 的值如何，你应该看到错误值是 2，它对应于 Nick 的 Pallet 的 Error 枚举的第三个变体，Unnamed
+  变体。这应该不足为奇，因为 Bob 尚未保留昵称，因此无法清除！
 
 ## 参考资料
 
