@@ -1,25 +1,26 @@
 # 模块相关
 
 <!--ts-->
+
 * [模块相关](#模块相关)
-   * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
-      * [Package: 包含Cargo.toml](#package-包含cargotoml)
-      * [workspace与package](#workspace与package)
-      * [crate: 主要在Cargo.toml的[bin]/[lib]中指明](#crate-主要在cargotoml的binlib中指明)
-      * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
-      * [module](#module)
-   * [模块呈现方式](#模块呈现方式)
-      * [嵌套模块](#嵌套模块)
-      * [文件模块](#文件模块)
-      * [目录模块](#目录模块)
-   * [隐私与导入导出](#隐私与导入导出)
-      * [隐私管理](#隐私管理)
-      * [嵌套导入](#嵌套导入)
-      * [再次导出](#再次导出)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
+        * [Package: 包含Cargo.toml](#package-包含cargotoml)
+        * [workspace与package](#workspace与package)
+        * [crate: 主要在Cargo.toml的[bin]/[lib]中指明](#crate-主要在cargotoml的binlib中指明)
+        * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
+        * [module](#module)
+    * [模块呈现方式](#模块呈现方式)
+        * [嵌套模块](#嵌套模块)
+        * [文件模块](#文件模块)
+        * [目录模块](#目录模块)
+    * [隐私与导入导出](#隐私与导入导出)
+        * [隐私管理](#隐私管理)
+        * [嵌套导入](#嵌套导入)
+        * [再次导出](#再次导出)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jul  3 19:16:07 CST 2022 -->
@@ -81,7 +82,9 @@ blake2 = { opt-level = 3 }
 
 > A Cargo.toml file can simultaneously define a package and a workspace to which it belongs, but that package is still a member of that workspace, not the other way around.
 
-### crate: 主要在Cargo.toml的[bin]/[lib]中指明
+### crate
+
+#### 在Cargo.toml的[bin]/[lib]中指明
 
 [Cargo Targets - The Cargo Book](https://doc.rust-lang.org/cargo/reference/cargo-targets.html?highlight=bin#library)
 
@@ -137,6 +140,14 @@ difference unless you're paying attention to the weeds and edge cases.
 
 在rust中，module(模块)更多还是一种逻辑上的概念，主要使用mod关键字，下面会具体说说
 
+```rust
+mod say {
+    pub fn hello() {
+        println!("Hello, world!");
+    }
+}
+```
+
 ## 模块呈现方式
 
 ### 嵌套模块
@@ -171,6 +182,10 @@ Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者
 
 - [了解下Rust 模块使用方式](https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA)
 - [Confused about Package vs. Crate terminology. : rust](https://www.reddit.com/r/rust/comments/lvtzri/confused_about_package_vs_crate_terminology/)
+- [包和模块 - Rust语言圣经(Rust Course)](https://course.rs/basic/crate-module/intro.html)
+    - 项目(Packages)：一个 Cargo 提供的 feature，可以用来构建、测试和分享包
+    - 包(Crate)：一个由多个模块组成的树形结构，可以作为三方库进行分发，也可以生成可执行文件进行运行
+    - 模块(Module)：可以一个文件多个模块，也可以一个文件一个模块，模块可以被认为是真实项目中的代码组织单元
 
 ### local
 

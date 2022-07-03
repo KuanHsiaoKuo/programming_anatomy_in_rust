@@ -1,29 +1,30 @@
 # cargo与rustc
 
 <!--ts-->
+
 * [cargo与rustc](#cargo与rustc)
-   * [rustc](#rustc)
-      * [rustc是什么](#rustc是什么)
-      * [基础使用](#基础使用)
-      * [rustc与cargo的关系](#rustc与cargo的关系)
-   * [cargo style](#cargo-style)
-   * [cargo essential structure](#cargo-essential-structure)
-   * [.cargo 扩展](#cargo-扩展)
-      * [tree overview](#tree-overview)
-      * [bin](#bin)
-      * [env](#env)
-      * [git](#git)
-      * [registry](#registry)
-   * [Cargo 与 git 的关联！](#cargo-与-git-的关联)
-      * [cargo tree](#cargo-tree)
-      * [git](#git-1)
-      * [关于依赖冲突问题](#关于依赖冲突问题)
-   * [Cargo相关问题解决](#cargo相关问题解决)
-      * [版本冲突：failed to select a version for the requirement](#版本冲突failed-to-select-a-version-for-the-requirement)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [rustc](#rustc)
+        * [rustc是什么](#rustc是什么)
+        * [基础使用](#基础使用)
+        * [rustc与cargo的关系](#rustc与cargo的关系)
+    * [cargo style](#cargo-style)
+    * [cargo essential structure](#cargo-essential-structure)
+    * [.cargo 扩展](#cargo-扩展)
+        * [tree overview](#tree-overview)
+        * [bin](#bin)
+        * [env](#env)
+        * [git](#git)
+        * [registry](#registry)
+    * [Cargo 与 git 的关联！](#cargo-与-git-的关联)
+        * [cargo tree](#cargo-tree)
+        * [git](#git-1)
+        * [关于依赖冲突问题](#关于依赖冲突问题)
+    * [Cargo相关问题解决](#cargo相关问题解决)
+        * [版本冲突：failed to select a version for the requirement](#版本冲突failed-to-select-a-version-for-the-requirement)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: kuanhsiaokuo, at: Sun Jul  3 19:16:06 CST 2022 -->
@@ -199,8 +200,11 @@ tree -L 2 $HOME/.cargo/registry                                                 
 ```
 
 ## Cargo 与 git 的关联！
+
 ### cargo tree
+
 1. Cargo.toml是分等级的，最外层的Cargo.toml里面可以只用一个members，然后里面列出内部包含的其他packages
+
 ~~~admonish info title='substrate-node-template为例'
 > 最外层的Cargo.toml
 ```toml
@@ -217,12 +221,14 @@ panic = "unwind"
 
 2. 然后内部的其他packages就需要列出用到的[dependencies]
 3. dependencies的完整使用参数如下：
+
 ~~~admonish info title='dependencies写法一'
 ```toml
 [dependencies]
 pallet-aura = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.24" }
 ```
 ~~~
+
 ~~~admonish info title='dependencies写法二'
 ```toml
 [dependencies.pallet-aura]
@@ -234,6 +240,7 @@ branch = "polkadot-v0.9.24"
 
 > 这里的branch也可以用tag(git tag)
 ~~~
+
 ### git
 
 > 上面dependencie里面的git+branch/tag唯一确定了一份代码，cargo下载对应的git代码之后，会从最外层Cargo.toml顺着members一层层找到[package]如下所示的Cargo.toml来确定对应的依赖包
@@ -256,11 +263,14 @@ readme = "README.md"
 ### 关于依赖冲突问题
 
 目前Cargo无法解决依赖冲突问题，一般都会是因为dependencies里面的git+branch/tag对应的依赖更新导致。
+
 ```admonish tip title='顺藤摸瓜，一一排查'
 这时需要根据冲突的包，切换分支/tag, 找到对应的branch/tag来更新
 ```
 
 > 应用场景: [substrate添加pallet](/layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#添加依赖-cargotomldependincies)
+
+## Cargo项目结构
 
 ## Cargo相关问题解决
 
@@ -276,6 +286,43 @@ Apparently, Cargo can sometimes get into a state where its local registry cache 
 - 修改dependencies
   [cargo install 出现需求版本选择失败怎么办--Qiita](https://web.archive.org/web/20220702110637/https://qiita.com/bc_yuuuuuki/items/6f566ddef60a201af1bc)
 
+### 基础说明
+
+![hello_world_project_sturcture](https://web.archive.org/web/20220621034241im_/https://pp88.org/rust.zui.jia.shi.jian.rust.zui.jia.shi.jian/cargo.xiang.mu.pei.zhi.ji.jie.gou/project-structure.png)
+
+- cargo.toml和cargo.lock文件总是位于项目根目录下。
+- 源代码位于src目录下。
+- 默认的库入口文件是src/lib.rs。
+- 默认的可执行程序入口文件是src/main.rs。
+- 其他可选的可执行文件位于src/bin/*.rs(这里每一个rs文件均对应一个可执行文件)。
+- 外部测试源代码文件位于tests目录下。
+- 示例程序源代码文件位于examples。
+- 基准测试源代码文件位于benches目录下。
+
+### cargo.toml和cargo.lock
+
+cargo.toml和cargo.lock是cargo项目代码管理的核心两个文件，cargo工具的所有活动均基于这两个文件。
+
+cargo.toml是cargo特有的项目数据描述文件，对于猿们而言，cargo.toml文件存储了项目的所有信息，它直接面向rust猿，猿们如果想让自己的rust项目能够按照期望的方式进行构建、测试和运行，那么，必须按照合理的方式构建’cargo.toml’。
+
+而cargo.lock文件则不直接面向猿，猿们也不需要直接去修改这个文件。lock文件是cargo工具根据同一项目的toml文件生成的项目依赖详细清单文件，所以我们一般不用不管他，只需要对着cargo.toml文件撸就行了。
+
+### 构建、清理、更新以及安装
+
+> 领会了toml描述文件的写法，是一个重要的方面。另一个重要的方面，就是cargo工具本身为我们程序猿提供的各种好用的工具。如果大家感兴趣，自己在终端中输入’cargo –help’查看即可。
+
+1. 其中开发时最常用的命令就是'cargo build'，用于构建项目。
+2. 此外，'cargo clean'命令可以清理target文件夹中的所有内容；
+3. 'cargo update'根据toml描述文件重新检索并更新各种依赖项的信息，并写入lock文件，例如依赖项版本的更新变化等等；
+4. 'cargo install'可用于实际的生产部署。这些命令在实际的开发部署中均是非常有用的。
+
+### main.rs 和 lib.rs
+
+- [Rust 模块系统 - 掘金](https://web.archive.org/web/20220703121446/https://juejin.cn/post/6919738138135003150)
+- [Rust modules confusion when there is main.rs and lib.rs - Stack Overflow](https://web.archive.org/web/20220703121604/https://stackoverflow.com/questions/57756927/rust-modules-confusion-when-there-is-main-rs-and-lib-rs)
+- [main.rs vs lib.rs : rust](https://www.reddit.com/r/rust/comments/c41iph/mainrs_vs_librs/)
+- [Main.rs and lib.rs at same level - help - The Rust Programming Language Forum](https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499)
+
 ## 参考资源
 
 ### online-book
@@ -285,5 +332,6 @@ Apparently, Cargo can sometimes get into a state where its local registry cache 
 ### fragment
 
 - [Rustc | Rust学习笔记](https://skyao.io/learning-rust/docs/build/rustc.html)
+- [Cargo项目配置及结构 | 皮皮爸(pp8)](https://web.archive.org/web/20220621034241/https://pp88.org/rust.zui.jia.shi.jian.rust.zui.jia.shi.jian/cargo.xiang.mu.pei.zhi.ji.jie.gou/)
 
 ### local
