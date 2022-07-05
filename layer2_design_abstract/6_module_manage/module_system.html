@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js rust">
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>模块使用 - Programming Anatomy In Rust 🦀</title>
+    <!-- Custom HTML head -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff"/>
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <link rel="stylesheet" href="../../css/general.css">
+    <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="../../highlight.css">
+    <link rel="stylesheet" href="../../tomorrow-night.css">
+    <link rel="stylesheet" href="../../ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../assets/pagetoc/pagetoc_style.css">
+        <link rel="stylesheet" href="../../assets/css/mdbook-admonish.css">
+        <!-- MathJax -->
+        <script async type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<!-- Provide site root to javascript -->
+<script type="text/javascript">
+    var path_to_root = "../../";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+</script>
+
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script type="text/javascript">
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) {
+    }
+</script>
+
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script type="text/javascript">
+    var theme;
+    try {
+        theme = localStorage.getItem('mdbook-theme');
+    } catch (e) {
+    }
+    if (theme === null || theme === undefined) {
+        theme = default_theme;
+    }
+    var html = document.querySelector('html');
+    html.classList.remove('no-js')
+    html.classList.remove('rust')
+    html.classList.add(theme);
+    html.classList.add('js');
+</script>
+
+<!-- Hide / unhide sidebar before it is displayed -->
+<script type="text/javascript">
+    var html = document.querySelector('html');
+    var sidebar = 'hidden';
+    if (document.body.clientWidth >= 1080) {
+        try {
+            sidebar = localStorage.getItem('mdbook-sidebar');
+        } catch (e) {
+        }
+        sidebar = sidebar || 'visible';
+    }
+    html.classList.remove('sidebar-visible');
+    html.classList.add("sidebar-" + sidebar);
+</script>
+
+<nav id="sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><a href="../../overview.html"><strong aria-hidden="true">1.</strong> 总览</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">1.1.</strong> Substrate介绍与解析</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/talks.html"><strong aria-hidden="true">1.2.</strong> Rust话题</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/layer1_underlying_abstract.html"><strong aria-hidden="true">2.</strong> Layer1: 底层抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/1_virtual_memory/virtual_memory.html"><strong aria-hidden="true">2.1.</strong> 虚拟内存管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html"><strong aria-hidden="true">2.1.1.</strong> 内存管理与内存安全</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html"><strong aria-hidden="true">2.1.2.</strong> 所有权三件套</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/2_type_system/type_system.html"><strong aria-hidden="true">2.2.</strong> 类型系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/2_type_system/built_in_types.html"><strong aria-hidden="true">2.2.1.</strong> 基础内置类型</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/2_type_system/collections.html"><strong aria-hidden="true">2.2.2.</strong> 集合类型</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/2_type_system/user_defined_types.html"><strong aria-hidden="true">2.2.3.</strong> 自定义类型</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/2_type_system/generics_traits_objects.html"><strong aria-hidden="true">2.2.4.</strong> 泛型、特征及特征对象</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/language_grammar.html"><strong aria-hidden="true">2.3.</strong> 语言语法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html"><strong aria-hidden="true">2.3.1.</strong> 注释与文档(rustdoc)</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/keywords_glossary.html"><strong aria-hidden="true">2.3.2.</strong> 词法结构扫盲</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html"><strong aria-hidden="true">2.3.3.</strong> 绑定、赋值与匹配</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/logical_decision_loops.html"><strong aria-hidden="true">2.3.4.</strong> 逻辑判断与循环♻️</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/statements_expressions.html"><strong aria-hidden="true">2.3.5.</strong> 语句与表达式</a></li><li class="chapter-item expanded "><a href="../../layer1_underlying_abstract/3_language_grammar/code_quality.html"><strong aria-hidden="true">2.3.6.</strong> 代码质量</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/layer2_design_abstract.html"><strong aria-hidden="true">3.</strong> Layer2: 设计抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html"><strong aria-hidden="true">3.1.</strong> 编程范式</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer2_design_abstract/4_programming_paradigm/fp.html"><strong aria-hidden="true">3.1.1.</strong> 函数式编程</a></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/4_programming_paradigm/oop.html"><strong aria-hidden="true">3.1.2.</strong> 面向对象编程</a></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/4_programming_paradigm/gp.html"><strong aria-hidden="true">3.1.3.</strong> 泛型编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/5_design_pattern/5_design_pattern.html"><strong aria-hidden="true">3.2.</strong> 设计模式</a></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/6_module_manage/6_module_manage.html"><strong aria-hidden="true">3.3.</strong> 模块管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer2_design_abstract/6_module_manage/module_system.html" class="active"><strong aria-hidden="true">3.3.1.</strong> 模块使用</a></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html"><strong aria-hidden="true">3.3.2.</strong> Cargo与项目生命周期</a></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/6_module_manage/cargo_rustc.html"><strong aria-hidden="true">3.3.3.</strong> Cargo run: rustc</a></li><li class="chapter-item expanded "><a href="../../layer2_design_abstract/6_module_manage/rust_plugins.html"><strong aria-hidden="true">3.3.4.</strong> Rust扩展工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../layer3_task_abstract/layer3_task_abstract.html"><strong aria-hidden="true">4.</strong> Layer3: 任务抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer3_task_abstract/7_concurrency/7_concurrency.html"><strong aria-hidden="true">4.1.</strong> 并发编程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer3_task_abstract/7_concurrency/io_models.html"><strong aria-hidden="true">4.1.1.</strong> 系统IO模型</a></li><li class="chapter-item expanded "><a href="../../layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html"><strong aria-hidden="true">4.1.2.</strong> 多线程模型</a></li><li class="chapter-item expanded "><a href="../../layer3_task_abstract/7_concurrency/2_async_models/async_models.html"><strong aria-hidden="true">4.1.3.</strong> 异步模型</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer3_task_abstract/8_meta_programming/8_meta_programming.html"><strong aria-hidden="true">4.2.</strong> 元编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer4_protocol_abstract/layer4_protocol_abstract.html"><strong aria-hidden="true">5.</strong> Layer4: 协议抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html"><strong aria-hidden="true">5.1.</strong> 跨语言编程</a></li><li class="chapter-item expanded "><a href="../../layer4_protocol_abstract/10_computer_network/10_computer_network.html"><strong aria-hidden="true">5.2.</strong> 计算机网络</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/layer5_ecosystem.html"><strong aria-hidden="true">6.</strong> Layer5: 生态环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/learning_resource.html"><strong aria-hidden="true">6.1.</strong> 学习资源</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/1_books/books.html"><strong aria-hidden="true">6.1.1.</strong> 书籍整理</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/2_courses/courses.html"><strong aria-hidden="true">6.1.2.</strong> 线上课程</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/3_blogs/blogs.html"><strong aria-hidden="true">6.1.3.</strong> 博客文章</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/4_videos/videos.html"><strong aria-hidden="true">6.1.4.</strong> 在线视频</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/1_learning_resource/5_projects/projects.html"><strong aria-hidden="true">6.1.5.</strong> 开源项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/2_lang_update/lang_update.html"><strong aria-hidden="true">6.2.</strong> 官方动态</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/3_community/community.html"><strong aria-hidden="true">6.3.</strong> 社区热点</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/4_academic/academic.html"><strong aria-hidden="true">6.4.</strong> 学术讨论</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/open_source.html"><strong aria-hidden="true">6.5.</strong> 开源观察</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/1_underlying/underlying.html"><strong aria-hidden="true">6.5.1.</strong> 底层开发</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/1_underlying/command/command.html"><strong aria-hidden="true">6.5.1.1.</strong> 命令行工具</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/1_underlying/data/data.html"><strong aria-hidden="true">6.5.1.2.</strong> 数据处理</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/1_underlying/embedded/embedded.html"><strong aria-hidden="true">6.5.1.3.</strong> 嵌入式</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/1_underlying/os/os.html"><strong aria-hidden="true">6.5.1.4.</strong> 系统开发</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/1_underlying/performance/performance.html"><strong aria-hidden="true">6.5.1.5.</strong> 性能工具</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network.html"><strong aria-hidden="true">6.5.2.</strong> 网络相关</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/cloud/cloud.html"><strong aria-hidden="true">6.5.2.1.</strong> 云原生</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/frontend/frontend.html"><strong aria-hidden="true">6.5.2.2.</strong> 前端基建</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network/network.html"><strong aria-hidden="true">6.5.2.3.</strong> 网络基建</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html"><strong aria-hidden="true">6.5.2.3.1.</strong> IPFS: 星际文件系统(InterPlanetary File System)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html"><strong aria-hidden="true">6.5.2.3.1.1.</strong> 利用IPFS构建自己的去中心化分布式网站</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_pubsub.html"><strong aria-hidden="true">6.5.2.3.1.2.</strong> IPFS pubsub功能</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.html"><strong aria-hidden="true">6.5.2.3.1.3.</strong> IPFS伴侣插件</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.html"><strong aria-hidden="true">6.5.2.3.1.4.</strong> IPFS+ngrok</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/web/web.html"><strong aria-hidden="true">6.5.2.4.</strong> web开发</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/2_network/web/webassembly_try.html"><strong aria-hidden="true">6.5.2.4.1.</strong> 基于Rust尝试WebAssembly</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/3_media/media.html"><strong aria-hidden="true">6.5.3.</strong> 多媒体</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/3_media/av/av.html"><strong aria-hidden="true">6.5.3.1.</strong> 音视频处理</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/3_media/game/game.html"><strong aria-hidden="true">6.5.3.2.</strong> 游戏开发</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/4_other/other.html"><strong aria-hidden="true">6.5.4.</strong> 其他</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/4_other/lang-with-rust/lang_with_rust.html"><strong aria-hidden="true">6.5.4.1.</strong> Rust与其他语言</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/4_other/scientific-research/scientific_research.html"><strong aria-hidden="true">6.5.4.2.</strong> 科学艺术研究</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/5_open_source/4_other/tools/tools.html"><strong aria-hidden="true">6.5.4.3.</strong> 其他工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/6_security/security.html"><strong aria-hidden="true">6.6.</strong> 安全参考</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/business.html"><strong aria-hidden="true">6.7.</strong> 商业观察</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/blockchain.html"><strong aria-hidden="true">6.7.1.</strong> 区块链</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/build-a-block-in-rust.html"><strong aria-hidden="true">6.7.1.1.</strong> 使用rust建立一个简单的区块链</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">6.7.1.2.</strong> Substrate介绍与解析</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html"><strong aria-hidden="true">6.7.1.2.1.</strong> Substrate尝试</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html"><strong aria-hidden="true">6.7.1.2.2.</strong> Substrate深入pallet</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html"><strong aria-hidden="true">6.7.1.2.3.</strong> Substrate开源项目</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html"><strong aria-hidden="true">6.7.1.2.4.</strong> Substrate惊奇资源</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html"><strong aria-hidden="true">6.7.1.3.</strong> Nervos CKB介绍与解析</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/blockchain/solana.html"><strong aria-hidden="true">6.7.1.4.</strong> Solana</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/practices/practices.html"><strong aria-hidden="true">6.7.2.</strong> 生产实践</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/7_business/products/products.html"><strong aria-hidden="true">6.7.3.</strong> 优秀产品</a></li></ol></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/8_libs/libs.html"><strong aria-hidden="true">6.8.</strong> 基础库</a></li><li class="chapter-item expanded "><a href="../../layer5_ecosystem/9_frameworks/frameworks.html"><strong aria-hidden="true">6.9.</strong> 框架引擎</a></li></ol></li><li class="chapter-item expanded "><a href="../../checklist.html">Checklist</a></li></ol>
+    </div>
+    <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+</nav>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+        <div id="menu-bar-hover-placeholder"></div>
+        <div id="menu-bar" class="menu-bar sticky bordered">
+            <div class="left-buttons">
+                <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                        aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                        aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                    <i class="fa fa-paint-brush"></i>
+                </button>
+                <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="light">Light</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="rust">Rust (default)</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="coal">Coal</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="navy">Navy</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="ayu">Ayu</button>
+                    </li>
+                </ul>
+                    <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                        <i class="fa fa-search"></i>
+                    </button>
+            </div>
+
+            <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
+            <h4 class="menu-bar"> -- 练武不练功 到头一场空 -- 《赛博英雄传》 </h4>
+            <div class="right-buttons">
+                    <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fa fa-print"></i>
+                    </a>
+                    <a href="https://github.com/KuanHsiaoKuo/programming_anatomy_in_rust.git" title="Git repository" aria-label="Git repository">
+                        <i id="git-repository-button" class="fa fa-rust"></i>
+                    </a>
+            </div>
+        </div>
+
+            <div id="search-wrapper" class="hidden">
+                <form id="searchbar-outer" class="searchbar-outer">
+                    <input type="search" name="search" id="searchbar" name="searchbar"
+                           placeholder="Search this book ..." aria-controls="searchresults-outer"
+                           aria-describedby="searchresults-header">
+                </form>
+                <div id="searchresults-outer" class="searchresults-outer hidden">
+                    <div id="searchresults-header" class="searchresults-header"></div>
+                    <ul id="searchresults">
+                    </ul>
+                </div>
+            </div>
+        <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+        <script type="text/javascript">
+            document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+
+                <!-- Page table of contents -->
+                <div class="sidetoc">
+                    <nav class="pagetoc"></nav>
+                </div>
+                <h1 id="模块系统相关workspacepackagecratemodule"><a class="header" href="#模块系统相关workspacepackagecratemodule">模块系统相关：Workspace、Package、Crate、Module</a></h1>
+<!--ts-->
+<ul>
+<li><a href="#%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3workspacepackagecratemodule">模块系统相关：Workspace、Package、Crate、Module</a>
+<ul>
+<li><a href="#%E5%8E%98%E6%B8%85workspacepackagecrate%E5%92%8Cmodule%E7%9A%84%E5%85%B3%E7%B3%BB">厘清Workspace、Package、crate和module的关系</a>
+<ul>
+<li><a href="#package-%E5%8C%85%E5%90%ABcargotoml">Package: 包含Cargo.toml</a></li>
+<li><a href="#workspace%E4%B8%8Epackage">workspace与package</a></li>
+<li><a href="#crate-%E6%9B%B4%E5%A4%9A%E6%83%85%E5%86%B5%E4%B8%8B%E5%8F%AA%E6%98%AFrustc%E9%BB%98%E8%AE%A4">crate: 更多情况下只是rustc默认</a></li>
+<li><a href="#%E5%85%B7%E4%BD%93%E5%AF%B9%E6%AF%94package%E5%92%8Ccrate">具体对比package和crate</a>
+<ul>
+<li><a href="#%E5%9C%A8cargotoml%E7%9A%84binlib%E4%B8%AD%E6%8C%87%E6%98%8E">在Cargo.toml的[bin]/[lib]中指明</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%8D%E6%9D%A5%E5%AF%B9%E6%AF%94workspacepackage%E5%92%8Ccrate">再来对比workspace、package和crate</a></li>
+<li><a href="#module">module</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9D%97%E5%91%88%E7%8E%B0%E6%96%B9%E5%BC%8F">模块呈现方式</a>
+<ul>
+<li><a href="#%E5%B5%8C%E5%A5%97%E6%A8%A1%E5%9D%97">嵌套模块</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97">文件模块</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95%E6%A8%A1%E5%9D%97">目录模块</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9A%90%E7%A7%81%E4%B8%8E%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA">隐私与导入导出</a>
+<ul>
+<li><a href="#%E9%9A%90%E7%A7%81%E7%AE%A1%E7%90%86">隐私管理</a></li>
+<li><a href="#%E5%B5%8C%E5%A5%97%E5%AF%BC%E5%85%A5">嵌套导入</a></li>
+<li><a href="#%E5%86%8D%E6%AC%A1%E5%AF%BC%E5%87%BA">再次导出</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="#online-book">online-book</a></li>
+<li><a href="#fragment">fragment</a></li>
+<li><a href="#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:46 CST 2022 -->
+<!--te-->
+<h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
+<h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
+<p>package就是cargo new的产物，里面包含一个cargo.toml，包名就写在里面的package里。比如substrate的一个包代码：</p>
+<blockquote>
+<p><a href="https://github.com/paritytech/substrate/blob/master/client/allocator/Cargo.toml">substrate/Cargo.toml at master · paritytech/substrate</a></p>
+</blockquote>
+<pre><code class="language-toml">[package]
+name = &quot;sc-allocator&quot;
+version = &quot;4.1.0-dev&quot;
+authors = [&quot;Parity Technologies &lt;admin@parity.io&gt;&quot;]
+edition = &quot;2021&quot;
+license = &quot;Apache-2.0&quot;
+homepage = &quot;https://substrate.io&quot;
+repository = &quot;https://github.com/paritytech/substrate/&quot;
+description = &quot;Collection of allocator implementations.&quot;
+documentation = &quot;https://docs.rs/sc-allocator&quot;
+readme = &quot;README.md&quot;
+
+[package.metadata.docs.rs]
+targets = [&quot;x86_64-unknown-linux-gnu&quot;]
+
+[dependencies]
+log = &quot;0.4.17&quot;
+thiserror = &quot;1.0.30&quot;
+sp-core = { version = &quot;6.0.0&quot;, path = &quot;../../primitives/core&quot; }
+sp-wasm-interface = { version = &quot;6.0.0&quot;, path = &quot;../../primitives/wasm-interface&quot; }
+</code></pre>
+<ol>
+<li>package表明该package的基本信息</li>
+<li>dependencies表示该package依赖的其他package</li>
+</ol>
+<h3 id="workspace与package"><a class="header" href="#workspace与package">workspace与package</a></h3>
+<blockquote>
+<p><a href="https://doc.rust-lang.org/cargo/reference/workspaces.html">Workspaces - The Cargo Book</a>
+默认情况下，一个Cargo.toml只能指明一个package，但是在workspace里面就可以指明多个(此时可以理解为这个package包含多个subpackage)，比如substrate的根cargo：
+<a href="https://github.com/paritytech/substrate/blob/master/Cargo.toml">substrate/Cargo.toml at master · paritytech/substrate</a></p>
+</blockquote>
+<pre><code class="language-toml">[workspace]
+resolver = &quot;2&quot;
+
+members = [
+    &quot;bin/node-template/node&quot;,
+]
+[profile.dev.package]
+blake2 = { opt-level = 3 }
+</code></pre>
+<ul>
+<li>workspace+members: 并发代表当前package包含的所有subpackage，只是指明一个工作区的所有package</li>
+</ul>
+<blockquote>
+<p>A Cargo.toml file can simultaneously define a package and a workspace to which it belongs, but that package is still a member of that workspace, not the other way around.</p>
+</blockquote>
+<h3 id="crate-更多情况下只是rustc默认"><a class="header" href="#crate-更多情况下只是rustc默认">crate: 更多情况下只是rustc默认</a></h3>
+<h3 id="具体对比package和crate"><a class="header" href="#具体对比package和crate">具体对比package和crate</a></h3>
+<div id="admonition-package和crate" class="admonition tip">
+<div class="admonition-title">
+<p>package和crate</p>
+<p><a class="admonition-anchor-link" href="#admonition-package和crate"></a></p>
+</div>
+<div>
+<p>在rust中，最小编译单元叫crate，package是一个或多个crate的集合。</p>
+<blockquote>
+<p>也就是说，如果package没有指明crate，本身就是一个crate</p>
+</blockquote>
+</div>
+</div>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html">Packages and Crates - The Rust Programming Language</a></li>
+</ul>
+<div id="admonition-the-rust-programming-language相关整理" class="admonition quote">
+<div class="admonition-title">
+<p>《The Rust Programming Language》相关整理</p>
+<p><a class="admonition-anchor-link" href="#admonition-the-rust-programming-language相关整理"></a></p>
+</div>
+<div>
+<ol>
+<li>一个包是一个或多个提供一组功能的 crates。一个package包含一个 Cargo.toml 文件，该文件描述了如何构建这些crate。</li>
+<li>crate 可以是二进制 crate 或库 crate。</li>
+</ol>
+<ul>
+<li>二进制 crate 是可以编译成可执行文件的程序，可以运行，例如命令行程序或服务器。</li>
+</ul>
+<blockquote>
+<p>它们必须有一个名为 main 的函数，该函数定义了可执行文件运行时会发生什么。到目前为止，我们创建的所有 crate 都是二进制 crate。</p>
+</blockquote>
+<ol start="3">
+<li>库 crates 没有 main 函数，它们不会编译为可执行文件。它们定义了旨在与多个项目共享的功能。</li>
+</ol>
+<blockquote>
+<p>例如，我们在第 2 章中使用的 rand crate 提供了生成随机数的功能。</p>
+</blockquote>
+<ol start="4">
+<li>下面是一些规则：</li>
+</ol>
+<ul>
+<li>一个包最多可以包含一个库 crate。它可以包含任意数量的二进制 crate，但它必须至少包含一个 crate（库或二进制）。</li>
+<li>当我们输入<strong>cargo new</strong>时，Cargo 创建了一个 Cargo.toml 文件，cargo将会给我们一个package。</li>
+<li>查看 Cargo.toml 的内容，没有提到 src/main.rs，因为 Cargo 遵循一个约定，即 src/main.rs 是与包同名的二进制 crate 的 crate 根。</li>
+<li>同样，Cargo 知道如果包目录包含 src/lib.rs，则该包包含一个与包同名的库 crate，并且 src/lib.rs 是它的 crate 根。 </li>
+</ul>
+<blockquote>
+<p>Cargo 将 crate 根文件传递给 rustc 以构建库或二进制文件。</p>
+</blockquote>
+<ul>
+<li>在这里，我们有一个只包含 src/main.rs 的包，这意味着它只包含一个名为 my-project 的二进制 crate。</li>
+<li>如果一个包包含 src/main.rs 和 src/lib.rs，它有两个 crate：一个二进制文件和一个库，两者都与包同名。</li>
+</ul>
+<blockquote>
+<p>通过将文件放在 src/bin 目录中，一个包可以有多个二进制 crate：每个文件都是一个单独的二进制crate</p>
+</blockquote>
+</div>
+</div>
+<h4 id="在cargotoml的binlib中指明"><a class="header" href="#在cargotoml的binlib中指明">在Cargo.toml的[bin]/[lib]中指明</a></h4>
+<p><a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html?highlight=bin#library">Cargo Targets - The Cargo Book</a></p>
+<div id="admonition-crate" class="admonition tip">
+<div class="admonition-title">
+<p>crate</p>
+<p><a class="admonition-anchor-link" href="#admonition-crate"></a></p>
+</div>
+<div>
+<p>A crate is the [lib] or [[bin]] tables in the Cargo.toml. 
+At most one lib crate may be present, but an arbitrary number of bin crates may be present. </p>
+<p>You won't see these tables added explicitly too often, 
+because they're implicitly present if you have src/lib.rs (lib crate) and/or src/main.rs (bin crate).</p>
+</div>
+</div>
+<pre><code class="language-toml"># Example of customizing the library in Cargo.toml.
+[lib]
+crate-type = [&quot;cdylib&quot;]
+bench = false
+</code></pre>
+<pre><code class="language-toml"># Example of customizing binaries in Cargo.toml.
+[[bin]]
+name = &quot;cool-tool&quot;
+test = false
+bench = false
+
+[[bin]]
+name = &quot;frobnicator&quot;
+required-features = [&quot;frobnicate&quot;]
+
+</code></pre>
+<h3 id="再来对比workspacepackage和crate"><a class="header" href="#再来对比workspacepackage和crate">再来对比workspace、package和crate</a></h3>
+<div id="admonition-hierarchy" class="admonition info">
+<div class="admonition-title">
+<p>hierarchy</p>
+<p><a class="admonition-anchor-link" href="#admonition-hierarchy"></a></p>
+</div>
+<div>
+<p>Workspace → Package → Crate</p>
+</div>
+</div>
+<p>Generally, a package exposes only one crate. Most library crates don't even have an associated binary crate(s) in their
+package. It's due to this that package/crate terminology is often used interchangeably; for lib crates it is in the 90%
+case. Package is also a generic term that people not familiar with Rust's ecosystem can understand, where crate is a
+Rust-specific piece of jargon.</p>
+<p>The two concepts are still meaningfully different -- while conventionally package and lib crate have the same name (
+modulo hyphens vs underscores), this is not required in any way -- but for the most part there isn't an appreciable
+difference unless you're paying attention to the weeds and edge cases.</p>
+<h3 id="module"><a class="header" href="#module">module</a></h3>
+<p>在rust中，module(模块)更多还是一种逻辑上的概念，主要使用mod关键字，下面会具体说说</p>
+<div id="admonition-模块主要还是为了控制作用域scope和隐私privacy" class="admonition tip">
+<div class="admonition-title">
+<p>模块主要还是为了控制作用域(scope)和隐私(privacy)</p>
+<p><a class="admonition-anchor-link" href="#admonition-模块主要还是为了控制作用域scope和隐私privacy"></a></p>
+</div>
+<div>
+</div>
+</div>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod say {
+    pub fn hello() {
+        println!(&quot;Hello, world!&quot;);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="模块呈现方式"><a class="header" href="#模块呈现方式">模块呈现方式</a></h2>
+<h3 id="嵌套模块"><a class="header" href="#嵌套模块">嵌套模块</a></h3>
+<h3 id="文件模块"><a class="header" href="#文件模块">文件模块</a></h3>
+<h3 id="目录模块"><a class="header" href="#目录模块">目录模块</a></h3>
+<h2 id="隐私与导入导出"><a class="header" href="#隐私与导入导出">隐私与导入导出</a></h2>
+<h3 id="隐私管理"><a class="header" href="#隐私管理">隐私管理</a></h3>
+<h3 id="嵌套导入"><a class="header" href="#嵌套导入">嵌套导入</a></h3>
+<h3 id="再次导出"><a class="header" href="#再次导出">再次导出</a></h3>
+<div id="admonition-pubcrate-fn-fn_name-" class="admonition info">
+<div class="admonition-title">
+<p>pub(crate) fn fn_name() {}</p>
+<p><a class="admonition-anchor-link" href="#admonition-pubcrate-fn-fn_name-"></a></p>
+</div>
+<div>
+<p>Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者,要从模块向用户公开一些内容可以使用关键字 pub。</p>
+<blockquote>
+<p>但是对于有一些元素,我们只想暴露给软件包中的其他模块,而不是用户。</p>
+</blockquote>
+<p>在这种情况下,我们可以对元素使用 pub(crate)修饰符,这允许元素仅在软件包内部暴露</p>
+</div>
+</div>
+<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html">Visibility and privacy - The Rust Reference</a></li>
+<li><a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself">pub(in path), pub(crate), pub(super), and pub(self) - The Rust Reference</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">Managing Growing Projects with Packages, Crates, and Modules - The Rust Programming Language</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/mod.html">Modules - Rust By Example</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/crates.html">Crates - Rust By Example</a></li>
+</ul>
+<h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
+<ul>
+<li><a href="https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA">了解下Rust 模块使用方式</a></li>
+<li><a href="https://www.reddit.com/r/rust/comments/lvtzri/confused_about_package_vs_crate_terminology/">Confused about Package vs. Crate terminology. : rust</a></li>
+<li><a href="https://course.rs/basic/crate-module/intro.html">包和模块 - Rust语言圣经(Rust Course)</a>
+<ul>
+<li>项目(Packages)：一个 Cargo 提供的 feature，可以用来构建、测试和分享包</li>
+<li>包(Crate)：一个由多个模块组成的树形结构，可以作为三方库进行分发，也可以生成可执行文件进行运行</li>
+<li>模块(Module)：可以一个文件多个模块，也可以一个文件一个模块，模块可以被认为是真实项目中的代码组织单元</li>
+</ul>
+</li>
+</ul>
+<h3 id="local"><a class="header" href="#local">local</a></h3>
+<ul>
+<li><a href="marginnote3app://note/CF61A2D3-C05C-49B2-943A-777D4A4A6434">&lt;精通Rust(第二版)&gt;-2.2模块</a></li>
+<li><a href="marginnote3app://note/72AB7939-56B0-4797-8307-09E7F9905417">&lt;精通Rust(第二版)&gt;-7.9 模块、路径和导入</a></li>
+</ul>
+
+            </main>
+
+<!--            <script src="https://utteranc.es/client.js"-->
+<!--                    repo="RustMagazine/rust_magazine_2022"-->
+<!--                    issue-term="title"-->
+<!--                    theme="github-light"-->
+<!--                    crossorigin="anonymous"-->
+<!--                    async></script>-->
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                <!-- Mobile navigation buttons -->
+                    <a rel="prev" href="../../layer2_design_abstract/6_module_manage/6_module_manage.html" class="mobile-nav-chapters previous"
+                       title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../../layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html" class="mobile-nav-chapters next"
+                       title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="../../layer2_design_abstract/6_module_manage/6_module_manage.html" class="nav-chapters previous" title="Previous chapter"
+               aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a rel="next" href="../../layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html" class="nav-chapters next" title="Next chapter"
+               aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+            </a>
+    </nav>
+
+</div>
+
+    <script type="text/javascript">
+        window.playground_copyable = true;
+    </script>
+    <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JS scripts -->
+    <script type="text/javascript" src="../../assets/mermaid/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../assets/mermaid/mermaid-init.js"></script>
+    <script type="text/javascript" src="../../assets/smart-anchor.js"></script>
+    <script type="text/javascript" src="../../assets/pagetoc/sidebar.js"></script>
+</body>
+</html>
