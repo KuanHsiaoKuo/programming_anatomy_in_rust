@@ -1,30 +1,30 @@
 # 模块系统相关：Workspace、Package、Crate、Module
 
 <!--ts-->
-
-* [模块相关](#模块相关)
-    * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
-        * [Package: 包含Cargo.toml](#package-包含cargotoml)
-        * [workspace与package](#workspace与package)
-        * [crate](#crate)
-            * [在Cargo.toml的[bin]/[lib]中指明](#在cargotoml的binlib中指明)
-        * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
-        * [module](#module)
-    * [模块呈现方式](#模块呈现方式)
-        * [嵌套模块](#嵌套模块)
-        * [文件模块](#文件模块)
-        * [目录模块](#目录模块)
-    * [隐私与导入导出](#隐私与导入导出)
-        * [隐私管理](#隐私管理)
-        * [嵌套导入](#嵌套导入)
-        * [再次导出](#再次导出)
-    * [参考资源](#参考资源)
-        * [online-book](#online-book)
-        * [fragment](#fragment)
-        * [local](#local)
+* [模块系统相关：Workspace、Package、Crate、Module](#模块系统相关workspacepackagecratemodule)
+   * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
+      * [Package: 包含Cargo.toml](#package-包含cargotoml)
+      * [workspace与package](#workspace与package)
+      * [crate: 更多情况下只是rustc默认](#crate-更多情况下只是rustc默认)
+      * [具体对比package和crate](#具体对比package和crate)
+         * [在Cargo.toml的[bin]/[lib]中指明](#在cargotoml的binlib中指明)
+      * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
+      * [module](#module)
+   * [模块呈现方式](#模块呈现方式)
+      * [嵌套模块](#嵌套模块)
+      * [文件模块](#文件模块)
+      * [目录模块](#目录模块)
+   * [隐私与导入导出](#隐私与导入导出)
+      * [隐私管理](#隐私管理)
+      * [嵌套导入](#嵌套导入)
+      * [再次导出](#再次导出)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Mon Jul  4 00:56:59 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:46 CST 2022 -->
 
 <!--te-->
 
