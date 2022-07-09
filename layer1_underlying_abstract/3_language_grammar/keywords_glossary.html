@@ -4,7 +4,10 @@
     <!-- Book generated using mdBook -->
     <meta charset="UTF-8">
     <title>词法结构扫盲 - Programming Anatomy In Rust 🦀</title>
+
+
     <!-- Custom HTML head -->
+    
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,9 +19,11 @@
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/chrome.css">
         <link rel="stylesheet" href="../../css/print.css" media="print">
+
     <!-- Fonts -->
     <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="../../fonts/fonts.css">
+
     <!-- Highlight.js Stylesheets -->
     <link rel="stylesheet" href="../../highlight.css">
     <link rel="stylesheet" href="../../tomorrow-night.css">
@@ -27,6 +32,7 @@
     <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../../assets/pagetoc/pagetoc_style.css">
         <link rel="stylesheet" href="../../assets/css/mdbook-admonish.css">
+
         <!-- MathJax -->
         <script async type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -97,7 +103,7 @@
 <div id="page-wrapper" class="page-wrapper">
 
     <div class="page">
-        <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
         <div id="menu-bar" class="menu-bar sticky bordered">
             <div class="left-buttons">
                 <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
@@ -157,6 +163,7 @@
                     </ul>
                 </div>
             </div>
+
         <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
         <script type="text/javascript">
             document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -176,15 +183,13 @@
                 <h1 id="词法关键字扫盲"><a class="header" href="#词法关键字扫盲">词法关键字扫盲</a></h1>
 <h2 id="1-关键字"><a class="header" href="#1-关键字">1. 关键字</a></h2>
 <h3 id="严格关键字"><a class="header" href="#严格关键字">严格关键字</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>as / break / const / continue / crate / if / else / struct / enum / true / false / fn / for / in / let / loop / impl / mod / match / move mut / pub / ref / return / self / Self / static / super /trait / type / unsafe /use / where / while / async /await/dyn/main
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="弱关键字"><a class="header" href="#弱关键字">弱关键字</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>abstract / become / box / do / final / macro / override / priv / typeof / unsized / virtual / yield / try
 <span class="boring">}
@@ -250,10 +255,12 @@
                        title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
+
                     <a rel="next" href="../../layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html" class="mobile-nav-chapters next"
                        title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
+
                 <div style="clear: both"></div>
             </nav>
         </div>
@@ -264,6 +271,7 @@
                aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <i class="fa fa-angle-left"></i>
             </a>
+
             <a rel="next" href="../../layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html" class="nav-chapters next" title="Next chapter"
                aria-label="Next chapter" aria-keyshortcuts="Right">
                 <i class="fa fa-angle-right"></i>
@@ -272,17 +280,23 @@
 
 </div>
 
+
+
+
     <script type="text/javascript">
         window.playground_copyable = true;
     </script>
+
     <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
@@ -292,5 +306,6 @@
     <script type="text/javascript" src="../../assets/mermaid/mermaid-init.js"></script>
     <script type="text/javascript" src="../../assets/smart-anchor.js"></script>
     <script type="text/javascript" src="../../assets/pagetoc/sidebar.js"></script>
+
 </body>
 </html>

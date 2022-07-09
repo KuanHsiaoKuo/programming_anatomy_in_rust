@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <title>Programming Anatomy In Rust 🦀</title>
         <meta name="robots" content="noindex"/>
+
+
     <!-- Custom HTML head -->
+    
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +20,11 @@
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
+
     <!-- Fonts -->
     <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="fonts/fonts.css">
+
     <!-- Highlight.js Stylesheets -->
     <link rel="stylesheet" href="highlight.css">
     <link rel="stylesheet" href="tomorrow-night.css">
@@ -28,6 +33,7 @@
     <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="assets/pagetoc/pagetoc_style.css">
         <link rel="stylesheet" href="assets/css/mdbook-admonish.css">
+
         <!-- MathJax -->
         <script async type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -98,7 +104,7 @@
 <div id="page-wrapper" class="page-wrapper">
 
     <div class="page">
-        <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
         <div id="menu-bar" class="menu-bar sticky bordered">
             <div class="left-buttons">
                 <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
@@ -158,6 +164,7 @@
                     </ul>
                 </div>
             </div>
+
         <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
         <script type="text/javascript">
             document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -1932,10 +1939,11 @@ fn main() {
 <blockquote>
 <p>Copy 和 Clone 特征传达了在代码中使用类型时如何进行复制的原理。</p>
 </blockquote>
-<table><thead><tr><th align="center">特征</th><th align="center">复制方式</th><th align="center">复制内容</th><th align="center">使用场景</th></tr></thead><tbody>
-<tr><td align="center">Copy</td><td align="center">隐式，自动化特征</td><td align="center">堆栈</td><td align="center">可以在堆栈上单独表示的小型值</td></tr>
-<tr><td align="center">Clone</td><td align="center">显式调用clone</td><td align="center">堆+栈</td><td align="center">在堆上还包含一个值作为其表示的一部分</td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征</th><th style="text-align: center">复制方式</th><th style="text-align: center">复制内容</th><th style="text-align: center">使用场景</th></tr></thead><tbody>
+<tr><td style="text-align: center">Copy</td><td style="text-align: center">隐式，自动化特征</td><td style="text-align: center">堆栈</td><td style="text-align: center">可以在堆栈上单独表示的小型值</td></tr>
+<tr><td style="text-align: center">Clone</td><td style="text-align: center">显式调用clone</td><td style="text-align: center">堆+栈</td><td style="text-align: center">在堆上还包含一个值作为其表示的一部分</td></tr>
 </tbody></table>
+</div>
 <h4 id="copy"><a class="header" href="#copy">Copy</a></h4>
 <ol>
 <li>Copy 特征通常用于可以在堆栈上完全表示的类型, 也就是说它们自身没有任何部分位于堆上。</li>
@@ -3019,8 +3027,7 @@ fn main() {
 </code></pre></pre>
 <h3 id="指定特征区间的四个方法"><a class="header" href="#指定特征区间的四个方法">指定特征区间的四个方法</a></h3>
 <h4 id="区间内泛型-fn-fn_namet-target_traitval-t"><a class="header" href="#区间内泛型-fn-fn_namet-target_traitval-t">区间内泛型: fn fn_name&lt;T: target_trait&gt;(val: T)</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 指定特征区间的一种方法, 它会接收任何实现了 Display 特征的类型
 fn show_me&lt;T: Display&gt;(val: T) {
@@ -3034,8 +3041,7 @@ fn show_me&lt;T: Display&gt;(val: T) {
 <li>在指定类型的特征区间时,此语法也有效</li>
 </ol>
 <h4 id="where语句-当第一种方法签名过长时使用"><a class="header" href="#where语句-当第一种方法签名过长时使用">where语句: 当第一种方法签名过长时使用</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn parse&lt;F&gt;(&amp;self) -&gt; Result&lt;F, &lt;F as FromStr&gt;::Err&gt;
     where F: FromStr { ... }
@@ -3048,8 +3054,7 @@ fn show_me&lt;T: Display&gt;(val: T) {
 <ul>
 <li>先看一下标准库中 HashMap 类型的 impl 代码块:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// HashMap 键类型的 K 必须实现 Hash 特征和 Eq 特征
 impl&lt;K: Hash + Eq, V&gt; HashMap&lt;K, V, RandomState&gt;
@@ -3244,10 +3249,11 @@ fn main() {
 <p>在面向对象的语言中,有时直到运行时才能确定调用的方法。这是因为具体类型被隐藏,并且只有接口方法可用于调用该类型。 在 Java 中,当函数只有参数时就是这种情况,即接口。 这种情况只能通过动态分发来处理。在动态分发过程中,可通过对
 vtable 接口的实现列表进行查找,并调用该方法来动态确定相关方法。vtable 是一个函数指针列表,指向每个类型的实现方法。由于方法调用过程中存在额外的间接指针引用,所以这需要更多的资源开销</p>
 <h3 id="区别特征区间与特征对象"><a class="header" href="#区别特征区间与特征对象">区别特征区间与特征对象</a></h3>
-<table><thead><tr><th align="center">特征使用方式</th><th align="center">分发方式</th><th align="center">实现方式</th><th align="center">绑定时期</th><th></th></tr></thead><tbody>
-<tr><td align="center">特征区间</td><td align="center">静态分发</td><td align="center">限定泛型</td><td align="center">编译期(早期绑定)</td><td></td></tr>
-<tr><td align="center">特征对象</td><td align="center">动态分发</td><td align="center">胖指针</td><td align="center">运行期多态(后期绑定)</td><td></td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征使用方式</th><th style="text-align: center">分发方式</th><th style="text-align: center">实现方式</th><th style="text-align: center">绑定时期</th><th></th></tr></thead><tbody>
+<tr><td style="text-align: center">特征区间</td><td style="text-align: center">静态分发</td><td style="text-align: center">限定泛型</td><td style="text-align: center">编译期(早期绑定)</td><td></td></tr>
+<tr><td style="text-align: center">特征对象</td><td style="text-align: center">动态分发</td><td style="text-align: center">胖指针</td><td style="text-align: center">运行期多态(后期绑定)</td><td></td></tr>
 </tbody></table>
+</div>
 <h3 id="特征对象具体说说"><a class="header" href="#特征对象具体说说">特征对象具体说说</a></h3>
 <h4 id="指定为实现某个特征"><a class="header" href="#指定为实现某个特征">指定为实现某个特征</a></h4>
 <p>特征对象是一种创建多态 API 的方法,可以将参数指定为实现某个特征的东西,而不是泛型或具体类型。这种方法被声明为实现某个特征 API,即特征对象。</p>
@@ -3410,15 +3416,13 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="词法关键字扫盲"><a class="header" href="#词法关键字扫盲">词法关键字扫盲</a></h1>
 <h2 id="1-关键字"><a class="header" href="#1-关键字">1. 关键字</a></h2>
 <h3 id="严格关键字"><a class="header" href="#严格关键字">严格关键字</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>as / break / const / continue / crate / if / else / struct / enum / true / false / fn / for / in / let / loop / impl / mod / match / move mut / pub / ref / return / self / Self / static / super /trait / type / unsafe /use / where / while / async /await/dyn/main
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="弱关键字"><a class="header" href="#弱关键字">弱关键字</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>abstract / become / box / do / final / macro / override / priv / typeof / unsized / virtual / yield / try
 <span class="boring">}
@@ -3933,8 +3937,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 <div>
 </div>
 </div>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>mod say {
     pub fn hello() {
@@ -7567,8 +7570,7 @@ std = [
 ]
 </code></pre>
 <h4 id="配置-添加config接口-srclibrs"><a class="header" href="#配置-添加config接口-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Add this code block to your template for Nicks:
 parameter_types! {
@@ -7606,8 +7608,7 @@ impl pallet_nicks::Config for Runtime {
 <span class="boring">}
 </span></code></pre></pre>
 <h4 id="定义运行时-srclibrsconstruct_runtime"><a class="header" href="#定义运行时-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>construct_runtime!(
     pub enum Runtime where
@@ -7684,8 +7685,7 @@ yarn start
 <li>错误为 2（第三个错误）,
 对应<a href="https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L99-L108">substrate源码</a>中定义的第三个错误</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Error for the nicks pallet.
 #[pallet::error]
@@ -8537,27 +8537,36 @@ Josep M Sobrepere.</li>
 
             <nav class="nav-wrapper" aria-label="Page navigation">
                 <!-- Mobile navigation buttons -->
+
+
                 <div style="clear: both"></div>
             </nav>
         </div>
     </div>
 
     <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
     </nav>
 
 </div>
 
+
+
+
     <script type="text/javascript">
         window.playground_copyable = true;
     </script>
+
     <script src="ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="editor.js" type="text/javascript" charset="utf-8"></script>
     <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
     <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
     <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
 <script src="book.js" type="text/javascript" charset="utf-8"></script>
@@ -8567,6 +8576,7 @@ Josep M Sobrepere.</li>
     <script type="text/javascript" src="assets/mermaid/mermaid-init.js"></script>
     <script type="text/javascript" src="assets/smart-anchor.js"></script>
     <script type="text/javascript" src="assets/pagetoc/sidebar.js"></script>
+
         <script type="text/javascript">
             window.addEventListener('load', function () {
                 MathJax.Hub.Register.StartupHook('End', function () {

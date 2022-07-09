@@ -4,7 +4,10 @@
     <!-- Book generated using mdBook -->
     <meta charset="UTF-8">
     <title>泛型、特征及特征对象 - Programming Anatomy In Rust 🦀</title>
+
+
     <!-- Custom HTML head -->
+    
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,9 +19,11 @@
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/chrome.css">
         <link rel="stylesheet" href="../../css/print.css" media="print">
+
     <!-- Fonts -->
     <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="../../fonts/fonts.css">
+
     <!-- Highlight.js Stylesheets -->
     <link rel="stylesheet" href="../../highlight.css">
     <link rel="stylesheet" href="../../tomorrow-night.css">
@@ -27,6 +32,7 @@
     <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../../assets/pagetoc/pagetoc_style.css">
         <link rel="stylesheet" href="../../assets/css/mdbook-admonish.css">
+
         <!-- MathJax -->
         <script async type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -97,7 +103,7 @@
 <div id="page-wrapper" class="page-wrapper">
 
     <div class="page">
-        <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
         <div id="menu-bar" class="menu-bar sticky bordered">
             <div class="left-buttons">
                 <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
@@ -157,6 +163,7 @@
                     </ul>
                 </div>
             </div>
+
         <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
         <script type="text/javascript">
             document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -734,8 +741,7 @@ fn main() {
 </code></pre></pre>
 <h3 id="指定特征区间的四个方法"><a class="header" href="#指定特征区间的四个方法">指定特征区间的四个方法</a></h3>
 <h4 id="区间内泛型-fn-fn_namet-target_traitval-t"><a class="header" href="#区间内泛型-fn-fn_namet-target_traitval-t">区间内泛型: fn fn_name&lt;T: target_trait&gt;(val: T)</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 指定特征区间的一种方法, 它会接收任何实现了 Display 特征的类型
 fn show_me&lt;T: Display&gt;(val: T) {
@@ -749,8 +755,7 @@ fn show_me&lt;T: Display&gt;(val: T) {
 <li>在指定类型的特征区间时,此语法也有效</li>
 </ol>
 <h4 id="where语句-当第一种方法签名过长时使用"><a class="header" href="#where语句-当第一种方法签名过长时使用">where语句: 当第一种方法签名过长时使用</a></h4>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn parse&lt;F&gt;(&amp;self) -&gt; Result&lt;F, &lt;F as FromStr&gt;::Err&gt;
     where F: FromStr { ... }
@@ -763,8 +768,7 @@ fn show_me&lt;T: Display&gt;(val: T) {
 <ul>
 <li>先看一下标准库中 HashMap 类型的 impl 代码块:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// HashMap 键类型的 K 必须实现 Hash 特征和 Eq 特征
 impl&lt;K: Hash + Eq, V&gt; HashMap&lt;K, V, RandomState&gt;
@@ -959,10 +963,11 @@ fn main() {
 <p>在面向对象的语言中,有时直到运行时才能确定调用的方法。这是因为具体类型被隐藏,并且只有接口方法可用于调用该类型。 在 Java 中,当函数只有参数时就是这种情况,即接口。 这种情况只能通过动态分发来处理。在动态分发过程中,可通过对
 vtable 接口的实现列表进行查找,并调用该方法来动态确定相关方法。vtable 是一个函数指针列表,指向每个类型的实现方法。由于方法调用过程中存在额外的间接指针引用,所以这需要更多的资源开销</p>
 <h3 id="区别特征区间与特征对象"><a class="header" href="#区别特征区间与特征对象">区别特征区间与特征对象</a></h3>
-<table><thead><tr><th align="center">特征使用方式</th><th align="center">分发方式</th><th align="center">实现方式</th><th align="center">绑定时期</th><th></th></tr></thead><tbody>
-<tr><td align="center">特征区间</td><td align="center">静态分发</td><td align="center">限定泛型</td><td align="center">编译期(早期绑定)</td><td></td></tr>
-<tr><td align="center">特征对象</td><td align="center">动态分发</td><td align="center">胖指针</td><td align="center">运行期多态(后期绑定)</td><td></td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征使用方式</th><th style="text-align: center">分发方式</th><th style="text-align: center">实现方式</th><th style="text-align: center">绑定时期</th><th></th></tr></thead><tbody>
+<tr><td style="text-align: center">特征区间</td><td style="text-align: center">静态分发</td><td style="text-align: center">限定泛型</td><td style="text-align: center">编译期(早期绑定)</td><td></td></tr>
+<tr><td style="text-align: center">特征对象</td><td style="text-align: center">动态分发</td><td style="text-align: center">胖指针</td><td style="text-align: center">运行期多态(后期绑定)</td><td></td></tr>
 </tbody></table>
+</div>
 <h3 id="特征对象具体说说"><a class="header" href="#特征对象具体说说">特征对象具体说说</a></h3>
 <h4 id="指定为实现某个特征"><a class="header" href="#指定为实现某个特征">指定为实现某个特征</a></h4>
 <p>特征对象是一种创建多态 API 的方法,可以将参数指定为实现某个特征的东西,而不是泛型或具体类型。这种方法被声明为实现某个特征 API,即特征对象。</p>
@@ -1075,10 +1080,12 @@ fn main() {
                        title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
+
                     <a rel="next" href="../../layer1_underlying_abstract/3_language_grammar/language_grammar.html" class="mobile-nav-chapters next"
                        title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
+
                 <div style="clear: both"></div>
             </nav>
         </div>
@@ -1089,6 +1096,7 @@ fn main() {
                aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <i class="fa fa-angle-left"></i>
             </a>
+
             <a rel="next" href="../../layer1_underlying_abstract/3_language_grammar/language_grammar.html" class="nav-chapters next" title="Next chapter"
                aria-label="Next chapter" aria-keyshortcuts="Right">
                 <i class="fa fa-angle-right"></i>
@@ -1097,17 +1105,23 @@ fn main() {
 
 </div>
 
+
+
+
     <script type="text/javascript">
         window.playground_copyable = true;
     </script>
+
     <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
@@ -1117,5 +1131,6 @@ fn main() {
     <script type="text/javascript" src="../../assets/mermaid/mermaid-init.js"></script>
     <script type="text/javascript" src="../../assets/smart-anchor.js"></script>
     <script type="text/javascript" src="../../assets/pagetoc/sidebar.js"></script>
+
 </body>
 </html>

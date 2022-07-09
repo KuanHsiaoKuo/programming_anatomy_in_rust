@@ -4,7 +4,10 @@
     <!-- Book generated using mdBook -->
     <meta charset="UTF-8">
     <title>所有权三件套 - Programming Anatomy In Rust 🦀</title>
+
+
     <!-- Custom HTML head -->
+    
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,9 +19,11 @@
     <link rel="stylesheet" href="../../css/general.css">
     <link rel="stylesheet" href="../../css/chrome.css">
         <link rel="stylesheet" href="../../css/print.css" media="print">
+
     <!-- Fonts -->
     <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="../../fonts/fonts.css">
+
     <!-- Highlight.js Stylesheets -->
     <link rel="stylesheet" href="../../highlight.css">
     <link rel="stylesheet" href="../../tomorrow-night.css">
@@ -27,6 +32,7 @@
     <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../../assets/pagetoc/pagetoc_style.css">
         <link rel="stylesheet" href="../../assets/css/mdbook-admonish.css">
+
         <!-- MathJax -->
         <script async type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -97,7 +103,7 @@
 <div id="page-wrapper" class="page-wrapper">
 
     <div class="page">
-        <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
         <div id="menu-bar" class="menu-bar sticky bordered">
             <div class="left-buttons">
                 <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
@@ -157,6 +163,7 @@
                     </ul>
                 </div>
             </div>
+
         <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
         <script type="text/javascript">
             document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -459,10 +466,11 @@ fn main() {
 <blockquote>
 <p>Copy 和 Clone 特征传达了在代码中使用类型时如何进行复制的原理。</p>
 </blockquote>
-<table><thead><tr><th align="center">特征</th><th align="center">复制方式</th><th align="center">复制内容</th><th align="center">使用场景</th></tr></thead><tbody>
-<tr><td align="center">Copy</td><td align="center">隐式，自动化特征</td><td align="center">堆栈</td><td align="center">可以在堆栈上单独表示的小型值</td></tr>
-<tr><td align="center">Clone</td><td align="center">显式调用clone</td><td align="center">堆+栈</td><td align="center">在堆上还包含一个值作为其表示的一部分</td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征</th><th style="text-align: center">复制方式</th><th style="text-align: center">复制内容</th><th style="text-align: center">使用场景</th></tr></thead><tbody>
+<tr><td style="text-align: center">Copy</td><td style="text-align: center">隐式，自动化特征</td><td style="text-align: center">堆栈</td><td style="text-align: center">可以在堆栈上单独表示的小型值</td></tr>
+<tr><td style="text-align: center">Clone</td><td style="text-align: center">显式调用clone</td><td style="text-align: center">堆+栈</td><td style="text-align: center">在堆上还包含一个值作为其表示的一部分</td></tr>
 </tbody></table>
+</div>
 <h4 id="copy"><a class="header" href="#copy">Copy</a></h4>
 <ol>
 <li>Copy 特征通常用于可以在堆栈上完全表示的类型, 也就是说它们自身没有任何部分位于堆上。</li>
@@ -838,10 +846,12 @@ fn main() {
                        title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
+
                     <a rel="next" href="../../layer1_underlying_abstract/2_type_system/type_system.html" class="mobile-nav-chapters next"
                        title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
+
                 <div style="clear: both"></div>
             </nav>
         </div>
@@ -852,6 +862,7 @@ fn main() {
                aria-label="Previous chapter" aria-keyshortcuts="Left">
                 <i class="fa fa-angle-left"></i>
             </a>
+
             <a rel="next" href="../../layer1_underlying_abstract/2_type_system/type_system.html" class="nav-chapters next" title="Next chapter"
                aria-label="Next chapter" aria-keyshortcuts="Right">
                 <i class="fa fa-angle-right"></i>
@@ -860,17 +871,23 @@ fn main() {
 
 </div>
 
+
+
+
     <script type="text/javascript">
         window.playground_copyable = true;
     </script>
+
     <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
@@ -880,5 +897,6 @@ fn main() {
     <script type="text/javascript" src="../../assets/mermaid/mermaid-init.js"></script>
     <script type="text/javascript" src="../../assets/smart-anchor.js"></script>
     <script type="text/javascript" src="../../assets/pagetoc/sidebar.js"></script>
+
 </body>
 </html>
