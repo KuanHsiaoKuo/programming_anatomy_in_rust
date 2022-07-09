@@ -373,11 +373,10 @@ fn main() {
 <blockquote>
 <p>Copy 和 Clone 特征传达了在代码中使用类型时如何进行复制的原理。</p>
 </blockquote>
-<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征</th><th style="text-align: center">复制方式</th><th style="text-align: center">复制内容</th><th style="text-align: center">使用场景</th></tr></thead><tbody>
-<tr><td style="text-align: center">Copy</td><td style="text-align: center">隐式，自动化特征</td><td style="text-align: center">堆栈</td><td style="text-align: center">可以在堆栈上单独表示的小型值</td></tr>
-<tr><td style="text-align: center">Clone</td><td style="text-align: center">显式调用clone</td><td style="text-align: center">堆+栈</td><td style="text-align: center">在堆上还包含一个值作为其表示的一部分</td></tr>
-</tbody></table>
-</div>
+<p>| 特征  |     复制方式     | 复制内容 |               使用场景               |
+| :---: | :--------------: | :------: | :----------------------------------: |
+| Copy  | 隐式，自动化特征 |   堆栈   |     可以在堆栈上单独表示的小型值     |
+| Clone |  显式调用clone   |  堆+栈   | 在堆上还包含一个值作为其表示的一部分 |</p>
 <h4 id="copy"><a class="header" href="#copy">Copy</a></h4>
 <ol>
 <li>Copy 特征通常用于可以在堆栈上完全表示的类型, 也就是说它们自身没有任何部分位于堆上。</li>

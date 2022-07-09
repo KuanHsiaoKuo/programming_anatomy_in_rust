@@ -414,8 +414,11 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></p>
 <ul>
-<li>node-template的结构</li>
-<li>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.
+<li>
+<p>node-template的结构</p>
+</li>
+<li>
+<p>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.</p>
 <ol>
 <li>依赖;</li>
 <li>pallet类型声明;</li>
@@ -426,14 +429,21 @@ pub enum Error&lt;T&gt; {
 <li>交易调用函数;</li>
 </ol>
 </li>
-<li>举例编写simple-pallet
+<li>
+<p>举例编写simple-pallet</p>
 <blockquote>
 <p>功能介绍: simple-pallet是一个存证的pallet，简单说就是提供一个存取一段hash到链上的功能，和从链上读取的功能。</p>
 </blockquote>
 </li>
-<li>将pallet添加到runtime中</li>
-<li>编译运行</li>
-<li>调试使用pallet中的功能</li>
+<li>
+<p>将pallet添加到runtime中</p>
+</li>
+<li>
+<p>编译运行</p>
+</li>
+<li>
+<p>调试使用pallet中的功能</p>
+</li>
 </ul>
 </li>
 <li>
@@ -524,14 +534,16 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></p>
 <ul>
-<li>在自己的pallet中使用其它的pallet主要有以下几种情况：
+<li>
+<p>在自己的pallet中使用其它的pallet主要有以下几种情况：</p>
 <ol>
 <li>指定某个现成的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个现成的pallet；</li>
 <li>指定某个自定义的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个自定义的pallet；</li>
 <li>封装和扩展现有的 pallet 。</li>
 </ol>
 </li>
-<li>在runtime中直接指定某个类型为其它的pallet
+<li>
+<p>在runtime中直接指定某个类型为其它的pallet</p>
 <blockquote>
 <p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
 </blockquote>
@@ -539,7 +551,8 @@ pub enum Error&lt;T&gt; {
 <li><a href="https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343">详情</a></li>
 </ul>
 </li>
-<li>pallet中使用其它pallet的storage
+<li>
+<p>pallet中使用其它pallet的storage</p>
 <blockquote>
 <p>自定义两个pallet，分别叫做pallet-use-other-pallet1和pallet-storage-provider，然后我们在前一个pallet中读取和存储后一个pallet</p>
 </blockquote>
@@ -549,18 +562,22 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></p>
 <ul>
-<li>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。
+<li>
+<p>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。</p>
 <blockquote>
 <p>在我们的封装中，将contracts pallet的call函数封装成sudo_call，即需要root权限才能调用。同时，我们在runtime中加载contracts时，去掉直接调用contracts函数的方式。</p>
 </blockquote>
 </li>
-<li>整个方式我们分成两大步骤，如下：
+<li>
+<p>整个方式我们分成两大步骤，如下：</p>
 <ol>
 <li>编写extend-pallet;</li>
 <li>在runtime配置extend- pallet 和contracts pallet。</li>
 </ol>
 </li>
-<li><a href="https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/">文档资料</a></li>
+<li>
+<p><a href="https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/">文档资料</a></p>
+</li>
 </ul>
 </li>
 <li>

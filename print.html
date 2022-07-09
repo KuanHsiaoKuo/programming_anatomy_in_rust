@@ -1714,11 +1714,10 @@ fn main() {
 <blockquote>
 <p>Copy 和 Clone 特征传达了在代码中使用类型时如何进行复制的原理。</p>
 </blockquote>
-<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征</th><th style="text-align: center">复制方式</th><th style="text-align: center">复制内容</th><th style="text-align: center">使用场景</th></tr></thead><tbody>
-<tr><td style="text-align: center">Copy</td><td style="text-align: center">隐式，自动化特征</td><td style="text-align: center">堆栈</td><td style="text-align: center">可以在堆栈上单独表示的小型值</td></tr>
-<tr><td style="text-align: center">Clone</td><td style="text-align: center">显式调用clone</td><td style="text-align: center">堆+栈</td><td style="text-align: center">在堆上还包含一个值作为其表示的一部分</td></tr>
-</tbody></table>
-</div>
+<p>| 特征  |     复制方式     | 复制内容 |               使用场景               |
+| :---: | :--------------: | :------: | :----------------------------------: |
+| Copy  | 隐式，自动化特征 |   堆栈   |     可以在堆栈上单独表示的小型值     |
+| Clone |  显式调用clone   |  堆+栈   | 在堆上还包含一个值作为其表示的一部分 |</p>
 <h4 id="copy"><a class="header" href="#copy">Copy</a></h4>
 <ol>
 <li>Copy 特征通常用于可以在堆栈上完全表示的类型, 也就是说它们自身没有任何部分位于堆上。</li>
@@ -2823,11 +2822,10 @@ fn main() {
 <p>在面向对象的语言中,有时直到运行时才能确定调用的方法。这是因为具体类型被隐藏,并且只有接口方法可用于调用该类型。 在 Java 中,当函数只有参数时就是这种情况,即接口。 这种情况只能通过动态分发来处理。在动态分发过程中,可通过对
 vtable 接口的实现列表进行查找,并调用该方法来动态确定相关方法。vtable 是一个函数指针列表,指向每个类型的实现方法。由于方法调用过程中存在额外的间接指针引用,所以这需要更多的资源开销</p>
 <h3 id="区别特征区间与特征对象"><a class="header" href="#区别特征区间与特征对象">区别特征区间与特征对象</a></h3>
-<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征使用方式</th><th style="text-align: center">分发方式</th><th style="text-align: center">实现方式</th><th style="text-align: center">绑定时期</th><th></th></tr></thead><tbody>
-<tr><td style="text-align: center">特征区间</td><td style="text-align: center">静态分发</td><td style="text-align: center">限定泛型</td><td style="text-align: center">编译期(早期绑定)</td><td></td></tr>
-<tr><td style="text-align: center">特征对象</td><td style="text-align: center">动态分发</td><td style="text-align: center">胖指针</td><td style="text-align: center">运行期多态(后期绑定)</td><td></td></tr>
-</tbody></table>
-</div>
+<p>| 特征使用方式 | 分发方式 | 实现方式 |       绑定时期       |      |
+| :----------: | :------: | :------: | :------------------: | ---- |
+|   特征区间   | 静态分发 | 限定泛型 |   编译期(早期绑定)   |      |
+|   特征对象   | 动态分发 |  胖指针  | 运行期多态(后期绑定) |      |</p>
 <h3 id="特征对象具体说说"><a class="header" href="#特征对象具体说说">特征对象具体说说</a></h3>
 <h4 id="指定为实现某个特征"><a class="header" href="#指定为实现某个特征">指定为实现某个特征</a></h4>
 <p>特征对象是一种创建多态 API 的方法,可以将参数指定为实现某个特征的东西,而不是泛型或具体类型。这种方法被声明为实现某个特征 API,即特征对象。</p>
@@ -3231,59 +3229,7 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="整理说一下rust的模块系统"><a class="header" href="#整理说一下rust的模块系统">整理说一下rust的模块系统</a></h3>
-<pre><code class="language-plantuml">@startmindmap
-skinparam monochrome reverse
-skinparam classFontName ttf-wqy-zenhei
-*[#lightblue] Rust模块系统
-**[#FFBBCC] 两种视角
-*** 程序猿
-**** 文件结构
-*** rustc：module tree
-****:可执行root
-&lt;code&gt;
-src/main.rs 
--&gt; binary crate(默认与cargo.toml-&gt;[package].name同名)
-&lt;/code&gt;;
-****:库root
-&lt;code&gt;
-src/lib.rs 
--&gt; lib crate(默认与cargo.toml-&gt;[package].name同名)
-&lt;/code&gt;;
-****:crate
-&lt;code&gt;编译的最小基本单位&lt;/code&gt;;
-**[#FFBBCC] project的五个层级
-*** workspace
-*** package
-*** crates
-*** modules
-*** paths
-**[#FFBBCC] bin文件夹：可以直接使用src/lib.rs
-**[#lightgreen] crates.io保存的什么？
-*** 发布流程
-**** cargo login
-****[#lightgreen]:cargo package
-&lt;code&gt;
-$ cargo help package
-从帮助信息结合substrate源码实验🧪可知：
-1. 从当前目录开始执行路径开始，首先去父文件夹找Cargo.toml, 然后找当前目录的Cargo.toml，找不到就报错
-2. 找到的Cargo.toml如果有workspace配置，就按照workspace里面的subpackage顺序来依次打包
-3. 每次打包的标志为src/main.rs或者src/lib.rs, 且src同级存在Cargo.toml,Cargo.toml里面有[package]
-4. 开始打包为上传到crate.io的格式
-5. 依次打包
-6. 所有依赖必须是在crate.io可以找到的，找不到就报错
-7. 以包含Cargo.toml父文件夹为项目根目录，放在target/package里面
-&lt;/code&gt;;
-**** cargo publish
-**** cargo yank
-**** cargo owner
-***[#lightgreen]:crate.io包含代码总结
-&lt;code&gt;
-1. 只包含最小crate内容，也就是src/main.rs或者src/lib.rs + Cargo.toml
-2. rust只能允许一级嵌套，使用workspace分出subpackage
-&lt;/code&gt;;
-@endmindmap
-
-</code></pre>
+<figure><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1183px" preserveAspectRatio="none" style="width:1263px;height:1183px;background:#000000;" version="1.1" viewBox="0 0 1263 1183" width="1263px" zoomAndPan="magnify"><defs/><g><rect fill="#333333" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="108" x="10" y="572.6016"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="20" y="595.5967">Rust模块系统</text><rect fill="#2E2E2E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="76" x="168" y="145.1875"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="178" y="168.1826">两种视角</text><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="62" x="294" y="20"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="304" y="42.9951">程序猿</text><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="76" x="406" y="20"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="416" y="42.9951">文件结构</text><path d="M356,38.1484 L366,38.1484 C381,38.1484 381,38.1484 396,38.1484 L406,38.1484 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><path d="M244,163.3359 L254,163.3359 C269,163.3359 269,38.1484 284,38.1484 L294,38.1484 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="153" x="294" y="173.3359"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="304" y="196.3311">rustc：module tree</text><rect fill="#0E0E0E" height="68.8906" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="434" x="497" y="76.2969"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="507" y="99.292">可执行root</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="88" x="507" y="115.5889">src/main.rs</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="414" x="507" y="131.8857">-&gt; binary crate(默认与cargo.toml-&gt;[package].name同名)</text><path d="M447,191.4844 L457,191.4844 C472,191.4844 472,110.7422 487,110.7422 L497,110.7422 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="68.8906" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="410" x="497" y="165.1875"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="507" y="188.1826">库root</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="80" x="507" y="204.4795">src/lib.rs</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="390" x="507" y="220.7764">-&gt; lib crate(默认与cargo.toml-&gt;[package].name同名)</text><path d="M447,191.4844 L457,191.4844 C472,191.4844 472,199.6328 487,199.6328 L497,199.6328 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="52.5938" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="269" x="497" y="254.0781"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="507" y="277.0732">crate</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="249" x="507" y="293.3701">&lt;code&gt;编译的最小基本单位&lt;/code&gt;</text><path d="M447,191.4844 L457,191.4844 C472,191.4844 472,280.375 487,280.375 L497,280.375 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><path d="M244,163.3359 L254,163.3359 C269,163.3359 269,191.4844 284,191.4844 L294,191.4844 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><path d="M118,590.75 L128,590.75 C143,590.75 143,163.3359 158,163.3359 L168,163.3359 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#2E2E2E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="138" x="168" y="439.2656"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="178" y="462.2607">project的五个层级</text><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="95" x="356" y="326.6719"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="366" y="349.667">workspace</text><path d="M306,457.4141 L316,457.4141 C331,457.4141 331,344.8203 346,344.8203 L356,344.8203 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="79" x="356" y="382.9688"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="59" x="366" y="405.9639">package</text><path d="M306,457.4141 L316,457.4141 C331,457.4141 331,401.1172 346,401.1172 L356,401.1172 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="63" x="356" y="439.2656"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="43" x="366" y="462.2607">crates</text><path d="M306,457.4141 L316,457.4141 C331,457.4141 331,457.4141 346,457.4141 L356,457.4141 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="80" x="356" y="495.5625"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="366" y="518.5576">modules</text><path d="M306,457.4141 L316,457.4141 C331,457.4141 331,513.7109 346,513.7109 L356,513.7109 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="59" x="356" y="551.8594"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="366" y="574.8545">paths</text><path d="M306,457.4141 L316,457.4141 C331,457.4141 331,570.0078 346,570.0078 L356,570.0078 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><path d="M118,590.75 L128,590.75 C143,590.75 143,457.4141 158,457.4141 L168,457.4141 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#2E2E2E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="239" x="168" y="608.1563"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="178" y="631.1514">bin文件夹：可以直接使用src/lib.rs</text><path d="M118,590.75 L128,590.75 C143,590.75 143,626.3047 158,626.3047 L168,626.3047 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#383838" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="163" x="168" y="894.8281"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="178" y="917.8232">crates.io保存的什么？</text><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="76" x="381" y="850.3828"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="391" y="873.3779">发布流程</text><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="96" x="507" y="664.4531"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="517" y="687.4482">cargo login</text><path d="M457,868.5313 L467,868.5313 C482,868.5313 482,682.6016 497,682.6016 L507,682.6016 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#383838" height="182.9688" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="744" x="507" y="720.75"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="517" y="743.7451">cargo package</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="160" x="517" y="760.042">$ cargo help package</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="268" x="517" y="776.3389">从帮助信息结合substrate源码实验&#129514;可知：</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="718" x="517" y="792.6357">1. 从当前目录开始执行路径开始，首先去父文件夹找Cargo.toml, 然后找当前目录的Cargo.toml，找不到就报错</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="636" x="517" y="808.9326">2. 找到的Cargo.toml如果有workspace配置，就按照workspace里面的subpackage顺序来依次打包</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="724" x="517" y="825.2295">3. 每次打包的标志为src/main.rs或者src/lib.rs, 且src同级存在Cargo.toml,Cargo.toml里面有[package]</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="242" x="517" y="841.5264">4. 开始打包为上传到crate.io的格式</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="80" x="517" y="857.8232">5. 依次打包</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="368" x="517" y="874.1201">6. 所有依赖必须是在crate.io可以找到的，找不到就报错</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="468" x="517" y="890.417">7. 以包含Cargo.toml父文件夹为项目根目录，放在target/package里面</text><path d="M457,868.5313 L467,868.5313 C482,868.5313 482,812.2344 497,812.2344 L507,812.2344 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="113" x="507" y="923.7188"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="517" y="946.7139">cargo publish</text><path d="M457,868.5313 L467,868.5313 C482,868.5313 482,941.8672 497,941.8672 L507,941.8672 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="95" x="507" y="980.0156"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="517" y="1003.0107">cargo yank</text><path d="M457,868.5313 L467,868.5313 C482,868.5313 482,998.1641 497,998.1641 L507,998.1641 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#0E0E0E" height="36.2969" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="106" x="507" y="1036.3125"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="517" y="1059.3076">cargo owner</text><path d="M457,868.5313 L467,868.5313 C482,868.5313 482,1054.4609 497,1054.4609 L507,1054.4609 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><path d="M331,912.9766 L341,912.9766 C356,912.9766 356,868.5313 371,868.5313 L381,868.5313 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><rect fill="#383838" height="68.8906" rx="12.5" ry="12.5" style="stroke:#E7E7E7;stroke-width:1.5;" width="538" x="381" y="1092.6094"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="391" y="1115.6045">crate.io包含代码总结</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="518" x="391" y="1131.9014">1. 只包含最小crate内容，也就是src/main.rs或者src/lib.rs + Cargo.toml</text><text fill="#FFFFFF" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="390" x="391" y="1148.1982">2. rust只能允许一级嵌套，使用workspace分出subpackage</text><path d="M331,912.9766 L341,912.9766 C356,912.9766 356,1127.0547 371,1127.0547 L381,1127.0547 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/><path d="M118,590.75 L128,590.75 C143,590.75 143,912.9766 158,912.9766 L168,912.9766 " fill="none" style="stroke:#E7E7E7;stroke-width:1.0;"/></g></svg></figure>
 <h3 id="联想对比"><a class="header" href="#联想对比">联想对比</a></h3>
 <ol>
 <li>golang的模块系统</li>
@@ -3978,7 +3924,8 @@ readme = &quot;README.md&quot;
 This allows for integration tests written against the library, which might otherwise be hard to do with only main.rs.</p>
 </blockquote>
 <ul>
-<li><a href="https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499">Main.rs and lib.rs at same level - help - The Rust Programming Language Forum</a>
+<li>
+<p><a href="https://web.archive.org/web/20220703121647/https://users.rust-lang.org/t/main-rs-and-lib-rs-at-same-level/42499">Main.rs and lib.rs at same level - help - The Rust Programming Language Forum</a></p>
 <blockquote>
 <p>这里有人跟着官方文档制作命令行工具时发现同样的疑惑点，底下有人引用了这个链接</p>
 </blockquote>
@@ -6175,7 +6122,8 @@ yarn start
 这个过程实际上和我们拉一个比特币的代码，然后编译下然后再启动 ，并没有太大的不同。</p>
 </blockquote>
 <ul>
-<li>substrate 开发环境
+<li>
+<p>substrate 开发环境</p>
 <blockquote>
 <ul>
 <li>启动链的节点：
@@ -6185,9 +6133,13 @@ yarn start
 </ul>
 </blockquote>
 </li>
-<li>使用polkadot-js访问节点:
-在substrate官方的教程中，是使用了substrate的前端模板来访问刚才启动的节点。但是在实际的开发中，后端人员其实更多的使用polkadot-js-app来访问我们的节点，所以这里我们也使用它来访问我们的节点。</li>
-<li><a href="https://docs.substrate.io/tutorials/v3/create-your-first-substrate-chain/">文档资料</a></li>
+<li>
+<p>使用polkadot-js访问节点:
+在substrate官方的教程中，是使用了substrate的前端模板来访问刚才启动的节点。但是在实际的开发中，后端人员其实更多的使用polkadot-js-app来访问我们的节点，所以这里我们也使用它来访问我们的节点。</p>
+</li>
+<li>
+<p><a href="https://docs.substrate.io/tutorials/v3/create-your-first-substrate-chain/">文档资料</a></p>
+</li>
 </ul>
 </li>
 <li>
@@ -6196,22 +6148,28 @@ yarn start
 <p>substrate采用模块化的方法进行开发，它定义了一组丰富的原语，给开发人员提供了强大的、熟悉的编程方法。</p>
 </blockquote>
 <ul>
-<li>使用方式介绍：
+<li>
+<p>使用方式介绍：</p>
 <ol>
-<li>使用substrate node: 使用json文件启动</li>
-<li>使用substrate frame: 业务逻辑自由
+<li>
+<p>使用substrate node: 使用json文件启动</p>
+</li>
+<li>
+<p>使用substrate frame: 业务逻辑自由</p>
 <blockquote>
 <p>frame其实是一组模块（pallet）和支持库。使用substrate frame可以轻松的创建自己的自定义运行时，因为frame是用来构建底层节点的。使用frame还可以配置数据类型，也可以从模块库中选择甚至是添加自己定义的模块。</p>
 </blockquote>
 </li>
-<li>使用substrate core: runtime自由
+<li>
+<p>使用substrate core: runtime自由</p>
 <blockquote>
 <p>使用substrate code运行开发者完全从头开始设计运行时（runtime，问题：什么是runtime？），当然此种方式也是使用substrate自由度最大的方式。</p>
 </blockquote>
 </li>
 </ol>
 </li>
-<li>Substrate Client:
+<li>
+<p>Substrate Client:</p>
 <blockquote>
 <p>substrate客户端是基于substrate实现的区块链的节点客户端（可以理解为全节点），它主要由以下几个组件组成（以下也就是告诉我们实现一条链由哪几部分组成）：</p>
 </blockquote>
@@ -6304,7 +6262,8 @@ yarn start
 <li>
 <p><a href="https://web.archive.org/web/20220628070102/https://mp.weixin.qq.com/s/tvva1vogIcyN60tWcBPqww">初探ink!智能合约开发</a></p>
 <ul>
-<li><a href="https://web.archive.org/web/20220628095113/https://zhuanlan.zhihu.com/p/468304741">发展两年的波卡智能合约语言ink!将会带来什么影响？ - 知乎</a>
+<li>
+<p><a href="https://web.archive.org/web/20220628095113/https://zhuanlan.zhihu.com/p/468304741">发展两年的波卡智能合约语言ink!将会带来什么影响？ - 知乎</a></p>
 <blockquote>
 <p>ink!是由Parity在这里开发智能合约语言Rust编写智能合同并编译成Wasm代码。
 智能合同是在分散区块链网络上运行的计算机协议，可视为可自动执行的应用程序。
@@ -6312,7 +6271,9 @@ ink!它不同于其他更成熟的智能合约语言Parity的烙印。ink!最初
 但是这种方法偏离了Rust在不牺牲易用性或开发性的前提下，开发人员熟悉和喜欢的语言诞生了ink!2.0.为开发人员提供最大的灵活性。简单来说，整合后现在ink!所有的结构和语法都是纯的Rust</p>
 </blockquote>
 </li>
-<li><a href="https://docs.substrate.io/tutorials/v3/ink-workshop/pt1/">参考</a></li>
+<li>
+<p><a href="https://docs.substrate.io/tutorials/v3/ink-workshop/pt1/">参考</a></p>
+</li>
 </ul>
 </li>
 <li>
@@ -6615,8 +6576,11 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://web.archive.org/web/20220626145126/https://mp.weixin.qq.com/s/4vIelf3YSV4fybakkT6QPQ">编写简单的pallet</a></p>
 <ul>
-<li>node-template的结构</li>
-<li>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.
+<li>
+<p>node-template的结构</p>
+</li>
+<li>
+<p>编写pallet的一般格式, 整理出7个部分, 1和2基本上是固定的写法，而对于后面的3-7部分，则是根据实际需要写或者不写。关于模板中每部分的解释，可以参考文档.</p>
 <ol>
 <li>依赖;</li>
 <li>pallet类型声明;</li>
@@ -6627,14 +6591,21 @@ pub enum Error&lt;T&gt; {
 <li>交易调用函数;</li>
 </ol>
 </li>
-<li>举例编写simple-pallet
+<li>
+<p>举例编写simple-pallet</p>
 <blockquote>
 <p>功能介绍: simple-pallet是一个存证的pallet，简单说就是提供一个存取一段hash到链上的功能，和从链上读取的功能。</p>
 </blockquote>
 </li>
-<li>将pallet添加到runtime中</li>
-<li>编译运行</li>
-<li>调试使用pallet中的功能</li>
+<li>
+<p>将pallet添加到runtime中</p>
+</li>
+<li>
+<p>编译运行</p>
+</li>
+<li>
+<p>调试使用pallet中的功能</p>
+</li>
 </ul>
 </li>
 <li>
@@ -6725,14 +6696,16 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></p>
 <ul>
-<li>在自己的pallet中使用其它的pallet主要有以下几种情况：
+<li>
+<p>在自己的pallet中使用其它的pallet主要有以下几种情况：</p>
 <ol>
 <li>指定某个现成的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个现成的pallet；</li>
 <li>指定某个自定义的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个自定义的pallet；</li>
 <li>封装和扩展现有的 pallet 。</li>
 </ol>
 </li>
-<li>在runtime中直接指定某个类型为其它的pallet
+<li>
+<p>在runtime中直接指定某个类型为其它的pallet</p>
 <blockquote>
 <p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
 </blockquote>
@@ -6740,7 +6713,8 @@ pub enum Error&lt;T&gt; {
 <li><a href="https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343">详情</a></li>
 </ul>
 </li>
-<li>pallet中使用其它pallet的storage
+<li>
+<p>pallet中使用其它pallet的storage</p>
 <blockquote>
 <p>自定义两个pallet，分别叫做pallet-use-other-pallet1和pallet-storage-provider，然后我们在前一个pallet中读取和存储后一个pallet</p>
 </blockquote>
@@ -6750,18 +6724,22 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></p>
 <ul>
-<li>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。
+<li>
+<p>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。</p>
 <blockquote>
 <p>在我们的封装中，将contracts pallet的call函数封装成sudo_call，即需要root权限才能调用。同时，我们在runtime中加载contracts时，去掉直接调用contracts函数的方式。</p>
 </blockquote>
 </li>
-<li>整个方式我们分成两大步骤，如下：
+<li>
+<p>整个方式我们分成两大步骤，如下：</p>
 <ol>
 <li>编写extend-pallet;</li>
 <li>在runtime配置extend- pallet 和contracts pallet。</li>
 </ol>
 </li>
-<li><a href="https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/">文档资料</a></li>
+<li>
+<p><a href="https://www.shawntabrizi.com/substrate/extending-substrate-runtime-modules/">文档资料</a></p>
+</li>
 </ul>
 </li>
 <li>

@@ -837,11 +837,10 @@ fn main() {
 <p>在面向对象的语言中,有时直到运行时才能确定调用的方法。这是因为具体类型被隐藏,并且只有接口方法可用于调用该类型。 在 Java 中,当函数只有参数时就是这种情况,即接口。 这种情况只能通过动态分发来处理。在动态分发过程中,可通过对
 vtable 接口的实现列表进行查找,并调用该方法来动态确定相关方法。vtable 是一个函数指针列表,指向每个类型的实现方法。由于方法调用过程中存在额外的间接指针引用,所以这需要更多的资源开销</p>
 <h3 id="区别特征区间与特征对象"><a class="header" href="#区别特征区间与特征对象">区别特征区间与特征对象</a></h3>
-<div class="table-wrapper"><table><thead><tr><th style="text-align: center">特征使用方式</th><th style="text-align: center">分发方式</th><th style="text-align: center">实现方式</th><th style="text-align: center">绑定时期</th><th></th></tr></thead><tbody>
-<tr><td style="text-align: center">特征区间</td><td style="text-align: center">静态分发</td><td style="text-align: center">限定泛型</td><td style="text-align: center">编译期(早期绑定)</td><td></td></tr>
-<tr><td style="text-align: center">特征对象</td><td style="text-align: center">动态分发</td><td style="text-align: center">胖指针</td><td style="text-align: center">运行期多态(后期绑定)</td><td></td></tr>
-</tbody></table>
-</div>
+<p>| 特征使用方式 | 分发方式 | 实现方式 |       绑定时期       |      |
+| :----------: | :------: | :------: | :------------------: | ---- |
+|   特征区间   | 静态分发 | 限定泛型 |   编译期(早期绑定)   |      |
+|   特征对象   | 动态分发 |  胖指针  | 运行期多态(后期绑定) |      |</p>
 <h3 id="特征对象具体说说"><a class="header" href="#特征对象具体说说">特征对象具体说说</a></h3>
 <h4 id="指定为实现某个特征"><a class="header" href="#指定为实现某个特征">指定为实现某个特征</a></h4>
 <p>特征对象是一种创建多态 API 的方法,可以将参数指定为实现某个特征的东西,而不是泛型或具体类型。这种方法被声明为实现某个特征 API,即特征对象。</p>
