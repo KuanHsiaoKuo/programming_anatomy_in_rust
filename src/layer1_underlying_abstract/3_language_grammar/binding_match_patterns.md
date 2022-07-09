@@ -1,14 +1,10 @@
 # 绑定、赋值与匹配模式
 
 <!--ts-->
-* [绑定、赋值与匹配模式](#绑定赋值与匹配模式)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:16 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:45:58 CST 2022 -->
 
 <!--te-->
 

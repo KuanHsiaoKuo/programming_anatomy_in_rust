@@ -1,14 +1,10 @@
 # 代码质量：异常、测试与日志
 
 <!--ts-->
-* [代码质量：异常、测试与日志](#代码质量异常测试与日志)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:17 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:45:59 CST 2022 -->
 
 <!--te-->
 

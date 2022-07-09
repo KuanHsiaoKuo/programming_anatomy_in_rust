@@ -1,33 +1,10 @@
 # 区块链
 
 <!--ts-->
-* [区块链](#区块链)
-   * [Layers](#layers)
-      * [OSI网络七层模型](#osi网络七层模型)
-      * [数据层](#数据层)
-      * [网络层](#网络层)
-      * [共识层](#共识层)
-         * [工作量证明共识机制（ PoW ）](#工作量证明共识机制-pow-)
-      * [激励层](#激励层)
-      * [合约层](#合约层)
-      * [应用层](#应用层)
-   * [Blockchains](#blockchains)
-   * [Blockchain Frameworks](#blockchain-frameworks)
-   * [Cross-Chain](#cross-chain)
-   * [Virtual Machines](#virtual-machines)
-   * [General-Purpose Consensus](#general-purpose-consensus)
-   * [P2P Network Libraries](#p2p-network-libraries)
-   * [Cryptography](#cryptography)
-   * [Layer2](#layer2)
-   * [Dapps](#dapps)
-   * [Other](#other)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:33:30 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:44 CST 2022 -->
 
 <!--te-->
 

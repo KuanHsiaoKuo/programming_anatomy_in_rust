@@ -1,20 +1,10 @@
 # 基础内置类型
 
 <!--ts-->
-* [基础内置类型](#基础内置类型)
-   * [基元类型](#基元类型)
-   * [序列类型](#序列类型)
-   * [自定义类型](#自定义类型)
-   * [函数类型](#函数类型)
-   * [指针类型](#指针类型)
-   * [特征类型](#特征类型)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:05 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:45:54 CST 2022 -->
 
 <!--te-->
 

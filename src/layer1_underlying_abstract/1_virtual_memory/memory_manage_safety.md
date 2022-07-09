@@ -1,14 +1,10 @@
 # 内存管理与内存安全
 
 <!--ts-->
-* [内存管理与内存安全](#内存管理与内存安全)
-   * [参考](#参考)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:45:51 CST 2022 -->
 
 <!--te-->
 

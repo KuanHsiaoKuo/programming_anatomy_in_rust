@@ -1,26 +1,10 @@
 # Substrate惊奇资源
 
 <!--ts-->
-* [Substrate惊奇资源](#substrate惊奇资源)
-   * [Resources](#resources)
-   * [Support](#support)
-   * [Social](#social)
-   * [Events](#events)
-   * [Blogs](#blogs)
-   * [Videos](#videos)
-   * [Templates](#templates)
-   * [FRAME Pallets](#frame-pallets)
-   * [Framework Extensions](#framework-extensions)
-   * [Client Libraries](#client-libraries)
-   * [Mobile](#mobile)
-   * [Tools](#tools)
-   * [Products and Services](#products-and-services)
-   * [Alternative Implementations](#alternative-implementations)
-   * [SCALE Codec](#scale-codec)
-   * [参考资源](#参考资源)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:33:33 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:47 CST 2022 -->
 
 <!--te-->
 

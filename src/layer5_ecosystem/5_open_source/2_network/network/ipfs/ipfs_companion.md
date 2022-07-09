@@ -1,11 +1,10 @@
 # IPFS伴侣插件使用
 
 <!--ts-->
-* [IPFS伴侣插件使用](#ipfs伴侣插件使用)
-   * [参考资源](#参考资源)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:33:14 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:32 CST 2022 -->
 
 <!--te-->
 

@@ -1,14 +1,10 @@
 # 协议抽象
 
 <!--ts-->
-* [协议抽象](#协议抽象)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:57 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:17 CST 2022 -->
 
 <!--te-->
 
