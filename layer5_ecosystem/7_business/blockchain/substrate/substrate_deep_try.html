@@ -139,7 +139,7 @@
             </div>
 
             <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
-            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判 有所取舍 方见真我</a> -- 练武不练功
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
                 到头一场空 -- 《赛博英雄传》 </h4>
             <div class="right-buttons">
                     <a href="../../../../print.html" title="Print this book" aria-label="Print this book">
@@ -182,55 +182,8 @@
                 </div>
                 <h1 id="substrate深入尝试pallet"><a class="header" href="#substrate深入尝试pallet">Substrate深入尝试pallet</a></h1>
 <!--ts-->
-<ul>
-<li><a href="#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
-<ul>
-<li><a href="#%E6%96%87%E6%A1%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98">文档/代码更新问题</a></li>
-<li><a href="#1-%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">1. 设置昵称：添加第一个Pallet到Runtime</a>
-<ul>
-<li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
-<li><a href="#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
-<ul>
-<li><a href="#package">[package]{...}</a></li>
-<li><a href="#packagemetadatadocsrs">[package.metadata.docs.rs]{...}</a></li>
-<li><a href="#dependencies">[dependencies]{...}</a></li>
-<li><a href="#build-dependencies">[build-dependencies]{...}</a></li>
-<li><a href="#features">[features]{...}</a></li>
-</ul>
-</li>
-<li><a href="#%E5%9B%9B%E6%AD%A5%E6%B7%BB%E5%8A%A0pallet">四步添加pallet</a>
-<ul>
-<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96-cargotomldependincies">添加依赖: Cargo.toml/[dependincies]</a></li>
-<li><a href="#%E6%B7%BB%E5%8A%A0feature-cargotomlfeatures">添加feature: Cargo.toml/[features]</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE-%E6%B7%BB%E5%8A%A0config%E6%8E%A5%E5%8F%A3-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></li>
-<li><a href="#%E5%AE%9A%E4%B9%89%E8%BF%90%E8%A1%8C%E6%97%B6-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BC%96%E8%AF%91-%E8%BF%90%E8%A1%8C-%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF">编译-&gt;运行-&gt;启动前端</a></li>
-<li><a href="#%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD">验证功能</a>
-<ul>
-<li><a href="#%E4%B8%BA%E5%B8%90%E6%88%B7%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0">为帐户设置昵称</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8nicks-pallet%E6%9F%A5%E8%AF%A2%E8%B4%A6%E6%88%B7%E4%BF%A1%E6%81%AF">使用Nicks pallet查询账户信息</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能出现的问题</a></li>
-</ul>
-</li>
-<li><a href="#2-%E6%8C%87%E5%AE%9A%E8%B0%83%E7%94%A8%E6%BA%90%E5%A4%B4unsigned-signed-or-sudo">2. 指定调用源头unsigned, signed or sudo</a>
-<ul>
-<li><a href="#signed%E4%B8%8Esudo%E6%9C%89%E4%B8%8D%E5%90%8C%E6%9D%83%E9%99%90">signed与sudo有不同权限。</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
-<ul>
-<li><a href="#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:33:35 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:47 CST 2022 -->
 <!--te-->
 <h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
 <pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。

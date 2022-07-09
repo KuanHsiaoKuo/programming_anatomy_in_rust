@@ -139,7 +139,7 @@
             </div>
 
             <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
-            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判 有所取舍 方见真我</a> -- 练武不练功
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
                 到头一场空 -- 《赛博英雄传》 </h4>
             <div class="right-buttons">
                     <a href="../../print.html" title="Print this book" aria-label="Print this book">
@@ -182,65 +182,8 @@
                 </div>
                 <h1 id="cargo与rustc"><a class="header" href="#cargo与rustc">cargo与rustc</a></h1>
 <!--ts-->
-<ul>
-<li><a href="#cargo%E4%B8%8Erustc">cargo与rustc</a>
-<ul>
-<li><a href="#rustc">rustc</a>
-<ul>
-<li><a href="#rustc%E6%98%AF%E4%BB%80%E4%B9%88">rustc是什么</a></li>
-<li><a href="#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8">基础使用</a></li>
-<li><a href="#rustc%E4%B8%8Ecargo%E7%9A%84%E5%85%B3%E7%B3%BB">rustc与cargo的关系</a></li>
-</ul>
-</li>
-<li><a href="#cargo-style">cargo style</a></li>
-<li><a href="#cargo-essential-structure">cargo essential structure</a></li>
-<li><a href="#cargo-%E6%89%A9%E5%B1%95">.cargo 扩展</a>
-<ul>
-<li><a href="#tree-overview">tree overview</a></li>
-<li><a href="#bin">bin</a></li>
-<li><a href="#env">env</a></li>
-<li><a href="#git">git</a></li>
-<li><a href="#registry">registry</a></li>
-</ul>
-</li>
-<li><a href="#cargo-%E4%B8%8E-git-%E7%9A%84%E5%85%B3%E8%81%94">Cargo 与 git 的关联！</a>
-<ul>
-<li><a href="#cargo-tree">cargo tree</a></li>
-<li><a href="#git-1">git</a></li>
-<li><a href="#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98">关于依赖冲突问题</a></li>
-</ul>
-</li>
-<li><a href="#cargo%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">Cargo相关问题解决</a>
-<ul>
-<li><a href="#%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81failed-to-select-a-version-for-the-requirement">版本冲突：failed to select a version for the requirement</a></li>
-</ul>
-</li>
-<li><a href="#cargo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">Cargo项目结构</a>
-<ul>
-<li><a href="#%E5%9F%BA%E7%A1%80%E8%AF%B4%E6%98%8E">基础说明</a></li>
-<li><a href="#cargotoml%E5%92%8Ccargolock">cargo.toml和cargo.lock</a></li>
-<li><a href="#%E6%9E%84%E5%BB%BA%E6%B8%85%E7%90%86%E6%9B%B4%E6%96%B0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85">构建、清理、更新以及安装</a></li>
-<li><a href="#mainrs-%E5%92%8C-librs">main.rs 和 lib.rs</a></li>
-<li><a href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8substrate%E7%9A%84substrate-node-template">实际应用：Substrate的substrate-node-template</a>
-<ul>
-<li><a href="#%E5%8C%BA%E5%88%ABcargo-run%E4%B8%8Ecargo-build">区别cargo run与cargo build</a></li>
-<li><a href="#%E5%9C%A8node%E5%8C%85%E9%87%8C%E9%9D%A2%E5%AD%98%E5%9C%A8mainrs">在node包里面存在main.rs</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
-<ul>
-<li><a href="#online-book">online-book</a></li>
-<li><a href="#fragment">fragment</a></li>
-<li><a href="#local">local</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:45 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:08 CST 2022 -->
 <!--te-->
 <h2 id="rustc"><a class="header" href="#rustc">rustc</a></h2>
 <h3 id="rustc是什么"><a class="header" href="#rustc是什么">rustc是什么</a></h3>

@@ -139,7 +139,7 @@
             </div>
 
             <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
-            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判 有所取舍 方见真我</a> -- 练武不练功
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
                 到头一场空 -- 《赛博英雄传》 </h4>
             <div class="right-buttons">
                     <a href="../../print.html" title="Print this book" aria-label="Print this book">
@@ -182,49 +182,8 @@
                 </div>
                 <h1 id="模块系统相关workspacepackagecratemodule"><a class="header" href="#模块系统相关workspacepackagecratemodule">模块系统相关：Workspace、Package、Crate、Module</a></h1>
 <!--ts-->
-<ul>
-<li><a href="#%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3workspacepackagecratemodule">模块系统相关：Workspace、Package、Crate、Module</a>
-<ul>
-<li><a href="#%E5%8E%98%E6%B8%85workspacepackagecrate%E5%92%8Cmodule%E7%9A%84%E5%85%B3%E7%B3%BB">厘清Workspace、Package、crate和module的关系</a>
-<ul>
-<li><a href="#package-%E5%8C%85%E5%90%ABcargotoml">Package: 包含Cargo.toml</a></li>
-<li><a href="#workspace%E4%B8%8Epackage">workspace与package</a></li>
-<li><a href="#crate-%E6%9B%B4%E5%A4%9A%E6%83%85%E5%86%B5%E4%B8%8B%E5%8F%AA%E6%98%AFrustc%E9%BB%98%E8%AE%A4">crate: 更多情况下只是rustc默认</a></li>
-<li><a href="#%E5%85%B7%E4%BD%93%E5%AF%B9%E6%AF%94package%E5%92%8Ccrate">具体对比package和crate</a>
-<ul>
-<li><a href="#%E5%9C%A8cargotoml%E7%9A%84binlib%E4%B8%AD%E6%8C%87%E6%98%8E">在Cargo.toml的[bin]/[lib]中指明</a></li>
-</ul>
-</li>
-<li><a href="#%E5%86%8D%E6%9D%A5%E5%AF%B9%E6%AF%94workspacepackage%E5%92%8Ccrate">再来对比workspace、package和crate</a></li>
-<li><a href="#module">module</a></li>
-</ul>
-</li>
-<li><a href="#%E6%A8%A1%E5%9D%97%E5%91%88%E7%8E%B0%E6%96%B9%E5%BC%8F">模块呈现方式</a>
-<ul>
-<li><a href="#%E5%B5%8C%E5%A5%97%E6%A8%A1%E5%9D%97">嵌套模块</a></li>
-<li><a href="#%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97">文件模块</a></li>
-<li><a href="#%E7%9B%AE%E5%BD%95%E6%A8%A1%E5%9D%97">目录模块</a></li>
-</ul>
-</li>
-<li><a href="#%E9%9A%90%E7%A7%81%E4%B8%8E%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA">隐私与导入导出</a>
-<ul>
-<li><a href="#%E9%9A%90%E7%A7%81%E7%AE%A1%E7%90%86">隐私管理</a></li>
-<li><a href="#%E5%B5%8C%E5%A5%97%E5%AF%BC%E5%85%A5">嵌套导入</a></li>
-<li><a href="#%E5%86%8D%E6%AC%A1%E5%AF%BC%E5%87%BA">再次导出</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
-<ul>
-<li><a href="#online-book">online-book</a></li>
-<li><a href="#fragment">fragment</a></li>
-<li><a href="#local">local</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:32:46 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:09 CST 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -258,27 +217,12 @@ sp-wasm-interface = { version = &quot;6.0.0&quot;, path = &quot;../../primitives
 <li>dependencies表示该package依赖的其他package</li>
 </ol>
 <h3 id="workspace与package"><a class="header" href="#workspace与package">workspace与package</a></h3>
-<blockquote>
-<p><a href="https://doc.rust-lang.org/cargo/reference/workspaces.html">Workspaces - The Cargo Book</a>
-默认情况下，一个Cargo.toml只能指明一个package，但是在workspace里面就可以指明多个(此时可以理解为这个package包含多个subpackage)，比如substrate的根cargo：
-<a href="https://github.com/paritytech/substrate/blob/master/Cargo.toml">substrate/Cargo.toml at master · paritytech/substrate</a></p>
-</blockquote>
-<pre><code class="language-toml">[workspace]
-resolver = &quot;2&quot;
-
-members = [
-    &quot;bin/node-template/node&quot;,
-]
-[profile.dev.package]
-blake2 = { opt-level = 3 }
-</code></pre>
 <ul>
 <li>workspace+members: 并发代表当前package包含的所有subpackage，只是指明一个工作区的所有package</li>
 </ul>
 <blockquote>
 <p>A Cargo.toml file can simultaneously define a package and a workspace to which it belongs, but that package is still a member of that workspace, not the other way around.</p>
 </blockquote>
-<h3 id="crate-更多情况下只是rustc默认"><a class="header" href="#crate-更多情况下只是rustc默认">crate: 更多情况下只是rustc默认</a></h3>
 <h3 id="具体对比package和crate"><a class="header" href="#具体对比package和crate">具体对比package和crate</a></h3>
 <div id="admonition-package和crate" class="admonition tip">
 <div class="admonition-title">
@@ -292,6 +236,215 @@ blake2 = { opt-level = 3 }
 </blockquote>
 </div>
 </div>
+<h4 id="在cargotoml的binlib中指明"><a class="header" href="#在cargotoml的binlib中指明">在Cargo.toml的[bin]/[lib]中指明</a></h4>
+<h3 id="再来对比workspacepackage和crate"><a class="header" href="#再来对比workspacepackage和crate">再来对比workspace、package和crate</a></h3>
+<div id="admonition-hierarchy" class="admonition info">
+<div class="admonition-title">
+<p>hierarchy</p>
+<p><a class="admonition-anchor-link" href="#admonition-hierarchy"></a></p>
+</div>
+<div>
+<p>Workspace → Package → Crate</p>
+</div>
+</div>
+<p>Generally, a package exposes only one crate. Most library crates don't even have an associated binary crate(s) in their
+package. It's due to this that package/crate terminology is often used interchangeably; for lib crates it is in the 90%
+case. Package is also a generic term that people not familiar with Rust's ecosystem can understand, where crate is a
+Rust-specific piece of jargon.</p>
+<p>The two concepts are still meaningfully different -- while conventionally package and lib crate have the same name (
+modulo hyphens vs underscores), this is not required in any way -- but for the most part there isn't an appreciable
+difference unless you're paying attention to the weeds and edge cases.</p>
+<h3 id="module"><a class="header" href="#module">module</a></h3>
+<p>在rust中，module(模块)更多还是一种逻辑上的概念，主要使用mod关键字，下面会具体说说</p>
+<div id="admonition-模块主要还是为了控制作用域scope和隐私privacy" class="admonition tip">
+<div class="admonition-title">
+<p>模块主要还是为了控制作用域(scope)和隐私(privacy)</p>
+<p><a class="admonition-anchor-link" href="#admonition-模块主要还是为了控制作用域scope和隐私privacy"></a></p>
+</div>
+<div>
+</div>
+</div>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod say {
+    pub fn hello() {
+        println!(&quot;Hello, world!&quot;);
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="整理说一下rust的模块系统"><a class="header" href="#整理说一下rust的模块系统">整理说一下rust的模块系统</a></h3>
+<pre><code class="language-plantuml">@startmindmap
+skinparam monochrome reverse
+skinparam classFontName ttf-wqy-zenhei
+*[#lightblue] Rust模块系统
+**[#FFBBCC] 两种视角
+*** 程序猿
+**** 文件结构
+*** rustc：module tree
+****:可执行root
+&lt;code&gt;
+src/main.rs 
+-&gt; binary crate(默认与cargo.toml-&gt;[package].name同名)
+&lt;/code&gt;;
+****:库root
+&lt;code&gt;
+src/lib.rs 
+-&gt; lib crate(默认与cargo.toml-&gt;[package].name同名)
+&lt;/code&gt;;
+****:crate
+&lt;code&gt;编译的最小基本单位&lt;/code&gt;;
+**[#FFBBCC] project的五个层级
+*** workspace
+*** package
+*** crates
+*** modules
+*** paths
+**[#FFBBCC] bin文件夹：可以直接使用src/lib.rs
+**[#lightgreen] crates.io保存的什么？
+*** 发布流程
+**** cargo login
+****[#lightgreen]:cargo package
+&lt;code&gt;
+$ cargo help package
+从帮助信息结合substrate源码实验🧪可知：
+1. 从当前目录开始执行路径开始，首先去父文件夹找Cargo.toml, 然后找当前目录的Cargo.toml，找不到就报错
+2. 找到的Cargo.toml如果有workspace配置，就按照workspace里面的subpackage顺序来依次打包
+3. 每次打包的标志为src/main.rs或者src/lib.rs, 且src同级存在Cargo.toml,Cargo.toml里面有[package]
+4. 开始打包为上传到crate.io的格式
+5. 依次打包
+6. 所有依赖必须是在crate.io可以找到的，找不到就报错
+7. 以包含Cargo.toml父文件夹为项目根目录，放在target/package里面
+&lt;/code&gt;;
+**** cargo publish
+**** cargo yank
+**** cargo owner
+***[#lightgreen]:crate.io包含代码总结
+&lt;code&gt;
+1. 只包含最小crate内容，也就是src/main.rs或者src/lib.rs + Cargo.toml
+2. rust只能允许一级嵌套，使用workspace分出subpackage
+&lt;/code&gt;;
+@endmindmap
+
+</code></pre>
+<h3 id="联想对比"><a class="header" href="#联想对比">联想对比</a></h3>
+<ol>
+<li>golang的模块系统</li>
+<li>python/js的模块系统</li>
+<li>mdbook的所有文章只能挂到SUMMARY才能生成链接。</li>
+</ol>
+<h3 id="module-tree"><a class="header" href="#module-tree">module tree</a></h3>
+<ul>
+<li>module Tree只有一个入口（根），src/main.rs或src/lib.rs</li>
+<li>默认情况下，lib.rs和main.rs的crate都和cargo.toml里面的[package].name同名</li>
+<li>但是cargo.toml里面可以给crate重命名：[lib]重命名lib.rs, [binary]重命名main.rs</li>
+<li>crate.io上面的名字还有优先级：[lib]-&gt;src/lib.rs &gt; [package]/name.
+比如这里：<a href="https://github.com/tkaitchuck/ahash/blob/master/smhasher/ahash-cbindings/Cargo.toml">aHash/Cargo.toml at master · tkaitchuck/aHash</a>
+. cargo search ahash-cbindings没有结果，cargo search ahash_c就有返回</li>
+</ul>
+<h2 id="模块呈现方式"><a class="header" href="#模块呈现方式">模块呈现方式</a></h2>
+<h3 id="嵌套模块"><a class="header" href="#嵌套模块">嵌套模块</a></h3>
+<h3 id="文件模块"><a class="header" href="#文件模块">文件模块</a></h3>
+<h3 id="目录模块"><a class="header" href="#目录模块">目录模块</a></h3>
+<h2 id="隐私与导入导出"><a class="header" href="#隐私与导入导出">隐私与导入导出</a></h2>
+<h3 id="隐私管理"><a class="header" href="#隐私管理">隐私管理</a></h3>
+<h3 id="嵌套导入"><a class="header" href="#嵌套导入">嵌套导入</a></h3>
+<h3 id="再次导出"><a class="header" href="#再次导出">再次导出</a></h3>
+<div id="admonition-pubcrate-fn-fn_name-" class="admonition info">
+<div class="admonition-title">
+<p>pub(crate) fn fn_name() {}</p>
+<p><a class="admonition-anchor-link" href="#admonition-pubcrate-fn-fn_name-"></a></p>
+</div>
+<div>
+<p>Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者,要从模块向用户公开一些内容可以使用关键字 pub。</p>
+<blockquote>
+<p>但是对于有一些元素,我们只想暴露给软件包中的其他模块,而不是用户。</p>
+</blockquote>
+<p>在这种情况下,我们可以对元素使用 pub(crate)修饰符,这允许元素仅在软件包内部暴露</p>
+</div>
+</div>
+<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<div id="admonition-不要把其他人的话直接照抄" class="admonition note">
+<div class="admonition-title">
+<p>不要把其他人的话直接照抄！</p>
+<p><a class="admonition-anchor-link" href="#admonition-不要把其他人的话直接照抄"></a></p>
+</div>
+<div>
+<p>保持批判，有所取舍，知行合一, 方见真我</p>
+</div>
+</div>
+<h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html">Visibility and privacy - The Rust Reference</a></li>
+<li><a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself">pub(in path), pub(crate), pub(super), and pub(self) - The Rust Reference</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">Managing Growing Projects with Packages, Crates, and Modules - The Rust Programming Language</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/mod.html">Modules - Rust By Example</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rust-by-example/crates.html">Crates - Rust By Example</a></li>
+</ul>
+<h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
+<ul>
+<li>
+<p><a href="https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA">了解下Rust 模块使用方式</a></p>
+</li>
+<li>
+<p><a href="https://www.reddit.com/r/rust/comments/lvtzri/confused_about_package_vs_crate_terminology/">Confused about Package vs. Crate terminology. : rust</a></p>
+</li>
+<li>
+<p><a href="https://course.rs/basic/crate-module/intro.html">包和模块 - Rust语言圣经(Rust Course)</a></p>
+<ul>
+<li>项目(Packages)：一个 Cargo 提供的 feature，可以用来构建、测试和分享包</li>
+<li>包(Crate)：一个由多个模块组成的树形结构，可以作为三方库进行分发，也可以生成可执行文件进行运行</li>
+<li>模块(Module)：可以一个文件多个模块，也可以一个文件一个模块，模块可以被认为是真实项目中的代码组织单元</li>
+</ul>
+</li>
+<li>
+<p><a href="https://doc.rust-lang.org/cargo/reference/workspaces.html">Workspaces - The Cargo Book</a>
+默认情况下，一个Cargo.toml只能指明一个package，但是在workspace里面就可以指明多个(此时可以理解为这个package包含多个subpackage)，比如substrate的根cargo：</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/substrate/blob/master/Cargo.toml">substrate/Cargo.toml at master · paritytech/substrate</a></p>
+</li>
+</ul>
+<pre><code class="language-toml">[workspace]
+resolver = &quot;2&quot;
+
+members = [
+    &quot;bin/node-template/node&quot;,
+]
+[profile.dev.package]
+blake2 = { opt-level = 3 }
+</code></pre>
+<ul>
+<li><a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html?highlight=bin#library">Cargo Targets - The Cargo Book</a></li>
+</ul>
+<div id="admonition-crate" class="admonition tip">
+<div class="admonition-title">
+<p>crate</p>
+<p><a class="admonition-anchor-link" href="#admonition-crate"></a></p>
+</div>
+<div>
+<p>A crate is the [lib] or [[bin]] tables in the Cargo.toml. 
+At most one lib crate may be present, but an arbitrary number of bin crates may be present. </p>
+<p>You won't see these tables added explicitly too often, 
+because they're implicitly present if you have src/lib.rs (lib crate) and/or src/main.rs (bin crate).</p>
+</div>
+</div>
+<pre><code class="language-toml"># Example of customizing the library in Cargo.toml.
+[lib]
+crate-type = [&quot;cdylib&quot;]
+bench = false
+</code></pre>
+<pre><code class="language-toml"># Example of customizing binaries in Cargo.toml.
+[[bin]]
+name = &quot;cool-tool&quot;
+test = false
+bench = false
+
+[[bin]]
+name = &quot;frobnicator&quot;
+required-features = [&quot;frobnicate&quot;]
+
+</code></pre>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html">Packages and Crates - The Rust Programming Language</a></li>
 </ul>
@@ -338,114 +491,83 @@ blake2 = { opt-level = 3 }
 </blockquote>
 </div>
 </div>
-<h4 id="在cargotoml的binlib中指明"><a class="header" href="#在cargotoml的binlib中指明">在Cargo.toml的[bin]/[lib]中指明</a></h4>
-<p><a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html?highlight=bin#library">Cargo Targets - The Cargo Book</a></p>
-<div id="admonition-crate" class="admonition tip">
-<div class="admonition-title">
-<p>crate</p>
-<p><a class="admonition-anchor-link" href="#admonition-crate"></a></p>
-</div>
-<div>
-<p>A crate is the [lib] or [[bin]] tables in the Cargo.toml. 
-At most one lib crate may be present, but an arbitrary number of bin crates may be present. </p>
-<p>You won't see these tables added explicitly too often, 
-because they're implicitly present if you have src/lib.rs (lib crate) and/or src/main.rs (bin crate).</p>
-</div>
-</div>
-<pre><code class="language-toml"># Example of customizing the library in Cargo.toml.
-[lib]
-crate-type = [&quot;cdylib&quot;]
-bench = false
-</code></pre>
-<pre><code class="language-toml"># Example of customizing binaries in Cargo.toml.
-[[bin]]
-name = &quot;cool-tool&quot;
-test = false
-bench = false
-
-[[bin]]
-name = &quot;frobnicator&quot;
-required-features = [&quot;frobnicate&quot;]
-
-</code></pre>
-<h3 id="再来对比workspacepackage和crate"><a class="header" href="#再来对比workspacepackage和crate">再来对比workspace、package和crate</a></h3>
-<div id="admonition-hierarchy" class="admonition info">
-<div class="admonition-title">
-<p>hierarchy</p>
-<p><a class="admonition-anchor-link" href="#admonition-hierarchy"></a></p>
-</div>
-<div>
-<p>Workspace → Package → Crate</p>
-</div>
-</div>
-<p>Generally, a package exposes only one crate. Most library crates don't even have an associated binary crate(s) in their
-package. It's due to this that package/crate terminology is often used interchangeably; for lib crates it is in the 90%
-case. Package is also a generic term that people not familiar with Rust's ecosystem can understand, where crate is a
-Rust-specific piece of jargon.</p>
-<p>The two concepts are still meaningfully different -- while conventionally package and lib crate have the same name (
-modulo hyphens vs underscores), this is not required in any way -- but for the most part there isn't an appreciable
-difference unless you're paying attention to the weeds and edge cases.</p>
-<h3 id="module"><a class="header" href="#module">module</a></h3>
-<p>在rust中，module(模块)更多还是一种逻辑上的概念，主要使用mod关键字，下面会具体说说</p>
-<div id="admonition-模块主要还是为了控制作用域scope和隐私privacy" class="admonition tip">
-<div class="admonition-title">
-<p>模块主要还是为了控制作用域(scope)和隐私(privacy)</p>
-<p><a class="admonition-anchor-link" href="#admonition-模块主要还是为了控制作用域scope和隐私privacy"></a></p>
-</div>
-<div>
-</div>
-</div>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>mod say {
-    pub fn hello() {
-        println!(&quot;Hello, world!&quot;);
-    }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<h2 id="模块呈现方式"><a class="header" href="#模块呈现方式">模块呈现方式</a></h2>
-<h3 id="嵌套模块"><a class="header" href="#嵌套模块">嵌套模块</a></h3>
-<h3 id="文件模块"><a class="header" href="#文件模块">文件模块</a></h3>
-<h3 id="目录模块"><a class="header" href="#目录模块">目录模块</a></h3>
-<h2 id="隐私与导入导出"><a class="header" href="#隐私与导入导出">隐私与导入导出</a></h2>
-<h3 id="隐私管理"><a class="header" href="#隐私管理">隐私管理</a></h3>
-<h3 id="嵌套导入"><a class="header" href="#嵌套导入">嵌套导入</a></h3>
-<h3 id="再次导出"><a class="header" href="#再次导出">再次导出</a></h3>
-<div id="admonition-pubcrate-fn-fn_name-" class="admonition info">
-<div class="admonition-title">
-<p>pub(crate) fn fn_name() {}</p>
-<p><a class="admonition-anchor-link" href="#admonition-pubcrate-fn-fn_name-"></a></p>
-</div>
-<div>
-<p>Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者,要从模块向用户公开一些内容可以使用关键字 pub。</p>
-<blockquote>
-<p>但是对于有一些元素,我们只想暴露给软件包中的其他模块,而不是用户。</p>
-</blockquote>
-<p>在这种情况下,我们可以对元素使用 pub(crate)修饰符,这允许元素仅在软件包内部暴露</p>
-</div>
-</div>
-<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
-<h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
 <ul>
-<li><a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html">Visibility and privacy - The Rust Reference</a></li>
-<li><a href="https://doc.rust-lang.org/stable/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself">pub(in path), pub(crate), pub(super), and pub(self) - The Rust Reference</a></li>
-<li><a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">Managing Growing Projects with Packages, Crates, and Modules - The Rust Programming Language</a></li>
-<li><a href="https://doc.rust-lang.org/stable/rust-by-example/mod.html">Modules - Rust By Example</a></li>
-<li><a href="https://doc.rust-lang.org/stable/rust-by-example/crates.html">Crates - Rust By Example</a></li>
-</ul>
-<h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
-<ul>
-<li><a href="https://web.archive.org/web/20220620093333/https://mp.weixin.qq.com/s/mQ0zh_tcLEZZNpGIbz6BVA">了解下Rust 模块使用方式</a></li>
-<li><a href="https://www.reddit.com/r/rust/comments/lvtzri/confused_about_package_vs_crate_terminology/">Confused about Package vs. Crate terminology. : rust</a></li>
-<li><a href="https://course.rs/basic/crate-module/intro.html">包和模块 - Rust语言圣经(Rust Course)</a>
-<ul>
-<li>项目(Packages)：一个 Cargo 提供的 feature，可以用来构建、测试和分享包</li>
-<li>包(Crate)：一个由多个模块组成的树形结构，可以作为三方库进行分发，也可以生成可执行文件进行运行</li>
-<li>模块(Module)：可以一个文件多个模块，也可以一个文件一个模块，模块可以被认为是真实项目中的代码组织单元</li>
-</ul>
+<li>
+<p><a href="https://web.archive.org/web/20220704161217/https://zhuanlan.zhihu.com/p/106251259">Rust的模块化系统: 包Packages, 箱Crates, 和模块Modules - 知乎</a>
+包 Packages: Cargo提供的让我们创建, 测试和分享Crates的工具. 箱 Crates: 提供类库或可执行文件的模块树 模块 Modules and use: 管理和组织路径, 及其作用域和访问权限 路径 Paths:
+如结构体(structs), 函数(function), 或模块(module)等事物的命名方式</p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220704161255/https://zhuanlan.zhihu.com/p/365735504">三言两语理解Rust module System - 知乎</a></p>
 </li>
 </ul>
+<p>Module System</p>
+<p>一个问题几乎总会由许多小问题组成。module system是为了定义清楚各个小问题的边界。这样更容易和更方便的管理问题。而大问题的解法，就是把小问题的解法组合起来。</p>
+<p>project，package， crate， module这些概念感觉相似。实际上，一个package/project可以包含多个 binary crates和一个或者零个library
+binary。一个crate可以包含多个module。可以认为package就是一个project，一个crate就是一个暴露给外界的逻辑单元，一个module就是一个小问题的解法。</p>
+<p>当project里面有lib.rs说明这个project是一个library crate，这个library的名字是project的名字。main.rs/main2.rs都可以直接使用这个library
+crate。我们可以认为bin文件夹里面是单独的crate，它们默认导入了这个library crate。</p>
+<p>一个crate就是一个暴露给外界的逻辑单元，一个module就是一个小问题的解法</p>
+<p>关于找不到模块： 这就是module tree的体现，<strong>be explicit</strong>。所有模块都需要添加到crate root(src/main.rs或者src/lib.rs)里面。也就是要显示地指明module
+tree的结构。这也就是我们经常在main.rs/lib.rs里面看到许多mod xxx的原因。比如<a href="https://github.com/Celthi/rsnova/blob/master/src/lib.rs#L20">这里的代码</a></p>
+<p>它们的存在就是为了将project里面的modules 加到这个crate里面。比如在main.rs 里面看到mod channel，就是将module channel加进crate的module tree来。</p>
+<p>相关引用：
+<a href="https://web.archive.org/web/20220419042941/https://manishearth.github.io/blog/2017/05/14/mentally-modelling-modules/">Mentally Modelling Modules - In Pursuit of Laziness</a></p>
+<ul>
+<li>
+<p><a href="https://web.archive.org/web/20220614192155/https://www.sheshbabu.com/posts/rust-module-system/">Clear explanation of Rust’s module system</a>
+作者通过举例，详细介绍了rust编译器与程序猿看到的不同项目结构。</p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220704161820/https://zhuanlan.zhihu.com/p/360342782">Rust那些难理解的点(大量更新于6月16日） - 知乎</a></p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20220704162217/https://news.ycombinator.com/item?id=23894172">The confusion around Rust's modules reminds me of the different ways that people... | Hacker News</a>
+The confusion around Rust's modules reminds me of the different ways that people learn how to use car indicators. Some
+people learn that you push the stalk up to indicate your intent to turn left, or down to turn right. And then they
+might eventually learn that in a European car, you push the stalk down to turn left, and up to turn right. And then of
+course some of these people get confused when switching between different cars. Yes, I've seen plenty of people on the
+road who indicate one direction and then turn another. It's... kind of frightening .</p>
+</li>
+</ul>
+<p>The other way of learning to use car indicators is much simpler: push the stalk in the direction that you would turn the
+wheel. Of course this still leaves the possibility that some people will push the wrong stalk, and briefly activate
+their windshield wipers . But it's a much easier mistake to <em>notice</em>, and the consequences are minor.</p>
+<p>Back to Rust's modules. I keep seeing articles trying to offer a simple or clear explanation of how they work, that end
+up unnecessarily complicated in a way that feels a lot like the &quot;up/down&quot; model of car indicators. The explanation that
+makes the basics of Rust modules clear to me is this:</p>
+<ul>
+<li>
+<p>Child modules must always be <em>declared</em> in the parent module, or they don't exist.</p>
+</li>
+<li>
+<p>The content of child modules may be <em>defined</em> either inline in the parent as <code>mod child { ... }</code>, or in a file with a
+relative path of './child.rs' or './child/mod.rs'.</p>
+</li>
+</ul>
+<p>Did I miss anything important?</p>
+<p>Without this basic explanation up-front, I have no idea what to do with the stream of information I'm reading in a
+lengthy article on the topic -- I've been given no scaffolding onto which to bolt all the details and examples. So this
+is the &quot;bottom line&quot; that I would like to see &quot;up front&quot; in descriptions of Rust's modules.</p>
+<p>Other misunderstandings, e.g., around item visibility, are explained really well by the compiler if you get them mixed
+up, so I'm not sure how much value there is in mixing them in to articles about how modules are <em>structured</em> before
+those two basic facts are presented.</p>
+<ul>
+<li><a href="https://web.archive.org/web/20220705022801/https://stackoverflow.com/questions/63515853/how-to-better-understand-crate-in-rust">How to better understand Crate in Rust? - Stack Overflow</a></li>
+</ul>
+<blockquote>
+<p>The processing of that source file may result in other source files being loaded as modules.
+It is not that one source file makes up a crate: it's that starting from that one source file, you can find all the files making up the crate, as opposed to other compilation models where the compiler might be given many file names to start from.</p>
+</blockquote>
+<p>其实从代码完整性考虑，crate确实就是编译的最小基本单位。因为它不仅指一个源码文件(xx.rs)，而是包含这个源码文件里面引入的所有其他module。这个时候，rustc才会开始编译这个crate</p>
+<ul>
+<li><a href="https://web.archive.org/web/20220609151503/https://stackoverflow.com/questions/52024304/what-exactly-is-a-crate-in-the-cargo-ecosystem-and-what-is-the-mapping-to-what?rq=1">rust - What exactly is a 'crate' in the Cargo ecosystem and what is the mapping to what is on crates.io? - Stack Overflow</a></li>
+</ul>
+<blockquote>
+<p>The exact things hosted on crates.io are crates inside packages. A crate is the output artifact of the compiler.
+The compilation model centers on artifacts called crates. Each compilation processes a single crate in source form, and if successful, produces a single crate in binary form: either an executable or some sort of library.
+A package is an artifact managed by Cargo, the Rust package manager.</p>
+</blockquote>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 <ul>
 <li><a href="marginnote3app://note/CF61A2D3-C05C-49B2-943A-777D4A4A6434">&lt;精通Rust(第二版)&gt;-2.2模块</a></li>

@@ -139,7 +139,7 @@
             </div>
 
             <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
-            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判 有所取舍 方见真我</a> -- 练武不练功
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
                 到头一场空 -- 《赛博英雄传》 </h4>
             <div class="right-buttons">
                     <a href="../../../../print.html" title="Print this book" aria-label="Print this book">
@@ -182,54 +182,8 @@
                 </div>
                 <h1 id="尝试substrate"><a class="header" href="#尝试substrate">尝试Substrate</a></h1>
 <!--ts-->
-<ul>
-<li><a href="#%E5%B0%9D%E8%AF%95substrate">尝试Substrate</a>
-<ul>
-<li><a href="#%E5%88%9D%E4%BD%93%E9%AA%8Csubstrate%E9%93%BE">初体验Substrate链</a>
-<ul>
-<li><a href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">设置开发环境</a>
-<ul>
-<li><a href="#%E4%BD%BF%E7%94%A8rustup%E8%AE%BE%E7%BD%AErust%E7%8E%AF%E5%A2%83">使用rustup设置rust环境</a></li>
-<li><a href="#%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83">检查环境</a></li>
-</ul>
-</li>
-<li><a href="#%E5%90%AF%E5%8A%A8%E9%93%BE%E8%8A%82%E7%82%B9">启动链节点</a>
-<ul>
-<li><a href="#%E4%B8%8B%E8%BD%BDnode-template">下载node-template</a></li>
-<li><a href="#node-templeate%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">node-templeate项目结构</a></li>
-<li><a href="#cargotoml">Cargo.toml</a></li>
-<li><a href="#%E7%BC%96%E8%AF%91%E5%89%8D%E7%9A%84%E6%A3%80%E6%9F%A5">编译前的检查</a></li>
-<li><a href="#%E7%BC%96%E8%AF%91">编译</a></li>
-<li><a href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能遇到的问题</a></li>
-<li><a href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">本地运行节点</a></li>
-<li><a href="#docker%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">docker运行节点</a></li>
-</ul>
-</li>
-<li><a href="#%E5%89%8D%E7%AB%AF%E8%AE%BF%E9%97%AE">前端访问</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E5%89%8D%E7%AB%AF%E6%A8%A1%E7%89%88">使用前端模版</a>
-<ul>
-<li><a href="#%E4%BD%BF%E7%94%A8polkadot-js%E8%AE%BF%E9%97%AE%E8%8A%82%E7%82%B9">使用polkadot-js访问节点</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#substrate%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">Substrate使用方式</a>
-<ul>
-<li><a href="#%E4%BD%BF%E7%94%A8subtrate-node">使用subtrate node</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8substrate-frame">使用substrate frame</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8substrate-core">使用substrate core</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
-<ul>
-<li><a href="#substrate%E6%96%87%E6%A1%A3%E7%BB%83%E4%B9%A0">substrate文档练习</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:33:39 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:50 CST 2022 -->
 <!--te-->
 <h2 id="初体验substrate链"><a class="header" href="#初体验substrate链">初体验Substrate链</a></h2>
 <p>这里主要使用官方提供的默认模版启动节点。</p>

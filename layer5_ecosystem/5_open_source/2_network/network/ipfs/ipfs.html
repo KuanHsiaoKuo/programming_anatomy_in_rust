@@ -139,7 +139,7 @@
             </div>
 
             <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
-            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判 有所取舍 方见真我</a> -- 练武不练功
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
                 到头一场空 -- 《赛博英雄传》 </h4>
             <div class="right-buttons">
                     <a href="../../../../../print.html" title="Print this book" aria-label="Print this book">
@@ -183,69 +183,8 @@
                 <h1 id="ipfs-星际文件系统interplanetary-file-system"><a class="header" href="#ipfs-星际文件系统interplanetary-file-system">IPFS: 星际文件系统(InterPlanetary File System)</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/ipfs.jpeg" alt="ipfs" /></p>
 <!--ts-->
-<ul>
-<li><a href="#ipfs-%E6%98%9F%E9%99%85%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Finterplanetary-file-system">IPFS: 星际文件系统(InterPlanetary File System)</a>
-<ul>
-<li><a href="#ipfs%E4%BB%8B%E7%BB%8D">IPFS介绍</a>
-<ul>
-<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AFipfs">1 什么是IPFS</a></li>
-<li><a href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89ipfs">2 为什么有IPFS</a>
-<ul>
-<li><a href="#http%E7%9A%84%E4%B8%AD%E5%BF%83%E5%8C%96%E6%98%AF%E4%BD%8E%E6%95%88%E7%9A%84-%E5%B9%B6%E4%B8%94%E6%88%90%E6%9C%AC%E5%BE%88%E9%AB%98">HTTP的中心化是低效的, 并且成本很高</a></li>
-<li><a href="#web%E6%96%87%E4%BB%B6%E7%BB%8F%E5%B8%B8%E8%A2%AB%E5%88%A0%E9%99%A4">Web文件经常被删除</a></li>
-<li><a href="#%E4%B8%AD%E5%BF%83%E5%8C%96%E9%99%90%E5%88%B6%E4%BA%86web%E7%9A%84%E6%88%90%E9%95%BF">中心化限制了web的成长</a></li>
-<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E5%BA%94%E7%94%A8%E9%AB%98%E5%BA%A6%E4%BE%9D%E8%B5%96%E4%B8%BB%E5%B9%B2%E7%BD%91">互联网应用高度依赖主干网</a></li>
-</ul>
-</li>
-<li><a href="#3-ipfs%E7%9A%84%E7%9B%AE%E6%A0%87">3 IPFS的目标</a></li>
-<li><a href="#4-ipfs%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9">4 IPFS包含哪些内容</a>
-<ul>
-<li><a href="#ipfs%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8D%8F%E8%AE%AE%E7%B1%BB%E4%BC%BChttp%E5%8D%8F%E8%AE%AE">IPFS是一个协议，类似http协议</a></li>
-<li><a href="#ipfs%E6%98%AF%E4%B8%80%E4%B8%AAweb%E5%8D%8F%E8%AE%AE">IPFS是一个web协议</a></li>
-<li><a href="#ipfs%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8D%8F%E8%AE%AE">IPFS是模块化的协议</a></li>
-<li><a href="#ipfs%E6%98%AF%E4%B8%80%E4%B8%AAp2p%E7%B3%BB%E7%BB%9F">IPFS是一个p2p系统</a></li>
-<li><a href="#ipfs%E5%A4%A9%E7%94%9F%E6%98%AF%E4%B8%80%E4%B8%AAcdn">IPFS天生是一个CDN</a></li>
-<li><a href="#ipfs%E6%8B%A5%E6%9C%89%E5%91%BD%E5%90%8D%E6%9C%8D%E5%8A%A1">IPFS拥有命名服务</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#ipfs%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C">IPFS如何工作</a></li>
-<li><a href="#ipfs%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E5%BF%83%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%BA%E7%82%B9">IPFS如何解决中心化服务器缺点</a>
-<ul>
-<li><a href="#1-%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E5%BF%AB-%E4%B8%8D%E5%86%8D%E4%BE%9D%E8%B5%96%E4%B8%BB%E5%B9%B2%E7%BD%91-%E4%B8%AD%E5%BF%83%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8">1 下载速度快, 不再依赖主干网, 中心化服务器</a></li>
-<li><a href="#2-%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E5%8F%98%E5%BE%97%E9%9D%9E%E5%B8%B8%E4%BE%BF%E5%AE%9C">2 存储空间变得非常便宜</a></li>
-<li><a href="#3-%E5%AE%89%E5%85%A8">3 安全</a></li>
-<li><a href="#4-%E5%BC%80%E6%94%BE">4 开放</a></li>
-</ul>
-</li>
-<li><a href="#ipfs%E7%9A%84%E7%94%A8%E9%80%94">IPFS的用途</a></li>
-<li><a href="#ipfs%E7%9A%84pow%E6%9C%BA%E5%88%B6">IPFS的POW机制</a></li>
-<li><a href="#ipfs%E5%AE%B6%E6%97%8F">IPFS家族</a>
-<ul>
-<li><a href="#main-projects">Main Projects</a></li>
-<li><a href="#contributions">Contributions</a></li>
-<li><a href="#movements">Movements</a></li>
-<li><a href="#ipfs-%E4%B8%8E-filecoin">IPFS 与 Filecoin</a>
-<ul>
-<li><a href="#ipfs%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E5%8F%91%E5%92%8C%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%B1%BB%E4%BC%BChttp%E5%8D%8F%E8%AE%AE">IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）</a></li>
-<li><a href="#filecoin-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B1%BB%E4%BC%BC%E4%B8%80%E4%B8%AA%E4%BA%91%E5%AD%98%E5%82%A8">Filecoin: 数据存储（类似一个云存储）</a></li>
-<li><a href="#ipfs%E5%92%8Cfilecoin%E5%85%B1%E5%90%8C%E4%BE%9D%E8%B5%96libp2p%E9%A1%B9%E7%9B%AE">IPFS和Filecoin共同依赖libp2p项目。</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E4%BD%BF%E7%94%A8ipfs%E7%9A%84%E5%BA%94%E7%94%A8">使用IPFS的应用</a></li>
-<li><a href="#ipfs%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C">IPFS网络如何运行</a></li>
-<li><a href="#ipfs-nat-traversal">IPFS: NAT traversal</a></li>
-<li><a href="#bitswap">BitSwap</a></li>
-<li><a href="#ipfs%E9%9D%9Erust%E5%AE%9E%E7%8E%B0%E7%89%88%E6%9C%AC">IPFS非rust实现版本</a></li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
-</ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Tue Jul  5 23:33:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:32 CST 2022 -->
 <!--te-->
 <h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
 <h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
