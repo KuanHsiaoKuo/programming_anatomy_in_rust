@@ -4,7 +4,7 @@
 
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sat Jul  9 22:46:09 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:48:27 CST 2022 -->
 
 <!--te-->
 
@@ -161,7 +161,19 @@ $ cargo help package
   . cargo search ahash-cbindings没有结果，cargo search ahash_c就有返回
 
 ## 模块呈现方式
-
+```plantuml
+@startmindmap
+* 模块使用方式
+** 存在形式
+*** 嵌套模块
+*** 文件模块
+*** 目录模块
+** 隐私管理
+** 导入导出
+*** 嵌套导入
+*** 再次导入
+@endmindmap
+```
 ### 嵌套模块
 
 ### 文件模块
