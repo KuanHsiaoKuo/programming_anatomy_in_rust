@@ -21,6 +21,9 @@ jobs:
         run: |
           chmod a+x scripts/update_toc_raw
           scripts/update_toc_raw
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Auto update markdown TOC
       #      - name: Install mdbook
       #        run: |
       #          #mkdir bin
@@ -29,9 +32,6 @@ jobs:
       #          #cp .cargo/*  /home/runner/.cargo/bin/
       #          echo "$(pwd)/bin" >> $GITHUB_PATH
       # - run: mdbook build && mdbook test # In case of custom book path: mdbook build path/to/mybook && mdbook test path/to/mybook
-      #- uses: stefanzweifel/git-auto-commit-action@v4
-      #  with:
-      #    commit_message: Auto update markdown TOC
       #- name: cargo-install-mdbook-checklist
       #  uses: actions-rs/install@v0.1.2
       #  with:
