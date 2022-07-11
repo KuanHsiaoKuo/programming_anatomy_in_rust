@@ -183,8 +183,103 @@
                 <h1 id="substrate介绍与源码解读"><a class="header" href="#substrate介绍与源码解读">Substrate介绍与源码解读</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png" alt="what_is_substrate" /></p>
 <!--ts-->
+<ul>
+<li><a href="#substrate%E4%BB%8B%E7%BB%8D%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB">Substrate介绍与源码解读</a>
+<ul>
+<li><a href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a>
+<ul>
+<li><a href="#gavin-wook%E4%B8%8E%E6%B3%A2%E5%8D%A1%E8%B7%A8%E9%93%BE">Gavin Wook与波卡跨链</a></li>
+<li><a href="#%E4%BB%8E%E6%B3%A2%E5%8D%A1%E5%88%B0substrate">从波卡到Substrate</a></li>
+<li><a href="#%E8%B7%A8%E9%93%BE%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7">跨链的重要性</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1">总体设计</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E5%8C%BA%E5%9D%97%E9%93%BE%E8%AE%BE%E8%AE%A1">常见区块链设计</a>
+<ul>
+<li><a href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86">区块链系统基础部分</a></li>
+<li><a href="#%E9%93%BE%E7%9A%84%E5%8A%9F%E8%83%BD">链的功能</a></li>
+<li><a href="#substrate%E7%90%86%E5%BF%B5">Substrate理念</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%88%E8%AE%A4%E8%AF%86%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BA%E5%9D%97%E9%93%BE%E6%A1%86%E6%9E%B6">先认识一下：什么是区块链框架</a></li>
+<li><a href="#%E6%8E%A5%E7%9D%80%E8%AF%B4%E8%AF%B4substrate%E4%B8%8Eweb3">接着说说Substrate与web3</a></li>
+<li><a href="#%E7%94%A8web%E6%A1%86%E6%9E%B6%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%B1%BB%E6%AF%94">用web框架、游戏引擎类比</a></li>
+<li><a href="#substrate-architecture">Substrate Architecture</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8runtime%E9%93%BE%E5%8A%9F%E8%83%BD">开发者只需要关注Runtime(链功能)</a></li>
+<li><a href="#%E6%98%8E%E6%99%B0runtime">明晰Runtime</a>
+<ul>
+<li><a href="#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86">判断标准</a></li>
+</ul>
+</li>
+<li><a href="#substrate%E7%9A%84runtime">Substrate的Runtime</a>
+<ul>
+<li><a href="#%E4%B8%AD%E5%BF%83%E5%8C%96%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B">中心化升级流程</a></li>
+<li><a href="#%E6%97%A0%E5%A4%AE%E5%8C%96%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B%E5%8E%9F%E5%85%88">无央化升级流程(原先)</a></li>
+<li><a href="#substrate%E7%9A%84%E4%B8%8D%E5%90%8C">Substrate的不同</a></li>
+<li><a href="#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%90%88%E7%BA%A6%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">以太坊合约更新策略</a></li>
+<li><a href="#substrate%E5%AF%B9%E5%BA%94%E5%90%88%E7%BA%A6%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">Substrate对应‘合约更新策略’</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a>
+<ul>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9E%B6%E6%9E%84">客户端架构</a>
+<ul>
+<li><a href="#%E6%9E%B6%E6%9E%84%E5%9B%BE">架构图</a></li>
+<li><a href="#%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E">模块说明</a>
+<ul>
+<li><a href="#%E5%AD%98%E5%82%A8">存储</a></li>
+<li><a href="#runtime">Runtime</a></li>
+<li><a href="#p2p%E7%BD%91%E7%BB%9C">p2p网络</a></li>
+<li><a href="#%E5%85%B1%E8%AF%86">共识</a></li>
+<li><a href="#rpc">RPC</a></li>
+<li><a href="#telemetry-%E9%81%A5%E6%B5%8B">telemetry （遥测）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tree-level1">Tree Level1</a>
+<ul>
+<li><a href="#%E7%94%A8cargo%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81">用Cargo组织代码</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
+<ul>
+<li><a href="#substrate-node">Substrate Node:</a>
+<ul>
+<li><a href="#%E9%87%8D%E7%82%B9%E8%AF%B4%E8%AF%B4nodepallets%E5%92%8Cruntime">重点说说node、pallets和runtime</a></li>
+</ul>
+</li>
+<li><a href="#substrate-frame">Substrate FRAME</a></li>
+<li><a href="#substrate-coreclient">Substrate Core(client)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a>
+<ul>
+<li><a href="#primitives">primitives</a></li>
+<li><a href="#scriptsci">scripts/ci</a></li>
+<li><a href="#utils">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91">功能逻辑</a></li>
+<li><a href="#%E7%89%B9%E8%89%B2%E4%BB%A3%E7%A0%81">特色代码</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="#online-book">online-book</a></li>
+<li><a href="#fragment">fragment</a></li>
+<li><a href="#runtime-1">Runtime</a></li>
+<li><a href="#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:23 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>

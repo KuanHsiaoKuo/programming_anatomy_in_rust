@@ -498,8 +498,103 @@ layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="substrate介绍与源码解读"><a class="header" href="#substrate介绍与源码解读">Substrate介绍与源码解读</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png" alt="what_is_substrate" /></p>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E4%BB%8B%E7%BB%8D%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB">Substrate介绍与源码解读</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#gavin-wook%E4%B8%8E%E6%B3%A2%E5%8D%A1%E8%B7%A8%E9%93%BE">Gavin Wook与波卡跨链</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%BB%8E%E6%B3%A2%E5%8D%A1%E5%88%B0substrate">从波卡到Substrate</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E8%B7%A8%E9%93%BE%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7">跨链的重要性</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1">总体设计</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%B8%B8%E8%A7%81%E5%8C%BA%E5%9D%97%E9%93%BE%E8%AE%BE%E8%AE%A1">常见区块链设计</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86">区块链系统基础部分</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%93%BE%E7%9A%84%E5%8A%9F%E8%83%BD">链的功能</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%90%86%E5%BF%B5">Substrate理念</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%88%E8%AE%A4%E8%AF%86%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BA%E5%9D%97%E9%93%BE%E6%A1%86%E6%9E%B6">先认识一下：什么是区块链框架</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%8E%A5%E7%9D%80%E8%AF%B4%E8%AF%B4substrate%E4%B8%8Eweb3">接着说说Substrate与web3</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8web%E6%A1%86%E6%9E%B6%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%B1%BB%E6%AF%94">用web框架、游戏引擎类比</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-architecture">Substrate Architecture</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8runtime%E9%93%BE%E5%8A%9F%E8%83%BD">开发者只需要关注Runtime(链功能)</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%98%8E%E6%99%B0runtime">明晰Runtime</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86">判断标准</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%9A%84runtime">Substrate的Runtime</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%AD%E5%BF%83%E5%8C%96%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B">中心化升级流程</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%97%A0%E5%A4%AE%E5%8C%96%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B%E5%8E%9F%E5%85%88">无央化升级流程(原先)</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%9A%84%E4%B8%8D%E5%90%8C">Substrate的不同</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%90%88%E7%BA%A6%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">以太坊合约更新策略</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E5%AF%B9%E5%BA%94%E5%90%88%E7%BA%A6%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">Substrate对应‘合约更新策略’</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9E%B6%E6%9E%84">客户端架构</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%9E%B6%E6%9E%84%E5%9B%BE">架构图</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E">模块说明</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%AD%98%E5%82%A8">存储</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#runtime">Runtime</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#p2p%E7%BD%91%E7%BB%9C">p2p网络</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%B1%E8%AF%86">共识</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#rpc">RPC</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#telemetry-%E9%81%A5%E6%B5%8B">telemetry （遥测）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#tree-level1">Tree Level1</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8cargo%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81">用Cargo组织代码</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%87%8D%E7%82%B9%E8%AF%B4%E8%AF%B4nodepallets%E5%92%8Cruntime">重点说说node、pallets和runtime</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-frame">Substrate FRAME</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-coreclient">Substrate Core(client)</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%B6%E4%BB%96">其他</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#primitives">primitives</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#scriptsci">scripts/ci</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#utils">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91">功能逻辑</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%89%B9%E8%89%B2%E4%BB%A3%E7%A0%81">特色代码</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#online-book">online-book</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#fragment">fragment</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#runtime-1">Runtime</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:23 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -1439,8 +1534,19 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="漫话rust"><a class="header" href="#漫话rust">漫话Rust</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/1_learning_resource/talks.html#%E6%BC%AB%E8%AF%9Drust">漫话Rust</a>
+<ul>
+<li><a href="layer5_ecosystem/1_learning_resource/talks.html#%E8%AF%9D%E9%A2%98">话题</a>
+<ul>
+<li><a href="layer5_ecosystem/1_learning_resource/talks.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%89%E5%BE%97-rust-%E9%9A%BE%E4%B8%8A%E6%89%8B%E5%B0%A4%E5%85%B6%E6%98%AF%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F---%E7%9F%A5%E4%B9%8E">为什么觉得 Rust 难上手，尤其是生命周期？ - 知乎</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:35 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:56 CST 2022 -->
 <!--te-->
 <h2 id="话题"><a class="header" href="#话题">话题</a></h2>
 <h3 id="为什么觉得-rust-难上手尤其是生命周期---知乎"><a class="header" href="#为什么觉得-rust-难上手尤其是生命周期---知乎">为什么觉得 Rust 难上手，尤其是生命周期？ - 知乎</a></h3>
@@ -1492,11 +1598,24 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </div>
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="底层抽象"><a class="header" href="#底层抽象">底层抽象</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/layer1_underlying_abstract.html#%E5%BA%95%E5%B1%82%E6%8A%BD%E8%B1%A1">底层抽象</a></li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:04 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:34 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#local">local</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:53 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:21 CST 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -1508,8 +1627,21 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <h3 id="local-1"><a class="header" href="#local-1">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="内存管理与内存安全"><a class="header" href="#内存管理与内存安全">内存管理与内存安全</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E5%86%85%E5%AD%98%E5%AE%89%E5%85%A8">内存管理与内存安全</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html#%E5%8F%82%E8%80%83">参考</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:51 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:18 CST 2022 -->
 <!--te-->
 <h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <h3 id="online-book-2"><a class="header" href="#online-book-2">online-book</a></h3>
@@ -1524,8 +1656,101 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="所有权三件套所有权借用与生命周期"><a class="header" href="#所有权三件套所有权借用与生命周期">所有权三件套：所有权、借用与生命周期</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/Ownership.jpeg" alt="Ownership" /></p>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E6%89%80%E6%9C%89%E6%9D%83%E4%B8%89%E4%BB%B6%E5%A5%97%E6%89%80%E6%9C%89%E6%9D%83%E5%80%9F%E7%94%A8%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">所有权三件套：所有权、借用与生命周期</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%BB%BC%E8%BF%B0">综述</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E6%89%80%E6%9C%89%E6%9D%83">所有权</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E8%B5%84%E6%BA%90%E6%89%80%E6%9C%89%E8%80%85">资源所有者</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E8%B5%84%E6%BA%90%E6%89%80%E6%9C%89%E8%80%85%E8%B4%9F%E8%B4%A3%E9%87%8A%E6%94%BE">资源所有者负责释放</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E9%9D%A0gc%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%9C%9F%E5%A4%84%E7%90%86">动态语言靠GC在运行期处理</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E5%9C%A8%E7%BC%96%E8%AF%91%E6%9C%9F%E8%A7%84%E5%AE%9A">静态语言在编译期规定</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#rust%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E8%A7%84%E5%88%99">Rust的所有权规则</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E6%8F%A3%E6%91%A9%E6%89%80%E6%9C%89%E6%9D%83%E5%90%AB%E4%B9%89">揣摩所有权含义</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%89%80%E6%9C%89%E6%9D%83%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0">作用域：所有权考虑因素</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%A4%9A%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%83%85%E5%86%B5%E5%88%86%E6%9E%90">多作用域的情况分析</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E6%8E%A8%E6%96%AD%E6%89%80%E6%9C%89%E6%9D%83%E6%97%B6%E7%9A%84%E4%B8%80%E4%B8%AA%E9%87%8D%E8%A6%81%E5%B1%9E%E6%80%A7">作用域是推断所有权时的一个重要属性</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%BC%95%E5%85%A5%E7%A7%BB%E5%8A%A8%E5%92%8C%E5%A4%8D%E5%88%B6%E8%AF%AD%E4%B9%89">引入移动和复制语义</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E8%AF%AD%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D">语义是什么意思</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E5%8F%98%E9%87%8F%E8%AE%BF%E9%97%AE%E6%88%96%E9%87%8D%E6%96%B0%E5%88%86%E9%85%8D%E6%97%B6%E9%BB%98%E8%AE%A4">移动语义：变量访问或重新分配时默认</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%A4%8D%E5%88%B6%E8%AF%AD%E4%B9%89">复制语义</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BD%BF%E7%94%A8copy%E7%89%B9%E5%BE%81%E6%9B%B4%E6%94%B9%E8%AF%AD%E4%B9%89">使用Copy特征更改语义</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#copy-%E7%89%B9%E5%BE%81%E4%BE%9D%E8%B5%96%E4%BA%8Eclone-%E7%89%B9%E5%BE%81">Copy 特征依赖于Clone 特征</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%8C%BA%E5%88%AB%E4%B8%80%E4%B8%8Bcopy%E4%B8%8Eclone-trait">区别一下Copy与Clone trait</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#copy">Copy</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#clone">Clone</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#copy%E4%B8%8Eclone%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%88%99">Copy与Clone的使用原则</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BD%95%E6%97%B6%E5%9C%A8%E7%B1%BB%E5%9E%8B%E4%B8%8A%E5%AE%9E%E7%8E%B0-copy">何时在类型上实现 Copy</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BD%95%E6%97%B6%E5%9C%A8%E7%B1%BB%E5%9E%8B%E4%B8%8A%E5%AE%9E%E7%8E%B0-clone">何时在类型上实现 Clone。</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E6%89%80%E6%9C%89%E6%9D%83%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">所有权使用场景</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#let%E7%BB%91%E5%AE%9A%E7%A4%BA%E4%BE%8B">let绑定示例</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%B0%86%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E7%BB%99%E5%87%BD%E6%95%B0">将参数传递给函数</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#match%E8%A1%A8%E8%BE%BE%E5%BC%8F">match表达式</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#impl%E4%BB%A3%E7%A0%81%E5%9D%97">impl代码块</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E9%97%AD%E5%8C%85">闭包</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%80%9F%E7%94%A8-%E9%80%9A%E8%BF%87%E5%BC%95%E7%94%A8%E8%A7%84%E9%81%BF%E6%89%80%E6%9C%89%E6%9D%83%E8%A7%84%E5%88%99%E9%99%90%E5%88%B6">借用: 通过引用规避所有权规则限制</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E5%80%9F%E7%94%A8%E5%BC%95%E7%94%A8">为何需要借用/引用</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%80%9F%E7%94%A8-or-%E5%BC%95%E7%94%A8">借用 or 引用？</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%B8%A4%E7%A7%8D%E5%80%9F%E7%94%A8%E6%96%B9%E5%BC%8F">两种借用方式</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%80%9F%E7%94%A8">不可变借用：&amp;</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%8F%AF%E5%8F%98%E5%80%9F%E7%94%A8mut">可变借用：&amp;mut</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%80%9F%E7%94%A8%E8%A7%84%E5%88%99">借用规则</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%A6%82%E6%9E%9C%E8%BF%9D%E5%8F%8D%E5%80%9F%E7%94%A8%E8%A7%84%E5%88%99">如果违反借用规则</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E5%80%9F%E7%94%A8">函数中的借用</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%8C%B9%E9%85%8D%E4%B8%AD%E7%9A%84%E5%80%9F%E7%94%A8">匹配中的借用</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BB%8E%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%BC%95%E7%94%A8">从函数返回引用：</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%9F%BA%E4%BA%8E%E5%80%9F%E7%94%A8%E8%A7%84%E5%88%99%E7%9A%84%E6%96%B9%E6%B3%95%E7%B1%BB%E5%9E%8B">基于借用规则的方法类型</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%88%E5%AF%B9%E5%BC%95%E7%94%A8%E9%99%84%E5%8A%A0%E7%9A%84%E4%BF%A1%E6%81%AF">生命周期：针对引用附加的信息</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E4%BB%8E%E5%8F%98%E9%87%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%BC%80%E5%A7%8B">从变量生命周期开始</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%99%90%E5%AE%9A">生命周期限定</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%B3%A8%E8%A7%A3">生命周期注解</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9C%81%E7%95%A5lifetime-elision">生命周期省略(Lifetime Elision)</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E9%94%80%E6%AF%81destructors">销毁(Destructors)</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:52 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:20 CST 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -2078,8 +2303,38 @@ fn main() {
 <li><a href="marginnote3app://note/72B2EE33-36EE-4FE6-A088-FEBE54D61E8D">&lt;精通rust(第二版)&gt;-5.7 内存安全三原则</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%B5%B7%E6%BA%90">类型系统起源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%9C%A8%E8%AF%AD%E8%A8%80%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%9E%8B">我们为什么需要在语言中使用类型?</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#1-%E4%BB%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%88%B0%E6%B1%87%E7%BC%96">1. 从二进制数据格式到汇编</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#2-%E4%BB%8E%E6%B1%87%E7%BC%96%E5%88%B0%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%BA%94%E8%BF%90%E8%80%8C%E7%94%9F">2. 从汇编到编程语言，类型系统应运而生</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#3-%E5%86%8D%E6%9D%A5%E8%AE%A4%E7%9C%9F%E7%9C%8B%E7%9C%8B%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F">3. 再来认真看看类型系统</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#4-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%80%E7%BB%84%E8%A7%84%E5%88%99">4. 类型系统其实是一组规则</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#5-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E6%98%AF%E5%AF%B9%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%AE%89%E5%85%A8%E7%9A%84%E6%8A%BD%E8%B1%A1">5. 类型系统是对内存管理/安全的抽象</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%A4%A7%E5%B0%8F">动态类型大小</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E7%B1%BB%E5%9E%8B%E5%B8%83%E5%B1%80">类型布局</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E5%86%85%E9%83%A8%E5%8F%AF%E5%8F%98%E6%80%A7">内部可变性</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E5%AD%90%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8D%8F%E5%8F%98">子类型与协变</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E5%BC%BA%E5%88%B6%E8%BD%AC%E6%8D%A2type-coercions">强制转换(type coercions)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/type_system.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:56 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:26 CST 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -2124,8 +2379,27 @@ fn main() {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基础内置类型"><a class="header" href="#基础内置类型">基础内置类型</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E5%9F%BA%E7%A1%80%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B">基础内置类型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E5%9F%BA%E5%85%83%E7%B1%BB%E5%9E%8B">基元类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B">序列类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B">自定义类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B">函数类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B">指针类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E7%89%B9%E5%BE%81%E7%B1%BB%E5%9E%8B">特征类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/built_in_types.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:54 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:22 CST 2022 -->
 <!--te-->
 <h2 id="基元类型"><a class="header" href="#基元类型">基元类型</a></h2>
 <h2 id="序列类型"><a class="header" href="#序列类型">序列类型</a></h2>
@@ -2143,8 +2417,21 @@ fn main() {
 <h3 id="local-5"><a class="header" href="#local-5">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="集合类型"><a class="header" href="#集合类型">集合类型</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/collections.html#%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B">集合类型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/collections.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/collections.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/collections.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/collections.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:55 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:24 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-4"><a class="header" href="#参考资源-4">参考资源</a></h2>
 <h3 id="online-book-6"><a class="header" href="#online-book-6">online-book</a></h3>
@@ -2155,8 +2442,21 @@ fn main() {
 <h3 id="local-6"><a class="header" href="#local-6">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="自定义类型-1"><a class="header" href="#自定义类型-1">自定义类型</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/user_defined_types.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B">自定义类型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/user_defined_types.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/user_defined_types.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/user_defined_types.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/user_defined_types.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:57 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:27 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-5"><a class="header" href="#参考资源-5">参考资源</a></h2>
 <h3 id="online-book-7"><a class="header" href="#online-book-7">online-book</a></h3>
@@ -2168,8 +2468,135 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型特征及特征对象"><a class="header" href="#泛型特征及特征对象">泛型、特征及特征对象</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/rust-traits-deep-dive.png" alt="rust-traits-deep-dive" /></p>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81%E5%8F%8A%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1">泛型、特征及特征对象</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B">泛型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E5%87%BA%E5%8F%91">从代码复用出发</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E4%B8%8D%E8%B6%B3">函数作用不足</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80%E8%BF%98%E9%9C%80%E8%A6%81%E6%B3%9B%E5%9E%8B%E6%9D%A5%E5%A4%8D%E7%94%A8%E4%BB%A3%E7%A0%81">静态类型语言还需要泛型来复用代码</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E4%B8%80%E7%A7%8D%E5%8D%95%E6%80%81%E5%8C%96">泛型本质上是一种单态化</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">泛型使用方式</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0">泛型函数</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%BB%93%E6%9E%84%E4%BD%93">泛型结构体</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%9E%9A%E4%B8%BE%E4%BD%93">泛型枚举体</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">泛型特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95">泛型方法</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#impl-%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0%E5%9D%97">impl: 泛型实现块</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%AE%9E%E7%8E%B0">泛型实现</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%B8%93%E9%97%A8%E5%8C%96%E6%B3%9B%E5%9E%8B">专门化泛型</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%8C%87%E5%AE%9A%E7%B1%BB%E5%9E%8B%E8%BF%9B%E8%A1%8C%E5%AE%9E%E4%BE%8B%E5%8C%96">指定类型进行实例化</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%9F%BA%E4%BA%8E%E7%B1%BB%E5%9E%8B%E5%AE%9E%E4%BE%8B%E5%8C%96%E6%8E%A8%E6%96%AD">基于类型实例化推断</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%9F%90%E4%BA%9B%E6%96%B9%E6%B3%95">泛型函数调用某些方法</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#turbofish-">turbofish: ::&lt;&gt;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81">特征</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%BB%8E%E5%A4%9A%E6%80%81%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E7%9A%84%E8%A7%92%E5%BA%A6%E6%9D%A5%E7%9C%8B-%E6%8E%A5%E5%8F%A3%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B%E8%BF%98%E6%98%AF%E7%89%B9%E5%BE%81">从多态和代码复用的角度来看: 接口、鸭子类型还是特征？</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%8E%A5%E5%8F%A3">接口</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B">鸭子类型</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81-1">特征</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88">特征到底是什么？</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E7%9A%84%E5%A4%9A%E7%A7%8D%E8%A1%A8%E7%8E%B0%E5%BD%A2%E5%BC%8F">特征的多种表现形式</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%A0%87%E8%AE%B0%E7%89%B9%E5%BE%81">标记(特征)</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%AE%80%E5%8D%95%E7%89%B9%E5%BE%81">简单(特征)</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81-1">泛型(特征)</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%85%B3%E8%81%94%E7%B1%BB%E5%9E%8B%E7%89%B9%E5%BE%81">关联类型(特征)</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%BB%A7%E6%89%BF%E7%89%B9%E5%BE%81">继承(特征)</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E7%89%B9%E5%BE%81">一些常用内置特征</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E8%87%AA%E5%8A%A8%E7%89%B9%E5%BE%81auto-traits">自动特征(Auto Traits)</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#send--sync">Send &amp; Sync</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#unpin-unwindsafe--refunwindsafe">Unpin、 UnwindSafe &amp; RefUnwindSafe</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#debug">Debug</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#partialeq-%E5%92%8C-eq">PartialEq 和 Eq</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#copy%E5%92%8Cclone">Copy和Clone</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#display">Display</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#add">Add</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#into-%E5%92%8C-from">Into 和 From</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#drop">Drop</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#deref--derefmut">Deref &amp; DerefMut</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#sizedspecial-types-and-traits---the-rust-reference">Sized<a href="https://doc.rust-lang.org/stable/reference/special-types-and-traits.html" rel="nofollow">Special types and traits - The Rust Reference</a>
+</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E4%BE%8B%E5%AD%90">一个完整例子</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E6%B3%9B%E5%9E%8B%E7%89%B9%E5%BE%81">特征区间：泛型+特征</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%BC%95%E5%87%BA%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4">引出特征区间</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%BB%A3%E7%A0%81%E5%8D%95%E4%BD%93%E5%8C%96">代码单体化</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%8C%87%E5%AE%9A%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%96%B9%E6%B3%95">指定特征区间的四个方法</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%8C%BA%E9%97%B4%E5%86%85%E6%B3%9B%E5%9E%8B-fn-fn_namet-target_traitval-t">区间内泛型: fn fn_name&lt;T: target_trait&gt;(val: T)</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#where%E8%AF%AD%E5%8F%A5-%E5%BD%93%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%E7%AD%BE%E5%90%8D%E8%BF%87%E9%95%BF%E6%97%B6%E4%BD%BF%E7%94%A8">where语句: 当第一种方法签名过长时使用</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%BD%BF%E7%94%A8%E7%BB%84%E5%90%88%E5%A4%9A%E4%B8%AA%E7%89%B9%E5%BE%81">使用&quot;+&quot;组合多个特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%BD%BF%E7%94%A8impl%E7%89%B9%E5%BE%81%E8%AF%AD%E6%B3%95-%E9%97%AD%E5%8C%85%E5%B8%B8%E7%94%A8">使用impl特征语法: 闭包常用</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">特征区间的使用场景</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%9C%A8%E7%B1%BB%E5%9E%8B%E4%B8%8A%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%BB%BA%E8%AE%AE">在类型上使用：不建议</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0impl%E4%BB%A3%E7%A0%81%E5%9D%97">泛型函数+impl代码块</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1-%E5%A4%9A%E6%80%81%E7%89%B9%E5%BE%81%E7%B1%BB%E5%9E%8B">特征对象: 多态特征类型</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%88%86%E5%8F%91dispatch">分发(dispatch)</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%88%86%E5%8F%91%E6%96%B9%E5%BC%8F%E9%9D%99%E6%80%81-or-%E5%8A%A8%E6%80%81">分发方式：静态 or 动态</a></li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%8C%BA%E5%88%AB%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E4%B8%8E%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1">区别特征区间与特征对象</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1%E5%85%B7%E4%BD%93%E8%AF%B4%E8%AF%B4">特征对象具体说说</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%8C%87%E5%AE%9A%E4%B8%BA%E5%AE%9E%E7%8E%B0%E6%9F%90%E4%B8%AA%E7%89%B9%E5%BE%81">指定为实现某个特征</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E7%94%A8%E8%83%96%E6%8C%87%E9%92%88%E5%AE%9E%E7%8E%B0">用胖指针实现</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%98%AFrust%E6%89%A7%E8%A1%8C%E5%8A%A8%E6%80%81%E5%88%86%E5%8F%91%E7%9A%84%E6%96%B9%E5%BC%8F">是Rust执行动态分发的方式</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E4%B8%8D%E5%AE%9A%E9%95%BF%E7%B1%BB%E5%9E%8B%E5%8F%AA%E8%83%BD%E4%BD%9C%E4%B8%BA%E5%BC%95%E7%94%A8%E5%88%9B%E5%BB%BA">不定长类型只能作为引用创建</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E6%80%BB%E7%BB%93%E7%89%B9%E5%BE%81%E7%89%B9%E5%BE%81%E5%8C%BA%E9%97%B4%E5%92%8C%E7%89%B9%E5%BE%81%E5%AF%B9%E8%B1%A1">总结特征、特征区间和特征对象</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/2_type_system/generics_traits_objects.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:55 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:25 CST 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -2923,8 +3350,22 @@ fn main() {
 <li><a href="marginnote3app://note/6D348DE0-2C5C-42E6-A404-4CF0CA1C5678">《代码之髓》- 第五章：函数</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/language_grammar.html#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%AF%AD%E6%B3%95%E6%A6%82%E8%BF%B0">编程语言语法概述</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/language_grammar.html#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/language_grammar.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/language_grammar.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/language_grammar.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/language_grammar.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:32 CST 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -2944,8 +3385,23 @@ fn main() {
 <h3 id="local-9"><a class="header" href="#local-9">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="注释与文档rustdoc"><a class="header" href="#注释与文档rustdoc">注释与文档(rustdoc)</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#%E6%B3%A8%E9%87%8A%E4%B8%8E%E6%96%87%E6%A1%A3rustdoc">注释与文档(rustdoc)</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#%E6%B3%A8%E9%87%8A%E6%96%B9%E6%B3%95">注释方法</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#rustdoc%E4%BD%BF%E7%94%A8">rustdoc使用</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:58 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:28 CST 2022 -->
 <!--te-->
 <h2 id="注释方法"><a class="header" href="#注释方法">注释方法</a></h2>
 <h2 id="rustdoc使用"><a class="header" href="#rustdoc使用">rustdoc使用</a></h2>
@@ -3017,8 +3473,21 @@ fn main() {
 <h3 id="local-11"><a class="header" href="#local-11">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="绑定赋值与匹配模式"><a class="header" href="#绑定赋值与匹配模式">绑定、赋值与匹配模式</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html#%E7%BB%91%E5%AE%9A%E8%B5%8B%E5%80%BC%E4%B8%8E%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F">绑定、赋值与匹配模式</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:58 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:28 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-10"><a class="header" href="#参考资源-10">参考资源</a></h2>
 <h3 id="online-book-12"><a class="header" href="#online-book-12">online-book</a></h3>
@@ -3036,8 +3505,21 @@ fn main() {
 <h3 id="local-13"><a class="header" href="#local-13">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="语句与表达式"><a class="header" href="#语句与表达式">语句与表达式</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/statements_expressions.html#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F">语句与表达式</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/statements_expressions.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/statements_expressions.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/statements_expressions.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/statements_expressions.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:04 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:33 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-12"><a class="header" href="#参考资源-12">参考资源</a></h2>
 <h3 id="online-book-14"><a class="header" href="#online-book-14">online-book</a></h3>
@@ -3049,8 +3531,21 @@ fn main() {
 <h3 id="local-14"><a class="header" href="#local-14">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="代码质量异常测试与日志"><a class="header" href="#代码质量异常测试与日志">代码质量：异常、测试与日志</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%BC%82%E5%B8%B8%E6%B5%8B%E8%AF%95%E4%B8%8E%E6%97%A5%E5%BF%97">代码质量：异常、测试与日志</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#online-book">online-book</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#fragment">fragment</a></li>
+<li><a href="layer1_underlying_abstract/3_language_grammar/code_quality.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:29:59 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:29 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-13"><a class="header" href="#参考资源-13">参考资源</a></h2>
 <h3 id="online-book-15"><a class="header" href="#online-book-15">online-book</a></h3>
@@ -3061,8 +3556,21 @@ fn main() {
 <h3 id="local-15"><a class="header" href="#local-15">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="设计抽象"><a class="header" href="#设计抽象">设计抽象</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/layer2_design_abstract.html#%E8%AE%BE%E8%AE%A1%E6%8A%BD%E8%B1%A1">设计抽象</a>
+<ul>
+<li><a href="layer2_design_abstract/layer2_design_abstract.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/layer2_design_abstract.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/layer2_design_abstract.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/layer2_design_abstract.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:16 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:44 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-14"><a class="header" href="#参考资源-14">参考资源</a></h2>
 <h3 id="online-book-16"><a class="header" href="#online-book-16">online-book</a></h3>
@@ -3070,8 +3578,21 @@ fn main() {
 <h3 id="local-16"><a class="header" href="#local-16">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="编程范式"><a class="header" href="#编程范式">编程范式</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html#%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F">编程范式</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:35 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-15"><a class="header" href="#参考资源-15">参考资源</a></h2>
 <h3 id="online-book-17"><a class="header" href="#online-book-17">online-book</a></h3>
@@ -3079,8 +3600,21 @@ fn main() {
 <h3 id="local-17"><a class="header" href="#local-17">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="函数式编程"><a class="header" href="#函数式编程">函数式编程</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/fp.html#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">函数式编程</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/fp.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/fp.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/fp.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/fp.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:35 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-16"><a class="header" href="#参考资源-16">参考资源</a></h2>
 <h3 id="online-book-18"><a class="header" href="#online-book-18">online-book</a></h3>
@@ -3092,8 +3626,21 @@ fn main() {
 <h3 id="local-18"><a class="header" href="#local-18">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="面向对象编程"><a class="header" href="#面向对象编程">面向对象编程</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/oop.html#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B">面向对象编程</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/oop.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/oop.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/oop.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/oop.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:10 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:37 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-17"><a class="header" href="#参考资源-17">参考资源</a></h2>
 <h3 id="online-book-19"><a class="header" href="#online-book-19">online-book</a></h3>
@@ -3104,8 +3651,21 @@ fn main() {
 <h3 id="local-19"><a class="header" href="#local-19">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="泛型编程"><a class="header" href="#泛型编程">泛型编程</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/gp.html#%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B">泛型编程</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/gp.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/4_programming_paradigm/gp.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/gp.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/4_programming_paradigm/gp.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:08 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:36 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-18"><a class="header" href="#参考资源-18">参考资源</a></h2>
 <h3 id="online-book-20"><a class="header" href="#online-book-20">online-book</a></h3>
@@ -3113,8 +3673,21 @@ fn main() {
 <h3 id="local-20"><a class="header" href="#local-20">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="设计模式"><a class="header" href="#设计模式">设计模式</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/5_design_pattern/5_design_pattern.html#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a>
+<ul>
+<li><a href="layer2_design_abstract/5_design_pattern/5_design_pattern.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/5_design_pattern/5_design_pattern.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/5_design_pattern/5_design_pattern.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/5_design_pattern/5_design_pattern.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:38 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-19"><a class="header" href="#参考资源-19">参考资源</a></h2>
 <h3 id="online-book-21"><a class="header" href="#online-book-21">online-book</a></h3>
@@ -3122,8 +3695,21 @@ fn main() {
 <h3 id="local-21"><a class="header" href="#local-21">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="项目模块管理及扩展"><a class="header" href="#项目模块管理及扩展">项目模块管理及扩展</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/6_module_manage.html#%E9%A1%B9%E7%9B%AE%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86%E5%8F%8A%E6%89%A9%E5%B1%95">项目模块管理及扩展</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/6_module_manage.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/6_module_manage.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/6_module_manage.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/6_module_manage.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:39 CST 2022 -->
 <!--te-->
 <p>对于一门编程语言，是否能够成为工程化开发工具的主要标准在于两点：</p>
 <ol>
@@ -3137,8 +3723,51 @@ fn main() {
 <h3 id="local-22"><a class="header" href="#local-22">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="模块系统相关workspacepackagecratemodule"><a class="header" href="#模块系统相关workspacepackagecratemodule">模块系统相关：Workspace、Package、Crate、Module</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3workspacepackagecratemodule">模块系统相关：Workspace、Package、Crate、Module</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%8E%98%E6%B8%85workspacepackagecrate%E5%92%8Cmodule%E7%9A%84%E5%85%B3%E7%B3%BB">厘清Workspace、Package、crate和module的关系</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#package-%E5%8C%85%E5%90%ABcargotoml">Package: 包含Cargo.toml</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#workspace%E4%B8%8Epackage">workspace与package</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%85%B7%E4%BD%93%E5%AF%B9%E6%AF%94package%E5%92%8Ccrate">具体对比package和crate</a>
+<ul>
+<li>[在Cargo.toml的[bin]/[lib]中指明](#在cargotoml的binlib中指明)</li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%86%8D%E6%9D%A5%E5%AF%B9%E6%AF%94workspacepackage%E5%92%8Ccrate">再来对比workspace、package和crate</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#module">module</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E6%95%B4%E7%90%86%E8%AF%B4%E4%B8%80%E4%B8%8Brust%E7%9A%84%E6%A8%A1%E5%9D%97%E7%B3%BB%E7%BB%9F">整理说一下rust的模块系统</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E8%81%94%E6%83%B3%E5%AF%B9%E6%AF%94">联想对比</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#module-tree">module tree</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E6%A8%A1%E5%9D%97%E5%91%88%E7%8E%B0%E6%96%B9%E5%BC%8F">模块呈现方式</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%B5%8C%E5%A5%97%E6%A8%A1%E5%9D%97">嵌套模块</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97">文件模块</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E7%9B%AE%E5%BD%95%E6%A8%A1%E5%9D%97">目录模块</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E9%9A%90%E7%A7%81%E4%B8%8E%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA">隐私与导入导出</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E9%9A%90%E7%A7%81%E7%AE%A1%E7%90%86">隐私管理</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%B5%8C%E5%A5%97%E5%AF%BC%E5%85%A5">嵌套导入</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%86%8D%E6%AC%A1%E5%AF%BC%E5%87%BA">再次导出</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/module_system.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:48:27 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:43 CST 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -3480,8 +4109,90 @@ A package is an artifact managed by Cargo, the Rust package manager.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo与crate生命周期"><a class="header" href="#cargo与crate生命周期">Cargo与crate生命周期</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/cargo_ship.jpeg" alt="cargo_ship" /></p>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo%E4%B8%8Ecrate%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">Cargo与crate生命周期</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo--%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%90%86%E8%A7%A3cargo%E6%8C%87%E4%BB%A4%E7%B3%BB%E5%88%97">cargo : 用生命周期理解Cargo指令系列</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E6%96%B0%E5%BB%BA">新建</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-new">cargo new</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-init">cargo init</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E5%BC%80%E5%8F%91">开发</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-clean">cargo clean</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-doc">cargo doc</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86">依赖管理</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-check">cargo check</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-fix">cargo fix</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-fetch">cargo fetch</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-searchinstalluninstall">cargo search/install/uninstall</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-report">cargo report</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-generate-lockfile">cargo generate-lockfile</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-locate-project">cargo locate-project</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-metadata">cargo metadata</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-pkgid">cargo pkgid</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-tree">cargo tree</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-update">cargo update</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-vendor">cargo vendor</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-verify-project">cargo verify-project</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E6%B5%8B%E8%AF%95">测试</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-test">cargo test</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-bench">cargo bench</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E8%BF%90%E8%A1%8C">运行</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-run">cargo run</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E6%9E%84%E5%BB%BA">构建</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-rustc">cargo rustc</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-build">cargo build</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-rustdoc">cargo rustdoc</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E5%8F%91%E5%B8%83">发布</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-login">cargo login</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-owner">cargo owner</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-package">cargo package</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-publish">cargo publish</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargo-yank">cargo yank</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E7%BB%B4%E6%8A%A4">维护</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E5%88%86%E5%8C%BA">分区</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#cargotoml%E7%BB%86%E8%AF%B4">Cargo.toml细说</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#rust%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93">Rust程序运行方式总结</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E8%84%9A%E6%9C%AC">脚本</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E9%A1%B9%E7%9B%AE">项目</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:12 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:39 CST 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
 <h3 id="新建"><a class="header" href="#新建">新建</a></h3>
@@ -3544,8 +4255,65 @@ A package is an artifact managed by Cargo, the Rust package manager.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cargo与rustc"><a class="header" href="#cargo与rustc">cargo与rustc</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo%E4%B8%8Erustc">cargo与rustc</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#rustc">rustc</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#rustc%E6%98%AF%E4%BB%80%E4%B9%88">rustc是什么</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8">基础使用</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#rustc%E4%B8%8Ecargo%E7%9A%84%E5%85%B3%E7%B3%BB">rustc与cargo的关系</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-style">cargo style</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-essential-structure">cargo essential structure</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-%E6%89%A9%E5%B1%95">.cargo 扩展</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#tree-overview">tree overview</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#bin">bin</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#env">env</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#git">git</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#registry">registry</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-%E4%B8%8E-git-%E7%9A%84%E5%85%B3%E8%81%94">Cargo 与 git 的关联！</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo-tree">cargo tree</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#git-1">git</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%85%B3%E4%BA%8E%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98">关于依赖冲突问题</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">Cargo相关问题解决</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81failed-to-select-a-version-for-the-requirement">版本冲突：failed to select a version for the requirement</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargo%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">Cargo项目结构</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%9F%BA%E7%A1%80%E8%AF%B4%E6%98%8E">基础说明</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#cargotoml%E5%92%8Ccargolock">cargo.toml和cargo.lock</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E6%9E%84%E5%BB%BA%E6%B8%85%E7%90%86%E6%9B%B4%E6%96%B0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85">构建、清理、更新以及安装</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#mainrs-%E5%92%8C-librs">main.rs 和 lib.rs</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8substrate%E7%9A%84substrate-node-template">实际应用：Substrate的substrate-node-template</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%8C%BA%E5%88%ABcargo-run%E4%B8%8Ecargo-build">区别cargo run与cargo build</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%9C%A8node%E5%8C%85%E9%87%8C%E9%9D%A2%E5%AD%98%E5%9C%A8mainrs">在node包里面存在main.rs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/cargo_rustc.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:41 CST 2022 -->
 <!--te-->
 <h2 id="rustc"><a class="header" href="#rustc">rustc</a></h2>
 <h3 id="rustc是什么"><a class="header" href="#rustc是什么">rustc是什么</a></h3>
@@ -4117,8 +4885,36 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 <h3 id="local-25"><a class="header" href="#local-25">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rust扩展工具介绍"><a class="header" href="#rust扩展工具介绍">Rust扩展工具介绍</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#rust%E6%89%A9%E5%B1%95%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D">Rust扩展工具介绍</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#cargo%E5%AD%90%E5%91%BD%E4%BB%A4%E7%B3%BB%E5%88%97-cargo-install-">Cargo子命令系列: cargo install </a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#cargo-watch">cargo-watch</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#cargo-edit">cargo-edit</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#cargo-deb">cargo-deb</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#cargo-outdated">cargo-outdated</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#rustup%E7%B3%BB%E5%88%97-rust-component-add-tool_name">rustup系列: rust component add &lt;tool_name&gt;</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#clippy">clippy</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#rustc">rustc</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#rustfmt">rustfmt</a></li>
+</ul>
+</li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#online-book">online-book</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#fragment">fragment</a></li>
+<li><a href="layer2_design_abstract/6_module_manage/rust_plugins.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:16 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:43 CST 2022 -->
 <!--te-->
 <h2 id="cargo子命令系列-cargo-install"><a class="header" href="#cargo子命令系列-cargo-install">Cargo子命令系列: cargo install <binary crate name></a></h2>
 <h3 id="cargo-watch"><a class="header" href="#cargo-watch">cargo-watch</a></h3>
@@ -4145,8 +4941,21 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="任务抽象"><a class="header" href="#任务抽象">任务抽象</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer3_task_abstract/layer3_task_abstract.html#%E4%BB%BB%E5%8A%A1%E6%8A%BD%E8%B1%A1">任务抽象</a>
+<ul>
+<li><a href="layer3_task_abstract/layer3_task_abstract.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer3_task_abstract/layer3_task_abstract.html#online-book">online-book</a></li>
+<li><a href="layer3_task_abstract/layer3_task_abstract.html#fragment">fragment</a></li>
+<li><a href="layer3_task_abstract/layer3_task_abstract.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:23 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:49 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-25"><a class="header" href="#参考资源-25">参考资源</a></h2>
 <h3 id="online-book-27"><a class="header" href="#online-book-27">online-book</a></h3>
@@ -4154,8 +4963,21 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 <h3 id="local-27"><a class="header" href="#local-27">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="并发"><a class="header" href="#并发">并发</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/7_concurrency.html#%E5%B9%B6%E5%8F%91">并发</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/7_concurrency.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/7_concurrency.html#online-book">online-book</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/7_concurrency.html#fragment">fragment</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/7_concurrency.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:18 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:46 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-26"><a class="header" href="#参考资源-26">参考资源</a></h2>
 <h3 id="online-book-28"><a class="header" href="#online-book-28">online-book</a></h3>
@@ -4163,8 +4985,51 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 <h3 id="local-28"><a class="header" href="#local-28">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="从io模型开始"><a class="header" href="#从io模型开始">从IO模型开始</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E4%BB%8Eio%E6%A8%A1%E5%9E%8B%E5%BC%80%E5%A7%8B">从IO模型开始</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#1-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A6%82%E5%BF%B5%E5%8C%BA%E5%88%AB">1. 同步/异步、阻塞/非阻塞概念区别</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E5%85%B3%E6%B3%A8%E7%9A%84%E6%98%AF%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%B0%83%E7%94%A8%E8%80%85%E8%A7%86%E8%A7%92">同步和异步，关注的是消息通信机制。（调用者视角）</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%85%B3%E6%B3%A8%E7%9A%84%E6%98%AF%E7%A8%8B%E5%BA%8F%E7%AD%89%E5%BE%85%E8%B0%83%E7%94%A8%E7%BB%93%E6%9E%9C%E7%9A%84%E7%8A%B6%E6%80%81%E8%A2%AB%E8%B0%83%E7%94%A8%E8%80%85%E8%A7%86%E8%A7%92">阻塞和非阻塞，关注的是程序等待调用结果的状态。（被调用者视角）</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E9%98%BB%E5%A1%9E%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E6%9C%89%E5%85%B3">阻塞，与系统调用有关。</a></li>
+</ul>
+</li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#2-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5io-%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB">2. 同步/异步IO 模型分类</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#3-%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9Eio-blocking-io">3. 同步阻塞I/O (blocking I/O)</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#4-io-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8io-multiplexing-">4. I/O 多路复用（I/O Multiplexing )</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#5-epoll-%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A8%A1%E5%9E%8B">5. epoll: 同步阻塞/非阻塞模型</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#epoll%E4%B8%89%E4%B8%AA%E5%87%BD%E6%95%B0">epoll三个函数</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#epoll-%E4%B8%A4%E7%A7%8D%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6">epoll 两种触发机制：</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E6%83%8A%E7%BE%A4%E9%97%AE%E9%A2%98">惊群问题：</a></li>
+</ul>
+</li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#6-%E5%BC%82%E6%AD%A5-io-%E6%A8%A1%E5%9E%8B-io_uring">6. 异步 I/O 模型: io_uring</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#1-reactor%E5%8F%8D%E5%BA%94%E5%99%A8-%E6%A8%A1%E5%BC%8F">1. Reactor（反应器） 模式</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#2-preactor%E4%B8%BB%E5%8A%A8%E5%99%A8-%E6%A8%A1%E5%BC%8F">2. Preactor（主动器） 模式</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#reactor-model">Reactor Model:</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">三种实现方式：</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B">读写操作流程：</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E5%8F%82%E4%B8%8E%E8%80%85">参与者：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#online-book">online-book</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#fragment">fragment</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/io_models.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:47 CST 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -4368,8 +5233,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-29"><a class="header" href="#local-29">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="多线程并发模型"><a class="header" href="#多线程并发模型">多线程并发模型</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B">多线程并发模型</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html#online-book">online-book</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html#fragment">fragment</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:17 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:45 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-28"><a class="header" href="#参考资源-28">参考资源</a></h2>
 <h3 id="online-book-30"><a class="header" href="#online-book-30">online-book</a></h3>
@@ -4381,8 +5259,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-30"><a class="header" href="#local-30">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="异步模型"><a class="header" href="#异步模型">异步模型</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/2_async_models/async_models.html#%E5%BC%82%E6%AD%A5%E6%A8%A1%E5%9E%8B">异步模型</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/2_async_models/async_models.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer3_task_abstract/7_concurrency/2_async_models/async_models.html#online-book">online-book</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/2_async_models/async_models.html#fragment">fragment</a></li>
+<li><a href="layer3_task_abstract/7_concurrency/2_async_models/async_models.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:18 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:45 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-29"><a class="header" href="#参考资源-29">参考资源</a></h2>
 <h3 id="online-book-31"><a class="header" href="#online-book-31">online-book</a></h3>
@@ -4390,8 +5281,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-31"><a class="header" href="#local-31">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="元编程"><a class="header" href="#元编程">元编程</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer3_task_abstract/8_meta_programming/8_meta_programming.html#%E5%85%83%E7%BC%96%E7%A8%8B">元编程</a>
+<ul>
+<li><a href="layer3_task_abstract/8_meta_programming/8_meta_programming.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer3_task_abstract/8_meta_programming/8_meta_programming.html#online-book">online-book</a></li>
+<li><a href="layer3_task_abstract/8_meta_programming/8_meta_programming.html#fragment">fragment</a></li>
+<li><a href="layer3_task_abstract/8_meta_programming/8_meta_programming.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:20 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:47 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-30"><a class="header" href="#参考资源-30">参考资源</a></h2>
 <h3 id="online-book-32"><a class="header" href="#online-book-32">online-book</a></h3>
@@ -4399,8 +5303,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-32"><a class="header" href="#local-32">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="协议抽象"><a class="header" href="#协议抽象">协议抽象</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer4_protocol_abstract/layer4_protocol_abstract.html#%E5%8D%8F%E8%AE%AE%E6%8A%BD%E8%B1%A1">协议抽象</a>
+<ul>
+<li><a href="layer4_protocol_abstract/layer4_protocol_abstract.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer4_protocol_abstract/layer4_protocol_abstract.html#online-book">online-book</a></li>
+<li><a href="layer4_protocol_abstract/layer4_protocol_abstract.html#fragment">fragment</a></li>
+<li><a href="layer4_protocol_abstract/layer4_protocol_abstract.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:27 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:52 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-31"><a class="header" href="#参考资源-31">参考资源</a></h2>
 <h3 id="online-book-33"><a class="header" href="#online-book-33">online-book</a></h3>
@@ -4408,8 +5325,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-33"><a class="header" href="#local-33">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="多语言编程"><a class="header" href="#多语言编程">多语言编程</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html#%E5%A4%9A%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B">多语言编程</a>
+<ul>
+<li><a href="layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html#online-book">online-book</a></li>
+<li><a href="layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html#fragment">fragment</a></li>
+<li><a href="layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:26 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:51 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-32"><a class="header" href="#参考资源-32">参考资源</a></h2>
 <h3 id="online-book-34"><a class="header" href="#online-book-34">online-book</a></h3>
@@ -4417,8 +5347,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-34"><a class="header" href="#local-34">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="计算机网络"><a class="header" href="#计算机网络">计算机网络</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer4_protocol_abstract/10_computer_network/10_computer_network.html#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C">计算机网络</a>
+<ul>
+<li><a href="layer4_protocol_abstract/10_computer_network/10_computer_network.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer4_protocol_abstract/10_computer_network/10_computer_network.html#online-book">online-book</a></li>
+<li><a href="layer4_protocol_abstract/10_computer_network/10_computer_network.html#fragment">fragment</a></li>
+<li><a href="layer4_protocol_abstract/10_computer_network/10_computer_network.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:24 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:50 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-33"><a class="header" href="#参考资源-33">参考资源</a></h2>
 <h3 id="online-book-35"><a class="header" href="#online-book-35">online-book</a></h3>
@@ -4426,8 +5369,21 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-35"><a class="header" href="#local-35">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="生态系统"><a class="header" href="#生态系统">生态系统</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/layer5_ecosystem.html#%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F">生态系统</a>
+<ul>
+<li><a href="layer5_ecosystem/layer5_ecosystem.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/layer5_ecosystem.html#online-book">online-book</a></li>
+<li><a href="layer5_ecosystem/layer5_ecosystem.html#fragment">fragment</a></li>
+<li><a href="layer5_ecosystem/layer5_ecosystem.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:12 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:29 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-34"><a class="header" href="#参考资源-34">参考资源</a></h2>
 <h3 id="online-book-36"><a class="header" href="#online-book-36">online-book</a></h3>
@@ -4435,8 +5391,11 @@ req          +---------&gt; |            |   |          | req handler    |
 <h3 id="local-36"><a class="header" href="#local-36">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学习资源"><a class="header" href="#学习资源">学习资源</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:35 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:56 CST 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
@@ -4452,8 +5411,69 @@ req          +---------&gt; |            |   |          | req handler    |
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ipfs-星际文件系统interplanetary-file-system"><a class="header" href="#ipfs-星际文件系统interplanetary-file-system">IPFS: 星际文件系统(InterPlanetary File System)</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/ipfs.jpeg" alt="ipfs" /></p>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs-%E6%98%9F%E9%99%85%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Finterplanetary-file-system">IPFS: 星际文件系统(InterPlanetary File System)</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E4%BB%8B%E7%BB%8D">IPFS介绍</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#1-%E4%BB%80%E4%B9%88%E6%98%AFipfs">1 什么是IPFS</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89ipfs">2 为什么有IPFS</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#http%E7%9A%84%E4%B8%AD%E5%BF%83%E5%8C%96%E6%98%AF%E4%BD%8E%E6%95%88%E7%9A%84-%E5%B9%B6%E4%B8%94%E6%88%90%E6%9C%AC%E5%BE%88%E9%AB%98">HTTP的中心化是低效的, 并且成本很高</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#web%E6%96%87%E4%BB%B6%E7%BB%8F%E5%B8%B8%E8%A2%AB%E5%88%A0%E9%99%A4">Web文件经常被删除</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#%E4%B8%AD%E5%BF%83%E5%8C%96%E9%99%90%E5%88%B6%E4%BA%86web%E7%9A%84%E6%88%90%E9%95%BF">中心化限制了web的成长</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#%E4%BA%92%E8%81%94%E7%BD%91%E5%BA%94%E7%94%A8%E9%AB%98%E5%BA%A6%E4%BE%9D%E8%B5%96%E4%B8%BB%E5%B9%B2%E7%BD%91">互联网应用高度依赖主干网</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#3-ipfs%E7%9A%84%E7%9B%AE%E6%A0%87">3 IPFS的目标</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#4-ipfs%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9">4 IPFS包含哪些内容</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8D%8F%E8%AE%AE%E7%B1%BB%E4%BC%BChttp%E5%8D%8F%E8%AE%AE">IPFS是一个协议，类似http协议</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E6%98%AF%E4%B8%80%E4%B8%AAweb%E5%8D%8F%E8%AE%AE">IPFS是一个web协议</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8D%8F%E8%AE%AE">IPFS是模块化的协议</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E6%98%AF%E4%B8%80%E4%B8%AAp2p%E7%B3%BB%E7%BB%9F">IPFS是一个p2p系统</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E5%A4%A9%E7%94%9F%E6%98%AF%E4%B8%80%E4%B8%AAcdn">IPFS天生是一个CDN</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E6%8B%A5%E6%9C%89%E5%91%BD%E5%90%8D%E6%9C%8D%E5%8A%A1">IPFS拥有命名服务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C">IPFS如何工作</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E5%BF%83%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%BA%E7%82%B9">IPFS如何解决中心化服务器缺点</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#1-%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E5%BF%AB-%E4%B8%8D%E5%86%8D%E4%BE%9D%E8%B5%96%E4%B8%BB%E5%B9%B2%E7%BD%91-%E4%B8%AD%E5%BF%83%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8">1 下载速度快, 不再依赖主干网, 中心化服务器</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#2-%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E5%8F%98%E5%BE%97%E9%9D%9E%E5%B8%B8%E4%BE%BF%E5%AE%9C">2 存储空间变得非常便宜</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#3-%E5%AE%89%E5%85%A8">3 安全</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#4-%E5%BC%80%E6%94%BE">4 开放</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E7%9A%84%E7%94%A8%E9%80%94">IPFS的用途</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E7%9A%84pow%E6%9C%BA%E5%88%B6">IPFS的POW机制</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E5%AE%B6%E6%97%8F">IPFS家族</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#main-projects">Main Projects</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#contributions">Contributions</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#movements">Movements</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs-%E4%B8%8E-filecoin">IPFS 与 Filecoin</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E5%8F%91%E5%92%8C%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%B1%BB%E4%BC%BChttp%E5%8D%8F%E8%AE%AE">IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#filecoin-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B1%BB%E4%BC%BC%E4%B8%80%E4%B8%AA%E4%BA%91%E5%AD%98%E5%82%A8">Filecoin: 数据存储（类似一个云存储）</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E5%92%8Cfilecoin%E5%85%B1%E5%90%8C%E4%BE%9D%E8%B5%96libp2p%E9%A1%B9%E7%9B%AE">IPFS和Filecoin共同依赖libp2p项目。</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#%E4%BD%BF%E7%94%A8ipfs%E7%9A%84%E5%BA%94%E7%94%A8">使用IPFS的应用</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C">IPFS网络如何运行</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs-nat-traversal">IPFS: NAT traversal</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#bitswap">BitSwap</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#ipfs%E9%9D%9Erust%E5%AE%9E%E7%8E%B0%E7%89%88%E6%9C%AC">IPFS非rust实现版本</a></li>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:05 CST 2022 -->
 <!--te-->
 <h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
 <h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
@@ -4627,8 +5647,15 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="利用ipfs构建自己的去中心化分布式网站"><a class="header" href="#利用ipfs构建自己的去中心化分布式网站">利用IPFS构建自己的去中心化分布式网站</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html#%E5%88%A9%E7%94%A8ipfs%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%88%86%E5%B8%83%E5%BC%8F%E7%BD%91%E7%AB%99">利用IPFS构建自己的去中心化分布式网站</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:50 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:08 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-36"><a class="header" href="#参考资源-36">参考资源</a></h2>
 <ul>
@@ -4637,8 +5664,15 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ipfspubsub功能使用"><a class="header" href="#ipfspubsub功能使用">IPFS：pubsub功能使用</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_pubsub.html#ipfspubsub%E5%8A%9F%E8%83%BD%E4%BD%BF%E7%94%A8">IPFS：pubsub功能使用</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_pubsub.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:50 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:07 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-37"><a class="header" href="#参考资源-37">参考资源</a></h2>
 <ul>
@@ -4646,8 +5680,15 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ipfs伴侣插件使用"><a class="header" href="#ipfs伴侣插件使用">IPFS伴侣插件使用</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.html#ipfs%E4%BC%B4%E4%BE%A3%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8">IPFS伴侣插件使用</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:48 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:05 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-38"><a class="header" href="#参考资源-38">参考资源</a></h2>
 <ul>
@@ -4655,8 +5696,15 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基于ipfs与ngrok构建网关"><a class="header" href="#基于ipfs与ngrok构建网关">基于IPFS与Ngrok构建网关</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.html#%E5%9F%BA%E4%BA%8Eipfs%E4%B8%8Engrok%E6%9E%84%E5%BB%BA%E7%BD%91%E5%85%B3">基于IPFS与Ngrok构建网关</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:49 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:06 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-39"><a class="header" href="#参考资源-39">参考资源</a></h2>
 <ul>
@@ -4666,8 +5714,19 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 <div style="break-before: page; page-break-before: always;"></div><h1 id="网络开发"><a class="header" href="#网络开发">网络开发</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="基于rust尝试webassembly"><a class="header" href="#基于rust尝试webassembly">基于Rust尝试WebAssembly</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/web/webassembly_try.html#%E5%9F%BA%E4%BA%8Erust%E5%B0%9D%E8%AF%95webassembly">基于Rust尝试WebAssembly</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/web/webassembly_try.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/5_open_source/2_network/web/webassembly_try.html#%E5%85%B3%E4%BA%8E%E5%BA%B7%E5%A8%81%E6%B8%B8%E6%88%8Fconways-game">关于康威游戏(Conway's Game)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:52 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:10 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-40"><a class="header" href="#参考资源-40">参考资源</a></h2>
 <ul>
@@ -4696,8 +5755,46 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 <div style="break-before: page; page-break-before: always;"></div><h1 id="商业观察"><a class="header" href="#商业观察">商业观察</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="区块链"><a class="header" href="#区块链">区块链</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E5%8C%BA%E5%9D%97%E9%93%BE">区块链</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#layers">Layers</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#osi%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B">OSI网络七层模型</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E6%95%B0%E6%8D%AE%E5%B1%82">数据层</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E7%BD%91%E7%BB%9C%E5%B1%82">网络层</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E5%85%B1%E8%AF%86%E5%B1%82">共识层</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6-pow-">工作量证明共识机制（ PoW ）</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E6%BF%80%E5%8A%B1%E5%B1%82">激励层</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E5%90%88%E7%BA%A6%E5%B1%82">合约层</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E5%BA%94%E7%94%A8%E5%B1%82">应用层</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#blockchains">Blockchains</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#blockchain-frameworks">Blockchain Frameworks</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#cross-chain">Cross-Chain</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#virtual-machines">Virtual Machines</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#general-purpose-consensus">General-Purpose Consensus</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#p2p-network-libraries">P2P Network Libraries</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#cryptography">Cryptography</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#layer2">Layer2</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#dapps">Dapps</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#other">Other</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#online-book">online-book</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#fragment">fragment</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/blockchain.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:00 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:17 CST 2022 -->
 <!--te-->
 <h2 id="layers"><a class="header" href="#layers">Layers</a></h2>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png" alt="img" /></p>
@@ -4958,8 +6055,103 @@ Rust and just like develop in a common backend.</li>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="substrate介绍与源码解读-1"><a class="header" href="#substrate介绍与源码解读-1">Substrate介绍与源码解读</a></h1>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/what_is_substrate.png" alt="what_is_substrate" /></p>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E4%BB%8B%E7%BB%8D%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB">Substrate介绍与源码解读</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#gavin-wook%E4%B8%8E%E6%B3%A2%E5%8D%A1%E8%B7%A8%E9%93%BE">Gavin Wook与波卡跨链</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%BB%8E%E6%B3%A2%E5%8D%A1%E5%88%B0substrate">从波卡到Substrate</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E8%B7%A8%E9%93%BE%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7">跨链的重要性</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%80%BB%E4%BD%93%E8%AE%BE%E8%AE%A1">总体设计</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%B8%B8%E8%A7%81%E5%8C%BA%E5%9D%97%E9%93%BE%E8%AE%BE%E8%AE%A1">常见区块链设计</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8C%BA%E5%9D%97%E9%93%BE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86">区块链系统基础部分</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%93%BE%E7%9A%84%E5%8A%9F%E8%83%BD">链的功能</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%90%86%E5%BF%B5">Substrate理念</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%88%E8%AE%A4%E8%AF%86%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BA%E5%9D%97%E9%93%BE%E6%A1%86%E6%9E%B6">先认识一下：什么是区块链框架</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%8E%A5%E7%9D%80%E8%AF%B4%E8%AF%B4substrate%E4%B8%8Eweb3">接着说说Substrate与web3</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8web%E6%A1%86%E6%9E%B6%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%B1%BB%E6%AF%94">用web框架、游戏引擎类比</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-architecture">Substrate Architecture</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8runtime%E9%93%BE%E5%8A%9F%E8%83%BD">开发者只需要关注Runtime(链功能)</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%98%8E%E6%99%B0runtime">明晰Runtime</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86">判断标准</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%9A%84runtime">Substrate的Runtime</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%AD%E5%BF%83%E5%8C%96%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B">中心化升级流程</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%97%A0%E5%A4%AE%E5%8C%96%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B%E5%8E%9F%E5%85%88">无央化升级流程(原先)</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E7%9A%84%E4%B8%8D%E5%90%8C">Substrate的不同</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%90%88%E7%BA%A6%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">以太坊合约更新策略</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate%E5%AF%B9%E5%BA%94%E5%90%88%E7%BA%A6%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">Substrate对应‘合约更新策略’</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9E%B6%E6%9E%84">客户端架构</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%9E%B6%E6%9E%84%E5%9B%BE">架构图</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E">模块说明</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%AD%98%E5%82%A8">存储</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#runtime">Runtime</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#p2p%E7%BD%91%E7%BB%9C">p2p网络</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%B1%E8%AF%86">共识</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#rpc">RPC</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#telemetry-%E9%81%A5%E6%B5%8B">telemetry （遥测）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#tree-level1">Tree Level1</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%94%A8cargo%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81">用Cargo组织代码</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E4%B8%BB%E8%A6%81%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8Dnodeframecore">主要部分介绍：Node、Frame、Core</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-node">Substrate Node:</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E9%87%8D%E7%82%B9%E8%AF%B4%E8%AF%B4nodepallets%E5%92%8Cruntime">重点说说node、pallets和runtime</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-frame">Substrate FRAME</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#substrate-coreclient">Substrate Core(client)</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%85%B6%E4%BB%96">其他</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#primitives">primitives</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#scriptsci">scripts/ci</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#utils">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91">功能逻辑</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E7%89%B9%E8%89%B2%E4%BB%A3%E7%A0%81">特色代码</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#online-book">online-book</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#fragment">fragment</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#runtime-1">Runtime</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:06 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:23 CST 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate-1"><a class="header" href="#gavin-wookpolkadot-and-substrate-1">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链-1"><a class="header" href="#gavin-wook与波卡跨链-1">Gavin Wook与波卡跨链</a></h3>
@@ -5899,8 +7091,54 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <h3 id="local-39"><a class="header" href="#local-39">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="尝试substrate"><a class="header" href="#尝试substrate">尝试Substrate</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E5%B0%9D%E8%AF%95substrate">尝试Substrate</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E5%88%9D%E4%BD%93%E9%AA%8Csubstrate%E9%93%BE">初体验Substrate链</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E8%AE%BE%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">设置开发环境</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%BD%BF%E7%94%A8rustup%E8%AE%BE%E7%BD%AErust%E7%8E%AF%E5%A2%83">使用rustup设置rust环境</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83">检查环境</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E5%90%AF%E5%8A%A8%E9%93%BE%E8%8A%82%E7%82%B9">启动链节点</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%B8%8B%E8%BD%BDnode-template">下载node-template</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#node-templeate%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">node-templeate项目结构</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#cargotoml">Cargo.toml</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E7%BC%96%E8%AF%91%E5%89%8D%E7%9A%84%E6%A3%80%E6%9F%A5">编译前的检查</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E7%BC%96%E8%AF%91">编译</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能遇到的问题</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">本地运行节点</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#docker%E8%BF%90%E8%A1%8C%E8%8A%82%E7%82%B9">docker运行节点</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E5%89%8D%E7%AB%AF%E8%AE%BF%E9%97%AE">前端访问</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%BD%BF%E7%94%A8%E5%89%8D%E7%AB%AF%E6%A8%A1%E7%89%88">使用前端模版</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%BD%BF%E7%94%A8polkadot-js%E8%AE%BF%E9%97%AE%E8%8A%82%E7%82%B9">使用polkadot-js访问节点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#substrate%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">Substrate使用方式</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%BD%BF%E7%94%A8subtrate-node">使用subtrate node</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%BD%BF%E7%94%A8substrate-frame">使用substrate frame</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E4%BD%BF%E7%94%A8substrate-core">使用substrate core</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_try.html#substrate%E6%96%87%E6%A1%A3%E7%BB%83%E4%B9%A0">substrate文档练习</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:08 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:25 CST 2022 -->
 <!--te-->
 <h2 id="初体验substrate链"><a class="header" href="#初体验substrate链">初体验Substrate链</a></h2>
 <p>这里主要使用官方提供的默认模版启动节点。</p>
@@ -6345,8 +7583,55 @@ substrate可以在不分叉的情况下更新runtime，因为运行时的定义�
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="substrate深入尝试pallet"><a class="header" href="#substrate深入尝试pallet">Substrate深入尝试pallet</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E6%96%87%E6%A1%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98">文档/代码更新问题</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#1-%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">1. 设置昵称：添加第一个Pallet到Runtime</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#runtimecargotoml%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime/Cargo.toml结构分析</a>
+<ul>
+<li>[[package]{...}](#package)</li>
+<li>[[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)</li>
+<li>[[dependencies]{...}](#dependencies)</li>
+<li>[[build-dependencies]{...}](#build-dependencies)</li>
+<li>[[features]{...}](#features)</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E5%9B%9B%E6%AD%A5%E6%B7%BB%E5%8A%A0pallet">四步添加pallet</a>
+<ul>
+<li>[添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)</li>
+<li>[添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E9%85%8D%E7%BD%AE-%E6%B7%BB%E5%8A%A0config%E6%8E%A5%E5%8F%A3-srclibrs">配置-&gt;添加config接口: src/lib.rs</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E5%AE%9A%E4%B9%89%E8%BF%90%E8%A1%8C%E6%97%B6-srclibrsconstruct_runtime">定义运行时: src/lib.rs/construct_runtime!</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E7%BC%96%E8%AF%91-%E8%BF%90%E8%A1%8C-%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF">编译-&gt;运行-&gt;启动前端</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD">验证功能</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E4%B8%BA%E5%B8%90%E6%88%B7%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0">为帐户设置昵称</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E4%BD%BF%E7%94%A8nicks-pallet%E6%9F%A5%E8%AF%A2%E8%B4%A6%E6%88%B7%E4%BF%A1%E6%81%AF">使用Nicks pallet查询账户信息</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能出现的问题</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#2-%E6%8C%87%E5%AE%9A%E8%B0%83%E7%94%A8%E6%BA%90%E5%A4%B4unsigned-signed-or-sudo">2. 指定调用源头unsigned, signed or sudo</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#signed%E4%B8%8Esudo%E6%9C%89%E4%B8%8D%E5%90%8C%E6%9D%83%E9%99%90">signed与sudo有不同权限。</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:05 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:21 CST 2022 -->
 <!--te-->
 <h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
 <pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
@@ -6806,8 +8091,90 @@ pub enum Error&lt;T&gt; {
 </div>
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="substrate项目介绍"><a class="header" href="#substrate项目介绍">Substrate项目介绍</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#substrate%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D">Substrate项目介绍</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study">Case Study</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#acala-network-defi">Acala Network: Defi</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study-1">Case Study</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#astar-network-smart-contracts">Astar Network: Smart Contracts</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study-2">Case Study</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#equilibrium">Equilibrium</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study-3">Case Study</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#moonbeam-smart-contracts">Moonbeam: Smart Contracts</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study-4">Case Study</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#polkadex-defi-infrastructure">Polkadex: DeFi, Infrastructure</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study-5">Case Study</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#unique-network-nfts">Unique Network: NFTs</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#case-study-6">Case Study</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#%E5%88%86%E7%B1%BB%E4%BB%8B%E7%BB%8D-144">分类介绍: 144</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#defi-35">DeFi: 35</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#wallet-16">Wallet: 16</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#identity-14">Identity: 14</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#social-5">Social: 5</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#smart-contracts-10">Smart Contracts: 10</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#file-storage-5">File Storage: 5</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#bluzelle">Bluzelle</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#cere">Cere</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#crust-network">Crust Network</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#datdot">DatDot</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#equilibriumco">Equilibrium.co</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#iot-4">IoT: 4</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#data-highway">Data Highway</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#nodle">Nodle</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#origin-trail">Origin Trail</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#robonomicsairalabs">Robonomics(Airalabs)</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#gaming-7">Gaming: 7</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#ajuna-network">Ajuna Network</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#bitcountry">Bit.Country</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#celer-network">Celer Network</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#everdream-soft">Everdream Soft</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#gamedao">GameDAO</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#sensorium-corporation">Sensorium Corporation</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#bridge-4">Bridge: 4</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#infrastructure-39">Infrastructure: 39</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#relay-chain-2">Relay Chain: 2</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#nfts-1">NFTs: 1</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#unique-network">Unique Network</a></li>
+</ul>
+</li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:07 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:24 CST 2022 -->
 <!--te-->
 <div id="admonition-他山之石可以攻玉" class="admonition tip">
 <div class="admonition-title">
@@ -6942,8 +8309,30 @@ transaction fees and upgrades.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="substrate惊奇资源"><a class="header" href="#substrate惊奇资源">Substrate惊奇资源</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#substrate%E6%83%8A%E5%A5%87%E8%B5%84%E6%BA%90">Substrate惊奇资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#resources">Resources</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#support">Support</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#social">Social</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#events">Events</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#blogs">Blogs</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#videos">Videos</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#templates">Templates</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#frame-pallets">FRAME Pallets</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#framework-extensions">Framework Extensions</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#client-libraries">Client Libraries</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#mobile">Mobile</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#tools">Tools</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#products-and-services">Products and Services</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#alternative-implementations">Alternative Implementations</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#scale-codec">SCALE Codec</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:04 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:20 CST 2022 -->
 <!--te-->
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <ul>
@@ -7228,8 +8617,21 @@ Josep M Sobrepere.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nervosckb"><a class="header" href="#nervosckb">nervos/ckb</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html#nervosckb">nervos/ckb</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html#online-book">online-book</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html#fragment">fragment</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:19 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-47"><a class="header" href="#参考资源-47">参考资源</a></h2>
 <h3 id="online-book-40"><a class="header" href="#online-book-40">online-book</a></h3>
@@ -7240,8 +8642,21 @@ Josep M Sobrepere.</li>
 <h3 id="local-40"><a class="header" href="#local-40">local</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="solana"><a class="header" href="#solana">Solana</a></h1>
 <!--ts-->
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/solana.html#solana">Solana</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/solana.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="layer5_ecosystem/7_business/blockchain/solana.html#online-book">online-book</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/solana.html#fragment">fragment</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/solana.html#local">local</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:31:02 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:19 CST 2022 -->
 <!--te-->
 <h2 id="参考资源-48"><a class="header" href="#参考资源-48">参考资源</a></h2>
 <h3 id="online-book-41"><a class="header" href="#online-book-41">online-book</a></h3>
