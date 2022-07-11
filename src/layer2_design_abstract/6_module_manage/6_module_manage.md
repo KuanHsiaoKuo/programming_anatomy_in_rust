@@ -1,10 +1,14 @@
 # 项目模块管理及扩展
 
 <!--ts-->
-
+* [项目模块管理及扩展](#项目模块管理及扩展)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:11 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:39 CST 2022 -->
 
 <!--te-->
 

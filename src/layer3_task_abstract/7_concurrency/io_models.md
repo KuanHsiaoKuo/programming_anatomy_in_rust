@@ -1,10 +1,32 @@
 # 从IO模型开始
 
 <!--ts-->
-
+* [从IO模型开始](#从io模型开始)
+   * [1. 同步/异步、阻塞/非阻塞概念区别](#1-同步异步阻塞非阻塞概念区别)
+      * [同步和异步，关注的是消息通信机制。（调用者视角）](#同步和异步关注的是消息通信机制调用者视角)
+      * [阻塞和非阻塞，关注的是程序等待调用结果的状态。（被调用者视角）](#阻塞和非阻塞关注的是程序等待调用结果的状态被调用者视角)
+      * [阻塞，与系统调用有关。](#阻塞与系统调用有关)
+   * [2. 同步/异步IO 模型分类](#2-同步异步io-模型分类)
+   * [3. 同步阻塞I/O (blocking I/O)](#3-同步阻塞io-blocking-io)
+   * [4. I/O 多路复用（I/O Multiplexing )](#4-io-多路复用io-multiplexing-)
+   * [5. epoll: 同步阻塞/非阻塞模型](#5-epoll-同步阻塞非阻塞模型)
+      * [epoll三个函数](#epoll三个函数)
+      * [epoll 两种触发机制：](#epoll-两种触发机制)
+      * [惊群问题：](#惊群问题)
+   * [6. 异步 I/O 模型: io_uring](#6-异步-io-模型-io_uring)
+      * [1. Reactor（反应器） 模式](#1-reactor反应器-模式)
+      * [2. Preactor（主动器） 模式](#2-preactor主动器-模式)
+      * [Reactor Model:](#reactor-model)
+         * [三种实现方式：](#三种实现方式)
+         * [读写操作流程：](#读写操作流程)
+         * [参与者：](#参与者)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:19 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:47 CST 2022 -->
 
 <!--te-->
 

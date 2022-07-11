@@ -1,10 +1,40 @@
 # cargo与rustc
 
 <!--ts-->
-
+* [cargo与rustc](#cargo与rustc)
+   * [rustc](#rustc)
+      * [rustc是什么](#rustc是什么)
+      * [基础使用](#基础使用)
+      * [rustc与cargo的关系](#rustc与cargo的关系)
+   * [cargo style](#cargo-style)
+   * [cargo essential structure](#cargo-essential-structure)
+   * [.cargo 扩展](#cargo-扩展)
+      * [tree overview](#tree-overview)
+      * [bin](#bin)
+      * [env](#env)
+      * [git](#git)
+      * [registry](#registry)
+   * [Cargo 与 git 的关联！](#cargo-与-git-的关联)
+      * [cargo tree](#cargo-tree)
+      * [git](#git-1)
+      * [关于依赖冲突问题](#关于依赖冲突问题)
+   * [Cargo相关问题解决](#cargo相关问题解决)
+      * [版本冲突：failed to select a version for the requirement](#版本冲突failed-to-select-a-version-for-the-requirement)
+   * [Cargo项目结构](#cargo项目结构)
+      * [基础说明](#基础说明)
+      * [cargo.toml和cargo.lock](#cargotoml和cargolock)
+      * [构建、清理、更新以及安装](#构建清理更新以及安装)
+      * [main.rs 和 lib.rs](#mainrs-和-librs)
+      * [实际应用：Substrate的substrate-node-template](#实际应用substrate的substrate-node-template)
+         * [区别cargo run与cargo build](#区别cargo-run与cargo-build)
+         * [在node包里面存在main.rs](#在node包里面存在mainrs)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:13 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:36:41 CST 2022 -->
 
 <!--te-->
 

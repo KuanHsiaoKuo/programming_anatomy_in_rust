@@ -2,10 +2,37 @@
 
 > 以rust为例分享学习编程常考虑的方方面面
 <!--ts-->
-
+* [编程解剖 in rust](#编程解剖-in-rust)
+   * [本地运行](#本地运行)
+   * [git lfs配置](#git-lfs配置)
+   * [项目基础结构](#项目基础结构)
+   * [用到的工具](#用到的工具)
+      * [mdbook-checklist: 整理待办事项](#mdbook-checklist-整理待办事项)
+      * [mdbook-pagetoc: 添加业内目录](#mdbook-pagetoc-添加业内目录)
+      * [mdbook-admonish: 使用新的css文件](#mdbook-admonish-使用新的css文件)
+         * [相关资源](#相关资源)
+         * [特别语法](#特别语法)
+            * [自定义标题](#自定义标题)
+            * [内嵌代码](#内嵌代码)
+            * [自定义样式](#自定义样式)
+            * [可折叠](#可折叠)
+         * [常用格式](#常用格式)
+            * [note](#note)
+            * [abstract, summary, tldr](#abstract-summary-tldr)
+            * [info, todo](#info-todo)
+            * [tip, hint, important](#tip-hint-important)
+            * [success, check, done](#success-check-done)
+            * [question, help, faq](#question-help-faq)
+            * [warning, caution, attention](#warning-caution-attention)
+            * [failure, fail, missing](#failure-fail-missing)
+            * [danger, error](#danger-error)
+            * [bug](#bug)
+            * [example](#example)
+            * [quote, cite](#quote-cite)
+   * [github action](#github-action)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:44:55 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:35:50 CST 2022 -->
 
 <!--te-->
 

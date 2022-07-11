@@ -1,10 +1,11 @@
 # 利用IPFS构建自己的去中心化分布式网站
 
 <!--ts-->
-
+* [利用IPFS构建自己的去中心化分布式网站](#利用ipfs构建自己的去中心化分布式网站)
+   * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:50 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:08 CST 2022 -->
 
 <!--te-->
 

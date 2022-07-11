@@ -3,10 +3,47 @@
 ![ipfs](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/ipfs.jpeg)
 
 <!--ts-->
-
+* [IPFS: 星际文件系统(InterPlanetary File System)](#ipfs-星际文件系统interplanetary-file-system)
+   * [IPFS介绍](#ipfs介绍)
+      * [1 什么是IPFS](#1-什么是ipfs)
+      * [2 为什么有IPFS](#2-为什么有ipfs)
+         * [HTTP的中心化是低效的, 并且成本很高](#http的中心化是低效的-并且成本很高)
+         * [Web文件经常被删除](#web文件经常被删除)
+         * [中心化限制了web的成长](#中心化限制了web的成长)
+         * [互联网应用高度依赖主干网](#互联网应用高度依赖主干网)
+      * [3 IPFS的目标](#3-ipfs的目标)
+      * [4 IPFS包含哪些内容](#4-ipfs包含哪些内容)
+         * [IPFS是一个协议，类似http协议](#ipfs是一个协议类似http协议)
+         * [IPFS是一个web协议](#ipfs是一个web协议)
+         * [IPFS是模块化的协议](#ipfs是模块化的协议)
+         * [IPFS是一个p2p系统](#ipfs是一个p2p系统)
+         * [IPFS天生是一个CDN](#ipfs天生是一个cdn)
+         * [IPFS拥有命名服务](#ipfs拥有命名服务)
+   * [IPFS如何工作](#ipfs如何工作)
+   * [IPFS如何解决中心化服务器缺点](#ipfs如何解决中心化服务器缺点)
+      * [1 下载速度快, 不再依赖主干网, 中心化服务器](#1-下载速度快-不再依赖主干网-中心化服务器)
+      * [2 存储空间变得非常便宜](#2-存储空间变得非常便宜)
+      * [3 安全](#3-安全)
+      * [4 开放](#4-开放)
+   * [IPFS的用途](#ipfs的用途)
+   * [IPFS的POW机制](#ipfs的pow机制)
+   * [IPFS家族](#ipfs家族)
+      * [Main Projects](#main-projects)
+      * [Contributions](#contributions)
+      * [Movements](#movements)
+      * [IPFS 与 Filecoin](#ipfs-与-filecoin)
+         * [IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）](#ipfs数据的分发和定位数据传输协议类似http协议)
+         * [Filecoin: 数据存储（类似一个云存储）](#filecoin-数据存储类似一个云存储)
+         * [IPFS和Filecoin共同依赖libp2p项目。](#ipfs和filecoin共同依赖libp2p项目)
+   * [使用IPFS的应用](#使用ipfs的应用)
+   * [IPFS网络如何运行](#ipfs网络如何运行)
+   * [IPFS: NAT traversal](#ipfs-nat-traversal)
+   * [BitSwap](#bitswap)
+   * [IPFS非rust实现版本](#ipfs非rust实现版本)
+   * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: kuanhsiaokuo, at: Sun Jul 10 18:30:47 CST 2022 -->
+<!-- Added by: kuanhsiaokuo, at: Mon Jul 11 11:37:05 CST 2022 -->
 
 <!--te-->
 
