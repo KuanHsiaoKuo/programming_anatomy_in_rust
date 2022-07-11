@@ -192,3 +192,12 @@ Rust is a multi-paradigm, general-purpose programming language designed for perf
 
 - [rust-cargo-install · Actions · GitHub Marketplace](https://github.com/marketplace/actions/rust-cargo-install)
 - [ekalinin/github-markdown-toc: Easy TOC creation for GitHub README.md](https://github.com/ekalinin/github-markdown-toc)
+
+```admonish info title='基于github repository设置secrects token'
+> [Access Token | Code Cookbook](https://michaelcurrin.github.io/code-cookbook/recipes/ci-cd/github-actions/tokens/access-token.html)
+1. 设置token：[Personal access tokens](https://github.com/settings/tokens)
+2. 给指定repository设置secret：repository -> settings -> secrets -> Actions
+3. 新建一个名为**GH_MD_TOC**的repository secret，将第一步的token设置进去
+4. 将这个secret设置为action环境变量
+
+```
