@@ -133,25 +133,21 @@ mod say {
   比如这里：[aHash/Cargo.toml at master · tkaitchuck/aHash](https://github.com/tkaitchuck/ahash/blob/master/smhasher/ahash-cbindings/Cargo.toml)
   . cargo search ahash-cbindings没有结果，cargo search ahash_c就有返回
 
-## 模块呈现方式
+## 模块使用方式
 
 ```plantuml
 {{#include ../../../materials/plantumls/module_usage.mindmap:1:}}
 ```
 
-### 嵌套模块
-
-### 文件模块
+```admonish info title='关于细节说明'
+下方对应小标题会对思维导图中的重点内容进行详叙和代码展示
+```
 
 ### 目录模块
 
-## 隐私与导入导出
+### 导入导出
 
-### 隐私管理
-
-### 嵌套导入
-
-### 再次导出
+### 导入路径
 
 ```admonish info title="pub(crate) fn fn_name() {}"
 Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者,要从模块向用户公开一些内容可以使用关键字 pub。
