@@ -1,29 +1,30 @@
 # 模块系统相关：Workspace、Package、Crate、Module
 
 <!--ts-->
+
 * [模块系统相关：Workspace、Package、Crate、Module](#模块系统相关workspacepackagecratemodule)
-   * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
-      * [Package: 包含Cargo.toml](#package-包含cargotoml)
-      * [workspace与package](#workspace与package)
-      * [具体对比package和crate](#具体对比package和crate)
-         * [在Cargo.toml的[bin]/[lib]中指明](#在cargotoml的binlib中指明)
-      * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
-      * [module](#module)
-      * [整理说一下rust的模块系统](#整理说一下rust的模块系统)
-      * [联想对比](#联想对比)
-      * [module tree](#module-tree)
-   * [模块呈现方式](#模块呈现方式)
-      * [嵌套模块](#嵌套模块)
-      * [文件模块](#文件模块)
-      * [目录模块](#目录模块)
-   * [隐私与导入导出](#隐私与导入导出)
-      * [隐私管理](#隐私管理)
-      * [嵌套导入](#嵌套导入)
-      * [再次导出](#再次导出)
-   * [参考资源](#参考资源)
-      * [online-book](#online-book)
-      * [fragment](#fragment)
-      * [local](#local)
+    * [厘清Workspace、Package、crate和module的关系](#厘清workspacepackagecrate和module的关系)
+        * [Package: 包含Cargo.toml](#package-包含cargotoml)
+        * [workspace与package](#workspace与package)
+        * [具体对比package和crate](#具体对比package和crate)
+            * [在Cargo.toml的[bin]/[lib]中指明](#在cargotoml的binlib中指明)
+        * [再来对比workspace、package和crate](#再来对比workspacepackage和crate)
+        * [module](#module)
+        * [整理说一下rust的模块系统](#整理说一下rust的模块系统)
+        * [联想对比](#联想对比)
+        * [module tree](#module-tree)
+    * [模块呈现方式](#模块呈现方式)
+        * [嵌套模块](#嵌套模块)
+        * [文件模块](#文件模块)
+        * [目录模块](#目录模块)
+    * [隐私与导入导出](#隐私与导入导出)
+        * [隐私管理](#隐私管理)
+        * [嵌套导入](#嵌套导入)
+        * [再次导出](#再次导出)
+    * [参考资源](#参考资源)
+        * [online-book](#online-book)
+        * [fragment](#fragment)
+        * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Mon Jul 11 07:23:09 UTC 2022 -->
@@ -68,7 +69,8 @@ sp-wasm-interface = { version = "6.0.0", path = "../../primitives/wasm-interface
 
 - workspace+members: 并发代表当前package包含的所有subpackage，只是指明一个工作区的所有package
 
-> A Cargo.toml file can simultaneously define a package and a workspace to which it belongs, but that package is still a member of that workspace, not the other way around.
+> A Cargo.toml file can simultaneously define a package and a workspace to which it belongs, but that package is still a
+> member of that workspace, not the other way around.
 
 ### 具体对比package和crate
 
@@ -113,58 +115,7 @@ mod say {
 ### 整理说一下rust的模块系统
 
 ```plantuml
-@startmindmap
-skinparam monochrome reverse
-skinparam classFontName ttf-wqy-zenhei
-*[#lightblue] Rust模块系统
-**[#FFBBCC] 两种视角
-*** 程序猿
-**** 文件结构
-*** rustc：module tree
-****:可执行root
-<code>
-src/main.rs 
--> binary crate(默认与cargo.toml->[package].name同名)
-</code>;
-****:库root
-<code>
-src/lib.rs 
--> lib crate(默认与cargo.toml->[package].name同名)
-</code>;
-****:crate
-<code>编译的最小基本单位</code>;
-**[#FFBBCC] project的五个层级
-*** workspace
-*** package
-*** crates
-*** modules
-*** paths
-**[#FFBBCC] bin文件夹：可以直接使用src/lib.rs
-**[#lightgreen] crates.io保存的什么？
-*** 发布流程
-**** cargo login
-****[#lightgreen]:cargo package
-<code>
-$ cargo help package
-从帮助信息结合substrate源码实验🧪可知：
-1. 从当前目录开始执行路径开始，首先去父文件夹找Cargo.toml, 然后找当前目录的Cargo.toml，找不到就报错
-2. 找到的Cargo.toml如果有workspace配置，就按照workspace里面的subpackage顺序来依次打包
-3. 每次打包的标志为src/main.rs或者src/lib.rs, 且src同级存在Cargo.toml,Cargo.toml里面有[package]
-4. 开始打包为上传到crate.io的格式
-5. 依次打包
-6. 所有依赖必须是在crate.io可以找到的，找不到就报错
-7. 以包含Cargo.toml父文件夹为项目根目录，放在target/package里面
-</code>;
-**** cargo publish
-**** cargo yank
-**** cargo owner
-***[#lightgreen]:crate.io包含代码总结
-<code>
-1. 只包含最小crate内容，也就是src/main.rs或者src/lib.rs + Cargo.toml
-2. rust只能允许一级嵌套，使用workspace分出subpackage
-</code>;
-@endmindmap
-
+{{#include ../../../materials/plantumls/module_tree.mindmap:1:}}
 ```
 
 ### 联想对比
@@ -183,19 +134,11 @@ $ cargo help package
   . cargo search ahash-cbindings没有结果，cargo search ahash_c就有返回
 
 ## 模块呈现方式
+
 ```plantuml
-@startmindmap
-* 模块使用方式
-** 存在形式
-*** 嵌套模块
-*** 文件模块
-*** 目录模块
-** 隐私管理
-** 导入导出
-*** 嵌套导入
-*** 再次导入
-@endmindmap
+{{#include ../../../materials/plantumls/module_usage.mindmap:1:}}
 ```
+
 ### 嵌套模块
 
 ### 文件模块
@@ -372,7 +315,9 @@ those two basic facts are presented.
 - [How to better understand Crate in Rust? - Stack Overflow](https://web.archive.org/web/20220705022801/https://stackoverflow.com/questions/63515853/how-to-better-understand-crate-in-rust)
 
 > The processing of that source file may result in other source files being loaded as modules.
-> It is not that one source file makes up a crate: it's that starting from that one source file, you can find all the files making up the crate, as opposed to other compilation models where the compiler might be given many file names to start from.
+> It is not that one source file makes up a crate: it's that starting from that one source file, you can find all the
+> files making up the crate, as opposed to other compilation models where the compiler might be given many file names to
+> start from.
 
 
 其实从代码完整性考虑，crate确实就是编译的最小基本单位。因为它不仅指一个源码文件(xx.rs)，而是包含这个源码文件里面引入的所有其他module。这个时候，rustc才会开始编译这个crate
@@ -380,7 +325,8 @@ those two basic facts are presented.
 - [rust - What exactly is a 'crate' in the Cargo ecosystem and what is the mapping to what is on crates.io? - Stack Overflow](https://web.archive.org/web/20220609151503/https://stackoverflow.com/questions/52024304/what-exactly-is-a-crate-in-the-cargo-ecosystem-and-what-is-the-mapping-to-what?rq=1)
 
 > The exact things hosted on crates.io are crates inside packages. A crate is the output artifact of the compiler.
-> The compilation model centers on artifacts called crates. Each compilation processes a single crate in source form, and if successful, produces a single crate in binary form: either an executable or some sort of library.
+> The compilation model centers on artifacts called crates. Each compilation processes a single crate in source form,
+> and if successful, produces a single crate in binary form: either an executable or some sort of library.
 > A package is an artifact managed by Cargo, the Rust package manager.
 
 ### local

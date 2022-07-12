@@ -1,0 +1,56 @@
+@startmindmap
+scale 900 width
+skinparam monochrome reverse
+skinparam classFontName ttf-wqy-zenhei
+*[#lightblue] Rust模块系统
+**[#FFBBCC] 两种视角
+*** 程序猿
+**** 文件结构
+*** rustc：module tree
+****:可执行root
+<code>
+src/main.rs
+-> binary crate(默认与cargo.toml->[package].name同名)
+</code>;
+****:库root
+<code>
+src/lib.rs
+-> lib crate(默认与cargo.toml->[package].name同名)
+</code>;
+****:crate
+<code>编译的最小基本单位</code>;
+**[#FFBBCC] project的五个层级
+*** workspace
+*** package
+*** crates
+*** modules
+*** paths
+**[#FFBBCC] bin文件夹：可以直接使用src/lib.rs
+**[#lightgreen] crates.io保存的什么？
+*** 发布流程
+**** cargo login
+****[#lightgreen]:cargo package
+<code>
+$ cargo help package
+从帮助信息结合substrate源码实验🧪可知：
+1. 从当前目录开始执行路径开始，首先去父文件夹找Cargo.toml,
+然后找当前目录的Cargo.toml，找不到就报错
+2. 找到的Cargo.toml如果有workspace配置，
+就按照workspace里面的subpackage顺序来依次打包
+3. 每次打包的标志为src/main.rs或者src/lib.rs,
+且src同级存在Cargo.toml,Cargo.toml里面有[package]
+4. 开始打包为上传到crate.io的格式
+5. 依次打包
+6. 所有依赖必须是在crate.io可以找到的，找不到就报错
+7. 以包含Cargo.toml父文件夹为项目根目录，
+放在target/package里面
+</code>;
+**** cargo publish
+**** cargo yank
+**** cargo owner
+***[#lightgreen]:crate.io包含代码总结
+<code>
+1. 只包含最小crate内容，也就是src/main.rs或者src/lib.rs + Cargo.toml
+2. rust只能允许一级嵌套，使用workspace分出subpackage
+</code>;
+@endmindmap
