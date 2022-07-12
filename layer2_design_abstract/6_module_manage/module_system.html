@@ -204,8 +204,8 @@
 <li><a href="#%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">模块使用方式</a>
 <ul>
 <li><a href="#%E7%9B%AE%E5%BD%95%E6%A8%A1%E5%9D%97">目录模块</a></li>
-<li><a href="#%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA">导入导出</a></li>
-<li><a href="#%E5%AF%BC%E5%85%A5%E8%B7%AF%E5%BE%84">导入路径</a></li>
+<li><a href="#%E5%B5%8C%E5%A5%97%E5%AF%BC%E5%85%A5">嵌套导入</a></li>
+<li><a href="#pubcrate%E5%AF%BC%E5%87%BA">pub/crate导出</a></li>
 </ul>
 </li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
@@ -219,7 +219,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jul 12 11:42:21 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jul 12 12:46:35 UTC 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -323,9 +323,6 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 <li>module Tree只有一个入口（根），src/main.rs或src/lib.rs</li>
 <li>默认情况下，lib.rs和main.rs的crate都和cargo.toml里面的[package].name同名</li>
 <li>但是cargo.toml里面可以给crate重命名：[lib]重命名lib.rs, [binary]重命名main.rs</li>
-<li>crate.io上面的名字还有优先级：[lib]-&gt;src/lib.rs &gt; [package]/name.
-比如这里：<a href="https://github.com/tkaitchuck/ahash/blob/master/smhasher/ahash-cbindings/Cargo.toml">aHash/Cargo.toml at master · tkaitchuck/aHash</a>
-. cargo search ahash-cbindings没有结果，cargo search ahash_c就有返回</li>
 </ul>
 <h2 id="模块使用方式"><a class="header" href="#模块使用方式">模块使用方式</a></h2>
 <figure><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="669px" preserveAspectRatio="none" style="width:719px;height:669px;background:#FFFFFF;" version="1.1" viewBox="0 0 719 669" width="719px" zoomAndPan="magnify"><defs/><g><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="104" x="10" y="315.5586"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="20" y="338.5537">模块使用方式</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="76" x="164" y="132.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="174" y="155.5889">存在形式</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="312" x="290" y="20"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="292" x="300" y="42.9951">嵌套模块: mod可以在一个文件中定义多个模块</text><path d="M240,150.7422 L250,150.7422 C265,150.7422 265,38.1484 280,38.1484 L290,38.1484 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="317" x="290" y="76.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="297" x="300" y="99.292">文件模块：不带mod的文件，以文件名为模块名</text><path d="M240,150.7422 L250,150.7422 C265,150.7422 265,94.4453 280,94.4453 L290,94.4453 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="76" x="290" y="188.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="300" y="211.8857">目录模块</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="146" x="416" y="132.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="426" y="155.5889">目录同级有同名文件</text><path d="M366,207.0391 L376,207.0391 C391,207.0391 391,150.7422 406,150.7422 L416,150.7422 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="291" x="416" y="188.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="271" x="426" y="211.8857">同名文件中导入目录中的文件模块/嵌套模块</text><path d="M366,207.0391 L376,207.0391 C391,207.0391 391,207.0391 406,207.0391 L416,207.0391 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="160" x="416" y="245.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="426" y="268.1826">在同名文件中开始使用</text><path d="M366,207.0391 L376,207.0391 C391,207.0391 391,263.3359 406,263.3359 L416,263.3359 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M240,150.7422 L250,150.7422 C265,150.7422 265,207.0391 280,207.0391 L290,207.0391 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M114,333.707 L124,333.707 C139,333.707 139,150.7422 154,150.7422 L164,150.7422 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="146" x="164" y="385.9297"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="174" y="408.9248">隐私管理与导出导入</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="145" x="360" y="301.4844"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="370" y="324.4795">pub: 导出-变为公有</text><path d="M310,404.0781 L320,404.0781 C335,404.0781 335,319.6328 350,319.6328 L360,319.6328 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="81" x="360" y="414.0781"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="61" x="370" y="437.0732">导入方式:</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="186" x="491" y="357.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="501" y="380.7764">use: 导入-进入当前作用域</text><path d="M441,432.2266 L451,432.2266 C466,432.2266 466,375.9297 481,375.9297 L491,375.9297 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="142" x="491" y="414.0781"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="501" y="437.0732">再次导入: pub use</text><path d="M441,432.2266 L451,432.2266 C466,432.2266 466,432.2266 481,432.2266 L491,432.2266 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="192" x="491" y="470.375"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="172" x="501" y="493.3701">嵌套导入：使用{}作为嵌套</text><path d="M441,432.2266 L451,432.2266 C466,432.2266 466,488.5234 481,488.5234 L491,488.5234 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M310,404.0781 L320,404.0781 C335,404.0781 335,432.2266 350,432.2266 L360,432.2266 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M114,333.707 L124,333.707 C139,333.707 139,404.0781 154,404.0781 L164,404.0781 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="104" x="164" y="568.8945"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="174" y="591.8896">两类导入路径</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="120" x="318" y="526.6719"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="328" y="549.667">crate: 绝对导入</text><path d="M268,587.043 L278,587.043 C293,587.043 293,544.8203 308,544.8203 L318,544.8203 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="141" x="318" y="582.9688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="328" y="605.9639">相对导入: 提高内聚</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="151" x="509" y="554.8203"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="519" y="577.8154">self: 与当前模块相关</text><path d="M459,601.1172 L469,601.1172 C484,601.1172 484,572.9688 499,572.9688 L509,572.9688 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="153" x="509" y="611.1172"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="519" y="634.1123">super: 从父模块导入</text><path d="M459,601.1172 L469,601.1172 C484,601.1172 484,629.2656 499,629.2656 L509,629.2656 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M268,587.043 L278,587.043 C293,587.043 293,601.1172 308,601.1172 L318,601.1172 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M114,333.707 L124,333.707 C139,333.707 139,587.043 154,587.043 L164,587.043 " fill="none" style="stroke:#181818;stroke-width:1.0;"/></g></svg></figure>
@@ -339,8 +336,53 @@ difference unless you're paying attention to the weeds and edge cases.</p>
 </div>
 </div>
 <h3 id="目录模块"><a class="header" href="#目录模块">目录模块</a></h3>
-<h3 id="导入导出"><a class="header" href="#导入导出">导入导出</a></h3>
-<h3 id="导入路径"><a class="header" href="#导入路径">导入路径</a></h3>
+<pre><code class="language-shell">tree -L 2                                                                                                      ─╯
+.
+├── foo
+│   └── bar.rs
+├── foo.rs
+└── main.rs
+
+1 directory, 3 files
+</code></pre>
+<ul>
+<li>foo/bar.rs</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust editable">
+pub struct Bar; // 导出给foo.rs使用
+
+impl Bar {
+    pub fn hello() {
+        println!(&quot;Hello from Bar !&quot;);
+    }
+}
+</code></pre></pre>
+<ul>
+<li>foo.rs</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust editable">
+mod bar; // 使用同名目录foo下的文件模块foo/bar.rs
+
+pub use self::bar::Bar; // 再次指定导入bar::Bar
+
+pub fn do_foo() {
+    println!(&quot;Hi from foo!&quot;);
+}
+</code></pre></pre>
+<h3 id="嵌套导入"><a class="header" href="#嵌套导入">嵌套导入</a></h3>
+<pre><pre class="playground"><code class="language-rust editable">// nested_imports.rs
+// 使用{}嵌套导入
+use std::sync::{Arc, Mutex, mpsc::{channel, Sender, Receiver}};
+
+fn consume(_tx: Sender&lt;()&gt;, _rx: Receiver&lt;()&gt;) { } 
+
+fn main() {
+    let _ = Arc::new(Mutex::new(40));
+    let (tx, rx) = channel();
+    consume(tx, rx);
+}
+</code></pre></pre>
+<h3 id="pubcrate导出"><a class="header" href="#pubcrate导出">pub/crate导出</a></h3>
 <div id="admonition-pubcrate-fn-fn_name-" class="admonition info">
 <div class="admonition-title">
 <p>pub(crate) fn fn_name() {}</p>
