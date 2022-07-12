@@ -128,9 +128,7 @@ mod say {
 - module Tree只有一个入口（根），src/main.rs或src/lib.rs
 - 默认情况下，lib.rs和main.rs的crate都和cargo.toml里面的[package].name同名
 - 但是cargo.toml里面可以给crate重命名：[lib]重命名lib.rs, [binary]重命名main.rs
-- crate.io上面的名字还有优先级：[lib]->src/lib.rs > [package]/name.
-  比如这里：[aHash/Cargo.toml at master · tkaitchuck/aHash](https://github.com/tkaitchuck/ahash/blob/master/smhasher/ahash-cbindings/Cargo.toml)
-  . cargo search ahash-cbindings没有结果，cargo search ahash_c就有返回
+
 
 ## 模块使用方式
 
@@ -143,10 +141,39 @@ mod say {
 ```
 
 ### 目录模块
+```shell
+tree -L 2                                                                                                      ─╯
+.
+├── foo
+│   └── bar.rs
+├── foo.rs
+└── main.rs
 
-### 导入导出
+1 directory, 3 files
+```
 
-### 导入路径
+- foo/bar.rs
+
+```rust editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter02_Managing_Project_With_Cargo/my_program/foo/bar.rs:1:}}
+```
+
+- foo.rs
+
+
+```rust editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter02_Managing_Project_With_Cargo/my_program/foo.rs:1:}}
+```
+
+
+### 嵌套导入
+
+```rust editable
+{{#include ../../../codes/The-Complete-Rust-Programming-Reference-Guide/Chapter07_advanced_concepts/nested_imports.rs:1:}}
+```
+
+
+### pub/crate导出
 
 ```admonish info title="pub(crate) fn fn_name() {}"
 Rust 中元素的隐私性是从模块层面开始的。作为程序库的作者,要从模块向用户公开一些内容可以使用关键字 pub。
