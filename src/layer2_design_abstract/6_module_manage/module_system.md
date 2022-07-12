@@ -12,21 +12,17 @@
       * [整理说一下rust的模块系统](#整理说一下rust的模块系统)
       * [联想对比](#联想对比)
       * [module tree](#module-tree)
-   * [模块呈现方式](#模块呈现方式)
-      * [嵌套模块](#嵌套模块)
-      * [文件模块](#文件模块)
+   * [模块使用方式](#模块使用方式)
       * [目录模块](#目录模块)
-   * [隐私与导入导出](#隐私与导入导出)
-      * [隐私管理](#隐私管理)
-      * [嵌套导入](#嵌套导入)
-      * [再次导出](#再次导出)
+      * [导入导出](#导入导出)
+      * [导入路径](#导入路径)
    * [参考资源](#参考资源)
       * [online-book](#online-book)
       * [fragment](#fragment)
       * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jul 12 07:54:14 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jul 12 11:42:21 UTC 2022 -->
 
 <!--te-->
 
