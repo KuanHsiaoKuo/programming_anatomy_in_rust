@@ -231,7 +231,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:48:46 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:19 UTC 2022 -->
 <!--te-->
 <h2 id="本地运行"><a class="header" href="#本地运行">本地运行</a></h2>
 <pre><code class="language-shell">cargo install mdbook
@@ -245,6 +245,7 @@ mdbook serve
 git lfs track '*.img'
 </code></pre>
 <h2 id="项目基础结构"><a class="header" href="#项目基础结构">项目基础结构</a></h2>
+<p>{{#check <name> | <description>}}</p>
 <ol>
 <li>每个文件夹下的同名md文件介绍当前文件夹的内容</li>
 <li>关于待完成内容：主要基于mdbook-checklist插件</li>
@@ -255,7 +256,8 @@ git lfs track '*.img'
 <li>添加待完成锚点的格式</li>
 </ol>
 <blockquote>
-<p>只支持英文</p>
+<p>check空格之后的内容不能有空格, 且只能为英文
+&quot; | &quot;之后的内容可以有空格，可以为中文</p>
 </blockquote>
 <pre><code class="language-shell">&lt;a id=&quot;Note-1&quot;&gt;&lt;/a&gt;Note-1
 </code></pre>
@@ -263,7 +265,7 @@ git lfs track '*.img'
 <li>checklist页面渲染效果：</li>
 </ul>
 <pre><code class="language-none">- &lt;SUMMARY对应标题名&gt;
-    - [This is an importtant note](Note-1)
+    - [This is an important note](Note-1)
 </code></pre>
 <blockquote>
 <p>这种写法会自动在本地生成md文件：src/checklist.md, 但是不用管它，最后渲染还是以mdbook-checklist的内容为准</p>

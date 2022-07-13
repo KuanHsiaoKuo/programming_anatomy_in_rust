@@ -232,7 +232,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:48:46 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:19 UTC 2022 -->
 <!--te-->
 <h2 id="本地运行"><a class="header" href="#本地运行">本地运行</a></h2>
 <pre><code class="language-shell">cargo install mdbook
@@ -246,6 +246,7 @@ mdbook serve
 git lfs track '*.img'
 </code></pre>
 <h2 id="项目基础结构"><a class="header" href="#项目基础结构">项目基础结构</a></h2>
+<p>{{#check <name> | <description>}}</p>
 <ol>
 <li>每个文件夹下的同名md文件介绍当前文件夹的内容</li>
 <li>关于待完成内容：主要基于mdbook-checklist插件</li>
@@ -256,7 +257,8 @@ git lfs track '*.img'
 <li>添加待完成锚点的格式</li>
 </ol>
 <blockquote>
-<p>只支持英文</p>
+<p>check空格之后的内容不能有空格, 且只能为英文
+&quot; | &quot;之后的内容可以有空格，可以为中文</p>
 </blockquote>
 <pre><code class="language-shell">&lt;a id=&quot;Note-1&quot;&gt;&lt;/a&gt;Note-1
 </code></pre>
@@ -264,7 +266,7 @@ git lfs track '*.img'
 <li>checklist页面渲染效果：</li>
 </ul>
 <pre><code class="language-none">- &lt;SUMMARY对应标题名&gt;
-    - [This is an importtant note](Note-1)
+    - [This is an important note](Note-1)
 </code></pre>
 <blockquote>
 <p>这种写法会自动在本地生成md文件：src/checklist.md, 但是不用管它，最后渲染还是以mdbook-checklist的内容为准</p>
@@ -576,7 +578,7 @@ git lfs track '*.img'
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:37 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:47 UTC 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -1528,7 +1530,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:21 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:38 UTC 2022 -->
 <!--te-->
 <h2 id="话题"><a class="header" href="#话题">话题</a></h2>
 <h3 id="为什么觉得-rust-难上手尤其是生命周期---知乎"><a class="header" href="#为什么觉得-rust-难上手尤其是生命周期---知乎">为什么觉得 Rust 难上手，尤其是生命周期？ - 知乎</a></h3>
@@ -1584,7 +1586,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 <li><a href="layer1_underlying_abstract/layer1_underlying_abstract.html#%E5%BA%95%E5%B1%82%E6%8A%BD%E8%B1%A1">底层抽象</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:08 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:32 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><!--ts-->
 <ul>
 <li><a href="layer1_underlying_abstract/1_virtual_memory/virtual_memory.html#%E4%BB%8B%E7%BB%8D">介绍</a></li>
@@ -1597,7 +1599,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:02 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:28 UTC 2022 -->
 <!--te-->
 <h2 id="介绍"><a class="header" href="#介绍">介绍</a></h2>
 <p>从计算机组成原理了解到操作系统，当一个程序开始运行的时候，不论是可执行程序还是命令行，都会从创建进程，申请进程资源开始，再到堆栈(stack/heap)
@@ -1623,7 +1625,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:01 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:27 UTC 2022 -->
 <!--te-->
 <h2 id="参考"><a class="header" href="#参考">参考</a></h2>
 <h3 id="online-book-2"><a class="header" href="#online-book-2">online-book</a></h3>
@@ -1732,7 +1734,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:02 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:28 UTC 2022 -->
 <!--te-->
 <h2 id="综述"><a class="header" href="#综述">综述</a></h2>
 <pre><code class="language-text">┌───────────────────────────────────┐
@@ -2316,7 +2318,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:05 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:29 UTC 2022 -->
 <!--te-->
 <h1 id="类型系统起源"><a class="header" href="#类型系统起源">类型系统起源</a></h1>
 <h2 id="我们为什么需要在语言中使用类型"><a class="header" href="#我们为什么需要在语言中使用类型">我们为什么需要在语言中使用类型?</a></h2>
@@ -2381,7 +2383,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:02 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:28 UTC 2022 -->
 <!--te-->
 <h2 id="基元类型"><a class="header" href="#基元类型">基元类型</a></h2>
 <h2 id="序列类型"><a class="header" href="#序列类型">序列类型</a></h2>
@@ -2413,7 +2415,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:03 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:28 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-4"><a class="header" href="#参考资源-4">参考资源</a></h2>
 <h3 id="online-book-6"><a class="header" href="#online-book-6">online-book</a></h3>
@@ -2438,7 +2440,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:05 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:30 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-5"><a class="header" href="#参考资源-5">参考资源</a></h2>
 <h3 id="online-book-7"><a class="header" href="#online-book-7">online-book</a></h3>
@@ -2578,7 +2580,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:04 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:29 UTC 2022 -->
 <!--te-->
 <h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
 <h3 id="从代码复用出发"><a class="header" href="#从代码复用出发">从代码复用出发</a></h3>
@@ -3347,7 +3349,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:07 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:31 UTC 2022 -->
 <!--te-->
 <h1 id="编程语言语法概述"><a class="header" href="#编程语言语法概述">编程语言语法概述</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
@@ -3383,7 +3385,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:05 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:30 UTC 2022 -->
 <!--te-->
 <h2 id="注释方法"><a class="header" href="#注释方法">注释方法</a></h2>
 <h2 id="rustdoc使用"><a class="header" href="#rustdoc使用">rustdoc使用</a></h2>
@@ -3469,7 +3471,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:06 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:30 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-10"><a class="header" href="#参考资源-10">参考资源</a></h2>
 <h3 id="online-book-12"><a class="header" href="#online-book-12">online-book</a></h3>
@@ -3501,7 +3503,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:08 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:31 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-12"><a class="header" href="#参考资源-12">参考资源</a></h2>
 <h3 id="online-book-14"><a class="header" href="#online-book-14">online-book</a></h3>
@@ -3527,7 +3529,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:06 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:30 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-13"><a class="header" href="#参考资源-13">参考资源</a></h2>
 <h3 id="online-book-15"><a class="header" href="#online-book-15">online-book</a></h3>
@@ -3552,7 +3554,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:14 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:35 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-14"><a class="header" href="#参考资源-14">参考资源</a></h2>
 <h3 id="online-book-16"><a class="header" href="#online-book-16">online-book</a></h3>
@@ -3574,7 +3576,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:09 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:32 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-15"><a class="header" href="#参考资源-15">参考资源</a></h2>
 <h3 id="online-book-17"><a class="header" href="#online-book-17">online-book</a></h3>
@@ -3596,7 +3598,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:09 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:32 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-16"><a class="header" href="#参考资源-16">参考资源</a></h2>
 <h3 id="online-book-18"><a class="header" href="#online-book-18">online-book</a></h3>
@@ -3622,7 +3624,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:10 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:32 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-17"><a class="header" href="#参考资源-17">参考资源</a></h2>
 <h3 id="online-book-19"><a class="header" href="#online-book-19">online-book</a></h3>
@@ -3647,7 +3649,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:10 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:32 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-18"><a class="header" href="#参考资源-18">参考资源</a></h2>
 <h3 id="online-book-20"><a class="header" href="#online-book-20">online-book</a></h3>
@@ -3669,7 +3671,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:10 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:33 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-19"><a class="header" href="#参考资源-19">参考资源</a></h2>
 <h3 id="online-book-21"><a class="header" href="#online-book-21">online-book</a></h3>
@@ -3691,7 +3693,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:11 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:33 UTC 2022 -->
 <!--te-->
 <p>对于一门编程语言，是否能够成为工程化开发工具的主要标准在于两点：</p>
 <ol>
@@ -3742,7 +3744,7 @@ fn main() {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:13 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:34 UTC 2022 -->
 <!--te-->
 <h2 id="厘清workspacepackagecrate和module的关系"><a class="header" href="#厘清workspacepackagecrate和module的关系">厘清Workspace、Package、crate和module的关系</a></h2>
 <h3 id="package-包含cargotoml"><a class="header" href="#package-包含cargotoml">Package: 包含Cargo.toml</a></h3>
@@ -4218,7 +4220,7 @@ A package is an artifact managed by Cargo, the Rust package manager.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:11 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:33 UTC 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
 <h3 id="新建"><a class="header" href="#新建">新建</a></h3>
@@ -4339,7 +4341,7 @@ A package is an artifact managed by Cargo, the Rust package manager.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:12 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:34 UTC 2022 -->
 <!--te-->
 <h2 id="rustc"><a class="header" href="#rustc">rustc</a></h2>
 <h3 id="rustc是什么"><a class="header" href="#rustc是什么">rustc是什么</a></h3>
@@ -4940,7 +4942,7 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:13 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:34 UTC 2022 -->
 <!--te-->
 <h2 id="cargo子命令系列-cargo-install"><a class="header" href="#cargo子命令系列-cargo-install">Cargo子命令系列: cargo install <binary crate name></a></h2>
 <h3 id="cargo-watch"><a class="header" href="#cargo-watch">cargo-watch</a></h3>
@@ -4981,7 +4983,7 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:17 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:36 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-25"><a class="header" href="#参考资源-25">参考资源</a></h2>
 <h3 id="online-book-27"><a class="header" href="#online-book-27">online-book</a></h3>
@@ -5003,7 +5005,7 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:15 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:35 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-26"><a class="header" href="#参考资源-26">参考资源</a></h2>
 <h3 id="online-book-28"><a class="header" href="#online-book-28">online-book</a></h3>
@@ -5055,7 +5057,7 @@ fn main() -&gt; sc_cli::Result&lt;()&gt; {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:16 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:36 UTC 2022 -->
 <!--te-->
 <h2 id="1-同步异步阻塞非阻塞概念区别"><a class="header" href="#1-同步异步阻塞非阻塞概念区别">1. 同步/异步、阻塞/非阻塞概念区别</a></h2>
 <h3 id="同步和异步关注的是消息通信机制调用者视角"><a class="header" href="#同步和异步关注的是消息通信机制调用者视角">同步和异步，关注的是消息通信机制。（调用者视角）</a></h3>
@@ -5273,7 +5275,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:14 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:35 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-28"><a class="header" href="#参考资源-28">参考资源</a></h2>
 <h3 id="online-book-30"><a class="header" href="#online-book-30">online-book</a></h3>
@@ -5299,7 +5301,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:15 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:35 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-29"><a class="header" href="#参考资源-29">参考资源</a></h2>
 <h3 id="online-book-31"><a class="header" href="#online-book-31">online-book</a></h3>
@@ -5321,7 +5323,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:16 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:36 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-30"><a class="header" href="#参考资源-30">参考资源</a></h2>
 <h3 id="online-book-32"><a class="header" href="#online-book-32">online-book</a></h3>
@@ -5343,7 +5345,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:18 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:37 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-31"><a class="header" href="#参考资源-31">参考资源</a></h2>
 <h3 id="online-book-33"><a class="header" href="#online-book-33">online-book</a></h3>
@@ -5365,7 +5367,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:18 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:37 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-32"><a class="header" href="#参考资源-32">参考资源</a></h2>
 <h3 id="online-book-34"><a class="header" href="#online-book-34">online-book</a></h3>
@@ -5387,7 +5389,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:17 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:37 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-33"><a class="header" href="#参考资源-33">参考资源</a></h2>
 <h3 id="online-book-35"><a class="header" href="#online-book-35">online-book</a></h3>
@@ -5409,7 +5411,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:41 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:49 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-34"><a class="header" href="#参考资源-34">参考资源</a></h2>
 <h3 id="online-book-36"><a class="header" href="#online-book-36">online-book</a></h3>
@@ -5421,7 +5423,7 @@ req          +---------&gt; |            |   |          | req handler    |
 <li><a href="layer5_ecosystem/1_learning_resource/learning_resource.html#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">学习资源</a></li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:20 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:38 UTC 2022 -->
 <!--te--><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="官方动态"><a class="header" href="#官方动态">官方动态</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="社区特点"><a class="header" href="#社区特点">社区特点</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="学术动态"><a class="header" href="#学术动态">学术动态</a></h1>
@@ -5499,7 +5501,7 @@ req          +---------&gt; |            |   |          | req handler    |
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:26 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:41 UTC 2022 -->
 <!--te-->
 <h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
 <h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
@@ -5681,7 +5683,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:28 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:42 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-36"><a class="header" href="#参考资源-36">参考资源</a></h2>
 <ul>
@@ -5698,7 +5700,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:27 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:42 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-37"><a class="header" href="#参考资源-37">参考资源</a></h2>
 <ul>
@@ -5714,7 +5716,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:27 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:41 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-38"><a class="header" href="#参考资源-38">参考资源</a></h2>
 <ul>
@@ -5730,7 +5732,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:27 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:42 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-39"><a class="header" href="#参考资源-39">参考资源</a></h2>
 <ul>
@@ -5752,7 +5754,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:29 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:43 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-40"><a class="header" href="#参考资源-40">参考资源</a></h2>
 <ul>
@@ -5820,7 +5822,7 @@ Freely”，问题是一旦用户停止运行软件，商店就下线了，借�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:33 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:45 UTC 2022 -->
 <!--te-->
 <h2 id="layers"><a class="header" href="#layers">Layers</a></h2>
 <p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/df67d027097043d3d1c8b180558bb3cc.png" alt="img" /></p>
@@ -6177,7 +6179,7 @@ Rust and just like develop in a common backend.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:37 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:47 UTC 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate-1"><a class="header" href="#gavin-wookpolkadot-and-substrate-1">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链-1"><a class="header" href="#gavin-wook与波卡跨链-1">Gavin Wook与波卡跨链</a></h3>
@@ -7164,7 +7166,7 @@ Blog</strong></a>：对Substrate的简要介绍</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:38 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:48 UTC 2022 -->
 <!--te-->
 <h2 id="初体验substrate链"><a class="header" href="#初体验substrate链">初体验Substrate链</a></h2>
 <p>这里主要使用官方提供的默认模版启动节点。</p>
@@ -7613,6 +7615,7 @@ substrate可以在不分叉的情况下更新runtime，因为运行时的定义�
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
 <ul>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E6%96%87%E6%A1%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98">文档/代码更新问题</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#pallet%E7%BB%84%E6%88%90">Pallet组成</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#1-%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">1. 设置昵称：添加第一个Pallet到Runtime</a>
 <ul>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
@@ -7648,7 +7651,15 @@ substrate可以在不分叉的情况下更新runtime，因为运行时的定义�
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#signed%E4%B8%8Esudo%E6%9C%89%E4%B8%8D%E5%90%8C%E6%9D%83%E9%99%90">signed与sudo有不同权限。</a></li>
 </ul>
 </li>
-<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#3-%E4%B8%8B%E4%B8%80%E4%B8%AA">3. 下一个</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#3-pallet-hooks">3. Pallet Hooks</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#4-pallet-extrinsics">4. Pallet Extrinsics</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#4-pallet-errors">4. Pallet Errors</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#5-pallet-config">5. Pallet Config</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#6-pallet-use-other-pallet">6. Pallet Use Other Pallet</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#7-pallet-extension">7. Pallet Extension</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#8-pallet-debug">8. Pallet Debug</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#9-pallet-rpc">9. Pallet RPC</a></li>
+<li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#10-pallet-benchmarking">10. Pallet Benchmarking</a></li>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
 <ul>
 <li><a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
@@ -7658,11 +7669,16 @@ substrate可以在不分叉的情况下更新runtime，因为运行时的定义�
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:36 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:47 UTC 2022 -->
 <!--te-->
 <h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
 <pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
 </code></pre>
+<h2 id="pallet组成"><a class="header" href="#pallet组成">Pallet组成</a></h2>
+<blockquote>
+<p>使用mindmap</p>
+</blockquote>
+<p><a id="pallet-components"></a>pallet-components</p>
 <h2 id="1-设置昵称添加第一个pallet到runtime"><a class="header" href="#1-设置昵称添加第一个pallet到runtime">1. 设置昵称：添加第一个Pallet到Runtime</a></h2>
 <blockquote>
 <p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
@@ -7858,8 +7874,24 @@ pub enum Error&lt;T&gt; {
 <li>取决于您的construct_runtime中尼克斯托盘的位置！宏，您可能会看到不同的索引编号。不管 index 的值如何，你应该看到错误值是 2，它对应于 Nick 的 Pallet 的 Error 枚举的第三个变体，Unnamed
 变体。这应该不足为奇，因为 Bob 尚未保留昵称，因此无法清除！</li>
 </ul>
-<h2 id="3-下一个"><a class="header" href="#3-下一个">3. 下一个</a></h2>
-<p><a id="next"></a>next</p>
+<h2 id="3-pallet-hooks"><a class="header" href="#3-pallet-hooks">3. Pallet Hooks</a></h2>
+<p><a id="Pallet-Hooks"></a>Pallet-Hooks</p>
+<h2 id="4-pallet-extrinsics"><a class="header" href="#4-pallet-extrinsics">4. Pallet Extrinsics</a></h2>
+<p><a id="Pallet-Extrinsics"></a>Pallet-Extrinsics</p>
+<h2 id="4-pallet-errors"><a class="header" href="#4-pallet-errors">4. Pallet Errors</a></h2>
+<p><a id="Pallet-Errors"></a>Pallet-Errors</p>
+<h2 id="5-pallet-config"><a class="header" href="#5-pallet-config">5. Pallet Config</a></h2>
+<p><a id="Pallet-Config"></a>Pallet-Config</p>
+<h2 id="6-pallet-use-other-pallet"><a class="header" href="#6-pallet-use-other-pallet">6. Pallet Use Other Pallet</a></h2>
+<p><a id="Pallet-Use-Other-Pallet"></a>Pallet-Use-Other-Pallet</p>
+<h2 id="7-pallet-extension"><a class="header" href="#7-pallet-extension">7. Pallet Extension</a></h2>
+<p><a id="Pallet-Extension"></a>Pallet-Extension</p>
+<h2 id="8-pallet-debug"><a class="header" href="#8-pallet-debug">8. Pallet Debug</a></h2>
+<p><a id="Pallet-Debug"></a>Pallet-Debug</p>
+<h2 id="9-pallet-rpc"><a class="header" href="#9-pallet-rpc">9. Pallet RPC</a></h2>
+<p><a id="Pallet-RPC"></a>Pallet-RPC</p>
+<h2 id="10-pallet-benchmarking"><a class="header" href="#10-pallet-benchmarking">10. Pallet Benchmarking</a></h2>
+<p><a id="Pallet-Benchmarking"></a>Pallet-Benchmarking</p>
 <h2 id="参考资料-1"><a class="header" href="#参考资料-1">参考资料</a></h2>
 <h3 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h3>
 <ul>
@@ -7975,7 +8007,8 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg">substrate轻松学：写调度函数</a></p>
 <blockquote>
-<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
+<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed
+transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
 </blockquote>
 <ul>
 <li>Signed transactions</li>
@@ -7984,13 +8017,13 @@ pub enum Error&lt;T&gt; {
 <li>示例</li>
 <li></li>
 </ul>
-<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
+<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>
+&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
 </li>
 <li>
-<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></p>
-<blockquote>
-<p>在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
-</blockquote>
+<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a>
+&gt;
+在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
 <ul>
 <li>错误类型的定义</li>
 <li>在函数中返回错误</li>
@@ -8022,7 +8055,8 @@ pub enum Error&lt;T&gt; {
 <li>
 <p>在runtime中直接指定某个类型为其它的pallet</p>
 <blockquote>
-<p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
+<p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances
+pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
 </blockquote>
 <ul>
 <li><a href="https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343">详情</a></li>
@@ -8079,10 +8113,9 @@ pub enum Error&lt;T&gt; {
 <p><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></p>
 </li>
 <li>
-<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></p>
-<blockquote>
-<p>pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
-</blockquote>
+<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a>
+&gt;
+pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
 <ol>
 <li>编写 mock runtime;</li>
 <li>编写pallet的genesisconfig;</li>
@@ -8203,7 +8236,7 @@ pub enum Error&lt;T&gt; {
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:37 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:48 UTC 2022 -->
 <!--te-->
 <div id="admonition-他山之石可以攻玉" class="admonition tip">
 <div class="admonition-title">
@@ -8361,7 +8394,7 @@ transaction fees and upgrades.</p>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:35 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:46 UTC 2022 -->
 <!--te-->
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <ul>
@@ -8660,7 +8693,7 @@ Josep M Sobrepere.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:34 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:45 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-47"><a class="header" href="#参考资源-47">参考资源</a></h2>
 <h3 id="online-book-40"><a class="header" href="#online-book-40">online-book</a></h3>
@@ -8685,7 +8718,7 @@ Josep M Sobrepere.</li>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:34 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:46 UTC 2022 -->
 <!--te-->
 <h2 id="参考资源-48"><a class="header" href="#参考资源-48">参考资源</a></h2>
 <h3 id="online-book-41"><a class="header" href="#online-book-41">online-book</a></h3>
@@ -8709,7 +8742,16 @@ Josep M Sobrepere.</li>
 <li>
 <p>Substrate深入pallet:</p>
 <ul>
-<li>[ ] substrate next (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#next">next</a>)</li>
+<li>[ ] mindmap (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#pallet-components">pallet-components</a>)</li>
+<li>[ ] pallet hooks 使用 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Hooks">Pallet-Hooks</a>)</li>
+<li>[ ] pallet extrinsics 使用 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Extrinsics">Pallet-Extrinsics</a>)</li>
+<li>[ ] pallet errors 使用 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Errors">Pallet-Errors</a>)</li>
+<li>[ ] pallet config 使用 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Config">Pallet-Config</a>)</li>
+<li>[ ] pallet 使用其他 Pallet (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Use-Other-Pallet">Pallet-Use-Other-Pallet</a>)</li>
+<li>[ ] pallet 扩展 使用 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Extension">Pallet-Extension</a>)</li>
+<li>[ ] pallet 调试 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Debug">Pallet-Debug</a>)</li>
+<li>[ ] pallet rpc 使用 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-RPC">Pallet-RPC</a>)</li>
+<li>[ ] pallet 基准测试 (<a href="layer5_ecosystem/7_business/blockchain/substrate/substrate_deep_try.html#Pallet-Benchmarking">Pallet-Benchmarking</a>)</li>
 </ul>
 </li>
 </ul>

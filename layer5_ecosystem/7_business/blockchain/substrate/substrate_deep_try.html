@@ -186,6 +186,7 @@
 <li><a href="#substrate%E6%B7%B1%E5%85%A5%E5%B0%9D%E8%AF%95pallet">Substrate深入尝试pallet</a>
 <ul>
 <li><a href="#%E6%96%87%E6%A1%A3%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98">文档/代码更新问题</a></li>
+<li><a href="#pallet%E7%BB%84%E6%88%90">Pallet组成</a></li>
 <li><a href="#1-%E8%AE%BE%E7%BD%AE%E6%98%B5%E7%A7%B0%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%80%E4%B8%AApallet%E5%88%B0runtime">1. 设置昵称：添加第一个Pallet到Runtime</a>
 <ul>
 <li><a href="#runtime%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90">runtime结构分析</a></li>
@@ -221,7 +222,15 @@
 <li><a href="#signed%E4%B8%8Esudo%E6%9C%89%E4%B8%8D%E5%90%8C%E6%9D%83%E9%99%90">signed与sudo有不同权限。</a></li>
 </ul>
 </li>
-<li><a href="#3-%E4%B8%8B%E4%B8%80%E4%B8%AA">3. 下一个</a></li>
+<li><a href="#3-pallet-hooks">3. Pallet Hooks</a></li>
+<li><a href="#4-pallet-extrinsics">4. Pallet Extrinsics</a></li>
+<li><a href="#4-pallet-errors">4. Pallet Errors</a></li>
+<li><a href="#5-pallet-config">5. Pallet Config</a></li>
+<li><a href="#6-pallet-use-other-pallet">6. Pallet Use Other Pallet</a></li>
+<li><a href="#7-pallet-extension">7. Pallet Extension</a></li>
+<li><a href="#8-pallet-debug">8. Pallet Debug</a></li>
+<li><a href="#9-pallet-rpc">9. Pallet RPC</a></li>
+<li><a href="#10-pallet-benchmarking">10. Pallet Benchmarking</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
 <ul>
 <li><a href="#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
@@ -231,11 +240,16 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 13 03:49:36 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 13 06:58:47 UTC 2022 -->
 <!--te-->
 <h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
 <pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
 </code></pre>
+<h2 id="pallet组成"><a class="header" href="#pallet组成">Pallet组成</a></h2>
+<blockquote>
+<p>使用mindmap</p>
+</blockquote>
+<p><a id="pallet-components"></a>pallet-components</p>
 <h2 id="1-设置昵称添加第一个pallet到runtime"><a class="header" href="#1-设置昵称添加第一个pallet到runtime">1. 设置昵称：添加第一个Pallet到Runtime</a></h2>
 <blockquote>
 <p>substrate node template提供了一个最小的可工作的运行时，但是为了保持精炼，它并不包括Frame中的大多数的Pallet</p>
@@ -431,8 +445,24 @@ pub enum Error&lt;T&gt; {
 <li>取决于您的construct_runtime中尼克斯托盘的位置！宏，您可能会看到不同的索引编号。不管 index 的值如何，你应该看到错误值是 2，它对应于 Nick 的 Pallet 的 Error 枚举的第三个变体，Unnamed
 变体。这应该不足为奇，因为 Bob 尚未保留昵称，因此无法清除！</li>
 </ul>
-<h2 id="3-下一个"><a class="header" href="#3-下一个">3. 下一个</a></h2>
-<p><a id="next"></a>next</p>
+<h2 id="3-pallet-hooks"><a class="header" href="#3-pallet-hooks">3. Pallet Hooks</a></h2>
+<p><a id="Pallet-Hooks"></a>Pallet-Hooks</p>
+<h2 id="4-pallet-extrinsics"><a class="header" href="#4-pallet-extrinsics">4. Pallet Extrinsics</a></h2>
+<p><a id="Pallet-Extrinsics"></a>Pallet-Extrinsics</p>
+<h2 id="4-pallet-errors"><a class="header" href="#4-pallet-errors">4. Pallet Errors</a></h2>
+<p><a id="Pallet-Errors"></a>Pallet-Errors</p>
+<h2 id="5-pallet-config"><a class="header" href="#5-pallet-config">5. Pallet Config</a></h2>
+<p><a id="Pallet-Config"></a>Pallet-Config</p>
+<h2 id="6-pallet-use-other-pallet"><a class="header" href="#6-pallet-use-other-pallet">6. Pallet Use Other Pallet</a></h2>
+<p><a id="Pallet-Use-Other-Pallet"></a>Pallet-Use-Other-Pallet</p>
+<h2 id="7-pallet-extension"><a class="header" href="#7-pallet-extension">7. Pallet Extension</a></h2>
+<p><a id="Pallet-Extension"></a>Pallet-Extension</p>
+<h2 id="8-pallet-debug"><a class="header" href="#8-pallet-debug">8. Pallet Debug</a></h2>
+<p><a id="Pallet-Debug"></a>Pallet-Debug</p>
+<h2 id="9-pallet-rpc"><a class="header" href="#9-pallet-rpc">9. Pallet RPC</a></h2>
+<p><a id="Pallet-RPC"></a>Pallet-RPC</p>
+<h2 id="10-pallet-benchmarking"><a class="header" href="#10-pallet-benchmarking">10. Pallet Benchmarking</a></h2>
+<p><a id="Pallet-Benchmarking"></a>Pallet-Benchmarking</p>
 <h2 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h2>
 <h3 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h3>
 <ul>
@@ -548,7 +578,8 @@ pub enum Error&lt;T&gt; {
 <li>
 <p><a href="https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg">substrate轻松学：写调度函数</a></p>
 <blockquote>
-<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
+<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed
+transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
 </blockquote>
 <ul>
 <li>Signed transactions</li>
@@ -557,13 +588,13 @@ pub enum Error&lt;T&gt; {
 <li>示例</li>
 <li></li>
 </ul>
-<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
+<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>
+&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
 </li>
 <li>
-<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a></p>
-<blockquote>
-<p>在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
-</blockquote>
+<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a>
+&gt;
+在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
 <ul>
 <li>错误类型的定义</li>
 <li>在函数中返回错误</li>
@@ -595,7 +626,8 @@ pub enum Error&lt;T&gt; {
 <li>
 <p>在runtime中直接指定某个类型为其它的pallet</p>
 <blockquote>
-<p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
+<p>这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances
+pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者</p>
 </blockquote>
 <ul>
 <li><a href="https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343">详情</a></li>
@@ -652,10 +684,9 @@ pub enum Error&lt;T&gt; {
 <p><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></p>
 </li>
 <li>
-<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></p>
-<blockquote>
-<p>pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
-</blockquote>
+<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a>
+&gt;
+pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
 <ol>
 <li>编写 mock runtime;</li>
 <li>编写pallet的genesisconfig;</li>
