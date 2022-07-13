@@ -1,40 +1,41 @@
 # Substrate深入尝试pallet
 
 <!--ts-->
+
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
-   * [文档/代码更新问题](#文档代码更新问题)
-   * [Pallet组成](#pallet组成)
-   * [1. 设置昵称：添加第一个Pallet到Runtime](#1-设置昵称添加第一个pallet到runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
-         * [[package]{...}](#package)
-         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
-         * [[dependencies]{...}](#dependencies)
-         * [[build-dependencies]{...}](#build-dependencies)
-         * [[features]{...}](#features)
-      * [四步添加pallet](#四步添加pallet)
-         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
-         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
-         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
-         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
-      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-      * [验证功能](#验证功能)
-         * [为帐户设置昵称](#为帐户设置昵称)
-         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-      * [可能出现的问题](#可能出现的问题)
-   * [2. 指定调用源头unsigned, signed or sudo](#2-指定调用源头unsigned-signed-or-sudo)
-      * [signed与sudo有不同权限。](#signed与sudo有不同权限)
-   * [3. Pallet Hooks](#3-pallet-hooks)
-   * [4. Pallet Extrinsics](#4-pallet-extrinsics)
-   * [4. Pallet Errors](#4-pallet-errors)
-   * [5. Pallet Config](#5-pallet-config)
-   * [6. Pallet Use Other Pallet](#6-pallet-use-other-pallet)
-   * [7. Pallet Extension](#7-pallet-extension)
-   * [8. Pallet Debug](#8-pallet-debug)
-   * [9. Pallet RPC](#9-pallet-rpc)
-   * [10. Pallet Benchmarking](#10-pallet-benchmarking)
-   * [参考资料](#参考资料)
-      * [pallet相关](#pallet相关)
+    * [文档/代码更新问题](#文档代码更新问题)
+    * [Pallet组成](#pallet组成)
+    * [1. 设置昵称：添加第一个Pallet到Runtime](#1-设置昵称添加第一个pallet到runtime)
+        * [runtime结构分析](#runtime结构分析)
+        * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+            * [[package]{...}](#package)
+            * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+            * [[dependencies]{...}](#dependencies)
+            * [[build-dependencies]{...}](#build-dependencies)
+            * [[features]{...}](#features)
+        * [四步添加pallet](#四步添加pallet)
+            * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+            * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+            * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+            * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+        * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+        * [验证功能](#验证功能)
+            * [为帐户设置昵称](#为帐户设置昵称)
+            * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+        * [可能出现的问题](#可能出现的问题)
+    * [2. 指定调用源头unsigned, signed or sudo](#2-指定调用源头unsigned-signed-or-sudo)
+        * [signed与sudo有不同权限。](#signed与sudo有不同权限)
+    * [3. Pallet Hooks](#3-pallet-hooks)
+    * [4. Pallet Extrinsics](#4-pallet-extrinsics)
+    * [4. Pallet Errors](#4-pallet-errors)
+    * [5. Pallet Config](#5-pallet-config)
+    * [6. Pallet Use Other Pallet](#6-pallet-use-other-pallet)
+    * [7. Pallet Extension](#7-pallet-extension)
+    * [8. Pallet Debug](#8-pallet-debug)
+    * [9. Pallet RPC](#9-pallet-rpc)
+    * [10. Pallet Benchmarking](#10-pallet-benchmarking)
+    * [参考资料](#参考资料)
+        * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Wed Jul 13 08:42:25 UTC 2022 -->
@@ -368,8 +369,9 @@ pub enum Error<T> {
     - [资料](https://docs.substrate.io/v3/concepts/execution/)
     - [substrate源码](https://paritytech.github.io/substrate/master/frame_support/traits/trait.Hooks.html)
 - [substrate轻松学：写调度函数](https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg)
-  > 调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed
-  transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。
+  > 调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.
+  > 在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。
+  > 而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。
     - Signed transactions
     - Unsigned transactions
     - 通常写法：调度函数的位置->函数体的写法->权重->transactional
