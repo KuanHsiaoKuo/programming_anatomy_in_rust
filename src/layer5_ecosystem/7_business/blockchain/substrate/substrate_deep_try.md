@@ -242,6 +242,9 @@ pub enum Error<T> {
 - 取决于您的construct_runtime中尼克斯托盘的位置！宏，您可能会看到不同的索引编号。不管 index 的值如何，你应该看到错误值是 2，它对应于 Nick 的 Pallet 的 Error 枚举的第三个变体，Unnamed
   变体。这应该不足为奇，因为 Bob 尚未保留昵称，因此无法清除！
 
+## 3. 下一个
+{{#check next | substrate next}}
+
 ## 参考资料
 
 ### pallet相关

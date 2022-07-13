@@ -2,34 +2,35 @@
 
 > 以rust为例分享学习编程常考虑的方方面面
 <!--ts-->
+
 * [编程解剖 in rust](#编程解剖-in-rust)
-   * [本地运行](#本地运行)
-   * [git lfs配置](#git-lfs配置)
-   * [项目基础结构](#项目基础结构)
-   * [用到的工具](#用到的工具)
-      * [mdbook-checklist: 整理待办事项](#mdbook-checklist-整理待办事项)
-      * [mdbook-pagetoc: 添加业内目录](#mdbook-pagetoc-添加业内目录)
-      * [mdbook-admonish: 使用新的css文件](#mdbook-admonish-使用新的css文件)
-         * [相关资源](#相关资源)
-         * [特别语法](#特别语法)
-            * [自定义标题](#自定义标题)
-            * [内嵌代码](#内嵌代码)
-            * [自定义样式](#自定义样式)
-            * [可折叠](#可折叠)
-         * [常用格式](#常用格式)
-            * [note](#note)
-            * [abstract, summary, tldr](#abstract-summary-tldr)
-            * [info, todo](#info-todo)
-            * [tip, hint, important](#tip-hint-important)
-            * [success, check, done](#success-check-done)
-            * [question, help, faq](#question-help-faq)
-            * [warning, caution, attention](#warning-caution-attention)
-            * [failure, fail, missing](#failure-fail-missing)
-            * [danger, error](#danger-error)
-            * [bug](#bug)
-            * [example](#example)
-            * [quote, cite](#quote-cite)
-   * [github action](#github-action)
+    * [本地运行](#本地运行)
+    * [git lfs配置](#git-lfs配置)
+    * [项目基础结构](#项目基础结构)
+    * [用到的工具](#用到的工具)
+        * [mdbook-checklist: 整理待办事项](#mdbook-checklist-整理待办事项)
+        * [mdbook-pagetoc: 添加业内目录](#mdbook-pagetoc-添加业内目录)
+        * [mdbook-admonish: 使用新的css文件](#mdbook-admonish-使用新的css文件)
+            * [相关资源](#相关资源)
+            * [特别语法](#特别语法)
+                * [自定义标题](#自定义标题)
+                * [内嵌代码](#内嵌代码)
+                * [自定义样式](#自定义样式)
+                * [可折叠](#可折叠)
+            * [常用格式](#常用格式)
+                * [note](#note)
+                * [abstract, summary, tldr](#abstract-summary-tldr)
+                * [info, todo](#info-todo)
+                * [tip, hint, important](#tip-hint-important)
+                * [success, check, done](#success-check-done)
+                * [question, help, faq](#question-help-faq)
+                * [warning, caution, attention](#warning-caution-attention)
+                * [failure, fail, missing](#failure-fail-missing)
+                * [danger, error](#danger-error)
+                * [bug](#bug)
+                * [example](#example)
+                * [quote, cite](#quote-cite)
+    * [github action](#github-action)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Tue Jul 12 11:41:57 UTC 2022 -->
@@ -55,6 +56,26 @@ git lfs track '*.img'
 ## 项目基础结构
 
 1. 每个文件夹下的同名md文件介绍当前文件夹的内容
+2. 关于待完成内容：主要基于mdbook-checklist插件
+
+```shell
+    - [待完成](checklist.md) 
+```
+
+3. 添加待完成锚点的格式
+
+> 只支持英文
+
+```shell
+{{#check Note-1 | This is an important note}}
+```
+- checklist页面渲染效果：
+```none
+- <SUMMARY对应标题名>
+    - [This is an importtant note](Note-1)
+```
+
+> 这种写法会自动在本地生成md文件：src/checklist.md, 但是不用管它，最后渲染还是以mdbook-checklist的内容为准
 
 ## 用到的工具
 

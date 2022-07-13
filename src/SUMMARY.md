@@ -1,6 +1,7 @@
 # Summary
 
-- [总览](./overview.md)
+- [总览](../README.md)
+    - [待完成](checklist.md) 
     - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
     - [Rust话题](layer5_ecosystem/1_learning_resource/talks.md)
 - [Layer1: 底层抽象](./layer1_underlying_abstract/layer1_underlying_abstract.md)
