@@ -1,30 +1,31 @@
 # Substrate深入尝试pallet
 
 <!--ts-->
+
 * [Substrate深入尝试pallet](#substrate深入尝试pallet)
-   * [文档/代码更新问题](#文档代码更新问题)
-   * [1. 设置昵称：添加第一个Pallet到Runtime](#1-设置昵称添加第一个pallet到runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
-         * [[package]{...}](#package)
-         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
-         * [[dependencies]{...}](#dependencies)
-         * [[build-dependencies]{...}](#build-dependencies)
-         * [[features]{...}](#features)
-      * [四步添加pallet](#四步添加pallet)
-         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
-         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
-         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
-         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
-      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-      * [验证功能](#验证功能)
-         * [为帐户设置昵称](#为帐户设置昵称)
-         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-      * [可能出现的问题](#可能出现的问题)
-   * [2. 指定调用源头unsigned, signed or sudo](#2-指定调用源头unsigned-signed-or-sudo)
-      * [signed与sudo有不同权限。](#signed与sudo有不同权限)
-   * [参考资料](#参考资料)
-      * [pallet相关](#pallet相关)
+    * [文档/代码更新问题](#文档代码更新问题)
+    * [1. 设置昵称：添加第一个Pallet到Runtime](#1-设置昵称添加第一个pallet到runtime)
+        * [runtime结构分析](#runtime结构分析)
+        * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+            * [[package]{...}](#package)
+            * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+            * [[dependencies]{...}](#dependencies)
+            * [[build-dependencies]{...}](#build-dependencies)
+            * [[features]{...}](#features)
+        * [四步添加pallet](#四步添加pallet)
+            * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+            * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+            * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+            * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+        * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+        * [验证功能](#验证功能)
+            * [为帐户设置昵称](#为帐户设置昵称)
+            * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+        * [可能出现的问题](#可能出现的问题)
+    * [2. 指定调用源头unsigned, signed or sudo](#2-指定调用源头unsigned-signed-or-sudo)
+        * [signed与sudo有不同权限。](#signed与sudo有不同权限)
+    * [参考资料](#参考资料)
+        * [pallet相关](#pallet相关)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Tue Jul 12 12:46:46 UTC 2022 -->
@@ -36,6 +37,12 @@
 ```admonisth warn title='substrate文档更新带来的问题'
 由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
 ```
+
+## Pallet组成
+
+> 使用mindmap
+
+{{#check pallet-components | mindmap}}
 
 ## 1. 设置昵称：添加第一个Pallet到Runtime
 
@@ -242,8 +249,41 @@ pub enum Error<T> {
 - 取决于您的construct_runtime中尼克斯托盘的位置！宏，您可能会看到不同的索引编号。不管 index 的值如何，你应该看到错误值是 2，它对应于 Nick 的 Pallet 的 Error 枚举的第三个变体，Unnamed
   变体。这应该不足为奇，因为 Bob 尚未保留昵称，因此无法清除！
 
-## 3. 下一个
-{{#check next | substrate next}}
+## 3. Pallet Hooks
+
+{{#check Pallet-Hooks | pallet hooks 使用}}
+
+## 4. Pallet Extrinsics
+
+{{#check Pallet-Extrinsics | pallet extrinsics 使用}}
+
+## 4. Pallet Errors
+
+{{#check Pallet-Errors | pallet errors 使用}}
+
+## 5. Pallet Config
+
+{{#check Pallet-Config | pallet config 使用}}
+
+## 6. Pallet Use Other Pallet
+
+{{#check Pallet-Use-Other-Pallet | pallet 使用其他 Pallet}}
+
+## 7. Pallet Extension
+
+{{#check Pallet-Extension | pallet 扩展 使用}}
+
+## 8. Pallet Debug
+
+{{#check Pallet-Debug | pallet 调试}}
+
+## 9. Pallet RPC
+
+{{#check Pallet-RPC | pallet rpc 使用}}
+
+## 10. Pallet Benchmarking
+
+{{#check Pallet-Benchmarking | pallet 基准测试}}
 
 ## 参考资料
 
@@ -309,15 +349,18 @@ pub enum Error<T> {
     - [资料](https://docs.substrate.io/v3/concepts/execution/)
     - [substrate源码](https://paritytech.github.io/substrate/master/frame_support/traits/trait.Hooks.html)
 - [substrate轻松学：写调度函数](https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg)
-  > 调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。
+  > 调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.在substrate中共有三种Extrinsics，分别是Inherents、Signed
+  transactions和Unsigned transactions。而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。
     - Signed transactions
     - Unsigned transactions
     - 通常写法：调度函数的位置->函数体的写法->权重->transactional
     - 示例
     -
-  参考：[extrinsics](https://docs.substrate.io/v3/concepts/extrinsics/)&[weights-and-fees](https://docs.substrate.io/v3/runtime/weights-and-fees/)
+  参考：[extrinsics](https://docs.substrate.io/v3/concepts/extrinsics/)
+  &[weights-and-fees](https://docs.substrate.io/v3/runtime/weights-and-fees/)
 - [pallet中Error类型的使用](https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA)
-  > 在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。
+  >
+  在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。
     - 错误类型的定义
     - 在函数中返回错误
     - 简单示例
@@ -334,7 +377,8 @@ pub enum Error<T> {
         2. 指定某个自定义的pallet: 在pallet的config中定义类型，然后runtime中使用时指定这个类型为frame中指定某个自定义的pallet；
         3. 封装和扩展现有的 pallet 。
     - 在runtime中直接指定某个类型为其它的pallet
-      > 这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者
+      > 这种方式比较常见的就是在pallet中定义currency类型，然后用指定currency类型为balances
+      pallet。详细的可以看substrate中node中的使用，在pallet_assets中使用了pallet_balances，就是通过指定前者的currency类型为后者
         - [详情](https://github.com/paritytech/substrate/blob/master/bin/node/runtime/src/lib.rs#L1343)
     - pallet中使用其它pallet的storage
       > 自定义两个pallet，分别叫做pallet-use-other-pallet1和pallet-storage-provider，然后我们在前一个pallet中读取和存储后一个pallet
@@ -359,7 +403,8 @@ pub enum Error<T> {
     - [文档资料](https://docs.substrate.io/v3/runtime/debugging/)
 - [为pallet编写tests](https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg)
 - [为pallet自定义rpc接口](https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA)
-  > pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：
+  >
+  pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：
     1. 编写 mock runtime;
     2. 编写pallet的genesisconfig;
     3. 编写测试。

@@ -55,6 +55,8 @@ git lfs track '*.img'
 
 ## 项目基础结构
 
+{{#check <name> | <description>}}
+
 1. 每个文件夹下的同名md文件介绍当前文件夹的内容
 2. 关于待完成内容：主要基于mdbook-checklist插件
 
@@ -64,15 +66,18 @@ git lfs track '*.img'
 
 3. 添加待完成锚点的格式
 
-> 只支持英文
+> check空格之后的内容不能有空格, 且只能为英文
+> " | "之后的内容可以有空格，可以为中文
 
 ```shell
 {{#check Note-1 | This is an important note}}
 ```
+
 - checklist页面渲染效果：
+
 ```none
 - <SUMMARY对应标题名>
-    - [This is an importtant note](Note-1)
+    - [This is an important note](Note-1)
 ```
 
 > 这种写法会自动在本地生成md文件：src/checklist.md, 但是不用管它，最后渲染还是以mdbook-checklist的内容为准
