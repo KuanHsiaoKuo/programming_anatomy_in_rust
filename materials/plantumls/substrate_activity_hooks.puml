@@ -4,6 +4,13 @@ partition #lightGreen "Initializes the block" {
     :on_initialize
     区块初始化的时候调用;
 }
+note right
+    会执行所有pallet
+    ====
+    就是construct_runtime!中包含的pallet，
+    并且也是按照construct_runtime!中定义的顺序的on_initialize函数，
+    不过会最先执行System模块的（frame-system）.
+end note
 partition "Upgrade the block" {
 :pre_upgrade
 升级之前的检查;
@@ -22,9 +29,21 @@ partition "Executes extrinsics" {
 可以在此函数中长时间的执行需要链下执行的功能。
 该函数会在每次区块导入的时候调用;
 }
+note right
+区块初始化后，就会根据交易（extrinsics）列表的顺序执行。
+end note
 partition "Finalizes the block" {
 :on_idle：区块finalize的时候调用，不过比on_finalize先调用;
 :on_initialize：区块初始化的时候调用;
 }
+note right
+区块中的交易执行完后，确认区块
+====
+确认区块时会调用所有pallet
+（就是construct_runtime!中包含的pallet，
+并且也是按照construct_runtime!中定义的顺序）
+的on_idle和on_finalize函数，
+不过这次最后执行System模块（frame-system）的hooks函数.
+end note
 stop
 @enduml

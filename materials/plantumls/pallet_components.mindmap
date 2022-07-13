@@ -5,6 +5,10 @@
 ** Runtime
 *** 3. 运行时配置：Runtime Configuration Trait
 *** 4. 运行时存储: Runtime Storage
+**** Storage Value
+**** Storage Map
+**** Storage Double Map
+**** Storage N Map
 *** 5. 运行时事件: Runtime Events
 ** 6. 生命周期钩子函数-Hooks
 *** normal
