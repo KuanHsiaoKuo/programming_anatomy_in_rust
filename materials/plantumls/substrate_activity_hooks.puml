@@ -1,0 +1,30 @@
+@startuml
+start
+partition #lightGreen "Initializes the block" {
+    :on_initialize
+    区块初始化的时候调用;
+}
+partition "Upgrade the block" {
+:pre_upgrade
+升级之前的检查;
+:on_runtime_upgrade
+执行模块升级的时候调用;
+:post_upgrade
+升级之后的处理;
+}
+partition Test {
+:integrity_test
+运行集成测试;
+}
+partition "Executes extrinsics" {
+:offchain_worker：
+在一个 pallet 上实现此函数后
+可以在此函数中长时间的执行需要链下执行的功能。
+该函数会在每次区块导入的时候调用;
+}
+partition "Finalizes the block" {
+:on_idle：区块finalize的时候调用，不过比on_finalize先调用;
+:on_initialize：区块初始化的时候调用;
+}
+stop
+@enduml

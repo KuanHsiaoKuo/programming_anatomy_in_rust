@@ -267,7 +267,11 @@ pub enum Error<T> {
 
 ## 3. Pallet Hooks
 
-{{#check Pallet-Hooks | pallet hooks 使用}}
+~~~admonish info title="基于执行过程看hooks"
+```plantuml
+{{#include ../../../../../materials/plantumls/substrate_activity_hooks.puml:1:}}
+```
+~~~
 
 ## 4. Pallet Extrinsics
 
