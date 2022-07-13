@@ -1,0 +1,21 @@
+@startmindmap
+* Pallet基本格式
+** 1. 依赖：Imports and Dependencies
+** 2. 类型声明: Declaration of the Pallet type
+** Runtime
+*** 3. 运行时配置：Runtime Configuration Trait
+*** 4. 运行时存储: Runtime Storage
+*** 5. 运行时事件: Runtime Events
+** 6. 生命周期钩子函数-Hooks
+*** normal
+**** on_initialize
+**** on_idle
+**** on_finalize
+*** upgrade
+**** pre_upgrade
+**** on_runtime_upgrade
+**** post_upgrade
+*** offchain_worker
+*** integrity_test
+** 7. Extrinsics: 对外提供的功能
+@endmindmap
