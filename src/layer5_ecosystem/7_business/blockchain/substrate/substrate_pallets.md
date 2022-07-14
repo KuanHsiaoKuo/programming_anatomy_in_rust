@@ -435,7 +435,7 @@ pub enum Error<T> {
 - [learn-substrate-easy/8.4Hooks函数使用.md at main · KuanHsiaoKuo/learn-substrate-easy](https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.4Hooks%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8.md)
 - [hooks: pallet的🪝钩子函数使用](https://web.archive.org/web/20220628021501/https://mp.weixin.qq.com/s/tPyB9CuTVP2Y1DGgl_VPyQ)
 
-  ![图片](https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/assets/%E8%BF%90%E8%A1%8C%E5%9B%BE.PNG)
+  ![运行图](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/%E8%BF%90%E8%A1%8C%E5%9B%BE.png)
 
 ```admonish tip title='交易到打包的过程'
 1. 用户通过钱包发起交易;
@@ -444,7 +444,7 @@ pub enum Error<T> {
   然后将交易打包到区块中;
 4. 打包好区块后，将区块广播到网络中;
 5. 其它每个节点收到区块后验证，然后执行区块里面的交易，更新自己本地的账本。
-``` 
+```
 
     - substrate中的执行过程
         1. 初始化区块（Initializes the block）
