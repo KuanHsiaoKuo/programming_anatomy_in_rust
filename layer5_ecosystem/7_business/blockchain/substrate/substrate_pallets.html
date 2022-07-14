@@ -236,12 +236,41 @@
 </li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a>
 <ul>
-<li><a href="#pallet%E7%9B%B8%E5%85%B3">pallet相关</a></li>
+<li><a href="#pallet%E5%9F%BA%E7%A1%80">pallet基础</a>
+<ul>
+<li><a href="#%E5%B0%9D%E8%AF%95%E6%B7%BB%E5%8A%A0pallet%E5%88%B0runtime">尝试添加pallet到runtime</a></li>
+<li><a href="#%E7%BC%96%E5%86%99pallet%E5%88%B0rust%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">编写pallet到rust前置知识</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E7%AE%80%E5%8D%95%E5%88%B0pallet">编写简单到pallet</a></li>
+<li><a href="#pallet%E7%9A%84%E7%BB%84%E6%88%90">pallet的组成</a></li>
+</ul>
+</li>
+<li><a href="#pallet%E6%8A%80%E5%B7%A7%E7%BB%86%E8%8A%82">Pallet技巧细节</a>
+<ul>
+<li><a href="#storage%E9%93%BE%E4%B8%8A%E5%90%84%E4%B8%AA%E7%B1%BB%E5%9E%8B%E4%BD%BF%E7%94%A8">storage（链上）各个类型使用</a></li>
+<li><a href="#error%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8">Error类型的使用</a></li>
+<li><a href="#%E5%86%99%E8%B0%83%E5%BA%A6%E5%87%BD%E6%95%B0%E7%9A%84%E5%A5%97%E8%B7%AF">写调度函数的套路</a></li>
+<li><a href="#hooks%E7%9A%84%E4%BD%BF%E7%94%A8">hooks的使用</a></li>
+<li><a href="#pallet%E4%B8%AD%E7%9A%84config">pallet中的Config</a></li>
+<li><a href="#%E5%9C%A8pallet%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AE%83pallet">在pallet中使用其它pallet</a></li>
+<li><a href="#%E5%B0%81%E8%A3%85%E5%92%8C%E6%89%A9%E5%B1%95%E7%8E%B0%E6%9C%89pallet">封装和扩展现有pallet</a></li>
+<li><a href="#%E8%B0%83%E8%AF%95">调试</a></li>
+<li><a href="#pallet%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">pallet中的类型转换；</a></li>
+<li><a href="#%E5%9C%A8pallet%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%93%BE%E4%B8%8B%E5%B7%A5%E4%BD%9C%E8%80%85offchain-worker">在pallet中使用链下工作者（Offchain worker）</a></li>
+<li><a href="#%E5%9C%A8pallet%E4%B8%AD%E9%93%BE%E4%B8%8A%E5%86%99%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8offchain-index">在pallet中链上写本地存储（offchain index）；</a></li>
+<li><a href="#%E5%9C%A8pallet%E7%9A%84ocw%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%93%BE%E4%B8%8B%E5%AD%98%E5%82%A8offchain-storage">在pallet的ocw中使用链下存储（offchain storage）；</a></li>
+<li><a href="#%E5%9C%A8pallet%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AE%83pallet%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AE%83pallet%E7%9A%84%E5%AD%98%E5%82%A8">在pallet中使用其它pallet（使用其它pallet的存储）；</a></li>
+<li><a href="#%E5%9C%A8pallet%E4%B8%AD%E6%B7%BB%E5%8A%A0rpc%E6%8E%A5%E5%8F%A3">在pallet中添加rpc接口</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95">编写测试</a></li>
+<li><a href="#benchmarking">benchmarking</a></li>
+<li><a href="#%E4%B8%BA%E6%9F%90%E4%BA%9Btrait%E6%8F%90%E4%BE%9B%E9%BB%98%E8%AE%A4%E5%AE%9E%E7%8E%B0">为某些trait提供默认实现。</a></li>
+<li><a href="#%E5%8D%87%E7%BA%A7">升级</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Thu Jul 14 08:51:02 UTC 2022 -->
+<!-- Added by: runner, at: Thu Jul 14 09:54:41 UTC 2022 -->
 <!--te-->
 <h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
 <pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
@@ -536,7 +565,8 @@ pub enum Error&lt;T&gt; {
 <h2 id="10-pallet-benchmarking"><a class="header" href="#10-pallet-benchmarking">10. Pallet Benchmarking</a></h2>
 <p><a id="Pallet-Benchmarking"></a>Pallet-Benchmarking</p>
 <h1 id="参考资料"><a class="header" href="#参考资料">参考资料</a></h1>
-<h2 id="pallet相关"><a class="header" href="#pallet相关">pallet相关</a></h2>
+<h2 id="pallet基础"><a class="header" href="#pallet基础">pallet基础</a></h2>
+<h3 id="尝试添加pallet到runtime"><a class="header" href="#尝试添加pallet到runtime">尝试添加pallet到runtime</a></h3>
 <ul>
 <li>
 <p><a href="https://web.archive.org/web/20220628065009/https://mp.weixin.qq.com/s/iQ6a-diWMfYDghuLVPJd9Q">添加一个pallet到runtime</a></p>
@@ -553,6 +583,9 @@ pub enum Error&lt;T&gt; {
 <li><a href="https://docs.substrate.io/tutorials/work-with-pallets/add-a-pallet/">Add a pallet to the runtime | Substrate_ Docs</a></li>
 </ul>
 </li>
+</ul>
+<h3 id="编写pallet到rust前置知识"><a class="header" href="#编写pallet到rust前置知识">编写pallet到rust前置知识</a></h3>
+<ul>
 <li>
 <p><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/5%E7%BC%96%E5%86%99pallet%E7%9A%84Rust%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86.md">learn-substrate-easy/5编写pallet的Rust前置知识.md at main · KuanHsiaoKuo/learn-substrate-easy</a></p>
 <blockquote>
@@ -566,8 +599,10 @@ pub enum Error&lt;T&gt; {
 <li>定义Config trait，然后为Pallet实现相应的trait，最后在main函数中使用它</li>
 </ul>
 </li>
-<li>
-<p><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/6%E7%BC%96%E5%86%99%E7%AE%80%E5%8D%95%E7%9A%84pallet.md">learn-substrate-easy/6编写简单的pallet.md at main · KuanHsiaoKuo/learn-substrate-easy</a></p>
+</ul>
+<h3 id="编写简单到pallet"><a class="header" href="#编写简单到pallet">编写简单到pallet</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/6%E7%BC%96%E5%86%99%E7%AE%80%E5%8D%95%E7%9A%84pallet.md">learn-substrate-easy/6编写简单的pallet.md at main · KuanHsiaoKuo/learn-substrate-easy</a>
 <ul>
 <li>
 <p>node-template的结构</p>
@@ -614,6 +649,7 @@ pub enum Error&lt;T&gt; {
 </ul>
 </div>
 </div>
+<h3 id="pallet的组成"><a class="header" href="#pallet的组成">pallet的组成</a></h3>
 <ul>
 <li>
 <p><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/7Pallet%E7%9A%84%E7%BB%84%E6%88%90.md">learn-substrate-easy/7Pallet的组成.md at main · KuanHsiaoKuo/learn-substrate-easy</a></p>
@@ -636,10 +672,56 @@ pub enum Error&lt;T&gt; {
 <li>hooks-钩子函数：钩子函数，是在区块链运行过程中希望固定执行的函数，例如我们希望在每个区块构建之前、之后的时候执行某些逻辑等，就可以把这些逻辑放在钩子函数中</li>
 <li>Extrinsic-调度函数，交易调用函数: Extrinsic则是<strong>可以从runtime外部可以调用的函数，也是pallet对外提供的逻辑功能</strong>。比如交易</li>
 </ol>
+<blockquote>
+<p><a href="https://kaisery.github.io/trpl-zh-cn/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#%E4%BD%BF%E7%94%A8-pub-%E5%85%B3%E9%94%AE%E5%AD%97%E6%9A%B4%E9%9C%B2%E8%B7%AF%E5%BE%84">路径用于引用模块树中的项 - Rust 程序设计语言 简体中文版</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="pallet技巧细节"><a class="header" href="#pallet技巧细节">Pallet技巧细节</a></h2>
+<h3 id="storage链上各个类型使用"><a class="header" href="#storage链上各个类型使用">storage（链上）各个类型使用</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.1storage%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D.md">learn-substrate-easy/8.1storage使用介绍.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+</ul>
+<h3 id="error类型的使用"><a class="header" href="#error类型的使用">Error类型的使用</a></h3>
+<ul>
+<li><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a>
+&gt;
+在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。
+<ul>
+<li>错误类型的定义</li>
+<li>在函数中返回错误</li>
+<li>简单示例</li>
+</ul>
+</li>
+</ul>
+<h3 id="写调度函数的套路"><a class="header" href="#写调度函数的套路">写调度函数的套路</a></h3>
+<ul>
+<li>
+<p><a href="https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg">substrate轻松学：写调度函数</a></p>
+<blockquote>
+<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.
+在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。
+而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
+</blockquote>
+<ul>
+<li>Signed transactions</li>
+<li>Unsigned transactions</li>
+<li>通常写法：调度函数的位置-&gt;函数体的写法-&gt;权重-&gt;transactional</li>
+<li>示例</li>
+<li></li>
+</ul>
+<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>
+&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
+</li>
+</ul>
+<h3 id="hooks的使用"><a class="header" href="#hooks的使用">hooks的使用</a></h3>
+<ul>
+<li>
+<p><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.4Hooks%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8.md">learn-substrate-easy/8.4Hooks函数使用.md at main · KuanHsiaoKuo/learn-substrate-easy</a></p>
 </li>
 <li>
 <p><a href="https://web.archive.org/web/20220628021501/https://mp.weixin.qq.com/s/tPyB9CuTVP2Y1DGgl_VPyQ">hooks: pallet的🪝钩子函数使用</a></p>
-<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/640-7783859.png" alt="图片" /></p>
+<p><img src="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/assets/%E8%BF%90%E8%A1%8C%E5%9B%BE.PNG" alt="图片" /></p>
 </li>
 </ul>
 <div id="admonition-交易到打包的过程" class="admonition tip">
@@ -676,36 +758,10 @@ pub enum Error&lt;T&gt; {
 - [资料](https://docs.substrate.io/v3/concepts/execution/)
 - [substrate源码](https://paritytech.github.io/substrate/master/frame_support/traits/trait.Hooks.html)
 </code></pre>
+<h3 id="pallet中的config"><a class="header" href="#pallet中的config">pallet中的Config</a></h3>
 <ul>
-<li>
-<p><a href="https://mp.weixin.qq.com/s/Xnv5aNiLn-NoH6obouaONg">substrate轻松学：写调度函数</a></p>
-<blockquote>
-<p>调度函数在substrate官方文档里面叫做Extrinsics（外部调用），详细的Extrinsics介绍可以参考这里.
-在substrate中共有三种Extrinsics，分别是Inherents、Signed transactions和Unsigned transactions。
-而在我们开发pallet的过程中，比较常用到的是后两种，所以我们这里也主要介绍后两种，对于Inherents有兴趣的小伙伴可以自己看官方文档研究下。</p>
-</blockquote>
-<ul>
-<li>Signed transactions</li>
-<li>Unsigned transactions</li>
-<li>通常写法：调度函数的位置-&gt;函数体的写法-&gt;权重-&gt;transactional</li>
-<li>示例</li>
-<li></li>
-</ul>
-<p>参考：<a href="https://docs.substrate.io/v3/concepts/extrinsics/">extrinsics</a>
-&amp;<a href="https://docs.substrate.io/v3/runtime/weights-and-fees/">weights-and-fees</a></p>
-</li>
-<li>
-<p><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a>
-&gt;
-在runtime代码执行时，代码必须是“非抛出的”，或者说不应该panic，应该是优雅的处理错误，所以在写pallet代码时，允许我们自定义错误类型，当错误发生时，可以返回我们定义的错误类型。这里的Error类型是指运行时在执行调度函数（也就是交易函数）时返回的错误。因为在调度函数执行时，返回的结果为DispatchResult类型，当执行结果错误时，返回DispatchError。</p>
-<ul>
-<li>错误类型的定义</li>
-<li>在函数中返回错误</li>
-<li>简单示例</li>
-</ul>
-</li>
-<li>
-<p><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a></p>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.5pallet%E4%B8%AD%E7%9A%84Config.md">learn-substrate-easy/8.5pallet中的Config.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://web.archive.org/web/20220627112755/https://mp.weixin.qq.com/s/JOaBn4bkda2LicV3Lyb4tw">pallet中的config</a>
 <ul>
 <li>好好理解rust中关于trait和关联类型相关的知识</li>
 <li>pallet 简单示例: 介绍一个存储学生信息的pallet，其中存储逻辑写在extrinsic中</li>
@@ -715,8 +771,11 @@ pub enum Error&lt;T&gt; {
 <li><a href="https://docs.substrate.io/v3/runtime/events-and-errors/">参考资料</a></li>
 </ul>
 </li>
-<li>
-<p><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a></p>
+</ul>
+<h3 id="在pallet中使用其它pallet"><a class="header" href="#在pallet中使用其它pallet">在pallet中使用其它pallet</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.6%E5%9C%A8pallet%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AE%83pallet.md">learn-substrate-easy/8.6在pallet中使用其它pallet.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://web.archive.org/web/20220627101725/https://mp.weixin.qq.com/s/z4fefNUb3avcae0htHpxgQ">在pallet中使用其他pallet</a>
 <ul>
 <li>
 <p>在自己的pallet中使用其它的pallet主要有以下几种情况：</p>
@@ -744,8 +803,11 @@ pallet。详细的可以看substrate中node中的使用，在pallet_assets中使
 </li>
 </ul>
 </li>
-<li>
-<p><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a></p>
+</ul>
+<h3 id="封装和扩展现有pallet"><a class="header" href="#封装和扩展现有pallet">封装和扩展现有pallet</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.7%E5%B0%81%E8%A3%85%E5%92%8C%E6%89%A9%E5%B1%95%E7%8E%B0%E6%9C%89pallet.md">learn-substrate-easy/8.7封装和扩展现有pallet.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://web.archive.org/web/20220627113013/https://mp.weixin.qq.com/s/23wuRo4gj4oH-3EG74NnTA">封装和扩展现有的pallet</a>
 <ul>
 <li>
 <p>这里使用substrate提供的contracts pallet，然后对其中的功能进行封装。</p>
@@ -765,8 +827,11 @@ pallet。详细的可以看substrate中node中的使用，在pallet_assets中使
 </li>
 </ul>
 </li>
-<li>
-<p><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a></p>
+</ul>
+<h3 id="调试"><a class="header" href="#调试">调试</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.8%E8%B0%83%E8%AF%95.md">learn-substrate-easy/8.8调试.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://web.archive.org/web/20220627113043/https://mp.weixin.qq.com/s/Ddu-CPgRz-U7uO4PkUnp2g">调试pallet</a>
 <ul>
 <li>在pallet开发时主要有以下几种调试方式：
 <ol>
@@ -783,13 +848,37 @@ pallet。详细的可以看substrate中node中的使用，在pallet_assets中使
 <li><a href="https://docs.substrate.io/v3/runtime/debugging/">文档资料</a></li>
 </ul>
 </li>
+</ul>
+<h3 id="pallet中的类型转换"><a class="header" href="#pallet中的类型转换">pallet中的类型转换；</a></h3>
+<h3 id="在pallet中使用链下工作者offchain-worker"><a class="header" href="#在pallet中使用链下工作者offchain-worker">在pallet中使用链下工作者（Offchain worker）</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.9%E4%BD%BF%E7%94%A8OCW%E6%8F%90%E4%BA%A4%E7%AD%BE%E5%90%8D%E4%BA%A4%E6%98%93.md">learn-substrate-easy/8.9使用OCW提交签名交易.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.10%E5%9C%A8ocw%E4%B8%AD%E6%8F%90%E4%BA%A4%E6%9C%AA%E7%AD%BE%E5%90%8D%E4%BA%A4%E6%98%93.md">learn-substrate-easy/8.10在ocw中提交未签名交易.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.11%E5%9C%A8ocw%E4%B8%AD%E6%8F%90%E4%BA%A4%E5%85%B7%E6%9C%89%E7%AD%BE%E5%90%8Dpayload%E7%9A%84%E6%9C%AA%E7%AD%BE%E5%90%8D%E4%BA%A4%E6%98%93.md">learn-substrate-easy/8.11在ocw中提交具有签名payload的未签名交易.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.12%E5%9C%A8ocw%E4%B8%AD%E4%BD%BF%E7%94%A8%E9%93%BE%E4%B8%8B%E5%AD%98%E5%82%A8.md">learn-substrate-easy/8.12在ocw中使用链下存储.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.14%E5%9C%A8ocw%E4%B8%AD%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82.md">learn-substrate-easy/8.14在ocw中发送http请求.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+</ul>
+<h3 id="在pallet中链上写本地存储offchain-index"><a class="header" href="#在pallet中链上写本地存储offchain-index">在pallet中链上写本地存储（offchain index）；</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.13%E4%BD%BF%E7%94%A8offchain_index.md">learn-substrate-easy/8.13使用offchain_index.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+</ul>
+<h3 id="在pallet的ocw中使用链下存储offchain-storage"><a class="header" href="#在pallet的ocw中使用链下存储offchain-storage">在pallet的ocw中使用链下存储（offchain storage）；</a></h3>
+<h3 id="在pallet中使用其它pallet使用其它pallet的存储"><a class="header" href="#在pallet中使用其它pallet使用其它pallet的存储">在pallet中使用其它pallet（使用其它pallet的存储）；</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.6%E5%9C%A8pallet%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AE%83pallet.md">learn-substrate-easy/8.6在pallet中使用其它pallet.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+</ul>
+<h3 id="在pallet中添加rpc接口"><a class="header" href="#在pallet中添加rpc接口">在pallet中添加rpc接口</a></h3>
+<ul>
 <li>
-<p><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></p>
+<p><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.15%E5%9C%A8pallet%E4%B8%AD%E6%B7%BB%E5%8A%A0rpc%E6%8E%A5%E5%8F%A3.md">learn-substrate-easy/8.15在pallet中添加rpc接口.md at main · KuanHsiaoKuo/learn-substrate-easy</a></p>
 </li>
 <li>
-<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a>
-&gt;
-pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。所以，编写pallet的测试就分为以下几部分：</p>
+<p><a href="https://web.archive.org/web/20220627101825/https://mp.weixin.qq.com/s/_QTUGTAWLreUVcNJcVKBjA">为pallet自定义rpc接口</a></p>
+<blockquote>
+<p>pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中的construct_runtime宏包含的部分）。
+那么对应到我们的测试，如果对pallet进行测试，我们也需要构建一个runtime测试环境，然后在这个环境中加载pallet，对pallet进行测试。
+所以，编写pallet的测试就分为以下几部分：</p>
+</blockquote>
 <ol>
 <li>编写 mock runtime;</li>
 <li>编写pallet的genesisconfig;</li>
@@ -798,6 +887,12 @@ pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中�
 <ul>
 <li><a href="https://docs.substrate.io/v3/runtime/custom-rpcs/">文档资料</a></li>
 </ul>
+</li>
+</ul>
+<h3 id="编写测试"><a class="header" href="#编写测试">编写测试</a></h3>
+<ul>
+<li>
+<p><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/9%E7%BC%96%E5%86%99tests.md">learn-substrate-easy/9编写tests.md at main · KuanHsiaoKuo/learn-substrate-easy</a></p>
 </li>
 <li>
 <p><a href="https://web.archive.org/web/20220701080314/https://mp.weixin.qq.com/s/8DsbCwL8XkiIEbTlHx4oAg">为pallet编写benchmarking</a></p>
@@ -826,6 +921,21 @@ pallet写好后需要通过runtime加载到链上（就是runtime/src/lib.rs中�
 </ul>
 </div>
 </div>
+<h3 id="benchmarking"><a class="header" href="#benchmarking">benchmarking</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/10%E7%BC%96%E5%86%99benchmarking.md">learn-substrate-easy/10编写benchmarking.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/12%E7%BC%96%E5%86%99%E5%A4%8D%E6%9D%82%E7%9A%84benchmarking.md">learn-substrate-easy/12编写复杂的benchmarking.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+</ul>
+<h3 id="为某些trait提供默认实现"><a class="header" href="#为某些trait提供默认实现">为某些trait提供默认实现。</a></h3>
+<ul>
+<li><a href="https://web.archive.org/web/20220627101811/https://mp.weixin.qq.com/s/ZU5SYYrL6OORWGEbRev7Zg">为pallet编写tests</a></li>
+</ul>
+<h3 id="升级"><a class="header" href="#升级">升级</a></h3>
+<ul>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/11%E5%8D%87%E7%BA%A7runtime.md">learn-substrate-easy/11升级runtime.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/12%E5%8D%87%E7%BA%A7substrate%E7%89%88%E6%9C%AC.md">learn-substrate-easy/12升级substrate版本.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+</ul>
+
             </main>
 
             <!--            <script src="https://utteranc.es/client.js"-->
