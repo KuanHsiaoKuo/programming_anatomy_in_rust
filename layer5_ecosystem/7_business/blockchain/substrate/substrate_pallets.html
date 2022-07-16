@@ -270,7 +270,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Thu Jul 14 09:58:49 UTC 2022 -->
+<!-- Added by: runner, at: Sat Jul 16 09:37:20 UTC 2022 -->
 <!--te-->
 <h2 id="文档代码更新问题"><a class="header" href="#文档代码更新问题">文档/代码更新问题</a></h2>
 <pre><code class="language-admonisth warn title='substrate文档更新带来的问题'">由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
@@ -681,7 +681,27 @@ pub enum Error&lt;T&gt; {
 <h3 id="storage链上各个类型使用"><a class="header" href="#storage链上各个类型使用">storage（链上）各个类型使用</a></h3>
 <ul>
 <li><a href="https://github.com/KuanHsiaoKuo/learn-substrate-easy/blob/main/8.1storage%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D.md">learn-substrate-easy/8.1storage使用介绍.md at main · KuanHsiaoKuo/learn-substrate-easy</a></li>
+<li><a href="https://docs.substrate.io/main-docs/build/runtime-storage/#best-practices">Runtime storage | Substrate_ Docs</a></li>
 </ul>
+<div id="admonition-区别pallet用到的storage和平时开发谈到的持久化storage" class="admonition tip">
+<div class="admonition-title">
+<p>区别pallet用到的storage和平时开发谈到的持久化storage</p>
+<p><a class="admonition-anchor-link" href="#admonition-区别pallet用到的storage和平时开发谈到的持久化storage"></a></p>
+</div>
+<div>
+<p>在pallet中要使用的storage更多的其实是一个应用层的概念，如果用城市建造来类比，持久化存储就像是整个城市的马路或者是管道，而我们谈论的storage则是某个具体建筑或者房屋里面的水管会小路，至于这些小水管（或小路）是怎么和整个城市的大路联系起来的，不是我们讨论的范围。</p>
+</div>
+</div>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 表示下面定义一个pallet storage
+#[pallet::storage]
+// 自动为storage生成一个getter函数，名字叫some_value
+// 后续可以在pallet使用some_value()函数来获取该Storage中存储的值
+#[pallet::getter(fn some_value)]
+pub(super) type SomeValue = StorageValue&lt;_, u64, ValueQuery&gt;;
+<span class="boring">}
+</span></code></pre></pre>
 <h3 id="error类型的使用"><a class="header" href="#error类型的使用">Error类型的使用</a></h3>
 <ul>
 <li><a href="https://web.archive.org/web/20220627112629/https://mp.weixin.qq.com/s/cNijF5h2Yn7R-K0ryoOJrA">pallet中Error类型的使用</a>
