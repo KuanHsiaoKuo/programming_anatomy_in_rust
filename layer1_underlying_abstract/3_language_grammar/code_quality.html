@@ -185,6 +185,16 @@
 <ul>
 <li><a href="#%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%BC%82%E5%B8%B8%E6%B5%8B%E8%AF%95%E4%B8%8E%E6%97%A5%E5%BF%97">代码质量：异常、测试与日志</a>
 <ul>
+<li><a href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">错误处理</a>
+<ul>
+<li><a href="#rust_backtrace%E7%9A%84%E7%94%A8%E6%B3%95">RUST_BACKTRACE的用法</a>
+<ul>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">设置环境变量</a></li>
+<li><a href="#%E4%B8%B4%E6%97%B6%E8%AE%BE%E7%BD%AE%E4%BD%BF%E7%94%A8">临时设置使用</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
 <ul>
 <li><a href="#online-book">online-book</a></li>
@@ -196,14 +206,31 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sat Jul 16 09:37:00 UTC 2022 -->
+<!-- Added by: runner, at: Sun Jul 17 03:07:32 UTC 2022 -->
 <!--te-->
+<h2 id="错误处理"><a class="header" href="#错误处理">错误处理</a></h2>
+<h3 id="rust_backtrace的用法"><a class="header" href="#rust_backtrace的用法">RUST_BACKTRACE的用法</a></h3>
+<ul>
+<li>1 : 打印简略错误信息</li>
+<li>full: 打印详细错误信息</li>
+</ul>
+<h4 id="设置环境变量"><a class="header" href="#设置环境变量">设置环境变量</a></h4>
+<pre><code class="language-shell">export RUST_BACKTRACE=1
+echo $RUST_BACKTRACE
+</code></pre>
+<h4 id="临时设置使用"><a class="header" href="#临时设置使用">临时设置使用</a></h4>
+<pre><code class="language-shell">RUST_BACKTRACE=1 cargo run
+RUST_BACKTRACE=full mdbook serve
+</code></pre>
 <h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
 <h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch11-00-testing.html">Writing Automated Tests - The Rust Programming Language</a></li>
 </ul>
 <h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
+<ul>
+<li><a href="https://www.runoob.com/rust/rust-error-handle.html">Rust 错误处理 | 菜鸟教程</a></li>
+</ul>
 <h3 id="local"><a class="header" href="#local">local</a></h3>
 
             </main>
