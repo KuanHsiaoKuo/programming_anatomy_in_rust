@@ -26,7 +26,7 @@
       * [substrate文档练习](#substrate文档练习)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jul 18 13:46:59 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jul 18 14:02:18 UTC 2022 -->
 
 <!--te-->
 
