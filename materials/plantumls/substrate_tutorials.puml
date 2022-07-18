@@ -846,15 +846,15 @@ std = [
  "pallet-scheduler/std",
  ...
 </code>;
-***** substrate-node-template/runtime/src/lib.rs
-******:Add the types required by the Scheduler pallet
+****** substrate-node-template/runtime/src/lib.rs
+*******:Add the types required by the Scheduler pallet
 <code>
 parameter_types! {
  pub MaximumSchedulerWeight: Weight = 10_000_000；
  pub const MaxScheduledPerBlock: u32 = 50；
 }
 </code>;
-******:Add the implementation for the Config trait for the Scheduler pallet .
+*******:Add the implementation for the Config trait for the Scheduler pallet .
 <code>
 
 impl pallet_scheduler::Config for Runtime {
@@ -871,7 +871,7 @@ impl pallet_scheduler::Config for Runtime {
  type NoPreimagePostponement = ()；
 }
 </code>;
-******:Add the Scheduler pallet inside the construct_runtime! macro.
+*******:Add the Scheduler pallet inside the construct_runtime! macro.
 <code>
 
 construct_runtime!(
@@ -885,12 +885,12 @@ construct_runtime!(
  }
 )；
 </code>;
-******:Add the following trait dependency at the top of the file:
+*******:Add the following trait dependency at the top of the file:
 <code>
 
 pub use frame_support::traits::EqualPrivilegeOnly；
 </code>;
-******:Increment the spec_version in the [[https://paritytech.github.io/substrate/master/sp_version/struct.RuntimeVersion.html RuntimeVersion struct]]
+*******:Increment the spec_version in the [[https://paritytech.github.io/substrate/master/sp_version/struct.RuntimeVersion.html RuntimeVersion struct]]
 <code>
 
 pub const VERSION: RuntimeVersion = RuntimeVersion {
@@ -903,7 +903,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
  transaction_version: 1,
 }；
 </code>;
-*******:Review the components of the RuntimeVersion struct
+********:Review the components of the RuntimeVersion struct
 <code>
 
 spec_name specifies the name of the runtime.
