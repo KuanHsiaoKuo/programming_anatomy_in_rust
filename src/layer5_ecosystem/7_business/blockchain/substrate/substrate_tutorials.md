@@ -1,13 +1,19 @@
 # Substrate官方教程梳理
 
 <!--ts-->
-
 * [Substrate官方教程梳理](#substrate官方教程梳理)
-    * [思维导图](#思维导图)
+   * [总览](#总览)
+   * [Get Started](#get-started)
+      * [Build a local blockchain](#build-a-local-blockchain)
+      * [Simulate a network](#simulate-a-network)
+      * [Add trusted nodes](#add-trusted-nodes)
+      * [Authorize specific nodes](#authorize-specific-nodes)
+      * [Monitor node metrics](#monitor-node-metrics)
+      * [Upgrade a running network](#upgrade-a-running-network)
 * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jul 18 14:02:18 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jul 18 16:18:36 UTC 2022 -->
 
 <!--te-->
 
