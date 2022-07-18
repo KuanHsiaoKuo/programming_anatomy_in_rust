@@ -1,0 +1,88 @@
+@startmindmap
+scale 850 width
+*:[[https://docs.substrate.io/tutorials/get-started/node-metrics/ Monitor node metrics]]
+<code>
+
+Substrate exposes metrics about the operation of your network.
+
+For example, you can collect information about:
+1. how many peers your node is connected to
+2. how much memory your node is using.
+
+To visualize these metrics, you can use tools like Prometheus and Grafana.
+
+This tutorial demonstrates how to use Grafana and Prometheus
+to scrape and visualize these types of node metrics .
+</code>;
+**[#darkseagreen]:A possible architecture
+<code>
+
++-----------+                     +-------------+                                                              +---------+
+| Substrate |                     | Prometheus  |                                                              | Grafana |
++-----------+                     +-------------+                                                              +---------+
+      |               -----------------\ |                                                                          |
+      |               | Every 1 minute |-|                                                                          |
+      |               |----------------| |                                                                          |
+      |                                  |                                                                          |
+      |        GET current metric values |                                                                          |
+      |<---------------------------------|                                                                          |
+      |                                  |                                                                          |
+      | `substrate_peers_count 5`        |                                                                          |
+      |--------------------------------->|                                                                          |
+      |                                  | --------------------------------------------------------------------\    |
+      |                                  |-| Save metric value with corresponding time stamp in local database |    |
+      |                                  | |-------------------------------------------------------------------|    |
+      |                                  |                                         -------------------------------\ |
+      |                                  |                                         | Every time user opens graphs |-|
+      |                                  |                                         |------------------------------| |
+      |                                  |                                                                          |
+      |                                  |       GET values of metric `substrate_peers_count` from time-X to time-Y |
+      |                                  |<-------------------------------------------------------------------------|
+      |                                  |                                                                          |
+      |                                  | `substrate_peers_count (1582023828, 5), (1582023847, 4) [...]`           |
+      |                                  |------------------------------------------------------------------------->|
+      |                                  |                                                                          |
+</code>;
+**:Tutorial objectives
+<code>
+
+1. Install Prometheus and Grafana.
+2. Configure Prometheus to capture a time series for your Substrate node.
+3. Configure Grafana to visualize the node metrics collected using the Prometheus endpoint.
+</code>;
+** [[https://docs.substrate.io/tutorials/get-started/node-metrics/#install-prometheus-and-grafana Install Prometheus and Grafana]]
+** Start a Substrate node
+**:Configure Prometheus to scrape your Substrate node
+<code>
+# prometheus.yml
+
+# --snip--
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "substrate_node"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    # ** NOTE: you want to have this *LESS THAN* the block time in order to ensure
+    # ** that you have a data point for every block!
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ["localhost:9615"]
+
+
+# specify a custom config file instead if you made one here:
+./prometheus --config.file prometheus.yml
+</code>;
+***:Check all Prometheus metrics
+<code>
+
+curl localhost:9615/metrics
+</code>;
+**** [[https://docs.substrate.io/tutorials/get-started/node-metrics/#visualizing-prometheus-metrics-with-grafana Visualizing Prometheus metrics with Grafana]]
+@endmindmap

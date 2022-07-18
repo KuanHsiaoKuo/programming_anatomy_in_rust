@@ -1,0 +1,201 @@
+@startmindmap
+scale 850 width
+*[#cornflowerblue] (重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]]
+**[#aqua]:About Substrate Consensus:
+<code>
+
+The Substrate node template uses a proof of authority consensus model
+also referred to as authority round or Aura consensus .
+The Aura consensus protocol limits block production to
+a rotating list of authorized accounts.
+The authorized accounts—authorities—create blocks in
+a round robin fashion and are generally considered to be
+trusted participants in the network.
+
+This consensus model provides a simple approach to
+starting a solo blockchain for a limited number of participants.
+
+In this tutorial, you'll see how to generate the keys
+required to authorize a node to participate in the network,
+how to configure and share information about the network
+with other authorized accounts, and how to launch the network
+with an approved set of validators.
+</code>;
+**:Tutorial objectives:
+<code>
+
+Generate key pairs for use as a network authority.
+Create a custom chain specification file.
+Launch a private two-node blockchain network.
+</code>;
+** Generate your account and keys
+***:Key generation options:
+<code>
+
+a node-template subcommand
+the standalone subkey command-line program
+the Polkadot-JS application
+third-party key generation utilities.
+</code>;
+***:Generate local keys using the node template:
+<code>
+
+./target/release/node-template key generate --scheme Sr25519 --password-interactive
+Type a password for the generated keys.
+./target/release/node-template key inspect --password-interactive --scheme Ed25519 "pig giraffe ceiling enter weird liar orange decline behind total despair fly"
+Type the password you used to generate the keys.
+</code>;
+*** Generate a second set of keys
+** Create a custom chain specification
+***:(Ten Steps)Modify the local chain specification
+<code>
+
+./target/release/node-template build-spec --disable-default-bootnode --chain local > customSpec.json
+head customSpec.json
+tail -n 80 customSpec.json
+Modify the name field to identify this chain specification as a custom chain specification.
+Modify aura field to specify the nodes
+Modify the grandpa field to specify the nodes
+</code>;
+***[#lightcoral]:customSpec.json
+<code>
+
+{
+ "name": "Local Testnet",
+ "id": "local_testnet",
+ "chainType": "Local",
+ "bootNodes": [],
+ "telemetryEndpoints": null,
+ "protocolId": null,
+ "properties": null,
+ "consensusEngine": null,
+ "codeSubstitutes": {},
+}
+</code>;
+***:Add validators
+<code>
+
+As you have just seen, you can add and change the authority addresses
+in a chain specification by modifying the aura and grandpa sections.
+
+You can use this technique to add as many validators as you like.
+
+Be sure to use unique keys for each validator.
+If two validators have the same keys, they produce conflicting blocks.
+</code>;
+** Modify the aura section to include Sr25519 addresses.
+** Modify the grandpa section to include Ed25519 addresses and a voting weight.
+**:Convert the chain specification to raw format
+<code>
+
+./target/release/node-template
+build-spec
+--chain=customSpec.json
+--raw
+--disable-default-bootnode
+> customSpecRaw.json
+</code>;
+**:Share the chain specification with others
+<code>
+
+If you are creating a private blockchain network
+to share with other participants, ensure that only
+one person creates the chain specification and
+shares the resulting raw version of that
+specification-for example, the customSpecRaw.json file—with
+all of the other validators in the network.
+
+Because the Rust compiler produces optimized WebAssembly binaries
+that aren't deterministically reproducible, each person who generates
+the Wasm runtime produces a slightly different Wasm blob.
+
+To ensure determinism, all participants in the blockchain network
+must use exactly the same raw chain specification file
+</code>;
+**:Prepare to launch the private network
+<code>
+
+After you distribute the custom chain specification
+to all network participants, you're ready to launch
+your own private blockchain.
+
+The steps are similar to the steps you followed
+in Start the first blockchain node.
+
+If you follow the steps in this tutorial,
+however, you can add multiple computers to your network.
+
+To continue, verify the following:
+1. You have generated or collected the account
+keys for at least two authority accounts.
+2. You have updated your custom chain specification
+to include the keys for block production (aura) and
+block finalization (grandpa).
+3. You have converted your custom chain specification
+to raw format and distributed the raw chain specification
+to the nodes participating in the private network.
+</code>;
+**:Start the first node
+<code>
+./target/release/node-template
+  --base-path /tmp/node01
+  --chain ./customSpecRaw.json
+  --port 30333
+  --ws-port 9945
+  --rpc-port 9933
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+  --validator
+  --rpc-methods Unsafe
+  --name MyNode01
+  --password-interactive
+</code>;
+*** --base-path /tmp/node01
+*** --chain ./customSpecRaw.json
+*** --port 30333
+*** --ws-port 9945
+*** --rpc-port 9933
+*** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+*** --validator
+*** --rpc-methods Unsafe
+*** --name MyNode01
+*** --password-interactive
+** View information about node operations
+** Add keys to the keystore
+*** tip: After you start the first node, no blocks are yet produced.
+***: For each node:
+<code>
+
+Add the aura authority keys to enable block production.
+Add the grandpa authority keys to enable block finalization.
+</code>;
+***: To insert keys into the keystore:
+<code>
+
+./target/release/node-template
+key insert --base-path /tmp/node01
+  --chain customSpecRaw.json
+  --scheme Sr25519
+  --suri <your-secret-seed>
+  --password-interactive
+  --key-type aura
+</code>;
+** Enable other participants to join
+*** tip: You can now allow other validators to join the network using the --bootnodes and --validator command-line options.
+***:To add a second validator to the private network:
+<code>
+
+./target/release/node-template
+  --base-path /tmp/node02
+  --chain ./customSpecRaw.json
+  --port 30334
+  --ws-port 9946
+  --rpc-port 9934
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+  --validator
+  --rpc-methods Unsafe
+  --name MyNode02
+  --bootnodes
+  /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWLmrYDLoNTyTYtRdDyZLWDe1paxzxTw5RgjmHLfzW96SX
+  --password-interactive
+</code>;
+@endmindmap

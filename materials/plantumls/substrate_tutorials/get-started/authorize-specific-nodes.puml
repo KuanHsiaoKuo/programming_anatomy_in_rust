@@ -1,0 +1,352 @@
+@startmindmap
+scale 850 width
+*[#darkcyan]:Authorize specific nodes
+<code>
+
+using the node authorization pallet
+
+The node-authorization pallet is a prebuilt FRAME pallet
+that enables you to manage a configurable set of nodes
+for a network. Each node is identified by a PeerId.
+
+Each PeerId is owned by one and only one AccountId
+that claims the node.
+</code>;
+**[#mediumorchid]:Why permissioned network
+<code>
+
+In Add trusted nodes, you saw how to build a simple
+network with a known set of validator nodes. That tutorial
+illustrated a simplified version of a permissioned network.
+
+In a permissioned network, only authorized nodes are allowed
+to perform specific network activities. For example, you might
+grant some nodes the permission to validate blocks and other
+nodes the permission to propagate transactions.
+
+A blockchain with nodes that are granted specific permissions
+is different from a public or permissionless blockchain.
+In a permissionless blockchain, anyone can join the network
+by running the node software on suitable hardware. In general,
+a permissionless blockchain offers greater decentralization of
+the network. However, there are use cases where creating a
+permissioned blockchain might be appropriate.
+
+For example,a permissioned blockchain would be suitable for
+the following types of projects:
+
+1. For a private or consortium network
+such as a private enterprise or a non-profit organization.
+2. In highly-regulated data environments
+such as healthcare, finance, or business-to-business ledgers.
+3. For testing of a pre-public blockchain network at scale.
+</code>;
+** Node authorization and ownership
+***:There are two ways you can authorize a node to join the network:
+<code>
+
+1. By adding the PeerId to the list of predefined nodes.
+You must be approved by the governance or sudo pallet
+in the network to do this.
+
+2. By asking for a paired peer connection from a specific node.
+This node can either be a predefined node PeerId or a normal one.
+</code>;
+***:any user can claim to be the owner of a PeerId
+<code>
+
+To protect against false claims, you should claim
+the node before you start the node.
+
+After you start the node, its PeerID is visible to
+the network and anyone could subsequently claim it.
+</code>;
+***:As the owner of a node
+<code>
+
+you can add and remove connections for your node.
+
+For example, you can manipulate the connection
+between a predefined node and your node or
+between your node and other non-predefined nodes.
+
+You can't change the connections for predefined nodes.
+They are always allowed to connect with each other.
+</code>;
+***:offchain worker
+<code>
+The node-authorization pallet uses an offchain worker
+to configure its node connections.
+
+Make sure to enable the offchain worker when you
+start the node because it is disabled by default
+for non-authority nodes.
+</code>;
+*** [[https://wiki.polkadot.network/docs/faq#networking Need to be familiar with peer-to-peer networking in Substrate]]
+**:Tutorial objectives
+<code>
+
+1. Check out and compile the node template.
+2. Add the node authorization pallet to the node template runtime.
+3. Launch multiple nodes and authorize new nodes to join.
+</code>;
+**:Build the node template
+<code>
+
+cd substrate-node-template
+git checkout latest
+cargo build --release
+</code>;
+** Add the node authorization pallet
+***:Cargo.toml
+<code>
+
+the Cargo.toml file controls two important pieces of information:
+
+1. The pallets to be imported as dependencies for the runtime,
+including the location and version of the pallets to import.
+2. The features in each pallet that should be enabled
+when compiling the native Rust binary. By enabling the standard (std)
+feature set from each pallet , you can compile the runtime to include
+functions, types, and primitives that would otherwise be missing
+when you build the WebAssembly binary.
+</code>;
+** [[https://doc.rust-lang.org/cargo/guide/dependencies.html cargo dependencies]]
+** [[https://doc.rust-lang.org/cargo/reference/features.html cargo features]]
+***:Add note-authorization dependencies
+<code>
+
+[dependencies]
+pallet-node-authorization = {
+    default-features = false,
+    git = "https://github.com/paritytech/substrate.git",
+    tag = "devhub/latest",
+    version = "4.0.0-dev" }
+
+[features]
+default = ['std']
+std = [
+ ...
+ "pallet-node-authorization/std",    # add this line
+ ...
+]
+
+cargo check -p node-template-runtime
+</code>;
+***:Add an administrative rule
+<code>
+
+To simulate governance in this tutorial, you can configure
+the pallet to use the EnsureRoot privileged function that
+can be called using the Sudo pallet .
+
+use frame_system::EnsureRoot；
+</code>;
+** Implement the Config trait for the pallet
+***:About Pallet Config Trait
+<code>
+
+Every pallet has a Rust trait called Config.
+
+The Config trait is used to identify the
+parameters and types that the pallet needs.
+
+Most of the pallet -specific code required to
+add a pallet is implemented using the Config trait.
+
+You can review what you to need to implement for
+any pallet by referring to its Rust documentation
+or the source code for the pallet.
+
+For example, to see what you need to implement for
+the Config trait in the node-authorization pallet,
+you can refer to the Rust documentation for
+pallet_node_authorization::Config.
+</code>;
+*** To implement the node-authorization pallet in your runtime
+** runtime/src/lib.rs
+***:Add the parameter_types
+<code>
+
+parameter_types! {
+ pub const MaxWellKnownNodes: u32 = 8；
+ pub const MaxPeerIdLength: u32 = 128；
+}
+</code>;
+***:Add the impl section
+<code>
+
+impl pallet_node_authorization::Config for Runtime {
+ type Event = Event；
+ type MaxWellKnownNodes = MaxWellKnownNodes；
+ type MaxPeerIdLength = MaxPeerIdLength；
+ type AddOrigin = EnsureRoot<AccountId>；
+ type RemoveOrigin = EnsureRoot<AccountId>；
+ type SwapOrigin = EnsureRoot<AccountId>; //
+ type ResetOrigin = EnsureRoot<AccountId>; //
+ type WeightInfo = (); //
+}
+</code>;
+***:Add the pallet to the construct_runtime macro
+<code>
+
+construct_runtime!(
+pub enum Runtime where
+   Block = Block,
+   NodeBlock = opaque::Block,
+   UncheckedExtrinsic = UncheckedExtrinsic
+ {
+   /* Add This Line */
+   NodeAuthorization: pallet_node_authorization::{Pallet, Call, Storage, Event<T>, Config<T>},
+ }
+)；
+</code>;
+***:Cargo check
+<code>
+
+cargo check -p node-template-runtime
+</code>;
+***:Add genesis storage for authorized nodes
+<code>
+
+Before you can launch the network to use node authorization,
+some additional configuration is needed to handle the peer
+identifiers and account identifiers .
+
+For example, the PeerId is encoded in bs58 format,
+so you need to add a new dependency for the bs58 library
+in the node/Cargo.toml to decode the PeerId to get its bytes.
+
+To keep things simple, the authorized nodes are associated
+with predefined accounts.
+</code>;
+**:node/Cargo.toml
+<code>
+
+[dependencies]
+bs58 = "0.4.0"
+</code>;
+** node/src/chain_spec.rs
+***:Add genesis storage for nodes
+<code>
+
+// A struct wraps Vec<u8>, represents as our `PeerId`.
+use sp_core::OpaquePeerId；
+// The genesis config that serves for our pallet.
+use node_template_runtime::NodeAuthorizationConfig；
+</code>;
+***:Locate the testnet_genesis function
+<code>
+
+/// Configure initial storage state for FRAME modules.
+fn testnet_genesis(
+ wasm_binary: &[u8],
+ initial_authorities: Vec<(AuraId, GrandpaId)>,
+ root_key: AccountId,
+ endowed_accounts: Vec<AccountId>,
+ _enable_println: bool,
+ ) -> GenesisConfig {
+</code>;
+***:Within the GenesisConfig declaration
+<code>
+
+ node_authorization: NodeAuthorizationConfig {
+   nodes: vec![
+     (
+       OpaquePeerId(bs58::decode("12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2").into_vec().unwrap()),
+       endowed_accounts[0].clone()
+     ),
+     (
+       OpaquePeerId(bs58::decode("12D3KooWQYV9dGMFoRzNStwpXztXaBUjtPqi6aU76ZgUriHhKust").into_vec().unwrap()),
+       endowed_accounts[1].clone()
+     ),
+   ],
+ },
+</code>;
+***:Verify that the node compiles
+<code>
+
+cargo build --release
+</code>;
+** Launch the permissioned network
+***:For the purposes of this tutorial
+<code>
+
+you are going to launch four nodes.
+
+Three of the nodes are associated with predefined accounts
+and all three of those nodes are allowed to author
+and validate blocks.
+
+The fourth node is a sub-node that is only authorized to
+read data from a selected node with the approval of that node's owner.
+</code>;
+***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#obtain-node-keys-and-peerids Obtain node keys and peerIDs]]
+<code>
+</code>;
+***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#start-the-first-node Start the first node]]
+<code>
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator1
+--alice
+--node-key=c12b6d18942f5ee8528c8e2baf4e147b5c5c18710926ea492d09cbd9f6c9f82a
+--port 30333
+--ws-port 9944
+</code>;
+***:Start the second node
+<code>
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator2
+--bob
+--node-key=6ce3be907dbcabf20a9a5a60a712b4256a54196000a8ed4050d352bc113f8c58
+--port 30334
+--ws-port 9945
+</code>;
+***:Add a third node to the list of well-known nodes
+<code>
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator3
+--name charlie
+--node-key=3a9d5b35b9fb4c42aafadeca046f6bf56107bd2579687f069b42646684b94d9e
+--port 30335
+--ws-port=9946
+--offchain-worker always
+</code>;
+**:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#authorize-access-for-the-third-node Authorize access for the third node]]
+<code>
+
+This tutorial uses the sudo pallet for governance.
+Therefore, yu can use the sudo pallet to call the
+add_well_known_node function provided by
+node-authorization pallet to add the third node.
+</code>;
+**:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#add-a-sub-node Add a sub-node]]
+<code>
+
+The fourth node in this network is not as a well-known node.
+
+1. This node is owned by the user dave,
+2. but is a sub-node of the charlie node.
+
+The sub-node can only access the network by
+connecting to the node owned by charlie.
+
+The parent node is responsible for any sub-node it authorizes to connect
+and controls access if the sub-node needs to be removed or audited.
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator4
+--name dave
+--node-key=a99331ff4f0e0a0434a6263da0a5823ea3afcfffe590c9f3014e6cf620f2b19a
+--port 30336
+--ws-port 9947
+--offchain-worker always
+</code>;
+@endmindmap

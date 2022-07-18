@@ -1,0 +1,34 @@
+@startmindmap
+scale 850 width
+* Build a local blockchain
+**:Compile a Substrate node:
+<code>
+
+git clone https://github.com/substrate-developer-hub/substrate-node-template
+cd substrate-node-template && git checkout latest
+cargo build --release
+</code>;
+**:Start the local node:
+<code>
+
+./target/release/node-template --dev
+</code>;
+**:Install the front-end template:
+<code>
+
+node --version
+yarn --version
+npm install -g yarn
+git clone https://github.com/substrate-developer-hub/substrate-front-end-template
+cd substrate-front-end-template
+yarn install
+</code>;
+**:Start the front-end template:
+<code>
+
+yarn start
+Open http://localhost:8000 in a browser to view the front-end template.
+</code>;
+** Transfer funds from an account
+
+@endmindmap

@@ -1,0 +1,240 @@
+@startmindmap
+scale 850 width
+* Upgrade a running network
+**:Forkless upgrade intro
+<code>
+
+Unlike many blockchains, the Substrate development framework supports
+forkless upgrades to the runtime that is the core of the blockchain.
+
+Most blockchain projects require a hard fork of the code base to
+support ongoing development of new features or enhancements
+to existing features.
+
+With Substrate , you can deploy enhanced runtime capabilities—including
+breaking changes—without a hard fork.
+
+Because the definition of the runtime is itself an element
+in a Substrate chain's state, network participants can update
+this value by calling the set_code function in a transaction.
+
+Because updates to the runtime state are validates using the
+blockchain's consensus mechanisms and cryptographic guarantees,
+network participants can use the blockchain itself to distribute
+updated or extended runtime logic without needing to fork the
+chain or release a new blockchain client.
+</code>;
+*** Hard Fork
+*** [[https://paritytech.github.io/substrate/master/frame_system/pallet/enum.Call.html#variant.set_code Substrate set_code function]]
+**:Tutorial objectives
+<code>
+
+1. Use the Sudo pallet to simulate governance for a chain upgrade.
+2. Upgrade the runtime for a running node to include a new pallet .
+3. Schedule an upgrade for a runtime.
+</code>;
+**:Authorize an upgrade using the Sudo pallet
+<code>
+
+In FRAME, the Root origin identifies the runtime administrator.
+Only this administrator can update the runtime by calling
+the set_code function. To invoke this function using the Root
+origin, you can use the the sudo function in the Sudo pallet to
+specify the account that has superuser administrative permissions.
+
+By default, the chain specification file for the node template
+specifies that the alice development account is the owner of
+the Sudo administrative account. Therefore, this tutorial uses
+the alice account to perform runtime upgrades.
+</code>;
+***:Resource accounting for runtime upgrades
+<code>
+
+Function calls that are dispatched to the Substrate runtime are
+always associated with a weight to account for resource usage.
+The FRAME System module sets boundaries on the block length and
+block weight that these transactions can use.
+
+However, the set_code function is intentionally designed to
+consume the maximum weight that can fit in a block. Forcing a
+runtime upgrade to consume an entire block prevents transactions
+in the same block from executing on different versions of a runtime.
+
+The weight annotation for the set_code function also specifies that
+the function is in the Operational class because it provides network
+capabilities. Functions calls that are identified as operational:
+
+1. Can consume the entire weight limit of a block.
+2. Are given maximum priority.
+3. Are exempt from paying the transaction fees.
+</code>;
+***:Managing resource accounting
+<code>
+
+In this tutorial, the sudo_unchecked_weight function is used to
+invoke the set_code function for the runtime upgrade.
+
+The sudo_unchecked_weight function is the same as the sudo function
+except that it supports an additional parameter to specify the weight
+to use for the call. This parameter enables you to work around resource
+accounting safeguards to specify a weight of zero for the call that
+dispatches the set_code function. This setting allows for a block to
+take an indefinite time to compute to ensure that the runtime upgrade
+does not fail, no matter how complex the operation is.
+
+It can take all the time it needs to succeed or fail.
+</code>;
+**:Upgrade the runtime to add the Scheduler pallet
+<code>
+
+The node template doesn't include the Scheduler pallet in its runtime.
+To illustrate a runtime upgrade, let's add the Scheduler pallet to a running node.
+</code>;
+***:First Screen: Start the local node in development mode
+<code>
+# Leave this node running.
+# You can edit and re-compile to upgrade the runtime
+# without stopping or restarting the running node.
+cargo run --release -- --dev
+</code>;
+*** Second Screen: Upgrade Operation
+** substrate-node-template/runtime/Cargo.toml
+***:Add the Scheduler pallet as a dependency
+<code>
+[dependencies]
+...
+pallet-scheduler = {
+    version = "4.0.0-dev",
+    default-features = false,
+    git = "https://github.com/paritytech/substrate.git",
+     branch = "polkadot-v0.9.24" }
+...
+</code>;
+***:Add the Scheduler pallet to the features list.
+<code>
+[features]
+default = ["std"]
+std = [
+ ...
+ "pallet-scheduler/std",
+ ...
+</code>;
+** substrate-node-template/runtime/src/lib.rs
+***:Add the types required by the Scheduler pallet
+<code>
+parameter_types! {
+ pub MaximumSchedulerWeight: Weight = 10_000_000；
+ pub const MaxScheduledPerBlock: u32 = 50；
+}
+</code>;
+***:Add the implementation for the Config trait for the Scheduler pallet .
+<code>
+
+impl pallet_scheduler::Config for Runtime {
+ type Event = Event；
+ type Origin = Origin；
+ type PalletsOrigin = OriginCaller；
+ type Call = Call；
+ type MaximumWeight = MaximumSchedulerWeight；
+ type ScheduleOrigin = frame_system::EnsureRoot<AccountId>；
+ type MaxScheduledPerBlock = MaxScheduledPerBlock；
+ type WeightInfo = ()；
+ type OriginPrivilegeCmp = EqualPrivilegeOnly；
+ type PreimageProvider = ()；
+ type NoPreimagePostponement = ()；
+}
+</code>;
+***:Add the Scheduler pallet inside the construct_runtime! macro.
+<code>
+
+construct_runtime!(
+ pub enum Runtime where
+ Block = Block,
+ NodeBlock = opaque::Block,
+ UncheckedExtrinsic = UncheckedExtrinsic
+ {
+   /* snip */
+   Scheduler: pallet_scheduler,
+ }
+)；
+</code>;
+***:Add the following trait dependency at the top of the file:
+<code>
+
+pub use frame_support::traits::EqualPrivilegeOnly；
+</code>;
+***:Increment the spec_version in the [[https://paritytech.github.io/substrate/master/sp_version/struct.RuntimeVersion.html RuntimeVersion struct]]
+<code>
+
+pub const VERSION: RuntimeVersion = RuntimeVersion {
+ spec_name: create_runtime_str!("node-template"),
+ impl_name: create_runtime_str!("node-template"),
+ authoring_version: 1,
+ spec_version: 101,  // *Increment* this value, the template uses 100 as a base
+ impl_version: 1,
+ apis: RUNTIME_API_VERSIONS,
+ transaction_version: 1,
+}；
+</code>;
+****:Review the components of the RuntimeVersion struct
+<code>
+
+spec_name specifies the name of the runtime.
+impl_name specifies the name of the client.
+authoring_version specifies the version for block authors.
+spec_version specifies the version of the runtime.
+impl_version specifies the version of the client.
+apis specifies the list of supported APIs.
+transaction_version specifies the version of the dispatchable function interface.
+</code>;
+**** [[https://docs.substrate.io/reference/glossary/#author author]]
+**** [[https://docs.substrate.io/reference/glossary/#dispatch dispatch]]
+***:Build the updated runtime in the second terminal
+<code>
+
+# without stopping the running node.
+cargo build --release -p node-template-runtime
+</code>;
+*** Connect to the local node to upgrade the runtime to use the new build artifact.
+** [[https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944 Polkadot-JS application]]
+**:Schedule an Upgrade
+<code>
+
+Now that the node template has been upgraded to include the Scheduler pallet ,
+the schedule function can be used to perform the next runtime upgrade.
+
+In the previous part, the sudo_unchecked_weight function was used to override
+the weight associated with the set_code function; in this section, the runtime
+upgrade will be scheduled so that it can be processed as the only extrinsic in a block.
+</code>;
+*** [[https://paritytech.github.io/substrate/master/pallet_scheduler/pallet/enum.Call.html#variant.schedule the schedule function]]
+*** [[https://docs.substrate.io/main-docs/fundamentals/transaction-types/ extrinsic]]
+***:Prepare an Upgraded Runtime
+<code>
+// runtime/src/lib.rs
+pub const VERSION: RuntimeVersion = RuntimeVersion {
+ spec_name: create_runtime_str!("node-template"),
+ impl_name: create_runtime_str!("node-template"),
+ authoring_version: 1,
+ spec_version: 102,  // *Increment* this value.
+ impl_version: 1,
+ apis: RUNTIME_API_VERSIONS,
+ transaction_version: 1,
+}；
+
+/* snip */
+
+parameter_types! {
+ pub const ExistentialDeposit: u128 = 1000;  // Update this value.
+ pub const MaxLocks: u32 = 50；
+}
+
+/* snip */
+</code>;
+***:Build the upgraded runtime
+<code>
+
+cargo build --release -p node-template-runtime
+</code>;
+*** [[https://docs.substrate.io/tutorials/get-started/forkless-upgrade/#upgrade-the-runtime Upgrade the Runtime]]
+@endmindmap

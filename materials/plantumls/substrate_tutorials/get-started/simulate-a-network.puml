@@ -1,0 +1,66 @@
+@startmindmap
+scale 850 width
+* Simulate a network
+**:Tutorial objectives:
+<code>
+
+Start a blockchain node using a predefined account.
+Learn the key command-line options used to start a node.
+Determine if a node is running and producing blocks.
+Connect a second node to a running network.
+Verify peer computers produce and finalize blocks.
+</code>;
+** Start the first blockchain node
+***:Five Steps:
+<code>
+
+./target/release/node-template purge-chain --base-path /tmp/alice --chain local
+Are you sure to remove "/tmp/alice/chains/local_testnet/db"? [y/N]:
+
+
+</code>;
+***[#lightgreen] ./target/release/node-template
+** --base-path /tmp/alice
+** --chain local
+** --alice
+** --port 30333
+** --ws-port 9945
+** --rpc-port 9933
+** --node-key 0000000000000000000000000000000000000000000000000000000000000001
+** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+** --validator
+*** [[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-command-line-options{点击查看} Review the command-line options]]
+***:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-node-messages-displayed{点击查看} Review the node messages displayed]]
+<code>
+
+🔨 Initializing Genesis block/state
+🏷 Local node identity is
+</code>;
+** Add a second node to the blockchain network
+***:Four Steps
+<code>
+
+./target/release/node-template purge-chain --base-path /tmp/bob --chain local -y
+
+</code>;
+***[#lightgreen] ./target/release/node-template
+** --base-path /tmp/bob
+** --chain local
+** --bob
+** --port 30334
+** --ws-port 9946
+** --rpc-port 9934
+** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+** --validator
+** --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+*** Note the following differences between this command and the previous one
+*** The --bootnodes option specifies the following information:
+**:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#verify-blocks-are-produced-and-finalized Verify blocks are produced and finalized]]
+<code>
+
+The first node was started by alice.
+The node has a one peer (1 peers).
+The nodes have produced some blocks (best: #4 (0x2b8a…fdc4)).
+The blocks are being finalized (finalized #2 (0x8b6a…dce6)).
+</code>;
+@endmindmap
