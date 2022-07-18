@@ -28,6 +28,8 @@ level = 0
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
 
+[preprocessor.kroki-preprocessor]
+
 [preprocessor.puml]
 command = "mdbook-puml"
 

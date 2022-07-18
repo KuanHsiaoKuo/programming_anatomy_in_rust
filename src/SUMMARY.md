@@ -1,7 +1,7 @@
 # Summary
 
 - [总览](../README.md)
-    - [待完成](checklist.md) 
+    - [待完成](checklist.md)
     - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
     - [Rust话题](layer5_ecosystem/1_learning_resource/talks.md)
 - [Layer1: 底层抽象](./layer1_underlying_abstract/layer1_underlying_abstract.md)
@@ -80,6 +80,7 @@
         - [区块链](layer5_ecosystem/7_business/blockchain/blockchain.md)
             - [使用rust建立一个简单的区块链](layer5_ecosystem/7_business/blockchain/build-a-block-in-rust.md)
             - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
+                - [Substrate教程梳理](layer5_ecosystem/7_business/blockchain/substrate/substrate_tutorials.md)
                 - [Substrate尝试](layer5_ecosystem/7_business/blockchain/substrate/substrate_started.md)
                 - [Substrate深入pallet](layer5_ecosystem/7_business/blockchain/substrate/substrate_pallets.md)
                 - [Substrate智能合约](layer5_ecosystem/7_business/blockchain/substrate/substrate_smart_contracts.md)

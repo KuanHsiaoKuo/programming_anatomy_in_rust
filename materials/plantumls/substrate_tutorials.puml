@@ -1,0 +1,982 @@
+@startmindmap
+scale 900 width
+* Substrate Tutorials
+** Get started
+*** Build a local blockchain
+****:Compile a Substrate node:
+<code>
+
+git clone https://github.com/substrate-developer-hub/substrate-node-template
+cd substrate-node-template && git checkout latest
+cargo build --release
+</code>;
+****:Start the local node:
+<code>
+
+./target/release/node-template --dev
+</code>;
+****:Install the front-end template:
+<code>
+
+node --version
+yarn --version
+npm install -g yarn
+git clone https://github.com/substrate-developer-hub/substrate-front-end-template
+cd substrate-front-end-template
+yarn install
+</code>;
+****:Start the front-end template:
+<code>
+
+yarn start
+Open http://localhost:8000 in a browser to view the front-end template.
+</code>;
+**** Transfer funds from an account
+*** Simulate a network
+****:Tutorial objectives:
+<code>
+
+Start a blockchain node using a predefined account.
+Learn the key command-line options used to start a node.
+Determine if a node is running and producing blocks.
+Connect a second node to a running network.
+Verify peer computers produce and finalize blocks.
+</code>;
+**** Start the first blockchain node
+*****:Five Steps:
+<code>
+
+./target/release/node-template purge-chain --base-path /tmp/alice --chain local
+Are you sure to remove "/tmp/alice/chains/local_testnet/db"? [y/N]:
+
+
+</code>;
+*****[#lightgreen] ./target/release/node-template
+****** --base-path /tmp/alice
+****** --chain local
+****** --alice
+****** --port 30333
+****** --ws-port 9945
+****** --rpc-port 9933
+****** --node-key 0000000000000000000000000000000000000000000000000000000000000001
+****** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+****** --validator
+***** [[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-command-line-options{点击查看} Review the command-line options]]
+*****:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-node-messages-displayed{点击查看} Review the node messages displayed]]
+<code>
+
+🔨 Initializing Genesis block/state
+🏷 Local node identity is
+</code>;
+**** Add a second node to the blockchain network
+*****:Four Steps
+<code>
+
+./target/release/node-template purge-chain --base-path /tmp/bob --chain local -y
+
+</code>;
+*****[#lightgreen] ./target/release/node-template
+****** --base-path /tmp/bob
+****** --chain local
+****** --bob
+****** --port 30334
+****** --ws-port 9946
+****** --rpc-port 9934
+****** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+****** --validator
+****** --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+***** Note the following differences between this command and the previous one
+***** The --bootnodes option specifies the following information:
+****:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#verify-blocks-are-produced-and-finalized Verify blocks are produced and finalized]]
+<code>
+
+The first node was started by alice.
+The node has a one peer (1 peers).
+The nodes have produced some blocks (best: #4 (0x2b8a…fdc4)).
+The blocks are being finalized (finalized #2 (0x8b6a…dce6)).
+</code>;
+***[#cornflowerblue] (重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]]
+****[#aqua]:About Substrate Consensus:
+<code>
+
+The Substrate node template uses a proof of authority consensus model
+also referred to as authority round or Aura consensus .
+The Aura consensus protocol limits block production to
+a rotating list of authorized accounts.
+The authorized accounts—authorities—create blocks in
+a round robin fashion and are generally considered to be
+trusted participants in the network.
+
+This consensus model provides a simple approach to
+starting a solo blockchain for a limited number of participants.
+
+In this tutorial, you'll see how to generate the keys
+required to authorize a node to participate in the network,
+how to configure and share information about the network
+with other authorized accounts, and how to launch the network
+with an approved set of validators.
+</code>;
+****:Tutorial objectives:
+<code>
+
+Generate key pairs for use as a network authority.
+Create a custom chain specification file.
+Launch a private two-node blockchain network.
+</code>;
+**** Generate your account and keys
+*****:Key generation options:
+<code>
+
+a node-template subcommand
+the standalone subkey command-line program
+the Polkadot-JS application
+third-party key generation utilities.
+</code>;
+*****:Generate local keys using the node template:
+<code>
+
+./target/release/node-template key generate --scheme Sr25519 --password-interactive
+Type a password for the generated keys.
+./target/release/node-template key inspect --password-interactive --scheme Ed25519 "pig giraffe ceiling enter weird liar orange decline behind total despair fly"
+Type the password you used to generate the keys.
+</code>;
+***** Generate a second set of keys
+**** Create a custom chain specification
+*****:(Ten Steps)Modify the local chain specification
+<code>
+
+./target/release/node-template build-spec --disable-default-bootnode --chain local > customSpec.json
+head customSpec.json
+tail -n 80 customSpec.json
+Modify the name field to identify this chain specification as a custom chain specification.
+Modify aura field to specify the nodes
+Modify the grandpa field to specify the nodes
+</code>;
+*****[#lightcoral]:customSpec.json
+<code>
+
+{
+ "name": "Local Testnet",
+ "id": "local_testnet",
+ "chainType": "Local",
+ "bootNodes": [],
+ "telemetryEndpoints": null,
+ "protocolId": null,
+ "properties": null,
+ "consensusEngine": null,
+ "codeSubstitutes": {},
+}
+</code>;
+*****:Add validators
+<code>
+
+As you have just seen, you can add and change the authority addresses
+in a chain specification by modifying the aura and grandpa sections.
+
+You can use this technique to add as many validators as you like.
+
+Be sure to use unique keys for each validator.
+If two validators have the same keys, they produce conflicting blocks.
+</code>;
+****** Modify the aura section to include Sr25519 addresses.
+****** Modify the grandpa section to include Ed25519 addresses and a voting weight.
+****:Convert the chain specification to raw format
+<code>
+
+./target/release/node-template
+build-spec
+--chain=customSpec.json
+--raw
+--disable-default-bootnode
+> customSpecRaw.json
+</code>;
+****:Share the chain specification with others
+<code>
+
+If you are creating a private blockchain network
+to share with other participants, ensure that only
+one person creates the chain specification and
+shares the resulting raw version of that
+specification-for example, the customSpecRaw.json file—with
+all of the other validators in the network.
+
+Because the Rust compiler produces optimized WebAssembly binaries
+that aren't deterministically reproducible, each person who generates
+the Wasm runtime produces a slightly different Wasm blob.
+
+To ensure determinism, all participants in the blockchain network
+must use exactly the same raw chain specification file
+</code>;
+****:Prepare to launch the private network
+<code>
+
+After you distribute the custom chain specification
+to all network participants, you're ready to launch
+your own private blockchain.
+
+The steps are similar to the steps you followed
+in Start the first blockchain node.
+
+If you follow the steps in this tutorial,
+however, you can add multiple computers to your network.
+
+To continue, verify the following:
+1. You have generated or collected the account
+keys for at least two authority accounts.
+2. You have updated your custom chain specification
+to include the keys for block production (aura) and
+block finalization (grandpa).
+3. You have converted your custom chain specification
+to raw format and distributed the raw chain specification
+to the nodes participating in the private network.
+</code>;
+****:Start the first node
+<code>
+./target/release/node-template
+  --base-path /tmp/node01
+  --chain ./customSpecRaw.json
+  --port 30333
+  --ws-port 9945
+  --rpc-port 9933
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+  --validator
+  --rpc-methods Unsafe
+  --name MyNode01
+  --password-interactive
+</code>;
+***** --base-path /tmp/node01
+***** --chain ./customSpecRaw.json
+***** --port 30333
+***** --ws-port 9945
+***** --rpc-port 9933
+***** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+***** --validator
+***** --rpc-methods Unsafe
+***** --name MyNode01
+***** --password-interactive
+**** View information about node operations
+**** Add keys to the keystore
+***** tip: After you start the first node, no blocks are yet produced.
+*****: For each node:
+<code>
+
+Add the aura authority keys to enable block production.
+Add the grandpa authority keys to enable block finalization.
+</code>;
+*****: To insert keys into the keystore:
+<code>
+
+./target/release/node-template
+key insert --base-path /tmp/node01
+  --chain customSpecRaw.json
+  --scheme Sr25519
+  --suri <your-secret-seed>
+  --password-interactive
+  --key-type aura
+</code>;
+**** Enable other participants to join
+***** tip: You can now allow other validators to join the network using the --bootnodes and --validator command-line options.
+*****:To add a second validator to the private network:
+<code>
+
+./target/release/node-template
+  --base-path /tmp/node02
+  --chain ./customSpecRaw.json
+  --port 30334
+  --ws-port 9946
+  --rpc-port 9934
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+  --validator
+  --rpc-methods Unsafe
+  --name MyNode02
+  --bootnodes
+  /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWLmrYDLoNTyTYtRdDyZLWDe1paxzxTw5RgjmHLfzW96SX
+  --password-interactive
+</code>;
+***[#darkcyan]:Authorize specific nodes
+<code>
+
+using the node authorization pallet
+
+The node-authorization pallet is a prebuilt FRAME pallet
+that enables you to manage a configurable set of nodes
+for a network. Each node is identified by a PeerId.
+
+Each PeerId is owned by one and only one AccountId
+that claims the node.
+</code>;
+****[#mediumorchid]:Why permissioned network
+<code>
+
+In Add trusted nodes, you saw how to build a simple
+network with a known set of validator nodes. That tutorial
+illustrated a simplified version of a permissioned network.
+
+In a permissioned network, only authorized nodes are allowed
+to perform specific network activities. For example, you might
+grant some nodes the permission to validate blocks and other
+nodes the permission to propagate transactions.
+
+A blockchain with nodes that are granted specific permissions
+is different from a public or permissionless blockchain.
+In a permissionless blockchain, anyone can join the network
+by running the node software on suitable hardware. In general,
+a permissionless blockchain offers greater decentralization of
+the network. However, there are use cases where creating a
+permissioned blockchain might be appropriate.
+
+For example,a permissioned blockchain would be suitable for
+the following types of projects:
+
+1. For a private or consortium network
+such as a private enterprise or a non-profit organization.
+2. In highly-regulated data environments
+such as healthcare, finance, or business-to-business ledgers.
+3. For testing of a pre-public blockchain network at scale.
+</code>;
+**** Node authorization and ownership
+*****:There are two ways you can authorize a node to join the network:
+<code>
+
+1. By adding the PeerId to the list of predefined nodes.
+You must be approved by the governance or sudo pallet
+in the network to do this.
+
+2. By asking for a paired peer connection from a specific node.
+This node can either be a predefined node PeerId or a normal one.
+</code>;
+*****:any user can claim to be the owner of a PeerId
+<code>
+
+To protect against false claims, you should claim
+the node before you start the node.
+
+After you start the node, its PeerID is visible to
+the network and anyone could subsequently claim it.
+</code>;
+*****:As the owner of a node
+<code>
+
+you can add and remove connections for your node.
+
+For example, you can manipulate the connection
+between a predefined node and your node or
+between your node and other non-predefined nodes.
+
+You can't change the connections for predefined nodes.
+They are always allowed to connect with each other.
+</code>;
+*****:offchain worker
+<code>
+The node-authorization pallet uses an offchain worker
+to configure its node connections.
+
+Make sure to enable the offchain worker when you
+start the node because it is disabled by default
+for non-authority nodes.
+</code>;
+***** [[https://wiki.polkadot.network/docs/faq#networking Need to be familiar with peer-to-peer networking in Substrate]]
+****:Tutorial objectives
+<code>
+
+1. Check out and compile the node template.
+2. Add the node authorization pallet to the node template runtime.
+3. Launch multiple nodes and authorize new nodes to join.
+</code>;
+****:Build the node template
+<code>
+
+cd substrate-node-template
+git checkout latest
+cargo build --release
+</code>;
+**** Add the node authorization pallet
+*****:Cargo.toml
+<code>
+
+the Cargo.toml file controls two important pieces of information:
+
+1. The pallets to be imported as dependencies for the runtime,
+including the location and version of the pallets to import.
+2. The features in each pallet that should be enabled
+when compiling the native Rust binary. By enabling the standard (std)
+feature set from each pallet , you can compile the runtime to include
+functions, types, and primitives that would otherwise be missing
+when you build the WebAssembly binary.
+</code>;
+****** [[https://doc.rust-lang.org/cargo/guide/dependencies.html cargo dependencies]]
+****** [[https://doc.rust-lang.org/cargo/reference/features.html cargo features]]
+*****:Add note-authorization dependencies
+<code>
+
+[dependencies]
+pallet-node-authorization = {
+    default-features = false,
+    git = "https://github.com/paritytech/substrate.git",
+    tag = "devhub/latest",
+    version = "4.0.0-dev" }
+
+[features]
+default = ['std']
+std = [
+ ...
+ "pallet-node-authorization/std",    # add this line
+ ...
+]
+
+cargo check -p node-template-runtime
+</code>;
+*****:Add an administrative rule
+<code>
+
+To simulate governance in this tutorial, you can configure
+the pallet to use the EnsureRoot privileged function that
+can be called using the Sudo pallet .
+
+use frame_system::EnsureRoot；
+</code>;
+**** Implement the Config trait for the pallet
+*****:About Pallet Config Trait
+<code>
+
+Every pallet has a Rust trait called Config.
+
+The Config trait is used to identify the
+parameters and types that the pallet needs.
+
+Most of the pallet -specific code required to
+add a pallet is implemented using the Config trait.
+
+You can review what you to need to implement for
+any pallet by referring to its Rust documentation
+or the source code for the pallet.
+
+For example, to see what you need to implement for
+the Config trait in the node-authorization pallet,
+you can refer to the Rust documentation for
+pallet_node_authorization::Config.
+</code>;
+***** To implement the node-authorization pallet in your runtime
+****** runtime/src/lib.rs
+*******:Add the parameter_types
+<code>
+
+parameter_types! {
+ pub const MaxWellKnownNodes: u32 = 8；
+ pub const MaxPeerIdLength: u32 = 128；
+}
+</code>;
+*******:Add the impl section
+<code>
+
+impl pallet_node_authorization::Config for Runtime {
+ type Event = Event；
+ type MaxWellKnownNodes = MaxWellKnownNodes；
+ type MaxPeerIdLength = MaxPeerIdLength；
+ type AddOrigin = EnsureRoot<AccountId>；
+ type RemoveOrigin = EnsureRoot<AccountId>；
+ type SwapOrigin = EnsureRoot<AccountId>; //
+ type ResetOrigin = EnsureRoot<AccountId>; //
+ type WeightInfo = (); //
+}
+</code>;
+*******:Add the pallet to the construct_runtime macro
+<code>
+
+construct_runtime!(
+pub enum Runtime where
+   Block = Block,
+   NodeBlock = opaque::Block,
+   UncheckedExtrinsic = UncheckedExtrinsic
+ {
+   /*** Add This Line ***/
+   NodeAuthorization: pallet_node_authorization::{Pallet, Call, Storage, Event<T>, Config<T>},
+ }
+)；
+</code>;
+*******:Cargo check
+<code>
+
+cargo check -p node-template-runtime
+</code>;
+*****:Add genesis storage for authorized nodes
+<code>
+
+Before you can launch the network to use node authorization,
+some additional configuration is needed to handle the peer
+identifiers and account identifiers .
+
+For example, the PeerId is encoded in bs58 format,
+so you need to add a new dependency for the bs58 library
+in the node/Cargo.toml to decode the PeerId to get its bytes.
+
+To keep things simple, the authorized nodes are associated
+with predefined accounts.
+</code>;
+******:node/Cargo.toml
+<code>
+
+[dependencies]
+bs58 = "0.4.0"
+</code>;
+****** node/src/chain_spec.rs
+*******:Add genesis storage for nodes
+<code>
+
+// A struct wraps Vec<u8>, represents as our `PeerId`.
+use sp_core::OpaquePeerId；
+// The genesis config that serves for our pallet.
+use node_template_runtime::NodeAuthorizationConfig；
+</code>;
+*******:Locate the testnet_genesis function
+<code>
+
+/// Configure initial storage state for FRAME modules.
+fn testnet_genesis(
+ wasm_binary: &[u8],
+ initial_authorities: Vec<(AuraId, GrandpaId)>,
+ root_key: AccountId,
+ endowed_accounts: Vec<AccountId>,
+ _enable_println: bool,
+ ) -> GenesisConfig {
+</code>;
+*******:Within the GenesisConfig declaration
+<code>
+
+ node_authorization: NodeAuthorizationConfig {
+   nodes: vec![
+     (
+       OpaquePeerId(bs58::decode("12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2").into_vec().unwrap()),
+       endowed_accounts[0].clone()
+     ),
+     (
+       OpaquePeerId(bs58::decode("12D3KooWQYV9dGMFoRzNStwpXztXaBUjtPqi6aU76ZgUriHhKust").into_vec().unwrap()),
+       endowed_accounts[1].clone()
+     ),
+   ],
+ },
+</code>;
+*****:Verify that the node compiles
+<code>
+
+cargo build --release
+</code>;
+**** Launch the permissioned network
+*****:For the purposes of this tutorial
+<code>
+
+you are going to launch four nodes.
+
+Three of the nodes are associated with predefined accounts
+and all three of those nodes are allowed to author
+and validate blocks.
+
+The fourth node is a sub-node that is only authorized to
+read data from a selected node with the approval of that node's owner.
+</code>;
+*****:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#obtain-node-keys-and-peerids Obtain node keys and peerIDs]]
+<code>
+</code>;
+*****:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#start-the-first-node Start the first node]]
+<code>
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator1
+--alice
+--node-key=c12b6d18942f5ee8528c8e2baf4e147b5c5c18710926ea492d09cbd9f6c9f82a
+--port 30333
+--ws-port 9944
+</code>;
+*****:Start the second node
+<code>
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator2
+--bob
+--node-key=6ce3be907dbcabf20a9a5a60a712b4256a54196000a8ed4050d352bc113f8c58
+--port 30334
+--ws-port 9945
+</code>;
+*****:Add a third node to the list of well-known nodes
+<code>
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator3
+--name charlie
+--node-key=3a9d5b35b9fb4c42aafadeca046f6bf56107bd2579687f069b42646684b94d9e
+--port 30335
+--ws-port=9946
+--offchain-worker always
+</code>;
+******:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#authorize-access-for-the-third-node Authorize access for the third node]]
+<code>
+
+This tutorial uses the sudo pallet for governance.
+Therefore, yu can use the sudo pallet to call the
+add_well_known_node function provided by
+node-authorization pallet to add the third node.
+</code>;
+******:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#add-a-sub-node Add a sub-node]]
+<code>
+
+The fourth node in this network is not as a well-known node.
+
+1. This node is owned by the user dave,
+2. but is a sub-node of the charlie node.
+
+The sub-node can only access the network by
+connecting to the node owned by charlie.
+
+The parent node is responsible for any sub-node it authorizes to connect
+and controls access if the sub-node needs to be removed or audited.
+
+./target/release/node-template
+--chain=local
+--base-path /tmp/validator4
+--name dave
+--node-key=a99331ff4f0e0a0434a6263da0a5823ea3afcfffe590c9f3014e6cf620f2b19a
+--port 30336
+--ws-port 9947
+--offchain-worker always
+</code>;
+***:[[https://docs.substrate.io/tutorials/get-started/node-metrics/ Monitor node metrics]]
+<code>
+
+Substrate exposes metrics about the operation of your network.
+
+For example, you can collect information about:
+1. how many peers your node is connected to
+2. how much memory your node is using.
+
+To visualize these metrics, you can use tools like Prometheus and Grafana.
+
+This tutorial demonstrates how to use Grafana and Prometheus
+to scrape and visualize these types of node metrics .
+</code>;
+****[#darkseagreen]:A possible architecture
+<code>
+
++-----------+                     +-------------+                                                              +---------+
+| Substrate |                     | Prometheus  |                                                              | Grafana |
++-----------+                     +-------------+                                                              +---------+
+      |               -----------------\ |                                                                          |
+      |               | Every 1 minute |-|                                                                          |
+      |               |----------------| |                                                                          |
+      |                                  |                                                                          |
+      |        GET current metric values |                                                                          |
+      |<---------------------------------|                                                                          |
+      |                                  |                                                                          |
+      | `substrate_peers_count 5`        |                                                                          |
+      |--------------------------------->|                                                                          |
+      |                                  | --------------------------------------------------------------------\    |
+      |                                  |-| Save metric value with corresponding time stamp in local database |    |
+      |                                  | |-------------------------------------------------------------------|    |
+      |                                  |                                         -------------------------------\ |
+      |                                  |                                         | Every time user opens graphs |-|
+      |                                  |                                         |------------------------------| |
+      |                                  |                                                                          |
+      |                                  |       GET values of metric `substrate_peers_count` from time-X to time-Y |
+      |                                  |<-------------------------------------------------------------------------|
+      |                                  |                                                                          |
+      |                                  | `substrate_peers_count (1582023828, 5), (1582023847, 4) [...]`           |
+      |                                  |------------------------------------------------------------------------->|
+      |                                  |                                                                          |
+</code>;
+****:Tutorial objectives
+<code>
+
+1. Install Prometheus and Grafana.
+2. Configure Prometheus to capture a time series for your Substrate node.
+3. Configure Grafana to visualize the node metrics collected using the Prometheus endpoint.
+</code>;
+**** [[https://docs.substrate.io/tutorials/get-started/node-metrics/#install-prometheus-and-grafana Install Prometheus and Grafana]]
+**** Start a Substrate node
+****:Configure Prometheus to scrape your Substrate node
+<code>
+# prometheus.yml
+
+# --snip--
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "substrate_node"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    # ** NOTE: you want to have this *LESS THAN* the block time in order to ensure
+    # ** that you have a data point for every block!
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ["localhost:9615"]
+
+
+# specify a custom config file instead if you made one here:
+./prometheus --config.file prometheus.yml
+</code>;
+*****:Check all Prometheus metrics
+<code>
+
+curl localhost:9615/metrics
+</code>;
+**** [[https://docs.substrate.io/tutorials/get-started/node-metrics/#visualizing-prometheus-metrics-with-grafana Visualizing Prometheus metrics with Grafana]]
+*** Upgrade a running network
+****:Forkless upgrade intro
+<code>
+
+Unlike many blockchains, the Substrate development framework supports
+forkless upgrades to the runtime that is the core of the blockchain.
+
+Most blockchain projects require a hard fork of the code base to
+support ongoing development of new features or enhancements
+to existing features.
+
+With Substrate , you can deploy enhanced runtime capabilities—including
+breaking changes—without a hard fork.
+
+Because the definition of the runtime is itself an element
+in a Substrate chain's state, network participants can update
+this value by calling the set_code function in a transaction.
+
+Because updates to the runtime state are validates using the
+blockchain's consensus mechanisms and cryptographic guarantees,
+network participants can use the blockchain itself to distribute
+updated or extended runtime logic without needing to fork the
+chain or release a new blockchain client.
+</code>;
+***** Hard Fork
+***** [[https://paritytech.github.io/substrate/master/frame_system/pallet/enum.Call.html#variant.set_code Substrate set_code function]]
+****:Tutorial objectives
+<code>
+
+1. Use the Sudo pallet to simulate governance for a chain upgrade.
+2. Upgrade the runtime for a running node to include a new pallet .
+3. Schedule an upgrade for a runtime.
+</code>;
+****:Authorize an upgrade using the Sudo pallet
+<code>
+
+In FRAME, the Root origin identifies the runtime administrator.
+Only this administrator can update the runtime by calling
+the set_code function. To invoke this function using the Root
+origin, you can use the the sudo function in the Sudo pallet to
+specify the account that has superuser administrative permissions.
+
+By default, the chain specification file for the node template
+specifies that the alice development account is the owner of
+the Sudo administrative account. Therefore, this tutorial uses
+the alice account to perform runtime upgrades.
+</code>;
+*****:Resource accounting for runtime upgrades
+<code>
+
+Function calls that are dispatched to the Substrate runtime are
+always associated with a weight to account for resource usage.
+The FRAME System module sets boundaries on the block length and
+block weight that these transactions can use.
+
+However, the set_code function is intentionally designed to
+consume the maximum weight that can fit in a block. Forcing a
+runtime upgrade to consume an entire block prevents transactions
+in the same block from executing on different versions of a runtime.
+
+The weight annotation for the set_code function also specifies that
+the function is in the Operational class because it provides network
+capabilities. Functions calls that are identified as operational:
+
+1. Can consume the entire weight limit of a block.
+2. Are given maximum priority.
+3. Are exempt from paying the transaction fees.
+</code>;
+*****:Managing resource accounting
+<code>
+
+In this tutorial, the sudo_unchecked_weight function is used to
+invoke the set_code function for the runtime upgrade.
+
+The sudo_unchecked_weight function is the same as the sudo function
+except that it supports an additional parameter to specify the weight
+to use for the call. This parameter enables you to work around resource
+accounting safeguards to specify a weight of zero for the call that
+dispatches the set_code function. This setting allows for a block to
+take an indefinite time to compute to ensure that the runtime upgrade
+does not fail, no matter how complex the operation is.
+
+It can take all the time it needs to succeed or fail.
+</code>;
+****:Upgrade the runtime to add the Scheduler pallet
+<code>
+
+The node template doesn't include the Scheduler pallet in its runtime.
+To illustrate a runtime upgrade, let's add the Scheduler pallet to a running node.
+</code>;
+*****:First Screen: Start the local node in development mode
+<code>
+# Leave this node running.
+# You can edit and re-compile to upgrade the runtime
+# without stopping or restarting the running node.
+cargo run --release -- --dev
+</code>;
+***** Second Screen: Upgrade Operation
+****** substrate-node-template/runtime/Cargo.toml
+*******:Add the Scheduler pallet as a dependency
+<code>
+[dependencies]
+...
+pallet-scheduler = {
+    version = "4.0.0-dev",
+    default-features = false,
+    git = "https://github.com/paritytech/substrate.git",
+     branch = "polkadot-v0.9.24" }
+...
+</code>;
+*******:Add the Scheduler pallet to the features list.
+<code>
+[features]
+default = ["std"]
+std = [
+ ...
+ "pallet-scheduler/std",
+ ...
+</code>;
+***** substrate-node-template/runtime/src/lib.rs
+******:Add the types required by the Scheduler pallet
+<code>
+parameter_types! {
+ pub MaximumSchedulerWeight: Weight = 10_000_000；
+ pub const MaxScheduledPerBlock: u32 = 50；
+}
+</code>;
+******:Add the implementation for the Config trait for the Scheduler pallet .
+<code>
+
+impl pallet_scheduler::Config for Runtime {
+ type Event = Event；
+ type Origin = Origin；
+ type PalletsOrigin = OriginCaller；
+ type Call = Call；
+ type MaximumWeight = MaximumSchedulerWeight；
+ type ScheduleOrigin = frame_system::EnsureRoot<AccountId>；
+ type MaxScheduledPerBlock = MaxScheduledPerBlock；
+ type WeightInfo = ()；
+ type OriginPrivilegeCmp = EqualPrivilegeOnly；
+ type PreimageProvider = ()；
+ type NoPreimagePostponement = ()；
+}
+</code>;
+******:Add the Scheduler pallet inside the construct_runtime! macro.
+<code>
+
+construct_runtime!(
+ pub enum Runtime where
+ Block = Block,
+ NodeBlock = opaque::Block,
+ UncheckedExtrinsic = UncheckedExtrinsic
+ {
+   /*** snip ***/
+   Scheduler: pallet_scheduler,
+ }
+)；
+</code>;
+******:Add the following trait dependency at the top of the file:
+<code>
+
+pub use frame_support::traits::EqualPrivilegeOnly；
+</code>;
+******:Increment the spec_version in the [[https://paritytech.github.io/substrate/master/sp_version/struct.RuntimeVersion.html RuntimeVersion struct]]
+<code>
+
+pub const VERSION: RuntimeVersion = RuntimeVersion {
+ spec_name: create_runtime_str!("node-template"),
+ impl_name: create_runtime_str!("node-template"),
+ authoring_version: 1,
+ spec_version: 101,  // *Increment* this value, the template uses 100 as a base
+ impl_version: 1,
+ apis: RUNTIME_API_VERSIONS,
+ transaction_version: 1,
+}；
+</code>;
+*******:Review the components of the RuntimeVersion struct
+<code>
+
+spec_name specifies the name of the runtime.
+impl_name specifies the name of the client.
+authoring_version specifies the version for block authors.
+spec_version specifies the version of the runtime.
+impl_version specifies the version of the client.
+apis specifies the list of supported APIs.
+transaction_version specifies the version of the dispatchable function interface.
+</code>;
+******** [[https://docs.substrate.io/reference/glossary/#author author]]
+******** [[https://docs.substrate.io/reference/glossary/#dispatch dispatch]]
+*****:Build the updated runtime in the second terminal
+<code>
+
+# without stopping the running node.
+cargo build --release -p node-template-runtime
+</code>;
+***** Connect to the local node to upgrade the runtime to use the new build artifact.
+****** [[https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944 Polkadot-JS application]]
+****:Schedule an Upgrade
+<code>
+
+Now that the node template has been upgraded to include the Scheduler pallet ,
+the schedule function can be used to perform the next runtime upgrade.
+
+In the previous part, the sudo_unchecked_weight function was used to override
+the weight associated with the set_code function; in this section, the runtime
+upgrade will be scheduled so that it can be processed as the only extrinsic in a block.
+</code>;
+***** [[https://paritytech.github.io/substrate/master/pallet_scheduler/pallet/enum.Call.html#variant.schedule the schedule function]]
+***** [[https://docs.substrate.io/main-docs/fundamentals/transaction-types/ extrinsic]]
+*****:Prepare an Upgraded Runtime
+<code>
+// runtime/src/lib.rs
+pub const VERSION: RuntimeVersion = RuntimeVersion {
+ spec_name: create_runtime_str!("node-template"),
+ impl_name: create_runtime_str!("node-template"),
+ authoring_version: 1,
+ spec_version: 102,  // *Increment* this value.
+ impl_version: 1,
+ apis: RUNTIME_API_VERSIONS,
+ transaction_version: 1,
+}；
+
+/*** snip ***/
+
+parameter_types! {
+ pub const ExistentialDeposit: u128 = 1000;  // Update this value.
+ pub const MaxLocks: u32 = 50；
+}
+
+/*** snip ***/
+</code>;
+*****:Build the upgraded runtime
+<code>
+
+cargo build --release -p node-template-runtime
+</code>;
+***** [[https://docs.substrate.io/tutorials/get-started/forkless-upgrade/#upgrade-the-runtime Upgrade the Runtime]]
+** Work with pallets
+*** Add a pallet to the runtime
+*** Configure the contracts pallet
+*** Use macros in a custom pallet
+** Develop smart contracts
+*** Prepare your first contract
+*** Develop a smart contract
+*** Use maps for storing values
+*** Buid a token contract
+*** Troubleshoot smart contracts
+** Connect with other chains
+*** Start a local relay chain
+*** Connect a local parachian
+*** Connect to Rococo testnet
+*** Access EVM accounts
+@endmindmap
