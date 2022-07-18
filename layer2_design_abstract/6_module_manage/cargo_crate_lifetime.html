@@ -186,8 +186,7 @@
 <ul>
 <li><a href="#cargo%E4%B8%8Ecrate%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">Cargo与crate生命周期</a>
 <ul>
-<li><a href="#cargo--%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%90%86%E8%A7%A3cargo%E6%8C%87%E4%BB%A4%E7%B3%BB%E5%88%97">cargo : 用生命周期理解Cargo指令系列</a>
-<ul>
+<li><a href="#cargo--%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%90%86%E8%A7%A3cargo%E6%8C%87%E4%BB%A4%E7%B3%BB%E5%88%97">cargo : 用生命周期理解Cargo指令系列</a></li>
 <li><a href="#%E6%96%B0%E5%BB%BA">新建</a>
 <ul>
 <li><a href="#cargo-new">cargo new</a></li>
@@ -205,7 +204,12 @@
 <li><a href="#cargo-check">cargo check</a></li>
 <li><a href="#cargo-fix">cargo fix</a></li>
 <li><a href="#cargo-fetch">cargo fetch</a></li>
-<li><a href="#cargo-searchinstalluninstall">cargo search/install/uninstall</a></li>
+<li><a href="#cargo-searchinstalluninstall">cargo search/install/uninstall</a>
+<ul>
+<li><a href="#%E4%BB%8Ecratesio%E6%8B%89%E5%8F%96%E5%AE%89%E8%A3%85">从crates.io拉取安装</a></li>
+<li><a href="#%E4%BB%8E%E6%BA%90%E7%A0%81%E8%BF%9B%E8%A1%8C%E5%AE%89%E8%A3%85">从源码进行安装</a></li>
+</ul>
+</li>
 <li><a href="#cargo-report">cargo report</a></li>
 <li><a href="#cargo-generate-lockfile">cargo generate-lockfile</a></li>
 <li><a href="#cargo-locate-project">cargo locate-project</a></li>
@@ -263,67 +267,78 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sun Jul 17 03:07:34 UTC 2022 -->
+<!-- Added by: runner, at: Mon Jul 18 03:35:02 UTC 2022 -->
 <!--te-->
 <h2 id="cargo--用生命周期理解cargo指令系列"><a class="header" href="#cargo--用生命周期理解cargo指令系列">cargo <cmd>: 用生命周期理解Cargo指令系列</a></h2>
-<h3 id="新建"><a class="header" href="#新建">新建</a></h3>
-<h4 id="cargo-new"><a class="header" href="#cargo-new">cargo new</a></h4>
-<h4 id="cargo-init"><a class="header" href="#cargo-init">cargo init</a></h4>
-<h3 id="开发"><a class="header" href="#开发">开发</a></h3>
-<h4 id="cargo-clean"><a class="header" href="#cargo-clean">cargo clean</a></h4>
-<h4 id="cargo-doc"><a class="header" href="#cargo-doc">cargo doc</a></h4>
-<h3 id="依赖管理"><a class="header" href="#依赖管理">依赖管理</a></h3>
-<h4 id="cargo-check"><a class="header" href="#cargo-check">cargo check</a></h4>
+<h2 id="新建"><a class="header" href="#新建">新建</a></h2>
+<h3 id="cargo-new"><a class="header" href="#cargo-new">cargo new</a></h3>
+<h3 id="cargo-init"><a class="header" href="#cargo-init">cargo init</a></h3>
+<h2 id="开发"><a class="header" href="#开发">开发</a></h2>
+<h3 id="cargo-clean"><a class="header" href="#cargo-clean">cargo clean</a></h3>
+<h3 id="cargo-doc"><a class="header" href="#cargo-doc">cargo doc</a></h3>
+<h2 id="依赖管理"><a class="header" href="#依赖管理">依赖管理</a></h2>
+<h3 id="cargo-check"><a class="header" href="#cargo-check">cargo check</a></h3>
 <p>该命令用来快速检查当前代码是否可以通过编译，但是不去生成真正可执行的程序。这样可以加快我们的检查速度。</p>
-<h4 id="cargo-fix"><a class="header" href="#cargo-fix">cargo fix</a></h4>
-<h4 id="cargo-fetch"><a class="header" href="#cargo-fetch">cargo fetch</a></h4>
-<h4 id="cargo-searchinstalluninstall"><a class="header" href="#cargo-searchinstalluninstall">cargo search/install/uninstall</a></h4>
-<h4 id="cargo-report"><a class="header" href="#cargo-report">cargo report</a></h4>
-<h4 id="cargo-generate-lockfile"><a class="header" href="#cargo-generate-lockfile">cargo generate-lockfile</a></h4>
-<h4 id="cargo-locate-project"><a class="header" href="#cargo-locate-project">cargo locate-project</a></h4>
-<h4 id="cargo-metadata"><a class="header" href="#cargo-metadata">cargo metadata</a></h4>
-<h4 id="cargo-pkgid"><a class="header" href="#cargo-pkgid">cargo pkgid</a></h4>
-<h4 id="cargo-tree"><a class="header" href="#cargo-tree">cargo tree</a></h4>
-<h4 id="cargo-update"><a class="header" href="#cargo-update">cargo update</a></h4>
-<h4 id="cargo-vendor"><a class="header" href="#cargo-vendor">cargo vendor</a></h4>
-<h4 id="cargo-verify-project"><a class="header" href="#cargo-verify-project">cargo verify-project</a></h4>
-<h3 id="测试"><a class="header" href="#测试">测试</a></h3>
-<h4 id="cargo-test"><a class="header" href="#cargo-test">cargo test</a></h4>
-<h4 id="cargo-bench"><a class="header" href="#cargo-bench">cargo bench</a></h4>
-<h3 id="运行"><a class="header" href="#运行">运行</a></h3>
-<h4 id="cargo-run"><a class="header" href="#cargo-run">cargo run</a></h4>
-<h3 id="构建"><a class="header" href="#构建">构建</a></h3>
-<h4 id="cargo-rustc"><a class="header" href="#cargo-rustc">cargo rustc</a></h4>
-<h4 id="cargo-build"><a class="header" href="#cargo-build">cargo build</a></h4>
+<h3 id="cargo-fix"><a class="header" href="#cargo-fix">cargo fix</a></h3>
+<h3 id="cargo-fetch"><a class="header" href="#cargo-fetch">cargo fetch</a></h3>
+<h3 id="cargo-searchinstalluninstall"><a class="header" href="#cargo-searchinstalluninstall">cargo search/install/uninstall</a></h3>
+<h4 id="从cratesio拉取安装"><a class="header" href="#从cratesio拉取安装">从crates.io拉取安装</a></h4>
+<p>cargo install <crate></p>
+<h4 id="从源码进行安装"><a class="header" href="#从源码进行安装">从源码进行安装</a></h4>
+<p>cargo install &lt;Cargo.toml path&gt; --debug --locked</p>
+<div id="admonition-具体应用" class="admonition tip">
+<div class="admonition-title">
+<p>具体应用</p>
+<p><a class="admonition-anchor-link" href="#admonition-具体应用"></a></p>
+</div>
+<div>
+<p>当crates.io上面的某个crate需要定制化的时候，就可以直接拉取源码之后本地修改安装</p>
+</div>
+</div>
+<h3 id="cargo-report"><a class="header" href="#cargo-report">cargo report</a></h3>
+<h3 id="cargo-generate-lockfile"><a class="header" href="#cargo-generate-lockfile">cargo generate-lockfile</a></h3>
+<h3 id="cargo-locate-project"><a class="header" href="#cargo-locate-project">cargo locate-project</a></h3>
+<h3 id="cargo-metadata"><a class="header" href="#cargo-metadata">cargo metadata</a></h3>
+<h3 id="cargo-pkgid"><a class="header" href="#cargo-pkgid">cargo pkgid</a></h3>
+<h3 id="cargo-tree"><a class="header" href="#cargo-tree">cargo tree</a></h3>
+<h3 id="cargo-update"><a class="header" href="#cargo-update">cargo update</a></h3>
+<h3 id="cargo-vendor"><a class="header" href="#cargo-vendor">cargo vendor</a></h3>
+<h3 id="cargo-verify-project"><a class="header" href="#cargo-verify-project">cargo verify-project</a></h3>
+<h2 id="测试"><a class="header" href="#测试">测试</a></h2>
+<h3 id="cargo-test"><a class="header" href="#cargo-test">cargo test</a></h3>
+<h3 id="cargo-bench"><a class="header" href="#cargo-bench">cargo bench</a></h3>
+<h2 id="运行"><a class="header" href="#运行">运行</a></h2>
+<h3 id="cargo-run"><a class="header" href="#cargo-run">cargo run</a></h3>
+<h2 id="构建"><a class="header" href="#构建">构建</a></h2>
+<h3 id="cargo-rustc"><a class="header" href="#cargo-rustc">cargo rustc</a></h3>
+<h3 id="cargo-build"><a class="header" href="#cargo-build">cargo build</a></h3>
 <pre><code class="language-shell">cargo build --release
 </code></pre>
 <blockquote>
 <p>该命令将会在 target/release/目录下生成优化过的可执行程序。这样生成的可执行程序拥有更好的性能。</p>
 </blockquote>
-<h4 id="cargo-rustdoc"><a class="header" href="#cargo-rustdoc">cargo rustdoc</a></h4>
-<h3 id="发布"><a class="header" href="#发布">发布</a></h3>
-<h4 id="cargo-login"><a class="header" href="#cargo-login">cargo login</a></h4>
-<h4 id="cargo-owner"><a class="header" href="#cargo-owner">cargo owner</a></h4>
-<h4 id="cargo-package"><a class="header" href="#cargo-package">cargo package</a></h4>
-<h4 id="cargo-publish"><a class="header" href="#cargo-publish">cargo publish</a></h4>
-<h4 id="cargo-yank"><a class="header" href="#cargo-yank">cargo yank</a></h4>
-<h3 id="维护"><a class="header" href="#维护">维护</a></h3>
-<h3 id="分区"><a class="header" href="#分区">分区</a></h3>
-<h2 id="cargotoml细说"><a class="header" href="#cargotoml细说">Cargo.toml细说</a></h2>
-<h2 id="rust程序运行方式总结"><a class="header" href="#rust程序运行方式总结">Rust程序运行方式总结</a></h2>
-<h3 id="脚本"><a class="header" href="#脚本">脚本</a></h3>
-<h3 id="项目"><a class="header" href="#项目">项目</a></h3>
-<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
-<h3 id="online-book"><a class="header" href="#online-book">online-book</a></h3>
+<h3 id="cargo-rustdoc"><a class="header" href="#cargo-rustdoc">cargo rustdoc</a></h3>
+<h2 id="发布"><a class="header" href="#发布">发布</a></h2>
+<h3 id="cargo-login"><a class="header" href="#cargo-login">cargo login</a></h3>
+<h3 id="cargo-owner"><a class="header" href="#cargo-owner">cargo owner</a></h3>
+<h3 id="cargo-package"><a class="header" href="#cargo-package">cargo package</a></h3>
+<h3 id="cargo-publish"><a class="header" href="#cargo-publish">cargo publish</a></h3>
+<h3 id="cargo-yank"><a class="header" href="#cargo-yank">cargo yank</a></h3>
+<h2 id="维护"><a class="header" href="#维护">维护</a></h2>
+<h2 id="分区"><a class="header" href="#分区">分区</a></h2>
+<h1 id="cargotoml细说"><a class="header" href="#cargotoml细说">Cargo.toml细说</a></h1>
+<h1 id="rust程序运行方式总结"><a class="header" href="#rust程序运行方式总结">Rust程序运行方式总结</a></h1>
+<h2 id="脚本"><a class="header" href="#脚本">脚本</a></h2>
+<h2 id="项目"><a class="header" href="#项目">项目</a></h2>
+<h1 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h1>
+<h2 id="online-book"><a class="header" href="#online-book">online-book</a></h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/cargo/commands/index.html">Cargo Commands - The Cargo Book</a></li>
 <li><a href="https://doc.rust-lang.org/stable/rust-by-example/cargo.html">Cargo - Rust By Example</a></li>
 </ul>
-<h3 id="fragment"><a class="header" href="#fragment">fragment</a></h3>
-<h3 id="local"><a class="header" href="#local">local</a></h3>
+<h2 id="fragment"><a class="header" href="#fragment">fragment</a></h2>
+<h2 id="local"><a class="header" href="#local">local</a></h2>
 <ul>
 <li><a href="marginnote3app://note/607C0511-4592-4F59-A8C0-AD8017A503FE">&lt;精通Rust(第二版)&gt;-2.3 Cargo和程序库</a></li>
 </ul>
