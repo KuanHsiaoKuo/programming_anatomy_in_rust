@@ -58,63 +58,71 @@
 
 ## cargo <cmd>: 用生命周期理解Cargo指令系列
 
-### 新建
+## 新建
 
-#### cargo new
+### cargo new
 
-#### cargo init
+### cargo init
 
-### 开发
+## 开发
 
-#### cargo clean
+### cargo clean
 
-#### cargo doc
+### cargo doc
 
-### 依赖管理
+## 依赖管理
 
-#### cargo check
+### cargo check
 
 该命令用来快速检查当前代码是否可以通过编译，但是不去生成真正可执行的程序。这样可以加快我们的检查速度。
 
-#### cargo fix
+### cargo fix
 
-#### cargo fetch
+### cargo fetch
 
-#### cargo search/install/uninstall
+### cargo search/install/uninstall
 
-#### cargo report
+#### 从crates.io拉取安装
 
-#### cargo generate-lockfile
+cargo install <crate>
 
-#### cargo locate-project
+#### 从源码进行安装
 
-#### cargo metadata
+cargo install <Cargo.toml path> --debug --locked
 
-#### cargo pkgid
+### cargo report
 
-#### cargo tree
+### cargo generate-lockfile
 
-#### cargo update
+### cargo locate-project
 
-#### cargo vendor
+### cargo metadata
 
-#### cargo verify-project
+### cargo pkgid
 
-### 测试
+### cargo tree
 
-#### cargo test
+### cargo update
 
-#### cargo bench
+### cargo vendor
 
-### 运行
+### cargo verify-project
 
-#### cargo run
+## 测试
 
-### 构建
+### cargo test
 
-#### cargo rustc
+### cargo bench
 
-#### cargo build
+## 运行
+
+### cargo run
+
+## 构建
+
+### cargo rustc
+
+### cargo build
 
 ```shell
 cargo build --release
@@ -122,41 +130,41 @@ cargo build --release
 
 > 该命令将会在 target/release/目录下生成优化过的可执行程序。这样生成的可执行程序拥有更好的性能。
 
-#### cargo rustdoc
+### cargo rustdoc
 
-### 发布
+## 发布
 
-#### cargo login
+### cargo login
 
-#### cargo owner
+### cargo owner
 
-#### cargo package
+### cargo package
 
-#### cargo publish
+### cargo publish
 
-#### cargo yank
+### cargo yank
 
-### 维护
+## 维护
 
-### 分区
+## 分区
 
-## Cargo.toml细说
+# Cargo.toml细说
 
-## Rust程序运行方式总结
+# Rust程序运行方式总结
 
-### 脚本
+## 脚本
 
-### 项目
+## 项目
 
-## 参考资源
+# 参考资源
 
-### online-book
+## online-book
 
 - [Cargo Commands - The Cargo Book](https://doc.rust-lang.org/cargo/commands/index.html)
 - [Cargo - Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/cargo.html)
 
-### fragment
+## fragment
 
-### local
+## local
 
 - [<精通Rust(第二版)>-2.3 Cargo和程序库](marginnote3app://note/607C0511-4592-4F59-A8C0-AD8017A503FE)
