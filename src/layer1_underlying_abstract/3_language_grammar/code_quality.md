@@ -1,15 +1,18 @@
 # 代码质量：异常、测试与日志
 
 <!--ts-->
-
 * [代码质量：异常、测试与日志](#代码质量异常测试与日志)
-    * [参考资源](#参考资源)
-        * [online-book](#online-book)
-        * [fragment](#fragment)
-        * [local](#local)
+   * [错误处理](#错误处理)
+      * [RUST_BACKTRACE的用法](#rust_backtrace的用法)
+         * [设置环境变量](#设置环境变量)
+         * [临时设置使用](#临时设置使用)
+   * [参考资源](#参考资源)
+      * [online-book](#online-book)
+      * [fragment](#fragment)
+      * [local](#local)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sat Jul 16 09:37:00 UTC 2022 -->
+<!-- Added by: runner, at: Sun Jul 17 03:07:32 UTC 2022 -->
 
 <!--te-->
 
