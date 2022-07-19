@@ -1,26 +1,131 @@
 @startmindmap
-scale 850 width
+'scale 850 width
 * Substrate Tutorials
-** Get started [[#get-started jump]]
-*** Build a local blockchain [[#build-a-local-blockchain jump]]
-*** Simulate a network [[#simulate-a-network jump]]
-*** Add trusted nodes [[#add-trusted-nodes jump]]
-*** Authorize specific nodes [[#authorize-specific-nodes jump]]
-*** monitor node metrics [[#monitor-node-metrics jump]]
-*** Upgrade a running network [[#upgrade-a-running-network jump]]
-** Work with pallets [[#work-with-pallets jump]]
-*** Add a pallet to the runtime [[#add-a-pallet-to-the-runtime jump]]
-*** Configure the contracts pallet [[#configure-the-contracts-pallet jump]]
-*** Use macros in a custom pallet [[#use-macros-in-a-custom-pallet jump]]
-** Develop smart contracts [[#develop-smart-contracts jump]]
-*** Prepare your first contract [[#prepare-your-first-contract jump]]
-*** Develop a smart contract [[#develop-a-smart-contract jump]]
-*** Use maps for storing values [[#use-maps-for-storing-values jump]]
-*** Buid a token contract [[#build-a-token-contract jump]]
+**:Get started [[#get-started jump]]
+<code>
+
+开始接触Substrate基础内容
+</code>;
+***:Build a local blockchain [[#build-a-local-blockchain jump]]
+<code>
+
+1. 下载链端模版(substrate-node-template)和前端模版(substrate-front-end-template)
+2. 启动节点、启动前端查看
+3. 在前端进行转账操作
+</code>;
+***:Simulate a network [[#simulate-a-network jump]]
+<code>
+
+1. 使用预定义的帐户启动区块链节点。
+2. 了解用于启动节点的关键命令行选项。
+3. 确定节点是否正在运行并产生块。
+4. 将第二个节点连接到正在运行的网络。
+5. 验证对等计算机(peer computers)产生并最终确定块。
+</code>;
+***:Add trusted nodes [[#add-trusted-nodes jump]]
+<code>
+
+1. 生成用作网络授权的密钥对。
+2. 创建自定义链规范文件。
+3. 启动一个私有的两节点区块链网络。
+</code>;
+***:Authorize specific nodes [[#authorize-specific-nodes jump]]
+<code>
+
+1. 检查并编译节点模板。
+2. 将节点授权托盘(pallet)添加到节点模板运行时。
+3. 启动多个节点并授权新节点加入。
+</code>;
+***:monitor node metrics [[#monitor-node-metrics jump]]
+<code>
+
+1. 安装 Prometheus 和 Grafana。
+2. 配置 Prometheus 以捕获 Substrate 节点的时间序列。
+3. 配置 Grafana 以可视化使用 Prometheus 端点收集的节点指标。
+</code>;
+***:Upgrade a running network [[#upgrade-a-running-network jump]]
+<code>
+
+1. 使用 Sudo 托盘(sudo pallet)模拟链升级的治理(governance)。
+2. 升级运行节点的运行时以包含新的托盘。
+3. 为运行时安排升级。
+</code>;
+**:Work with pallets [[#work-with-pallets jump]]
+<code>
+
+通过示例介绍pallets的结构和相关使用
+</code>
+***:Add a pallet to the runtime [[#add-a-pallet-to-the-runtime jump]]
+<code>
+
+1. 了解如何更新运行时依赖项以包含新托盘。
+2. 了解如何配置特定于托盘(pallet-specific)的 Rust 特征(trait)。
+3. 通过使用前端模板与新托盘交互来查看运行时的更改。
+</code>;
+***:Configure the contracts pallet [[#configure-the-contracts-pallet jump]]
+<code>
+
+
+</code>;
+***:Use macros in a custom pallet [[#use-macros-in-a-custom-pallet jump]]
+<code>
+
+1. 了解定制托盘的基本结构。
+2. 查看 Rust 宏如何简化需要编写的代码的示例。
+3. 启动一个包含自定义托盘的区块链节点。
+4. 添加暴露存在证明托盘的前端代码。
+</code>;
+**:Develop smart contracts [[#develop-smart-contracts jump]]
+<code>
+
+
+</code>;
+***:Prepare your first contract [[#prepare-your-first-contract jump]]
+<code>
+
+1. 了解如何创建智能合约项目。
+2. 使用ink!智能合约语言构建和测试智能合约。
+3. 在本地 Substrate 节点上部署智能合约。
+4. 通过浏览器与智能合约交互。
+</code>;
+***:Develop a smart contract [[#develop-a-smart-contract jump]]
+<code>
+
+1. 了解如何使用智能合约模板。
+2. 使用智能合约存储简单值。
+3. 使用智能合约增加和检索存储的值。
+4. 向智能合约添加公共和私有功能。
+</code>;
+***:Use maps for storing values [[#use-maps-for-storing-values jump]]
+<code>
+
+
+</code>;
+***:Buid a token contract [[#build-a-token-contract jump]]
+<code>
+
+1. 了解 ERC-20 标准中定义的基本属性和接口。
+2. 创建符合 ERC-20 标准的代币。
+3. 在合约之间转移代币。
+4. 处理涉及批准或第三方的转移活动的路由。
+5. 创建与令牌活动相关的事件。
+</code>;
 *** Troubleshoot smart contracts [[#troubleshoot-smart-contracts jump]]
 ** Connect with other chains [[#connect-with-other-chains jump]]
-*** Start a local relay chain [[#start-a-local-relay-chain jump]]
-*** Connect a local parachain [[#connect-a-local-parachain jump]]
+***:Start a local relay chain [[#start-a-local-relay-chain jump]]
+<code>
+
+1. 确认软件需求。
+2. 设置平行链(para chain)构建环境。
+3. 准备中继链(relay chain)规格。
+4. 在本地启动中继链。
+</code>;
+***:Connect a local parachain [[#connect-a-local-parachain jump]]
+<code>
+
+1. 在中继链上为你的平行链注册一个 ParaID。
+2. 在中继链上开始生产平行链。
+</code>;
 *** Connect to Rococo testnet [[#connect-to-rococo-testnet jump]]
 *** Access EVM accounts [[#access-evm-accounts jump]]
 @endmindmap
