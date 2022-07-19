@@ -6,14 +6,33 @@
 
 开始接触Substrate基础内容
 </code>;
-***:Build a local blockchain [[#build-a-local-blockchain jump]]
+*** Build a local blockchain [[#build-a-local-blockchain jump]]
+****:前置条件
+<code>
+
+1. 有良好的互联网连接并可以访问本地计算机上的 shell 终端。
+2. 您相当(generally)熟悉软件开发并使用命令行界面。
+3. 相当熟悉区块链和智能合约平台。
+4. 你已经安装了 Rust 并按照安装中的描述设置了你的开发环境。
+</code>;
+****:目标内容
 <code>
 
 1. 下载链端模版(substrate-node-template)和前端模版(substrate-front-end-template)
 2. 启动节点、启动前端查看
 3. 在前端进行转账操作
 </code>;
-***:Simulate a network [[#simulate-a-network jump]]
+*** Simulate a network [[#simulate-a-network jump]]
+****:前置条件
+<code>
+
+完成上一节课
+1. 通过安装 Rust 和 Rust 工具链，已经为 Substrate 开发配置了环境。
+2. 已完成构建本地区块链并在本地安装了 Substrate 节点模板。
+3. 熟悉软件开发和使用命令行界面。
+4. 熟悉区块链和智能合约平台。
+</code>;
+****:目标内容
 <code>
 
 1. 使用预定义的帐户启动区块链节点。
@@ -22,28 +41,55 @@
 4. 将第二个节点连接到正在运行的网络。
 5. 验证对等计算机(peer computers)产生并最终确定块。
 </code>;
-***:Add trusted nodes [[#add-trusted-nodes jump]]
+*** Add trusted nodes [[#add-trusted-nodes jump]]
+****:前置条件
+<code>
+
+完成上一节课
+</code>;
+****:目标内容
 <code>
 
 1. 生成用作网络授权的密钥对。
 2. 创建自定义链规范文件。
 3. 启动一个私有的两节点区块链网络。
 </code>;
-***:Authorize specific nodes [[#authorize-specific-nodes jump]]
+*** Authorize specific nodes [[#authorize-specific-nodes jump]]
+****:前置条件
+<code>
+
+1. 完成上一节课
+2. 熟悉[[https://wiki.polkadot.network/docs/faq#networking libp2p]]
+</code>;
+****:目标内容
 <code>
 
 1. 检查并编译节点模板。
 2. 将节点授权托盘(pallet)添加到节点模板运行时。
 3. 启动多个节点并授权新节点加入。
 </code>;
-***:monitor node metrics [[#monitor-node-metrics jump]]
+*** monitor node metrics [[#monitor-node-metrics jump]]
+****:前置条件
+<code>
+
+完成Build a local blockchain
+完成Simulate a network
+</code>;
+****:目标内容
 <code>
 
 1. 安装 Prometheus 和 Grafana。
 2. 配置 Prometheus 以捕获 Substrate 节点的时间序列。
 3. 配置 Grafana 以可视化使用 Prometheus 端点收集的节点指标。
 </code>;
-***:Upgrade a running network [[#upgrade-a-running-network jump]]
+*** Upgrade a running network [[#upgrade-a-running-network jump]]
+****:前置条件
+<code>
+
+1. Build a local blockchain
+2. 从 Add a pallet to the runtime 了解如何添加pallet
+</code>;
+****:目标内容
 <code>
 
 1. 使用 Sudo 托盘(sudo pallet)模拟链升级的治理(governance)。
@@ -54,20 +100,41 @@
 <code>
 
 通过示例介绍pallets的结构和相关使用
-</code>
-***:Add a pallet to the runtime [[#add-a-pallet-to-the-runtime jump]]
+</code>;
+*** Add a pallet to the runtime [[#add-a-pallet-to-the-runtime jump]]
+****:前置条件
+<code>
+
+1. Build a local blockchain
+</code>;
+****:目标内容
 <code>
 
 1. 了解如何更新运行时依赖项以包含新托盘。
 2. 了解如何配置特定于托盘(pallet-specific)的 Rust 特征(trait)。
 3. 通过使用前端模板与新托盘交互来查看运行时的更改。
 </code>;
-***:Configure the contracts pallet [[#configure-the-contracts-pallet jump]]
+*** Configure the contracts pallet [[#configure-the-contracts-pallet jump]]
+****:前置条件
+<code>
+
+1. Build a local blockchain
+</code>;
+****:目标内容
 <code>
 
 
 </code>;
-***:Use macros in a custom pallet [[#use-macros-in-a-custom-pallet jump]]
+*** Use macros in a custom pallet [[#use-macros-in-a-custom-pallet jump]]
+****:前置条件
+<code>
+
+
+1. Build a local blockchain
+2. Simulate a network
+3. 需要1～2h编译运行
+</code>;
+****:目标内容
 <code>
 
 1. 了解定制托盘的基本结构。
@@ -80,7 +147,12 @@
 
 
 </code>;
-***:Prepare your first contract [[#prepare-your-first-contract jump]]
+*** Prepare your first contract [[#prepare-your-first-contract jump]]
+****:前置条件
+<code>
+
+</code>;
+****:目标内容
 <code>
 
 1. 了解如何创建智能合约项目。
@@ -88,7 +160,13 @@
 3. 在本地 Substrate 节点上部署智能合约。
 4. 通过浏览器与智能合约交互。
 </code>;
-***:Develop a smart contract [[#develop-a-smart-contract jump]]
+*** Develop a smart contract [[#develop-a-smart-contract jump]]
+****:前置条件
+<code>
+
+1. Prepare your first contract
+</code>;
+****:目标内容
 <code>
 
 1. 了解如何使用智能合约模板。
@@ -96,12 +174,25 @@
 3. 使用智能合约增加和检索存储的值。
 4. 向智能合约添加公共和私有功能。
 </code>;
-***:Use maps for storing values [[#use-maps-for-storing-values jump]]
+*** Use maps for storing values [[#use-maps-for-storing-values jump]]
+****:前置条件
+<code>
+
+</code>;
+****:目标内容
 <code>
 
 
 </code>;
-***:Buid a token contract [[#build-a-token-contract jump]]
+*** Buid a token contract [[#build-a-token-contract jump]]
+****:前置条件
+<code>
+
+
+1. Prepare your first contract
+2. Develop a smart contract
+</code>;
+****:目标内容
 <code>
 
 1. 了解 ERC-20 标准中定义的基本属性和接口。
@@ -112,7 +203,16 @@
 </code>;
 *** Troubleshoot smart contracts [[#troubleshoot-smart-contracts jump]]
 ** Connect with other chains [[#connect-with-other-chains jump]]
-***:Start a local relay chain [[#start-a-local-relay-chain jump]]
+*** Start a local relay chain [[#start-a-local-relay-chain jump]]
+****:前置条件
+<code>
+
+1. Build a local blockchain
+2. Add trusted nodes
+3. 了解波卡的架构：[[https://wiki.polkadot.network/docs/learn-architecture Atchitecture of Polkadot]]
+4. 了解平行链: [[https://wiki.polkadot.network/docs/learn-parachains Parachains]]
+</code>;
+****:目标内容
 <code>
 
 1. 确认软件需求。
@@ -120,12 +220,50 @@
 3. 准备中继链(relay chain)规格。
 4. 在本地启动中继链。
 </code>;
-***:Connect a local parachain [[#connect-a-local-parachain jump]]
+*** Connect a local parachain [[#connect-a-local-parachain jump]]
+****:前置条件
+<code>
+
+1. Start a local relay chain
+2. 注意与1的波卡版本一致，比如：[[https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.24 polkadot-v0.9.24/substrate-parachain-template]]
+</code>;
+****:目标内容
 <code>
 
 1. 在中继链上为你的平行链注册一个 ParaID。
 2. 在中继链上开始生产平行链。
 </code>;
 *** Connect to Rococo testnet [[#connect-to-rococo-testnet jump]]
+****:前置条件
+<code>
+
+1. 回顾Add trusted nodes:
+- 如何生成并修改链规范文件
+- 如何生成和存储keys
+2. Connect a local parachain
+</code>;
+****:目标内容
+<code>
+</code>;
 *** Access EVM accounts [[#access-evm-accounts jump]]
+****:前置条件
+<code>
+
+一、完成课程
+1. Build a local blockchain
+2. Add a pallet to the runtime
+3. Use macros in a custom pallet
+二、熟悉操作
+1. 启动一个 Substrate 区块链节点。
+2. 在运行时添加、移除和配置托盘。
+3. 通过使用 Polkadot-JS 或其他前端连接到节点来提交交易。
+三、掌握概念
+1. 以太坊核心概念和术语
+2. 以太坊虚拟机 (EVM) 基础知识
+3. 去中心化应用程序和智能合约
+4. 托盘设计原则
+</code>;
+****:目标内容
+<code>
+</code>;
 @endmindmap
