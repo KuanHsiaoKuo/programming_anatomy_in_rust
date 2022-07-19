@@ -1,20 +1,34 @@
 # Substrate官方教程梳理
 
 <!--ts-->
-
 * [Substrate官方教程梳理](#substrate官方教程梳理)
-    * [总览](#总览)
-    * [Get Started](#get-started)
-        * [Build a local blockchain](#build-a-local-blockchain)
-        * [Simulate a network](#simulate-a-network)
-        * [Add trusted nodes](#add-trusted-nodes)
-        * [Authorize specific nodes](#authorize-specific-nodes)
-        * [Monitor node metrics](#monitor-node-metrics)
-        * [Upgrade a running network](#upgrade-a-running-network)
+   * [总览](#总览)
+   * [Get Started](#get-started)
+      * [Build a local blockchain](#build-a-local-blockchain)
+      * [Simulate a network](#simulate-a-network)
+      * [Add trusted nodes](#add-trusted-nodes)
+      * [Authorize specific nodes](#authorize-specific-nodes)
+      * [Monitor node metrics](#monitor-node-metrics)
+      * [Upgrade a running network](#upgrade-a-running-network)
+   * [Work with pallets](#work-with-pallets)
+      * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
+      * [Configure the contracts pallet](#configure-the-contracts-pallet)
+      * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
+   * [Develop smart contracts](#develop-smart-contracts)
+      * [Prepare your first contract](#prepare-your-first-contract)
+      * [Develop a smart contract](#develop-a-smart-contract)
+      * [Use maps for storing values](#use-maps-for-storing-values)
+      * [Buid a token contract](#buid-a-token-contract)
+      * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
+   * [Connect with other chains](#connect-with-other-chains)
+      * [Start a local relay chain](#start-a-local-relay-chain)
+      * [Connect a local parachain](#connect-a-local-parachain)
+      * [Connect to Rococo testnet](#connect-to-rococo-testnet)
+      * [Access EVM accounts](#access-evm-accounts)
 * [参考资源](#参考资源)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Mon Jul 18 16:18:36 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jul 19 07:02:33 UTC 2022 -->
 
 <!--te-->
 
