@@ -1,6 +1,6 @@
 @startmindmap
 scale 850 width
-*[#darkcyan]:Authorize specific nodes [[#总览 返回]]
+*[#darkcyan]:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/ Authorize specific nodes]] [[#总览 返回]]
 <code>
 
 using the node authorization pallet
@@ -97,7 +97,7 @@ cd substrate-node-template
 git checkout latest
 cargo build --release
 </code>;
-** Add the node authorization pallet
+** [[https://docs.substrate.io/tutorials/get-started/permissioned-network/#add-the-node-authorization-pallet Add the node authorization pallet]]
 ***:Cargo.toml
 <code>
 
@@ -111,9 +111,10 @@ feature set from each pallet , you can compile the runtime to include
 functions, types, and primitives that would otherwise be missing
 when you build the WebAssembly binary.
 </code>;
-** [[https://doc.rust-lang.org/cargo/guide/dependencies.html cargo dependencies]]
-** [[https://doc.rust-lang.org/cargo/reference/features.html cargo features]]
-***:Add note-authorization dependencies
+**** [[https://doc.rust-lang.org/cargo/guide/dependencies.html cargo dependencies]]
+**** [[https://doc.rust-lang.org/cargo/reference/features.html cargo features]]
+*** Add note-authorization dependencies
+****:runtime/Cargo.toml->[depencies]
 <code>
 
 [dependencies]
@@ -122,6 +123,9 @@ pallet-node-authorization = {
     git = "https://github.com/paritytech/substrate.git",
     tag = "devhub/latest",
     version = "4.0.0-dev" }
+<code>;
+****:runtime/Cargo.toml->[features]
+<code>
 
 [features]
 default = ['std']
@@ -130,7 +134,9 @@ std = [
  "pallet-node-authorization/std",    # add this line
  ...
 ]
-
+</code>;
+****:check new dependencies
+<code>
 cargo check -p node-template-runtime
 </code>;
 ***:Add an administrative rule
@@ -139,6 +145,9 @@ cargo check -p node-template-runtime
 To simulate governance in this tutorial, you can configure
 the pallet to use the EnsureRoot privileged function that
 can be called using the Sudo pallet .
+</code>;
+****:runtime/src/lib.rs
+<code>
 
 use frame_system::EnsureRoot；
 </code>;
@@ -164,8 +173,8 @@ you can refer to the Rust documentation for
 pallet_node_authorization::Config.
 </code>;
 *** To implement the node-authorization pallet in your runtime
-** runtime/src/lib.rs
-***:Add the parameter_types
+**** runtime/src/lib.rs
+*****:Add the parameter_types
 <code>
 
 parameter_types! {
@@ -173,7 +182,7 @@ parameter_types! {
  pub const MaxPeerIdLength: u32 = 128；
 }
 </code>;
-***:Add the impl section
+*****:Add the impl section
 <code>
 
 impl pallet_node_authorization::Config for Runtime {
@@ -187,7 +196,7 @@ impl pallet_node_authorization::Config for Runtime {
  type WeightInfo = (); //
 }
 </code>;
-***:Add the pallet to the construct_runtime macro
+*****:Add the pallet to the construct_runtime macro
 <code>
 
 construct_runtime!(
@@ -201,7 +210,7 @@ pub enum Runtime where
  }
 )；
 </code>;
-***:Cargo check
+*****:Cargo check
 <code>
 
 cargo check -p node-template-runtime
@@ -220,14 +229,14 @@ in the node/Cargo.toml to decode the PeerId to get its bytes.
 To keep things simple, the authorized nodes are associated
 with predefined accounts.
 </code>;
-**:node/Cargo.toml
+****:node/Cargo.toml
 <code>
 
 [dependencies]
 bs58 = "0.4.0"
 </code>;
-** node/src/chain_spec.rs
-***:Add genesis storage for nodes
+**** node/src/chain_spec.rs
+*****:Add genesis storage for nodes
 <code>
 
 // A struct wraps Vec<u8>, represents as our `PeerId`.
@@ -235,7 +244,7 @@ use sp_core::OpaquePeerId；
 // The genesis config that serves for our pallet.
 use node_template_runtime::NodeAuthorizationConfig；
 </code>;
-***:Locate the testnet_genesis function
+*****:Locate the testnet_genesis function
 <code>
 
 /// Configure initial storage state for FRAME modules.
@@ -247,7 +256,7 @@ fn testnet_genesis(
  _enable_println: bool,
  ) -> GenesisConfig {
 </code>;
-***:Within the GenesisConfig declaration
+*****:Within the GenesisConfig declaration
 <code>
 
  node_authorization: NodeAuthorizationConfig {
@@ -318,7 +327,7 @@ read data from a selected node with the approval of that node's owner.
 --ws-port=9946
 --offchain-worker always
 </code>;
-**:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#authorize-access-for-the-third-node Authorize access for the third node]]
+***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#authorize-access-for-the-third-node Authorize access for the third node]]
 <code>
 
 This tutorial uses the sudo pallet for governance.
@@ -326,7 +335,7 @@ Therefore, yu can use the sudo pallet to call the
 add_well_known_node function provided by
 node-authorization pallet to add the third node.
 </code>;
-**:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#add-a-sub-node Add a sub-node]]
+***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#add-a-sub-node Add a sub-node]]
 <code>
 
 The fourth node in this network is not as a well-known node.

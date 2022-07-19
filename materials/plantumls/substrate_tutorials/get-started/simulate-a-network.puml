@@ -20,15 +20,15 @@ Are you sure to remove "/tmp/alice/chains/local_testnet/db"? [y/N]:
 
 </code>;
 ***[#lightgreen] ./target/release/node-template
-** --base-path /tmp/alice
-** --chain local
-** --alice
-** --port 30333
-** --ws-port 9945
-** --rpc-port 9933
-** --node-key 0000000000000000000000000000000000000000000000000000000000000001
-** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-** --validator
+**** --base-path /tmp/alice
+**** --chain local
+**** --alice
+**** --port 30333
+**** --ws-port 9945
+**** --rpc-port 9933
+**** --node-key 0000000000000000000000000000000000000000000000000000000000000001
+**** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+**** --validator
 *** [[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-command-line-options{点击查看} Review the command-line options]]
 ***:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-node-messages-displayed{点击查看} Review the node messages displayed]]
 <code>
@@ -44,15 +44,15 @@ Are you sure to remove "/tmp/alice/chains/local_testnet/db"? [y/N]:
 
 </code>;
 ***[#lightgreen] ./target/release/node-template
-** --base-path /tmp/bob
-** --chain local
-** --bob
-** --port 30334
-** --ws-port 9946
-** --rpc-port 9934
-** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-** --validator
-** --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+**** --base-path /tmp/bob
+**** --chain local
+**** --bob
+**** --port 30334
+**** --ws-port 9946
+**** --rpc-port 9934
+**** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+**** --validator
+**** --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
 *** Note the following differences between this command and the previous one
 *** The --bootnodes option specifies the following information:
 **:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#verify-blocks-are-produced-and-finalized Verify blocks are produced and finalized]]
