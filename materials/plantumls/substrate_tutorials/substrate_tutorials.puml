@@ -1,0 +1,26 @@
+@startmindmap
+scale 850 width
+* Substrate Tutorials
+** Get started [[#get-started jump]]
+*** Build a local blockchain [[#build-a-local-blockchain jump]]
+*** Simulate a network [[#simulate-a-network jump]]
+*** Add trusted nodes [[#add-trusted-nodes jump]]
+*** Authorize specific nodes [[#authorize-specific-nodes jump]]
+*** monitor node metrics [[#monitor-node-metrics jump]]
+*** Upgrade a running network [[#upgrade-a-running-network jump]]
+** Work with pallets [[#work-with-pallets jump]]
+*** Add a pallet to the runtime [[#add-a-pallet-to-the-runtime jump]]
+*** Configure the contracts pallet [[#configure-the-contracts-pallet jump]]
+*** Use macros in a custom pallet [[#use-macros-in-a-custom-pallet jump]]
+** Develop smart contracts [[#develop-smart-contracts jump]]
+*** Prepare your first contract [[#prepare-your-first-contract jump]]
+*** Develop a smart contract [[#develop-a-smart-contract jump]]
+*** Use maps for storing values [[#use-maps-for-storing-values jump]]
+*** Buid a token contract [[#build-a-token-contract jump]]
+*** Troubleshoot smart contracts [[#troubleshoot-smart-contracts jump]]
+** Connect with other chains [[#connect-with-other-chains jump]]
+*** Start a local relay chain [[#start-a-local-relay-chain jump]]
+*** Connect a local parachain [[#connect-a-local-parachain jump]]
+*** Connect to Rococo testnet [[#connect-to-rococo-testnet jump]]
+*** Access EVM accounts [[#access-evm-accounts jump]]
+@endmindmap

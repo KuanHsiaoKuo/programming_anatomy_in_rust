@@ -1,6 +1,6 @@
 @startmindmap
 scale 850 width
-*:[[https://docs.substrate.io/tutorials/get-started/node-metrics/ Monitor node metrics]]
+*:[[https://docs.substrate.io/tutorials/get-started/node-metrics/ Monitor node metrics]] [[#总览 返回]]
 <code>
 
 Substrate exposes metrics about the operation of your network.

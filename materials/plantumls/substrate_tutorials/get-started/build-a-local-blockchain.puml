@@ -1,6 +1,6 @@
 @startmindmap
 scale 850 width
-* Build a local blockchain
+* Build a local blockchain [[#总览 返回]]
 **:Compile a Substrate node:
 <code>
 

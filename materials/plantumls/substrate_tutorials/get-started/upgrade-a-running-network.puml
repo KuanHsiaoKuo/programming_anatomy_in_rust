@@ -1,6 +1,6 @@
 @startmindmap
 scale 850 width
-* Upgrade a running network
+* Upgrade a running network [[#总览 返回]]
 **:Forkless upgrade intro
 <code>
 
@@ -185,7 +185,8 @@ authoring_version specifies the version for block authors.
 spec_version specifies the version of the runtime.
 impl_version specifies the version of the client.
 apis specifies the list of supported APIs.
-transaction_version specifies the version of the dispatchable function interface.
+transaction_version specifies the version of
+the dispatchable function interface.
 </code>;
 **** [[https://docs.substrate.io/reference/glossary/#author author]]
 **** [[https://docs.substrate.io/reference/glossary/#dispatch dispatch]]

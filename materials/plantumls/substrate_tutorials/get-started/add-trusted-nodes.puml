@@ -1,6 +1,6 @@
 @startmindmap
 scale 850 width
-*[#cornflowerblue] (重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]]
+*[#cornflowerblue] (重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]][[#总览 返回]]
 **[#aqua]:About Substrate Consensus:
 <code>
 
