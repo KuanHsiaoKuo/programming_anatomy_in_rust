@@ -6,7 +6,7 @@
       * [为什么觉得 Rust 难上手，尤其是生命周期？ - 知乎](#为什么觉得-rust-难上手尤其是生命周期---知乎)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Tue Jul 19 07:02:27 UTC 2022 -->
+<!-- Added by: runner, at: Tue Jul 19 07:31:46 UTC 2022 -->
 
 <!--te-->
 
