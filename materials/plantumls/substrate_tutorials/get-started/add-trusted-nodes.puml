@@ -21,13 +21,6 @@ how to configure and share information about the network
 with other authorized accounts, and how to launch the network
 with an approved set of validators.
 </code>;
-**:Tutorial objectives:
-<code>
-
-Generate key pairs for use as a network authority.
-Create a custom chain specification file.
-Launch a private two-node blockchain network.
-</code>;
 ** Generate your account and keys
 ***:Key generation options:
 <code>

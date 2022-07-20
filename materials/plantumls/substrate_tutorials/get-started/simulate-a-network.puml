@@ -1,15 +1,6 @@
 @startmindmap
 scale 850 width
 * Simulate a network [[#总览 返回]]
-**:Tutorial objectives:
-<code>
-
-Start a blockchain node using a predefined account.
-Learn the key command-line options used to start a node.
-Determine if a node is running and producing blocks.
-Connect a second node to a running network.
-Verify peer computers produce and finalize blocks.
-</code>;
 ** Start the first blockchain node
 ***:Five Steps:
 <code>
