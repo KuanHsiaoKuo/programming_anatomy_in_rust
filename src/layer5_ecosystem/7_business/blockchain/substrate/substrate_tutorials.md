@@ -335,7 +335,7 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 ```
 
 ## Simulate a network
-> [返回顶部](#Substrate官方教程梳理与练习)
+> [返回顶部](#substrate官方教程梳理与练习)
 
 ```plantuml
 {{#include ../../../../../materials/plantumls/substrate_tutorials/get-started/simulate-a-network.puml:1:}}
