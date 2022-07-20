@@ -1,8 +1,8 @@
 @startmindmap
 scale 850 width
 * Simulate a network [[#总览 返回]]
-** Start the first blockchain node
-***:Five Steps:
+** Start the first alice blockchain node
+***:清理之前alice的链数据:
 <code>
 
 ./target/release/node-template purge-chain --base-path /tmp/alice --chain local
@@ -10,48 +10,140 @@ Are you sure to remove "/tmp/alice/chains/local_testnet/db"? [y/N]:
 
 
 </code>;
-***[#lightgreen] ./target/release/node-template
-**** --base-path /tmp/alice
-**** --chain local
-**** --alice
-**** --port 30333
-**** --ws-port 9945
-**** --rpc-port 9933
-**** --node-key 0000000000000000000000000000000000000000000000000000000000000001
-**** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-**** --validator
-*** [[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-command-line-options{点击查看} Review the command-line options]]
+***[#lightgreen]:启动alice节点
+<code>
+
+./target/release/node-template
+--base-path /tmp/alice
+--chain local
+--alice
+--port 30333
+--ws-port 9945
+--rpc-port 9933
+--node-key 0000000000000000000000000000000000000000000000000000000000000001
+--telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+--validator
+</code>;
+***:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-command-line-options{点击查看} Review the command-line options]]
+<code>
+For more details:
+
+./target/release/node-template --help > the-command-line-options.txt
+</code>
 ***:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#review-the-node-messages-displayed{点击查看} Review the node messages displayed]]
 <code>
 
 🔨 Initializing Genesis block/state
 🏷 Local node identity is
 </code>;
-** Add a second node to the blockchain network
-***:Four Steps
+**:Add a second node to the blockchain network
 <code>
 
-./target/release/node-template purge-chain --base-path /tmp/bob --chain local -y
+现在开始使用 alice 帐户密钥的节点正在运行，
+接着可以使用 bob 帐户将另一个节点添加到网络中。
 
+因为要加入一个已经在运行的网络，所以可以使用
+正在运行的节点来识别新节点要加入的网络。
+
+这些命令与之前使用的命令相似，但有一些重要区别。
+1. --base-path
+2. --port
+3. --ws-port
+4. --rpc-port
+5. --bootnodes: 指定一个单独启动节点，这个节点来自于alias
+
+总共有4步，重点介绍后面两步
+1. 重新打开一个终端
+2. 进入substrate-node-template
 </code>;
-***[#lightgreen] ./target/release/node-template
-**** --base-path /tmp/bob
-**** --chain local
-**** --bob
-**** --port 30334
-**** --ws-port 9946
-**** --rpc-port 9934
-**** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-**** --validator
-**** --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
-*** Note the following differences between this command and the previous one
-*** The --bootnodes option specifies the following information:
-**:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#verify-blocks-are-produced-and-finalized Verify blocks are produced and finalized]]
+***: 清除之前的链数据
 <code>
 
-The first node was started by alice.
+./target/release/node-template purge-chain
+--base-path /tmp/bob
+--chain local
+-y
+
+通过在命令中添加-y，可以在不提示确认操作的情况下删除链数据。
+</code>;
+***[#lightgreen]:启动第二个节点，用bob的账号
+<code>
+
+./target/release/node-template
+--base-path /tmp/bob
+--chain local
+--bob
+--port 30334
+--ws-port 9946
+--rpc-port 9934
+--telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+--validator
+--bootnodes /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+</code>;
+**** --base-path
+**** --bob
+**** --port
+**** --ws-port
+**** --rpc-port
+****:--bootnodes
+<code>
+
+ip4 表示节点的 IP 地址使用 IPv4 格式
+127.0.0.1 指定运行节点的 IP 地址,在这种情况下，本地主机的地址。
+tcp 将 TCP 指定为用于对等通信的协议。
+30333 指定用于点对点通信的端口号,在这种情况下，TCP 流量的端口号。
+
+12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+标识该网络要与之通信的运行节点。
+在这种情况下，节点的标识符开始使用 alice 帐户。
+</code>;
+**[#lightgreen]:[[https://docs.substrate.io/tutorials/get-started/simulate-network/#verify-blocks-are-produced-and-finalized Verify blocks are produced and finalized]]
+<code>
+
+为了方便识别，还在每行前面加了标记：
+✌️  version 4.0.0-dev-9c89be106cb
+❤️  by Substrate DevHub <https://github.com/substrate-developer-hub>, 2017-2022
+📋 Chain specification: Local Testnet
+🏷  Node name: Bob
+👤 Role: AUTHORITY
+💾 Database: RocksDb at /tmp/bob/chains/local_testnet/db/full
+⛓  Native runtime: node-template-100 (node-template-1.tx1.au1)
+🔨 Initializing Genesis block/state (state: 0x0336…17a1, header-hash: 0x387f…a9b7)
+👴 Loading GRANDPA authority set from genesis on what appears to be first startup.
+Using default protocol ID "sup" because none is configured in the chain specs
+🏷  Local node identity is: 12D3KooWCPbSKhf9WggmGev8RBwzB5WKDNi9BjA8gjwsA4uDSkxN
+💻 Operating system: macos
+💻 CPU architecture: x86_64
+📦 Highest known block at #0
+🏷  Local node identity is: <encrypted account name>
+
+🔍 Discovered new external address for our node
+The first node was started by alice:
+
+💤 Idle (1 peers), best... finalized...
 The node has a one peer (1 peers).
 The nodes have produced some blocks (best: #4 (0x2b8a…fdc4)).
 The blocks are being finalized (finalized #2 (0x8b6a…dce6)).
+
+🙌 Starting consensus session
+
+🎁 Prepared block for proposing at ...
+🔖 Pre-sealed block for proposal at ...
+✨ Imported #85 (0x5f7a…9b10)
+</code>;
+***:需要关注的标记有两个：🔍和💤
+<code>
+
+🔍 Discovered new external address for our node
+The first node was started by alice:
+
+注意：新版本已经更新，没有这个标记，改成如下：
+discovered: 12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp /ip4/172.16.0.79/tcp/30333
+这也和第一个alice节点启动的身份码一致
+
+💤 Idle (1 peers), best... finalized...
+The node has a one peer (1 peers).
+The nodes have produced some blocks (best: #4 (0x2b8a…fdc4)).
+
 </code>;
 @endmindmap
