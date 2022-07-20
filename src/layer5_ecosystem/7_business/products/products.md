@@ -1,6 +1,18 @@
 # 优秀产品
 
 <!--ts-->
+* [优秀产品](#优秀产品)
+   * [awesome series](#awesome-series)
+      * [rust-unofficial/awesome-rust](#rust-unofficialawesome-rust)
+      * [rust-embedded/asesome-embedded-rust](#rust-embeddedasesome-embedded-rust)
+      * [rust-in-blockchain/awesome-blockchain-rust](#rust-in-blockchainawesome-blockchain-rust)
+      * [TaKO8Ki/awesome-alternatives-in-rust](#tako8kiawesome-alternatives-in-rust)
+      * [RustBegginers/awesome-rust-mentors](#rustbegginersawesome-rust-mentors)
+      * [awesome-rust-com/awesome-rust](#awesome-rust-comawesome-rust)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Wed Jul 20 07:33:33 UTC 2022 -->
+
 <!--te-->
 
 ## awesome series
