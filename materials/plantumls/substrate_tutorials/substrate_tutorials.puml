@@ -18,7 +18,9 @@ scale 850 width
 ****:目标内容
 <code>
 
-1. 下载链端模版(substrate-node-template)和前端模版(substrate-front-end-template)
+1. 下载链端模版和前端模版
+- substrate-node-template
+- substrate-front-end-template
 2. 启动节点、启动前端查看
 3. 在前端进行转账操作
 </code>;
@@ -27,8 +29,8 @@ scale 850 width
 <code>
 
 完成上一节课
-1. 通过安装 Rust 和 Rust 工具链，已经为 Substrate 开发配置了环境。
-2. 已完成构建本地区块链并在本地安装了 Substrate 节点模板。
+1. 安装Rust和Rust工具链，为Substrate 开发配置了环境。
+2. 已完成构建本地区块链并在本地安装Substrate节点模板。
 3. 熟悉软件开发和使用命令行界面。
 4. 熟悉区块链和智能合约平台。
 </code>;
@@ -59,8 +61,9 @@ scale 850 width
 <code>
 
 1. 完成上一节课
-2. 熟悉[[https://wiki.polkadot.network/docs/faq#networking libp2p]]
+2. 熟悉libp2p
 </code>;
+***** [[https://wiki.polkadot.network/docs/faq#networking libp2p]]
 ****:目标内容
 <code>
 
@@ -209,9 +212,11 @@ scale 850 width
 
 1. Build a local blockchain
 2. Add trusted nodes
-3. 了解波卡的架构：[[https://wiki.polkadot.network/docs/learn-architecture Atchitecture of Polkadot]]
-4. 了解平行链: [[https://wiki.polkadot.network/docs/learn-parachains Parachains]]
+3. 了解波卡的架构
+4. 了解平行链
 </code>;
+***** [[https://wiki.polkadot.network/docs/learn-architecture Atchitecture of Polkadot]]
+***** [[https://wiki.polkadot.network/docs/learn-parachains Parachains]]
 ****:目标内容
 <code>
 
@@ -225,8 +230,9 @@ scale 850 width
 <code>
 
 1. Start a local relay chain
-2. 注意与1的波卡版本一致，比如：[[https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.24 polkadot-v0.9.24/substrate-parachain-template]]
+2. 注意与1的波卡版本一致，比如： polkadot-v0.9.24
 </code>;
+**** [[https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.24 polkadot-v0.9.24/substrate-parachain-template]]
 ****:目标内容
 <code>
 
