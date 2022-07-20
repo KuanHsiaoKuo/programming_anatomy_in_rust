@@ -82,7 +82,7 @@
             - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
                 - [Substrate教程梳理](layer5_ecosystem/7_business/blockchain/substrate/substrate_tutorials.md)
                 - [Substrate备忘](layer5_ecosystem/7_business/blockchain/substrate/substrate_ref.md)
-                - [Substrate开源项目](layer5_ecosystem/7_business/blockchain/substrate/substrate_projects.md)
+                - [Substrate市场：Rutimes、Pallets和Projects](layer5_ecosystem/7_business/blockchain/substrate/substrate_marketplace.md)
                 - [Substrate惊奇资源](layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.md)
             - [Nervos CKB介绍与解析](layer5_ecosystem/7_business/blockchain/nervos_ckb_anatomy.md)
             - [Solana](layer5_ecosystem/7_business/blockchain/solana.md)
