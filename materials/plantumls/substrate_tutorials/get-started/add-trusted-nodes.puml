@@ -1,5 +1,5 @@
 @startmindmap
-scale 850 width
+'scale 850 width
 *[#cornflowerblue] (重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]][[#总览 返回]]
 **[#aqua]:About Substrate Consensus:
 <code>
@@ -174,7 +174,7 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
 
 确保为每个验证器使用唯一的密钥。如果两个验证器具有相同的密钥，它们会产生冲突的块。
 </code>;
-***:Convert the chain specification to raw format
+**:Convert the chain specification to raw format
 <code>
 
 ./target/release/node-template
@@ -184,7 +184,7 @@ build-spec
 --disable-default-bootnode
 > customSpecRaw.json
 </code>;
-***:Share the chain specification with others
+**:Share the chain specification with others
 <code>
 
 如果你正在创建私有区块链网络以与其他参与者共享，
@@ -201,8 +201,8 @@ build-spec
 
 有关此问题的更多信息，请参阅<Hunting down a non-determinism-bug in our Rust Wasm build>。
 </code>;
-**** [[https://dev.to/gnunicorn/hunting-down-a-non-determinism-bug-in-our-rust-wasm-build-4fk1 Hunting down a non-determinism-bug in our Rust Wasm build]]
-***:Prepare to launch the private network
+*** [[https://dev.to/gnunicorn/hunting-down-a-non-determinism-bug-in-our-rust-wasm-build-4fk1 Hunting down a non-determinism-bug in our Rust Wasm build]]
+**:Prepare to launch the private network
 <code>
 
 将自定义链规范分发给所有网络参与者后，就可以启动自己的私有区块链了。
@@ -218,7 +218,7 @@ build-spec
 
 如果已完成这些步骤，您就可以启动私有区块链中的第一个节点了。
 </code>;
-***:Start the first node
+**:Start the first node
 <code>
 ./target/release/node-template
   --base-path /tmp/node01
@@ -236,30 +236,30 @@ build-spec
 由于没有使用具有已知密钥的预定义帐户，因此需要在单独
 的步骤中将密钥添加到密钥库。
 </code>;
-****:--base-path /tmp/node01
+***:--base-path /tmp/node01
 <code>
 
 The --base-path command-line option specifies a
 custom location for the chain associated with
 this first node.
 </code>;
-****:--chain ./customSpecRaw.json
+***:--chain ./customSpecRaw.json
 <code>
 
 The --chain command-line option specifies the
 custom chain specification.
 </code>
-**** --port 30333
-**** --ws-port 9945
-**** --rpc-port 9933
-**** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-****:--validator
+*** --port 30333
+*** --ws-port 9945
+*** --rpc-port 9933
+*** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+***:--validator
 <code>
 
 The --validator command-line option indicates that
 this node is an authority for the chain.
 </code>;
-****:--rpc-methods Unsafe
+***:--rpc-methods Unsafe
 <code>
 
 The --rpc-methods Unsafe command-line option allows
@@ -267,45 +267,45 @@ you to continue the tutorial using an unsafe communication
 mode because your blockchain is not being used in a
 production setting.
 </code>;
-****:--name MyNode01
+***:--name MyNode01
 <code>
 
 The --name command-line option enables you to give
 your node a human-readable name in the telemetry UI.
 </code>;
-**** --password-interactive
-***:View information about node operations
+*** --password-interactive
+**:View information about node operations
 <code>
 
 注意其中的这些信息
 </code>;
-****:--chain
+***:--chain
 <code>
 
 输出表明正在使用的链规范是您使用 --chain 命令行选项创建和指定的自定义链规范。
 </code>;
-****:--validator
+***:--validator
 <code>
 
 输出表明该节点是一个授权，因为您使用 --validator 命令行选项启动了该节点。
 </code>;
-****:state
+***:state
 <code>
 
 输出显示使用块哈希（状态：0x2bde…8f66，标头哈希：0x6c78…37de）初始化创世块。
 </code>;
-****:node identify
+***:node identify
 <code>
 
 输出指定您的节点的本地节点身份。在此示例中，节点身份为
 12d3koowlmrydlontytytytdyzlwde1paxzxtw5rgjmhlfzw96sx。
 </code>;
-****:IP address
+***:IP address
 <code>
 
 输出指定用于节点的 IP 地址是本地主机 127.0.0.1。
 </code>;
-***:Add keys to the keystore
+**:Add keys to the keystore
 <code>
 
 启动第一个节点后，尚未生成任何块。
@@ -320,7 +320,7 @@ your node a human-readable name in the telemetry UI.
 
 对于本教程，您可以使用 key 子命令插入本地生成的密钥。
 </code>;
-****: Insert the aura secret key:
+***: Insert the aura secret key:
 <code>
 
 ./target/release/node-template
@@ -339,7 +339,7 @@ You can also insert a key from a specified file location.
 
 ./target/release/node-template key insert --help
 </code>;
-****:Insert the grandpa secret key
+***:Insert the grandpa secret key
 <code>
 
 ./target/release/node-template key insert
@@ -350,12 +350,12 @@ You can also insert a key from a specified file location.
   --password-interactive
   --key-type gran
 </code>;
-****:Verify that your keys are in the keystore for node01
+***:Verify that your keys are in the keystore for node01
 <code>
 
 ls /tmp/node01/chains/local_testnet/keystore
 </code>;
-****:Restart the node
+***:Restart the node
 <code>
 
 After you have added your keys to the keystore for
@@ -363,7 +363,7 @@ the first node under /tmp/node01, you can restart
 the node using the command you used previously in
 <Start the first node>.
 </code>;
-***:Enable other participants to join
+**:Enable other participants to join
 <code>
 
 tip: You can now allow other validators to join
@@ -372,7 +372,7 @@ command-line options.
 
 To add a second validator to the private network:
 </code>;
-***:Start a second blockchain node
+**:Start a second blockchain node
 <code>
 
 ./target/release/node-template
