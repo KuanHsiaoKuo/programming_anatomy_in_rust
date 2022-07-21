@@ -8,6 +8,7 @@ The Substrate node template uses a proof of authority consensus model
 also referred to as authority round or Aura consensus .
 The Aura consensus protocol limits block production to
 a rotating list of authorized accounts.
+
 The authorized accounts—authorities—create blocks in
 a round robin fashion and are generally considered to be
 trusted participants in the network.
@@ -25,34 +26,92 @@ with an approved set of validators.
 ***:Key generation options:
 <code>
 
-a node-template subcommand
-the standalone subkey command-line program
-the Polkadot-JS application
-third-party key generation utilities.
+1. a node-template subcommand
+2. the standalone subkey command-line program
+3. the Polkadot-JS application
+4. third-party key generation utilities.
 </code>;
-***:Generate local keys using the node template:
+*** Generate local keys using the node template:
+****:Generate a random secret phrase and keys
 <code>
 
 ./target/release/node-template key generate --scheme Sr25519 --password-interactive
-Type a password for the generated keys.
-./target/release/node-template key inspect --password-interactive --scheme Ed25519 "pig giraffe ceiling enter weird liar orange decline behind total despair fly"
-Type the password you used to generate the keys.
+Type a password for the generated keys: <123456>
+
+displayed:
+./target/release/node-template key generate --scheme Sr25519 --password-interactive                            ─╯
+Key password:
+
+Secret phrase:       answer cotton spike caution blouse only radio artefact middle guilt bleak original
+  Network ID:        substrate
+  Secret seed:       0xfcd01919178fa73e7223bdeea134b1ef809b75d3fabd672a52dcc69b964813b6
+  Public key (hex):  0x5413998d3c189f62288daaf2bd2ca3da5e78b00be9172a36ae063aae4cc7f607
+  Account ID:        0x5413998d3c189f62288daaf2bd2ca3da5e78b00be9172a36ae063aae4cc7f607
+  Public key (SS58): 5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
+  SS58 Address:      5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
+
+您现在拥有 Sr25519 密钥，用于使用 aura 为一个节点生成块。在此示例中，帐户的 Sr25519 公钥是 5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
 </code>;
-*** Generate a second set of keys
-** Create a custom chain specification
-***:(Ten Steps)Modify the local chain specification
+****:使用生成的密钥
 <code>
 
-./target/release/node-template build-spec --disable-default-bootnode --chain local > customSpec.json
-head customSpec.json
-tail -n 80 customSpec.json
-Modify the name field to identify this chain specification as a custom chain specification.
-Modify aura field to specify the nodes
-Modify the grandpa field to specify the nodes
+./target/release/node-template key inspect --password-interactive --scheme Ed25519 "answer cotton spike caution blouse only radio artefact middle guilt bleak original"
+
+Key password: 123456
+Secret phrase:       answer cotton spike caution blouse only radio artefact middle guilt bleak original
+  Network ID:        substrate
+  Secret seed:       0xfcd01919178fa73e7223bdeea134b1ef809b75d3fabd672a52dcc69b964813b6
+  Public key (hex):  0xb293f948a04a5bac3b8321f99bb4c9532f6ffe2b8ff40926b23c68c9726ca40a
+  Account ID:        0xb293f948a04a5bac3b8321f99bb4c9532f6ffe2b8ff40926b23c68c9726ca40a
+  Public key (SS58): 5G6rLZNtZPyMrYTo2YXL9nzaatJ837hmKPnsgYqDURgAWBgX
+  SS58 Address:      5G6rLZNtZPyMrYTo2YXL9nzaatJ837hmKPnsgYqDURgAWBgX
 </code>;
-***[#lightcoral]:customSpec.json
+***:[[https://docs.substrate.io/tutorials/get-started/trusted-network/#generate-a-second-set-of-keys Generate a second set of keys]]
 <code>
 
+此教程的专用网络仅包含两个节点，因此需要两组密钥。
+
+有几个选项可以继续本教程：
+1. 可以将密钥用于预定义帐户之一。
+2. 可以使用本地计算机上的不同身份重复上一节中的步骤，以生成第二个密钥对。
+3. 您可以派生一个子密钥对来模拟本地计算机上的第二个身份。
+4. 您可以招募其他参与者来生成加入您的私有网络所需的密钥。
+
+出于说明目的，本教程中使用的第二组键是：
+Sr25519：5EJPj83tJuJtTVE2v7B9ehfM7jNT44CBFaPWicvBwYyUKBS6 用于aura。
+Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
+</code>;
+**:Create a custom chain specification
+<code>
+
+生成用于区块链的密钥后，您就可以使用这些密钥对创建自定义链规范，
+然后与作为验证器(validators)的受信任网络参与者共享您的自定义链规范。
+
+为了使其他人能够参与您的区块链网络，请确保他们生成自己的密钥。
+
+收集完网络参与者的密钥后，可以创建自定义链规范以替换本地链规范。
+
+为简单起见，本教程中创建的自定义链规范是本地链规范的修改版本，
+用于说明如何创建双节点网络。
+
+如果您拥有所需的密钥，您可以按照相同的步骤将更多节点添加到网络中。
+</code>;
+***:Modify the local chain specification
+<code>
+
+这个操作很重要，后续课程还会用到。(Connect to Rococo testnet)
+</code>;
+****:Export the local chain specification to a file
+<code>
+
+./target/release/node-template build-spec
+--disable-default-bootnode
+--chain local > customSpec.json
+</code>;
+*****[#lightcoral]:head customSpec.json
+<code>
+
+# customSpec.json
 {
  "name": "Local Testnet",
  "id": "local_testnet",
@@ -65,20 +124,57 @@ Modify the grandpa field to specify the nodes
  "codeSubstitutes": {},
 }
 </code>;
-***:Add validators
+*****:tail -n 80 customSpec.json
 <code>
 
-As you have just seen, you can add and change the authority addresses
-in a chain specification by modifying the aura and grandpa sections.
-
-You can use this technique to add as many validators as you like.
-
-Be sure to use unique keys for each validator.
-If two validators have the same keys, they produce conflicting blocks.
+此命令显示 Wasm 二进制字段后面的最后部分，
+包括运行时使用的几个托盘的详细信息，
+例如 sudo 和 balances 托盘。
 </code>;
-** Modify the aura section to include Sr25519 addresses.
-** Modify the grandpa section to include Ed25519 addresses and a voting weight.
-**:Convert the chain specification to raw format
+*****:Modify the name field to identify this chain specification as a custom chain specification.
+<code>
+
+"name": "My Custom Testnet",
+</code>
+*****:Modify aura field to specify the nodes
+<code>
+
+"aura": { "authorities": [
+ "5CfBuoHDvZ4fd8jkLQicNL8tgjnK8pVG9AiuJrsNrRAx6CNW", "5CXGP4oPXC1Je3zf5wEDkYeAqGcGXyKWSRX2Jm14GdME5Xc5"
+ ]
+},
+</code>;
+*****:Modify the grandpa field to specify the nodes
+<code>
+
+"grandpa": {
+   "authorities": [
+     [
+       "5CuqCGfwqhjGzSqz5mnq36tMe651mU9Ji8xQ4JRuUTvPcjVN",
+       1
+     ],
+     [
+       "5DpdMN4bVTMy67TfMMtinQTcUmLhZBWoWarHvEYPM4jYziqm",
+       1
+     ]
+   ]
+ },
+</code>;
+****:Add validators
+<code>
+
+如你所见：
+
+可以通过修改 aura 和 grandpa 部分来添加和更改链规范中的权限地址。
+可以使用此技术添加任意数量的验证器。
+
+添加验证器：
+1. 修改 aura 部分以包含 Sr25519 地址。
+2. 修改爷爷部分以包括 Ed25519 地址和投票权重。
+
+确保为每个验证器使用唯一的密钥。如果两个验证器具有相同的密钥，它们会产生冲突的块。
+</code>;
+***:Convert the chain specification to raw format
 <code>
 
 ./target/release/node-template
@@ -88,47 +184,41 @@ build-spec
 --disable-default-bootnode
 > customSpecRaw.json
 </code>;
-**:Share the chain specification with others
+***:Share the chain specification with others
 <code>
 
-If you are creating a private blockchain network
-to share with other participants, ensure that only
-one person creates the chain specification and
-shares the resulting raw version of that
-specification-for example, the customSpecRaw.json file—with
-all of the other validators in the network.
+如果你正在创建私有区块链网络以与其他参与者共享，
+请确保只有一个人创建链规范并与该规范中的所有其
+他验证器共享生成的该规范的原始版本
+（例如 customSpecRaw.json 文件）网络。
 
-Because the Rust compiler produces optimized WebAssembly binaries
-that aren't deterministically reproducible, each person who generates
-the Wasm runtime produces a slightly different Wasm blob.
+因为 Rust 编译器生成的优化的 WebAssembly 二进
+制文件在确定性上无法重现，所以每个生成 Wasm 运行
+时的人都会生成稍微不同的 Wasm blob。
 
-To ensure determinism, all participants in the blockchain network
-must use exactly the same raw chain specification file
+为了确保确定性，区块链网络中的所有参与者必须使用
+完全相同的原始链规范文件。
+
+有关此问题的更多信息，请参阅<Hunting down a non-determinism-bug in our Rust Wasm build>。
 </code>;
-**:Prepare to launch the private network
+**** [[https://dev.to/gnunicorn/hunting-down-a-non-determinism-bug-in-our-rust-wasm-build-4fk1 Hunting down a non-determinism-bug in our Rust Wasm build]]
+***:Prepare to launch the private network
 <code>
 
-After you distribute the custom chain specification
-to all network participants, you're ready to launch
-your own private blockchain.
+将自定义链规范分发给所有网络参与者后，就可以启动自己的私有区块链了。
 
-The steps are similar to the steps you followed
-in Start the first blockchain node.
+这些步骤类似于在启动第一个区块链节点中执行的步骤。
 
-If you follow the steps in this tutorial,
-however, you can add multiple computers to your network.
+但是，如果按照本教程中的步骤操作，则可以将多台计算机添加到您的网络中。
 
-To continue, verify the following:
-1. You have generated or collected the account
-keys for at least two authority accounts.
-2. You have updated your custom chain specification
-to include the keys for block production (aura) and
-block finalization (grandpa).
-3. You have converted your custom chain specification
-to raw format and distributed the raw chain specification
-to the nodes participating in the private network.
+要继续，请验证以下内容：
+1. 已经为至少两个权限帐户生成或收集了帐户密钥。
+2. 已经更新自定义链规范，以包含用于块生产（aura）和块完成（grandpa）的密钥。
+3. 已将自定义链规范转换为原始格式，并将原始链规范分发给参与私有网络的节点。
+
+如果已完成这些步骤，您就可以启动私有区块链中的第一个节点了。
 </code>;
-**:Start the first node
+***:Start the first node
 <code>
 ./target/release/node-template
   --base-path /tmp/node01
@@ -141,27 +231,96 @@ to the nodes participating in the private network.
   --rpc-methods Unsafe
   --name MyNode01
   --password-interactive
+
+此命令还使用您自己的密钥而不是预定义的帐户来启动节点。
+由于没有使用具有已知密钥的预定义帐户，因此需要在单独
+的步骤中将密钥添加到密钥库。
 </code>;
-*** --base-path /tmp/node01
-*** --chain ./customSpecRaw.json
-*** --port 30333
-*** --ws-port 9945
-*** --rpc-port 9933
-*** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-*** --validator
-*** --rpc-methods Unsafe
-*** --name MyNode01
-*** --password-interactive
-** View information about node operations
-** Add keys to the keystore
-*** tip: After you start the first node, no blocks are yet produced.
-***: For each node:
+****:--base-path /tmp/node01
 <code>
 
-Add the aura authority keys to enable block production.
-Add the grandpa authority keys to enable block finalization.
+The --base-path command-line option specifies a
+custom location for the chain associated with
+this first node.
 </code>;
-***: To insert keys into the keystore:
+****:--chain ./customSpecRaw.json
+<code>
+
+The --chain command-line option specifies the
+custom chain specification.
+</code>
+**** --port 30333
+**** --ws-port 9945
+**** --rpc-port 9933
+**** --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+****:--validator
+<code>
+
+The --validator command-line option indicates that
+this node is an authority for the chain.
+</code>;
+****:--rpc-methods Unsafe
+<code>
+
+The --rpc-methods Unsafe command-line option allows
+you to continue the tutorial using an unsafe communication
+mode because your blockchain is not being used in a
+production setting.
+</code>;
+****:--name MyNode01
+<code>
+
+The --name command-line option enables you to give
+your node a human-readable name in the telemetry UI.
+</code>;
+**** --password-interactive
+***:View information about node operations
+<code>
+
+注意其中的这些信息
+</code>;
+****:--chain
+<code>
+
+输出表明正在使用的链规范是您使用 --chain 命令行选项创建和指定的自定义链规范。
+</code>;
+****:--validator
+<code>
+
+输出表明该节点是一个授权，因为您使用 --validator 命令行选项启动了该节点。
+</code>;
+****:state
+<code>
+
+输出显示使用块哈希（状态：0x2bde…8f66，标头哈希：0x6c78…37de）初始化创世块。
+</code>;
+****:node identify
+<code>
+
+输出指定您的节点的本地节点身份。在此示例中，节点身份为
+12d3koowlmrydlontytytytdyzlwde1paxzxtw5rgjmhlfzw96sx。
+</code>;
+****:IP address
+<code>
+
+输出指定用于节点的 IP 地址是本地主机 127.0.0.1。
+</code>;
+***:Add keys to the keystore
+<code>
+
+启动第一个节点后，尚未生成任何块。
+
+下一步是将两种类型的密钥添加到网络中每个节点的密钥库中。
+
+对于每个节点：
+1. 添加 aura 权限密钥以启用块生产。
+2. 添加g randpa 权限密钥以启用块完成。
+
+有几种方法可以将密钥插入密钥库。
+
+对于本教程，您可以使用 key 子命令插入本地生成的密钥。
+</code>;
+****: Insert the aura secret key:
 <code>
 
 ./target/release/node-template
@@ -171,10 +330,49 @@ key insert --base-path /tmp/node01
   --suri <your-secret-seed>
   --password-interactive
   --key-type aura
+
+Replace <your-secret-seed> with the secret phrase or
+secret seed for the first key pair that you generated
+in Generate local keys using node template.
+
+You can also insert a key from a specified file location.
+
+./target/release/node-template key insert --help
 </code>;
-** Enable other participants to join
-*** tip: You can now allow other validators to join the network using the --bootnodes and --validator command-line options.
-***:To add a second validator to the private network:
+****:Insert the grandpa secret key
+<code>
+
+./target/release/node-template key insert
+  --base-path /tmp/node01
+  --chain customSpecRaw.json
+  --scheme Ed25519
+  --suri <your-secret-key>
+  --password-interactive
+  --key-type gran
+</code>;
+****:Verify that your keys are in the keystore for node01
+<code>
+
+ls /tmp/node01/chains/local_testnet/keystore
+</code>;
+****:Restart the node
+<code>
+
+After you have added your keys to the keystore for
+the first node under /tmp/node01, you can restart
+the node using the command you used previously in
+<Start the first node>.
+</code>;
+***:Enable other participants to join
+<code>
+
+tip: You can now allow other validators to join
+the network using the --bootnodes and --validator
+command-line options.
+
+To add a second validator to the private network:
+</code>;
+***:Start a second blockchain node
 <code>
 
 ./target/release/node-template
