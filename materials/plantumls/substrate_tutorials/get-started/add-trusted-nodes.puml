@@ -370,9 +370,8 @@ tip: You can now allow other validators to join
 the network using the --bootnodes and --validator
 command-line options.
 
-To add a second validator to the private network:
-</code>;
-**:Start a second blockchain node
+To add a second validator to the private network,
+just start a second blockchain node
 <code>
 
 ./target/release/node-template
