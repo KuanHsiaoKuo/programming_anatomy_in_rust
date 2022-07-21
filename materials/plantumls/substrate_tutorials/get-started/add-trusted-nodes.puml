@@ -372,7 +372,6 @@ command-line options.
 
 To add a second validator to the private network,
 just start a second blockchain node
-<code>
 
 ./target/release/node-template
   --base-path /tmp/node02
