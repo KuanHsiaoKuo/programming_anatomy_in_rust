@@ -35,12 +35,11 @@ with an approved set of validators.
 ****:Generate a random secret phrase and keys
 <code>
 
-./target/release/node-template key generate --scheme Sr25519 --password-interactive
-Type a password for the generated keys: <123456>
-
-displayed:
-./target/release/node-template key generate --scheme Sr25519 --password-interactive                            ─╯
-Key password:
+./target/release/node-template key
+generate
+--scheme Sr25519
+--password-interactive                            ─╯
+Key password: <123456>
 
 Secret phrase:       answer cotton spike caution blouse only radio artefact middle guilt bleak original
   Network ID:        substrate
@@ -50,12 +49,17 @@ Secret phrase:       answer cotton spike caution blouse only radio artefact midd
   Public key (SS58): 5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
   SS58 Address:      5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
 
-您现在拥有 Sr25519 密钥，用于使用 aura 为一个节点生成块。在此示例中，帐户的 Sr25519 公钥是 5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
+您现在拥有 Sr25519 密钥，用于使用 aura 为一个节点生成块。
+在此示例中，帐户的 Sr25519 公钥是 5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
 </code>;
 ****:使用生成的密钥
 <code>
 
-./target/release/node-template key inspect --password-interactive --scheme Ed25519 "answer cotton spike caution blouse only radio artefact middle guilt bleak original"
+./target/release/node-template key
+inspect
+--scheme Ed25519
+--password-interactive
+"answer cotton spike caution blouse only radio artefact middle guilt bleak original"
 
 Key password: 123456
 Secret phrase:       answer cotton spike caution blouse only radio artefact middle guilt bleak original
@@ -95,20 +99,19 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
 用于说明如何创建双节点网络。
 
 如果您拥有所需的密钥，您可以按照相同的步骤将更多节点添加到网络中。
-</code>;
-***:Modify the local chain specification
-<code>
+
+--------> Modify the local chain specification
 
 这个操作很重要，后续课程还会用到。(Connect to Rococo testnet)
 </code>;
-****:Export the local chain specification to a file
+***:Export the local chain specification to a file
 <code>
 
 ./target/release/node-template build-spec
 --disable-default-bootnode
 --chain local > customSpec.json
 </code>;
-*****[#lightcoral]:head customSpec.json
+****[#lightcoral]:head customSpec.json
 <code>
 
 # customSpec.json
@@ -124,19 +127,19 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
  "codeSubstitutes": {},
 }
 </code>;
-*****:tail -n 80 customSpec.json
+****:tail -n 80 customSpec.json
 <code>
 
 此命令显示 Wasm 二进制字段后面的最后部分，
 包括运行时使用的几个托盘的详细信息，
 例如 sudo 和 balances 托盘。
 </code>;
-*****:Modify the name field to identify this chain specification as a custom chain specification.
+****:Modify the name field to identify this chain specification as a custom chain specification.
 <code>
 
 "name": "My Custom Testnet",
 </code>
-*****:Modify aura field to specify the nodes
+****:Modify aura field to specify the nodes
 <code>
 
 "aura": { "authorities": [
@@ -144,7 +147,7 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
  ]
 },
 </code>;
-*****:Modify the grandpa field to specify the nodes
+****:Modify the grandpa field to specify the nodes
 <code>
 
 "grandpa": {
@@ -160,7 +163,7 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
    ]
  },
 </code>;
-****:Add validators
+***:Add validators
 <code>
 
 如你所见：
@@ -172,7 +175,8 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
 1. 修改 aura 部分以包含 Sr25519 地址。
 2. 修改爷爷部分以包括 Ed25519 地址和投票权重。
 
-确保为每个验证器使用唯一的密钥。如果两个验证器具有相同的密钥，它们会产生冲突的块。
+确保为每个验证器使用唯一的密钥。
+如果两个验证器具有相同的密钥，它们会产生冲突的块。
 </code>;
 **:Convert the chain specification to raw format
 <code>
