@@ -1,6 +1,17 @@
 @startmindmap
 scale 850 width
-*[#cornflowerblue] (重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]][[#总览 返回]]
+*[#cornflowerblue]:(重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]][[#总览 返回]]
+<code>
+
+1. Sr25519: 用于使用 aura 为一个节点生成块。
+2. Ed25519: 用于使用 grapdpa 为一个节点生成块。
+2. SS58: 对应公钥
+
+步骤：
+1. 使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura
+2. 使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa
+
+</code>;
 **[#aqua]:About Substrate Consensus:
 <code>
 
@@ -32,9 +43,10 @@ with an approved set of validators.
 4. third-party key generation utilities.
 </code>;
 *** Generate local keys using the node template:
-****:Generate a random secret phrase and keys
+****:使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura
 <code>
 
+# Generate a random secret phrase and keys
 ./target/release/node-template key
 generate
 --scheme Sr25519
@@ -52,7 +64,7 @@ Secret phrase:       answer cotton spike caution blouse only radio artefact midd
 您现在拥有 Sr25519 密钥，用于使用 aura 为一个节点生成块。
 在此示例中，帐户的 Sr25519 公钥是 5DxwhfEDto6kGkHz1SZQWE1hDGM8E2LFQNujQdJ3vHNWrnc3
 </code>;
-****:使用生成的密钥
+****: 使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa
 <code>
 
 ./target/release/node-template key
@@ -81,9 +93,34 @@ Secret phrase:       answer cotton spike caution blouse only radio artefact midd
 3. 您可以派生一个子密钥对来模拟本地计算机上的第二个身份。
 4. 您可以招募其他参与者来生成加入您的私有网络所需的密钥。
 
-出于说明目的，本教程中使用的第二组键是：
-Sr25519：5EJPj83tJuJtTVE2v7B9ehfM7jNT44CBFaPWicvBwYyUKBS6 用于aura。
-Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
+出于强化目的，这里再次重复前面的操作，
+
+./target/release/node-template key generate --scheme Sr25519 --password-interactive                                                                                                                                                    ─╯
+Key password: 234567
+Secret phrase:       twelve genuine tree month sport thought more almost frown question suit life
+  Network ID:        substrate
+  Secret seed:       0x627c5e2ac10a94cc0150efb2e2d38e0de2477e6a53892ade5f8b3cd9862e541e
+  Public key (hex):  0x0069217a6b3a9a4d3fa248a69fb39cef88c27301b5a63aeff52ba59c6781173d
+  Account ID:        0x0069217a6b3a9a4d3fa248a69fb39cef88c27301b5a63aeff52ba59c6781173d
+  Public key (SS58): 5C5F62ga8UtigQK1YRTcuVk1sexcmuLHtVSBnJk5xQQ9P6ud
+  SS58 Address:      5C5F62ga8UtigQK1YRTcuVk1sexcmuLHtVSBnJk5xQQ9P6ud
+
+
+./target/release/node-template key inspect --password-interactive --scheme Ed25519 "<前面的助记词>"                                                                      ─╯
+Key password: 234567
+Secret phrase:       twelve genuine tree month sport thought more almost frown question suit life
+  Network ID:        substrate
+  Secret seed:       0x627c5e2ac10a94cc0150efb2e2d38e0de2477e6a53892ade5f8b3cd9862e541e
+  Public key (hex):  0xcde9a701b5965bb5327f900c83c2f9753d1d124fa21228851d6e26659d8dff5f
+  Account ID:        0xcde9a701b5965bb5327f900c83c2f9753d1d124fa21228851d6e26659d8dff5f
+  Public key (SS58): 5Gih5kiPMdKBrz4HTuKWQrTedqr8TLYWLb2WW67VzUyRzgF1
+  SS58 Address:      5Gih5kiPMdKBrz4HTuKWQrTedqr8TLYWLb2WW67VzUyRzgF1
+
+使用的第二组键是：
+
+Sr25519 对应 SS58：5C5F62ga8UtigQK1YRTcuVk1sexcmuLHtVSBnJk5xQQ9P6ud 用于aura。
+Ed25519 对应 SS58：5Gih5kiPMdKBrz4HTuKWQrTedqr8TLYWLb2WW67VzUyRzgF1 用于grapdpa
+
 </code>;
 **:Create a custom chain specification
 <code>
@@ -143,7 +180,7 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
 <code>
 
 "aura": { "authorities": [
- "5CfBuoHDvZ4fd8jkLQicNL8tgjnK8pVG9AiuJrsNrRAx6CNW", "5CXGP4oPXC1Je3zf5wEDkYeAqGcGXyKWSRX2Jm14GdME5Xc5"
+ "<aura的Sr25519密钥>", "<aura的Sr25519公钥对应地址(SS58)>"
  ]
 },
 </code>;
@@ -153,15 +190,22 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
 "grandpa": {
    "authorities": [
      [
-       "5CuqCGfwqhjGzSqz5mnq36tMe651mU9Ji8xQ4JRuUTvPcjVN",
+       "节点 1 的grandpa Ed25519 对应 SS58公钥(地址)",
        1
      ],
      [
-       "5DpdMN4bVTMy67TfMMtinQTcUmLhZBWoWarHvEYPM4jYziqm",
+       "节点 2 的grandpa Ed25519 对应 SS58公钥(地址)",
        1
      ]
    ]
  },
+
+请注意，grandpa 部分中的 authority 字段有两个数据值。
+
+1. 第一个值是地址键。
+2. 第二个值用于支持加权投票。
+
+在此示例中，每个验证者的权重为 1 票。
 </code>;
 ***:Add validators
 <code>
@@ -173,12 +217,12 @@ Ed25519：5FeJQsfmbbJLTH1pvehBxrZrT5kHvJFj84ZaY5LK7NU87gZS 用于grapdpa
 
 添加验证器：
 1. 修改 aura 部分以包含 Sr25519 地址。
-2. 修改爷爷部分以包括 Ed25519 地址和投票权重。
+2. 修改 grapdpa 部分以包括 Ed25519 地址和投票权重。
 
 确保为每个验证器使用唯一的密钥。
 如果两个验证器具有相同的密钥，它们会产生冲突的块。
 </code>;
-**:Convert the chain specification to raw format
+**:[[https://docs.substrate.io/tutorials/get-started/trusted-network/#convert-the-chain-specification-to-raw-format Convert the chain specification to raw format]]
 <code>
 
 ./target/release/node-template
@@ -222,23 +266,41 @@ build-spec
 
 如果已完成这些步骤，您就可以启动私有区块链中的第一个节点了。
 </code>;
-**:Start the first node
+**:[[https://docs.substrate.io/tutorials/get-started/trusted-network/#start-the-first-node Start the first node]]
 <code>
-./target/release/node-template
-  --base-path /tmp/node01
-  --chain ./customSpecRaw.json
-  --port 30333
-  --ws-port 9945
-  --rpc-port 9933
-  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
-  --validator
-  --rpc-methods Unsafe
-  --name MyNode01
-  --password-interactive
 
 此命令还使用您自己的密钥而不是预定义的帐户来启动节点。
 由于没有使用具有已知密钥的预定义帐户，因此需要在单独
 的步骤中将密钥添加到密钥库。
+
+ ./target/release/node-template \                                                                                                                                                                                                       ─╯
+  --base-path /tmp/node01 \
+  --chain ./customSpecRaw.json \
+  --port 30333 \
+  --ws-port 9945 \
+  --rpc-port 9933 \
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" \
+  --validator \
+  --rpc-methods Unsafe \
+  --name MyNode01 \
+  --password-interactive
+Keystore password: 234567
+2022-07-21 21:10:58 Substrate Node
+2022-07-21 21:10:58 ✌️  version 4.0.0-dev-9c89be106cb
+2022-07-21 21:10:58 ❤️  by Substrate DevHub <https://github.com/substrate-developer-hub>, 2017-2022
+2022-07-21 21:10:58 📋 Chain specification: My Custom Testnet
+2022-07-21 21:10:58 🏷  Node name: MyNode01
+2022-07-21 21:10:58 👤 Role: AUTHORITY
+2022-07-21 21:10:58 💾 Database: RocksDb at /tmp/node01/chains/local_testnet/db/full
+2022-07-21 21:10:58 ⛓  Native runtime: node-template-100 (node-template-1.tx1.au1)
+2022-07-21 21:10:59 🔨 Initializing Genesis block/state (state: 0xe114…e9a6, header-hash: 0xbe24…67a2)
+2022-07-21 21:10:59 👴 Loading GRANDPA authority set from genesis on what appears to be first startup.
+2022-07-21 21:10:59 Using default protocol ID "sup" because none is configured in the chain specs
+2022-07-21 21:10:59 🏷  Local node identity is: 12D3KooWA6tqKTpAQVV8uanr7X3sRaEuTAaeHw3V5RVEupMoaCDA
+2022-07-21 21:10:59 💻 Operating system: macos
+2022-07-21 21:10:59 💻 CPU architecture: x86_64
+2022-07-21 21:10:59 📦 Highest known block at #0
+2022-07-21 21:10:59 〽️ Prometheus exporter started at 127.0.0.1:9615
 </code>;
 ***:--base-path /tmp/node01
 <code>
@@ -252,6 +314,7 @@ this first node.
 
 The --chain command-line option specifies the
 custom chain specification.
+
 </code>
 *** --port 30333
 *** --ws-port 9945
@@ -309,7 +372,7 @@ your node a human-readable name in the telemetry UI.
 
 输出指定用于节点的 IP 地址是本地主机 127.0.0.1。
 </code>;
-**:Add keys to the keystore
+**:[[https://docs.substrate.io/tutorials/get-started/trusted-network/#add-keys-to-the-keystore Add keys to the keystore]]
 <code>
 
 启动第一个节点后，尚未生成任何块。
