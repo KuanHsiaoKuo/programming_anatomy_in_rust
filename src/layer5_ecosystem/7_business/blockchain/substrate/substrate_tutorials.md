@@ -27,6 +27,8 @@
             * [使用substrate core](#使用substrate-core)
     * [Simulate a network](#simulate-a-network)
     * [Add trusted nodes](#add-trusted-nodes)
+        * [加密方式梳理](#加密方式梳理)
+        * [步骤：](#步骤)
     * [Authorize specific nodes](#authorize-specific-nodes)
     * [Monitor node metrics](#monitor-node-metrics)
     * [Upgrade a running network](#upgrade-a-running-network)
@@ -112,7 +114,7 @@
     * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Fri Jul 22 11:18:15 UTC 2022 -->
+<!-- Added by: runner, at: Fri Jul 22 11:20:28 UTC 2022 -->
 
 <!--te-->
 
