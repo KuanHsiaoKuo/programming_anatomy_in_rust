@@ -50,7 +50,7 @@ with an approved set of validators.
 ./target/release/node-template key
 generate
 --scheme Sr25519
---password-interactive                            ─╯
+--password-interactive
 Key password: <123456>
 
 Secret phrase:       answer cotton spike caution blouse only radio artefact middle guilt bleak original
@@ -95,7 +95,7 @@ Secret phrase:       answer cotton spike caution blouse only radio artefact midd
 
 出于强化目的，这里再次重复前面的操作，
 
-./target/release/node-template key generate --scheme Sr25519 --password-interactive                                                                                                                                                    ─╯
+./target/release/node-template key generate --scheme Sr25519 --password-interactive
 Key password: 234567
 Secret phrase:       twelve genuine tree month sport thought more almost frown question suit life
   Network ID:        substrate
@@ -106,7 +106,7 @@ Secret phrase:       twelve genuine tree month sport thought more almost frown q
   SS58 Address:      5C5F62ga8UtigQK1YRTcuVk1sexcmuLHtVSBnJk5xQQ9P6ud
 
 
-./target/release/node-template key inspect --password-interactive --scheme Ed25519 "<前面的助记词>"                                                                      ─╯
+./target/release/node-template key inspect --password-interactive --scheme Ed25519 "<前面的助记词>"
 Key password: 234567
 Secret phrase:       twelve genuine tree month sport thought more almost frown question suit life
   Network ID:        substrate
@@ -273,16 +273,16 @@ build-spec
 由于没有使用具有已知密钥的预定义帐户，因此需要在单独
 的步骤中将密钥添加到密钥库。
 
- ./target/release/node-template \                                                                                                                                                                                                       ─╯
-  --base-path /tmp/node01 \
-  --chain ./customSpecRaw.json \
-  --port 30333 \
-  --ws-port 9945 \
-  --rpc-port 9933 \
-  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0" \
-  --validator \
-  --rpc-methods Unsafe \
-  --name MyNode01 \
+ ./target/release/node-template
+  --base-path /tmp/node01
+  --chain ./customSpecRaw.json
+  --port 30333
+  --ws-port 9945
+  --rpc-port 9933
+  --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
+  --validator
+  --rpc-methods Unsafe
+  --name MyNode01
   --password-interactive
 Keystore password: 234567
 2022-07-21 21:10:58 Substrate Node
