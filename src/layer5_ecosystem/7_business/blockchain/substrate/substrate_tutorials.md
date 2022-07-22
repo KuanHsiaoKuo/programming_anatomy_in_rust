@@ -347,6 +347,15 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 {{#include ../../../../../materials/plantumls/substrate_tutorials/get-started/add-trusted-nodes.puml:1:}}
 ```
 
+### 加密方式梳理
+1. Sr25519: 用于使用 aura 为一个节点生成块。
+2. Ed25519: 用于使用 grapdpa 为一个节点生成块。
+2. SS58: 对应公钥
+
+### 步骤：
+1. 使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura
+2. 使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa
+
 ## Authorize specific nodes
 
 ```plantuml
