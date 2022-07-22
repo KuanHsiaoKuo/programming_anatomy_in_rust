@@ -31,6 +31,7 @@
          * [Ed25519](#ed25519)
          * [SS58: 对应公钥](#ss58-对应公钥)
       * [步骤：](#步骤)
+      * [actdiag](#actdiag)
    * [Authorize specific nodes](#authorize-specific-nodes)
    * [Monitor node metrics](#monitor-node-metrics)
    * [Upgrade a running network](#upgrade-a-running-network)
@@ -116,7 +117,7 @@
    * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Fri Jul 22 11:30:37 UTC 2022 -->
+<!-- Added by: runner, at: Fri Jul 22 16:30:00 UTC 2022 -->
 
 <!--te-->
 
