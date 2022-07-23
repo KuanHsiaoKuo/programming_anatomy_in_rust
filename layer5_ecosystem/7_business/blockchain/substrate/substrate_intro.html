@@ -206,6 +206,7 @@
 <li><a href="#%E6%8E%A5%E7%9D%80%E8%AF%B4%E8%AF%B4substrate%E4%B8%8Eweb3">接着说说Substrate与web3</a></li>
 <li><a href="#%E7%94%A8web%E6%A1%86%E6%9E%B6%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E%E7%B1%BB%E6%AF%94">用web框架、游戏引擎类比</a></li>
 <li><a href="#substrate-architecture">Substrate Architecture</a></li>
+<li><a href="#%E4%BB%8Erust%E7%9C%8Bsubstrate">从Rust看Substrate</a></li>
 <li><a href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%8F%AA%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8runtime%E9%93%BE%E5%8A%9F%E8%83%BD">开发者只需要关注Runtime(链功能)</a></li>
 <li><a href="#%E6%98%8E%E6%99%B0runtime">明晰Runtime</a>
 <ul>
@@ -279,7 +280,7 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sat Jul 23 10:47:42 UTC 2022 -->
+<!-- Added by: runner, at: Sat Jul 23 13:01:30 UTC 2022 -->
 <!--te-->
 <h2 id="gavin-wookpolkadot-and-substrate"><a class="header" href="#gavin-wookpolkadot-and-substrate">Gavin Wook、Polkadot and Substrate</a></h2>
 <h3 id="gavin-wook与波卡跨链"><a class="header" href="#gavin-wook与波卡跨链">Gavin Wook与波卡跨链</a></h3>
@@ -491,6 +492,10 @@ Runtime：链功能</p>
 </code></pre>
 </div>
 </div>
+<h3 id="从rust看substrate"><a class="header" href="#从rust看substrate">从Rust看Substrate</a></h3>
+<ul>
+<li><a href="https://docs.substrate.io/main-docs/fundamentals/rust-basics/">Rust for Substrate | Substrate_ Docs</a></li>
+</ul>
 <h3 id="开发者只需要关注runtime链功能"><a class="header" href="#开发者只需要关注runtime链功能">开发者只需要关注Runtime(链功能)</a></h3>
 <p>根据这样的划分，当开发者使用Substrate框架的时候，无需关心区块链基础功能也就是Core部分的工作，而只需关心自己链能够提供的功能，也就是Runtime部分的工作。</p>
 <div id="admonition-vm类似以太坊的智能合约" class="admonition tip">
@@ -748,7 +753,7 @@ Runtime：链功能</p>
 </code></pre>
 </div>
 </div>
-<p>现在我们知道了 Substrate 是什么，让我们对框架、它的移动部分以及我们可以用来创建自定义区块链的扩展点进行高级概述。 
+<p>现在我们知道了 Substrate 是什么，让我们对框架、它的移动部分以及我们可以用来创建自定义区块链的扩展点进行高级概述。
 由于我们在这里处理的是去中心化的点对点系统，所以我们谈论的基本单元是节点,这是我们的区块链运行的地方。
 该节点在客户端内部运行，并提供系统运行所需的所有基本组件，例如p2p网络、区块链的存储、块处理和共识的逻辑，以及从外部与区块链交互的能力。</p>
 <h4 id="模块说明"><a class="header" href="#模块说明">模块说明</a></h4>
