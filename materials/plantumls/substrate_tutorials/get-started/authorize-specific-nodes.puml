@@ -173,8 +173,8 @@ Config trait 用于识别托盘所需的参数和类型。
 例如，要查看 node-authorization 托盘中的 Config trait
 需要实现什么，可以参考托盘节点授权::Config 的 Rust 文档。
 </code>;
-**** [[[Traits: Defining Shared Behavior - The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html) Traits]]
-**** [[https://paritytech.github.io/substrate/master/pallet_node_authorization/pallet/trait.Config.html pallet_node_authorization::pallet::Config]
+**** [[Traits: Defining Shared Behavior - The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html) Traits]]
+**** [[https://paritytech.github.io/substrate/master/pallet_node_authorization/pallet/trait.Config.html pallet_node_authorization::pallet::Config]]
 *** To implement the node-authorization pallet in your runtime
 **** runtime/src/lib.rs
 *****:Add the parameter_types
@@ -352,7 +352,7 @@ cargo build --release
 --ws-port=9946
 --offchain-worker always
 </code>;
-***[#lightgreen]]:charlie节点没有连接的peers
+***[#lightgreen]:charlie节点没有连接的peers
 <code>
 
 启动此节点后，您应该会看到该节点没有连接的对等方。

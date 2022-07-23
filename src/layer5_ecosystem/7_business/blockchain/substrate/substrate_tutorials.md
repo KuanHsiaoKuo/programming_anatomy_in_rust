@@ -474,13 +474,61 @@ actdiag {
 ![image-20220723183551671](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220723183551671.png)
 
 > 您现在应该看到 Dave 正在捕获区块，并且只有一个属于 Charlie 的节点！重新启动 Dave 的节点，以防它没有立即与 Charlie 连接
+### 流程图
 
+```kroki-mermaid
+sequenceDiagram
+    actor terminal as 终端
+    participant runtime as 运行时
+    participant node as 节点 
+    participant pkjs as polkadot-js-app
+    terminal->>terminal: git chekout latest & cargo build --release
+    terminal->>+runtime: 开始修改运行时cargo文件，添加pallet依赖与feature
+    rect rgb(200, 150, 255)
+    runtime->>runtime: runtime/Cargo.toml:depencies添加pallet-node-authorization
+    runtime->>runtime: runtime/Cargo.toml:features添加pallet-node-authorization/std
+    end
+    runtime->>-terminal: prepare to check
+    terminal->>terminal: cargo check -p node-template-runtime
+    terminal->>+runtime: 开始给节点node添加pallet用到的参数类型、实现块、构建运行时配置
+    rect rgb(200, 150, 255)
+    runtime->>runtime: runtime/src/runtime.rs:add parameter_types
+    runtime->>runtime: runtime/src/runtime.rs:add impl section
+    runtime->>runtime: runtime/src/runtime.rs:add the pallet to the construct_runtime macro
+    end
+    runtime->>-terminal: 开始检查
+    terminal->>terminal: cargo check -p node-template-runtime
+    terminal->>+node: 开始给授权节点添加创始区块存储功能
+    node->>node: node/Cargo.toml:add bs58 dependency
+    rect rgb(200, 150, 255)
+    node->>+node: 添加创始区块存储功能
+    node->>node: node/src/node.rs:add genesis storage for nodes
+    node->>node: node/src/node.rs:locate the testnet_genesis function
+    node->>node: node/src/node.rs:add GenesisConfig declaration
+    end
+    node->>-terminal: cargo check & start nodes
+    terminal->>terminal: cargo check -p node-template-runtime
+    rect rgb(200, 150, 255)
+    terminal->>terminal: start alice node
+    terminal->>terminal: start bob node
+    terminal->>terminal: start Charlie node
+    terminal->>terminal: start Dave node
+    end
+    terminal->>pkjs: 开始进行授权与建立连接操作
+    rect rgb(200, 150, 255)
+    pkjs->>pkjs: 使用alice账号给Charlie授权
+    pkjs->>pkjs: 使用Charlie账号连接Dave节点
+    pkjs->>pkjs: Dave对外claimNode
+    end
+```
 ### 总结
 
 任何节点都可以发出影响其他节点行为的交易(extrinsics)，只要它位于用于参考的链数据上，并且您在密钥库中拥有可用于所需来源的相关帐户的密钥。此演示中的所有节点都可以访问开发人员签名密钥，因此能够代表 Charlie
 从网络上的任何连接节点发出影响 charlie 子节点的命令。
 
 在现实世界的应用程序中，节点操作员只能访问他们的节点密钥，并且是唯一能够正确签署和提交外部信息的人，很可能来自他们自己的节点，他们可以控制密钥的安全性。
+
+- [Accounts, addresses, and keys | Substrate_ Docs](https://docs.substrate.io/main-docs/fundamentals/accounts-addresses-keys/)
 
 ## Monitor node metrics
 
@@ -847,7 +895,7 @@ pub enum Error<T> {
         3. 使用substrate core: runtime自由
            > 使用substrate code运行开发者完全从头开始设计运行时（runtime，问题：什么是runtime？），当然此种方式也是使用substrate自由度最大的方式。
     - Substrate Client:
-      > substrate客户端是基于substrate实现的区块链的节点客户端（可以理解为全节点），它主要由以下几个组件组成（以下也就是告诉我们实现一条链由哪几部分组成）：
+      >   substrate客户端是基于substrate实现的区块链的节点客户端（可以理解为全节点），它主要由以下几个组件组成（以下也就是告诉我们实现一条链由哪几部分组成）：
         1. 存储: 用来维持区块链系统所呈现的状态演变。substrate提供了的存储方式是一种简单有效的key-value对存储机制的方式。
         2. Runtime: 这里就可以回答上面的问题，什么是runtime？runtime定义了区块的处理方式，主要是状态转换的逻辑。在substrate中，runtime code被编译成wasm作为区块链存储状态的一部分。
         3. p2p网络: 允许客户端和其它网络参与者进行通信。
