@@ -480,8 +480,8 @@ actdiag {
 ```kroki-mermaid
 sequenceDiagram
     actor terminal as 终端
-    participant runtime as 运行时
-    participant node as 节点 
+    participant runtime as 运行时:添加pallet
+    participant node as 节点:修改链规范
     participant pkjs as polkadot-js-app
     terminal->>terminal: git chekout latest & cargo build --release
     terminal->>+runtime: 开始修改运行时cargo文件，添加pallet依赖与feature
