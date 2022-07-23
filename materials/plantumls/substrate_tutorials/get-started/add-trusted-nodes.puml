@@ -1,6 +1,6 @@
 @startmindmap
-'scale 900 width
-!include ../../custom.conf
+scale max 850 width
+'!include ../../custom.conf
 *[#cornflowerblue]:(重点内容)[[https://docs.substrate.io/tutorials/get-started/trusted-network/ Add trusted nodes]][[#总览 返回]]
 <code>
 

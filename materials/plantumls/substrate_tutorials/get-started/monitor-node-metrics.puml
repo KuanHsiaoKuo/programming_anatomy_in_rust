@@ -1,6 +1,6 @@
 @startmindmap
-'scale 850 width
-!include ../../custom.conf
+scale max 850 width
+'!include ../../custom.conf
 *:[[https://docs.substrate.io/tutorials/get-started/node-metrics/ Monitor node metrics]] [[#总览 返回]]
 <code>
 

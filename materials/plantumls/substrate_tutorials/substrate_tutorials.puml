@@ -1,5 +1,5 @@
 @startmindmap
-scale 850 width
+scale max 850 width
 * Substrate Tutorials
 **:Get started [[#get-started jump]]
 <code>
