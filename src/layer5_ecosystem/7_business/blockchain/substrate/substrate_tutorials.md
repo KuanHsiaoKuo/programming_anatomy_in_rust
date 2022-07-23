@@ -35,6 +35,7 @@
    * [Authorize specific nodes](#authorize-specific-nodes)
       * [Alice授权Charlie过程](#alice授权charlie过程)
          * [Charlie连接Dave过程](#charlie连接dave过程)
+      * [流程图](#流程图)
       * [总结](#总结)
    * [Monitor node metrics](#monitor-node-metrics)
    * [Upgrade a running network](#upgrade-a-running-network)
@@ -120,7 +121,7 @@
    * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sat Jul 23 10:47:43 UTC 2022 -->
+<!-- Added by: runner, at: Sat Jul 23 13:01:32 UTC 2022 -->
 
 <!--te-->
 
