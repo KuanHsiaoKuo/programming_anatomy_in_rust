@@ -1,5 +1,6 @@
 @startmindmap
-scale 850 width
+'scale 850 width
+!include ../../custom.conf
 * Simulate a network [[#总览 返回]]
 ** Start the first alice blockchain node
 ***:清理之前alice的链数据:
