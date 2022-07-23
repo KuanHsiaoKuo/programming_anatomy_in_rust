@@ -42,7 +42,7 @@ such as a private enterprise or a non-profit organization.
 such as healthcare, finance, or business-to-business ledgers.
 3. For testing of a pre-public blockchain network at scale.
 </code>;
-** Node authorization and ownership
+**[#mediumorchid] Node authorization and ownership
 ***:There are two ways you can authorize a node to join the network:
 <code>
 
@@ -84,14 +84,7 @@ start the node because it is disabled by default
 for non-authority nodes.
 </code>;
 *** [[https://wiki.polkadot.network/docs/faq#networking Need to be familiar with peer-to-peer networking in Substrate]]
-**:Tutorial objectives
-<code>
-
-1. Check out and compile the node template.
-2. Add the node authorization pallet to the node template runtime.
-3. Launch multiple nodes and authorize new nodes to join.
-</code>;
-**:Build the node template
+**:编译一下项目，获取可执行文件
 <code>
 
 cd substrate-node-template
@@ -135,6 +128,20 @@ std = [
  "pallet-node-authorization/std",    # add this line
  ...
 ]
+
+如果忘记更新 Cargo.toml 文件中的 features 部分，
+可能会在编译运行时二进制文件时看到找不到函数错误。
+</code>;
+*****:[[https://docs.substrate.io/main-docs/build/build-process/ Build process]]
+<code>
+
+本节指定要为此运行时编译的默认功能集是 std 功能集。
+
+使用 std 功能集编译运行时的时候，将启用所有列为依赖项的托盘中的 std 功能。
+
+有关如何使用标准库将运行时编译为原生 Rust 二进制文件以及
+使用 no_std 属性编译为 WebAssembly 二进制文件的更多详细信息，
+请参阅构建运行时。
 </code>;
 ****:check new dependencies
 <code>
@@ -143,9 +150,9 @@ cargo check -p node-template-runtime
 ***:Add an administrative rule
 <code>
 
-To simulate governance in this tutorial, you can configure
-the pallet to use the EnsureRoot privileged function that
-can be called using the Sudo pallet .
+要在本教程中模拟治理(governance)，可以将托盘配置为使用 EnsureRoot 特权功能，
+该功能可以使用 Sudo 托盘调用。 Sudo 托盘默认包含在节点模板中，使您能够通过根级
+管理帐户进行调用。在生产环境中，将使用更现实的基于治理的检查。
 </code>;
 ****:runtime/src/lib.rs
 <code>
@@ -156,23 +163,18 @@ use frame_system::EnsureRoot；
 ***:About Pallet Config Trait
 <code>
 
-Every pallet has a Rust trait called Config.
 
-The Config trait is used to identify the
-parameters and types that the pallet needs.
+每个托盘都有一个名为 Config 的 Rust 特征。
+Config trait 用于识别托盘所需的参数和类型。
 
-Most of the pallet -specific code required to
-add a pallet is implemented using the Config trait.
+添加托盘所需的大多数特定于托盘的代码都是使用 Config 特征实现的。
+可以通过参考其 Rust 文档或托盘的源代码来查看您需要为任何托盘实现的内容。
 
-You can review what you to need to implement for
-any pallet by referring to its Rust documentation
-or the source code for the pallet.
-
-For example, to see what you need to implement for
-the Config trait in the node-authorization pallet,
-you can refer to the Rust documentation for
-pallet_node_authorization::Config.
+例如，要查看 node-authorization 托盘中的 Config trait
+需要实现什么，可以参考托盘节点授权::Config 的 Rust 文档。
 </code>;
+**** [[[Traits: Defining Shared Behavior - The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html) Traits]]
+**** [[https://paritytech.github.io/substrate/master/pallet_node_authorization/pallet/trait.Config.html pallet_node_authorization::pallet::Config]
 *** To implement the node-authorization pallet in your runtime
 **** runtime/src/lib.rs
 *****:Add the parameter_types
@@ -272,7 +274,16 @@ fn testnet_genesis(
      ),
    ],
  },
+
+在这段代码中，NodeAuthorizationConfig 包含一个 nodes 属性，
+它是一个包含两个元素的元组的向量。
+1. 元组的第一个元素是 OpaquePeerId。 bs58::decode 操作将人类可读的 PeerId
+（例如 12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2）转换为字节。
+2. 元组的第二个元素是代表该节点所有者的 AccountId。
+
+此示例使用预定义的 Alice 和 Bob，此处标识为捐赠账户 [0] 和 [1]。
 </code>;
+**** [[https://docs.substrate.io/reference/command-line-tools/subkey/#well-known-keys 预定义的key]]
 ***:Verify that the node compiles
 <code>
 
@@ -282,19 +293,25 @@ cargo build --release
 ***:For the purposes of this tutorial
 <code>
 
-you are going to launch four nodes.
+现在可以使用预定义帐户的节点密钥和对等标识符来启动许可网络并授权其他节点加入。
 
-Three of the nodes are associated with predefined accounts
-and all three of those nodes are allowed to author
-and validate blocks.
-
-The fourth node is a sub-node that is only authorized to
-read data from a selected node with the approval of that node's owner.
+出于本教程的目的，将启动四个节点:
+1. 其中三个节点与预定义的帐户相关联，并且所有这三个节点都被允许创作和验证区块。
+2. 第四个节点是一个子节点，只有在该节点所有者批准的情况下才被授权从选定节点读取数据。
 </code>;
 ***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#obtain-node-keys-and-peerids Obtain node keys and peerIDs]]
 <code>
+
+现在已经在创世存储（Genesis storage）中配置了与 Alice 和 Bob 账户关联的节点。
+
+可以使用子密钥程序(subkey)检查与预定义帐户关联的密钥，并生成和检查您自己的密钥。
+
+但是，如果运行 subkey generate-node-key 命令，节点密钥和对等标识符是随机生成的，
+并且与教程中使用的密钥不匹配。
+
+因为本教程使用预定义的账户和众所周知的节点密钥，所以总结了每个账户的密钥。
 </code>;
-***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#start-the-first-node Start the first node]]
+***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#start-the-first-node 使用表中数据启动alice节点]]
 <code>
 
 ./target/release/node-template
@@ -305,7 +322,7 @@ read data from a selected node with the approval of that node's owner.
 --port 30333
 --ws-port 9944
 </code>;
-***:Start the second node
+***:使用表中数据启动bob节点
 <code>
 
 ./target/release/node-template
@@ -316,8 +333,15 @@ read data from a selected node with the approval of that node's owner.
 --port 30334
 --ws-port 9945
 </code>;
+***[#lightgreen] 两个节点都启动后，您应该能够在两个终端日志中看到创建和完成的新块。
 ***:Add a third node to the list of well-known nodes
 <code>
+
+您可以使用 --name charlie 命令启动第三个节点。
+节点授权托盘使用脱链工作者来配置节点连接。
+由于第三个节点不是知名节点，并且会将网络中的第四
+个节点配置为只读子节点，
+因此您必须包含命令行选项以启用脱链工作者(offchain worker)。
 
 ./target/release/node-template
 --chain=local
@@ -327,6 +351,16 @@ read data from a selected node with the approval of that node's owner.
 --port 30335
 --ws-port=9946
 --offchain-worker always
+</code>;
+***[#lightgreen]]:charlie节点没有连接的peers
+<code>
+
+启动此节点后，您应该会看到该节点没有连接的对等方。
+因为这是一个许可网络，所以必须明确授权该节点进行连接。
+
+Alice 和 Bob 节点在 genesis chain_spec.rsfile 中配置。
+
+必须使用对 Sudo 托盘的调用手动添加所有其他节点。
 </code>;
 ***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#authorize-access-for-the-third-node Authorize access for the third node]]
 <code>
@@ -339,16 +373,10 @@ node-authorization pallet to add the third node.
 ***:[[https://docs.substrate.io/tutorials/get-started/permissioned-network/#add-a-sub-node Add a sub-node]]
 <code>
 
-The fourth node in this network is not as a well-known node.
-
-1. This node is owned by the user dave,
-2. but is a sub-node of the charlie node.
-
-The sub-node can only access the network by
-connecting to the node owned by charlie.
-
-The parent node is responsible for any sub-node it authorizes to connect
-and controls access if the sub-node needs to be removed or audited.
+该网络中的第四个节点不是众所周知的节点。
+1. 该节点归用户 dave 所有，是 charlie 节点的子节点。
+2. 子节点只能通过连接到 charlie 拥有的节点来访问网络。
+3. 父节点负责其授权连接的任何子节点，并在子节点需要删除或审计时控制访问。
 
 ./target/release/node-template
 --chain=local
