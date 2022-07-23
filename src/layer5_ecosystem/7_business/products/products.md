@@ -11,7 +11,7 @@
       * [awesome-rust-com/awesome-rust](#awesome-rust-comawesome-rust)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sat Jul 23 13:01:33 UTC 2022 -->
+<!-- Added by: runner, at: Sat Jul 23 13:11:12 UTC 2022 -->
 
 <!--te-->
 
