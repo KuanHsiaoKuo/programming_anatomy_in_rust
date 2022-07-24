@@ -1,124 +1,125 @@
 # Substrate官方教程梳理与练习
 
 <!--ts-->
+
 * [Substrate官方教程梳理与练习](#substrate官方教程梳理与练习)
 * [总览](#总览)
 * [Get Started](#get-started)
-   * [Build a local blockchain](#build-a-local-blockchain)
-      * [设置开发环境](#设置开发环境)
-         * [使用rustup设置rust环境](#使用rustup设置rust环境)
-         * [检查环境](#检查环境)
-      * [启动链节点](#启动链节点)
-         * [下载node-template](#下载node-template)
-         * [node-templeate项目结构](#node-templeate项目结构)
-         * [Cargo.toml](#cargotoml)
-         * [编译前的检查](#编译前的检查)
-         * [编译](#编译)
-         * [可能遇到的问题](#可能遇到的问题)
-         * [本地运行节点](#本地运行节点)
-         * [docker运行节点](#docker运行节点)
-      * [前端访问](#前端访问)
-         * [使用前端模版](#使用前端模版)
-         * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
-      * [Substrate使用方式](#substrate使用方式)
-         * [使用subtrate node](#使用subtrate-node)
-         * [使用substrate frame](#使用substrate-frame)
-         * [使用substrate core](#使用substrate-core)
-   * [Simulate a network](#simulate-a-network)
-   * [Add trusted nodes](#add-trusted-nodes)
-      * [加密方式梳理](#加密方式梳理)
-         * [Sr25519](#sr25519)
-         * [Ed25519](#ed25519)
-         * [SS58: 对应公钥](#ss58-对应公钥)
-      * [步骤：](#步骤)
-      * [actdiag](#actdiag)
-   * [Authorize specific nodes](#authorize-specific-nodes)
-      * [Alice授权Charlie过程](#alice授权charlie过程)
-         * [Charlie连接Dave过程](#charlie连接dave过程)
-      * [流程图](#流程图)
-      * [总结](#总结)
-   * [Monitor node metrics](#monitor-node-metrics)
-   * [Upgrade a running network](#upgrade-a-running-network)
+    * [Build a local blockchain](#build-a-local-blockchain)
+        * [设置开发环境](#设置开发环境)
+            * [使用rustup设置rust环境](#使用rustup设置rust环境)
+            * [检查环境](#检查环境)
+        * [启动链节点](#启动链节点)
+            * [下载node-template](#下载node-template)
+            * [node-templeate项目结构](#node-templeate项目结构)
+            * [Cargo.toml](#cargotoml)
+            * [编译前的检查](#编译前的检查)
+            * [编译](#编译)
+            * [可能遇到的问题](#可能遇到的问题)
+            * [本地运行节点](#本地运行节点)
+            * [docker运行节点](#docker运行节点)
+        * [前端访问](#前端访问)
+            * [使用前端模版](#使用前端模版)
+            * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
+        * [Substrate使用方式](#substrate使用方式)
+            * [使用subtrate node](#使用subtrate-node)
+            * [使用substrate frame](#使用substrate-frame)
+            * [使用substrate core](#使用substrate-core)
+    * [Simulate a network](#simulate-a-network)
+    * [Add trusted nodes](#add-trusted-nodes)
+        * [加密方式梳理](#加密方式梳理)
+            * [Sr25519](#sr25519)
+            * [Ed25519](#ed25519)
+            * [SS58: 对应公钥](#ss58-对应公钥)
+        * [步骤：](#步骤)
+        * [actdiag](#actdiag)
+    * [Authorize specific nodes](#authorize-specific-nodes)
+        * [Alice授权Charlie过程](#alice授权charlie过程)
+            * [Charlie连接Dave过程](#charlie连接dave过程)
+        * [流程图](#流程图)
+        * [总结](#总结)
+    * [Monitor node metrics](#monitor-node-metrics)
+    * [Upgrade a running network](#upgrade-a-running-network)
 * [Work with pallets](#work-with-pallets)
-   * [文档/代码更新问题](#文档代码更新问题)
-   * [Pallet前置Rust知识](#pallet前置rust知识)
-   * [Pallet组成](#pallet组成)
-   * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
-         * [[package]{...}](#package)
-         * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
-         * [[dependencies]{...}](#dependencies)
-         * [[build-dependencies]{...}](#build-dependencies)
-         * [[features]{...}](#features)
-      * [四步添加pallet](#四步添加pallet)
-         * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
-         * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
-         * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
-         * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
-      * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
-      * [验证功能](#验证功能)
-         * [为帐户设置昵称](#为帐户设置昵称)
-         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-      * [可能出现的问题](#可能出现的问题)
-   * [Configure the contracts pallet](#configure-the-contracts-pallet)
-      * [signed与sudo有不同权限。](#signed与sudo有不同权限)
-   * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
-   * [Pallet组件深入](#pallet组件深入)
-      * [1. Pallet Hooks](#1-pallet-hooks)
-      * [2. Pallet Extrinsics](#2-pallet-extrinsics)
-      * [3. Pallet Errors](#3-pallet-errors)
-      * [4. Pallet Config](#4-pallet-config)
-      * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
-      * [6. Pallet Extension](#6-pallet-extension)
-      * [7. Pallet Debug](#7-pallet-debug)
-      * [8. Pallet RPC](#8-pallet-rpc)
-      * [9. Pallet Benchmarking](#9-pallet-benchmarking)
+    * [文档/代码更新问题](#文档代码更新问题)
+    * [Pallet前置Rust知识](#pallet前置rust知识)
+    * [Pallet组成](#pallet组成)
+    * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
+        * [runtime结构分析](#runtime结构分析)
+        * [runtime/Cargo.toml结构分析](#runtimecargotoml结构分析)
+            * [[package]{...}](#package)
+            * [[package.metadata.docs.rs]{...}](#packagemetadatadocsrs)
+            * [[dependencies]{...}](#dependencies)
+            * [[build-dependencies]{...}](#build-dependencies)
+            * [[features]{...}](#features)
+        * [四步添加pallet](#四步添加pallet)
+            * [添加依赖: Cargo.toml/[dependincies]](#添加依赖-cargotomldependincies)
+            * [添加feature: Cargo.toml/[features]](#添加feature-cargotomlfeatures)
+            * [配置-&gt;添加config接口: src/lib.rs](#配置-添加config接口-srclibrs)
+            * [定义运行时: src/lib.rs/construct_runtime!](#定义运行时-srclibrsconstruct_runtime)
+        * [编译-&gt;运行-&gt;启动前端](#编译-运行-启动前端)
+        * [验证功能](#验证功能)
+            * [为帐户设置昵称](#为帐户设置昵称)
+            * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+        * [可能出现的问题](#可能出现的问题)
+    * [Configure the contracts pallet](#configure-the-contracts-pallet)
+        * [signed与sudo有不同权限。](#signed与sudo有不同权限)
+    * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
+    * [Pallet组件深入](#pallet组件深入)
+        * [1. Pallet Hooks](#1-pallet-hooks)
+        * [2. Pallet Extrinsics](#2-pallet-extrinsics)
+        * [3. Pallet Errors](#3-pallet-errors)
+        * [4. Pallet Config](#4-pallet-config)
+        * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
+        * [6. Pallet Extension](#6-pallet-extension)
+        * [7. Pallet Debug](#7-pallet-debug)
+        * [8. Pallet RPC](#8-pallet-rpc)
+        * [9. Pallet Benchmarking](#9-pallet-benchmarking)
 * [Develop smart contracts](#develop-smart-contracts)
-   * [Prepare your first contract](#prepare-your-first-contract)
-   * [Develop a smart contract](#develop-a-smart-contract)
-   * [Use maps for storing values](#use-maps-for-storing-values)
-   * [Buid a token contract](#buid-a-token-contract)
-   * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
+    * [Prepare your first contract](#prepare-your-first-contract)
+    * [Develop a smart contract](#develop-a-smart-contract)
+    * [Use maps for storing values](#use-maps-for-storing-values)
+    * [Buid a token contract](#buid-a-token-contract)
+    * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
 * [Connect with other chains](#connect-with-other-chains)
-   * [Start a local relay chain](#start-a-local-relay-chain)
-   * [Connect a local parachain](#connect-a-local-parachain)
-   * [Connect to Rococo testnet](#connect-to-rococo-testnet)
-   * [Access EVM accounts](#access-evm-accounts)
+    * [Start a local relay chain](#start-a-local-relay-chain)
+    * [Connect a local parachain](#connect-a-local-parachain)
+    * [Connect to Rococo testnet](#connect-to-rococo-testnet)
+    * [Access EVM accounts](#access-evm-accounts)
 * [参考资源](#参考资源)
-   * [substrate文档练习](#substrate文档练习)
-   * [pallet基础](#pallet基础)
-      * [尝试添加pallet到runtime](#尝试添加pallet到runtime)
-      * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
-      * [编写简单到pallet](#编写简单到pallet)
-      * [pallet的组成](#pallet的组成)
-   * [Pallet技巧细节](#pallet技巧细节)
-      * [storage（链上）各个类型使用](#storage链上各个类型使用)
-      * [Error类型的使用](#error类型的使用)
-      * [写调度函数的套路](#写调度函数的套路)
-      * [hooks的使用](#hooks的使用)
-      * [pallet中的Config](#pallet中的config)
-      * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
-      * [封装和扩展现有pallet](#封装和扩展现有pallet)
-      * [调试](#调试)
-      * [pallet中的类型转换；](#pallet中的类型转换)
-      * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
-      * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
-      * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
-      * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
-      * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
-      * [为某些trait提供默认实现。](#为某些trait提供默认实现)
-   * [智能合约](#智能合约)
-      * [初探ink!](#初探ink)
-      * [深入ink!](#深入ink)
-      * [ERC20](#erc20)
-   * [连接其他链](#连接其他链)
-      * [中继链连接](#中继链连接)
-      * [平行链连接](#平行链连接)
-   * [测试](#测试)
-      * [编写测试](#编写测试)
-      * [benchmarking](#benchmarking)
-   * [升级](#升级)
+    * [substrate文档练习](#substrate文档练习)
+    * [pallet基础](#pallet基础)
+        * [尝试添加pallet到runtime](#尝试添加pallet到runtime)
+        * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
+        * [编写简单到pallet](#编写简单到pallet)
+        * [pallet的组成](#pallet的组成)
+    * [Pallet技巧细节](#pallet技巧细节)
+        * [storage（链上）各个类型使用](#storage链上各个类型使用)
+        * [Error类型的使用](#error类型的使用)
+        * [写调度函数的套路](#写调度函数的套路)
+        * [hooks的使用](#hooks的使用)
+        * [pallet中的Config](#pallet中的config)
+        * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
+        * [封装和扩展现有pallet](#封装和扩展现有pallet)
+        * [调试](#调试)
+        * [pallet中的类型转换；](#pallet中的类型转换)
+        * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
+        * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
+        * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
+        * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
+        * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
+        * [为某些trait提供默认实现。](#为某些trait提供默认实现)
+    * [智能合约](#智能合约)
+        * [初探ink!](#初探ink)
+        * [深入ink!](#深入ink)
+        * [ERC20](#erc20)
+    * [连接其他链](#连接其他链)
+        * [中继链连接](#中继链连接)
+        * [平行链连接](#平行链连接)
+    * [测试](#测试)
+        * [编写测试](#编写测试)
+        * [benchmarking](#benchmarking)
+    * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Sat Jul 23 13:11:12 UTC 2022 -->
@@ -475,6 +476,7 @@ actdiag {
 ![image-20220723183551671](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220723183551671.png)
 
 > 您现在应该看到 Dave 正在捕获区块，并且只有一个属于 Charlie 的节点！重新启动 Dave 的节点，以防它没有立即与 Charlie 连接
+
 ### 流程图
 
 ```kroki-mermaid
@@ -522,6 +524,7 @@ sequenceDiagram
     pkjs->>pkjs: Dave对外claimNode
     end
 ```
+
 ### 总结
 
 任何节点都可以发出影响其他节点行为的交易(extrinsics)，只要它位于用于参考的链数据上，并且您在密钥库中拥有可用于所需来源的相关帐户的密钥。此演示中的所有节点都可以访问开发人员签名密钥，因此能够代表 Charlie
@@ -533,9 +536,149 @@ sequenceDiagram
 
 ## Monitor node metrics
 
+```admonish tip info title='承接关系:需要基于上一节课'
+![image-20220724104945822](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220724104945822.png)
+```
+
 ```plantuml
 {{#include ../../../../../materials/plantumls/substrate_tutorials/get-started/monitor-node-metrics.puml:1:}}
 ```
+
+### 本节大概的架构
+
+```kroki-svgbob
++-----------+                     +-------------+                                                              +---------+
+| Substrate |                     | Prometheus  |                                                              | Grafana |
++-----------+                     +-------------+                                                              +---------+
+      |               -----------------\ |                                                                          |
+      |               | Every 1 minute |-|                                                                          |
+      |               |----------------| |                                                                          |
+      |                                  |                                                                          |
+      |        GET current metric values |                                                                          |
+      |<---------------------------------|                                                                          |
+      |                                  |                                                                          |
+      | `substrate_peers_count 5`        |                                                                          |
+      |--------------------------------->|                                                                          |
+      |                                  | --------------------------------------------------------------------\    |
+      |                                  |-| Save metric value with corresponding time stamp in local database |    |
+      |                                  | |-------------------------------------------------------------------|    |
+      |                                  |                                         -------------------------------\ |
+      |                                  |                                         | Every time user opens graphs |-|
+      |                                  |                                         |------------------------------| |
+      |                                  |                                                                          |
+      |                                  |       GET values of metric `substrate_peers_count` from time-X to time-Y |
+      |                                  |<-------------------------------------------------------------------------|
+      |                                  |                                                                          |
+      |                                  | `substrate_peers_count (1582023828, 5), (1582023847, 4) [...]`           |
+      |                                  |------------------------------------------------------------------------->|
+      |                                  |                                                                          |
+```
+
+### 安装Prometheus和grafana
+
+- [Download | Prometheus](https://prometheus.io/download/)
+- [Download Grafana | Grafana Labs](https://grafana.com/grafana/download?edition=oss)
+
+```shell
+gunzip prometheus-<version>.darwin-amd64.tar.gz && tar -xvf prometheus-2.35.0.darwin-amd64.tar
+brew update && brew install grafana
+==> Downloading https://ghcr.io/v2/homebrew/core/grafana/manifests/9.0.2
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/grafana/blobs/sha256:6022dd955d971d2d34d70f29e56335610108c84b75081020092e29f3ec641724
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:6022dd955d971d2d34d70f29e56335610108c84b75081020092e29f3ec64
+######################################################################## 100.0%
+==> Pouring grafana--9.0.2.monterey.bottle.tar.gz
+==> Caveats
+To restart grafana after an upgrade:
+  brew services restart grafana
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/grafana/bin/grafana-server --config /usr/local/etc/grafana/grafana.ini --homepath /usr/local/opt/grafana/share/grafana --packaging=brew cfg:default.paths.logs=/usr/local/var/log/grafana cfg:default.paths.data=/usr/local/var/lib/grafana cfg:default.paths.plugins=/usr/local/var/lib/grafana/plugins
+==> Summary
+🍺  /usr/local/Cellar/grafana/9.0.2: 6,007 files, 247.3MB
+==> Running `brew cleanup grafana`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+```
+
+### 配置Prometheus.yml
+
+~~~admonish info title='substrate_prometheus.yml'
+```yaml
+# --snip--
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "substrate_node"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    # ** NOTE: you want to have this *LESS THAN* the block time in order to ensure
+    # ** that you have a data point for every block!
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ["localhost:9615"]
+```
+~~~
+
+```shell
+# specify a custom config file instead if you made one here:
+./prometheus --config.file substrate_prometheus.yml
+curl localhost:9615/metrics
+```
+
+```admonish info title='浏览器查看'
+也可以直接打开浏览器：localhost:9615/metrics
+```
+
+### 启动grafana
+
+```shell
+# 后台运行
+brew services restart grafana
+# 指定运行
+/usr/local/opt/grafana/bin/grafana-server --config /usr/local/etc/grafana/grafana.ini --homepath /usr/local/opt/grafana/share/grafana --packaging=brew cfg:default.paths.logs=/usr/local/var/log/grafana cfg:default.paths.data=/usr/local/var/lib/grafana cfg:default.paths.plugins=/usr/local/var/lib/grafana/plugins
+```
+
+- http://localhost:3000/
+
+![image-20220724110946857](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220724110946857.png)
+
+![image-20220724111058420](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220724111058420.png)
+
+> 然后需要选择 Prometheus 数据源类型并指定 Grafana 需要查找它的位置。
+>
+> Grafana 需要的 Prometheus 端口不是在 prometheus.yml 文件 (http://localhost:9615) 中为节点发布其数据的位置设置的端口。
+>
+> 在同时运行 Substrate 节点和 Prometheus 的情况下，配置 Grafana 以在其默认端口 http://localhost:9090 或配置的端口（如果自定义它）上查找 Prometheus。
+
+### 配置数据源
+
+![CleanShot 2022-07-24 at 11.16.03](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-24%20at%2011.16.03.png)
+
+![CleanShot 2022-07-24 at 11.16.59](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-24%20at%2011.16.59.png)
+
+![CleanShot 2022-07-24 at 11.18.17](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-24%20at%2011.18.17.png)
+
+![CleanShot 2022-07-24 at 11.34.47](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-24%20at%2011.34.47.png)
+
+### 导入看板模版
+
+[Export and import | Grafana documentation](https://grafana.com/docs/grafana/v7.5/dashboards/export-import/)
+
+[Dashboards | Grafana Labs](https://grafana.com/grafana/dashboards/)
+
+[Substrate Node Template Metrics dashboard for Grafana | Grafana Labs](https://grafana.com/grafana/dashboards/13759)
+
+![image-20220724113036077](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220724113036077.png)
+
+![CleanShot 2022-07-24 at 11.31.10](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/CleanShot%202022-07-24%20at%2011.31.10.png)
+
+![image-20220724113401390](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220724113401390.png)
 
 ## Upgrade a running network
 
@@ -896,7 +1039,7 @@ pub enum Error<T> {
         3. 使用substrate core: runtime自由
            > 使用substrate code运行开发者完全从头开始设计运行时（runtime，问题：什么是runtime？），当然此种方式也是使用substrate自由度最大的方式。
     - Substrate Client:
-      >   substrate客户端是基于substrate实现的区块链的节点客户端（可以理解为全节点），它主要由以下几个组件组成（以下也就是告诉我们实现一条链由哪几部分组成）：
+      > substrate客户端是基于substrate实现的区块链的节点客户端（可以理解为全节点），它主要由以下几个组件组成（以下也就是告诉我们实现一条链由哪几部分组成）：
         1. 存储: 用来维持区块链系统所呈现的状态演变。substrate提供了的存储方式是一种简单有效的key-value对存储机制的方式。
         2. Runtime: 这里就可以回答上面的问题，什么是runtime？runtime定义了区块的处理方式，主要是状态转换的逻辑。在substrate中，runtime code被编译成wasm作为区块链存储状态的一部分。
         3. p2p网络: 允许客户端和其它网络参与者进行通信。
