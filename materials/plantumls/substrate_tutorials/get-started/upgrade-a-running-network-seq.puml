@@ -1,0 +1,116 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant terminal1 [
+    =终端1
+    ----
+    直接运行节点
+]
+participant terminal2 [
+    =终端2
+    ----
+    用于更新
+]
+participant runtime [
+    =运行时
+    ----
+    运行时
+]
+participant pkjs [
+    =Polkadot-JS application
+    ----
+    波卡前端
+]
+autonumber 1.1
+== 运行原先节点 ==
+terminal1 -> terminal1:运行原先节点
+note left: cargo run --release -- --dev
+autonumber 2.1
+== 更新palelt ==
+ref over runtime
+    substrate-node-template/runtime/Cargo.toml
+end ref
+runtime -> runtime: 添加pallet-scheduler依赖.
+runtime -> runtime: feature添加pallet-scheduler/std.
+ref over runtime
+    substrate-node-template/runtime/src/lib.rs
+end ref
+runtime -> runtime: Add the types required by the Scheduler pallet
+runtime -> runtime: Add the implementation for the Config trait for the Scheduler pallet .
+runtime -> runtime: Add the Scheduler pallet inside the construct_runtime! macro.
+runtime -> runtime: Add the following trait dependency
+runtime -> runtime: Increment the spec_version in the RuntimeVersion struct
+note left
+    注意下列参数的意思：
+    spec_name,
+    impl_name,
+    authoring_version,
+    spec_version,
+    impl_version,
+    apis,
+    traction_version
+end note
+autonumber 3.1
+== 在第二个终端编译更新运行时，获取编译后的wasm文件 ==
+terminal2 -> terminal2: Build the updated runtime in the second terminal window or tab
+note left: without stopping the running node\n先检查：cargo check -p node-template-runtime\n再编译：cargo build --release -p node-template-runtim
+autonumber 4.1
+== 在波卡前端的extrinsics提交wasm文件升级runtime ==
+pkjs -> pkjs: Connect to the local node to upgrade the runtime to use the new build artifact.
+pkjs -> pkjs: Select the Alice account to submit a call
+note left
+    https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944
+    using the selected account: Alice
+    submit the following extrinsic: sudo > sudoUncheckedWeight(call, weight)
+    call: system > setCode(code)
+    then toggle file upload
+end note
+terminal2 -> pkjs: 编译生成的wasm文件用于上传
+note left
+    target/release/wbuild/node-template-runtime/
+    node_template_runtime.compact.compressed.wasm
+end note
+pkjs -> pkjs: Select file upload, then select or drag and drop the WebAssembly file that nyou generated for the runtime.
+pkjs -> pkjs: Click Submit Transaction.
+autonumber 5.1
+== 现在runtime已经更新成功，节点模版包含Scheduler pallet。\n可以使用the schedule函数进行自动更新spec_version ==
+runtime -> runtime: update spec_version
+note left
+    runtime/src/lib.rs
+    pub const VERSION: RuntimeVersion = RuntimeVersion {
+     spec_name: create_runtime_str!("node-template"),
+     impl_name: create_runtime_str!("node-template"),
+     authoring_version: 1,
+     spec_version: 102,  // *Increment* this value.
+     impl_version: 1,
+     apis: RUNTIME_API_VERSIONS,
+     transaction_version: 1,
+    };
+
+    /*** snip ***/
+
+    parameter_types! {
+     pub const ExistentialDeposit: u128 = 1000;  // Update this value.
+     pub const MaxLocks: u32 = 50;
+    }
+
+    /*** snip ***/
+end note
+autonumber 6.1
+terminal2 -> terminal2: 再次编译运行时，获取wasm文件
+note left
+    This will override any previous build artifacts!
+    So if you want to have a copy on hand of your
+    last runtime Wasm build files,
+    be sure to copy them somewhere else.
+    先检查：cargo check -p node-template-runtime
+    再编译：cargo build --release -p node-template-runtim
+end note
+terminal2 -> pkjs: 提供wasm文件
+pkjs -> pkjs: 打开对应功能上传文件
+note left
+    https://polkadot.js.org/apps/#/sudo?rpc=ws://127.0.0.1:9944
+end note
+pkjs -> pkjs: 查看区块，等到达到指定条件，自动更新
+note left: https://polkadot.js.org/apps/#/explorer?rpc=ws://127.0.0.1:9944
+@enduml
