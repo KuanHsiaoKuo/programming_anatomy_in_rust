@@ -1,0 +1,184 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant lib [
+    =lib.rs
+    ----
+    incrementer/lib.rs
+]
+participant terminal [
+    =终端
+    ----
+    更新工具链，
+    下载安装
+    Substrate contract code
+]
+
+== initialize a mapping ==
+lib -> lib:
+note left
+#![cfg_attr(not(feature = "std"), no_std)]
+
+use ink_lang as ink;
+
+#[ink::contract]
+mod mycontract {
+    use ink_storage::traits::SpreadAllocate;
+
+    #[ink(storage)]
+    #[derive(SpreadAllocate)]
+    pub struct MyContract {
+        // Store a mapping from AccountIds to a u32
+        map: ink_storage::Mapping<AccountId, u32>,
+    }
+
+    impl MyContract {
+        #[ink(constructor)]
+        pub fn new(count: u32) -> Self {
+            // This call is required to correctly initialize the
+            // Mapping of the contract.
+            ink_lang::utils::initialize_contract(|contract: &mut Self| {
+                let caller = Self::env().caller();
+                contract.map.insert(&caller, &count);
+            })
+        }
+
+        #[ink(constructor)]
+        pub fn default() -> Self {
+            ink_lang::utils::initialize_contract(|_| {})
+        }
+
+        // Get the number associated with the caller's AccountId, if it exists
+        #[ink(message)]
+        pub fn get(&self) -> u32 {
+            let caller = Self::env().caller();
+            self.map.get(&caller).unwrap_or_default()
+        }
+    }
+}
+end note
+== identifying the contract caller ==
+lib -> lib: using the contract caller
+note left
+#![cfg_attr(not(feature = "std"), no_std)]
+
+use ink_lang as ink;
+
+#[ink::contract]
+mod mycontract {
+
+	#[ink(storage)]
+	pub struct MyContract {
+		// Store a contract owner
+		owner: AccountId,
+	}
+
+	impl MyContract {
+		#[ink(constructor)]
+		pub fn new() -> Self {
+			Self {
+				owner: Self::env().caller();
+			}
+		}
+		/* --snip-- */
+	}
+}
+end note
+== add mapping to the smart contract ==
+lib -> lib: import
+note left
+#[ink::contract
+mod incrementer {
+   use ink_storage::traits::SpreadAllocate;
+
+   #[ink(storage)]
+   #[derive(SpreadAllocate)]
+end note
+lib -> lib: add mapping key
+note left
+pub struct Incrementer {
+   value: i32,
+   my_value: ink_storage::Mapping<AccountId, i32>,
+}
+end note
+lib -> lib: set an initial value in the new function
+note left
+#[ink(constructor)]
+pub fn new(init_value: i32) -> Self {
+   ink_lang::utils::initialize_contract(|contract: &mut Self| {
+       contract.value = init_value;
+       let caller = Self::env().caller();
+       contract.my_value.insert(&caller, &0);
+   })
+}
+end note
+lib -> lib: set an initial value in the default function
+note left
+#[ink(constructor)]
+pub fn default() -> Self {
+   ink_lang::utils::initialize_contract(|contract: &mut Self| {
+       contract.value = Default::default();
+   })
+}
+end note
+lib -> lib: add get function
+note left
+#[ink(message)]
+pub fn get_mine(&self) -> i32 {
+   self.my_value.get(&self.env().caller()).unwrap_or_default()
+}
+end note
+lib -> lib: add test code
+note left
+#[ink::test]
+fn my_value_works() {
+   let contract = Incrementer::new(11);
+   assert_eq!(contract.get(), 11);
+   assert_eq!(contract.get_mine(), 0);
+}
+end note
+terminal -> terminal: cargo +nightly test
+== insert, update, or remove values ==
+lib -> lib: add insert function
+note left
+#[ink(message)]
+pub fn inc_mine(&mut self, by: i32) {
+   let caller = self.env().caller();
+   let my_value = self.get_mine();
+   self.my_value.insert(caller, &(my_value + by));
+}
+end note
+lib -> lib: add test code for insert function
+note left
+#[ink::test]
+fn inc_mine_works() {
+   let mut contract = Incrementer::new(11);
+   assert_eq!(contract.get_mine(), 0);
+   contract.inc_mine(5);
+   assert_eq!(contract.get_mine(), 5);
+   contract.inc_mine(5);
+   assert_eq!(contract.get_mine(), 10);
+}
+end note
+lib -> lib: add remove function
+note left
+#[ink(message)]
+pub fn remove_mine(&self) {
+   self.my_value.remove(&self.env().caller())
+}
+end note
+lib -> lib: add test code for remove function
+note left
+#[ink::test]
+fn remove_mine_works() {
+   let mut contract = Incrementer::new(11);
+   assert_eq!(contract.get_mine(), 0);
+   contract.inc_mine(5);
+   assert_eq!(contract.get_mine(), 5);
+   contract.remove_mine();
+   assert_eq!(contract.get_mine(), 0);
+}
+end note
+terminal -> terminal: cargo +nightly test
+
+@enduml

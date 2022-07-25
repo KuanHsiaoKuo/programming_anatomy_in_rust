@@ -1,0 +1,254 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant lib [
+    =lib.rs
+    ----
+    erc20/lib.rs
+]
+participant cargo [
+    =Cargo.toml
+    ----
+    erc20/Cargo.toml
+]
+participant terminal [
+    =终端
+    ----
+    更新工具链，
+    下载安装
+    Substrate contract code
+]
+participant contracts [
+    =contracts-ui application
+    ----
+    智能合约web app
+]
+== build an ERC-20 token smart contract ==
+terminal -> terminal: create & cd
+note left
+cargo contract new [[https://docs.substrate.io/assets/tutorials/ink-workshop/erc-template-lib-0.rs/?mode=dark new erc20 code]]
+cd erc20/
+end note
+lib -> lib: replace the default src with new
+cargo -> cargo: modify [dependencies]
+note left
+scale = {
+    package = "parity-scale-codec",
+    version = "3",
+    default-features = false,
+     features = ["derive"] }
+scale-info = {
+    version = "2",
+    default-features = false,
+    features = ["derive"],
+    optional = true }
+end note
+terminal -> terminal: cargo +nightly test
+terminal -> terminal: cargo +nightly contract build
+== Upload an instantiate the contract ==
+contracts -> contracts: connect & upload contract file and sequence operations
+== Transfer tokens ==
+lib -> lib: add Error declaration
+note left
+/// Specify ERC-20 error type.
+#[derive(Debug, PartialEq, Eq, scale::Encode, scale::Decode)]
+#[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
+pub enum Error {
+/// Return if the balance cannot fulfill a request.
+   InsufficientBalance,
+}
+end note
+lib -> lib: add an Result return type
+note left
+/// Specify the ERC-20 result type.
+pub type Result<T> = core::result::Result<T, Error>;
+end note
+lib -> lib: add the transfer()
+note left
+#[ink(message)]
+pub fn transfer(&mut self, to: AccountId, value: Balance) -> Result<()> {
+   let from = self.env().caller();
+   self.transfer_from_to(&from, &to, value)
+}
+end note
+lib -> lib: add transfer_from_to()
+note left
+fn transfer_from_to(
+   &mut self,
+   from: &AccountId,
+   to: &AccountId,
+   value: Balance,
+) -> Result<()> {
+    let from_balance = self.balance_of_impl(from);
+    if from_balance < value {
+        return Err(Error::InsufficientBalance)
+    }
+
+    self.balances.insert(from, &(from_balance - value));
+    let to_balance = self.balance_of_impl(to);
+    self.balances.insert(to, &(to_balance + value));
+    Ok(())
+}
+end note
+lib -> lib: add balance_of_impl
+note left
+#[inline]
+fn balance_of_impl(&self, owner: &AccountId) -> Balance {
+   self.balances.get(owner).unwrap_or_default()
+}
+end note
+terminal -> terminal: cargo + nightly test
+== create events ==
+lib -> lib: add a transfer event
+note left
+#[ink(event)]
+pub struct Transfer {
+   #[ink(topic)]
+   from: Option<AccountId>,
+   #[ink(topic)]
+   to: Option<AccountId>,
+   value: Balance,
+ }
+end note
+lib -> lib: emit the event in new function
+note left
+fn new_init(&mut self, initial_supply: Balance) {
+   let caller = Self::env().caller();
+   self.balances.insert(&caller, &initial_supply);
+   self.total_supply = initial_supply;
+   Self::env().emit_event(Transfer {
+       from: None,
+       to: Some(caller),
+       value: initial_supply,
+     });
+   }
+end note
+lib -> lib: emit the eventh in transfer_from_to function
+note left
+self.balances.insert(from, &(from_balance - value));
+let to_balance = self.balance_of_impl(to);
+self.balances.insert(to, &(to_balance + value));
+self.env().emit_event(Transfer {
+   from: Some(*from),
+   to: Some(*to),
+   value,
+});
+end note
+lib -> lib: add test code for transfers tokens
+note left
+#[ink::test]
+fn transfer_works() {
+   let mut erc20 = Erc20::new(100);
+   assert_eq!(erc20.balance_of(AccountId::from([0x0; 32])), 0);
+   assert_eq!(erc20.transfer((AccountId::from([0x0; 32])), 10), Ok(()));
+   assert_eq!(erc20.balance_of(AccountId::from([0x0; 32])), 10);
+}
+end note
+terminal -> terminal: cargo +nightly test
+== enable third-party transfers ==
+lib -> lib: declare the approval event
+note left
+#[ink(event)]
+pub struct Approval {
+    #[ink(topic)]
+    owner: AccountId,
+    #[ink(topic)]
+    spender: AccountId,
+    value: Balance,
+}
+end note
+lib -> lib: add an Error declaration
+note left
+#[derive(Debug, PartialEq, Eq, scale::Encode, scale::Decode)]
+#[cfg_attr(feature = "std", derive(scale_info::TypeInfo))]
+pub enum Error {
+   InsufficientBalance,
+   InsufficientAllowance,
+}
+end note
+lib -> lib: add the storage mapping
+note left
+allowances: Mapping<(AccountId, AccountId), Balance>,
+end note
+lib -> lib: add the approve()
+note left
+#[ink(message)]
+pub fn approve(&mut self, spender: AccountId, value: Balance) -> Result<()> {
+   let owner = self.env().caller();
+   self.allowances.insert((&owner, &spender), &value);
+   self.env().emit_event(Approval {
+     owner,
+     spender,
+     value,
+   });
+   Ok(())
+}
+end note
+lib -> lib: add the allowance()
+note left
+#[ink(message)]
+pub fn allowance(&self, owner: AccountId, spender: AccountId) -> Balance {
+   self.allowance_impl(&owner, &spender)
+}
+end note
+lib -> lib: add the allowance_impl()
+note left
+#[inline]
+fn allowance_impl(&self, owner: &AccountId, spender: &AccountId) -> Balance {
+   self.allowances.get((owner, spender)).unwrap_or_default()
+}
+end note
+lib -> lib: add test for the allowance()
+note left
+#[ink::test]
+fn allowances_works() {
+let mut contract = Erc20::new(100);
+assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
+contract.approve(AccountId::from([0x1; 32]), 200);
+assert_eq!(contract.allowance(AccountId::from([0x1; 32]), AccountId::from([0x1; 32])), 200);
+
+contract.transfer_from(AccountId::from([0x1; 32]), AccountId::from([0x0; 32]), 50);
+assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 50);
+assert_eq!(contract.allowance(AccountId::from([0x1; 32]), AccountId::from([0x1; 32])), 150);
+
+contract.transfer_from(AccountId::from([0x1; 32]), AccountId::from([0x0; 32]), 100);
+assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 50);
+assert_eq!(contract.allowance(AccountId::from([0x1; 32]), AccountId::from([0x1; 32])), 150);
+}
+end note
+lib -> lib: add the transfer_from()
+note left
+/// Transfers tokens on the behalf of the `from` account to the `to account
+#[ink(message)]
+pub fn transfer_from(
+    &mut self,
+    from: AccountId,
+    to: AccountId,
+    value: Balance,
+) -> Result<()> {
+    let caller = self.env().caller();
+    let allowance = self.allowance_impl(&from, &caller);
+    if allowance < value {
+        return Err(Error::InsufficientAllowance)
+    }
+    self.transfer_from_to(&from, &to, value)?;
+    self.allowances
+        .insert((&from, &caller), &(allowance - value));
+    Ok(())
+    }
+}
+end note
+lib -> lib: add test code for the transfer_from()
+note left
+#[ink::test]
+fn transfer_from_works() {
+let mut contract = Erc20::new(100);
+assert_eq!(contract.balance_of(AccountId::from([0x1; 32])), 100);
+contract.approve(AccountId::from([0x1; 32]), 20);
+contract.transfer_from(AccountId::from([0x1; 32]), AccountId::from([0x0; 32]), 10);
+assert_eq!(contract.balance_of(AccountId::from([0x0; 32])), 10);
+}
+end note
+terminal -> terminal: cargo +nightly test
+terminal -> terminal: cargo +nightly contract build
+@enduml

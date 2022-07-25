@@ -1,0 +1,97 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant terminal [
+    =终端
+    ----
+    更新工具链，
+    下载安装
+    Substrate contract code
+]
+participant cargo [
+    =智能合约项目
+    ----
+    flipper/Cargo.toml
+]
+participant contracts [
+    =contracts-ui application
+    ----
+    智能合约web app
+]
+terminal -> terminal: 更新工具链
+note left
+rustup component add rust-src --toolchain nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
+end note
+terminal -> terminal: cargo install
+note left
+cargo install contracts-node
+--git https://github.com/paritytech/substrate-contracts-node.git
+--tag <latest-tag> --force --locked
+
+可以去这里查看标签号: [[https://github.com/paritytech/substrate-contracts-node/releases substrate contract code]]
+end note
+terminal -> terminal: 安装相关包
+note left
+linux: sudo apt install binaryen
+mac: brew install binaryen
+
+cargo install dylint-link
+cargo install cargo-contract --force
+cargo contract --help
+end note
+terminal -> terminal: 新建智能合约项目
+note left
+cargo contract new flipper
+cd flipper/
+ls -al
+-rwxr-xr-x   1 dev-doc  staff   285 Mar  4 14:49 .gitignore
+-rwxr-xr-x   1 dev-doc  staff  1023 Mar  4 14:49 Cargo.toml
+-rwxr-xr-x   1 dev-doc  staff  2262 Mar  4 14:49 lib.rs
+end note
+cargo -> cargo: 修改scale和scale-info
+note left
+scale = {
+    package = "parity-scale-codec",
+    version = "3",
+    default-features = false,
+    features = ["derive"] }
+scale-info = {
+    version = "2",
+    default-features = false,
+    features = ["derive"],
+    optional = true }
+end note
+== Test the default contract ==
+terminal -> terminal: cargo +nightly test
+== Build the contract ==
+terminal -> terminal: cargo +nightly contract build
+note left
+此命令为 Flipper 项目构建:
+1. 一个 WebAssembly 二进制文件
+2. 一个包含合约应用程序二进制接口 (ABI) 的元数据文件
+3. 一个用于部署合约的 .contract 文件。
+
+target/ink 目录中的 metadata.json 文件描述了
+你可以用来与这个合约交互的所有接口。
+该文件包含几个重要部分：
+1. 规范部分包括有关可以调用的函数（如构造函数和消息）
+2. 发出的事件以及可以显示的任何文档的信息。
+
+本节还包括一个选择器字段，
+该字段包含函数名称的 4 字节散列，
+用于将合约调用路由到正确的函数。
+storage 部分定义了合约管理的所有存储项以及如何访问它们。
+类型部分提供了整个 JSON 其余部分中使用的自定义数据类型。
+end note
+== Start the Substrate smart contracts node ==
+terminal -> terminal: substrate-contracts-node --dev
+contracts -> contracts: Select Local Node
+== Deploy the contract ==
+contracts -> contracts: Add New Contract & Upload New Contract Code
+contracts -> contracts: Select an account, such as alice, and uplodat flipper.contract
+contracts -> contracts: create an instance on the blockchain
+== Try smart contract ==
+contracts -> contracts: test the get() function
+contracts -> contracts: test the flip() function
+@enduml

@@ -1,0 +1,196 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant terminal [
+    =终端
+    ----
+    更新工具链，
+    下载安装
+    Substrate contract code
+]
+participant lib [
+    =lib.rs
+    ----
+    incrementer/lib.rs
+]
+participant cargo [
+    =Cargo.toml
+    ----
+    incrementer/Cargo.toml
+]
+participant contracts [
+    =contracts-ui application
+    ----
+    智能合约web app
+]
+terminal -> terminal: create & cd
+note left
+cargo contract new incrementer
+cd incrementer/
+end note
+lib -> lib: update [[https://github.com/substrate-developer-hub/substrate-contracts-workshop/blob/master/1/assets/1.1-finished-code.rs incrementer source code]]
+cargo -> cargo: modify scale and scale-info
+note left
+scale = {
+    package = "parity-scale-codec",
+    version = "3",
+    default-features = false,
+    features = ["derive"]
+    }
+scale-info = {
+    version = "2",
+    default-features = false,
+    features = ["derive"],
+    optional = true }
+end note
+terminal -> terminal: test & build
+note left
+cargo +nightly test
+cargo +nightly contract build
+end note
+== store simple values ==
+lib -> lib: update #[ink(storage)]
+note left
+#[ink(storage)]
+pub struct MyContract {
+	// Store a bool
+	my_bool: bool,
+	// Store a number
+	my_number: u32,
+}
+end note
+lib -> lib: supported types & [[https://github.com/paritytech/parity-scale-codec parity scale codec]]
+note left
+// We are importing the default ink! types
+use ink_lang as ink;
+
+#[ink::contract]
+mod MyContract {
+
+	// Our struct will use those default ink! types
+	#[ink(storage)]
+	pub struct MyContract {
+		// Store some AccountId
+		my_account: AccountId,
+		// Store some Balance
+		my_balance: Balance,
+	}
+	/* --snip-- */
+}
+end note
+lib -> lib: add contructors
+note left
+use ink_lang as ink;
+
+#[ink::contract]
+mod mycontract {
+
+	#[ink(storage)]
+	pub struct MyContract {
+		number: u32,
+	}
+
+	impl MyContract {
+		/// Constructor that initializes the `u32` value to the given `init_value`.
+		#[ink(constructor)]
+		pub fn new(init_value: u32) -> Self {
+			Self {
+				number: init_value,
+			}
+		}
+
+		/// Constructor that initializes the `u32` value to the `u32` default.
+		///
+		/// Constructors can delegate to other constructors.
+		#[ink(constructor)]
+		pub fn default() -> Self {
+			Self {
+				number: Default::default(),
+			}
+		}
+	/* --snip-- */
+	}
+}
+end note
+== update smart contract ==
+lib -> lib: replace the Storage Declaration
+note left
+#[ink(storage)]
+pub struct Incrementer {
+   value: i32,
+}
+end note
+lib -> lib: modify the incrementer constructor
+note left
+impl Incrementer {
+ #[ink(constructor)]
+ pub fn new(init_value: i32) -> Self {
+       Self {
+         value: init_value,
+       }
+ }
+}
+end note
+lib -> lib: add a second constructor
+note left
+#[ink(constructor)]
+pub fn default() -> Self {
+   Self {
+       value: 0,
+   }
+}
+end note
+terminal -> terminal: cargo +nightly test
+== add a function to get a storage value ==
+lib -> lib: use #[link(message)] to get message
+note left
+#[ink(message)]
+pub fn get(&self) -> i32 {
+   self.value
+   }
+}
+end note
+lib -> lib: add test code
+note left
+fn default_works() {
+   let contract = Incrementer::default();
+   assert_eq!(contract.get(), 0);
+}
+end note
+terminal -> terminal: cargo +nightly test
+== add a function to modify the storage value ==
+lib -> lib: add inc function in #[ink(message)]
+note left
+#[ink(message)]
+pub fn inc(&mut self, by: i32) {
+   self.value += by;
+   }
+}
+end note
+lib -> lib: add test code
+note left
+#[ink::test]
+   fn it_works() {
+       let mut contract = Incrementer::new(42);
+       assert_eq!(contract.get(), 42);
+       contract.inc(5);
+       assert_eq!(contract.get(), 47);
+       contract.inc(-50);
+       assert_eq!(contract.get(), -3);
+}
+end note
+terminal -> terminal: cargo +nightly test
+== build wasm file ==
+terminal -> terminal: cargo +nightly contract build
+== deploy and test the smart contract ==
+terminal -> terminal: substrate-contracts-node --dev
+contracts -> contracts: add new contract
+note left
+Open the Contracts UI and verify that it is connected to the local node.
+Click Add New Contract.
+Click Upload New Contract Code.
+Select the incrementer.contract file, then click Next.
+Click Upload and Instantiate.
+Explore and interact with the smart contract using the Contracts UI.
+end note
+@enduml
