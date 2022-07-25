@@ -1,0 +1,152 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+header custom pallet
+participant pallet [
+    =pallet
+    ----
+    pallets/template/src
+]
+participant lib [
+    =lib.rs
+    ----
+    pallets/template/src/lib.rs
+]
+participant cargo [
+    =Cargo.toml
+    ----
+    pallets/template/Cargo.toml
+]
+participant terminal [
+    =终端
+    ----
+    用于检查和编译
+]
+participant local_frontend [
+    =本地前端
+    ----
+    不使用pkjs，因为要添加新的前端模块
+]
+== 一、准备全新模版 ==
+pallet -> pallet: 移除其他文件
+note left
+benchmarking.rs
+mock.rs
+tests.rs
+end note
+ref over lib
+    substrate-node-template/pallets/template/src/lib.rs
+end ref
+pallet -> pallet: 删除所有内容
+lib -> lib: 添加std本地构建和wasm构建no_std所需要的宏
+note left: #![cfg_attr(not(feature = "std"), no_std)]
+lib -> lib: 把一个lib所需的基本结构复制进去
+note left
+// Re-export pallet items so that they can be accessed from the crate namespace.
+pub use pallet::*;
+
+/#[frame_support::pallet]
+pub mod pallet {
+	use frame_support::pallet_prelude::*;
+	use frame_system::pallet_prelude::*;
+	use sp_std::vec::Vec; // Step 3.1 will include this in `Cargo.toml`
+
+	#[pallet::config]  // <-- Step 2. code block will replace this.
+	#[pallet::event]   // <-- Step 3. code block will replace this.
+	#[pallet::error]   // <-- Step 4. code block will replace this.
+	#[pallet::pallet]
+	#[pallet::generate_store(pub(super) trait Store)]
+	pub struct Pallet<T>(_);
+
+	#[pallet::storage] // <-- Step 5. code block will replace this.
+	#[pallet::hooks]
+	impl<T: Config> Hooks<BlockNumberFor<T>> for Pallet<T> {}
+	#[pallet::call]   // <-- Step 6. code block will replace this.
+}
+end note
+== event config ==
+lib -> lib: Replace the #[lib::config]
+note left
+/// Configure the pallet by specifying the parameters and types on which it depends.
+#[pallet::config]
+pub trait Config: frame_system::Config {
+	/// Because this pallet emits events, it depends on the runtime's definition of an event.
+	type Event: From<Event<Self>> + IsType<<Self as frame_system::Config>::Event>;
+}
+end note
+== event impl ==
+lib -> lib: 实现配置的事件
+note left
+// Pallets use events to inform users when important changes are made.
+// Event documentation should end with an array that provides descriptive names for parameters.
+#[pallet::event]
+#[pallet::generate_deposit(pub(super) fn deposit_event)]
+pub enum Event<T: Config> {
+	/// Event emitted when a proof has been claimed. [who, claim]
+	ClaimCreated(T::AccountId, Vec<u8>),
+	/// Event emitted when a claim is revoked by the owner. [who, claim]
+	ClaimRevoked(T::AccountId, Vec<u8>),
+}
+end note
+cargo -> cargo: 添加依赖
+note left
+[dependencies.sp-std]
+default-features = false
+git = 'https://github.com/paritytech/substrate.git'
+branch = 'polkadot-v0.9.26'  # Must *match* the rest of your Substrate deps!
+
+[features]
+default = ['std']
+std = [
+   # -- snip --
+   'sp-std/std',
+]
+end note
+== error ==
+lib -> lib: Replace the #[pallet::error]
+note left
+#[pallet::error]
+pub enum Error<T> {
+	/// The proof has already been claimed.
+	ProofAlreadyClaimed,
+	/// The proof does not exist, so it cannot be revoked.
+	NoSuchProof,
+	/// The proof is claimed by another account, so caller can't revoke it.
+	NotProofOwner,
+}
+end note
+== storage ==
+lib -> lib: Replace the #[pallet::storage]
+note left
+#[pallet::storage]
+pub(super) type Proofs<T: Config> = StorageMap<_, Blake2_128Concat, Vec<u8>, (T::AccountId, T::BlockNumber), ValueQuery>;
+end note
+== call ==
+lib -> lib: Replace the #[pallet::call]
+note left
+// Dispatchable functions allow users to interact with the pallet and invoke state changes.
+// These functions materialize as "extrinsics", which are often compared to transactions.
+// Dispatchable functions must be annotated with a weight and must return a DispatchResult.
+#[pallet::call]
+impl<T: Config> Pallet<T> {
+    #[pallet::weight(1_000)]
+    pub fn create_claim(
+        origin: OriginFor<T>,
+        proof: Vec<u8>,
+    ) -> DispatchResult {...}
+
+    #[pallet::weight(10_000)]
+    pub fn revoke_claim(
+        origin: OriginFor<T>,
+        proof: Vec<u8>,
+    ) -> DispatchResult {...}
+}
+end note
+terminal -> terminal: cargo check
+terminal -> terminal: cargo build
+terminal -> terminal: start node
+local_frontend -> local_frontend: add react component
+note left: src/TemplateModule.js
+local_frontend -> local_frontend: yarn start
+local_frontend -> local_frontend: verify pallet function
+@enduml

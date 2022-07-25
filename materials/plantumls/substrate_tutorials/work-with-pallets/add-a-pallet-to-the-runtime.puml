@@ -1,0 +1,60 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+header add pallet-nicks
+participant runtime [
+    =运行时
+    ----
+    运行时
+]
+participant terminal [
+    =终端
+    ----
+    用于检查和编译
+]
+participant pkjs [
+    =Polkadot-JS application
+    ----
+    波卡前端
+]
+== 添加pallet-nicks ==
+ref over runtime
+    substrate-node-template/runtime/Cargo.toml
+end ref
+runtime -> runtime: 添加pallet依赖pallet-nicks
+runtime -> runtime: 添加pallet-nicks/std features
+runtime -> terminal
+terminal -> terminal: cargo check
+terminal -> runtime
+ref over runtime
+    substrate-node-template/runtime/src/lib.rs
+end ref
+runtime -> runtime: impl-实现新增pallet对应的功能
+runtime -> runtime: construct_runtime!宏添加新增pallet
+runtime -> terminal
+terminal -> terminal: cargo check
+terminal -> terminal: cargo build --release
+terminal -> terminal: start the node
+terminal -> pkjs
+pkjs -> pkjs: 切换连接到本地测试网络
+ref over pkjs
+    其实pallet的源码都是单独一个[[https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs crate]]
+end ref
+pkjs -> pkjs: 测试新增pallet的[[https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L137-L157 setName]]
+note left
+[package]
+name = "pallet-nicks"
+version = "4.0.0-dev"
+authors = ["Parity Technologies <admin@parity.io>"]
+edition = "2021"
+license = "Apache-2.0"
+homepage = "https://substrate.io"
+repository = "https://github.com/paritytech/substrate/"
+description = "FRAME pallet for nick management"
+readme = "README.md"
+end note
+pkjs -> pkjs: 测试新增pallet的[[https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L110-L113 nameof]]
+pkjs -> pkjs: 测试新增pallet的[[https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L159-L180 clear_name]]
+pkjs -> pkjs: 测试新增pallet的[[https://github.com/paritytech/substrate/blob/master/frame/nicks/src/lib.rs#L182-L211 kill_name]]
+
+@enduml

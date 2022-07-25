@@ -1,0 +1,121 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+header add pallet-contracts
+participant runtime [
+    =运行时
+    ----
+    runtime
+]
+participant terminal [
+    =终端
+    ----
+    用于检查和编译
+]
+participant node [
+    =节点
+    ----
+    node
+]
+participant pkjs [
+    =Polkadot-JS application
+    ----
+    波卡前端
+]
+== 添加pallet-contracts依赖 ==
+ref over runtime
+    substrate-node-template/runtime/Cargo.toml
+end ref
+runtime -> runtime: 添加pallet依赖pallet-contracts
+runtime -> runtime: 添加pallet依赖pallet-contracts-primitives
+runtime -> runtime: std features: 添加上述两个pallet的std
+note left
+pallet-contracts/std
+pallet-contracts-primitives/std
+end note
+runtime -> terminal
+terminal -> terminal: cargo check
+== 实现配置trait ==
+terminal -> runtime
+ref over runtime
+    substrate-node-template/runtime/src/lib.rs
+end ref
+runtime -> runtime: 更新pub use frame_support
+runtime -> runtime: 引入
+note left: use pallet_contracts::DefaultContractAccessWeight; // Add this line
+runtime -> runtime: 添加pallet-contracts用到的参数
+note left
+/* After this block */
+// Time is measured by number of blocks.
+pub const MINUTES: BlockNumber = 60_000 / (MILLISECS_PER_BLOCK as BlockNumber);
+pub const HOURS: BlockNumber = MINUTES * 60;
+pub const DAYS: BlockNumber = HOURS * 24;
+
+/* Add this block */
+// Contracts price units.
+pub const MILLICENTS: Balance = 1_000_000_000;
+pub const CENTS: Balance = 1_000 * MILLICENTS;
+pub const DOLLARS: Balance = 100 * CENTS;
+
+const fn deposit(items: u32, bytes: u32) -> Balance {
+items as Balance * 15 * CENTS + (bytes as Balance) * 6 * CENTS
+}
+const AVERAGE_ON_INITIALIZE_RATIO: Perbill = Perbill::from_percent(10);
+/*** End Added Block ***/
+end note
+runtime -> runtime: parameter_types!添加用到的参数类型
+runtime -> runtime: impl-实现新增pallet对应的功能
+runtime -> runtime: construct_runtime!宏添加新增pallet
+runtime -> terminal
+terminal -> terminal: cargo check
+terminal -> runtime
+== 对外暴露合约API ==
+ref over runtime
+    substrate-node-template/runtime/Cargo.toml
+end ref
+runtime -> runtime: 添加依赖pallet-contracts-rpc-runtime-api
+runtime -> runtime: 添加std feature
+ref over runtime
+    substrate-node-template/runtime/src/lib.rs
+end ref
+runtime -> runtime: 添加常量
+note left: const CONTRACTS_DEBUG_OUTPUT: bool = true;
+runtime -> runtime: 实现运行时api,impl_runtime_apis!
+note left
+/*** Add this block ***/
+impl pallet_contracts_rpc_runtime_api::ContractsApi<Block, AccountId, Balance, BlockNumber, Hash>
+ for Runtime
+ {
+  fn call(...) -> pallet_contracts_primitives::ContractExecResult<Balance> {}
+
+  fn instantiate(...) -> pallet_contracts_primitives::ContractInstantiateResult<AccountId, Balance> {}
+
+  fn upload_code(...) -> pallet_contracts_primitives::CodeUploadResult<Hash, Balance> {}
+
+  fn get_storage(...) -> pallet_contracts_primitives::GetStorageResult {}
+  }
+end note
+runtime -> terminal
+terminal -> terminal: cargo check
+== 更新节点，添加对应RPC功能 ==
+terminal -> node
+ref over node
+    substrate-node-template/node/Cargo.toml
+end ref
+node -> node: 更新依赖pallet-contracts\pallet-contracts-rpc
+ref over node
+    substrate-node-template/node/src/rpc.rs
+end ref
+node -> node: 更新use node_template_runtime::{..., Hash, BlockNumber}
+node -> node: 添加use
+note left: use pallet_contracts_rpc::{Contracts, ContractsApiServer};
+node -> node: create_full函数中添加RPC扩展
+node -> terminal
+terminal -> terminal: cargo check -p node-template
+terminal -> terminal: cargo build --release
+terminal -> terminal: start the node
+terminal -> pkjs
+pkjs -> pkjs: 切换连接到本地测试网络
+== 至此已经将合约pallet添加完成，要想进一步，还需要学习如何写合约 ==
+
+@enduml
