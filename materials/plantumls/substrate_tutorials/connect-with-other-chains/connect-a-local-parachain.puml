@@ -1,0 +1,209 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant terminal [
+    =终端
+    ----
+]
+participant chain_spec [
+    =链规范文件
+    ----
+    Plain/Raw rococo-local
+    relay chain spec
+]
+participant pkjs [
+    =Polkadot-JS application
+    ----
+    波卡前端
+]
+participant pkjs2 [
+    =Polkadot-JS application 2
+    ----
+    波卡前端2, 验证平行链的实际使用
+]
+
+== build the parachain template ==
+terminal -> terminal: clone & build
+note left
+# Clone the parachain template with the correct Polkadot version
+git clone
+--depth 1
+--branch
+polkadot-v0.9.26 https://github.com/substrate-developer-hub/substrate-parachain-template
+
+# Switch into the parachain template directory
+cd substrate-parachain-template
+
+# Build the parachain template collator
+# Compiling the node can take 15 to 60 minuets
+cargo b -r
+end note
+pkjs -> pkjs: reserve a paraID
+terminal -> terminal: generate a plain spec
+note left
+# Assumes that `rococo-local` is in `node/chan_spec.rs` as the relay you registered with
+./target/release/parachain-collator
+build-spec
+--disable-default-bootnode
+> rococo-local-parachain-plain.json
+end note
+chain_spec -> chain_spec: set the correct reserved ParaID
+note left
+  // --snip--
+  "para_id": 2000, // <--- your already registered ID
+  // --snip--
+      "parachainInfo": {
+        "parachainId": 2000 // <--- your already registered ID
+      },
+  // --snip--
+end note
+terminal -> terminal: generate a raw chain spec
+note left
+./target/release/parachain-collator
+build-spec
+--chain rococo-local-parachain-plain.json
+--raw
+--disable-default-bootnode
+> rococo-local-parachain-2000-raw.json
+end note
+pkjs -> pkjs: Save and distribute your raw spec
+terminal -> terminal: Obtain Wasm runtime validation function
+note left
+./target/release/parachain-collator
+export-genesis-wasm
+--chain
+rococo-local-parachain-2000-raw.json
+> para-2000-wasm
+end note
+terminal -> terminal: convert the solo chain to a parachain
+note left
+此运行时和状态仅适用于平行链的创世块。您不能将具有任何先前状态的平行链连接到中继链。
+所有平行链必须从中继链上的区块 0 开始。之后可能推出迁移基于 Substrate 构建的单链
+的区块历史，但短期内不会计划此功能。
+end note
+terminal -> terminal: generate a parachain genesis state
+note left
+./target/release/parachain-collator
+export-genesis-state
+--chain
+rococo-local-parachain-2000-raw.json
+> para-2000-genesis
+end note
+terminal -> terminal: start a collator node
+note left
+./target/release/parachain-collator
+--alice
+--collator
+--force-authoring
+--chain rococo-local-parachain-2000-raw.json
+--base-path /tmp/parachain/alice
+--port 40333
+--ws-port 8844
+--
+--execution wasm
+--chain <relay chain raw chain spec>
+--port 30343
+--ws-port 9977
+end note
+note right
+关于这个命令，首先要注意的是:
+在单独的 -- 之前传递了几个参数，在它之后传递了更多参数。
+平行链collator包含实际的收集人节点以及嵌入式中继链节点。
+1. -- 之前的参数是针对整理者的，
+2. -- 之后的参数是针对嵌入式中继链节点的。
+
+如果为第二条平行链再次执行这些指令，请记住更改collator-specific的值。
+必须使用相同的中继链规范文件，但要绑定到的第二个平行链收集器.
+使用不同的 ParaID、基本路径和端口号。
+目前没有嵌入中继链节点的平行链节点无法运行，但预计最后也会实现非收集节点。
+
+执行命令后应该看到收集人节点作为独立节点运行，并且其中继节点作为对等节点
+与已经运行的中继链验证节点连接。
+
+请注意，如果没有看到嵌入式中继链与本地中继链节点对等，请尝试禁用防火墙或
+添加带有中继节点地址的 bootnodes 参数。
+
+此时还没有开始授权平行链区块。当收集人实际在中继链上注册时，才会开始。
+end note
+== Parachain Registration ==
+note over of pkjs
+有几种方法可以将平行链注册到中继链。
+1. 对于测试，使用 sudo 是最常见的。
+我们已经启动了中继链，并且我们的平行链整理器已经准备就绪。
+现在我们必须在中继链上注册平行链。在生产网络中，这通常通过
+平行链拍卖(parachain auctions)来完成。但是对于本教程，
+我们将使用 sudo 调用来完成。
+
+2. 注册交易
+交易可以通过 Polkadot-JS Apps UI 在中继链节点上提交。
+有多种选择可以解决这个问题，我们可以选择以下任何一种。请注意，
+此处的所有选项都取决于保留的 paraID - 因此请务必先执行此操作。
+end note
+pkjs -> pkjs: Registration Transaction
+alt#Gold #LightBlue option1
+    pkjs -> pkjs: paraSudoWrapper.sudoScheduleParaInitialize
+    note left
+        此选项完全绕过插槽租赁机制，从下一个中继链会话开始为保留的 paraID
+        加入平行链或平行线程。这是进行测试的最简单和最快的方法。
+
+        但请注意，平行链将这些注册平行链所需的文件包含在链规范中设置的详细信息，
+        这些详细信息必须明确针对正确的中继链并使用正确的 ParaID.
+        在这种情况下，是 rococo（而不是本教程中使用的 rococo-local） .
+    end note
+else #Pink option2
+    pkjs -> pkjs: slots.forceLease
+    note left
+        这是生产中使用的更正式的注册流程（除了使用 sudo 强制槽租用）：
+        使用保留它的同一帐户注册您的保留 paraID，
+        或者使用 sudo 和 registrar.forceRegister 交易操作，如果你希望。
+    end note
+end
+terminal -> terminal: block production
+note left
+The collator should start producing parachain blocks
+(aka collating) once the registration is successful
+and the next relay chain epoch begin!
+end note
+pkjs -> pkjs: see block finalization
+note left
+中继链跟踪每个平行链的最新块（头部）。
+
+当一个中继链区块最终确定时，每个已完成验证过程的平行链区块也将最终确定。
+这就是 Polkadot 为其平行链实现池化、共享安全性的方式！
+end note
+pkjs2 -> pkjs2: Connecting with the Apps UI
+note left
+我们已经将 Apps UI 连接到中继链节点。现在我们还可以连接到平行链收集器。
+在新的浏览器窗口中打开另一个应用程序 UI 实例，并将其连接到适当的端点。
+
+如果您到目前为止已经按照本教程进行操作，则可以连接到平行链节点
+end note
+pkjs2 -> pkjs2: Submit extrinsics
+note left
+
+您可以进行一些简单的代币转账，以确保平行链正常运行。
+
+您还可以通过转到外部页面，选择系统托盘并注释外部来进行一些链上注释。
+如果交易按预期进行，你就有了一个有效的平行链。
+end note
+terminal -> terminal: 链条清洗
+note left
+# Purge the collator(s)
+./target/release/parachain-collator
+purge-chain
+--base-path <your collator DB path set above>
+
+# Purge the validator(s)
+polkadot
+purge-chain
+--base-path <your relay chain DB path set above>
+end note
+note right
+收集者节点是平行链区块链数据的唯一归宿，
+因为整个平行链网络上只有一个节点。
+中继链仅存储平行链标头信息。
+
+如果平行链数据丢失，您将无法恢复该链。
+但是，在测试中，您可能需要从头开始。
+end note
+@enduml

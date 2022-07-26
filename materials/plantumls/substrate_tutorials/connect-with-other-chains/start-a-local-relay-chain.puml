@@ -1,0 +1,39 @@
+@startuml
+scale 850 width
+skinparam maxMessageSize 200
+participant terminal [
+    =终端
+    ----
+]
+participant chain_spec [
+    =链规范文件
+    ----
+    Plain/Raw rococo-local
+    relay chain spec
+]
+== Build the relay chain node ==
+terminal -> terminal: git clone & compile
+note left
+# Clone the Polkadot Repository, with correct version
+git clone --depth 1 --branch release-v0.9.26 https://github.com/paritytech/polkadot.git
+
+# Switch into the Polkadot directory
+cd polkadot
+
+# Build the relay chain Node
+# Compiling the node can take 15 to 60 minuets to complete.
+cargo b -r
+
+# Check if the help page prints to ensure the node is built correctly
+./target/release/polkadot --help
+end note
+chain_spec -> chain_spec: 准备链规范文件
+note left
+[[https://github.com/substrate-developer-hub/substrate-docs/blob/main/static/assets/tutorials/cumulus/chain-specs/rococo-custom-2-plain.json Plain rococo-local relay chain spec]]
+[[https://github.com/substrate-developer-hub/substrate-docs/blob/main/static/assets/tutorials/cumulus/chain-specs/rococo-custom-2-raw.json Raw rococo-local relay chain spec]]
+注意：文件比较大，直接复制比较麻烦。
+可以git clone到本地后复制过来
+end note
+terminal -> terminal: start the alice validator
+terminal -> terminal: start the bob validator
+@enduml
