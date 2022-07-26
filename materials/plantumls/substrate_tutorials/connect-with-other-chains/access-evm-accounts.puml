@@ -1,0 +1,117 @@
+@startuml
+participant terminal [
+    =终端
+    ----
+]
+participant pkjs [
+    =Polkadot-JS application
+    ----
+    波卡前端
+]
+== 本节背景 ==
+note over of terminal
+本教程说明了如何使用 [[https://github.com/paritytech/frontier Frontier]] 项目中的 crate 来构建与以太坊兼容的区块链，
+该区块链可以访问基于以太坊的账户并执行基于 Solidity 的智能合约。
+
+Frontier 项目的两个主要目标是使您能够执行以下操作：
+1. 使用本地 Substrate 节点运行未经修改的以太坊去中心化应用程序(Dapp)。
+2. 从以太坊主网络导入状态。
+
+本教程使用预定义的节点模板来提供工作环境。
+该模板是使用 [[https://github.com/paritytech/frontier/blob/master/docs/node-template-release.md Frontier发布指南]]中的说明生成的。
+
+如果你想为自己生成一个独立的模板，你可以使用 [[https://github.com/paritytech/frontier/blob/master/.maintain/node-template-release.sh node-template-release.sh 模板]]生成脚本。
+
+如果您使用[[https://github.com/paritytech/frontier frontier 分支]]或模板生成脚本构建自己的节点，请注意 Frontier 使用其自己的
+ Substrate crates 版本，您可能需要更新 Cargo 文件中的依赖项以匹配项目中的依赖项。
+end note
+terminal -> terminal: chain specification file
+note right
+frontier-node-template 中的开发链规范定义了一个创世区块，
+该创世区块已预先配置了 alice 账户的 EVM 账户。
+
+当您在开发模式下启动此节点时，alice 的 EVM 帐户将默认分配一定数量的eth。
+您将使用此帐户查看 EVM 帐户详细信息并调用以太坊智能合约。
+
+启动节点后，您将能够使用 Polkadot-JS 应用程序查看 alice 的 EVM 帐户的详细信息。
+terminal -> terminal: clone -> compile -> start
+note left
+git clone https://github.com/substrate-developer-hub/frontier-node-template.git
+cd frontier-node-template
+cargo build --release
+./target/release/frontier-template-node --dev
+end note
+pkjs -> pkjs: connect local node
+pkjs -> pkjs: Settings >> Developer >> Define to create an EVM Account
+note left
+{
+  "Address": "MultiAddress",
+  "LookupSource": "MultiAddress",
+  "Account": {
+     "nonce": "U256",
+     "balance": "U256"
+  },
+  "Transaction": {
+     "nonce": "U256",
+     "action": "String",
+     "gas_price": "u64",
+     "gas_limit": "u64",
+     "value": "U256",
+     "input": "Vec<u8>",
+     "signature": "Signature"
+  },
+  "Signature": {
+     "v": "u64",
+     "r": "H256",
+     "s": "H256"
+  }
+}
+end note
+pkjs -> pkjs: Developer >> RPC calls
+note right
+1. Verify that your node is still running and
+the Polkadot-JS application is connected to the node.
+2. Click Developer, then select RPC calls.
+3. On the Submission tab, select eth as the endpoint to call.
+4. Select getBalance(address, number) from the list of functions to call.
+5. Specify the EVM account identifier for the alice account for the address.
+
+The predefined account address is:
+- 0xd43593c715fdd31c61141abd04a99fd6822c8558.
+
+The address for the account was calculated fromthe public key
+for the alice account using Substrate EVM utilities.
+
+6. Click Submit RPC call.
+end note
+== deploy a smart contract ==
+note over of pkjs
+现在您已经了解了如何查询以太坊地址的余额，
+您可能想探索如何部署和调用以太坊智能合约并测试相关功能。
+
+本教程使用定义 ERC-20 代币的 Truffle 示例合约。
+您还可以使用 Polkadot JS SDK 和 Typescript
+创建 ERC-20 代币合约。
+end note
+terminal -> terminal: create the ERC-20 contract
+pkjs -> pkjs: Developer >> Extrinsics >> ALICE >> \nevm >> create >> Configure >> \nSubmit Transaction >> Sign and Submit
+note left
+source	0xd43593c715fdd31c61141abd04a99fd6822c8558
+init	raw bytecode hex value from MyToken.json
+value	0
+gasLimit	4294967295
+maxFeePerGas	100000000
+end note
+== view the smart contract、view -> transfer -> verify ==
+pkjs -> pkjs: Network >> Explorer >> evm.Created event
+pkjs -> pkjs: Developer >> Extrinsics >> ALICE\n>> evm >> call transfer(address, uint256)
+note left
+source
+target
+input
+value
+gasLimit
+maxFeePerGas
+end note
+pkjs -> pkjs: Network >> Explorer >> evm.Excuted
+@enduml

@@ -36,11 +36,14 @@ ParaID 编号 0-999 保留给[[https://wiki.polkadot.network/docs/learn-common-g
 
 只有尚未保留的 2000 及以上数字才能用于社区平行链。
 end note
+== generate file & start ==
 terminal -> terminal: generate parachain genesis and wasm files
 note left
-注册平行链所需的文件必须明确指定正确的中继链和正确的 ParaID。
+注册平行链所需的文件必须明确指定
+正确的中继链和正确的 ParaID。
 
-在本教程中，中继链是 rococo，而不是 Connect a local parachain
+在本教程中，中继链是 rococo，
+而不是 Connect a local parachain
 教程中使用的 rococo-local。
 
 配置您的链规范以使用：
@@ -64,6 +67,7 @@ note left
 端口也打开，以允许您自己（和其他人）通过 Polkadot
 应用程序 UI 或 API 调用与其连接。
 end note
+== register and request ==
 pkjs -> pkjs: Register as a parathread
 browser -> browser: 申请开通你的平行链插槽
 note over of browser
