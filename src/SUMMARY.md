@@ -81,6 +81,8 @@
             - [使用rust建立一个简单的区块链](layer5_ecosystem/7_business/blockchain/build-a-block-in-rust.md)
             - [Substrate介绍与解析](layer5_ecosystem/7_business/blockchain/substrate/substrate_intro.md)
                 - [Substrate教程梳理](layer5_ecosystem/7_business/blockchain/substrate/substrate_tutorials.md)
+                - [深入Substrate Pallet](layer5_ecosystem/7_business/blockchain/substrate/substrate_pallet.md)
+                - [深入Substrate Runtime](layer5_ecosystem/7_business/blockchain/substrate/substrate_runtime.md)
                 - [Substrate备忘](layer5_ecosystem/7_business/blockchain/substrate/substrate_ref.md)
                 - [Substrate市场：Rutimes、Pallets和Projects](layer5_ecosystem/7_business/blockchain/substrate/substrate_marketplace.md)
                 - [Substrate惊奇资源](layer5_ecosystem/7_business/blockchain/substrate/awesome_substrate.md)
