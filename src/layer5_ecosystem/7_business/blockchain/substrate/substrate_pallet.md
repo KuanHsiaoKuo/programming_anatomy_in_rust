@@ -1,6 +1,43 @@
 # 深入substrate pallet
 
 <!--ts-->
+* [深入substrate pallet](#深入substrate-pallet)
+* [Pallet](#pallet)
+   * [Pallet组件深入](#pallet组件深入)
+      * [1. Pallet Hooks](#1-pallet-hooks)
+      * [2. Pallet Extrinsics](#2-pallet-extrinsics)
+      * [3. Pallet Errors](#3-pallet-errors)
+      * [4. Pallet Config](#4-pallet-config)
+      * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
+      * [6. Pallet Extension](#6-pallet-extension)
+      * [7. Pallet Debug](#7-pallet-debug)
+      * [8. Pallet RPC](#8-pallet-rpc)
+      * [9. Pallet Benchmarking](#9-pallet-benchmarking)
+* [参考资源](#参考资源)
+   * [pallet](#pallet-1)
+      * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
+      * [编写简单到pallet](#编写简单到pallet)
+      * [pallet的组成](#pallet的组成)
+   * [Pallet技巧细节](#pallet技巧细节)
+      * [storage（链上）各个类型使用](#storage链上各个类型使用)
+      * [Error类型的使用](#error类型的使用)
+      * [写调度函数的套路](#写调度函数的套路)
+      * [hooks的使用](#hooks的使用)
+      * [pallet中的Config](#pallet中的config)
+      * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
+      * [封装和扩展现有pallet](#封装和扩展现有pallet)
+      * [调试](#调试)
+      * [pallet中的类型转换；](#pallet中的类型转换)
+      * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
+      * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
+      * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
+      * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
+      * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
+      * [为某些trait提供默认实现。](#为某些trait提供默认实现)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Tue Jul 26 13:09:58 UTC 2022 -->
+
 <!--te-->
 
 # Pallet
