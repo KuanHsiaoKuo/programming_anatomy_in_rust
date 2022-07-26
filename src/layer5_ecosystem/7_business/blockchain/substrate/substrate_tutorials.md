@@ -1,135 +1,136 @@
 # Substrate官方教程梳理与练习
 
 <!--ts-->
+
 * [Substrate官方教程梳理与练习](#substrate官方教程梳理与练习)
 * [总览](#总览)
 * [Get Started](#get-started)
-   * [Build a local blockchain](#build-a-local-blockchain)
-      * [设置开发环境](#设置开发环境)
-         * [使用rustup设置rust环境](#使用rustup设置rust环境)
-         * [检查环境](#检查环境)
-      * [启动链节点](#启动链节点)
-         * [下载node-template](#下载node-template)
-         * [node-templeate项目结构](#node-templeate项目结构)
-         * [Cargo.toml](#cargotoml)
-         * [编译前的检查](#编译前的检查)
-         * [编译](#编译)
-         * [可能遇到的问题](#可能遇到的问题)
-         * [本地运行节点](#本地运行节点)
-         * [docker运行节点](#docker运行节点)
-      * [前端访问](#前端访问)
-         * [使用前端模版](#使用前端模版)
-         * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
-      * [Substrate使用方式](#substrate使用方式)
-         * [使用subtrate node](#使用subtrate-node)
-         * [使用substrate frame](#使用substrate-frame)
-         * [使用substrate core](#使用substrate-core)
-   * [Simulate a network](#simulate-a-network)
-   * [Add trusted nodes](#add-trusted-nodes)
-      * [加密方式梳理](#加密方式梳理)
-         * [Sr25519](#sr25519)
-         * [Ed25519](#ed25519)
-         * [SS58: 对应公钥](#ss58-对应公钥)
-      * [步骤：](#步骤)
-      * [actdiag](#actdiag)
-   * [Authorize specific nodes](#authorize-specific-nodes)
-      * [Alice授权Charlie过程](#alice授权charlie过程)
-         * [Charlie连接Dave过程](#charlie连接dave过程)
-      * [流程图](#流程图)
-      * [总结](#总结)
-   * [Monitor node metrics](#monitor-node-metrics)
-      * [本节大概的架构](#本节大概的架构)
-      * [安装Prometheus和grafana](#安装prometheus和grafana)
-      * [配置Prometheus.yml](#配置prometheusyml)
-      * [启动grafana](#启动grafana)
-      * [配置数据源](#配置数据源)
-      * [导入看板模版](#导入看板模版)
-   * [Upgrade a running network](#upgrade-a-running-network)
-      * [时序图](#时序图)
-      * [第一次更新运行时](#第一次更新运行时)
-      * [第二次上传文件设置自动执行条件](#第二次上传文件设置自动执行条件)
+    * [Build a local blockchain](#build-a-local-blockchain)
+        * [设置开发环境](#设置开发环境)
+            * [使用rustup设置rust环境](#使用rustup设置rust环境)
+            * [检查环境](#检查环境)
+        * [启动链节点](#启动链节点)
+            * [下载node-template](#下载node-template)
+            * [node-templeate项目结构](#node-templeate项目结构)
+            * [Cargo.toml](#cargotoml)
+            * [编译前的检查](#编译前的检查)
+            * [编译](#编译)
+            * [可能遇到的问题](#可能遇到的问题)
+            * [本地运行节点](#本地运行节点)
+            * [docker运行节点](#docker运行节点)
+        * [前端访问](#前端访问)
+            * [使用前端模版](#使用前端模版)
+            * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
+        * [Substrate使用方式](#substrate使用方式)
+            * [使用subtrate node](#使用subtrate-node)
+            * [使用substrate frame](#使用substrate-frame)
+            * [使用substrate core](#使用substrate-core)
+    * [Simulate a network](#simulate-a-network)
+    * [Add trusted nodes](#add-trusted-nodes)
+        * [加密方式梳理](#加密方式梳理)
+            * [Sr25519](#sr25519)
+            * [Ed25519](#ed25519)
+            * [SS58: 对应公钥](#ss58-对应公钥)
+        * [步骤：](#步骤)
+        * [actdiag](#actdiag)
+    * [Authorize specific nodes](#authorize-specific-nodes)
+        * [Alice授权Charlie过程](#alice授权charlie过程)
+            * [Charlie连接Dave过程](#charlie连接dave过程)
+        * [流程图](#流程图)
+        * [总结](#总结)
+    * [Monitor node metrics](#monitor-node-metrics)
+        * [本节大概的架构](#本节大概的架构)
+        * [安装Prometheus和grafana](#安装prometheus和grafana)
+        * [配置Prometheus.yml](#配置prometheusyml)
+        * [启动grafana](#启动grafana)
+        * [配置数据源](#配置数据源)
+        * [导入看板模版](#导入看板模版)
+    * [Upgrade a running network](#upgrade-a-running-network)
+        * [时序图](#时序图)
+        * [第一次更新运行时](#第一次更新运行时)
+        * [第二次上传文件设置自动执行条件](#第二次上传文件设置自动执行条件)
 * [Work with pallets](#work-with-pallets)
-   * [文档/代码更新问题](#文档代码更新问题)
-   * [Pallet前置Rust知识](#pallet前置rust知识)
-   * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [时序图](#时序图-1)
-   * [Specify the origin for a call](#specify-the-origin-for-a-call)
-         * [为帐户设置昵称](#为帐户设置昵称)
-         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-      * [可能出现的问题](#可能出现的问题)
-      * [signed与sudo有不同权限。](#signed与sudo有不同权限)
-   * [Configure the contracts pallet](#configure-the-contracts-pallet)
-   * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
-      * [Pallet组成](#pallet组成)
-      * [时序图](#时序图-2)
-      * [Pallet组件深入](#pallet组件深入)
-      * [1. Pallet Hooks](#1-pallet-hooks)
-      * [2. Pallet Extrinsics](#2-pallet-extrinsics)
-      * [3. Pallet Errors](#3-pallet-errors)
-      * [4. Pallet Config](#4-pallet-config)
-      * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
-      * [6. Pallet Extension](#6-pallet-extension)
-      * [7. Pallet Debug](#7-pallet-debug)
-      * [8. Pallet RPC](#8-pallet-rpc)
-      * [9. Pallet Benchmarking](#9-pallet-benchmarking)
-   * [Publish Custom pallets](#publish-custom-pallets)
-      * [内置pallets](#内置pallets)
-      * [发布pallets](#发布pallets)
+    * [文档/代码更新问题](#文档代码更新问题)
+    * [Pallet前置Rust知识](#pallet前置rust知识)
+    * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
+        * [runtime结构分析](#runtime结构分析)
+        * [时序图](#时序图-1)
+    * [Specify the origin for a call](#specify-the-origin-for-a-call)
+        * [为帐户设置昵称](#为帐户设置昵称)
+        * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+            * [可能出现的问题](#可能出现的问题)
+            * [signed与sudo有不同权限。](#signed与sudo有不同权限)
+    * [Configure the contracts pallet](#configure-the-contracts-pallet)
+    * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
+        * [Pallet组成](#pallet组成)
+        * [时序图](#时序图-2)
+        * [Pallet组件深入](#pallet组件深入)
+        * [1. Pallet Hooks](#1-pallet-hooks)
+        * [2. Pallet Extrinsics](#2-pallet-extrinsics)
+        * [3. Pallet Errors](#3-pallet-errors)
+        * [4. Pallet Config](#4-pallet-config)
+        * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
+        * [6. Pallet Extension](#6-pallet-extension)
+        * [7. Pallet Debug](#7-pallet-debug)
+        * [8. Pallet RPC](#8-pallet-rpc)
+        * [9. Pallet Benchmarking](#9-pallet-benchmarking)
+    * [Publish Custom pallets](#publish-custom-pallets)
+        * [内置pallets](#内置pallets)
+        * [发布pallets](#发布pallets)
 * [Develop smart contracts](#develop-smart-contracts)
-   * [Prepare your first contract](#prepare-your-first-contract)
-   * [Develop a smart contract](#develop-a-smart-contract)
-   * [Use maps for storing values](#use-maps-for-storing-values)
-   * [Buid a token contract](#buid-a-token-contract)
-   * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
+    * [Prepare your first contract](#prepare-your-first-contract)
+    * [Develop a smart contract](#develop-a-smart-contract)
+    * [Use maps for storing values](#use-maps-for-storing-values)
+    * [Buid a token contract](#buid-a-token-contract)
+    * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
 * [Connect with other chains](#connect-with-other-chains)
-   * [Start a local relay chain](#start-a-local-relay-chain)
-      * [波卡架构](#波卡架构)
-      * [parachains](#parachains)
-      * [注意版本匹配](#注意版本匹配)
-      * [时序图](#时序图-3)
-   * [Connect a local parachain](#connect-a-local-parachain)
-      * [Common Good Parachains](#common-good-parachains)
-      * [Conver a solo chain](#conver-a-solo-chain)
-      * [Parachain Slots Autcion](#parachain-slots-autcion)
-      * [跨链用到的信息格式](#跨链用到的信息格式)
-      * [时序图](#时序图-4)
-   * [Connect to Rococo testnet](#connect-to-rococo-testnet)
-   * [Access EVM accounts](#access-evm-accounts)
+    * [Start a local relay chain](#start-a-local-relay-chain)
+        * [波卡架构](#波卡架构)
+        * [parachains](#parachains)
+        * [注意版本匹配](#注意版本匹配)
+        * [时序图](#时序图-3)
+    * [Connect a local parachain](#connect-a-local-parachain)
+        * [Common Good Parachains](#common-good-parachains)
+        * [Conver a solo chain](#conver-a-solo-chain)
+        * [Parachain Slots Autcion](#parachain-slots-autcion)
+        * [跨链用到的信息格式](#跨链用到的信息格式)
+        * [时序图](#时序图-4)
+    * [Connect to Rococo testnet](#connect-to-rococo-testnet)
+    * [Access EVM accounts](#access-evm-accounts)
 * [参考资源](#参考资源)
-   * [substrate文档练习](#substrate文档练习)
-   * [pallet基础](#pallet基础)
-      * [尝试添加pallet到runtime](#尝试添加pallet到runtime)
-      * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
-      * [编写简单到pallet](#编写简单到pallet)
-      * [pallet的组成](#pallet的组成)
-   * [Pallet技巧细节](#pallet技巧细节)
-      * [storage（链上）各个类型使用](#storage链上各个类型使用)
-      * [Error类型的使用](#error类型的使用)
-      * [写调度函数的套路](#写调度函数的套路)
-      * [hooks的使用](#hooks的使用)
-      * [pallet中的Config](#pallet中的config)
-      * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
-      * [封装和扩展现有pallet](#封装和扩展现有pallet)
-      * [调试](#调试)
-      * [pallet中的类型转换；](#pallet中的类型转换)
-      * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
-      * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
-      * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
-      * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
-      * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
-      * [为某些trait提供默认实现。](#为某些trait提供默认实现)
-   * [智能合约](#智能合约)
-      * [初探ink!](#初探ink)
-      * [深入ink!](#深入ink)
-      * [ERC20](#erc20)
-   * [连接其他链](#连接其他链)
-      * [中继链连接](#中继链连接)
-      * [平行链连接](#平行链连接)
-   * [测试](#测试)
-      * [编写测试](#编写测试)
-      * [benchmarking](#benchmarking)
-   * [升级](#升级)
+    * [substrate文档练习](#substrate文档练习)
+    * [pallet基础](#pallet基础)
+        * [尝试添加pallet到runtime](#尝试添加pallet到runtime)
+        * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
+        * [编写简单到pallet](#编写简单到pallet)
+        * [pallet的组成](#pallet的组成)
+    * [Pallet技巧细节](#pallet技巧细节)
+        * [storage（链上）各个类型使用](#storage链上各个类型使用)
+        * [Error类型的使用](#error类型的使用)
+        * [写调度函数的套路](#写调度函数的套路)
+        * [hooks的使用](#hooks的使用)
+        * [pallet中的Config](#pallet中的config)
+        * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
+        * [封装和扩展现有pallet](#封装和扩展现有pallet)
+        * [调试](#调试)
+        * [pallet中的类型转换；](#pallet中的类型转换)
+        * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
+        * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
+        * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
+        * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
+        * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
+        * [为某些trait提供默认实现。](#为某些trait提供默认实现)
+    * [智能合约](#智能合约)
+        * [初探ink!](#初探ink)
+        * [深入ink!](#深入ink)
+        * [ERC20](#erc20)
+    * [连接其他链](#连接其他链)
+        * [中继链连接](#中继链连接)
+        * [平行链连接](#平行链连接)
+    * [测试](#测试)
+        * [编写测试](#编写测试)
+        * [benchmarking](#benchmarking)
+    * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Tue Jul 26 04:04:45 UTC 2022 -->
@@ -208,35 +209,7 @@ git checkout latest
 
 ~~~admonish info title='node-template项目结构'
 ```shell
-tree -L 2                                                                                                                                                                                                                              ─╯
-.
-├── Cargo.lock
-├── Cargo.toml
-├── LICENSE
-├── README.md
-├── docker-compose.yml
-├── docs
-│   └── rust-setup.md
-├── node
-│   ├── Cargo.toml
-│   ├── build.rs
-│   └── src
-├── pallets
-│   └── template
-├── runtime
-│   ├── Cargo.toml
-│   ├── build.rs
-│   └── src
-├── rustfmt.toml
-├── scripts
-│   ├── docker_run.sh
-│   └── init.sh
-├── shell.nix
-└── target
-    ├── CACHEDIR.TAG
-    └── release
-
-10 directories, 15 files
+{{#include ../../../../../materials/node-template-structure.txt:1:}}
 ```
 ~~~
 
@@ -388,9 +361,10 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 
 - [pub mod ed25519-substrate/lib.rs at 42b2d623d058197aebc3c737fb44fbbf278a85b4 · paritytech/substrate](https://github.com/paritytech/substrate/blob/42b2d623d058197aebc3c737fb44fbbf278a85b4/primitives/consensus/aura/src/lib.rs#L47-L63)
 
-#### SS58: 对应公钥
+#### SS58: 对应公钥/地址格式
 
 - [pub use ss58_registry-substrate/crypto.rs at 0ba251c9388452c879bfcca425ada66f1f9bc802 · paritytech/substrate](https://github.com/paritytech/substrate/blob/0ba251c9388452c879bfcca425ada66f1f9bc802/primitives/core/src/crypto.rs#L46)
+- [Glossary | Substrate_ Docs](https://docs.substrate.io/reference/glossary/#ss58-address-format)
 
 ### 步骤：
 
@@ -399,40 +373,7 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 
 ### actdiag
 
-```kroki-actdiag
-actdiag {
-  first_sr25519 -> first_ed25519 -> add_validators
-  second_sr25519 -> second_ed25519 -> add_validators
-  export_customSpec -> add_validators
-  add_validators -> first_start -> first_import_key -> first_restart
-  add_validators -> second_start -> second_import_key -> second_restart
-  first_restart -> peers
-  second_restart -> peers
-
-  lane node1 {
-    label = "node1"
-    first_sr25519 [label = "使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura"];
-    first_ed25519 [label = "使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa"];
-    first_start [label = "使用链规范文件启动第一个节点"];
-    first_import_key [label = "导入第一个节点的key"];
-    first_restart [label = "使用链规范文件重启第一个节点"];
-  }
-  lane network {
-    label = "本地链"
-    export_customSpec [label = "导出链规范文件"];
-    add_validators [label = "添加验证节点信息"];
-    peers [label = "进入本地链，互为观察者(peers)"];
-  }
-  lane node2 {
-    label = "node2"
-    second_sr25519 [label = "使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura"];
-    second_ed25519 [label = "使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa"];
-    second_start [label = "使用链规范文件启动第二个节点"];
-    second_import_key [label = "导入第二个节点的key"];
-    second_restart [label = "使用链规范文件重启第二个节点"];
-  }
-}
-```
+![add trusted noted seq](kroki-actdiag:../../../../../materials/plantumls/substrate_tutorials/get-started/add-trusted-nodes-seq.actdiag)
 
 ## Authorize specific nodes
 
@@ -460,11 +401,11 @@ actdiag {
 
 - 注意填写charlie的peerid
 
-  ![image-20220723182510593](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220723182510593.png)
+![image-20220723182510593](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220723182510593.png)
 
 5. 签名并提交
 
-   ![image-20220723180850302](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220723180850302.png)
+![image-20220723180850302](https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220723180850302.png)
 
 > 交易包含在区块中后，您应该看到 charlie 节点连接到 alice 和 bob 节点，并开始同步区块。这三个节点可以使用本地网络中默认启用的 mDNS 发现机制找到彼此。 如果您的节点不在同一个本地网络上，您应该使用命令行选项
 > --no-mdns 来禁用它。
@@ -489,51 +430,7 @@ actdiag {
 
 ### 流程图
 
-```kroki-mermaid
-sequenceDiagram
-    actor terminal as 终端
-    participant runtime as 运行时:添加pallet
-    participant node as 节点:修改链规范
-    participant pkjs as polkadot-js-app
-    terminal->>terminal: git chekout latest & cargo build --release
-    terminal->>+runtime: 开始修改运行时cargo文件，添加pallet依赖与feature
-    rect rgb(200, 150, 255)
-    runtime->>runtime: runtime/Cargo.toml:depencies添加pallet-node-authorization
-    runtime->>runtime: runtime/Cargo.toml:features添加pallet-node-authorization/std
-    end
-    runtime->>-terminal: prepare to check
-    terminal->>terminal: cargo check -p node-template-runtime
-    terminal->>+runtime: 开始给节点node添加pallet用到的参数类型、实现块、构建运行时配置
-    rect rgb(200, 150, 255)
-    runtime->>runtime: runtime/src/runtime.rs:add parameter_types
-    runtime->>runtime: runtime/src/runtime.rs:add impl section
-    runtime->>runtime: runtime/src/runtime.rs:add the pallet to the construct_runtime macro
-    end
-    runtime->>-terminal: 开始检查
-    terminal->>terminal: cargo check -p node-template-runtime
-    terminal->>+node: 开始给授权节点添加创始区块存储功能
-    node->>node: node/Cargo.toml:add bs58 dependency
-    rect rgb(200, 150, 255)
-    node->>+node: 添加创始区块存储功能
-    node->>node: node/src/node.rs:add genesis storage for nodes
-    node->>node: node/src/node.rs:locate the testnet_genesis function
-    node->>node: node/src/node.rs:add GenesisConfig declaration
-    end
-    node->>-terminal: cargo check & start nodes
-    terminal->>terminal: cargo check -p node-template-runtime
-    rect rgb(200, 150, 255)
-    terminal->>terminal: start alice node
-    terminal->>terminal: start bob node
-    terminal->>terminal: start Charlie node
-    terminal->>terminal: start Dave node
-    end
-    terminal->>pkjs: 开始进行授权与建立连接操作
-    rect rgb(200, 150, 255)
-    pkjs->>pkjs: 使用alice账号给Charlie授权
-    pkjs->>pkjs: 使用Charlie账号连接Dave节点
-    pkjs->>pkjs: Dave对外claimNode
-    end
-```
+![authorize specific nodes seq](kroki-mermaid:../../../../../materials/plantumls/substrate_tutorials/get-started/authorize-specific-nodes-seq.mermaid)
 
 ### 总结
 
@@ -870,50 +767,6 @@ pub enum Error<T> {
 {{#include ../../../../../materials/plantumls/substrate_tutorials/work-with-pallets/use-macros-in-a-custom-pallet.puml:1:}}
 ```
 
-### Pallet组件深入
-
-> [返回顶部](#substrate官方教程梳理与练习)
-
-### 1. Pallet Hooks
-
-~~~admonish info title="基于执行过程看hooks"
-```plantuml
-{{#include ../../../../../materials/plantumls/substrate_activity_hooks.puml:1:}}
-```
-~~~
-
-### 2. Pallet Extrinsics
-
-{{#check Pallet-Extrinsics | pallet extrinsics 使用}}
-
-### 3. Pallet Errors
-
-{{#check Pallet-Errors | pallet errors 使用}}
-
-### 4. Pallet Config
-
-{{#check Pallet-Config | pallet config 使用}}
-
-### 5. Pallet Use Other Pallet
-
-{{#check Pallet-Use-Other-Pallet | pallet 使用其他 Pallet}}
-
-### 6. Pallet Extension
-
-{{#check Pallet-Extension | pallet 扩展 使用}}
-
-### 7. Pallet Debug
-
-{{#check Pallet-Debug | pallet 调试}}
-
-### 8. Pallet RPC
-
-{{#check Pallet-RPC | pallet rpc 使用}}
-
-### 9. Pallet Benchmarking
-
-{{#check Pallet-Benchmarking | pallet 基准测试}}
-
 ## Publish Custom pallets
 
 - [Publish custom pallets | Substrate_ Docs](https://docs.substrate.io/tutorials/work-with-pallets/publish-custom-pallets/)
@@ -1029,9 +882,81 @@ pub enum Error<T> {
 
 > [返回顶部](#substrate官方教程梳理与练习)
 
+### substrate预置账户和密钥
+
+- [subkey | Substrate_ Docs](https://docs.substrate.io/reference/command-line-tools/subkey/#predefined-accounts-and-keys)
+
+### wallets
+
+- [Wallets · Polkadot Wiki](https://wiki.polkadot.network/docs/build-wallets)
+
+### polkadot-js/extension
+
+- [polkadot-js/extension: Simple browser extension for managing Polkadot and Substrate network accounts in a browser. Allows the signing of extrinsics using these accounts. Also provides a simple interface for compliant extensions for dapps.](https://github.com/polkadot-js/extension)
+
+### SS58地址格式
+
+- [Glossary | Substrate_ Docs](https://docs.substrate.io/reference/glossary/#ss58-address-format)
+
+### Rococo faucet martic channel
+
+- [You're invited to talk on Matrix](https://matrix.to/#/#rococo-faucet:matrix.org)
+
+### 时序图
+
+```plantuml
+{{#include ../../../../../materials/plantumls/substrate_tutorials/connect-with-other-chains/connect-to-rococo-testnet.puml:1:k}}
+```
+
 ## Access EVM accounts
 
 > [返回顶部](#substrate官方教程梳理与练习)
+
+# Pallet
+
+## Pallet组件深入
+
+> [返回顶部](#substrate官方教程梳理与练习)
+
+### 1. Pallet Hooks
+
+~~~admonish info title="基于执行过程看hooks"
+```plantuml
+{{#include ../../../../../materials/plantumls/substrate_activity_hooks.puml:1:}}
+```
+~~~
+
+### 2. Pallet Extrinsics
+
+{{#check Pallet-Extrinsics | pallet extrinsics 使用}}
+
+### 3. Pallet Errors
+
+{{#check Pallet-Errors | pallet errors 使用}}
+
+### 4. Pallet Config
+
+{{#check Pallet-Config | pallet config 使用}}
+
+### 5. Pallet Use Other Pallet
+
+{{#check Pallet-Use-Other-Pallet | pallet 使用其他 Pallet}}
+
+### 6. Pallet Extension
+
+{{#check Pallet-Extension | pallet 扩展 使用}}
+
+### 7. Pallet Debug
+
+{{#check Pallet-Debug | pallet 调试}}
+
+### 8. Pallet RPC
+
+{{#check Pallet-RPC | pallet rpc 使用}}
+
+### 9. Pallet Benchmarking
+
+{{#check Pallet-Benchmarking | pallet 基准测试}}
 
 # 参考资源
 

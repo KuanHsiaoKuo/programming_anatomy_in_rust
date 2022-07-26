@@ -1,0 +1,32 @@
+actdiag {
+  first_sr25519 -> first_ed25519 -> add_validators
+  second_sr25519 -> second_ed25519 -> add_validators
+  export_customSpec -> add_validators
+  add_validators -> first_start -> first_import_key -> first_restart
+  add_validators -> second_start -> second_import_key -> second_restart
+  first_restart -> peers
+  second_restart -> peers
+
+  lane node1 {
+    label = "node1"
+    first_sr25519 [label = "使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura"];
+    first_ed25519 [label = "使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa"];
+    first_start [label = "使用链规范文件启动第一个节点"];
+    first_import_key [label = "导入第一个节点的key"];
+    first_restart [label = "使用链规范文件重启第一个节点"];
+  }
+  lane network {
+    label = "本地链"
+    export_customSpec [label = "导出链规范文件"];
+    add_validators [label = "添加验证节点信息"];
+    peers [label = "进入本地链，互为观察者(peers)"];
+  }
+  lane node2 {
+    label = "node2"
+    second_sr25519 [label = "使用Sr25519 -> 一个助记词和对应SS58公钥 -> aura"];
+    second_ed25519 [label = "使用Ed25519+前面的助记词 -> Ed25519 公钥 -> grandpa"];
+    second_start [label = "使用链规范文件启动第二个节点"];
+    second_import_key [label = "导入第二个节点的key"];
+    second_restart [label = "使用链规范文件重启第二个节点"];
+  }
+}

@@ -1,0 +1,29 @@
+tree -L 2                                                                                                                                                                                                                              ─╯
+.
+├── Cargo.lock
+├── Cargo.toml
+├── LICENSE
+├── README.md
+├── docker-compose.yml
+├── docs
+│   └── rust-setup.md
+├── node
+│   ├── Cargo.toml
+│   ├── build.rs
+│   └── src
+├── pallets
+│   └── template
+├── runtime
+│   ├── Cargo.toml
+│   ├── build.rs
+│   └── src
+├── rustfmt.toml
+├── scripts
+│   ├── docker_run.sh
+│   └── init.sh
+├── shell.nix
+└── target
+    ├── CACHEDIR.TAG
+    └── release
+
+10 directories, 15 files
