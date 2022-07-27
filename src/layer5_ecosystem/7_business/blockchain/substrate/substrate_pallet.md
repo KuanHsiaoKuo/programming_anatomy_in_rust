@@ -1,39 +1,40 @@
 # 深入substrate pallet
 
 <!--ts-->
+
 * [深入substrate pallet](#深入substrate-pallet)
 * [Pallet](#pallet)
-   * [Pallet组件深入](#pallet组件深入)
-      * [1. Pallet Hooks](#1-pallet-hooks)
-      * [2. Pallet Extrinsics](#2-pallet-extrinsics)
-      * [3. Pallet Errors](#3-pallet-errors)
-      * [4. Pallet Config](#4-pallet-config)
-      * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
-      * [6. Pallet Extension](#6-pallet-extension)
-      * [7. Pallet Debug](#7-pallet-debug)
-      * [8. Pallet RPC](#8-pallet-rpc)
-      * [9. Pallet Benchmarking](#9-pallet-benchmarking)
+    * [Pallet组件深入](#pallet组件深入)
+        * [1. Pallet Hooks](#1-pallet-hooks)
+        * [2. Pallet Extrinsics](#2-pallet-extrinsics)
+        * [3. Pallet Errors](#3-pallet-errors)
+        * [4. Pallet Config](#4-pallet-config)
+        * [5. Pallet Use Other Pallet](#5-pallet-use-other-pallet)
+        * [6. Pallet Extension](#6-pallet-extension)
+        * [7. Pallet Debug](#7-pallet-debug)
+        * [8. Pallet RPC](#8-pallet-rpc)
+        * [9. Pallet Benchmarking](#9-pallet-benchmarking)
 * [参考资源](#参考资源)
-   * [pallet](#pallet-1)
-      * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
-      * [编写简单到pallet](#编写简单到pallet)
-      * [pallet的组成](#pallet的组成)
-   * [Pallet技巧细节](#pallet技巧细节)
-      * [storage（链上）各个类型使用](#storage链上各个类型使用)
-      * [Error类型的使用](#error类型的使用)
-      * [写调度函数的套路](#写调度函数的套路)
-      * [hooks的使用](#hooks的使用)
-      * [pallet中的Config](#pallet中的config)
-      * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
-      * [封装和扩展现有pallet](#封装和扩展现有pallet)
-      * [调试](#调试)
-      * [pallet中的类型转换；](#pallet中的类型转换)
-      * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
-      * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
-      * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
-      * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
-      * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
-      * [为某些trait提供默认实现。](#为某些trait提供默认实现)
+    * [pallet](#pallet-1)
+        * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
+        * [编写简单到pallet](#编写简单到pallet)
+        * [pallet的组成](#pallet的组成)
+    * [Pallet技巧细节](#pallet技巧细节)
+        * [storage（链上）各个类型使用](#storage链上各个类型使用)
+        * [Error类型的使用](#error类型的使用)
+        * [写调度函数的套路](#写调度函数的套路)
+        * [hooks的使用](#hooks的使用)
+        * [pallet中的Config](#pallet中的config)
+        * [在pallet中使用其它pallet](#在pallet中使用其它pallet)
+        * [封装和扩展现有pallet](#封装和扩展现有pallet)
+        * [调试](#调试)
+        * [pallet中的类型转换；](#pallet中的类型转换)
+        * [在pallet中使用链下工作者（Offchain worker）](#在pallet中使用链下工作者offchain-worker)
+        * [在pallet中链上写本地存储（offchain index）；](#在pallet中链上写本地存储offchain-index)
+        * [在pallet的ocw中使用链下存储（offchain storage）；](#在pallet的ocw中使用链下存储offchain-storage)
+        * [在pallet中使用其它pallet（使用其它pallet的存储）；](#在pallet中使用其它pallet使用其它pallet的存储)
+        * [在pallet中添加rpc接口](#在pallet中添加rpc接口)
+        * [为某些trait提供默认实现。](#为某些trait提供默认实现)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Wed Jul 27 03:43:57 UTC 2022 -->
@@ -41,6 +42,31 @@
 <!--te-->
 
 # Pallet
+
+## Pallet到底是什么
+
+```admonish info title='从框架角度理解'
+1. 框架和库的区别是什么？
+框架和库本身都是一堆写好的代码和逻辑，使用起来都是先安装/下载。
+但是二者最本质的区别在于"控制反转"：
+- 库是用来给开发者调用的，开发者将各种库同自己的代码结合起来编程一个有特定逻辑的程序
+- 框架是用来调用开发者写的业务逻辑。这里就出现'控制反转'，是框架来控制开发者编写的代码的使用时机
+- 结合这个使用时机，就出现了生命周期这个概念，这点不展开论述
+2. Substrate是一个框架，所以pallet其实就是它预留出来的"空格"
+开发者可以很方便地只实现业务相关的代码，整理成pallet，供substrate这个框架使用
+```
+
+## Pallet基础组成
+
+~~~admonish info title='pallet基础模版'
+```rust
+{{#include ../../../../../codes/substrate/pallet_components.rs:1:}}
+```
+~~~
+
+```plantuml
+{{#include ../../../../../materials/plantumls/pallet_components.mindmap:1:}}
+```
 
 ## Pallet组件深入
 

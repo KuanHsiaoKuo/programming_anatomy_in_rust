@@ -732,17 +732,7 @@ pub enum Error<T> {
 4. 更多详细内容：[how-to-guides: pallet-design](https://docs.substrate.io/reference/how-to-guides/#pallet-design)
 ```
 
-### Pallet组成
 
-~~~admonish info title='pallet基础模版'
-```rust
-{{#include ../../../../../codes/substrate/pallet_components.rs:1:}}
-```
-~~~
-
-```plantuml
-{{#include ../../../../../materials/plantumls/pallet_components.mindmap:1:}}
-```
 
 ### 时序图
 
