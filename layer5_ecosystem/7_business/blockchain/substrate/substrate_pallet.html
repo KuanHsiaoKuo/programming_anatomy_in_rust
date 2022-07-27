@@ -186,6 +186,8 @@
 <li><a href="#%E6%B7%B1%E5%85%A5substrate-pallet">深入substrate pallet</a></li>
 <li><a href="#pallet">Pallet</a>
 <ul>
+<li><a href="#pallet%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88">Pallet到底是什么</a></li>
+<li><a href="#pallet%E5%9F%BA%E7%A1%80%E7%BB%84%E6%88%90">Pallet基础组成</a></li>
 <li><a href="#pallet%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5">Pallet组件深入</a>
 <ul>
 <li><a href="#1-pallet-hooks">1. Pallet Hooks</a></li>
@@ -233,9 +235,92 @@
 </li>
 </ul>
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 27 03:43:57 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 27 11:49:31 UTC 2022 -->
 <!--te-->
 <h1 id="pallet"><a class="header" href="#pallet">Pallet</a></h1>
+<h2 id="pallet到底是什么"><a class="header" href="#pallet到底是什么">Pallet到底是什么</a></h2>
+<div id="admonition-从框架角度理解" class="admonition info">
+<div class="admonition-title">
+<p>从框架角度理解</p>
+<p><a class="admonition-anchor-link" href="#admonition-从框架角度理解"></a></p>
+</div>
+<div>
+<ol>
+<li>框架和库的区别是什么？
+框架和库本身都是一堆写好的代码和逻辑，使用起来都是先安装/下载。
+但是二者最本质的区别在于“控制反转“：</li>
+</ol>
+<ul>
+<li>库是用来给开发者调用的，开发者将各种库同自己的代码结合起来编程一个有特定逻辑的程序</li>
+<li>框架是用来调用开发者写的业务逻辑。这里就出现’控制反转’，是框架来控制开发者编写的代码的使用时机</li>
+<li>结合这个使用时机，就出现了生命周期这个概念，这点不展开论述</li>
+</ul>
+<ol start="2">
+<li>Substrate是一个框架，所以pallet其实就是它预留出来的“空格“
+开发者可以很方便地只实现业务相关的代码，整理成pallet，供substrate这个框架使用</li>
+</ol>
+</div>
+</div>
+<h2 id="pallet基础组成"><a class="header" href="#pallet基础组成">Pallet基础组成</a></h2>
+<div id="admonition-pallet基础模版" class="admonition info">
+<div class="admonition-title">
+<p>pallet基础模版</p>
+<p><a class="admonition-anchor-link" href="#admonition-pallet基础模版"></a></p>
+</div>
+<div>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 1. Imports and Dependencies
+pub use pallet::*;
+
+#[frame_support::pallet]
+pub mod pallet {
+    use frame_support::pallet_prelude::*;
+    use frame_system::pallet_prelude::*;
+
+    // 2. Declaration of the Pallet type
+    // This is a placeholder to implement traits and methods.
+    #[pallet::pallet]
+    #[pallet::generate_store(pub (super) trait Store)]
+    pub struct Pallet&lt;T&gt;(_);
+
+    // 3. Runtime Configuration Trait
+    // All types and constants go here.
+    // Use #[pallet::constant] and #[pallet::extra_constants]
+    // to pass in values to metadata.
+    #[pallet::config]
+    pub trait Config: frame_system::Config { ... }
+
+    // 4. Runtime Storage
+    // Use to declare storage items.
+<span class="boring">    [pallet::storage]
+</span><span class="boring">    [pallet::getter(fn something)]
+</span>    pub MyStorage&lt;T: Config&gt; = StorageValue&lt;_, u32&gt;;
+
+    // 5. Runtime Events
+    // Can stringify event types to metadata.
+    #[pallet::event]
+    #[pallet::generate_deposit(pub (super) fn deposit_event)]
+    pub enum Event&lt;T: Config&gt; {...
+}
+
+// 6. Hooks
+// Define some logic that should be executed
+// regularly in some context, for e.g. on_initialize.
+#[pallet::hooks]
+impl&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; for Pallet&lt;T&gt; { ... }
+
+// 7. Extrinsics
+// Functions that are callable from outside the runtime.
+#[pallet::call]
+impl&lt;T: Config&gt; Pallet&lt;T&gt; { ... }
+
+}
+<span class="boring">}
+</span></code></pre></pre>
+</div>
+</div>
+<figure><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="922px" preserveAspectRatio="none" style="width:756px;height:922px;background:#FFFFFF;" version="1.1" viewBox="0 0 756 922" width="756px" zoomAndPan="magnify"><defs/><g><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="113" x="10" y="442.2266"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="20" y="465.2217">Pallet基本格式</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="267" x="173" y="20"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247" x="183" y="42.9951">1. 依赖：Imports and Dependencies</text><path d="M123,460.375 L133,460.375 C148,460.375 148,38.1484 163,38.1484 L173,38.1484 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="299" x="173" y="76.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="279" x="183" y="99.292">2. 类型声明: Declaration of the Pallet type</text><path d="M123,460.375 L133,460.375 C148,460.375 148,94.4453 163,94.4453 L173,94.4453 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="78" x="173" y="245.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="183" y="268.1826">Runtime</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="309" x="301" y="132.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289" x="311" y="155.5889">3. 运行时配置：Runtime Configuration Trait</text><path d="M251,263.3359 L261,263.3359 C276,263.3359 276,150.7422 291,150.7422 L301,150.7422 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="232" x="301" y="273.3359"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="212" x="311" y="296.3311">4. 运行时存储: Runtime Storage</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="116" x="583" y="188.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="593" y="211.8857">Storage Value</text><path d="M533,291.4844 L543,291.4844 C558,291.4844 558,207.0391 573,207.0391 L583,207.0391 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="107" x="583" y="245.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="593" y="268.1826">Storage Map</text><path d="M533,291.4844 L543,291.4844 C558,291.4844 558,263.3359 573,263.3359 L583,263.3359 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="161" x="583" y="301.4844"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="141" x="593" y="324.4795">Storage Double Map</text><path d="M533,291.4844 L543,291.4844 C558,291.4844 558,319.6328 573,319.6328 L583,319.6328 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="121" x="583" y="357.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="593" y="380.7764">Storage N Map</text><path d="M533,291.4844 L543,291.4844 C558,291.4844 558,375.9297 573,375.9297 L583,375.9297 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M251,263.3359 L261,263.3359 C276,263.3359 276,291.4844 291,291.4844 L301,291.4844 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="225" x="301" y="329.6328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="311" y="352.6279">5. 运行时事件: Runtime Events</text><path d="M251,263.3359 L261,263.3359 C276,263.3359 276,347.7813 291,347.7813 L301,347.7813 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M123,460.375 L133,460.375 C148,460.375 148,263.3359 163,263.3359 L173,263.3359 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="198" x="173" y="611.1172"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="178" x="183" y="634.1123">6. 生命周期钩子函数-Hooks</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="67" x="421" y="470.375"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="431" y="493.3701">normal</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="99" x="538" y="414.0781"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="548" y="437.0732">on_initialize</text><path d="M488,488.5234 L498,488.5234 C513,488.5234 513,432.2266 528,432.2266 L538,432.2266 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="69" x="538" y="470.375"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49" x="548" y="493.3701">on_idle</text><path d="M488,488.5234 L498,488.5234 C513,488.5234 513,488.5234 528,488.5234 L538,488.5234 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="92" x="538" y="526.6719"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="548" y="549.667">on_finalize</text><path d="M488,488.5234 L498,488.5234 C513,488.5234 513,544.8203 528,544.8203 L538,544.8203 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M371,629.2656 L381,629.2656 C396,629.2656 396,488.5234 411,488.5234 L421,488.5234 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="78" x="421" y="639.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="431" y="662.2607">upgrade</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="108" x="549" y="582.9688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="559" y="605.9639">pre_upgrade</text><path d="M499,657.4141 L509,657.4141 C524,657.4141 524,601.1172 539,601.1172 L549,601.1172 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="163" x="549" y="639.2656"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="559" y="662.2607">on_runtime_upgrade</text><path d="M499,657.4141 L509,657.4141 C524,657.4141 524,657.4141 539,657.4141 L549,657.4141 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="116" x="549" y="695.5625"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="559" y="718.5576">post_upgrade</text><path d="M499,657.4141 L509,657.4141 C524,657.4141 524,713.7109 539,713.7109 L549,713.7109 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M371,629.2656 L381,629.2656 C396,629.2656 396,657.4141 411,657.4141 L421,657.4141 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="128" x="421" y="751.8594"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="431" y="774.8545">offchain_worker</text><path d="M371,629.2656 L381,629.2656 C396,629.2656 396,770.0078 411,770.0078 L421,770.0078 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="109" x="421" y="808.1563"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="431" y="831.1514">integrity_test</text><path d="M371,629.2656 L381,629.2656 C396,629.2656 396,826.3047 411,826.3047 L421,826.3047 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M123,460.375 L133,460.375 C148,460.375 148,629.2656 163,629.2656 L173,629.2656 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="209" x="173" y="864.4531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="183" y="887.4482">7. Extrinsics: 对外提供的功能</text><path d="M123,460.375 L133,460.375 C148,460.375 148,882.6016 163,882.6016 L173,882.6016 " fill="none" style="stroke:#181818;stroke-width:1.0;"/></g></svg></figure>
 <h2 id="pallet组件深入"><a class="header" href="#pallet组件深入">Pallet组件深入</a></h2>
 <blockquote>
 <p><a href="#substrate%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E7%BB%83%E4%B9%A0">返回顶部</a></p>
