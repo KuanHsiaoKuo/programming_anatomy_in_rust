@@ -16,6 +16,7 @@
       * [8. Pallet RPC](#8-pallet-rpc)
       * [9. Pallet Benchmarking](#9-pallet-benchmarking)
 * [参考资源](#参考资源)
+   * [官方资料](#官方资料)
    * [pallet](#pallet-1)
       * [编写pallet到rust前置知识](#编写pallet到rust前置知识)
       * [编写简单到pallet](#编写简单到pallet)
@@ -38,7 +39,7 @@
       * [为某些trait提供默认实现。](#为某些trait提供默认实现)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 27 11:49:31 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 27 13:35:46 UTC 2022 -->
 
 <!--te-->
 
