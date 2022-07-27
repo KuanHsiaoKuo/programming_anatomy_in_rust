@@ -114,6 +114,10 @@
 
 # 参考资源
 
+## 官方资料
+
+- [Pallets · Substrate Developer Hub](https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/pallets)
+
 ## pallet
 
 ### 编写pallet到rust前置知识
