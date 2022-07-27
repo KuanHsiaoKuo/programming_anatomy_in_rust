@@ -61,7 +61,6 @@
       * [signed与sudo有不同权限。](#signed与sudo有不同权限)
    * [Configure the contracts pallet](#configure-the-contracts-pallet)
    * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
-      * [Pallet组成](#pallet组成)
       * [时序图](#时序图-2)
    * [Publish Custom pallets](#publish-custom-pallets)
       * [内置pallets](#内置pallets)
@@ -116,7 +115,7 @@
    * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Wed Jul 27 03:43:59 UTC 2022 -->
+<!-- Added by: runner, at: Wed Jul 27 11:49:33 UTC 2022 -->
 
 <!--te-->
 
