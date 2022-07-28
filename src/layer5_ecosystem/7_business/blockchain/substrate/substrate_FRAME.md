@@ -41,8 +41,13 @@ Framework for Runtime Aggregation of Modularized Entities (FRAME) 是一组可�
 其中 pallets 指的是 FRAME 中那些单一功能模块，承载着特定业务逻辑。
 3. FRAME 不止 Runtime
 
-FRAME 提供了一些与 Substrate Primitives 交互的帮助模块，
+FRAME 提供了一些与 Substrate Primitives 交互的帮助模块，还有智能合约宏展开
 而 Substrate Primitives 则提供了与核心客户端的交互接口。
+
+
+![substrate frontier frame runtime contract](kroki-excalidraw:../../../../../materials/substrate-frontier-frame-runtime-contract.excalidraw)
+
+(点击链接直达源码)
 ```
 
 ```admonish info title='Runtime 把所有 pallets 组件整合起来。 '
