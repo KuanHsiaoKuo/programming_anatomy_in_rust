@@ -34,7 +34,8 @@ Framework for Runtime Aggregation of Modularized Entities (FRAME)
 
 1. FRAME 与 Runtime
 
-Framework for Runtime Aggregation of Modularized Entities (FRAME) 是一组可简化 runtime 开发的模块（称为 pallets ）和支持库。 
+Framework for Runtime Aggregation of Modularized Entities (FRAME)
+是一组可简化 runtime 开发的模块（称为 pallets ）和支持库。 
 
 2. FRAME 与 Runtime
 
