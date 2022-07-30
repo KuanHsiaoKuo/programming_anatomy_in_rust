@@ -124,7 +124,7 @@ impl Theme {
             // If the user overrides one favicon, but not the other, do not
             // copy the default for the other.
             let favicon_png = &mut theme.favicon_png.as_mut().unwrap();
-            let png = load_with_warn(&theme_dir.join("favicon.png"), favicon_png);
+            let png = load_with_warn(&theme_dir.join("md-favicon.png"), favicon_png);
             let favicon_svg = &mut theme.favicon_svg.as_mut().unwrap();
             let svg = load_with_warn(&theme_dir.join("favicon.svg"), favicon_svg);
             match (png, svg) {
@@ -206,7 +206,7 @@ mod tests {
             "head.hbs",
             "redirect.hbs",
             "header.hbs",
-            "favicon.png",
+            "md-favicon.png",
             "favicon.svg",
             "css/chrome.css",
             "css/fonts.css",
@@ -256,7 +256,7 @@ mod tests {
     #[test]
     fn favicon_override() {
         let temp = TempFileBuilder::new().prefix("mdbook-").tempdir().unwrap();
-        fs::write(temp.path().join("favicon.png"), "1234").unwrap();
+        fs::write(temp.path().join("md-favicon.png"), "1234").unwrap();
         let got = Theme::new(temp.path());
         assert_eq!(got.favicon_png.as_ref().unwrap(), b"1234");
         assert_eq!(got.favicon_svg, None);
