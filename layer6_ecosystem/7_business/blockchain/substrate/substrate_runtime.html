@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js rust">
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>深入Substrate Runtime - Programming Anatomy In Rust 🦀</title>
+
+
+    <!-- Custom HTML head -->
+    
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff"/>
+
+        <link rel="icon" href="../../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../../md-favicon.png">
+    <link rel="stylesheet" href="../../../../css/variables.css">
+    <link rel="stylesheet" href="../../../../css/general.css">
+    <link rel="stylesheet" href="../../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../../css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../../fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="../../../../highlight.css">
+    <link rel="stylesheet" href="../../../../tomorrow-night.css">
+    <link rel="stylesheet" href="../../../../ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../../assets/pagetoc/pagetoc_style.css">
+        <link rel="stylesheet" href="../../../../assets/css/mdbook-admonish.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<!-- Provide site root to javascript -->
+<script type="text/javascript">
+    var path_to_root = "../../../../";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+</script>
+
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script type="text/javascript">
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) {
+    }
+</script>
+
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script type="text/javascript">
+    var theme;
+    try {
+        theme = localStorage.getItem('mdbook-theme');
+    } catch (e) {
+    }
+    if (theme === null || theme === undefined) {
+        theme = default_theme;
+    }
+    var html = document.querySelector('html');
+    html.classList.remove('no-js')
+    html.classList.remove('rust')
+    html.classList.add(theme);
+    html.classList.add('js');
+</script>
+
+<!-- Hide / unhide sidebar before it is displayed -->
+<script type="text/javascript">
+    var html = document.querySelector('html');
+    var sidebar = 'hidden';
+    if (document.body.clientWidth >= 1080) {
+        try {
+            sidebar = localStorage.getItem('mdbook-sidebar');
+        } catch (e) {
+        }
+        sidebar = sidebar || 'visible';
+    }
+    html.classList.remove('sidebar-visible');
+    html.classList.add("sidebar-" + sidebar);
+</script>
+
+<nav id="sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><a href="../../../../../index.html"><strong aria-hidden="true">1.</strong> 总览</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../checklist.html"><strong aria-hidden="true">1.1.</strong> 待完成</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">1.2.</strong> Substrate介绍与解析</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/talks.html"><strong aria-hidden="true">1.3.</strong> Rust话题</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/layer1_underlying_abstract.html"><strong aria-hidden="true">2.</strong> Layer1: 底层抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/1_virtual_memory/virtual_memory.html"><strong aria-hidden="true">2.1.</strong> 虚拟内存管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html"><strong aria-hidden="true">2.1.1.</strong> 内存管理与内存安全</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html"><strong aria-hidden="true">2.1.2.</strong> 所有权三件套</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/2_type_system/type_system.html"><strong aria-hidden="true">2.2.</strong> 类型系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/2_type_system/built_in_types.html"><strong aria-hidden="true">2.2.1.</strong> 基础内置类型</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/2_type_system/collections.html"><strong aria-hidden="true">2.2.2.</strong> 集合类型</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/2_type_system/user_defined_types.html"><strong aria-hidden="true">2.2.3.</strong> 自定义类型</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/2_type_system/generics_traits_objects.html"><strong aria-hidden="true">2.2.4.</strong> 泛型、特征及特征对象</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/language_grammar.html"><strong aria-hidden="true">2.3.</strong> 语言语法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html"><strong aria-hidden="true">2.3.1.</strong> 注释与文档(rustdoc)</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/keywords_glossary.html"><strong aria-hidden="true">2.3.2.</strong> 词法结构扫盲</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html"><strong aria-hidden="true">2.3.3.</strong> 绑定、赋值与匹配</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/logical_decision_loops.html"><strong aria-hidden="true">2.3.4.</strong> 逻辑判断与循环♻️</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/statements_expressions.html"><strong aria-hidden="true">2.3.5.</strong> 语句与表达式</a></li><li class="chapter-item expanded "><a href="../../../../layer1_underlying_abstract/3_language_grammar/code_quality.html"><strong aria-hidden="true">2.3.6.</strong> 代码质量</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/layer2_design_abstract.html"><strong aria-hidden="true">3.</strong> Layer2: 设计抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html"><strong aria-hidden="true">3.1.</strong> 编程范式</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/4_programming_paradigm/fp.html"><strong aria-hidden="true">3.1.1.</strong> 函数式编程</a></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/4_programming_paradigm/oop.html"><strong aria-hidden="true">3.1.2.</strong> 面向对象编程</a></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/4_programming_paradigm/gp.html"><strong aria-hidden="true">3.1.3.</strong> 泛型编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/5_design_pattern/5_design_pattern.html"><strong aria-hidden="true">3.2.</strong> 设计模式</a></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/6_module_manage/6_module_manage.html"><strong aria-hidden="true">3.3.</strong> 模块管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/6_module_manage/module_system.html"><strong aria-hidden="true">3.3.1.</strong> 模块系统</a></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html"><strong aria-hidden="true">3.3.2.</strong> Cargo与项目生命周期</a></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/6_module_manage/cargo_rustc.html"><strong aria-hidden="true">3.3.3.</strong> Cargo run: rustc</a></li><li class="chapter-item expanded "><a href="../../../../layer2_design_abstract/6_module_manage/rust_plugins.html"><strong aria-hidden="true">3.3.4.</strong> Rust扩展工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer3_task_abstract/layer3_task_abstract.html"><strong aria-hidden="true">4.</strong> Layer3: 任务抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer3_task_abstract/7_concurrency/7_concurrency.html"><strong aria-hidden="true">4.1.</strong> 并发编程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer3_task_abstract/7_concurrency/io_models.html"><strong aria-hidden="true">4.1.1.</strong> 系统IO模型</a></li><li class="chapter-item expanded "><a href="../../../../layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html"><strong aria-hidden="true">4.1.2.</strong> 多线程模型</a></li><li class="chapter-item expanded "><a href="../../../../layer3_task_abstract/7_concurrency/2_async_models/async_models.html"><strong aria-hidden="true">4.1.3.</strong> 异步模型</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer3_task_abstract/8_meta_programming/8_meta_programming.html"><strong aria-hidden="true">4.2.</strong> 元编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer4_protocol_abstract/layer4_protocol_abstract.html"><strong aria-hidden="true">5.</strong> Layer4: 协议抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html"><strong aria-hidden="true">5.1.</strong> 跨语言编程</a></li><li class="chapter-item expanded "><a href="../../../../layer4_protocol_abstract/10_computer_network/10_computer_network.html"><strong aria-hidden="true">5.2.</strong> 计算机网络</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer5_source_code_anatomy/layer5_source_code_anatomy.html"><strong aria-hidden="true">6.</strong> Layer5: 源码剖析</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/layer6_ecosystem.html"><strong aria-hidden="true">7.</strong> Layer6: 生态环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/learning_resource.html"><strong aria-hidden="true">7.1.</strong> 学习资源</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/1_books/books.html"><strong aria-hidden="true">7.1.1.</strong> 书籍整理</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/2_courses/courses.html"><strong aria-hidden="true">7.1.2.</strong> 线上课程</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/3_blogs/blogs.html"><strong aria-hidden="true">7.1.3.</strong> 博客文章</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/4_videos/videos.html"><strong aria-hidden="true">7.1.4.</strong> 在线视频</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/1_learning_resource/5_projects/projects.html"><strong aria-hidden="true">7.1.5.</strong> 开源项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/2_lang_update/lang_update.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/3_community/community.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/4_academic/academic.html"><strong aria-hidden="true">7.4.</strong> 学术讨论</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/open_source.html"><strong aria-hidden="true">7.5.</strong> 开源观察</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/1_underlying/underlying.html"><strong aria-hidden="true">7.5.1.</strong> 底层开发</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/1_underlying/command/command.html"><strong aria-hidden="true">7.5.1.1.</strong> 命令行工具</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/1_underlying/data/data.html"><strong aria-hidden="true">7.5.1.2.</strong> 数据处理</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/1_underlying/embedded/embedded.html"><strong aria-hidden="true">7.5.1.3.</strong> 嵌入式</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/1_underlying/os/os.html"><strong aria-hidden="true">7.5.1.4.</strong> 系统开发</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/1_underlying/performance/performance.html"><strong aria-hidden="true">7.5.1.5.</strong> 性能工具</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network.html"><strong aria-hidden="true">7.5.2.</strong> 网络相关</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/cloud/cloud.html"><strong aria-hidden="true">7.5.2.1.</strong> 云原生</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/frontend/frontend.html"><strong aria-hidden="true">7.5.2.2.</strong> 前端基建</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network/network.html"><strong aria-hidden="true">7.5.2.3.</strong> 网络基建</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html"><strong aria-hidden="true">7.5.2.3.1.</strong> IPFS: 星际文件系统(InterPlanetary File System)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html"><strong aria-hidden="true">7.5.2.3.1.1.</strong> 利用IPFS构建自己的去中心化分布式网站</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_pubsub.html"><strong aria-hidden="true">7.5.2.3.1.2.</strong> IPFS pubsub功能</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.html"><strong aria-hidden="true">7.5.2.3.1.3.</strong> IPFS伴侣插件</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.html"><strong aria-hidden="true">7.5.2.3.1.4.</strong> IPFS+ngrok</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/web/web.html"><strong aria-hidden="true">7.5.2.4.</strong> web开发</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/2_network/web/webassembly_try.html"><strong aria-hidden="true">7.5.2.4.1.</strong> 基于Rust尝试WebAssembly</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/3_media/media.html"><strong aria-hidden="true">7.5.3.</strong> 多媒体</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/3_media/av/av.html"><strong aria-hidden="true">7.5.3.1.</strong> 音视频处理</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/3_media/game/game.html"><strong aria-hidden="true">7.5.3.2.</strong> 游戏开发</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/4_other/other.html"><strong aria-hidden="true">7.5.4.</strong> 其他</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/4_other/lang-with-rust/lang_with_rust.html"><strong aria-hidden="true">7.5.4.1.</strong> Rust与其他语言</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/5_open_source/4_other/scientific-research/scientific_research.html"><strong aria-hidden="true">7.5.4.2.</strong> 科学艺术研究</a></li><li class="chapter-item expanded "><a href="../../../../layer6ecosystem/5_open_source/4_other/tools/tools.html"><strong aria-hidden="true">7.5.4.3.</strong> 其他工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/6_security/security.html"><strong aria-hidden="true">7.6.</strong> 安全参考</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/business.html"><strong aria-hidden="true">7.7.</strong> 商业观察</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/blockchain.html"><strong aria-hidden="true">7.7.1.</strong> 区块链</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/build-a-block-in-rust.html"><strong aria-hidden="true">7.7.1.1.</strong> 使用rust建立一个简单的区块链</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">7.7.1.2.</strong> Substrate介绍与解析</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_tutorials.html"><strong aria-hidden="true">7.7.1.2.1.</strong> Substrate教程梳理</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_pallet.html"><strong aria-hidden="true">7.7.1.2.2.</strong> 深入Substrate Pallet</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_runtime.html" class="active"><strong aria-hidden="true">7.7.1.2.3.</strong> 深入Substrate Runtime</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_FRAME.html"><strong aria-hidden="true">7.7.1.2.4.</strong> 深入Substrate FRAME</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_ref.html"><strong aria-hidden="true">7.7.1.2.5.</strong> Substrate备忘</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_marketplace.html"><strong aria-hidden="true">7.7.1.2.6.</strong> Substrate市场：Rutimes、Pallets和Projects</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/substrate/awesome_substrate.html"><strong aria-hidden="true">7.7.1.2.7.</strong> Substrate惊奇资源</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html"><strong aria-hidden="true">7.7.1.3.</strong> Nervos CKB介绍与解析</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/blockchain/solana.html"><strong aria-hidden="true">7.7.1.4.</strong> Solana</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/practices/practices.html"><strong aria-hidden="true">7.7.2.</strong> 生产实践</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/7_business/products/products.html"><strong aria-hidden="true">7.7.3.</strong> 优秀产品</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/8_libs/libs.html"><strong aria-hidden="true">7.8.</strong> 基础库</a></li><li class="chapter-item expanded "><a href="../../../../layer6_ecosystem/9_frameworks/frameworks.html"><strong aria-hidden="true">7.9.</strong> 框架引擎</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../checklist.html">Checklist</a></li></ol>
+    </div>
+    <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+</nav>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+        <div id="menu-bar" class="menu-bar sticky bordered">
+            <div class="left-buttons">
+                <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                        aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                        aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                    <i class="fa fa-paint-brush"></i>
+                </button>
+                <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="light">Light</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="rust">Rust (default)</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="coal">Coal</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="navy">Navy</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="ayu">Ayu</button>
+                    </li>
+                </ul>
+                    <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                        <i class="fa fa-search"></i>
+                    </button>
+            </div>
+
+            <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
+                到头一场空 -- 《赛博英雄传》 </h4>
+            <div class="right-buttons">
+                    <a href="../../../../print.html" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fa fa-print"></i>
+                    </a>
+                    <a href="https://github.com/KuanHsiaoKuo/programming_anatomy_in_rust.git" title="Git repository" aria-label="Git repository">
+                        <i id="git-repository-button" class="fa fa-rust"></i>
+                    </a>
+            </div>
+        </div>
+
+            <div id="search-wrapper" class="hidden">
+                <form id="searchbar-outer" class="searchbar-outer">
+                    <input type="search" name="search" id="searchbar" name="searchbar"
+                           placeholder="Search this book ..." aria-controls="searchresults-outer"
+                           aria-describedby="searchresults-header">
+                </form>
+                <div id="searchresults-outer" class="searchresults-outer hidden">
+                    <div id="searchresults-header" class="searchresults-header"></div>
+                    <ul id="searchresults">
+                    </ul>
+                </div>
+            </div>
+
+        <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+        <script type="text/javascript">
+            document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+
+                <!-- Page table of contents -->
+                <div class="sidetoc">
+                    <nav class="pagetoc"></nav>
+                </div>
+                <h1 id="深入substrate-runtime"><a class="header" href="#深入substrate-runtime">深入substrate runtime</a></h1>
+<!--ts-->
+<ul>
+<li><a href="#%E6%B7%B1%E5%85%A5substrate-runtime">深入substrate runtime</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a>
+<ul>
+<li><a href="#runtime%E6%80%BB%E8%A7%88">Runtime总览</a></li>
+<li><a href="#runtime%E4%B8%8Esmart-contracts">Runtime与Smart Contracts</a></li>
+</ul>
+</li>
+</ul>
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Thu Aug 11 08:03:07 UTC 2022 -->
+<!--te-->
+<h1 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h1>
+<h2 id="runtime总览"><a class="header" href="#runtime总览">Runtime总览</a></h2>
+<ul>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/">Runtime 总览 · Substrate Developer Hub</a></p>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/macros">Runtime宏 · Substrate Developer Hub</a></p>
+</li>
+</ul>
+<div id="admonition-学习-substrate-runtime宏的方法如下" class="admonition tip">
+<div class="admonition-title">
+<p>学习 Substrate runtime宏的方法如下：</p>
+<p><a class="admonition-anchor-link" href="#admonition-学习-substrate-runtime宏的方法如下"></a></p>
+</div>
+<div>
+<p>阅读某个特定宏的文档
+运行cargo expand命令去查看宏扩展后的代码
+阅读宏定义。 如能很好地掌握 表达式模式匹配的宏规则是非常有帮助的。</p>
+</div>
+</div>
+<ul>
+<li><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/metadata">Runtime 元数据 · Substrate Developer Hub</a></li>
+</ul>
+<blockquote>
+<p>Runtim元数据就是用来RPC调用的。这里还说明了，各种语言如何通过RPC调用与链端交互</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/storage">Runtime 存储 · Substrate Developer Hub</a></p>
+<ol>
+<li>Substrate 提供了分层的模块化存储API，使runtime开发人员能根据自身情况作出合适的存储决策。 但同时请记住，区块链runtime存储的基本原则是尽可能少的使用链上存储。</li>
+<li><a href="https://github.com/paritytech/substrate/tree/master/frame/support/src/storage">substrate/frame/support/src/storage at master · paritytech/substrate</a></li>
+</ol>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/origin">Runtime 来源 · Substrate Developer Hub</a>:
+Root\Signed\None</p>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/execution">Runtime 执行流程 · Substrate Developer Hub</a></p>
+<ol>
+<li><a href="https://github.com/paritytech/substrate/blob/master/frame/executive/README.md">substrate/README.md at master · paritytech/substrate</a></li>
+<li>主要完成三种区块操作：初始化区块 执行Extrinsics 完结区块</li>
+</ol>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/events">Runtime事件 · Substrate Developer Hub</a></p>
+<ol>
+<li>Substrate runtime模块通过触发事件，以向外部实体（例如用户，区块链链浏览器或dApps）通知runtime中的变化或状况。</li>
+<li>模块所能触发的事件类型、事件中包含的信息，以及事件触发的时间都能被自定义。</li>
+</ol>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/errors">Runtime 错误 · Substrate Developer Hub</a></p>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/off-chain-workers">链下工作机 · Substrate Developer Hub</a></p>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/debugging">调试 · Substrate Developer Hub</a></p>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/tests">Runtime 测试 · Substrate Developer Hub</a></p>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/randomness">链上随机生成 · Substrate Developer Hub</a></p>
+<ol>
+<li><a href="https://github.com/paritytech/substrate/blob/master/frame/support/src/traits/randomness.rs">substrate/randomness.rs at master · paritytech/substrate</a></li>
+</ol>
+</li>
+<li>
+<p><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/runtime/upgrades">Runtime 升级 · Substrate Developer Hub</a></p>
+</li>
+</ul>
+<div id="admonition-两种升级方式都是累加扩展真正的更新还需要存储迁移" class="admonition info">
+<div class="admonition-title">
+<p>两种升级方式都是累加，扩展，真正的更新还需要存储迁移</p>
+<p><a class="admonition-anchor-link" href="#admonition-两种升级方式都是累加扩展真正的更新还需要存储迁移"></a></p>
+</div>
+<div>
+<p>在用于 runtime 开发的 FRAME 系统中，System 库定义了 set_code 函数 来更新 runtime 的定义。 </p>
+<p>在 升级一条链 的教程里详细介绍了 FRAME runtime 的升级过程，并演示了两种不同的升级机制。 </p>
+<p>该教程演示的两种升级方法严格意义上都是 累加型 的，这意味着它们通过 扩展，</p>
+<p>而不是 更新 现有的 runtime 状态来修改 runtime 逻辑。 </p>
+<p>如果 runtime 升级时对现时的状态有所更改，则可能有必要执行 “存储迁移”。</p>
+</div>
+</div>
+<h2 id="runtime与smart-contracts"><a class="header" href="#runtime与smart-contracts">Runtime与Smart Contracts</a></h2>
+<ul>
+<li><a href="https://core.tetcoin.org/docs/zh-CN/knowledgebase/smart-contracts/overview">总览 · Substrate Developer Hub</a>
+<ol>
+<li>Substrate Runtime 开发和 Substrate 智能合约是使用 Substrate 框架来构建 “去中心化应用” 的两种不同途径。</li>
+</ol>
+</li>
+</ul>
+
+            </main>
+
+            <!--            <script src="https://utteranc.es/client.js"-->
+            <!--                    repo="RustMagazine/rust_magazine_2022"-->
+            <!--                    issue-term="title"-->
+            <!--                    theme="github-light"-->
+            <!--                    crossorigin="anonymous"-->
+            <!--                    async></script>-->
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                <!-- Mobile navigation buttons -->
+                    <a rel="prev" href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_pallet.html" class="mobile-nav-chapters previous"
+                       title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_FRAME.html" class="mobile-nav-chapters next"
+                       title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_pallet.html" class="nav-chapters previous" title="Previous chapter"
+               aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <i class="fa fa-angle-left"></i>
+            </a>
+
+            <a rel="next" href="../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_FRAME.html" class="nav-chapters next" title="Next chapter"
+               aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+            </a>
+    </nav>
+
+</div>
+
+
+
+
+    <script type="text/javascript">
+        window.playground_copyable = true;
+    </script>
+
+    <script src="../../../../ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="../../../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../highlight.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../book.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JS scripts -->
+    <script type="text/javascript" src="../../../../assets/mermaid/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../../../assets/mermaid/mermaid-init.js"></script>
+    <script type="text/javascript" src="../../../../assets/smart-anchor.js"></script>
+    <script type="text/javascript" src="../../../../assets/pagetoc/sidebar.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js rust">
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>IPFS: 星际文件系统(InterPlanetary File System) - Programming Anatomy In Rust 🦀</title>
+
+
+    <!-- Custom HTML head -->
+    
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff"/>
+
+        <link rel="icon" href="../../../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../../../md-favicon.png">
+    <link rel="stylesheet" href="../../../../../css/variables.css">
+    <link rel="stylesheet" href="../../../../../css/general.css">
+    <link rel="stylesheet" href="../../../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../../../css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../../../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../../../fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="../../../../../highlight.css">
+    <link rel="stylesheet" href="../../../../../tomorrow-night.css">
+    <link rel="stylesheet" href="../../../../../ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../../../assets/pagetoc/pagetoc_style.css">
+        <link rel="stylesheet" href="../../../../../assets/css/mdbook-admonish.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<!-- Provide site root to javascript -->
+<script type="text/javascript">
+    var path_to_root = "../../../../../";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+</script>
+
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script type="text/javascript">
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) {
+    }
+</script>
+
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script type="text/javascript">
+    var theme;
+    try {
+        theme = localStorage.getItem('mdbook-theme');
+    } catch (e) {
+    }
+    if (theme === null || theme === undefined) {
+        theme = default_theme;
+    }
+    var html = document.querySelector('html');
+    html.classList.remove('no-js')
+    html.classList.remove('rust')
+    html.classList.add(theme);
+    html.classList.add('js');
+</script>
+
+<!-- Hide / unhide sidebar before it is displayed -->
+<script type="text/javascript">
+    var html = document.querySelector('html');
+    var sidebar = 'hidden';
+    if (document.body.clientWidth >= 1080) {
+        try {
+            sidebar = localStorage.getItem('mdbook-sidebar');
+        } catch (e) {
+        }
+        sidebar = sidebar || 'visible';
+    }
+    html.classList.remove('sidebar-visible');
+    html.classList.add("sidebar-" + sidebar);
+</script>
+
+<nav id="sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><a href="../../../../../../index.html"><strong aria-hidden="true">1.</strong> 总览</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../checklist.html"><strong aria-hidden="true">1.1.</strong> 待完成</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">1.2.</strong> Substrate介绍与解析</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/talks.html"><strong aria-hidden="true">1.3.</strong> Rust话题</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/layer1_underlying_abstract.html"><strong aria-hidden="true">2.</strong> Layer1: 底层抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/1_virtual_memory/virtual_memory.html"><strong aria-hidden="true">2.1.</strong> 虚拟内存管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html"><strong aria-hidden="true">2.1.1.</strong> 内存管理与内存安全</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html"><strong aria-hidden="true">2.1.2.</strong> 所有权三件套</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/2_type_system/type_system.html"><strong aria-hidden="true">2.2.</strong> 类型系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/2_type_system/built_in_types.html"><strong aria-hidden="true">2.2.1.</strong> 基础内置类型</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/2_type_system/collections.html"><strong aria-hidden="true">2.2.2.</strong> 集合类型</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/2_type_system/user_defined_types.html"><strong aria-hidden="true">2.2.3.</strong> 自定义类型</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/2_type_system/generics_traits_objects.html"><strong aria-hidden="true">2.2.4.</strong> 泛型、特征及特征对象</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/language_grammar.html"><strong aria-hidden="true">2.3.</strong> 语言语法</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html"><strong aria-hidden="true">2.3.1.</strong> 注释与文档(rustdoc)</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/keywords_glossary.html"><strong aria-hidden="true">2.3.2.</strong> 词法结构扫盲</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html"><strong aria-hidden="true">2.3.3.</strong> 绑定、赋值与匹配</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/logical_decision_loops.html"><strong aria-hidden="true">2.3.4.</strong> 逻辑判断与循环♻️</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/statements_expressions.html"><strong aria-hidden="true">2.3.5.</strong> 语句与表达式</a></li><li class="chapter-item expanded "><a href="../../../../../layer1_underlying_abstract/3_language_grammar/code_quality.html"><strong aria-hidden="true">2.3.6.</strong> 代码质量</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/layer2_design_abstract.html"><strong aria-hidden="true">3.</strong> Layer2: 设计抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html"><strong aria-hidden="true">3.1.</strong> 编程范式</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/4_programming_paradigm/fp.html"><strong aria-hidden="true">3.1.1.</strong> 函数式编程</a></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/4_programming_paradigm/oop.html"><strong aria-hidden="true">3.1.2.</strong> 面向对象编程</a></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/4_programming_paradigm/gp.html"><strong aria-hidden="true">3.1.3.</strong> 泛型编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/5_design_pattern/5_design_pattern.html"><strong aria-hidden="true">3.2.</strong> 设计模式</a></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/6_module_manage/6_module_manage.html"><strong aria-hidden="true">3.3.</strong> 模块管理</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/6_module_manage/module_system.html"><strong aria-hidden="true">3.3.1.</strong> 模块系统</a></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html"><strong aria-hidden="true">3.3.2.</strong> Cargo与项目生命周期</a></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/6_module_manage/cargo_rustc.html"><strong aria-hidden="true">3.3.3.</strong> Cargo run: rustc</a></li><li class="chapter-item expanded "><a href="../../../../../layer2_design_abstract/6_module_manage/rust_plugins.html"><strong aria-hidden="true">3.3.4.</strong> Rust扩展工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer3_task_abstract/layer3_task_abstract.html"><strong aria-hidden="true">4.</strong> Layer3: 任务抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer3_task_abstract/7_concurrency/7_concurrency.html"><strong aria-hidden="true">4.1.</strong> 并发编程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer3_task_abstract/7_concurrency/io_models.html"><strong aria-hidden="true">4.1.1.</strong> 系统IO模型</a></li><li class="chapter-item expanded "><a href="../../../../../layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html"><strong aria-hidden="true">4.1.2.</strong> 多线程模型</a></li><li class="chapter-item expanded "><a href="../../../../../layer3_task_abstract/7_concurrency/2_async_models/async_models.html"><strong aria-hidden="true">4.1.3.</strong> 异步模型</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer3_task_abstract/8_meta_programming/8_meta_programming.html"><strong aria-hidden="true">4.2.</strong> 元编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer4_protocol_abstract/layer4_protocol_abstract.html"><strong aria-hidden="true">5.</strong> Layer4: 协议抽象</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html"><strong aria-hidden="true">5.1.</strong> 跨语言编程</a></li><li class="chapter-item expanded "><a href="../../../../../layer4_protocol_abstract/10_computer_network/10_computer_network.html"><strong aria-hidden="true">5.2.</strong> 计算机网络</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer5_source_code_anatomy/layer5_source_code_anatomy.html"><strong aria-hidden="true">6.</strong> Layer5: 源码剖析</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/layer6_ecosystem.html"><strong aria-hidden="true">7.</strong> Layer6: 生态环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/learning_resource.html"><strong aria-hidden="true">7.1.</strong> 学习资源</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/1_books/books.html"><strong aria-hidden="true">7.1.1.</strong> 书籍整理</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/2_courses/courses.html"><strong aria-hidden="true">7.1.2.</strong> 线上课程</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/3_blogs/blogs.html"><strong aria-hidden="true">7.1.3.</strong> 博客文章</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/4_videos/videos.html"><strong aria-hidden="true">7.1.4.</strong> 在线视频</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/1_learning_resource/5_projects/projects.html"><strong aria-hidden="true">7.1.5.</strong> 开源项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/2_lang_update/lang_update.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/3_community/community.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/4_academic/academic.html"><strong aria-hidden="true">7.4.</strong> 学术讨论</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/open_source.html"><strong aria-hidden="true">7.5.</strong> 开源观察</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/1_underlying/underlying.html"><strong aria-hidden="true">7.5.1.</strong> 底层开发</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/1_underlying/command/command.html"><strong aria-hidden="true">7.5.1.1.</strong> 命令行工具</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/1_underlying/data/data.html"><strong aria-hidden="true">7.5.1.2.</strong> 数据处理</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/1_underlying/embedded/embedded.html"><strong aria-hidden="true">7.5.1.3.</strong> 嵌入式</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/1_underlying/os/os.html"><strong aria-hidden="true">7.5.1.4.</strong> 系统开发</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/1_underlying/performance/performance.html"><strong aria-hidden="true">7.5.1.5.</strong> 性能工具</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network.html"><strong aria-hidden="true">7.5.2.</strong> 网络相关</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/cloud/cloud.html"><strong aria-hidden="true">7.5.2.1.</strong> 云原生</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/frontend/frontend.html"><strong aria-hidden="true">7.5.2.2.</strong> 前端基建</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network/network.html"><strong aria-hidden="true">7.5.2.3.</strong> 网络基建</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html" class="active"><strong aria-hidden="true">7.5.2.3.1.</strong> IPFS: 星际文件系统(InterPlanetary File System)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html"><strong aria-hidden="true">7.5.2.3.1.1.</strong> 利用IPFS构建自己的去中心化分布式网站</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_pubsub.html"><strong aria-hidden="true">7.5.2.3.1.2.</strong> IPFS pubsub功能</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.html"><strong aria-hidden="true">7.5.2.3.1.3.</strong> IPFS伴侣插件</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.html"><strong aria-hidden="true">7.5.2.3.1.4.</strong> IPFS+ngrok</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/web/web.html"><strong aria-hidden="true">7.5.2.4.</strong> web开发</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/2_network/web/webassembly_try.html"><strong aria-hidden="true">7.5.2.4.1.</strong> 基于Rust尝试WebAssembly</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/3_media/media.html"><strong aria-hidden="true">7.5.3.</strong> 多媒体</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/3_media/av/av.html"><strong aria-hidden="true">7.5.3.1.</strong> 音视频处理</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/3_media/game/game.html"><strong aria-hidden="true">7.5.3.2.</strong> 游戏开发</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/4_other/other.html"><strong aria-hidden="true">7.5.4.</strong> 其他</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/4_other/lang-with-rust/lang_with_rust.html"><strong aria-hidden="true">7.5.4.1.</strong> Rust与其他语言</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/5_open_source/4_other/scientific-research/scientific_research.html"><strong aria-hidden="true">7.5.4.2.</strong> 科学艺术研究</a></li><li class="chapter-item expanded "><a href="../../../../../layer6ecosystem/5_open_source/4_other/tools/tools.html"><strong aria-hidden="true">7.5.4.3.</strong> 其他工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/6_security/security.html"><strong aria-hidden="true">7.6.</strong> 安全参考</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/business.html"><strong aria-hidden="true">7.7.</strong> 商业观察</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/blockchain.html"><strong aria-hidden="true">7.7.1.</strong> 区块链</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/build-a-block-in-rust.html"><strong aria-hidden="true">7.7.1.1.</strong> 使用rust建立一个简单的区块链</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">7.7.1.2.</strong> Substrate介绍与解析</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_tutorials.html"><strong aria-hidden="true">7.7.1.2.1.</strong> Substrate教程梳理</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_pallet.html"><strong aria-hidden="true">7.7.1.2.2.</strong> 深入Substrate Pallet</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_runtime.html"><strong aria-hidden="true">7.7.1.2.3.</strong> 深入Substrate Runtime</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_FRAME.html"><strong aria-hidden="true">7.7.1.2.4.</strong> 深入Substrate FRAME</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_ref.html"><strong aria-hidden="true">7.7.1.2.5.</strong> Substrate备忘</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_marketplace.html"><strong aria-hidden="true">7.7.1.2.6.</strong> Substrate市场：Rutimes、Pallets和Projects</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/substrate/awesome_substrate.html"><strong aria-hidden="true">7.7.1.2.7.</strong> Substrate惊奇资源</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html"><strong aria-hidden="true">7.7.1.3.</strong> Nervos CKB介绍与解析</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/blockchain/solana.html"><strong aria-hidden="true">7.7.1.4.</strong> Solana</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/practices/practices.html"><strong aria-hidden="true">7.7.2.</strong> 生产实践</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/7_business/products/products.html"><strong aria-hidden="true">7.7.3.</strong> 优秀产品</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/8_libs/libs.html"><strong aria-hidden="true">7.8.</strong> 基础库</a></li><li class="chapter-item expanded "><a href="../../../../../layer6_ecosystem/9_frameworks/frameworks.html"><strong aria-hidden="true">7.9.</strong> 框架引擎</a></li></ol></li><li class="chapter-item expanded "><a href="../../../../../checklist.html">Checklist</a></li></ol>
+    </div>
+    <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+</nav>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+        <div id="menu-bar" class="menu-bar sticky bordered">
+            <div class="left-buttons">
+                <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                        aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                        aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                    <i class="fa fa-paint-brush"></i>
+                </button>
+                <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="light">Light</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="rust">Rust (default)</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="coal">Coal</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="navy">Navy</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="ayu">Ayu</button>
+                    </li>
+                </ul>
+                    <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                        <i class="fa fa-search"></i>
+                    </button>
+            </div>
+
+            <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
+                到头一场空 -- 《赛博英雄传》 </h4>
+            <div class="right-buttons">
+                    <a href="../../../../../print.html" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fa fa-print"></i>
+                    </a>
+                    <a href="https://github.com/KuanHsiaoKuo/programming_anatomy_in_rust.git" title="Git repository" aria-label="Git repository">
+                        <i id="git-repository-button" class="fa fa-rust"></i>
+                    </a>
+            </div>
+        </div>
+
+            <div id="search-wrapper" class="hidden">
+                <form id="searchbar-outer" class="searchbar-outer">
+                    <input type="search" name="search" id="searchbar" name="searchbar"
+                           placeholder="Search this book ..." aria-controls="searchresults-outer"
+                           aria-describedby="searchresults-header">
+                </form>
+                <div id="searchresults-outer" class="searchresults-outer hidden">
+                    <div id="searchresults-header" class="searchresults-header"></div>
+                    <ul id="searchresults">
+                    </ul>
+                </div>
+            </div>
+
+        <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+        <script type="text/javascript">
+            document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+
+                <!-- Page table of contents -->
+                <div class="sidetoc">
+                    <nav class="pagetoc"></nav>
+                </div>
+                <h1 id="ipfs-星际文件系统interplanetary-file-system"><a class="header" href="#ipfs-星际文件系统interplanetary-file-system">IPFS: 星际文件系统(InterPlanetary File System)</a></h1>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/ipfs.jpeg" alt="ipfs" /></p>
+<!--ts-->
+<ul>
+<li><a href="#ipfs-%E6%98%9F%E9%99%85%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Finterplanetary-file-system">IPFS: 星际文件系统(InterPlanetary File System)</a>
+<ul>
+<li><a href="#ipfs%E4%BB%8B%E7%BB%8D">IPFS介绍</a>
+<ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AFipfs">1 什么是IPFS</a></li>
+<li><a href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89ipfs">2 为什么有IPFS</a>
+<ul>
+<li><a href="#http%E7%9A%84%E4%B8%AD%E5%BF%83%E5%8C%96%E6%98%AF%E4%BD%8E%E6%95%88%E7%9A%84-%E5%B9%B6%E4%B8%94%E6%88%90%E6%9C%AC%E5%BE%88%E9%AB%98">HTTP的中心化是低效的, 并且成本很高</a></li>
+<li><a href="#web%E6%96%87%E4%BB%B6%E7%BB%8F%E5%B8%B8%E8%A2%AB%E5%88%A0%E9%99%A4">Web文件经常被删除</a></li>
+<li><a href="#%E4%B8%AD%E5%BF%83%E5%8C%96%E9%99%90%E5%88%B6%E4%BA%86web%E7%9A%84%E6%88%90%E9%95%BF">中心化限制了web的成长</a></li>
+<li><a href="#%E4%BA%92%E8%81%94%E7%BD%91%E5%BA%94%E7%94%A8%E9%AB%98%E5%BA%A6%E4%BE%9D%E8%B5%96%E4%B8%BB%E5%B9%B2%E7%BD%91">互联网应用高度依赖主干网</a></li>
+</ul>
+</li>
+<li><a href="#3-ipfs%E7%9A%84%E7%9B%AE%E6%A0%87">3 IPFS的目标</a></li>
+<li><a href="#4-ipfs%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9">4 IPFS包含哪些内容</a>
+<ul>
+<li><a href="#ipfs%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8D%8F%E8%AE%AE%E7%B1%BB%E4%BC%BChttp%E5%8D%8F%E8%AE%AE">IPFS是一个协议，类似http协议</a></li>
+<li><a href="#ipfs%E6%98%AF%E4%B8%80%E4%B8%AAweb%E5%8D%8F%E8%AE%AE">IPFS是一个web协议</a></li>
+<li><a href="#ipfs%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8D%8F%E8%AE%AE">IPFS是模块化的协议</a></li>
+<li><a href="#ipfs%E6%98%AF%E4%B8%80%E4%B8%AAp2p%E7%B3%BB%E7%BB%9F">IPFS是一个p2p系统</a></li>
+<li><a href="#ipfs%E5%A4%A9%E7%94%9F%E6%98%AF%E4%B8%80%E4%B8%AAcdn">IPFS天生是一个CDN</a></li>
+<li><a href="#ipfs%E6%8B%A5%E6%9C%89%E5%91%BD%E5%90%8D%E6%9C%8D%E5%8A%A1">IPFS拥有命名服务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ipfs%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C">IPFS如何工作</a></li>
+<li><a href="#ipfs%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E5%BF%83%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%BA%E7%82%B9">IPFS如何解决中心化服务器缺点</a>
+<ul>
+<li><a href="#1-%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E5%BF%AB-%E4%B8%8D%E5%86%8D%E4%BE%9D%E8%B5%96%E4%B8%BB%E5%B9%B2%E7%BD%91-%E4%B8%AD%E5%BF%83%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8">1 下载速度快, 不再依赖主干网, 中心化服务器</a></li>
+<li><a href="#2-%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E5%8F%98%E5%BE%97%E9%9D%9E%E5%B8%B8%E4%BE%BF%E5%AE%9C">2 存储空间变得非常便宜</a></li>
+<li><a href="#3-%E5%AE%89%E5%85%A8">3 安全</a></li>
+<li><a href="#4-%E5%BC%80%E6%94%BE">4 开放</a></li>
+</ul>
+</li>
+<li><a href="#ipfs%E7%9A%84%E7%94%A8%E9%80%94">IPFS的用途</a></li>
+<li><a href="#ipfs%E7%9A%84pow%E6%9C%BA%E5%88%B6">IPFS的POW机制</a></li>
+<li><a href="#ipfs%E5%AE%B6%E6%97%8F">IPFS家族</a>
+<ul>
+<li><a href="#main-projects">Main Projects</a></li>
+<li><a href="#contributions">Contributions</a></li>
+<li><a href="#movements">Movements</a></li>
+<li><a href="#ipfs-%E4%B8%8E-filecoin">IPFS 与 Filecoin</a>
+<ul>
+<li><a href="#ipfs%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%86%E5%8F%91%E5%92%8C%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E7%B1%BB%E4%BC%BChttp%E5%8D%8F%E8%AE%AE">IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）</a></li>
+<li><a href="#filecoin-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B1%BB%E4%BC%BC%E4%B8%80%E4%B8%AA%E4%BA%91%E5%AD%98%E5%82%A8">Filecoin: 数据存储（类似一个云存储）</a></li>
+<li><a href="#ipfs%E5%92%8Cfilecoin%E5%85%B1%E5%90%8C%E4%BE%9D%E8%B5%96libp2p%E9%A1%B9%E7%9B%AE">IPFS和Filecoin共同依赖libp2p项目。</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8ipfs%E7%9A%84%E5%BA%94%E7%94%A8">使用IPFS的应用</a></li>
+<li><a href="#ipfs%E7%BD%91%E7%BB%9C%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C">IPFS网络如何运行</a></li>
+<li><a href="#ipfs-nat-traversal">IPFS: NAT traversal</a></li>
+<li><a href="#bitswap">BitSwap</a></li>
+<li><a href="#ipfs%E9%9D%9Erust%E5%AE%9E%E7%8E%B0%E7%89%88%E6%9C%AC">IPFS非rust实现版本</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90">参考资源</a></li>
+</ul>
+</li>
+</ul>
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Thu Aug 11 08:03:00 UTC 2022 -->
+<!--te-->
+<h2 id="ipfs介绍"><a class="header" href="#ipfs介绍">IPFS介绍</a></h2>
+<h3 id="1-什么是ipfs"><a class="header" href="#1-什么是ipfs">1 什么是IPFS</a></h3>
+<p>星际文件系统(InterPlanetary File System). IPFS 是一个分布式的web, 点到点超媒体协议. 可以让我们的互联网速度更快, 更加安全, 并且更加开放. IPFS协议的目标是取代传统的互联网协议HTTP。</p>
+<h3 id="2-为什么有ipfs"><a class="header" href="#2-为什么有ipfs">2 为什么有IPFS</a></h3>
+<p>众所周知, 互联网是建立在HTTP协议上的. HTTP协议是个伟大的发明, 让我们的互联网得以快速发展.但是互联网发展到了今天HTTP逐渐出来了不足.</p>
+<h4 id="http的中心化是低效的-并且成本很高"><a class="header" href="#http的中心化是低效的-并且成本很高">HTTP的中心化是低效的, 并且成本很高</a></h4>
+<p>使用HTTP协议每次需要从中心化的服务器下载完整的文件(网页, 视频, 图片等), 速度慢, 效率低. 如果改用P2P的方式下载, 可以节省近60%的带宽. P2P将文件分割为小的块, 从多个服务器同时下载, 速度非常快.</p>
+<h4 id="web文件经常被删除"><a class="header" href="#web文件经常被删除">Web文件经常被删除</a></h4>
+<p>回想一下是不是经常你收藏的某个页面, 在使用的时候浏览器返回404(无法找到页面), http的页面平均生存周期大约只有100天. Web文件经常被删除(由于存储成本太高), 无法永久保存. IPFS提供了文件的历史版本回溯功能(就像git版本控制工具一样), 可以很容易的查看文件的历史版本, 数据可以得到永久保存</p>
+<h4 id="中心化限制了web的成长"><a class="header" href="#中心化限制了web的成长">中心化限制了web的成长</a></h4>
+<p>我们的现有互联网是一个高度中心化的网络. 互联网是人类的伟大发明, 也是科技创新的加速器. 各种管制将对这互联网的功能造成威胁, 例如: 互联网封锁, 管制, 监控等等.这些都源于互联网的中心化.而分布式的IPFS可以克服这些web的缺点.</p>
+<h4 id="互联网应用高度依赖主干网"><a class="header" href="#互联网应用高度依赖主干网">互联网应用高度依赖主干网</a></h4>
+<p>主干网受制于诸多因素的影响, 战争, 自然灾害, 互联网管制, 中心化服务器宕机等等, 都可能是我们的互联网应用中断服务. IPFS可以是互联网应用极大的降低互联网应用对主干网的依赖.</p>
+<h3 id="3-ipfs的目标"><a class="header" href="#3-ipfs的目标">3 IPFS的目标</a></h3>
+<p>IPFS不仅仅是为了加速web. 而是为了最终取代HTTP协议, 使互联网更加美好</p>
+<h3 id="4-ipfs包含哪些内容"><a class="header" href="#4-ipfs包含哪些内容">4 IPFS包含哪些内容</a></h3>
+<h4 id="ipfs是一个协议类似http协议"><a class="header" href="#ipfs是一个协议类似http协议">IPFS是一个协议，类似http协议</a></h4>
+<ul>
+<li>定义了基于内容的寻址文件系统</li>
+<li>内容分发</li>
+<li>使用的技术分布式哈希、p2p传输、版本管理系统</li>
+<li>IPFS是一个文件系统</li>
+</ul>
+<p>有文件夹和文件 可挂载文件系统</p>
+<h4 id="ipfs是一个web协议"><a class="header" href="#ipfs是一个web协议">IPFS是一个web协议</a></h4>
+<ul>
+<li>可以像http那样查看互联网页面</li>
+<li>未来浏览器可以直接支持 ipfs:/ 或者 fs:/ 协议</li>
+</ul>
+<h4 id="ipfs是模块化的协议"><a class="header" href="#ipfs是模块化的协议">IPFS是模块化的协议</a></h4>
+<ul>
+<li>连接层：通过其他任何网络协议连接</li>
+<li>路由层：寻找定位文件所在位置</li>
+<li>数据块交换：采用BitTorrent技术</li>
+</ul>
+<h4 id="ipfs是一个p2p系统"><a class="header" href="#ipfs是一个p2p系统">IPFS是一个p2p系统</a></h4>
+<ul>
+<li>世界范围内的p2p文件传输网络</li>
+<li>分布式网络结构</li>
+<li>没有单点失效问题</li>
+</ul>
+<h4 id="ipfs天生是一个cdn"><a class="header" href="#ipfs天生是一个cdn">IPFS天生是一个CDN</a></h4>
+<ul>
+<li>文件添加到IPFS网络，将会在全世界进行CDN加速</li>
+<li>bittorrent的带宽管理</li>
+</ul>
+<h4 id="ipfs拥有命名服务"><a class="header" href="#ipfs拥有命名服务">IPFS拥有命名服务</a></h4>
+<ul>
+<li>IPNS：基于SFS（自认证系统）命名体系</li>
+<li>可以和现有域名系统绑定</li>
+</ul>
+<h2 id="ipfs如何工作"><a class="header" href="#ipfs如何工作">IPFS如何工作</a></h2>
+<ol>
+<li>IPFS为每一个文件分配一个独一无二的哈希值(文件指纹: 根据文件的内容进行创建), 即使是两个文件内容只有1个比特的不相同, 其哈希值也是不相同的.所以IPFS是基于文件内容进行寻址, 而不像传统的HTTP协议一样基于域名寻址.</li>
+<li>IPFS在整个网络范围内去掉重复的文件, 并且为文件建立版本管理, 也就是说每一个文件的变更历史都将被记录(这一点类似版本控制工具git, svn等), 可以很容易个回到文件的历史版本查看数据.</li>
+<li>当查询文件的时候, IPFS网络根据文件的哈希值(全网唯一)进行查找. 由于每个文件的哈希值全网唯一, 查询将很容易进行.</li>
+<li>如果仅仅使用哈希值来区分文件的话, 会给传播造成困难, 因为哈希值不容易记忆, 就像ip地址一样不容易记忆, 于是人类发明的域名. IPFS利用IPNS将哈希值映射为容易记的名字</li>
+<li>每个节点除了存储自己需要的数据, 还存储了一张哈希表, 用来记录文件存储所在的位置. 用来进行文件的查询下载.</li>
+</ol>
+<h2 id="ipfs如何解决中心化服务器缺点"><a class="header" href="#ipfs如何解决中心化服务器缺点">IPFS如何解决中心化服务器缺点</a></h2>
+<h3 id="1-下载速度快-不再依赖主干网-中心化服务器"><a class="header" href="#1-下载速度快-不再依赖主干网-中心化服务器">1 下载速度快, 不再依赖主干网, 中心化服务器</a></h3>
+<p>整个IPFS系统是一个分布式的文件存储系统, 那么在下载相关数据的时候, 将从多个节点同时下载, 相比于HTTP从中心服务器的下载速度要快很多, 大家都用过P2P下载(比如: 迅雷, BitTorrent), IPFS下载过程跟这个类似.</p>
+<h3 id="2-存储空间变得非常便宜"><a class="header" href="#2-存储空间变得非常便宜">2 存储空间变得非常便宜</a></h3>
+<p>由于IPFS使用的是区块链技术, 利用 Filecoin(也就是挖矿)来激励矿工分享自己的硬盘, 并且IFPS从全网去掉了冗余存储(从整个网络空间考虑, 这将大大节省网络存储空间), 将来的IPFS存储将会变得非常便宜(与我们现在的云盘, 各种中心化的CND相比较).</p>
+<h3 id="3-安全"><a class="header" href="#3-安全">3 安全</a></h3>
+<p>中心化服务器目前很难抵挡DDoS攻击, 当大量的访问请求从四面八方涌来, 中心化的服务器几乎会在一瞬间瘫痪, 巨大的访问量随时可能造成服务器宕机. IPFS天生就拥有抵挡这种攻击的能力. 因为所有的访问将会被分散到不同的节点. 甚至攻击者自己也是节点之一. 某种程度上讲, IPFS甚至能抵挡量子计算的攻击.</p>
+<h3 id="4-开放"><a class="header" href="#4-开放">4 开放</a></h3>
+<p>众所周知, 比特币是一种去中心化, 匿名的数据货币, 这些特性使得比特币无法被管制, 交易无法篡改. IPFS同样, 由于是建立在去中心化的分布式网络上的, 所以IFPS很难被中心化管理, 限制. 互联网将更加开放.</p>
+<h2 id="ipfs的用途"><a class="header" href="#ipfs的用途">IPFS的用途</a></h2>
+<blockquote>
+<p>IPFS主要解决现有中心化服务器中的数据存储问题。它能够极大的降低数据存储的成本,提升数据下载速度。</p>
+</blockquote>
+<blockquote>
+<p>那么凡是需要优化数据存储的地方几乎都可以使用IPFS来提升效率</p>
+</blockquote>
+<blockquote>
+<p>下面是一张保存在ipfs网络的图片：</p>
+</blockquote>
+<p><img src="https://ipfs.io/ipfs/QmdDTor6dWzknFJPJuhJgrUYqd56WkFXYAxyxpEY7kUrEb" alt="" /></p>
+<ul>
+<li>在 /ipfs 和 /ipns 下面挂载全球文件系统：就是说我们所有的文件都可以存到上面.</li>
+<li>挂载个人同步的文件夹, 可以自动进行版本管理, 自动备份. 也就意味着未来我们将拥有无限空间的网盘, 不用担心数据丢失, 不用担心隐私泄露(非对称加密). 国外的dropbox, 跟IPFS云盘相比, 都将变得微不足道 。</li>
+<li>作为加密文件和数据共享系统。IPFS天生视乎就具备这样的能力, 文件加密, 数据共享, 都是小菜一碟.</li>
+<li>作为带版本控制的软件包管理系统.</li>
+<li>作为虚拟机的根文件系统</li>
+<li>作为利用管理程序, 把IPFS作为虚拟机的引导文件系统：在线操作系统</li>
+<li>作为数据库：应用可以直接操作IPFS的Merkle DAG数据结构, 并且可以使用IPFS的版本控制, 缓存. 试想一下我们的数据库直接存在IPFS的文件系统是什么体验? 自动备份, 永不丢失, 安全加密, 无限空间, 高速连接。</li>
+<li>作为加密通讯平台，谁都别想窃听消息通信</li>
+<li>作为加密CDN, 作为web的CDN, CDN功能全包.</li>
+<li>永久web, 不存在不能访问的链接, 跟 404 说 byebye.</li>
+</ul>
+<h2 id="ipfs的pow机制"><a class="header" href="#ipfs的pow机制">IPFS的POW机制</a></h2>
+<h2 id="ipfs家族"><a class="header" href="#ipfs家族">IPFS家族</a></h2>
+<blockquote>
+<p><a href="https://protocol.ai/work/">Work | Protocol Labs</a></p>
+</blockquote>
+<h3 id="main-projects"><a class="header" href="#main-projects">Main Projects</a></h3>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220618215731222.png" alt="image-20220618215731222" /></p>
+<h3 id="contributions"><a class="header" href="#contributions">Contributions</a></h3>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220618220109640.png" alt="image-20220618220109640" /></p>
+<h3 id="movements"><a class="header" href="#movements">Movements</a></h3>
+<p><img src="https://raw.githubusercontent.com/KuanHsiaoKuo/writing_materials/main/imgs/image-20220618220532130.png" alt="image-20220618220532130" /></p>
+<h3 id="ipfs-与-filecoin"><a class="header" href="#ipfs-与-filecoin">IPFS 与 Filecoin</a></h3>
+<h4 id="ipfs数据的分发和定位数据传输协议类似http协议"><a class="header" href="#ipfs数据的分发和定位数据传输协议类似http协议">IPFS：数据的分发和定位（数据传输协议，类似HTTP协议）</a></h4>
+<ul>
+<li>传输：数据在节点之间进行传输</li>
+<li>定位：寻址，发现数据的存储位置</li>
+<li>存储：自己提供存储（可以保证存储的安全性），其它节点不保证数据存储的安全性</li>
+<li>用户：下载数据免费，自己提供服务器，自己搭建节点</li>
+<li>存储内容：只存储节点自己感兴趣的内容</li>
+</ul>
+<h4 id="filecoin-数据存储类似一个云存储"><a class="header" href="#filecoin-数据存储类似一个云存储">Filecoin: 数据存储（类似一个云存储）</a></h4>
+<ul>
+<li>存储：付费存储，用户付费，矿工和Filecoin网络保证存储的安全性</li>
+<li>下载：付费下载，用户付费，矿工负责发送数据</li>
+<li>用户：不需要自己提供存储，也不需要自己提供节点</li>
+<li>存储内容：收费存储一切</li>
+</ul>
+<h4 id="ipfs和filecoin共同依赖libp2p项目"><a class="header" href="#ipfs和filecoin共同依赖libp2p项目">IPFS和Filecoin共同依赖libp2p项目。</a></h4>
+<blockquote>
+<p>Filecoin是IPFS的激励层，二者互补形式一对协议。为我们的互联网提供了很好的基础设施。</p>
+</blockquote>
+<p>了解上述的基本内容后：</p>
+<ul>
+<li>如果开发者仅仅想要的是一个安全、快速的云存储，那么选择Filecoin即可。</li>
+<li>如果开发者除了数据存储需求，还需要分发数据，那么选择IPFS即可。</li>
+<li>如果开发者既有数据存储需求，又有数据的分发需求，那么可以单独选择IPFS，也可以IPFS+Filecoin一起。</li>
+</ul>
+<blockquote>
+<p>注意：IPFS可以做Filecoin的事情，存储，而filecoin并不能做IPFS的事情，数据传输</p>
+</blockquote>
+<h2 id="使用ipfs的应用"><a class="header" href="#使用ipfs的应用">使用IPFS的应用</a></h2>
+<ul>
+<li><del><a href="https://github.com/AKASHAorg/Community/releases">akasha</a>： 基于以太坊和IPFS的社交网络</del></li>
+<li><del>Alexandria：去中心化的内容发布平台</del></li>
+<li><a href="https://github.com/MichaelMure/Arbore">Arbore</a>：朋友之间的文件共享系统–相信很快就可以抛弃某度的云盘了</li>
+<li><a href="https://github.com/dtube/dtube">dtube</a>：利用IPFS作为存储的视频分享网站</li>
+<li><a href="https://github.com/whyrusleeping/git-ipfs-rehost">git-ipfs-rehost</a>：可以把github上的项目存储到IPFS上</li>
+<li><a href="https://github.com/ipfs-search/ipfs-search">ipfs-search</a>：基于IFPS的搜索引擎</li>
+<li><a href="https://github.com/ipfs-shipyard/ipfs-share-files">ipfs-share</a>：基于IFPS的文件分享</li>
+<li><a href="http://ipfs.pics/">ipfs.pics</a>：基于IFPS的图片分享网站</li>
+<li><a href="https://github.com/orbitdb/orbit">Orbit</a>：基于IFPS的分布式聊天工具</li>
+<li><a href="https://github.com/BusterLabs/Partyshare">Partyshare</a>：一个简单的文件共享系统</li>
+<li>http://computes.io：基于IPFS的分布式计算机（这个牛，把世界上的计算资源收集起来，构建一个巨大的分布式计算机）</li>
+<li><a href="https://github.com/OpenBazaar?type=source">OpenBazaar</a>：openbazaar是一个去中心化的淘宝，口号是“买卖自由/Buy and Sell
+Freely”，问题是一旦用户停止运行软件，商店就下线了，借助于IPFS，openbazaar2.0 打造一个离线商店。</li>
+<li>Ubuntu：著名的linux发行版本Ubuntu正在计算把发行版本转移到IPFS上来，目前正在讨论方案。</li>
+</ul>
+<blockquote>
+<p>更多可在这里查看：
+<a href="https://ipfs.io/ipfs/QmUQs8yuYbQ7VbMpRoL6RFz4dMuK4RqCCmPmJc5fK7P4Yc/">Awesome IPFS</a></p>
+</blockquote>
+<blockquote>
+<p>一些过期项目：
+<a href="https://github.com/ipfs-inactive?type=source">IPFS Inactive repositories</a></p>
+</blockquote>
+<h2 id="ipfs网络如何运行"><a class="header" href="#ipfs网络如何运行">IPFS网络如何运行</a></h2>
+<h2 id="ipfs-nat-traversal"><a class="header" href="#ipfs-nat-traversal">IPFS: NAT traversal</a></h2>
+<h2 id="bitswap"><a class="header" href="#bitswap">BitSwap</a></h2>
+<h2 id="ipfs非rust实现版本"><a class="header" href="#ipfs非rust实现版本">IPFS非rust实现版本</a></h2>
+<h2 id="参考资源"><a class="header" href="#参考资源">参考资源</a></h2>
+<ul>
+<li><a href="https://www.zhihu.com/column/ipfsguide">IPFS指南 - 知乎</a></li>
+<li><a href="https://github.com/rs-ipfs/rust-ipfs">rs-ipfs/rust-ipfs: The InterPlanetary File System (IPFS), implemented in Rust.</a></li>
+<li><a href="https://opencollective.com/rs-ipfs">Rust IPFS - Open Collective</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/33170031">IPFS网络是如何运行的(p2p网络) - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/33057094">IPFS: NAT traversal(NAT穿越) - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/33148036">IPFS: BitSwap协议(数据块交换) - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/34158682">IPFS非rust实现版本</a></li>
+</ul>
+
+            </main>
+
+            <!--            <script src="https://utteranc.es/client.js"-->
+            <!--                    repo="RustMagazine/rust_magazine_2022"-->
+            <!--                    issue-term="title"-->
+            <!--                    theme="github-light"-->
+            <!--                    crossorigin="anonymous"-->
+            <!--                    async></script>-->
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                <!-- Mobile navigation buttons -->
+                    <a rel="prev" href="../../../../../layer6_ecosystem/5_open_source/2_network/network/network.html" class="mobile-nav-chapters previous"
+                       title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html" class="mobile-nav-chapters next"
+                       title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="../../../../../layer6_ecosystem/5_open_source/2_network/network/network.html" class="nav-chapters previous" title="Previous chapter"
+               aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <i class="fa fa-angle-left"></i>
+            </a>
+
+            <a rel="next" href="../../../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html" class="nav-chapters next" title="Next chapter"
+               aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+            </a>
+    </nav>
+
+</div>
+
+
+
+
+    <script type="text/javascript">
+        window.playground_copyable = true;
+    </script>
+
+    <script src="../../../../../ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="../../../../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../../../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../highlight.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../book.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JS scripts -->
+    <script type="text/javascript" src="../../../../../assets/mermaid/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../../../../assets/mermaid/mermaid-init.js"></script>
+    <script type="text/javascript" src="../../../../../assets/smart-anchor.js"></script>
+    <script type="text/javascript" src="../../../../../assets/pagetoc/sidebar.js"></script>
+
+</body>
+</html>
