@@ -1,0 +1,24 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+</head>
+<body>
+<div id="view"></div>
+<script type="text/javascript">
+    var view;
+
+    fetch('vega/substrate_overview_radial_tree.vg.json')
+        .then(res => res.json())
+        .then(spec => render(spec))
+        .catch(err => console.error(err));
+
+    function render(spec) {
+        view = new vega.View(vega.parse(spec), {
+            // canvas在节点多的时候性能更好，svg的功能性更好
+            renderer: 'canvas',  // renderer (canvas or svg)
+            container: '#view',   // parent DOM container
+            hover: true       // enable hover processing
+        });
+        return view.runAsync();
+    }
+</script>
+</body>

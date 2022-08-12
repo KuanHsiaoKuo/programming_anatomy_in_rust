@@ -2,6 +2,7 @@
 主要将plantuml的mindmap写法转为vega可用的json文件
 """
 import sys
+import os
 import re
 import json
 
@@ -141,9 +142,9 @@ def add_tool_tip(parse_results: list[dict]):
     return parse_results
 
 
-def write_bubble_json(parse_results: list[dict]):
+def write_bubble_json(parse_results: list[dict], target_directory: str):
     filename = f"{re.split('[/|.]', puml_path)[-2]}_bubble.json"
-    file_path = '../src/overview/vega/'
+    # file_path = '../src/overview/vega/'
     amount_start = 0.91
     bubble_content = []
     for item in parse_results:
@@ -156,13 +157,13 @@ def write_bubble_json(parse_results: list[dict]):
         if item.get('note'):
             node['note'] = item['note']
         bubble_content.append(node)
-    with open(f"{file_path}{filename}", 'w') as f:
+    with open(f"{target_directory}{filename}", 'w') as f:
         f.write(json.dumps(bubble_content))
 
 
-def write_knowledge_graph_json(parse_results: list[dict]):
+def write_knowledge_graph_json(parse_results: list[dict], target_directory: str):
     filename = f"{re.split('[/|.]', puml_path)[-2]}_knowledge_graph.json"
-    file_path = '../src/overview/vega/'
+    # file_path = '../src/overview/vega/'
     # knowledge_graph_nodes = parse_results
     knowledge_graph_links = []
     knowledge_graph_nodes = []
@@ -173,14 +174,14 @@ def write_knowledge_graph_json(parse_results: list[dict]):
         node['index'] = node['id']
         knowledge_graph_nodes.append(node)
     knowledge_graph = {'nodes': knowledge_graph_nodes, 'links': knowledge_graph_links}
-    with open(f"{file_path}{filename}", 'w') as f:
+    with open(f"{target_directory}{filename}", 'w') as f:
         f.write(json.dumps(knowledge_graph))
 
 
-def write_tree_json(parse_results: list[dict]):
+def write_tree_json(parse_results: list[dict], target_directory: str):
     filename = f"{re.split('[/|.]', puml_path)[-2]}.json"
-    file_path = '../src/overview/vega/'
-    with open(f"{file_path}{filename}", 'w') as f:
+    # file_path = '../src/overview/vega/'
+    with open(f"{target_directory}{filename}", 'w') as f:
         f.write(json.dumps(parse_results))
 
 
@@ -322,17 +323,26 @@ def preprocess_title(puml_path: str):
         f.writelines(lines)
 
 
-
-
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print("请传入puml文件路径...")
+        sys.exit()
     else:
         puml_path = sys.argv[1]
         if not puml_path.endswith('.puml'):
             print("请传入puml文件...")
-    # converted_results = converter(puml_path)
-    # write_tree_json(converted_results)
-    # write_bubble_json(converted_results)
-    # write_knowledge_graph_json(converted_results)
-    preprocess_title(puml_path)
+    mod = os.getenv('PUML_CONVERT_MOD')
+    if mod == 'transform':
+        if len(sys.argv) < 3:
+            print("请传入puml文件路径和转化保存路径")
+            sys.exit()
+        else:
+            target_dir = sys.argv[2]
+        converted_results = converter(puml_path)
+        write_tree_json(converted_results, target_dir)
+        write_bubble_json(converted_results, target_dir)
+        write_knowledge_graph_json(converted_results, target_dir)
+    elif mod == 'modify':
+        preprocess_title(puml_path)
+    else:
+        print("请设置环境变量PUML_CONVERT_MOD")

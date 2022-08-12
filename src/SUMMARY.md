@@ -41,6 +41,7 @@
     - [跨语言编程](./layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.md)
     - [计算机网络](./layer4_protocol_abstract/10_computer_network/10_computer_network.md)
 - [Layer5: 源码剖析](./layer5_source_code_anatomy/layer5_source_code_anatomy.md)
+    - [Substrate](./layer5_source_code_anatomy/substrate_anatomy/substrate_overview.html)
 - [Layer6: 生态环境](./layer6_ecosystem/layer6_ecosystem.md)
     - [学习资源](layer6_ecosystem/1_learning_resource/learning_resource.md)
         - [书籍整理](layer6_ecosystem/1_learning_resource/1_books/books.md)

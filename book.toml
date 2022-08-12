@@ -21,8 +21,8 @@ editable = true
 copy-js = true
 
 [output.html.fold]
-enable = false
-level = 0
+enable = true
+level = 2
 
 # Enables the `mdbook-mermaid` preprocessor
 [preprocessor.mermaid]
