@@ -1,0 +1,49 @@
+@startmindmap
+* [[https://github.com/paritytech/substrate/blob/master/Cargo.toml master/Cargo.toml]]
+** bin
+*** node-template
+**** docs
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node-template/node/Cargo.toml node/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node-template/template/Cargo.toml template/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node-template/runtime/Cargo.toml runtime/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/tree/master/bin/node-template/node-template/scripts node-template/scripts]]
+*** node
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/bench/Cargo.toml bench/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/cli/Cargo.toml cli/Cargo.toml]]
+***** benches
+***** bin
+***** doc
+***** res
+***** src
+***** tests
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/executor/Cargo.toml executor/Cargo.toml]]
+***** benches
+***** src
+***** tests
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/inspect/Cargo.toml inspect/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/primitives/Cargo.toml primitives/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/rpc/Cargo.toml rpc/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/runtime/Cargo.toml runtime/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/node/testing/Cargo.toml testing/Cargo.toml]]
+*** utils
+**** [[https://github.com/paritytech/substrate/blob/master/bin/utils/chain-spec-builder/Cargo.toml chain-spec-builder/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/bin/utils/subkey/Cargo.toml subkey/Cargo.toml]]
+** client
+*** [[https://github.com/paritytech/substrate/blob/master/client/allocator/Cargo.toml allocator/Cargo.toml]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/api/Cargo.toml api/Cargo.toml]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/authority-discovery/Cargo.toml authority-discovery/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/client/authority-discovery/build.rs authority-discovery/build.rs]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/basic-authorship/Cargo.toml basic-authorship/Cargo.toml]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/beefy/Cargo.toml beefy/Cargo.toml]]
+**** [[https://github.com/paritytech/substrate/blob/master/client/beefy/rpc/Cargo.toml rpc/Cargo.toml]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/block-builder/Cargo.toml block-builder/Cargo.toml]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/chain-spec/Cargo.toml chain-spec/Cargo.toml]]
+*** [[https://github.com/paritytech/substrate/blob/master/client/chain-spec/derive/Cargo.toml derive/Cargo.toml]]
+** docker
+** docs
+** frame
+** primitives
+** scripts
+** test-utils
+** utils
+@endmindmap
