@@ -1,0 +1,15 @@
+@startmindmap
+* substrate/docs
+** [[https://github.com/paritytech/substrate/blob/master/docs docs]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/CHANGELOG.md CHANGELOG.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/CODEOWNERS CODEOWNERS]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/CODE_OF_CONDUCT.md CODE_OF_CONDUCT.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/PULL_REQUEST_TEMPLATE.md PULL_REQUEST_TEMPLATE.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/SECURITY.md SECURITY.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/STYLE_GUIDE.md STYLE_GUIDE.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/Upgrade.md Upgrade.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/Upgrading-2.0-to-3.0.md Upgrading-2.0-to-3.0.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/media media]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/node-template-release.md node-template-release.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docs/rustdocs-release.md rustdocs-release.md]]
+@endmindmap

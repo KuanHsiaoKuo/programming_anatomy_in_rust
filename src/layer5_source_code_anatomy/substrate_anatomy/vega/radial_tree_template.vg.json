@@ -1,0 +1,631 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "An example of a radial layout for a node-link diagram of hierarchical data.",
+  "padding": 100,
+  "autosize": "none",
+  "signals": [
+    {
+      "name": "square",
+      "value": 2400,
+      "bind": {
+        "input": "range",
+        "min": 20,
+        "max": 3000,
+        "step": 10
+      }
+    },
+    {
+      "name": "radius",
+      "value": "1200",
+      "bind": {
+        "input": "range",
+        "min": 20,
+        "max": 2000,
+        "step": 10
+      }
+    },
+    {
+      "name": "width",
+      "update": "square"
+    },
+    {
+      "name": "height",
+      "update": "square"
+    },
+    {
+      "name": "labels",
+      "value": true,
+      "bind": {
+        "input": "checkbox"
+      }
+    },
+    {
+      "name": "textOffset",
+      "value": 8,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 20,
+        "step": 1
+      }
+    },
+    {
+      "name": "extent",
+      "value": 360,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 360,
+        "step": 1
+      }
+    },
+    {
+      "name": "rotate",
+      "value": 90,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 360,
+        "step": 1
+      }
+    },
+    {
+      "name": "layout",
+      "value": "tidy",
+      "bind": {
+        "input": "radio",
+        "options": [
+          "tidy",
+          "cluster"
+        ]
+      }
+    },
+    {
+      "name": "links",
+      "value": "diagonal",
+      "bind": {
+        "input": "select",
+        "options": [
+          "line",
+          "curve",
+          "diagonal",
+          "orthogonal"
+        ]
+      }
+    },
+    {
+      "name": "originX",
+      "update": "width / 2"
+    },
+    {
+      "name": "originY",
+      "update": "height / 2"
+    },
+    {
+      "name": "colorIn",
+      "value": "firebrick"
+    },
+    {
+      "name": "colorOut",
+      "value": "forestgreen"
+    },
+    {
+      "name": "hover_tool_tip",
+      "value": 0,
+      "on": [
+        {
+          "events": "text:mouseover[event.shiftKey]",
+          "update": "1"
+        },
+        {
+          "events": "mouseover[!event.item]",
+          "update": "0"
+        }
+      ]
+    },
+    {
+      "name": "active",
+      "value": null,
+      "on": [
+        {
+          "events": "text:mouseover",
+          "update": "datum.id"
+        },
+        {
+          "events": "mouseover[!event.item]",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      "name": "active_parent",
+      "value": null,
+      "on": [
+        {
+          "events": "text:mouseover",
+          "update": "datum.parent"
+        },
+        {
+          "events": "mouseover[!event.item]",
+          "update": "null"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "tree",
+      "url": "vega/overview.json",
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "tree",
+          "method": {
+            "signal": "layout"
+          },
+          "size": [
+            1,
+            {
+              "signal": "radius"
+            }
+          ],
+          "as": [
+            "alpha",
+            "radius",
+            "depth",
+            "children"
+          ]
+        },
+        {
+          "type": "formula",
+          "expr": "(rotate + extent * datum.alpha + 270) % 360",
+          "as": "angle"
+        },
+        {
+          "type": "formula",
+          "expr": "PI * datum.angle / 180",
+          "as": "radians"
+        },
+        {
+          "type": "formula",
+          "expr": "inrange(datum.angle, [90, 270])",
+          "as": "leftside"
+        },
+        {
+          "type": "formula",
+          "expr": "originX + datum.radius * cos(datum.radians)",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "originY + datum.radius * sin(datum.radians)",
+          "as": "y"
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "treelinks"
+        },
+        {
+          "type": "linkpath",
+          "shape": {
+            "signal": "links"
+          },
+          "orient": "radial",
+          "sourceX": "source.radians",
+          "sourceY": "source.radius",
+          "targetX": "target.radians",
+          "targetY": "target.radius"
+        }
+      ]
+    },
+    {
+      "name": "selected_bro",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.parent === active_parent"
+        }
+      ]
+    },
+    {
+      "name": "selected_child",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.parent === active"
+        }
+      ]
+    },
+    {
+      "name": "selected_grandson",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "indata('selected_child', 'id', datum.parent)"
+        }
+      ]
+    },
+    {
+      "name": "unrevlant",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "active ? datum.id != active && datum.id != active_parent && !indata('selected_child', 'id', datum.id) && !indata('selected_bro', 'id', datum.id) && !indata('selected_grandson', 'id', datum.id) : datum.id === null"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "linear",
+      "range": {
+        "scheme": "magma"
+      },
+      "domain": {
+        "data": "tree",
+        "field": "depth"
+      },
+      "zero": true
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "title": "Relative",
+      "offset": 0,
+      "encode": {
+        "symbols": {
+          "update": {
+            "fillOpacity": {
+              "value": 1
+            },
+            "stroke": {
+              "value": "transparent"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": {
+        "data": "links"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "originX"
+          },
+          "y": {
+            "signal": "originY"
+          },
+          "path": {
+            "field": "path"
+          },
+          "stroke": {
+            "value": "#ccc"
+          },
+          "update": {
+            "stroke": [
+              {
+                "test": "parent.id === active",
+                "signal": "colorOut"
+              },
+              {
+                "test": "parent.parent === active",
+                "signal": "colorIn"
+              },
+              {
+                "value": "#ccc"
+              }
+            ],
+            "strokeOpacity": [
+              {
+                "test": "parent.source === active || parent.target === active",
+                "value": 1
+              },
+              {
+                "value": 0.2
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "tree"
+      },
+      "encode": {
+        "enter": {
+          "stroke": {
+            "value": "#fff"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "depth"
+          },
+          "size": [
+            {
+              "test": "indata('unrevlant', 'id', datum.id)",
+              "value": 10
+            },
+            {
+              "test": "datum.child_count > 1",
+              "signal": "datum.parent ? 60 * datum.child_count : 60 * datum.node_count"
+            },
+            {
+              "value": 100
+            }
+          ],
+          "stroke": [
+            {
+              "test": "datum.id === active",
+              "value": "red"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "tree"
+      },
+      "encode": {
+        "enter": {
+          "text": {
+            "field": "name"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "dx": [
+            {
+              "test": "datum.child_count === 0",
+              "signal": "(datum.leftside ? -1 : 1) * textOffset"
+          },
+            {
+              "test": "datum.child_count > 0",
+              "signal": "(datum.leftside ? -1 : 1) * (textOffset + datum.child_count * 2)"
+            }
+          ],
+          "angle": {
+            "signal": "datum.leftside ? datum.angle - 180 : datum.angle"
+          },
+          "align": {
+            "signal": "datum.leftside ? 'right' : 'left'"
+          },
+          "opacity": {
+            "signal": "labels ? 1 : 0"
+          },
+          "lineBreak": {
+            "value": "\n"
+          },
+          "href": {
+            "signal": "datum.link"
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "fontSize": [
+            {
+              "test": "indata('unrevlant', 'id', datum.id)",
+              "value": 0
+            },
+            {
+              "value": 12
+            }
+          ],
+          "fill": [
+            {
+              "test": "datum.id === active_parent",
+              "value": "gold"
+            },
+            {
+              "test": "datum.id === active",
+              "value": "green"
+            },
+            {
+              "test": "indata('selected_bro', 'id', datum.id)",
+              "value": "purple"
+            },
+            {
+              "test": "indata('selected_child', 'id', datum.id)",
+              "value": "steelblue"
+            },
+            {
+              "value": "black"
+            }
+          ]
+        },
+        "hover": {
+          "tooltip": {
+            "signal": "hover_tool_tip === 1 ? datum.tool_tip : null"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFFF",
+    "title": {
+      "anchor": "start",
+      "fontSize": 18,
+      "font": "Lato"
+    },
+    "axisX": {
+      "domain": true,
+      "domainColor": "#000000",
+      "domainWidth": 1,
+      "grid": false,
+      "labelFontSize": 12,
+      "labelFont": "Lato",
+      "labelAngle": 0,
+      "tickColor": "#000000",
+      "tickSize": 5,
+      "titleFontSize": 12,
+      "titlePadding": 10,
+      "titleFont": "Lato"
+    },
+    "axisY": {
+      "domain": false,
+      "domainWidth": 1,
+      "grid": true,
+      "gridColor": "#DEDDDD",
+      "gridWidth": 1,
+      "labelFontSize": 12,
+      "labelFont": "Lato",
+      "labelPadding": 8,
+      "ticks": false,
+      "titleFontSize": 12,
+      "titlePadding": 10,
+      "titleFont": "Lato",
+      "titleAngle": 0,
+      "titleY": -10,
+      "titleX": 18
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "labelFont": "Lato",
+      "symbolSize": 100,
+      "titleFontSize": 12,
+      "titlePadding": 10,
+      "titleFont": "Lato",
+      "orient": "right",
+      "offset": 10
+    },
+    "view": {
+      "stroke": "transparent"
+    },
+    "range": {
+      "category": [
+        "#1696d2",
+        "#ec008b",
+        "#fdbf11",
+        "#000000",
+        "#d2d2d2",
+        "#55b748"
+      ],
+      "diverging": [
+        "#ca5800",
+        "#fdbf11",
+        "#fdd870",
+        "#fff2cf",
+        "#cfe8f3",
+        "#73bfe2",
+        "#1696d2",
+        "#0a4c6a"
+      ],
+      "heatmap": [
+        "#ca5800",
+        "#fdbf11",
+        "#fdd870",
+        "#fff2cf",
+        "#cfe8f3",
+        "#73bfe2",
+        "#1696d2",
+        "#0a4c6a"
+      ],
+      "ordinal": [
+        "#cfe8f3",
+        "#a2d4ec",
+        "#73bfe2",
+        "#46abdb",
+        "#1696d2",
+        "#12719e"
+      ],
+      "ramp": [
+        "#CFE8F3",
+        "#A2D4EC",
+        "#73BFE2",
+        "#46ABDB",
+        "#1696D2",
+        "#12719E",
+        "#0A4C6A",
+        "#062635"
+      ]
+    },
+    "area": {
+      "fill": "#1696d2"
+    },
+    "rect": {
+      "fill": "#1696d2"
+    },
+    "line": {
+      "color": "#1696d2",
+      "stroke": "#1696d2",
+      "strokeWidth": 5
+    },
+    "trail": {
+      "color": "#1696d2",
+      "stroke": "#1696d2",
+      "strokeWidth": 0,
+      "size": 1
+    },
+    "path": {
+      "stroke": "#1696d2",
+      "strokeWidth": 0.5
+    },
+    "point": {
+      "filled": true
+    },
+    "text": {
+      "font": "Lato",
+      "color": "#1696d2",
+      "fontSize": 11,
+      "align": "center",
+      "fontWeight": 400,
+      "size": 11
+    },
+    "style": {
+      "bar": {
+        "fill": "#1696d2",
+        "stroke": null
+      }
+    },
+    "arc": {
+      "fill": "#1696d2"
+    },
+    "shape": {
+      "stroke": "#1696d2"
+    },
+    "symbol": {
+      "fill": "#1696d2",
+      "size": 30
+    }
+  }
+}

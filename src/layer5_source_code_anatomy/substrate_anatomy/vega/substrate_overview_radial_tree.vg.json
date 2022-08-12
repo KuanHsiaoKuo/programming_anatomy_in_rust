@@ -16,7 +16,7 @@
     },
     {
       "name": "radius",
-      "update": "square * 0.4",
+      "value": "1200",
       "bind": {
         "input": "range",
         "min": 20,
@@ -447,7 +447,7 @@
               "value": 0
             },
             {
-              "value": 20
+              "value": 12
             }
           ],
           "fill": [

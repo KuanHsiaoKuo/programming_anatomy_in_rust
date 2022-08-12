@@ -1,0 +1,7 @@
+@startmindmap
+* substrate/docker
+** [[https://github.com/paritytech/substrate/blob/master/docker docker]]
+*** [[https://github.com/paritytech/substrate/blob/master/docker/README.md README.md]]
+*** [[https://github.com/paritytech/substrate/blob/master/docker/build.sh build.sh]]
+*** [[https://github.com/paritytech/substrate/blob/master/docker/substrate_builder.Dockerfile substrate_builder.Dockerfile]]
+@endmindmap
