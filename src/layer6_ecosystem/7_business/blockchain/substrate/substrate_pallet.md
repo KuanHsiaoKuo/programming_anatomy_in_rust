@@ -39,7 +39,7 @@
       * [为某些trait提供默认实现。](#为某些trait提供默认实现)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Fri Aug 12 05:14:50 UTC 2022 -->
+<!-- Added by: runner, at: Fri Aug 12 08:05:24 UTC 2022 -->
 
 <!--te-->
 

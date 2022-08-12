@@ -5,7 +5,7 @@
    * [RustCN](#rustcn)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Fri Aug 12 05:14:45 UTC 2022 -->
+<!-- Added by: runner, at: Fri Aug 12 08:05:19 UTC 2022 -->
 
 <!--te-->
 
