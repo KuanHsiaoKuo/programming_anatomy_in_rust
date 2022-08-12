@@ -1,0 +1,50 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+    String.prototype.format = function () {
+        if (arguments.length == 0) return this;
+        var param = arguments[0];
+        var s = this;
+        if (typeof (param) == 'object') {
+            for (var key in param)
+                s = s.replace(new RegExp("\\{" + key + "\\}", "g"), param[key]);
+            return s;
+        } else {
+            for (var i = 0; i < arguments.length; i++)
+                s = s.replace(new RegExp("\\{" + i + "\\}", "g"), arguments[i]);
+            return s;
+        }
+    }
+
+    function render(view_id) {
+        target_view = document.createElement("div")
+        target_view.id = view_id
+        document.body.appendChild(target_view)
+        target_vg = 'vega/{0}_radial_tree.vg.json'.format(view_id)
+        vegaEmbed(
+            '#' + view_id,
+            target_vg
+        );
+
+    }
+
+    let target_views = [
+        'substrate-overview',
+        'substrate-bin',
+        'substrate-client',
+        'substrate-docker',
+        'substrate-docs',
+        'substrate-frame',
+        'substrate-primitives'
+    ]
+    for (let view_id of target_views) {
+        console.log(view_id)
+        render(view_id)
+    }
+</script>
+</body>
