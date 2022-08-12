@@ -1,6 +1,13 @@
 # 漫话Rust
 
 <!--ts-->
+* [漫话Rust](#漫话rust)
+   * [话题](#话题)
+      * [为什么觉得 Rust 难上手，尤其是生命周期？ - 知乎](#为什么觉得-rust-难上手尤其是生命周期---知乎)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Fri Aug 12 16:18:38 UTC 2022 -->
+
 <!--te-->
 
 ## 话题
