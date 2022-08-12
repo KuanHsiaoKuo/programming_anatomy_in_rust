@@ -18,21 +18,12 @@
             * [可折叠](#可折叠)
          * [常用格式](#常用格式)
             * [note](#note)
-            * [abstract, summary, tldr](#abstract-summary-tldr)
-            * [info, todo](#info-todo)
-            * [tip, hint, important](#tip-hint-important)
-            * [success, check, done](#success-check-done)
-            * [question, help, faq](#question-help-faq)
-            * [warning, caution, attention](#warning-caution-attention)
-            * [failure, fail, missing](#failure-fail-missing)
-            * [danger, error](#danger-error)
             * [bug](#bug)
             * [example](#example)
-            * [quote, cite](#quote-cite)
    * [github action](#github-action)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Thu Aug 11 08:19:54 UTC 2022 -->
+<!-- Added by: runner, at: Fri Aug 12 05:14:36 UTC 2022 -->
 
 <!--te-->
 
