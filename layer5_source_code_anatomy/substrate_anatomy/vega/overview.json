@@ -1,0 +1,1630 @@
+[
+  {
+    "id": 1,
+    "layers": 1,
+    "name": "master/Cargo.\ntoml",
+    "link": "https://github.com/paritytech/substrate/blob/master/Cargo.toml",
+    "child_count": 9,
+    "node_count": 102,
+    "tool_tip": {
+      "title": "master/Cargo.\ntoml",
+      "link": "https://github.com/paritytech/substrate/blob/master/Cargo.toml"
+    }
+  },
+  {
+    "id": 2,
+    "layers": 2,
+    "name": "bin",
+    "parent": 1,
+    "child_count": 3,
+    "node_count": 22,
+    "tool_tip": {
+      "title": "bin"
+    }
+  },
+  {
+    "id": 30,
+    "layers": 2,
+    "name": "client",
+    "parent": 1,
+    "child_count": 30,
+    "node_count": 61,
+    "tool_tip": {
+      "title": "client"
+    }
+  },
+  {
+    "id": 109,
+    "layers": 2,
+    "name": "docker",
+    "parent": 1,
+    "child_count": 3,
+    "node_count": 3,
+    "tool_tip": {
+      "title": "docker"
+    }
+  },
+  {
+    "id": 113,
+    "layers": 2,
+    "name": "docs",
+    "parent": 1,
+    "child_count": 11,
+    "node_count": 11,
+    "tool_tip": {
+      "title": "docs"
+    }
+  },
+  {
+    "id": 125,
+    "layers": 2,
+    "name": "frame",
+    "parent": 1,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "frame"
+    }
+  },
+  {
+    "id": 126,
+    "layers": 2,
+    "name": "primitives",
+    "parent": 1,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "primitives"
+    }
+  },
+  {
+    "id": 127,
+    "layers": 2,
+    "name": "scripts",
+    "parent": 1,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "scripts"
+    }
+  },
+  {
+    "id": 128,
+    "layers": 2,
+    "name": "test-utils",
+    "parent": 1,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "test-utils"
+    }
+  },
+  {
+    "id": 129,
+    "layers": 2,
+    "name": "utils",
+    "parent": 1,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "utils"
+    }
+  },
+  {
+    "id": 3,
+    "layers": 3,
+    "name": "node-template",
+    "parent": 2,
+    "child_count": 5,
+    "node_count": 5,
+    "tool_tip": {
+      "title": "node-template"
+    }
+  },
+  {
+    "id": 9,
+    "layers": 3,
+    "name": "node",
+    "parent": 2,
+    "child_count": 8,
+    "node_count": 15,
+    "tool_tip": {
+      "title": "node"
+    }
+  },
+  {
+    "id": 27,
+    "layers": 3,
+    "name": "utils",
+    "parent": 2,
+    "child_count": 2,
+    "node_count": 2,
+    "tool_tip": {
+      "title": "utils"
+    }
+  },
+  {
+    "id": 31,
+    "layers": 3,
+    "name": "allocator/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/allocator/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "allocator/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/allocator/Cargo.toml"
+    }
+  },
+  {
+    "id": 32,
+    "layers": 3,
+    "name": "api/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/api/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "api/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/api/Cargo.toml"
+    }
+  },
+  {
+    "id": 33,
+    "layers": 3,
+    "name": "authority-discovery/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/authority-discovery/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "authority-discovery/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/authority-discovery/Cargo.toml"
+    }
+  },
+  {
+    "id": 35,
+    "layers": 3,
+    "name": "basic-authorship/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/basic-authorship/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "basic-authorship/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/basic-authorship/Cargo.toml"
+    }
+  },
+  {
+    "id": 36,
+    "layers": 3,
+    "name": "beefy/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/beefy/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "beefy/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/beefy/Cargo.toml"
+    }
+  },
+  {
+    "id": 38,
+    "layers": 3,
+    "name": "block-builder/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/block-builder/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "block-builder/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/block-builder/Cargo.toml"
+    }
+  },
+  {
+    "id": 39,
+    "layers": 3,
+    "name": "chain-spec/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/chain-spec/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "chain-spec/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/chain-spec/Cargo.toml"
+    }
+  },
+  {
+    "id": 41,
+    "layers": 3,
+    "name": "cli/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/cli/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "cli/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/cli/Cargo.toml"
+    }
+  },
+  {
+    "id": 42,
+    "layers": 3,
+    "name": "consensus",
+    "parent": 30,
+    "child_count": 8,
+    "node_count": 8,
+    "tool_tip": {
+      "title": "consensus"
+    }
+  },
+  {
+    "id": 52,
+    "layers": 3,
+    "name": "db/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/db/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "db/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/db/Cargo.toml"
+    }
+  },
+  {
+    "id": 53,
+    "layers": 3,
+    "name": "executor/Carg\no.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/executor/Cargo.toml",
+    "child_count": 6,
+    "node_count": 6,
+    "tool_tip": {
+      "title": "executor/Carg\no.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/executor/Cargo.toml"
+    }
+  },
+  {
+    "id": 61,
+    "layers": 3,
+    "name": "finality-grandpa/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/finality-grandpa/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "finality-grandpa/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/finality-grandpa/Cargo.toml"
+    }
+  },
+  {
+    "id": 63,
+    "layers": 3,
+    "name": "informant/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/informant/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "informant/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/informant/Cargo.toml"
+    }
+  },
+  {
+    "id": 64,
+    "layers": 3,
+    "name": "keystore/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/keystore/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "keystore/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/keystore/Cargo.toml"
+    }
+  },
+  {
+    "id": 65,
+    "layers": 3,
+    "name": "network-gossip/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network-gossip/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "network-gossip/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network-gossip/Cargo.toml"
+    }
+  },
+  {
+    "id": 66,
+    "layers": 3,
+    "name": "network/Cargo\n.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network/Cargo.toml",
+    "child_count": 5,
+    "node_count": 5,
+    "tool_tip": {
+      "title": "network/Cargo\n.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network/Cargo.toml"
+    }
+  },
+  {
+    "id": 72,
+    "layers": 3,
+    "name": "offchain/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/offchain/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "offchain/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/offchain/Cargo.toml"
+    }
+  },
+  {
+    "id": 73,
+    "layers": 3,
+    "name": "peerset/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/peerset/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "peerset/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/peerset/Cargo.toml"
+    }
+  },
+  {
+    "id": 74,
+    "layers": 3,
+    "name": "proposer-metrics/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/proposer-metrics/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "proposer-metrics/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/proposer-metrics/Cargo.toml"
+    }
+  },
+  {
+    "id": 75,
+    "layers": 3,
+    "name": "rpc-api/Cargo\n.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/rpc-api/Cargo.toml",
+    "child_count": 7,
+    "node_count": 7,
+    "tool_tip": {
+      "title": "rpc-api/Cargo\n.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/rpc-api/Cargo.toml"
+    }
+  },
+  {
+    "id": 83,
+    "layers": 3,
+    "name": "rpc-servers/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/rpc-servers/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "rpc-servers/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/rpc-servers/Cargo.toml"
+    }
+  },
+  {
+    "id": 84,
+    "layers": 3,
+    "name": "rpc/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/rpc/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "rpc/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/rpc/Cargo.toml"
+    }
+  },
+  {
+    "id": 85,
+    "layers": 3,
+    "name": "service/Cargo\n.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/service/Cargo.toml",
+    "child_count": 3,
+    "node_count": 3,
+    "tool_tip": {
+      "title": "service/Cargo\n.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/service/Cargo.toml"
+    }
+  },
+  {
+    "id": 89,
+    "layers": 3,
+    "name": "state-db/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/state-db/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "state-db/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/state-db/Cargo.toml"
+    }
+  },
+  {
+    "id": 90,
+    "layers": 3,
+    "name": "sync-state-rpc/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/sync-state-rpc/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "sync-state-rpc/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/sync-state-rpc/Cargo.toml"
+    }
+  },
+  {
+    "id": 91,
+    "layers": 3,
+    "name": "sysinfo/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/sysinfo/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "sysinfo/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/sysinfo/Cargo.toml"
+    }
+  },
+  {
+    "id": 93,
+    "layers": 3,
+    "name": "telemetry/Cargo.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/telemetry/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "telemetry/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/telemetry/Cargo.toml"
+    }
+  },
+  {
+    "id": 94,
+    "layers": 3,
+    "name": "tracing/Cargo\n.toml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/Cargo.toml",
+    "child_count": 4,
+    "node_count": 4,
+    "tool_tip": {
+      "title": "tracing/Cargo\n.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/Cargo.toml"
+    }
+  },
+  {
+    "id": 100,
+    "layers": 3,
+    "name": "transaction-p\nool/Cargo.to\nml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/Cargo.toml",
+    "child_count": 3,
+    "node_count": 3,
+    "tool_tip": {
+      "title": "transaction-p\nool/Cargo.to\nml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/Cargo.toml"
+    }
+  },
+  {
+    "id": 105,
+    "layers": 3,
+    "name": "utils/Cargo.t\noml",
+    "parent": 30,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/utils/Cargo.toml",
+    "child_count": 3,
+    "node_count": 3,
+    "tool_tip": {
+      "title": "utils/Cargo.t\noml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/utils/Cargo.toml"
+    }
+  },
+  {
+    "id": 110,
+    "layers": 3,
+    "name": "docker/README.md",
+    "parent": 109,
+    "link": "https://github.com/paritytech/substrate/blob/master/docker/README.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docker/README.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docker/README.md"
+    }
+  },
+  {
+    "id": 111,
+    "layers": 3,
+    "name": "docker/build.sh",
+    "parent": 109,
+    "link": "https://github.com/paritytech/substrate/blob/master/docker/build.sh",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docker/build.sh",
+      "link": "https://github.com/paritytech/substrate/blob/master/docker/build.sh"
+    }
+  },
+  {
+    "id": 112,
+    "layers": 3,
+    "name": "docker/substrate_builder.Dockerfile",
+    "parent": 109,
+    "link": "https://github.com/paritytech/substrate/blob/master/docker/substrate_builder.Dockerfile",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docker/substrate_builder.Dockerfile",
+      "link": "https://github.com/paritytech/substrate/blob/master/docker/substrate_builder.Dockerfile"
+    }
+  },
+  {
+    "id": 114,
+    "layers": 3,
+    "name": "docs/CHANGELOG.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/CHANGELOG.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/CHANGELOG.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/CHANGELOG.md"
+    }
+  },
+  {
+    "id": 115,
+    "layers": 3,
+    "name": "docs/Upgrading-2.0-to-3.0.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/Upgrading-2.0-to-3.0.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/Upgrading-2.0-to-3.0.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/Upgrading-2.0-to-3.0.md"
+    }
+  },
+  {
+    "id": 116,
+    "layers": 3,
+    "name": "docs/CODEOWNERS",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/CODEOWNERS",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/CODEOWNERS",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/CODEOWNERS"
+    }
+  },
+  {
+    "id": 117,
+    "layers": 3,
+    "name": "docs/CODE_OF_CONDUCT.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/CODE_OF_CONDUCT.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/CODE_OF_CONDUCT.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/CODE_OF_CONDUCT.md"
+    }
+  },
+  {
+    "id": 118,
+    "layers": 3,
+    "name": "docs/CONTRIBUTING.adoc",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/CONTRIBUTING.adoc",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/CONTRIBUTING.adoc",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/CONTRIBUTING.adoc"
+    }
+  },
+  {
+    "id": 119,
+    "layers": 3,
+    "name": "docs/PULL_REQUEST_TEMPLATE.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/PULL_REQUEST_TEMPLATE.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/PULL_REQUEST_TEMPLATE.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/PULL_REQUEST_TEMPLATE.md"
+    }
+  },
+  {
+    "id": 120,
+    "layers": 3,
+    "name": "docs/README.adoc",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/README.adoc",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/README.adoc",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/README.adoc"
+    }
+  },
+  {
+    "id": 121,
+    "layers": 3,
+    "name": "docs/STYLE_GUIDE.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/STYLE_GUIDE.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/STYLE_GUIDE.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/STYLE_GUIDE.md"
+    }
+  },
+  {
+    "id": 122,
+    "layers": 3,
+    "name": "docs/Structure.adoc",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/Structure.adoc",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/Structure.adoc",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/Structure.adoc"
+    }
+  },
+  {
+    "id": 123,
+    "layers": 3,
+    "name": "docs/node-template-release.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/node-template-release.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/node-template-release.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/node-template-release.md"
+    }
+  },
+  {
+    "id": 124,
+    "layers": 3,
+    "name": "docs/rustdocs-release.md",
+    "parent": 113,
+    "link": "https://github.com/paritytech/substrate/blob/master/docs/rustdocs-release.md",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs/rustdocs-release.md",
+      "link": "https://github.com/paritytech/substrate/blob/master/docs/rustdocs-release.md"
+    }
+  },
+  {
+    "id": 4,
+    "layers": 4,
+    "name": "docs",
+    "parent": 3,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "docs"
+    }
+  },
+  {
+    "id": 5,
+    "layers": 4,
+    "name": "node/Cargo.toml",
+    "parent": 3,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node-template/node/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "node/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node-template/node/Cargo.toml"
+    }
+  },
+  {
+    "id": 6,
+    "layers": 4,
+    "name": "template/Cargo.toml",
+    "parent": 3,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node-template/template/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "template/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node-template/template/Cargo.toml"
+    }
+  },
+  {
+    "id": 7,
+    "layers": 4,
+    "name": "runtime/Cargo.toml",
+    "parent": 3,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node-template/runtime/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "runtime/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node-template/runtime/Cargo.toml"
+    }
+  },
+  {
+    "id": 8,
+    "layers": 4,
+    "name": "node-template/scripts",
+    "parent": 3,
+    "link": "https://github.com/paritytech/substrate/tree/master/bin/node-template/node-template/scripts",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "node-template/scripts",
+      "link": "https://github.com/paritytech/substrate/tree/master/bin/node-template/node-template/scripts"
+    }
+  },
+  {
+    "id": 10,
+    "layers": 4,
+    "name": "bench/Cargo.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/bench/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "bench/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/bench/Cargo.toml"
+    }
+  },
+  {
+    "id": 11,
+    "layers": 4,
+    "name": "cli/Cargo.tom\nl",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/cli/Cargo.toml",
+    "child_count": 6,
+    "node_count": 6,
+    "tool_tip": {
+      "title": "cli/Cargo.tom\nl",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/cli/Cargo.toml"
+    }
+  },
+  {
+    "id": 18,
+    "layers": 4,
+    "name": "executor/Carg\no.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/executor/Cargo.toml",
+    "child_count": 3,
+    "node_count": 3,
+    "tool_tip": {
+      "title": "executor/Carg\no.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/executor/Cargo.toml"
+    }
+  },
+  {
+    "id": 22,
+    "layers": 4,
+    "name": "inspect/Cargo.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/inspect/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "inspect/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/inspect/Cargo.toml"
+    }
+  },
+  {
+    "id": 23,
+    "layers": 4,
+    "name": "primitives/Cargo.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/primitives/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "primitives/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/primitives/Cargo.toml"
+    }
+  },
+  {
+    "id": 24,
+    "layers": 4,
+    "name": "rpc/Cargo.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/rpc/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "rpc/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/rpc/Cargo.toml"
+    }
+  },
+  {
+    "id": 25,
+    "layers": 4,
+    "name": "runtime/Cargo.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/runtime/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "runtime/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/runtime/Cargo.toml"
+    }
+  },
+  {
+    "id": 26,
+    "layers": 4,
+    "name": "testing/Cargo.toml",
+    "parent": 9,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/node/testing/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "testing/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/node/testing/Cargo.toml"
+    }
+  },
+  {
+    "id": 28,
+    "layers": 4,
+    "name": "chain-spec-builder/Cargo.toml",
+    "parent": 27,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/utils/chain-spec-builder/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "chain-spec-builder/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/utils/chain-spec-builder/Cargo.toml"
+    }
+  },
+  {
+    "id": 29,
+    "layers": 4,
+    "name": "subkey/Cargo.toml",
+    "parent": 27,
+    "link": "https://github.com/paritytech/substrate/blob/master/bin/utils/subkey/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "subkey/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/bin/utils/subkey/Cargo.toml"
+    }
+  },
+  {
+    "id": 34,
+    "layers": 4,
+    "name": "authority-discovery/build.rs",
+    "parent": 33,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/authority-discovery/build.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "authority-discovery/build.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/authority-discovery/build.rs"
+    }
+  },
+  {
+    "id": 37,
+    "layers": 4,
+    "name": "rpc/Cargo.toml",
+    "parent": 36,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/beefy/rpc/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "rpc/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/beefy/rpc/Cargo.toml"
+    }
+  },
+  {
+    "id": 40,
+    "layers": 4,
+    "name": "derive/Cargo.toml",
+    "parent": 39,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/chain-spec/derive/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "derive/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/chain-spec/derive/Cargo.toml"
+    }
+  },
+  {
+    "id": 43,
+    "layers": 4,
+    "name": "aura/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/aura/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "aura/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/aura/Cargo.toml"
+    }
+  },
+  {
+    "id": 44,
+    "layers": 4,
+    "name": "babe/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/babe/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "babe/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/babe/Cargo.toml"
+    }
+  },
+  {
+    "id": 45,
+    "layers": 4,
+    "name": "common/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/common/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "common/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/common/Cargo.toml"
+    }
+  },
+  {
+    "id": 46,
+    "layers": 4,
+    "name": "epochs/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/epochs/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "epochs/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/epochs/Cargo.toml"
+    }
+  },
+  {
+    "id": 47,
+    "layers": 4,
+    "name": "manual-seal/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/manual-seal/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "manual-seal/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/manual-seal/Cargo.toml"
+    }
+  },
+  {
+    "id": 48,
+    "layers": 4,
+    "name": "pow/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/pow/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "pow/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/pow/Cargo.toml"
+    }
+  },
+  {
+    "id": 49,
+    "layers": 4,
+    "name": "slots/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/slots/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "slots/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/slots/Cargo.toml"
+    }
+  },
+  {
+    "id": 51,
+    "layers": 4,
+    "name": "uncles/Cargo.toml",
+    "parent": 42,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/uncles/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "uncles/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/uncles/Cargo.toml"
+    }
+  },
+  {
+    "id": 54,
+    "layers": 4,
+    "name": "benches",
+    "parent": 53,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "benches"
+    }
+  },
+  {
+    "id": 55,
+    "layers": 4,
+    "name": "common/Cargo.toml",
+    "parent": 53,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/executor/common/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "common/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/executor/common/Cargo.toml"
+    }
+  },
+  {
+    "id": 56,
+    "layers": 4,
+    "name": "runtime-test/Cargo.toml",
+    "parent": 53,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/executor/runtime-test/Cargo.toml",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "runtime-test/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/executor/runtime-test/Cargo.toml"
+    }
+  },
+  {
+    "id": 58,
+    "layers": 4,
+    "name": "wasmi/Cargo.toml",
+    "parent": 53,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/executor/wasmi/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "wasmi/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/executor/wasmi/Cargo.toml"
+    }
+  },
+  {
+    "id": 59,
+    "layers": 4,
+    "name": "wasmtime/Cargo.toml",
+    "parent": 53,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/executor/wasmtime/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "wasmtime/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/executor/wasmtime/Cargo.toml"
+    }
+  },
+  {
+    "id": 60,
+    "layers": 4,
+    "name": "src/integration_tests",
+    "parent": 53,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/executor/src/integration_tests",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/integration_tests",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/executor/src/integration_tests"
+    }
+  },
+  {
+    "id": 62,
+    "layers": 4,
+    "name": "rpc/Cargo.toml",
+    "parent": 61,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/finality-grandpa/rpc/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "rpc/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/finality-grandpa/rpc/Cargo.toml"
+    }
+  },
+  {
+    "id": 67,
+    "layers": 4,
+    "name": "common/Cargo.toml",
+    "parent": 66,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network/common/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "common/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network/common/Cargo.toml"
+    }
+  },
+  {
+    "id": 68,
+    "layers": 4,
+    "name": "light/Cargo.toml",
+    "parent": 66,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network/light/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "light/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network/light/Cargo.toml"
+    }
+  },
+  {
+    "id": 69,
+    "layers": 4,
+    "name": "sync/Cargo.toml",
+    "parent": 66,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network/sync/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "sync/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network/sync/Cargo.toml"
+    }
+  },
+  {
+    "id": 70,
+    "layers": 4,
+    "name": "test/Cargo.toml",
+    "parent": 66,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network/test/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "test/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network/test/Cargo.toml"
+    }
+  },
+  {
+    "id": 71,
+    "layers": 4,
+    "name": "network/build.rs",
+    "parent": 66,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/network/build.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "network/build.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/network/build.rs"
+    }
+  },
+  {
+    "id": 76,
+    "layers": 4,
+    "name": "src/author",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/author",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/author",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/author"
+    }
+  },
+  {
+    "id": 77,
+    "layers": 4,
+    "name": "src/chain",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/chain",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/chain",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/chain"
+    }
+  },
+  {
+    "id": 78,
+    "layers": 4,
+    "name": "src/child_state",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/child_state",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/child_state",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/child_state"
+    }
+  },
+  {
+    "id": 79,
+    "layers": 4,
+    "name": "src/dev",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/dev",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/dev",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/dev"
+    }
+  },
+  {
+    "id": 80,
+    "layers": 4,
+    "name": "src/offchain",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/offchain",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/offchain",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/offchain"
+    }
+  },
+  {
+    "id": 81,
+    "layers": 4,
+    "name": "src/state",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/state",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/state",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/state"
+    }
+  },
+  {
+    "id": 82,
+    "layers": 4,
+    "name": "src/system",
+    "parent": 75,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/system",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/system",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/rpc-api/src/system"
+    }
+  },
+  {
+    "id": 86,
+    "layers": 4,
+    "name": "src/chain_ops",
+    "parent": 85,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/service/src/chain_ops",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/chain_ops",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/service/src/chain_ops"
+    }
+  },
+  {
+    "id": 87,
+    "layers": 4,
+    "name": "src/client",
+    "parent": 85,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/service/src/client",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/client",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/service/src/client"
+    }
+  },
+  {
+    "id": 88,
+    "layers": 4,
+    "name": "src/task_manager",
+    "parent": 85,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/service/src/task_manager",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/task_manager",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/service/src/task_manager"
+    }
+  },
+  {
+    "id": 92,
+    "layers": 4,
+    "name": "sysinfo/build.rs",
+    "parent": 91,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/sysinfo/build.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "sysinfo/build.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/sysinfo/build.rs"
+    }
+  },
+  {
+    "id": 95,
+    "layers": 4,
+    "name": "benches/bench.rs",
+    "parent": 94,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/benches/bench.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "benches/bench.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/benches/bench.rs"
+    }
+  },
+  {
+    "id": 96,
+    "layers": 4,
+    "name": "proc-macro/Cargo.toml",
+    "parent": 94,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/proc-macro/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "proc-macro/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/proc-macro/Cargo.toml"
+    }
+  },
+  {
+    "id": 97,
+    "layers": 4,
+    "name": "block/mod.rs",
+    "parent": 94,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/src/block/mod.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "block/mod.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/src/block/mod.rs"
+    }
+  },
+  {
+    "id": 98,
+    "layers": 4,
+    "name": "logging/mod.rs",
+    "parent": 94,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/src/logging/mod.rs",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "logging/mod.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/src/logging/mod.rs"
+    }
+  },
+  {
+    "id": 101,
+    "layers": 4,
+    "name": "api/Cargo.toml",
+    "parent": 100,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/api/Cargo.toml",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "api/Cargo.toml",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/api/Cargo.toml"
+    }
+  },
+  {
+    "id": 102,
+    "layers": 4,
+    "name": "benches/basics.rs",
+    "parent": 100,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/benches/basics.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "benches/basics.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/benches/basics.rs"
+    }
+  },
+  {
+    "id": 103,
+    "layers": 4,
+    "name": "src/lib.rs",
+    "parent": 100,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/src/lib.rs",
+    "child_count": 1,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/lib.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/src/lib.rs"
+    }
+  },
+  {
+    "id": 106,
+    "layers": 4,
+    "name": "src/lib.rs",
+    "parent": 105,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/utils/src/lib.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/lib.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/utils/src/lib.rs"
+    }
+  },
+  {
+    "id": 107,
+    "layers": 4,
+    "name": "src/notification",
+    "parent": 105,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/utils/src/notification",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/notification",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/utils/src/notification"
+    }
+  },
+  {
+    "id": 108,
+    "layers": 4,
+    "name": "src/pubsub",
+    "parent": 105,
+    "link": "https://github.com/paritytech/substrate/tree/master/client/utils/src/pubsub",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src/pubsub",
+      "link": "https://github.com/paritytech/substrate/tree/master/client/utils/src/pubsub"
+    }
+  },
+  {
+    "id": 12,
+    "layers": 5,
+    "name": "benches",
+    "parent": 11,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "benches"
+    }
+  },
+  {
+    "id": 13,
+    "layers": 5,
+    "name": "bin",
+    "parent": 11,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "bin"
+    }
+  },
+  {
+    "id": 14,
+    "layers": 5,
+    "name": "doc",
+    "parent": 11,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "doc"
+    }
+  },
+  {
+    "id": 15,
+    "layers": 5,
+    "name": "res",
+    "parent": 11,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "res"
+    }
+  },
+  {
+    "id": 16,
+    "layers": 5,
+    "name": "src",
+    "parent": 11,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src"
+    }
+  },
+  {
+    "id": 17,
+    "layers": 5,
+    "name": "tests",
+    "parent": 11,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "tests"
+    }
+  },
+  {
+    "id": 19,
+    "layers": 5,
+    "name": "benches",
+    "parent": 18,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "benches"
+    }
+  },
+  {
+    "id": 20,
+    "layers": 5,
+    "name": "src",
+    "parent": 18,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "src"
+    }
+  },
+  {
+    "id": 21,
+    "layers": 5,
+    "name": "tests",
+    "parent": 18,
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "tests"
+    }
+  },
+  {
+    "id": 50,
+    "layers": 5,
+    "name": "slots/build.rs",
+    "parent": 49,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/slots/build.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "slots/build.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/consensus/slots/build.rs"
+    }
+  },
+  {
+    "id": 57,
+    "layers": 5,
+    "name": "runtime-test/build.rs",
+    "parent": 56,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/executor/runtime-test/build.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "runtime-test/build.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/executor/runtime-test/build.rs"
+    }
+  },
+  {
+    "id": 99,
+    "layers": 5,
+    "name": "layers/mod.rs",
+    "parent": 98,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/src/logging/layers/mod.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "layers/mod.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/tracing/src/logging/layers/mod.rs"
+    }
+  },
+  {
+    "id": 104,
+    "layers": 5,
+    "name": "graph/mod.rs",
+    "parent": 103,
+    "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/src/graph/mod.rs",
+    "child_count": 0,
+    "node_count": 1,
+    "tool_tip": {
+      "title": "graph/mod.rs",
+      "link": "https://github.com/paritytech/substrate/blob/master/client/transaction-pool/src/graph/mod.rs"
+    }
+  }
+]
