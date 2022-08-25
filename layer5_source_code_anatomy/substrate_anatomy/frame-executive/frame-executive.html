@@ -1,0 +1,1303 @@
+<!DOCTYPE HTML>
+<html lang="cn" class="sidebar-visible no-js rust">
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>frame-executive - Programming Anatomy In Rust 🦀</title>
+
+
+    <!-- Custom HTML head -->
+    
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="以rust为例分享学习编程常考虑的方方面面">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff"/>
+
+        <link rel="icon" href="../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../md-favicon.png">
+    <link rel="stylesheet" href="../../../css/variables.css">
+    <link rel="stylesheet" href="../../../css/general.css">
+    <link rel="stylesheet" href="../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../fonts/fonts.css">
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="../../../highlight.css">
+    <link rel="stylesheet" href="../../../tomorrow-night.css">
+    <link rel="stylesheet" href="../../../ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../assets/pagetoc/pagetoc_style.css">
+        <link rel="stylesheet" href="../../../assets/css/mdbook-admonish.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<!-- Provide site root to javascript -->
+<script type="text/javascript">
+    var path_to_root = "../../../";
+    var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+</script>
+
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script type="text/javascript">
+    try {
+        var theme = localStorage.getItem('mdbook-theme');
+        var sidebar = localStorage.getItem('mdbook-sidebar');
+
+        if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+        }
+
+        if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+        }
+    } catch (e) {
+    }
+</script>
+
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script type="text/javascript">
+    var theme;
+    try {
+        theme = localStorage.getItem('mdbook-theme');
+    } catch (e) {
+    }
+    if (theme === null || theme === undefined) {
+        theme = default_theme;
+    }
+    var html = document.querySelector('html');
+    html.classList.remove('no-js')
+    html.classList.remove('rust')
+    html.classList.add(theme);
+    html.classList.add('js');
+</script>
+
+<!-- Hide / unhide sidebar before it is displayed -->
+<script type="text/javascript">
+    var html = document.querySelector('html');
+    var sidebar = 'hidden';
+    if (document.body.clientWidth >= 1080) {
+        try {
+            sidebar = localStorage.getItem('mdbook-sidebar');
+        } catch (e) {
+        }
+        sidebar = sidebar || 'visible';
+    }
+    html.classList.remove('sidebar-visible');
+    html.classList.add("sidebar-" + sidebar);
+</script>
+
+<nav id="sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-scrollbox">
+        <ol class="chapter"><li class="chapter-item expanded "><a href="../../../../index.html"><strong aria-hidden="true">1.</strong> 总览</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../checklist.html"><strong aria-hidden="true">1.1.</strong> 待完成</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">1.2.</strong> Substrate介绍与解析</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/1_learning_resource/talks.html"><strong aria-hidden="true">1.3.</strong> Rust话题</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer1_underlying_abstract/layer1_underlying_abstract.html"><strong aria-hidden="true">2.</strong> Layer1: 底层抽象</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../layer1_underlying_abstract/1_virtual_memory/virtual_memory.html"><strong aria-hidden="true">2.1.</strong> 虚拟内存管理</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer1_underlying_abstract/1_virtual_memory/memory_manage_safety.html"><strong aria-hidden="true">2.1.1.</strong> 内存管理与内存安全</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/1_virtual_memory/ownership_borrow_lifetime.html"><strong aria-hidden="true">2.1.2.</strong> 所有权三件套</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer1_underlying_abstract/2_type_system/type_system.html"><strong aria-hidden="true">2.2.</strong> 类型系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer1_underlying_abstract/2_type_system/built_in_types.html"><strong aria-hidden="true">2.2.1.</strong> 基础内置类型</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/2_type_system/collections.html"><strong aria-hidden="true">2.2.2.</strong> 集合类型</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/2_type_system/user_defined_types.html"><strong aria-hidden="true">2.2.3.</strong> 自定义类型</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/2_type_system/generics_traits_objects.html"><strong aria-hidden="true">2.2.4.</strong> 泛型、特征及特征对象</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer1_underlying_abstract/3_language_grammar/language_grammar.html"><strong aria-hidden="true">2.3.</strong> 语言语法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer1_underlying_abstract/3_language_grammar/annotation_rustdoc.html"><strong aria-hidden="true">2.3.1.</strong> 注释与文档(rustdoc)</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/3_language_grammar/keywords_glossary.html"><strong aria-hidden="true">2.3.2.</strong> 词法结构扫盲</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/3_language_grammar/binding_match_patterns.html"><strong aria-hidden="true">2.3.3.</strong> 绑定、赋值与匹配</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/3_language_grammar/logical_decision_loops.html"><strong aria-hidden="true">2.3.4.</strong> 逻辑判断与循环♻️</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/3_language_grammar/statements_expressions.html"><strong aria-hidden="true">2.3.5.</strong> 语句与表达式</a></li><li class="chapter-item "><a href="../../../layer1_underlying_abstract/3_language_grammar/code_quality.html"><strong aria-hidden="true">2.3.6.</strong> 代码质量</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../layer2_design_abstract/layer2_design_abstract.html"><strong aria-hidden="true">3.</strong> Layer2: 设计抽象</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../layer2_design_abstract/4_programming_paradigm/4_programming_paradigm.html"><strong aria-hidden="true">3.1.</strong> 编程范式</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer2_design_abstract/4_programming_paradigm/fp.html"><strong aria-hidden="true">3.1.1.</strong> 函数式编程</a></li><li class="chapter-item "><a href="../../../layer2_design_abstract/4_programming_paradigm/oop.html"><strong aria-hidden="true">3.1.2.</strong> 面向对象编程</a></li><li class="chapter-item "><a href="../../../layer2_design_abstract/4_programming_paradigm/gp.html"><strong aria-hidden="true">3.1.3.</strong> 泛型编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer2_design_abstract/5_design_pattern/5_design_pattern.html"><strong aria-hidden="true">3.2.</strong> 设计模式</a></li><li class="chapter-item expanded "><a href="../../../layer2_design_abstract/6_module_manage/6_module_manage.html"><strong aria-hidden="true">3.3.</strong> 模块管理</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer2_design_abstract/6_module_manage/module_system.html"><strong aria-hidden="true">3.3.1.</strong> 模块系统</a></li><li class="chapter-item "><a href="../../../layer2_design_abstract/6_module_manage/cargo_crate_lifetime.html"><strong aria-hidden="true">3.3.2.</strong> Cargo与项目生命周期</a></li><li class="chapter-item "><a href="../../../layer2_design_abstract/6_module_manage/cargo_rustc.html"><strong aria-hidden="true">3.3.3.</strong> Cargo run: rustc</a></li><li class="chapter-item "><a href="../../../layer2_design_abstract/6_module_manage/rust_plugins.html"><strong aria-hidden="true">3.3.4.</strong> Rust扩展工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../layer3_task_abstract/layer3_task_abstract.html"><strong aria-hidden="true">4.</strong> Layer3: 任务抽象</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../layer3_task_abstract/7_concurrency/7_concurrency.html"><strong aria-hidden="true">4.1.</strong> 并发编程</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer3_task_abstract/7_concurrency/io_models.html"><strong aria-hidden="true">4.1.1.</strong> 系统IO模型</a></li><li class="chapter-item "><a href="../../../layer3_task_abstract/7_concurrency/1_multi_models/multi_models.html"><strong aria-hidden="true">4.1.2.</strong> 多线程模型</a></li><li class="chapter-item "><a href="../../../layer3_task_abstract/7_concurrency/2_async_models/async_models.html"><strong aria-hidden="true">4.1.3.</strong> 异步模型</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer3_task_abstract/8_meta_programming/8_meta_programming.html"><strong aria-hidden="true">4.2.</strong> 元编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer4_protocol_abstract/layer4_protocol_abstract.html"><strong aria-hidden="true">5.</strong> Layer4: 协议抽象</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.html"><strong aria-hidden="true">5.1.</strong> 跨语言编程</a></li><li class="chapter-item expanded "><a href="../../../layer4_protocol_abstract/10_computer_network/10_computer_network.html"><strong aria-hidden="true">5.2.</strong> 计算机网络</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer5_source_code_anatomy/layer5_source_code_anatomy.html"><strong aria-hidden="true">6.</strong> Layer5: 源码剖析</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../layer5_source_code_anatomy/substrate_anatomy/substrate_overview.html"><strong aria-hidden="true">6.1.</strong> Substrate</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer5_source_code_anatomy/substrate_anatomy/substrate_modules.html"><strong aria-hidden="true">6.1.1.</strong> Substrate主要模块</a></li><li class="chapter-item expanded "><a href="../../../layer5_source_code_anatomy/substrate_anatomy/frame-executive/frame-executive.html" class="active"><strong aria-hidden="true">6.1.2.</strong> frame-executive</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/layer6_ecosystem.html"><strong aria-hidden="true">7.</strong> Layer6: 生态环境</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/1_learning_resource/learning_resource.html"><strong aria-hidden="true">7.1.</strong> 学习资源</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/1_learning_resource/1_books/books.html"><strong aria-hidden="true">7.1.1.</strong> 书籍整理</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/1_learning_resource/2_courses/courses.html"><strong aria-hidden="true">7.1.2.</strong> 线上课程</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/1_learning_resource/3_blogs/blogs.html"><strong aria-hidden="true">7.1.3.</strong> 博客文章</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/1_learning_resource/4_videos/videos.html"><strong aria-hidden="true">7.1.4.</strong> 在线视频</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/1_learning_resource/5_projects/projects.html"><strong aria-hidden="true">7.1.5.</strong> 开源项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/2_lang_update/lang_update.html"><strong aria-hidden="true">7.2.</strong> 官方动态</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/3_community/community.html"><strong aria-hidden="true">7.3.</strong> 社区热点</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/4_academic/academic.html"><strong aria-hidden="true">7.4.</strong> 学术讨论</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/5_open_source/open_source.html"><strong aria-hidden="true">7.5.</strong> 开源观察</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/1_underlying/underlying.html"><strong aria-hidden="true">7.5.1.</strong> 底层开发</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/1_underlying/command/command.html"><strong aria-hidden="true">7.5.1.1.</strong> 命令行工具</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/1_underlying/data/data.html"><strong aria-hidden="true">7.5.1.2.</strong> 数据处理</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/1_underlying/embedded/embedded.html"><strong aria-hidden="true">7.5.1.3.</strong> 嵌入式</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/1_underlying/os/os.html"><strong aria-hidden="true">7.5.1.4.</strong> 系统开发</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/1_underlying/performance/performance.html"><strong aria-hidden="true">7.5.1.5.</strong> 性能工具</a></li></ol></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network.html"><strong aria-hidden="true">7.5.2.</strong> 网络相关</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/cloud/cloud.html"><strong aria-hidden="true">7.5.2.1.</strong> 云原生</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/frontend/frontend.html"><strong aria-hidden="true">7.5.2.2.</strong> 前端基建</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network/network.html"><strong aria-hidden="true">7.5.2.3.</strong> 网络基建</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs.html"><strong aria-hidden="true">7.5.2.3.1.</strong> IPFS: 星际文件系统(InterPlanetary File System)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_website.html"><strong aria-hidden="true">7.5.2.3.1.1.</strong> 利用IPFS构建自己的去中心化分布式网站</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_pubsub.html"><strong aria-hidden="true">7.5.2.3.1.2.</strong> IPFS pubsub功能</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_companion.html"><strong aria-hidden="true">7.5.2.3.1.3.</strong> IPFS伴侣插件</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/network/ipfs/ipfs_ngrok.html"><strong aria-hidden="true">7.5.2.3.1.4.</strong> IPFS+ngrok</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/web/web.html"><strong aria-hidden="true">7.5.2.4.</strong> web开发</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/2_network/web/webassembly_try.html"><strong aria-hidden="true">7.5.2.4.1.</strong> 基于Rust尝试WebAssembly</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/3_media/media.html"><strong aria-hidden="true">7.5.3.</strong> 多媒体</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/3_media/av/av.html"><strong aria-hidden="true">7.5.3.1.</strong> 音视频处理</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/3_media/game/game.html"><strong aria-hidden="true">7.5.3.2.</strong> 游戏开发</a></li></ol></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/4_other/other.html"><strong aria-hidden="true">7.5.4.</strong> 其他</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/4_other/lang-with-rust/lang_with_rust.html"><strong aria-hidden="true">7.5.4.1.</strong> Rust与其他语言</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/4_other/scientific-research/scientific_research.html"><strong aria-hidden="true">7.5.4.2.</strong> 科学艺术研究</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/5_open_source/4_other/tools/tools.html"><strong aria-hidden="true">7.5.4.3.</strong> 其他工具</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/6_security/security.html"><strong aria-hidden="true">7.6.</strong> 安全参考</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/7_business/business.html"><strong aria-hidden="true">7.7.</strong> 商业观察</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/blockchain.html"><strong aria-hidden="true">7.7.1.</strong> 区块链</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/build-a-block-in-rust.html"><strong aria-hidden="true">7.7.1.1.</strong> 使用rust建立一个简单的区块链</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_intro.html"><strong aria-hidden="true">7.7.1.2.</strong> Substrate介绍与解析</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_tutorials.html"><strong aria-hidden="true">7.7.1.2.1.</strong> Substrate教程梳理</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_pallet.html"><strong aria-hidden="true">7.7.1.2.2.</strong> 深入Substrate Pallet</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_runtime.html"><strong aria-hidden="true">7.7.1.2.3.</strong> 深入Substrate Runtime</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_FRAME.html"><strong aria-hidden="true">7.7.1.2.4.</strong> 深入Substrate FRAME</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_ref.html"><strong aria-hidden="true">7.7.1.2.5.</strong> Substrate备忘</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/substrate_marketplace.html"><strong aria-hidden="true">7.7.1.2.6.</strong> Substrate市场：Rutimes、Pallets和Projects</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/substrate/awesome_substrate.html"><strong aria-hidden="true">7.7.1.2.7.</strong> Substrate惊奇资源</a></li></ol></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/nervos_ckb_anatomy.html"><strong aria-hidden="true">7.7.1.3.</strong> Nervos CKB介绍与解析</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/blockchain/solana.html"><strong aria-hidden="true">7.7.1.4.</strong> Solana</a></li></ol></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/practices/practices.html"><strong aria-hidden="true">7.7.2.</strong> 生产实践</a></li><li class="chapter-item "><a href="../../../layer6_ecosystem/7_business/products/products.html"><strong aria-hidden="true">7.7.3.</strong> 优秀产品</a></li></ol></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/8_libs/libs.html"><strong aria-hidden="true">7.8.</strong> 基础库</a></li><li class="chapter-item expanded "><a href="../../../layer6_ecosystem/9_frameworks/frameworks.html"><strong aria-hidden="true">7.9.</strong> 框架引擎</a></li></ol></li><li class="chapter-item expanded "><a href="../../../checklist.html">Checklist</a></li></ol>
+    </div>
+    <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+</nav>
+
+<div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+        <div id="menu-bar" class="menu-bar sticky bordered">
+            <div class="left-buttons">
+                <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                        aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                        aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                    <i class="fa fa-paint-brush"></i>
+                </button>
+                <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="light">Light</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="rust">Rust (default)</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="coal">Coal</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="navy">Navy</button>
+                    </li>
+                    <li role="none">
+                        <button role="menuitem" class="theme" id="ayu">Ayu</button>
+                    </li>
+                </ul>
+                    <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
+                        <i class="fa fa-search"></i>
+                    </button>
+            </div>
+
+            <h1 class="menu-title">Programming Anatomy In Rust 🦀</h1>
+            <h4 class="menu-bar"><a href="https://kuanhsiaokuo.github.io/think-tool-kit/">保持批判，有所取舍，知行合一, 方见真我</a> -- 练武不练功
+                到头一场空 -- 《赛博英雄传》 </h4>
+            <div class="right-buttons">
+                    <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fa fa-print"></i>
+                    </a>
+                    <a href="https://github.com/KuanHsiaoKuo/programming_anatomy_in_rust.git" title="Git repository" aria-label="Git repository">
+                        <i id="git-repository-button" class="fa fa-rust"></i>
+                    </a>
+            </div>
+        </div>
+
+            <div id="search-wrapper" class="hidden">
+                <form id="searchbar-outer" class="searchbar-outer">
+                    <input type="search" name="search" id="searchbar" name="searchbar"
+                           placeholder="Search this book ..." aria-controls="searchresults-outer"
+                           aria-describedby="searchresults-header">
+                </form>
+                <div id="searchresults-outer" class="searchresults-outer hidden">
+                    <div id="searchresults-header" class="searchresults-header"></div>
+                    <ul id="searchresults">
+                    </ul>
+                </div>
+            </div>
+
+        <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+        <script type="text/javascript">
+            document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+            });
+        </script>
+
+        <div id="content" class="content">
+            <main>
+
+                <!-- Page table of contents -->
+                <div class="sidetoc">
+                    <nav class="pagetoc"></nav>
+                </div>
+                <h1 id="frameexecutive解剖"><a class="header" href="#frameexecutive解剖">frame/executive解剖</a></h1>
+<h1 id="rust核心"><a class="header" href="#rust核心">Rust核心</a></h1>
+<blockquote>
+<p>静态-&gt;泛型-&gt;trait-&gt;trait bound-&gt;trait object: struct、enum和impl</p>
+</blockquote>
+<!-- toc start -->
+<!-- toc end -->
+<h2 id="核心思路"><a class="header" href="#核心思路">核心思路</a></h2>
+<ul>
+<li>所有权、借用、切片</li>
+<li>泛型、trait、生命周期</li>
+</ul>
+<h3 id="从静态语言开始"><a class="header" href="#从静态语言开始">从静态语言开始</a></h3>
+<p>每个方法都需要指定特定类型</p>
+<h3 id="为了复用加入泛型"><a class="header" href="#为了复用加入泛型">为了复用，加入泛型</a></h3>
+<p>可以用泛型指定所有类型，就不需要重复写同样的方法</p>
+<h3 id="为了范围加入接口trait"><a class="header" href="#为了范围加入接口trait">为了范围，加入接口/trait</a></h3>
+<p>其实写方法就是为了写特定操作，那么不如把操作作为重点，于是就有了接口</p>
+<h3 id="泛型trait限定会导致编译的包膨胀于是考虑trait对象"><a class="header" href="#泛型trait限定会导致编译的包膨胀于是考虑trait对象">泛型+trait限定会导致编译的包膨胀，于是考虑trait对象</a></h3>
+<ul>
+<li><a href="marginnote3app://note/17559D64-980D-4EA7-B69E-49D766438399">精通rust-4.6 使用trait对象实现真正多态性</a></li>
+</ul>
+<blockquote>
+<p>特征和泛型通过单态化(早期绑定)或运行时多态(后期绑定)</p>
+</blockquote>
+<p>提供了两种代码复用的方式。何时使用它们取决于具体情况和相关应用程序的需求。通常,错误类型会被分配到动态分发的序列,因为它们应该是很少被执行的代码路径。单态化对小型的应用场景来说非常方便,但是缺点是导致了代码的膨胀和重复,这会影响缓存效率,并增加二进制文件的大小。但是,在这两个选项中,静态分发应该是首选,除非系统对二进制文件大小存在严格的限制。</p>
+<h3 id="为了隐私加入pub"><a class="header" href="#为了隐私加入pub">为了隐私，加入pub</a></h3>
+<h2 id="一泛型-generic-types"><a class="header" href="#一泛型-generic-types">一、泛型-Generic Types</a></h2>
+<h3 id="泛型由来"><a class="header" href="#泛型由来">泛型由来</a></h3>
+<blockquote>
+<p>泛型本质上是对多类型的抽象，因为对于静态语言来说需要指明类型，对于那些很多类型通用的函数，不能一个个地写出来，那样编写、维护很麻烦。这个时候就需要用泛型了。</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn largest_i32(list: &amp;[i32]) -&gt; &amp;i32 {
+    let mut largest = &amp;list[0];
+
+    for item in list {
+        if item &gt; largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn largest_char(list: &amp;[char]) -&gt; &amp;char {
+    let mut largest = &amp;list[0];
+
+    for item in list {
+        if item &gt; largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+
+fn largest&lt;T&gt;(list: &amp;[T]) -&gt; &amp;T {
+    let mut largest = &amp;list[0];
+
+    for item in list {
+        if item &gt; largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="泛型使用"><a class="header" href="#泛型使用">泛型使用</a></h3>
+<h4 id="范型结构体"><a class="header" href="#范型结构体">范型结构体</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Point&lt;T, U&gt; {
+    x: T,
+    y: U,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="范型枚举体"><a class="header" href="#范型枚举体">范型枚举体</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span>
+<span class="boring">fn main() {
+</span>enum Result&lt;T, E&gt; {
+    Ok(T),
+    Err(E),
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="范型方法impl"><a class="header" href="#范型方法impl">范型方法(impl)</a></h4>
+<blockquote>
+<p>注意，这里不是泛型函数。本质是因为方法是需要调用者，也就是某个对象；而函数是自己调用。</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust">struct Point&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+impl&lt;T&gt; Point&lt;T&gt; {
+    fn x(&amp;self) -&gt; &amp;T {
+        &amp;self.x
+    }
+}
+
+fn main() {
+    let p = Point { x: 5, y: 10 };
+
+    println!(&quot;p.x = {}&quot;, p.x());
+}
+</code></pre></pre>
+<h3 id="泛型的性能表现"><a class="header" href="#泛型的性能表现">泛型的性能表现</a></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics">Generic Data Types - The Rust Programming Language</a></li>
+</ul>
+<h2 id="区分一下类的组合与trait的组合"><a class="header" href="#区分一下类的组合与trait的组合">区分一下类的组合与trait的组合</a></h2>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Point&lt;X1, Y1&gt; {
+    x: X1,
+    y: Y1,
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn notify(item: &amp;(impl Summary + Display)) {}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="二trait"><a class="header" href="#二trait">二、Trait</a></h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch10-02-traits.html">Traits: Defining Shared Behavior - The Rust Programming Language</a></li>
+</ul>
+<blockquote>
+<p>A trait defines functionality a particular type has and can share with other types. We can use traits to define shared
+behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain
+behavior.</p>
+</blockquote>
+<blockquote>
+<p>Traits are similar to a feature often called interfaces in other languages, although with some differences.</p>
+</blockquote>
+<h3 id="关键字"><a class="header" href="#关键字">关键字</a></h3>
+<h4 id="定义"><a class="header" href="#定义">定义</a></h4>
+<p>trait</p>
+<h4 id="实现"><a class="header" href="#实现">实现</a></h4>
+<p>impl <trait name> for <struct name>{ fn &lt;method_name in trait definition&gt; }</p>
+<h4 id="与实现方法的区别"><a class="header" href="#与实现方法的区别">与实现方法的区别</a></h4>
+<p>Implementing a trait on a type is similar to implementing regular methods. The difference is that after impl, we put the
+trait name we want to implement, then use the for keyword, and then specify the name of the type we want to implement
+the trait for. Within the impl block, we put the method signatures that the trait definition has defined. Instead of
+adding a semicolon after each signature, we use curly brackets and fill in the method body with the specific behavior
+that we want the methods of the trait to have for the particular type.</p>
+<h3 id="举例"><a class="header" href="#举例">举例</a></h3>
+<pre><pre class="playground"><code class="language-rust">pub trait Summary {
+    fn summarize(&amp;self) -&gt; String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&amp;self) -&gt; String {
+        format!(&quot;{}, by {} ({})&quot;, self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&amp;self) -&gt; String {
+        format!(&quot;{}: {}&quot;, self.username, self.content)
+    }
+}
+
+
+use aggregator::{Summary, Tweet};
+
+fn main() {
+    let tweet = Tweet {
+        username: String::from(&quot;horse_ebooks&quot;),
+        content: String::from(
+            &quot;of course, as you probably already know, people&quot;,
+        ),
+        reply: false,
+        retweet: false,
+    };
+
+    println!(&quot;1 new tweet: {}&quot;, tweet.summarize());
+}
+
+
+</code></pre></pre>
+<h3 id="限制孤儿原则"><a class="header" href="#限制孤儿原则">限制：孤儿原则</a></h3>
+<p>we can’t implement external traits on external types. For example, we can’t implement the Display trait on Vec<T> within
+our aggregator crate, because Display and Vec<T> are both defined in the standard library and aren’t local to our
+aggregator crate. This restriction is part of a property called coherence (相干) , and more specifically the orphan (孤儿)
+rule, so named because the parent type is not present. This rule ensures that other people’s code can’t break your code
+and vice (副) versa. Without the rule, two crates could implement the same trait for the same type, and Rust wouldn’t
+know which implementation to use.</p>
+<h3 id="常用方式"><a class="header" href="#常用方式">常用方式</a></h3>
+<h4 id="在trait定义中编写默认方法逻辑"><a class="header" href="#在trait定义中编写默认方法逻辑">在trait定义中编写默认方法逻辑</a></h4>
+<h4 id="作为函数入参"><a class="header" href="#作为函数入参">作为函数入参:</a></h4>
+<h5 id="impl"><a class="header" href="#impl">&amp;impl</a></h5>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn notify(item: &amp;impl Summary) {
+    println!(&quot;Breaking news! {}&quot;, item.summarize());
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="语法糖trait限定trait-bounds"><a class="header" href="#语法糖trait限定trait-bounds">语法糖：trait限定(trait bounds)</a></h4>
+<h5 id="使用t代称"><a class="header" href="#使用t代称">使用T代称</a></h5>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn notify&lt;T: Summary&gt;(item1: &amp;T, item2: &amp;T) {}
+<span class="boring">}
+</span></code></pre></pre>
+<h5 id="使用组合继承"><a class="header" href="#使用组合继承">使用“+”组合继承</a></h5>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn notify(item: &amp;(impl Summary + Display)) {}
+<span class="boring">}
+</span></code></pre></pre>
+<h5 id="使用where后置"><a class="header" href="#使用where后置">使用where后置</a></h5>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn some_function&lt;T, U&gt;(t: &amp;T, u: &amp;U) -&gt; i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{}
+
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="作为函数出参"><a class="header" href="#作为函数出参">作为函数出参</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn returns_summarizable() -&gt; impl Summary {
+    Tweet {
+        username: String::from(&quot;horse_ebooks&quot;),
+        content: String::from(
+            &quot;of course, as you probably already know, people&quot;,
+        ),
+        reply: false,
+        retweet: false,
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h5 id="条件出参"><a class="header" href="#条件出参">条件出参</a></h5>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn returns_summarizable(switch: bool) -&gt; impl Summary {
+    if switch {
+        NewsArticle {
+            headline: String::from(
+                &quot;Penguins win the Stanley Cup Championship!&quot;,
+            ),
+            location: String::from(&quot;Pittsburgh, PA, USA&quot;),
+            author: String::from(&quot;Iceburgh&quot;),
+            content: String::from(
+                &quot;The Pittsburgh Penguins once again are the best \
+                 hockey team in the NHL.&quot;,
+            ),
+        }
+    } else {
+        Tweet {
+            username: String::from(&quot;horse_ebooks&quot;),
+            content: String::from(
+                &quot;of course, as you probably already know, people&quot;,
+            ),
+            reply: false,
+            retweet: false,
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="泛型trait多态"><a class="header" href="#泛型trait多态">泛型trait多态</a></h4>
+<blockquote>
+<p>根据泛型的trait设定不同函数</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::fmt::Display;
+
+struct Pair&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+impl&lt;T&gt; Pair&lt;T&gt; {
+    fn new(x: T, y: T) -&gt; Self {
+        Self { x, y }
+    }
+}
+
+impl&lt;T: Display + PartialOrd&gt; Pair&lt;T&gt; {
+    fn cmp_display(&amp;self) {
+        if self.x &gt;= self.y {
+            println!(&quot;The largest member is x = {}&quot;, self.x);
+        } else {
+            println!(&quot;The largest member is y = {}&quot;, self.y);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="三trait-objects"><a class="header" href="#三trait-objects">三、Trait Objects</a></h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/reference/types/trait-object.html">Trait object types - The Rust Reference</a></li>
+</ul>
+<blockquote>
+<p>A trait object is an opaque value of another type that implements a set of traits. The set of traits is made up of an
+object safe base trait plus any number of auto traits.</p>
+</blockquote>
+<h3 id="关键字-1"><a class="header" href="#关键字-1">关键字</a></h3>
+<p>dyn Trait</p>
+<blockquote>
+<p>Before the 2021 edition, the dyn keyword may be omitted .</p>
+</blockquote>
+<h3 id="存在形式"><a class="header" href="#存在形式">存在形式</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>dyn Trait
+dyn Trait + Send
+dyn Trait + Send + Sync
+dyn Trait + 'static
+dyn Trait + Send + 'static
+dyn Trait +
+dyn 'static + Trait.
+dyn (Trait)
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="举例-1"><a class="header" href="#举例-1">举例</a></h3>
+<pre><pre class="playground"><code class="language-rust">trait Printable {
+    fn stringify(&amp;self) -&gt; String;
+}
+
+impl Printable for i32 {
+    fn stringify(&amp;self) -&gt; String { self.to_string() }
+}
+
+fn print(a: Box&lt;dyn Printable&gt;) {
+    println!(&quot;{}&quot;, a.stringify());
+}
+
+fn main() {
+    print(Box::new(10) as Box&lt;dyn Printable&gt;);
+}
+</code></pre></pre>
+<h3 id="面向对象编程应用trait-objects--structenum"><a class="header" href="#面向对象编程应用trait-objects--structenum">面向对象编程应用(trait objects + struct/enum)</a></h3>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html">Using Trait Objects That Allow for Values of Different Types - The Rust Programming Language</a></li>
+</ul>
+<blockquote>
+<p>We can use trait objects in place of a generic or concrete type.</p>
+</blockquote>
+<p>Wherever we use a trait object, Rust’s type system will ensure at compile time that any value used in that context will
+implement the trait object’s trait. Consequently, we don’t need to know all the possible types at compile time.</p>
+<blockquote>
+<p>We’ve mentioned that, in Rust, we refrain from calling structs and enums “objects” to distinguish them from other
+languages’ objects.</p>
+</blockquote>
+<p>In a struct or enum, the data in the struct fields and the behavior in impl blocks are separated, whereas in other
+languages, the data and behavior combined into one concept is often labeled an object.</p>
+<p>However, trait objects are more like objects in other languages in the sense that they combine data and behavior.</p>
+<p>But trait objects differ from traditional objects in that we can’t add data to a trait object. Trait objects aren’t as
+generally useful as objects in other languages: their specific purpose is to allow abstraction across common behavior.</p>
+<ul>
+<li>trait objects</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Screen {
+    // This vector is of type Box&lt;dyn Draw&gt;
+    // which is a trait object; it’s a stand-in for any type inside a Box that implements the Draw trait.
+    pub components: Vec&lt;Box&lt;dyn Draw&gt;&gt;,
+}
+
+impl Screen {
+    pub fn run(&amp;self) {
+        for component in self.components.iter() {
+            component.draw();
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>trait bounds</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Screen&lt;T: Draw&gt; {
+    pub components: Vec&lt;T&gt;,
+}
+
+// If you’ll only ever have homogeneous collections, 
+// using generics and trait bounds is preferable because 
+// the definitions will be monomorphized at compile time to use the concrete types.
+impl&lt;T&gt; Screen&lt;T&gt;
+    where
+        T: Draw,
+{
+    pub fn run(&amp;self) {
+        for component in self.components.iter() {
+            component.draw();
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>static or dynamic dispatch</li>
+</ul>
+<ol>
+<li>trait限定：静态分发，编译期确定，对应实现了trait限定的类型</li>
+<li>trait对象：动态分发，编译器指针，运行期确定具体类型</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn trait_object() {
+    #[derive(Debug)]
+    struct Foo;
+    trait Bar {
+        fn baz(&amp;self);
+    }
+    impl Bar for Foo {
+        fn baz(&amp;self) { println!(&quot;{:?}&quot;, self) }
+    }
+    fn static_dispatch&lt;T&gt;(t: &amp;T) where T: Bar {
+        t.baz();
+    }
+    fn dynamic_dispatch(t: &amp;Bar) {
+        t.baz();
+    }
+    let foo = Foo;
+    static_dispatch(&amp;foo);
+    dynamic_dispatch(&amp;foo);
+}
+
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="trait-objects-其实就是鸭子类型"><a class="header" href="#trait-objects-其实就是鸭子类型">trait objects 其实就是鸭子类型</a></h4>
+<blockquote>
+<p>在编译期编译器就知道你的类型是否具有指定的动作，提前检查</p>
+</blockquote>
+<p>This concept—of being concerned only with the messages a value responds to rather than the value’s concrete type—is
+similar to the concept of duck typing in dynamically typed languages:</p>
+<blockquote>
+<p>if it walks like a duck and quacks like a duck, then it must be a duck!</p>
+</blockquote>
+<p>In the implementation of run on Screen in Listing 17-5, run doesn’t need to know what the concrete type of each
+component is.</p>
+<p>It doesn’t check whether a component is an instance of a Button or a SelectBox, it just calls the draw method on the
+component.</p>
+<blockquote>
+<p>By specifying Box<dyn Draw> as the type of the values in the components vector, we’ve defined Screen to need values
+that we can call the draw method on.</p>
+</blockquote>
+<p>The advantage of using trait objects and Rust’s type system to write code similar to code using duck typing is that:</p>
+<ul>
+<li>we never have to check whether a value implements a particular method at runtime or worry about getting errors if a
+value doesn’t implement a method but we call it anyway.</li>
+<li>Rust won’t compile our code if the values don’t implement the traits that the trait objects need.</li>
+</ul>
+<h2 id="四trait-object-与-trait-bound的对比"><a class="header" href="#四trait-object-与-trait-bound的对比">四、trait object 与 trait bound的对比</a></h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html#performance-of-code-using-generics">Performance of Code Using Generics</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html#trait-objects-perform-dynamic-dispatch">Trait Objects Perform Dynamic Dispatch</a></li>
+</ul>
+<p>Recall in the “Performance of Code Using Generics” section in Chapter 10 our discussion on the monomorphization process
+performed by the compiler when we use trait bounds on generics: the compiler generates nongeneric implementations of
+functions and methods for each concrete type that we use in place of a generic type parameter. The code that results
+from monomorphization is doing static dispatch, which is when the compiler knows what method you’re calling at compile
+time. This is opposed to dynamic dispatch, which is when the compiler can’t tell at compile time which method you’re
+calling. In dynamic dispatch cases, the compiler emits code that at runtime will figure out which method to call.</p>
+<p>When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used
+with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call. Instead, at
+runtime, Rust uses the pointers inside the trait object to know which method to call. This lookup incurs a runtime cost
+that doesn’t occur with static dispatch. Dynamic dispatch also prevents the compiler from choosing to inline a method’s
+code, which in turn prevents some optimizations. However, we did get extra flexibility in the code that we wrote in
+Listing 17-5 and were able to support in Listing 17-9, so it’s a trade-off to consider.</p>
+<ul>
+<li>tait对象编译期间无法确定对象大小，所以需要使用指针形式(引用)。</li>
+</ul>
+<blockquote>
+<p>trait作为参数一般有两种写法：</p>
+</blockquote>
+<ul>
+<li>一种是trait对象，需要运行时才能获取对象大小属于动态分发，</li>
+<li>一种是trait限定，类似模板是编译器件确定属于静态分发。</li>
+</ul>
+<h2 id="五impl使用场景实现方法而非函数"><a class="header" href="#五impl使用场景实现方法而非函数">五、impl使用场景：实现方法，而非函数。</a></h2>
+<blockquote>
+<p>impl与fn不会共存</p>
+</blockquote>
+<h3 id="impl--xxx结构体枚举体定义并实现方法"><a class="header" href="#impl--xxx结构体枚举体定义并实现方法">impl &lt;&gt; xxx&lt;&gt;结构体/枚举体：定义并实现方法</a></h3>
+<blockquote>
+<p>impl<target types> &lt;struct/enum&gt;<target types></p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Point&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+impl&lt;T&gt; Point&lt;T&gt; {
+    fn x(&amp;self) -&gt; &amp;T {
+        &amp;self.x
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="示例一-定义并实现许多方法"><a class="header" href="#示例一-定义并实现许多方法">示例一: 定义并实现许多方法</a></h4>
+<ul>
+<li><a href="https://paritytech.github.io/substrate/master/frame_executive/struct.Executive.html">Executive in frame_executive - Rust</a></li>
+</ul>
+<blockquote>
+<p>substrate/frame/executive/src/lib.rs</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust  editable">impl&lt;
+		System: frame_system::Config + EnsureInherentsAreFirst&lt;Block&gt;,
+		Block: traits::Block&lt;Header = System::Header, Hash = System::Hash&gt;,
+		Context: Default,
+		UnsignedValidator,
+		AllPalletsWithSystem: OnRuntimeUpgrade
+			+ OnInitialize&lt;System::BlockNumber&gt;
+			+ OnIdle&lt;System::BlockNumber&gt;
+			+ OnFinalize&lt;System::BlockNumber&gt;
+			+ OffchainWorker&lt;System::BlockNumber&gt;,
+		COnRuntimeUpgrade: OnRuntimeUpgrade,
+	&gt; Executive&lt;System, Block, Context, UnsignedValidator, AllPalletsWithSystem, COnRuntimeUpgrade&gt;
+where
+	Block::Extrinsic: Checkable&lt;Context&gt; + Codec,
+	CheckedOf&lt;Block::Extrinsic, Context&gt;: Applyable + GetDispatchInfo,
+	CallOf&lt;Block::Extrinsic, Context&gt;:
+		Dispatchable&lt;Info = DispatchInfo, PostInfo = PostDispatchInfo&gt;,
+	OriginOf&lt;Block::Extrinsic, Context&gt;: From&lt;Option&lt;System::AccountId&gt;&gt;,
+	UnsignedValidator: ValidateUnsigned&lt;Call = CallOf&lt;Block::Extrinsic, Context&gt;&gt;,
+{
+	/// Execute all `OnRuntimeUpgrade` of this runtime, and return the aggregate weight.
+	pub fn execute_on_runtime_upgrade() -&gt; frame_support::weights::Weight {
+		&lt;(COnRuntimeUpgrade, AllPalletsWithSystem) as OnRuntimeUpgrade&gt;::on_runtime_upgrade()
+	}
+
+	/// Execute given block, but don't do any of the `final_checks`.
+	///
+	/// Should only be used for testing.
+	#[cfg(feature = &quot;try-runtime&quot;)]
+	pub fn execute_block_no_check(block: Block) -&gt; frame_support::weights::Weight {
+		Self::initialize_block(block.header());
+		Self::initial_checks(&amp;block);
+
+		let (header, extrinsics) = block.deconstruct();
+
+		Self::execute_extrinsics_with_book_keeping(extrinsics, *header.number());
+
+		// do some of the checks that would normally happen in `final_checks`, but definitely skip
+		// the state root check.
+		{
+			let new_header = &lt;frame_system::Pallet&lt;System&gt;&gt;::finalize();
+			let items_zip = header.digest().logs().iter().zip(new_header.digest().logs().iter());
+			for (header_item, computed_item) in items_zip {
+				header_item.check_equal(computed_item);
+				assert!(header_item == computed_item, &quot;Digest item must match that calculated.&quot;);
+			}
+
+			assert!(
+				header.extrinsics_root() == new_header.extrinsics_root(),
+				&quot;Transaction trie root must be valid.&quot;,
+			);
+		}
+
+		frame_system::Pallet::&lt;System&gt;::block_weight().total()
+	}
+
+	/// Execute all `OnRuntimeUpgrade` of this runtime, including the pre and post migration checks.
+	///
+	/// This should only be used for testing.
+	#[cfg(feature = &quot;try-runtime&quot;)]
+	pub fn try_runtime_upgrade() -&gt; Result&lt;frame_support::weights::Weight, &amp;'static str&gt; {
+		&lt;(COnRuntimeUpgrade, AllPalletsWithSystem) as OnRuntimeUpgrade&gt;::pre_upgrade().unwrap();
+		let weight = Self::execute_on_runtime_upgrade();
+
+		&lt;(COnRuntimeUpgrade, AllPalletsWithSystem) as OnRuntimeUpgrade&gt;::post_upgrade().unwrap();
+
+		Ok(weight)
+	}
+
+	/// Start the execution of a particular block.
+	pub fn initialize_block(header: &amp;System::Header) {
+		sp_io::init_tracing();
+		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;init_block&quot;);
+		let digests = Self::extract_pre_digest(header);
+		Self::initialize_block_impl(header.number(), header.parent_hash(), &amp;digests);
+	}
+
+	fn extract_pre_digest(header: &amp;System::Header) -&gt; Digest {
+		let mut digest = &lt;Digest&gt;::default();
+		header.digest().logs().iter().for_each(|d| {
+			if d.as_pre_runtime().is_some() {
+				digest.push(d.clone())
+			}
+		});
+		digest
+	}
+
+	fn initialize_block_impl(
+		block_number: &amp;System::BlockNumber,
+		parent_hash: &amp;System::Hash,
+		digest: &amp;Digest,
+	) {
+		// Reset events before apply runtime upgrade hook.
+		// This is required to preserve events from runtime upgrade hook.
+		// This means the format of all the event related storages must always be compatible.
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::reset_events();
+
+		let mut weight = 0;
+		if Self::runtime_upgraded() {
+			weight = weight.saturating_add(Self::execute_on_runtime_upgrade());
+		}
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::initialize(block_number, parent_hash, digest);
+		weight = weight.saturating_add(&lt;AllPalletsWithSystem as OnInitialize&lt;
+			System::BlockNumber,
+		&gt;&gt;::on_initialize(*block_number));
+		weight = weight.saturating_add(
+			&lt;System::BlockWeights as frame_support::traits::Get&lt;_&gt;&gt;::get().base_block,
+		);
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::register_extra_weight_unchecked(
+			weight,
+			DispatchClass::Mandatory,
+		);
+
+		frame_system::Pallet::&lt;System&gt;::note_finished_initialize();
+	}
+
+	/// Returns if the runtime was upgraded since the last time this function was called.
+	fn runtime_upgraded() -&gt; bool {
+		let last = frame_system::LastRuntimeUpgrade::&lt;System&gt;::get();
+		let current = &lt;System::Version as frame_support::traits::Get&lt;_&gt;&gt;::get();
+
+		if last.map(|v| v.was_upgraded(&amp;current)).unwrap_or(true) {
+			frame_system::LastRuntimeUpgrade::&lt;System&gt;::put(
+				frame_system::LastRuntimeUpgradeInfo::from(current),
+			);
+			true
+		} else {
+			false
+		}
+	}
+
+	fn initial_checks(block: &amp;Block) {
+		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;initial_checks&quot;);
+		let header = block.header();
+
+		// Check that `parent_hash` is correct.
+		let n = *header.number();
+		assert!(
+			n &gt; System::BlockNumber::zero() &amp;&amp;
+				&lt;frame_system::Pallet&lt;System&gt;&gt;::block_hash(n - System::BlockNumber::one()) ==
+					*header.parent_hash(),
+			&quot;Parent hash should be valid.&quot;,
+		);
+
+		if let Err(i) = System::ensure_inherents_are_first(block) {
+			panic!(&quot;Invalid inherent position for extrinsic at index {}&quot;, i);
+		}
+	}
+
+	/// Actually execute all transitions for `block`.
+	pub fn execute_block(block: Block) {
+		sp_io::init_tracing();
+		sp_tracing::within_span! {
+			sp_tracing::info_span!(&quot;execute_block&quot;, ?block);
+
+			Self::initialize_block(block.header());
+
+			// any initial checks
+			Self::initial_checks(&amp;block);
+
+			let signature_batching = sp_runtime::SignatureBatching::start();
+
+			// execute extrinsics
+			let (header, extrinsics) = block.deconstruct();
+			Self::execute_extrinsics_with_book_keeping(extrinsics, *header.number());
+
+			if !signature_batching.verify() {
+				panic!(&quot;Signature verification failed.&quot;);
+			}
+
+			// any final checks
+			Self::final_checks(&amp;header);
+		}
+	}
+
+	/// Execute given extrinsics and take care of post-extrinsics book-keeping.
+	fn execute_extrinsics_with_book_keeping(
+		extrinsics: Vec&lt;Block::Extrinsic&gt;,
+		block_number: NumberFor&lt;Block&gt;,
+	) {
+		extrinsics.into_iter().for_each(|e| {
+			if let Err(e) = Self::apply_extrinsic(e) {
+				let err: &amp;'static str = e.into();
+				panic!(&quot;{}&quot;, err)
+			}
+		});
+
+		// post-extrinsics book-keeping
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_finished_extrinsics();
+
+		Self::idle_and_finalize_hook(block_number);
+	}
+
+	/// Finalize the block - it is up the caller to ensure that all header fields are valid
+	/// except state-root.
+	pub fn finalize_block() -&gt; System::Header {
+		sp_io::init_tracing();
+		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;finalize_block&quot;);
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_finished_extrinsics();
+		let block_number = &lt;frame_system::Pallet&lt;System&gt;&gt;::block_number();
+
+		Self::idle_and_finalize_hook(block_number);
+
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::finalize()
+	}
+
+	fn idle_and_finalize_hook(block_number: NumberFor&lt;Block&gt;) {
+		let weight = &lt;frame_system::Pallet&lt;System&gt;&gt;::block_weight();
+		let max_weight = &lt;System::BlockWeights as frame_support::traits::Get&lt;_&gt;&gt;::get().max_block;
+		let remaining_weight = max_weight.saturating_sub(weight.total());
+
+		if remaining_weight &gt; 0 {
+			let used_weight = &lt;AllPalletsWithSystem as OnIdle&lt;System::BlockNumber&gt;&gt;::on_idle(
+				block_number,
+				remaining_weight,
+			);
+			&lt;frame_system::Pallet&lt;System&gt;&gt;::register_extra_weight_unchecked(
+				used_weight,
+				DispatchClass::Mandatory,
+			);
+		}
+
+		&lt;AllPalletsWithSystem as OnFinalize&lt;System::BlockNumber&gt;&gt;::on_finalize(block_number);
+	}
+
+	/// Apply extrinsic outside of the block execution function.
+	///
+	/// This doesn't attempt to validate anything regarding the block, but it builds a list of uxt
+	/// hashes.
+	pub fn apply_extrinsic(uxt: Block::Extrinsic) -&gt; ApplyExtrinsicResult {
+		sp_io::init_tracing();
+		let encoded = uxt.encode();
+		let encoded_len = encoded.len();
+		sp_tracing::enter_span!(sp_tracing::info_span!(&quot;apply_extrinsic&quot;,
+				ext=?sp_core::hexdisplay::HexDisplay::from(&amp;encoded)));
+		// Verify that the signature is good.
+		let xt = uxt.check(&amp;Default::default())?;
+
+		// We don't need to make sure to `note_extrinsic` only after we know it's going to be
+		// executed to prevent it from leaking in storage since at this point, it will either
+		// execute or panic (and revert storage changes).
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_extrinsic(encoded);
+
+		// AUDIT: Under no circumstances may this function panic from here onwards.
+
+		// Decode parameters and dispatch
+		let dispatch_info = xt.get_dispatch_info();
+		let r = Applyable::apply::&lt;UnsignedValidator&gt;(xt, &amp;dispatch_info, encoded_len)?;
+
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_applied_extrinsic(&amp;r, dispatch_info);
+
+		Ok(r.map(|_| ()).map_err(|e| e.error))
+	}
+
+	fn final_checks(header: &amp;System::Header) {
+		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;final_checks&quot;);
+		// remove temporaries
+		let new_header = &lt;frame_system::Pallet&lt;System&gt;&gt;::finalize();
+
+		// check digest
+		assert_eq!(
+			header.digest().logs().len(),
+			new_header.digest().logs().len(),
+			&quot;Number of digest items must match that calculated.&quot;
+		);
+		let items_zip = header.digest().logs().iter().zip(new_header.digest().logs().iter());
+		for (header_item, computed_item) in items_zip {
+			header_item.check_equal(computed_item);
+			assert!(header_item == computed_item, &quot;Digest item must match that calculated.&quot;);
+		}
+
+		// check storage root.
+		let storage_root = new_header.state_root();
+		header.state_root().check_equal(storage_root);
+		assert!(header.state_root() == storage_root, &quot;Storage root must match that calculated.&quot;);
+
+		assert!(
+			header.extrinsics_root() == new_header.extrinsics_root(),
+			&quot;Transaction trie root must be valid.&quot;,
+		);
+	}
+
+	/// Check a given signed transaction for validity. This doesn't execute any
+	/// side-effects; it merely checks whether the transaction would panic if it were included or
+	/// not.
+	///
+	/// Changes made to storage should be discarded.
+	pub fn validate_transaction(
+		source: TransactionSource,
+		uxt: Block::Extrinsic,
+		block_hash: Block::Hash,
+	) -&gt; TransactionValidity {
+		sp_io::init_tracing();
+		use sp_tracing::{enter_span, within_span};
+
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::initialize(
+			&amp;(frame_system::Pallet::&lt;System&gt;::block_number() + One::one()),
+			&amp;block_hash,
+			&amp;Default::default(),
+		);
+
+		enter_span! { sp_tracing::Level::TRACE, &quot;validate_transaction&quot; };
+
+		let encoded_len = within_span! { sp_tracing::Level::TRACE, &quot;using_encoded&quot;;
+			uxt.using_encoded(|d| d.len())
+		};
+
+		let xt = within_span! { sp_tracing::Level::TRACE, &quot;check&quot;;
+			uxt.check(&amp;Default::default())
+		}?;
+
+		let dispatch_info = within_span! { sp_tracing::Level::TRACE, &quot;dispatch_info&quot;;
+			xt.get_dispatch_info()
+		};
+
+		within_span! {
+			sp_tracing::Level::TRACE, &quot;validate&quot;;
+			xt.validate::&lt;UnsignedValidator&gt;(source, &amp;dispatch_info, encoded_len)
+		}
+	}
+
+	/// Start an offchain worker and generate extrinsics.
+	pub fn offchain_worker(header: &amp;System::Header) {
+		sp_io::init_tracing();
+		// We need to keep events available for offchain workers,
+		// hence we initialize the block manually.
+		// OffchainWorker RuntimeApi should skip initialization.
+		let digests = header.digest().clone();
+
+		&lt;frame_system::Pallet&lt;System&gt;&gt;::initialize(header.number(), header.parent_hash(), &amp;digests);
+
+		// Frame system only inserts the parent hash into the block hashes as normally we don't know
+		// the hash for the header before. However, here we are aware of the hash and we can add it
+		// as well.
+		frame_system::BlockHash::&lt;System&gt;::insert(header.number(), header.hash());
+
+		&lt;AllPalletsWithSystem as OffchainWorker&lt;System::BlockNumber&gt;&gt;::offchain_worker(
+			*header.number(),
+		)
+	}
+}
+</code></pre></pre>
+<h3 id="impl-for-xxx-结构体枚举体trait实现接口定义的方法"><a class="header" href="#impl-for-xxx-结构体枚举体trait实现接口定义的方法">impl&lt;&gt; for xxx 结构体/枚举体+trait：实现接口定义的方法</a></h3>
+<blockquote>
+<p>impl &lt;trait_name&gt; for &lt;struct/enum name&gt;</p>
+</blockquote>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Summary {
+    fn summarize(&amp;self) -&gt; String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&amp;self) -&gt; String {
+        format!(&quot;{}, by {} ({})&quot;, self.headline, self.author, self.location)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4 id="示例一实现trait中定义的方法"><a class="header" href="#示例一实现trait中定义的方法">示例一：实现trait中定义的方法</a></h4>
+<ul>
+<li>
+<p><a href="https://www.jianshu.com/p/0d60c148c0c0">Rust之PhantomData - 简书</a></p>
+</li>
+<li>
+<p><a href="https://users.rust-lang.org/t/type-alias-vs-use/7486"><code>type</code> alias vs <code>use</code> - help - The Rust Programming Language Forum</a></p>
+</li>
+<li>
+<p>类型转换：</p>
+<ul>
+<li><a href="marginnote3app://note/EA8CFC57-E675-493B-ACBA-BE60163B32EC">as类型转换</a></li>
+<li><a href="marginnote3app://note/C1F89C89-164E-4A63-9214-0E2E335DFD00">From与Into</a></li>
+<li><a href="marginnote3app://note/D27CC849-C8B6-477F-A76C-DFF423784062">整理类型转换</a></li>
+</ul>
+</li>
+<li>
+<p>where与impl语法的对比：</p>
+<ul>
+<li><a href="marginnote3app://note/8974BCC4-5036-4051-913A-287D6C6A56A5">where可以用于更复杂的情况, 如关联类型</a></li>
+<li><a href="marginnote3app://note/E1B86A91-9D49-4CC5-9344-CAEB316EAC41">泛型关联类型(Generic Associated Types)只能使用where子句</a></li>
+<li><a href="https://rust-lang.github.io/rfcs/0135-where.html">0135-where - The Rust RFC Book</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>substrate/frame/executive/src/lib.rs</p>
+</blockquote>
+<ol>
+<li>下列trait限定的意思：
+<ol>
+<li>为Executive结构体实现ExecuteBlock这个trait的方法</li>
+<li>for Executive&lt;…&gt;：Executive本身是个结构体，用到了这些类型</li>
+<li>impl&lt;…&gt;：这些类型分别有哪些trait限定，要用到关联类型限定的，就放在where子句中</li>
+<li>where子句：主要先约束好关联类型Block::Extrinsic，给后面的使用</li>
+<li>总结impl与where子句：这里将简单情况放在impl中，将复杂的关联类型限定放在where子句中。</li>
+</ol>
+</li>
+<li>关于CheckedOf、CallOf、OriginOf这三个：
+<ol>
+<li>impl中的UnsignedValidator用到CallOf， CallOf用到CheckedOf</li>
+<li>(问题)OriginOf的用途</li>
+</ol>
+</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust  editable">impl&lt;
+		System: frame_system::Config + EnsureInherentsAreFirst&lt;Block&gt;,
+		Block: traits::Block&lt;Header = System::Header, Hash = System::Hash&gt;,
+		Context: Default,
+		UnsignedValidator,
+		AllPalletsWithSystem: OnRuntimeUpgrade
+			+ OnInitialize&lt;System::BlockNumber&gt;
+			+ OnIdle&lt;System::BlockNumber&gt;
+			+ OnFinalize&lt;System::BlockNumber&gt;
+			+ OffchainWorker&lt;System::BlockNumber&gt;,
+		COnRuntimeUpgrade: OnRuntimeUpgrade,
+	&gt; ExecuteBlock&lt;Block&gt;
+	for Executive&lt;System, Block, Context, UnsignedValidator, AllPalletsWithSystem, COnRuntimeUpgrade&gt;
+where
+	Block::Extrinsic: Checkable&lt;Context&gt; + Codec,
+	CheckedOf&lt;Block::Extrinsic, Context&gt;: Applyable + GetDispatchInfo,
+	CallOf&lt;Block::Extrinsic, Context&gt;:
+		Dispatchable&lt;Info = DispatchInfo, PostInfo = PostDispatchInfo&gt;,
+	OriginOf&lt;Block::Extrinsic, Context&gt;: From&lt;Option&lt;System::AccountId&gt;&gt;,
+	UnsignedValidator: ValidateUnsigned&lt;Call = CallOf&lt;Block::Extrinsic, Context&gt;&gt;,
+{
+	fn execute_block(block: Block) {
+		Executive::&lt;
+			System,
+			Block,
+			Context,
+			UnsignedValidator,
+			AllPalletsWithSystem,
+			COnRuntimeUpgrade,
+		&gt;::execute_block(block);
+	}
+}
+</code></pre></pre>
+<h2 id="rust面向对象"><a class="header" href="#rust面向对象">Rust面向对象</a></h2>
+<blockquote>
+<p>Struct/Enum+Trait、Reusable、Encapsulation、Inheritance</p>
+</blockquote>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch17-01-what-is-oo.html">Characteristics of Object-Oriented Languages - The Rust Programming Language</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html">Implementing an Object-Oriented Design Pattern - The Rust Programming Language</a></li>
+</ul>
+<blockquote>
+<p>Object-oriented programs are made up of objects. An object packages both data and the procedures that operate on that
+data. The procedures are typically called methods or operations.</p>
+</blockquote>
+<p>Using this definition, Rust is object-oriented: structs and enums have data, and impl blocks provide methods on structs
+and enums. Even though structs and enums with methods aren’t called objects, they provide the same functionality,
+according to the Gang of Four’s definition of objects.</p>
+<h3 id="注意可以使用图表对比python和rust的对应面向对象特性实现方式"><a class="header" href="#注意可以使用图表对比python和rust的对应面向对象特性实现方式">注意：可以使用图表，对比python和rust的对应面向对象特性实现方式</a></h3>
+<h4 id="属性方法"><a class="header" href="#属性方法">属性方法</a></h4>
+<h4 id="静态方法"><a class="header" href="#静态方法">静态方法</a></h4>
+<h4 id="实例方法"><a class="header" href="#实例方法">实例方法</a></h4>
+<h4 id="类方法"><a class="header" href="#类方法">类方法</a></h4>
+<h3 id="encapsulation"><a class="header" href="#encapsulation">Encapsulation</a></h3>
+<p>pub(crate/super) keywords</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#modules-cheat-sheet">Modules Cheat Sheet</a></li>
+</ul>
+<h4 id="start-from-the-crate-root"><a class="header" href="#start-from-the-crate-root">Start from the crate root</a></h4>
+<h4 id="declaring-modules"><a class="header" href="#declaring-modules">Declaring modules</a></h4>
+<h4 id="declaring-submodules"><a class="header" href="#declaring-submodules">Declaring submodules</a></h4>
+<p>mod keyword</p>
+<h4 id="paths-to-code-in-modules"><a class="header" href="#paths-to-code-in-modules">Paths to code in modules</a></h4>
+<h4 id="private-vs-public"><a class="header" href="#private-vs-public">Private vs public</a></h4>
+<h4 id="the-use-keyword"><a class="header" href="#the-use-keyword">The use keyword</a></h4>
+<h3 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h3>
+<blockquote>
+<p>If a language must have inheritance to be an object-oriented language, then Rust is not one. There is no way to define
+a struct that inherits the parent struct’s fields and method implementations without using a macro.</p>
+</blockquote>
+<p>You would choose inheritance for two main reasons.</p>
+<h4 id="reuse"><a class="header" href="#reuse">Reuse</a></h4>
+<p>One is for reuse of code: you can implement particular behavior for one type, and inheritance enables you to reuse that
+implementation for a different type. You can do this in a limited way in Rust code using default trait method
+implementations</p>
+<h4 id="polymorphism"><a class="header" href="#polymorphism">Polymorphism</a></h4>
+<p>The other reason to use inheritance relates to the type system: to enable a child type to be used in the same places as
+the parent type. This is also called polymorphism (多态性) , which means that you can substitute multiple objects for each
+other at runtime if they share certain characteristics.</p>
+<blockquote>
+<p>Polymorphism: code that can work with data of multiple types</p>
+</blockquote>
+<p>Rust instead uses generics to abstract over different possible types and trait bounds to impose constraints on what
+those types must provide. This is sometimes called <strong>bounded parametric polymorphism</strong> .</p>
+<h2 id="六回顾trait联系上生命周期"><a class="header" href="#六回顾trait联系上生命周期">六、回顾trait，联系上生命周期</a></h2>
+<ul>
+<li><a href="marginnote3app://note/133A41C4-ADA0-4101-B280-BCD4D3DB8014">rust权威指南-trait定义共享行为</a></li>
+</ul>
+<p>借助于trait和trait约束,我们可以在使用泛型参数来消除重复代码的同时,向编译器指明自己希望泛型拥有的功能。而编译器则可以利用这些trait约束信息来确保代码中使用的具体类型提供了正确的行为。在动态语言中,尝试调用一个类型没有实现的方法会导致在运行时出现错误。但是,Rust将这些错误出现的时期转移到了编译期,并迫使我们在运行代码之前修复问题。我们无须编写那些用于在运行时检查行为的代码,因为这些工作已经在编译期完成了。这一机制在保留泛型灵活性的同时提升了代码的性能。</p>
+<p>生命周期是另外一种你已经接触过的泛型。普通泛型可以确保类型拥有期望的行为,与之不同的是,生命周期能够确保引用在我们的使用过程中一直有效</p>
+
+            </main>
+
+            <!--            <script src="https://utteranc.es/client.js"-->
+            <!--                    repo="RustMagazine/rust_magazine_2022"-->
+            <!--                    issue-term="title"-->
+            <!--                    theme="github-light"-->
+            <!--                    crossorigin="anonymous"-->
+            <!--                    async></script>-->
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                <!-- Mobile navigation buttons -->
+                    <a rel="prev" href="../../../layer5_source_code_anatomy/substrate_anatomy/substrate_modules.html" class="mobile-nav-chapters previous"
+                       title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../../layer6_ecosystem/layer6_ecosystem.html" class="mobile-nav-chapters next"
+                       title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            <a rel="prev" href="../../../layer5_source_code_anatomy/substrate_anatomy/substrate_modules.html" class="nav-chapters previous" title="Previous chapter"
+               aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <i class="fa fa-angle-left"></i>
+            </a>
+
+            <a rel="next" href="../../../layer6_ecosystem/layer6_ecosystem.html" class="nav-chapters next" title="Next chapter"
+               aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+            </a>
+    </nav>
+
+</div>
+
+
+
+
+    <script type="text/javascript">
+        window.playground_copyable = true;
+    </script>
+
+    <script src="../../../ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="../../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../highlight.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../book.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JS scripts -->
+    <script type="text/javascript" src="../../../assets/mermaid/mermaid.min.js"></script>
+    <script type="text/javascript" src="../../../assets/mermaid/mermaid-init.js"></script>
+    <script type="text/javascript" src="../../../assets/smart-anchor.js"></script>
+    <script type="text/javascript" src="../../../assets/pagetoc/sidebar.js"></script>
+
+</body>
+</html>
