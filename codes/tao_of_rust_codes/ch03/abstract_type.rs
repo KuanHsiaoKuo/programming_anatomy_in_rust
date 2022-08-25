@@ -30,7 +30,7 @@ pub fn trait_object() {
     impl Bar for Foo {
         fn baz(&self) { println!("{:?}", self) }
     }
-    fn static_dispatch<T>(t: &T) where T:Bar {
+    fn static_dispatch<T>(t: &T) where T: Bar {
         t.baz();
     }
     fn dynamic_dispatch(t: &Bar) {
@@ -117,7 +117,7 @@ pub fn trait_object() {
 ///     a
 /// }
 /// ```
-pub fn impl_trait(){
+pub fn impl_trait() {
     use std::fmt::Debug;
     pub trait Fly {
         fn fly(&self) -> bool;
@@ -136,21 +136,21 @@ pub fn impl_trait(){
             return false;
         }
     }
-    fn fly_static(s: impl Fly+Debug) -> bool {
+    fn fly_static(s: impl Fly + Debug) -> bool {
         s.fly()
     }
-    fn can_fly(s: impl Fly+Debug) -> impl Fly {
-        if s.fly(){
+    fn can_fly(s: impl Fly + Debug) -> impl Fly {
+        if s.fly() {
             println!("{:?} can fly", s);
-        }else{
+        } else {
             println!("{:?} can't fly", s);
         }
         s
     }
-    fn dyn_can_fly(s: impl Fly+Debug+'static) -> Box<dyn Fly> {
-        if s.fly(){
+    fn dyn_can_fly(s: impl Fly + Debug + 'static) -> Box<dyn Fly> {
+        if s.fly() {
             println!("{:?} can fly", s);
-        }else{
+        } else {
             println!("{:?} can't fly", s);
         }
         Box::new(s)
