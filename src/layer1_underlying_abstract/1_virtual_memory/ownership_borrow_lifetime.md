@@ -97,7 +97,7 @@
 
 ## 所有权语义模型
 
-![rust ownership semantic](../../../materials/rust_basics/rust-semantic.excalidraw)
+![rust ownership semantic](kroki-excalidraw:../../../materials/rust_basics/ownership-semantic.excalidraw)
 
 ## 所有权与内存管理
 

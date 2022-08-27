@@ -1,118 +1,119 @@
 # Substrate官方教程梳理与练习
 
 <!--ts-->
+
 * [Substrate官方教程梳理与练习](#substrate官方教程梳理与练习)
 * [总览](#总览)
 * [Get Started](#get-started)
-   * [Build a local blockchain](#build-a-local-blockchain)
-      * [设置开发环境](#设置开发环境)
-         * [使用rustup设置rust环境](#使用rustup设置rust环境)
-         * [检查环境](#检查环境)
-      * [启动链节点](#启动链节点)
-         * [下载node-template](#下载node-template)
-         * [node-templeate项目结构](#node-templeate项目结构)
-         * [Cargo.toml](#cargotoml)
-         * [编译前的检查](#编译前的检查)
-         * [编译](#编译)
-         * [可能遇到的问题](#可能遇到的问题)
-         * [本地运行节点](#本地运行节点)
-         * [docker运行节点](#docker运行节点)
-      * [前端访问](#前端访问)
-         * [使用前端模版](#使用前端模版)
-         * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
-      * [Substrate使用方式](#substrate使用方式)
-         * [使用subtrate node](#使用subtrate-node)
-         * [使用substrate frame](#使用substrate-frame)
-         * [使用substrate core](#使用substrate-core)
-   * [Simulate a network](#simulate-a-network)
-   * [Add trusted nodes](#add-trusted-nodes)
-      * [加密方式梳理](#加密方式梳理)
-         * [Sr25519](#sr25519)
-         * [Ed25519](#ed25519)
-         * [SS58: 对应公钥/地址格式](#ss58-对应公钥地址格式)
-      * [步骤：](#步骤)
-      * [actdiag](#actdiag)
-   * [Authorize specific nodes](#authorize-specific-nodes)
-      * [Alice授权Charlie过程](#alice授权charlie过程)
-         * [Charlie连接Dave过程](#charlie连接dave过程)
-      * [流程图](#流程图)
-      * [总结](#总结)
-   * [Monitor node metrics](#monitor-node-metrics)
-      * [本节大概的架构](#本节大概的架构)
-      * [安装Prometheus和grafana](#安装prometheus和grafana)
-      * [配置Prometheus.yml](#配置prometheusyml)
-      * [启动grafana](#启动grafana)
-      * [配置数据源](#配置数据源)
-      * [导入看板模版](#导入看板模版)
-   * [Upgrade a running network](#upgrade-a-running-network)
-      * [时序图](#时序图)
-      * [第一次更新运行时](#第一次更新运行时)
-      * [第二次上传文件设置自动执行条件](#第二次上传文件设置自动执行条件)
+    * [Build a local blockchain](#build-a-local-blockchain)
+        * [设置开发环境](#设置开发环境)
+            * [使用rustup设置rust环境](#使用rustup设置rust环境)
+            * [检查环境](#检查环境)
+        * [启动链节点](#启动链节点)
+            * [下载node-template](#下载node-template)
+            * [node-templeate项目结构](#node-templeate项目结构)
+            * [Cargo.toml](#cargotoml)
+            * [编译前的检查](#编译前的检查)
+            * [编译](#编译)
+            * [可能遇到的问题](#可能遇到的问题)
+            * [本地运行节点](#本地运行节点)
+            * [docker运行节点](#docker运行节点)
+        * [前端访问](#前端访问)
+            * [使用前端模版](#使用前端模版)
+            * [使用polkadot-js访问节点](#使用polkadot-js访问节点)
+        * [Substrate使用方式](#substrate使用方式)
+            * [使用subtrate node](#使用subtrate-node)
+            * [使用substrate frame](#使用substrate-frame)
+            * [使用substrate core](#使用substrate-core)
+    * [Simulate a network](#simulate-a-network)
+    * [Add trusted nodes](#add-trusted-nodes)
+        * [加密方式梳理](#加密方式梳理)
+            * [Sr25519](#sr25519)
+            * [Ed25519](#ed25519)
+            * [SS58: 对应公钥/地址格式](#ss58-对应公钥地址格式)
+        * [步骤：](#步骤)
+        * [actdiag](#actdiag)
+    * [Authorize specific nodes](#authorize-specific-nodes)
+        * [Alice授权Charlie过程](#alice授权charlie过程)
+            * [Charlie连接Dave过程](#charlie连接dave过程)
+        * [流程图](#流程图)
+        * [总结](#总结)
+    * [Monitor node metrics](#monitor-node-metrics)
+        * [本节大概的架构](#本节大概的架构)
+        * [安装Prometheus和grafana](#安装prometheus和grafana)
+        * [配置Prometheus.yml](#配置prometheusyml)
+        * [启动grafana](#启动grafana)
+        * [配置数据源](#配置数据源)
+        * [导入看板模版](#导入看板模版)
+    * [Upgrade a running network](#upgrade-a-running-network)
+        * [时序图](#时序图)
+        * [第一次更新运行时](#第一次更新运行时)
+        * [第二次上传文件设置自动执行条件](#第二次上传文件设置自动执行条件)
 * [Work with pallets](#work-with-pallets)
-   * [文档/代码更新问题](#文档代码更新问题)
-   * [Pallet前置Rust知识](#pallet前置rust知识)
-   * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
-      * [runtime结构分析](#runtime结构分析)
-      * [时序图](#时序图-1)
-   * [Specify the origin for a call](#specify-the-origin-for-a-call)
-         * [为帐户设置昵称](#为帐户设置昵称)
-         * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
-      * [可能出现的问题](#可能出现的问题)
-      * [signed与sudo有不同权限。](#signed与sudo有不同权限)
-   * [Configure the contracts pallet](#configure-the-contracts-pallet)
-   * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
-      * [时序图](#时序图-2)
-   * [Publish Custom pallets](#publish-custom-pallets)
-      * [内置pallets](#内置pallets)
-      * [发布pallets](#发布pallets)
+    * [文档/代码更新问题](#文档代码更新问题)
+    * [Pallet前置Rust知识](#pallet前置rust知识)
+    * [Add a pallet to the runtime](#add-a-pallet-to-the-runtime)
+        * [runtime结构分析](#runtime结构分析)
+        * [时序图](#时序图-1)
+    * [Specify the origin for a call](#specify-the-origin-for-a-call)
+      * [为帐户设置昵称](#为帐户设置昵称)
+      * [使用Nicks pallet查询账户信息](#使用nicks-pallet查询账户信息)
+        * [可能出现的问题](#可能出现的问题)
+        * [signed与sudo有不同权限。](#signed与sudo有不同权限)
+    * [Configure the contracts pallet](#configure-the-contracts-pallet)
+    * [Use macros in a custom pallet](#use-macros-in-a-custom-pallet)
+        * [时序图](#时序图-2)
+    * [Publish Custom pallets](#publish-custom-pallets)
+        * [内置pallets](#内置pallets)
+        * [发布pallets](#发布pallets)
 * [Develop smart contracts](#develop-smart-contracts)
-   * [Prepare your first contract](#prepare-your-first-contract)
-   * [Develop a smart contract](#develop-a-smart-contract)
-   * [Use maps for storing values](#use-maps-for-storing-values)
-   * [Buid a token contract](#buid-a-token-contract)
-   * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
+    * [Prepare your first contract](#prepare-your-first-contract)
+    * [Develop a smart contract](#develop-a-smart-contract)
+    * [Use maps for storing values](#use-maps-for-storing-values)
+    * [Buid a token contract](#buid-a-token-contract)
+    * [Troubleshoot smart contracts](#troubleshoot-smart-contracts)
 * [Connect with other chains](#connect-with-other-chains)
-   * [Start a local relay chain](#start-a-local-relay-chain)
-      * [波卡架构](#波卡架构)
-      * [parachains](#parachains)
-      * [注意版本匹配](#注意版本匹配)
-      * [时序图](#时序图-3)
-   * [Connect a local parachain](#connect-a-local-parachain)
-      * [Common Good Parachains](#common-good-parachains)
-      * [Conver a solo chain](#conver-a-solo-chain)
-      * [Parachain Slots Autcion](#parachain-slots-autcion)
-      * [跨链用到的信息格式](#跨链用到的信息格式)
-      * [时序图](#时序图-4)
-   * [Connect to Rococo testnet](#connect-to-rococo-testnet)
-      * [substrate预置账户和密钥](#substrate预置账户和密钥)
-      * [wallets](#wallets)
-      * [polkadot-js/extension](#polkadot-jsextension)
-      * [SS58地址格式](#ss58地址格式)
-      * [Rococo faucet martic channel](#rococo-faucet-martic-channel)
-      * [时序图](#时序图-5)
-   * [Access EVM accounts](#access-evm-accounts)
-      * [Ethereum core concepts and terminology](#ethereum-core-concepts-and-terminology)
-      * [Ethereum Virtual Machine (EVM) basics](#ethereum-virtual-machine-evm-basics)
-      * [Decentralized applications and smart contracts](#decentralized-applications-and-smart-contracts)
-      * [Pallet design principles](#pallet-design-principles)
-      * [Truffle](#truffle)
-      * [Remix IDE](#remix-ide)
-      * [时序图](#时序图-6)
+    * [Start a local relay chain](#start-a-local-relay-chain)
+        * [波卡架构](#波卡架构)
+        * [parachains](#parachains)
+        * [注意版本匹配](#注意版本匹配)
+        * [时序图](#时序图-3)
+    * [Connect a local parachain](#connect-a-local-parachain)
+        * [Common Good Parachains](#common-good-parachains)
+        * [Conver a solo chain](#conver-a-solo-chain)
+        * [Parachain Slots Autcion](#parachain-slots-autcion)
+        * [跨链用到的信息格式](#跨链用到的信息格式)
+        * [时序图](#时序图-4)
+    * [Connect to Rococo testnet](#connect-to-rococo-testnet)
+        * [substrate预置账户和密钥](#substrate预置账户和密钥)
+        * [wallets](#wallets)
+        * [polkadot-js/extension](#polkadot-jsextension)
+        * [SS58地址格式](#ss58地址格式)
+        * [Rococo faucet martic channel](#rococo-faucet-martic-channel)
+        * [时序图](#时序图-5)
+    * [Access EVM accounts](#access-evm-accounts)
+        * [Ethereum core concepts and terminology](#ethereum-core-concepts-and-terminology)
+        * [Ethereum Virtual Machine (EVM) basics](#ethereum-virtual-machine-evm-basics)
+        * [Decentralized applications and smart contracts](#decentralized-applications-and-smart-contracts)
+        * [Pallet design principles](#pallet-design-principles)
+        * [Truffle](#truffle)
+        * [Remix IDE](#remix-ide)
+        * [时序图](#时序图-6)
 * [参考资源](#参考资源)
-   * [substrate文档练习](#substrate文档练习)
-   * [pallet基础](#pallet基础)
-      * [尝试添加pallet到runtime](#尝试添加pallet到runtime)
-   * [智能合约](#智能合约)
-      * [初探ink!](#初探ink)
-      * [深入ink!](#深入ink)
-      * [ERC20](#erc20)
-   * [连接其他链](#连接其他链)
-      * [中继链连接](#中继链连接)
-      * [平行链连接](#平行链连接)
-   * [测试](#测试)
-      * [编写测试](#编写测试)
-      * [benchmarking](#benchmarking)
-   * [升级](#升级)
+    * [substrate文档练习](#substrate文档练习)
+    * [pallet基础](#pallet基础)
+        * [尝试添加pallet到runtime](#尝试添加pallet到runtime)
+    * [智能合约](#智能合约)
+        * [初探ink!](#初探ink)
+        * [深入ink!](#深入ink)
+        * [ERC20](#erc20)
+    * [连接其他链](#连接其他链)
+        * [中继链连接](#中继链连接)
+        * [平行链连接](#平行链连接)
+    * [测试](#测试)
+        * [编写测试](#编写测试)
+        * [benchmarking](#benchmarking)
+    * [升级](#升级)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
 <!-- Added by: runner, at: Thu Aug 25 14:30:43 UTC 2022 -->
@@ -412,7 +413,53 @@ frame其实是一组模块（pallet）和支持库。使用substrate frame可以
 
 ### 流程图
 
-![authorize specific nodes seq](kroki-mermaid:../../../../../materials/plantumls/substrate_tutorials/get-started/authorize-specific-nodes-seq.mermaid)
+[//]: # (![authorize specific nodes seq]&#40;kroki-mermaid:../../../../../materials/plantumls/substrate_tutorials/get-started/authorize-specific-nodes-seq.mermaid&#41;)
+
+```mermaid
+sequenceDiagram
+    actor terminal as 终端
+    participant runtime as 运行时:添加pallet
+    participant node as 节点:修改链规范
+    participant pkjs as polkadot-js-app
+    terminal->>terminal: git chekout latest & cargo build --release
+    terminal->>+runtime: 开始修改运行时cargo文件，添加pallet依赖与feature
+    rect rgb(200, 150, 255)
+    runtime->>runtime: runtime/Cargo.toml:depencies添加pallet-node-authorization
+    runtime->>runtime: runtime/Cargo.toml:features添加pallet-node-authorization/std
+    end
+    runtime->>-terminal: prepare to check
+    terminal->>terminal: cargo check -p node-template-runtime
+    terminal->>+runtime: 开始给节点node添加pallet用到的参数类型、实现块、构建运行时配置
+    rect rgb(200, 150, 255)
+    runtime->>runtime: runtime/src/runtime.rs:add parameter_types
+    runtime->>runtime: runtime/src/runtime.rs:add impl section
+    runtime->>runtime: runtime/src/runtime.rs:add the pallet to the construct_runtime macro
+    end
+    runtime->>-terminal: 开始检查
+    terminal->>terminal: cargo check -p node-template-runtime
+    terminal->>+node: 开始给授权节点添加创始区块存储功能
+    node->>node: node/Cargo.toml:add bs58 dependency
+    rect rgb(200, 150, 255)
+    node->>+node: 添加创始区块存储功能
+    node->>node: node/src/node.rs:add genesis storage for nodes
+    node->>node: node/src/node.rs:locate the testnet_genesis function
+    node->>node: node/src/node.rs:add GenesisConfig declaration
+    end
+    node->>-terminal: cargo check & start nodes
+    terminal->>terminal: cargo check -p node-template-runtime
+    rect rgb(200, 150, 255)
+    terminal->>terminal: start alice node
+    terminal->>terminal: start bob node
+    terminal->>terminal: start Charlie node
+    terminal->>terminal: start Dave node
+    end
+    terminal->>pkjs: 开始进行授权与建立连接操作
+    rect rgb(200, 150, 255)
+    pkjs->>pkjs: 使用alice账号给Charlie授权
+    pkjs->>pkjs: 使用Charlie账号连接Dave节点
+    pkjs->>pkjs: Dave对外claimNode
+    end
+```
 
 ### 总结
 
@@ -731,8 +778,6 @@ pub enum Error<T> {
 4. 更多详细内容：[how-to-guides: pallet-design](https://docs.substrate.io/reference/how-to-guides/#pallet-design)
 ```
 
-
-
 ### 时序图
 
 ```plantuml
@@ -905,7 +950,6 @@ pub enum Error<T> {
 ```plantuml
 {{#include ../../../../../materials/plantumls/substrate_tutorials/connect-with-other-chains/access-evm-accounts.puml:1:}}
 ```
-
 
 # 参考资源
 
