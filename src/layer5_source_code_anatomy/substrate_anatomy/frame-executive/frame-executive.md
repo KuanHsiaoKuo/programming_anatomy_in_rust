@@ -1,8 +1,22 @@
 # frame/executive解剖
 
-<!-- ts -->
+<!--ts-->
 
-<!-- te -->
+<!--te-->
+
+## 类型定义
+
+
+```rust, editable
+{{#include ../../../../codes/substrate/executive/src/lib.rs:139:141}}
+```
+
+## 特殊结构体定义(PhantomData)
+
+
+```rust, editable
+{{#include ../../../../codes/substrate/executive/src/lib.rs:143:170}}
+```
 
 ## 定义并实现许多方法
 
@@ -11,7 +25,7 @@
 > substrate/frame/executive/src/lib.rs
 
 ```rust, editable
-{{#include ../../../../codes/substrate/executive/src/lib.rs:205:545}}
+{{#include ../../../../codes/substrate/executive/src/lib.rs:205:224}}
 ```
 
 ## 实现trait中定义的方法
