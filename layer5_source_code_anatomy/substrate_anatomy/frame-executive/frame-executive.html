@@ -181,8 +181,55 @@
                     <nav class="pagetoc"></nav>
                 </div>
                 <h1 id="frameexecutive解剖"><a class="header" href="#frameexecutive解剖">frame/executive解剖</a></h1>
-<!-- ts -->
-<!-- te -->
+<!--ts-->
+<ul>
+<li><a href="#frameexecutive%E8%A7%A3%E5%89%96">frame/executive解剖</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89">类型定义</a></li>
+<li><a href="#%E7%89%B9%E6%AE%8A%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89phantomdata">特殊结构体定义(PhantomData)</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E5%B9%B6%E5%AE%9E%E7%8E%B0%E8%AE%B8%E5%A4%9A%E6%96%B9%E6%B3%95">定义并实现许多方法</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0trait%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%9A%84%E6%96%B9%E6%B3%95">实现trait中定义的方法</a></li>
+</ul>
+</li>
+</ul>
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: runner, at: Sat Aug 27 09:30:50 UTC 2022 -->
+<!--te-->
+<h2 id="类型定义"><a class="header" href="#类型定义">类型定义</a></h2>
+<pre><pre class="playground"><code class="language-rust  editable">pub type CheckedOf&lt;E, C&gt; = &lt;E as Checkable&lt;C&gt;&gt;::Checked;
+pub type CallOf&lt;E, C&gt; = &lt;CheckedOf&lt;E, C&gt; as Applyable&gt;::Call;
+pub type OriginOf&lt;E, C&gt; = &lt;CallOf&lt;E, C&gt; as Dispatchable&gt;::Origin;
+</code></pre></pre>
+<h2 id="特殊结构体定义phantomdata"><a class="header" href="#特殊结构体定义phantomdata">特殊结构体定义(PhantomData)</a></h2>
+<pre><pre class="playground"><code class="language-rust  editable">/// Main entry point for certain runtime actions as e.g. `execute_block`.
+///
+/// Generic parameters:
+/// - `System`: Something that implements `frame_system::Config`
+/// - `Block`: The block type of the runtime
+/// - `Context`: The context that is used when checking an extrinsic.
+/// - `UnsignedValidator`: The unsigned transaction validator of the runtime.
+/// - `AllPalletsWithSystem`: Tuple that contains all pallets including frame system pallet. Will be
+///   used to call hooks e.g. `on_initialize`.
+/// - `OnRuntimeUpgrade`: Custom logic that should be called after a runtime upgrade. Modules are
+///   already called by `AllPalletsWithSystem`. It will be called before all modules will be called.
+pub struct Executive&lt;
+	System,
+	Block,
+	Context,
+	UnsignedValidator,
+	AllPalletsWithSystem,
+	OnRuntimeUpgrade = (),
+&gt;(
+	PhantomData&lt;(
+		System,
+		Block,
+		Context,
+		UnsignedValidator,
+		AllPalletsWithSystem,
+		OnRuntimeUpgrade,
+	)&gt;,
+);
+</code></pre></pre>
 <h2 id="定义并实现许多方法"><a class="header" href="#定义并实现许多方法">定义并实现许多方法</a></h2>
 <ul>
 <li><a href="https://paritytech.github.io/substrate/master/frame_executive/struct.Executive.html">Executive in frame_executive - Rust</a></li>
@@ -210,327 +257,6 @@ where
 	OriginOf&lt;Block::Extrinsic, Context&gt;: From&lt;Option&lt;System::AccountId&gt;&gt;,
 	UnsignedValidator: ValidateUnsigned&lt;Call = CallOf&lt;Block::Extrinsic, Context&gt;&gt;,
 {
-	/// Execute all `OnRuntimeUpgrade` of this runtime, and return the aggregate weight.
-	pub fn execute_on_runtime_upgrade() -&gt; frame_support::weights::Weight {
-		&lt;(COnRuntimeUpgrade, AllPalletsWithSystem) as OnRuntimeUpgrade&gt;::on_runtime_upgrade()
-	}
-
-	/// Execute given block, but don't do any of the `final_checks`.
-	///
-	/// Should only be used for testing.
-	#[cfg(feature = &quot;try-runtime&quot;)]
-	pub fn execute_block_no_check(block: Block) -&gt; frame_support::weights::Weight {
-		Self::initialize_block(block.header());
-		Self::initial_checks(&amp;block);
-
-		let (header, extrinsics) = block.deconstruct();
-
-		Self::execute_extrinsics_with_book_keeping(extrinsics, *header.number());
-
-		// do some of the checks that would normally happen in `final_checks`, but definitely skip
-		// the state root check.
-		{
-			let new_header = &lt;frame_system::Pallet&lt;System&gt;&gt;::finalize();
-			let items_zip = header.digest().logs().iter().zip(new_header.digest().logs().iter());
-			for (header_item, computed_item) in items_zip {
-				header_item.check_equal(computed_item);
-				assert!(header_item == computed_item, &quot;Digest item must match that calculated.&quot;);
-			}
-
-			assert!(
-				header.extrinsics_root() == new_header.extrinsics_root(),
-				&quot;Transaction trie root must be valid.&quot;,
-			);
-		}
-
-		frame_system::Pallet::&lt;System&gt;::block_weight().total()
-	}
-
-	/// Execute all `OnRuntimeUpgrade` of this runtime, including the pre and post migration checks.
-	///
-	/// This should only be used for testing.
-	#[cfg(feature = &quot;try-runtime&quot;)]
-	pub fn try_runtime_upgrade() -&gt; Result&lt;frame_support::weights::Weight, &amp;'static str&gt; {
-		&lt;(COnRuntimeUpgrade, AllPalletsWithSystem) as OnRuntimeUpgrade&gt;::pre_upgrade().unwrap();
-		let weight = Self::execute_on_runtime_upgrade();
-
-		&lt;(COnRuntimeUpgrade, AllPalletsWithSystem) as OnRuntimeUpgrade&gt;::post_upgrade().unwrap();
-
-		Ok(weight)
-	}
-
-	/// Start the execution of a particular block.
-	pub fn initialize_block(header: &amp;System::Header) {
-		sp_io::init_tracing();
-		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;init_block&quot;);
-		let digests = Self::extract_pre_digest(header);
-		Self::initialize_block_impl(header.number(), header.parent_hash(), &amp;digests);
-	}
-
-	fn extract_pre_digest(header: &amp;System::Header) -&gt; Digest {
-		let mut digest = &lt;Digest&gt;::default();
-		header.digest().logs().iter().for_each(|d| {
-			if d.as_pre_runtime().is_some() {
-				digest.push(d.clone())
-			}
-		});
-		digest
-	}
-
-	fn initialize_block_impl(
-		block_number: &amp;System::BlockNumber,
-		parent_hash: &amp;System::Hash,
-		digest: &amp;Digest,
-	) {
-		// Reset events before apply runtime upgrade hook.
-		// This is required to preserve events from runtime upgrade hook.
-		// This means the format of all the event related storages must always be compatible.
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::reset_events();
-
-		let mut weight = 0;
-		if Self::runtime_upgraded() {
-			weight = weight.saturating_add(Self::execute_on_runtime_upgrade());
-		}
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::initialize(block_number, parent_hash, digest);
-		weight = weight.saturating_add(&lt;AllPalletsWithSystem as OnInitialize&lt;
-			System::BlockNumber,
-		&gt;&gt;::on_initialize(*block_number));
-		weight = weight.saturating_add(
-			&lt;System::BlockWeights as frame_support::traits::Get&lt;_&gt;&gt;::get().base_block,
-		);
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::register_extra_weight_unchecked(
-			weight,
-			DispatchClass::Mandatory,
-		);
-
-		frame_system::Pallet::&lt;System&gt;::note_finished_initialize();
-	}
-
-	/// Returns if the runtime was upgraded since the last time this function was called.
-	fn runtime_upgraded() -&gt; bool {
-		let last = frame_system::LastRuntimeUpgrade::&lt;System&gt;::get();
-		let current = &lt;System::Version as frame_support::traits::Get&lt;_&gt;&gt;::get();
-
-		if last.map(|v| v.was_upgraded(&amp;current)).unwrap_or(true) {
-			frame_system::LastRuntimeUpgrade::&lt;System&gt;::put(
-				frame_system::LastRuntimeUpgradeInfo::from(current),
-			);
-			true
-		} else {
-			false
-		}
-	}
-
-	fn initial_checks(block: &amp;Block) {
-		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;initial_checks&quot;);
-		let header = block.header();
-
-		// Check that `parent_hash` is correct.
-		let n = *header.number();
-		assert!(
-			n &gt; System::BlockNumber::zero() &amp;&amp;
-				&lt;frame_system::Pallet&lt;System&gt;&gt;::block_hash(n - System::BlockNumber::one()) ==
-					*header.parent_hash(),
-			&quot;Parent hash should be valid.&quot;,
-		);
-
-		if let Err(i) = System::ensure_inherents_are_first(block) {
-			panic!(&quot;Invalid inherent position for extrinsic at index {}&quot;, i);
-		}
-	}
-
-	/// Actually execute all transitions for `block`.
-	pub fn execute_block(block: Block) {
-		sp_io::init_tracing();
-		sp_tracing::within_span! {
-			sp_tracing::info_span!(&quot;execute_block&quot;, ?block);
-
-			Self::initialize_block(block.header());
-
-			// any initial checks
-			Self::initial_checks(&amp;block);
-
-			let signature_batching = sp_runtime::SignatureBatching::start();
-
-			// execute extrinsics
-			let (header, extrinsics) = block.deconstruct();
-			Self::execute_extrinsics_with_book_keeping(extrinsics, *header.number());
-
-			if !signature_batching.verify() {
-				panic!(&quot;Signature verification failed.&quot;);
-			}
-
-			// any final checks
-			Self::final_checks(&amp;header);
-		}
-	}
-
-	/// Execute given extrinsics and take care of post-extrinsics book-keeping.
-	fn execute_extrinsics_with_book_keeping(
-		extrinsics: Vec&lt;Block::Extrinsic&gt;,
-		block_number: NumberFor&lt;Block&gt;,
-	) {
-		extrinsics.into_iter().for_each(|e| {
-			if let Err(e) = Self::apply_extrinsic(e) {
-				let err: &amp;'static str = e.into();
-				panic!(&quot;{}&quot;, err)
-			}
-		});
-
-		// post-extrinsics book-keeping
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_finished_extrinsics();
-
-		Self::idle_and_finalize_hook(block_number);
-	}
-
-	/// Finalize the block - it is up the caller to ensure that all header fields are valid
-	/// except state-root.
-	pub fn finalize_block() -&gt; System::Header {
-		sp_io::init_tracing();
-		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;finalize_block&quot;);
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_finished_extrinsics();
-		let block_number = &lt;frame_system::Pallet&lt;System&gt;&gt;::block_number();
-
-		Self::idle_and_finalize_hook(block_number);
-
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::finalize()
-	}
-
-	fn idle_and_finalize_hook(block_number: NumberFor&lt;Block&gt;) {
-		let weight = &lt;frame_system::Pallet&lt;System&gt;&gt;::block_weight();
-		let max_weight = &lt;System::BlockWeights as frame_support::traits::Get&lt;_&gt;&gt;::get().max_block;
-		let remaining_weight = max_weight.saturating_sub(weight.total());
-
-		if remaining_weight &gt; 0 {
-			let used_weight = &lt;AllPalletsWithSystem as OnIdle&lt;System::BlockNumber&gt;&gt;::on_idle(
-				block_number,
-				remaining_weight,
-			);
-			&lt;frame_system::Pallet&lt;System&gt;&gt;::register_extra_weight_unchecked(
-				used_weight,
-				DispatchClass::Mandatory,
-			);
-		}
-
-		&lt;AllPalletsWithSystem as OnFinalize&lt;System::BlockNumber&gt;&gt;::on_finalize(block_number);
-	}
-
-	/// Apply extrinsic outside of the block execution function.
-	///
-	/// This doesn't attempt to validate anything regarding the block, but it builds a list of uxt
-	/// hashes.
-	pub fn apply_extrinsic(uxt: Block::Extrinsic) -&gt; ApplyExtrinsicResult {
-		sp_io::init_tracing();
-		let encoded = uxt.encode();
-		let encoded_len = encoded.len();
-		sp_tracing::enter_span!(sp_tracing::info_span!(&quot;apply_extrinsic&quot;,
-				ext=?sp_core::hexdisplay::HexDisplay::from(&amp;encoded)));
-		// Verify that the signature is good.
-		let xt = uxt.check(&amp;Default::default())?;
-
-		// We don't need to make sure to `note_extrinsic` only after we know it's going to be
-		// executed to prevent it from leaking in storage since at this point, it will either
-		// execute or panic (and revert storage changes).
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_extrinsic(encoded);
-
-		// AUDIT: Under no circumstances may this function panic from here onwards.
-
-		// Decode parameters and dispatch
-		let dispatch_info = xt.get_dispatch_info();
-		let r = Applyable::apply::&lt;UnsignedValidator&gt;(xt, &amp;dispatch_info, encoded_len)?;
-
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::note_applied_extrinsic(&amp;r, dispatch_info);
-
-		Ok(r.map(|_| ()).map_err(|e| e.error))
-	}
-
-	fn final_checks(header: &amp;System::Header) {
-		sp_tracing::enter_span!(sp_tracing::Level::TRACE, &quot;final_checks&quot;);
-		// remove temporaries
-		let new_header = &lt;frame_system::Pallet&lt;System&gt;&gt;::finalize();
-
-		// check digest
-		assert_eq!(
-			header.digest().logs().len(),
-			new_header.digest().logs().len(),
-			&quot;Number of digest items must match that calculated.&quot;
-		);
-		let items_zip = header.digest().logs().iter().zip(new_header.digest().logs().iter());
-		for (header_item, computed_item) in items_zip {
-			header_item.check_equal(computed_item);
-			assert!(header_item == computed_item, &quot;Digest item must match that calculated.&quot;);
-		}
-
-		// check storage root.
-		let storage_root = new_header.state_root();
-		header.state_root().check_equal(storage_root);
-		assert!(header.state_root() == storage_root, &quot;Storage root must match that calculated.&quot;);
-
-		assert!(
-			header.extrinsics_root() == new_header.extrinsics_root(),
-			&quot;Transaction trie root must be valid.&quot;,
-		);
-	}
-
-	/// Check a given signed transaction for validity. This doesn't execute any
-	/// side-effects; it merely checks whether the transaction would panic if it were included or
-	/// not.
-	///
-	/// Changes made to storage should be discarded.
-	pub fn validate_transaction(
-		source: TransactionSource,
-		uxt: Block::Extrinsic,
-		block_hash: Block::Hash,
-	) -&gt; TransactionValidity {
-		sp_io::init_tracing();
-		use sp_tracing::{enter_span, within_span};
-
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::initialize(
-			&amp;(frame_system::Pallet::&lt;System&gt;::block_number() + One::one()),
-			&amp;block_hash,
-			&amp;Default::default(),
-		);
-
-		enter_span! { sp_tracing::Level::TRACE, &quot;validate_transaction&quot; };
-
-		let encoded_len = within_span! { sp_tracing::Level::TRACE, &quot;using_encoded&quot;;
-			uxt.using_encoded(|d| d.len())
-		};
-
-		let xt = within_span! { sp_tracing::Level::TRACE, &quot;check&quot;;
-			uxt.check(&amp;Default::default())
-		}?;
-
-		let dispatch_info = within_span! { sp_tracing::Level::TRACE, &quot;dispatch_info&quot;;
-			xt.get_dispatch_info()
-		};
-
-		within_span! {
-			sp_tracing::Level::TRACE, &quot;validate&quot;;
-			xt.validate::&lt;UnsignedValidator&gt;(source, &amp;dispatch_info, encoded_len)
-		}
-	}
-
-	/// Start an offchain worker and generate extrinsics.
-	pub fn offchain_worker(header: &amp;System::Header) {
-		sp_io::init_tracing();
-		// We need to keep events available for offchain workers,
-		// hence we initialize the block manually.
-		// OffchainWorker RuntimeApi should skip initialization.
-		let digests = header.digest().clone();
-
-		&lt;frame_system::Pallet&lt;System&gt;&gt;::initialize(header.number(), header.parent_hash(), &amp;digests);
-
-		// Frame system only inserts the parent hash into the block hashes as normally we don't know
-		// the hash for the header before. However, here we are aware of the hash and we can add it
-		// as well.
-		frame_system::BlockHash::&lt;System&gt;::insert(header.number(), header.hash());
-
-		&lt;AllPalletsWithSystem as OffchainWorker&lt;System::BlockNumber&gt;&gt;::offchain_worker(
-			*header.number(),
-		)
-	}
-}
 </code></pre></pre>
 <h2 id="实现trait中定义的方法"><a class="header" href="#实现trait中定义的方法">实现trait中定义的方法</a></h2>
 <ul>
