@@ -41,6 +41,7 @@
     - [跨语言编程](./layer4_protocol_abstract/9_multilingual_programming/9_multilingual_programming.md)
     - [计算机网络](./layer4_protocol_abstract/10_computer_network/10_computer_network.md)
 - [Layer5: 源码剖析](./layer5_source_code_anatomy/layer5_source_code_anatomy.md)
+    - [libp2p](./layer5_source_code_anatomy/libp2p_anatomy/libp2p_anatom.md)
     - [Substrate](./layer5_source_code_anatomy/substrate_anatomy/substrate_overview.html)
         - [Substrate主要模块](./layer5_source_code_anatomy/substrate_anatomy/substrate_modules.html)
         - [frame-executive](layer5_source_code_anatomy/substrate_anatomy/frame-executive/frame-executive.md)
