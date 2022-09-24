@@ -623,7 +623,7 @@ brew services restart grafana
 
 ## 文档/代码更新问题
 
-```admonisth warn title='substrate文档更新带来的问题'
+```admonish warn title='substrate文档更新带来的问题'
 由于目前substrate的源码和文档都在快速更新，所以可能出现一些未曾说过的问题。
 比如链接找不到、目录里面不存在对应文章链接、编译时依赖包版本冲突。
 这些都需要对文档的熟悉、对rust编程的熟悉才能轻松越过。
