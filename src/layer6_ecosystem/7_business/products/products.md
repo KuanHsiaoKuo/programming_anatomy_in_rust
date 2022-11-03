@@ -1,6 +1,4 @@
 # 优秀产品
-<<<<<<< HEAD
-=======
 
 <!--ts-->
 * [优秀产品](#优秀产品)
@@ -46,4 +44,3 @@
 
 - [awesome-rust-com/awesome-rust: Awesome Rust](https://github.com/awesome-rust-com/awesome-rust)
 - [Awesome Rust | awesome-rust](https://awesome-rust.com/)
->>>>>>> 21f74ca11f4486bdf6dfcb4fc5b656e988ec3d35
