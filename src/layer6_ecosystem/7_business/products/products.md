@@ -2,7 +2,6 @@
 
 <!--ts-->
 * [优秀产品](#优秀产品)
-* [&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD](#-head)
    * [awesome series](#awesome-series)
       * [rust-unofficial/awesome-rust](#rust-unofficialawesome-rust)
       * [rust-embedded/asesome-embedded-rust](#rust-embeddedasesome-embedded-rust)
@@ -12,7 +11,7 @@
       * [awesome-rust-com/awesome-rust](#awesome-rust-comawesome-rust)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: runner, at: Sat Sep 24 14:13:20 UTC 2022 -->
+<!-- Added by: runner, at: Thu Nov  3 06:46:03 UTC 2022 -->
 
 <!--te-->
 
